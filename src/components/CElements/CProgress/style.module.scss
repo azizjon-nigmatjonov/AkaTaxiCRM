@@ -1,0 +1,13 @@
+.outer {
+    background-color: $lineGray;
+    width: 100%;
+    height: 4.5px;
+    border-radius: 2.5px;
+
+    .inner {
+        width: 12%;
+        height: 100%;
+        border-radius: 2.5px;
+        background-color: $green;
+    }
+}

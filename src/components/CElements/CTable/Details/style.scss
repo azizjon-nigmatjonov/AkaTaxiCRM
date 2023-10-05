@@ -1,0 +1,205 @@
+.CTableContainer {
+  width: 100%;
+  .table {
+    width: 100%;
+    overflow: auto;
+    border-radius: $lg;
+    position: relative;
+    color: $black;
+    background-color: white;
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    &__pagination {
+      // background-color: red;
+      border-bottom-right-radius: $lg;
+      border-bottom-left-radius: $lg;
+      min-height: 50px;
+      @include center;
+      padding: 0 24px;
+
+      .MuiPagination-ul {
+        .MuiPaginationItem-page {
+          background-color: transparent;
+          font-size: 14px;
+          font-weight: 500;
+        }
+        .MuiButtonBase-root {
+          cursor: pointer;
+          svg {
+            display: none;
+          }
+        }
+        li {
+          position: relative;
+          z-index: 2;
+          cursor: pointer;
+          border-radius: 8px;
+          width: 32px;
+          height: 32px;
+          @include center-center;
+
+          button {
+            color: $gray;
+          }
+
+          .Mui-selected {
+            color: $main;
+            font-weight: 700;
+          }
+        }
+        li:first-child {
+          border: 1px solid $lineGray;
+          button {
+            background-image: url('/svg/arrow-left.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+        }
+        li:last-child {
+          border: 1px solid $lineGray;
+          button {
+            background-image: url('/svg/arrow-right.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+.CTableHead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.CTableCell {
+  padding: 0 24px !important;
+  background-color: transparent !important;
+  color: $black;
+
+  &:first-child {
+    margin-top: 30px;
+    border-left: 0;
+  }
+}
+
+.MuiTableRow-root {
+  height: 45px !important;
+  &.clickable {
+    cursor: pointer;
+    transition-duration: 0.2s;
+    &:hover {
+      background-color: #999;
+    }
+  }
+}
+
+.CTableBody {
+  z-index: 1;
+}
+
+#table {
+  .CTableContainer {
+    border-radius: 18px !important;
+    border: 1px solid $lightGray;
+    box-shadow: none;
+  }
+
+  #resizeMe {
+    padding: 12px;
+  }
+}
+
+thead {
+  height: 60px;
+  th {
+    position: relative;
+    padding: 0 !important;
+    div {
+      height: 40px;
+      padding: 0 24px !important;
+      background-color: $softGray !important;
+      color: $black;
+      font-weight: 600;
+      text-transform: uppercase;
+      width: 100%;
+      @include center;
+    }
+    
+    &:first-child {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+    &:last-child {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+  }
+}
+
+.resizer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  cursor: col-resize;
+  user-select: none;
+  height: 80px !important;
+}
+.resizer:hover,
+.resizing {
+  border-right: 2px solid $main;
+}
+
+.resizable {
+  border: 1px solid red;
+  height: 100px;
+  width: 100px;
+  position: relative;
+}
+
+#tableActions {
+  position: relative;
+  @include center-center;
+  gap: 12px;
+  .delete,
+  .edit {
+    // border: 1px solid #777;
+    width: 28px;
+    height: 28px;
+    @include center-center;
+    border-radius: 4px;
+    svg {
+      transition: 0.3s;
+      &:hover {
+        transform: scale(1.5);
+      }
+    }
+  }
+  .edit {
+    color: #111;
+  }
+  .delete {
+    color: red;
+  }
+  .popover {
+    // background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 0;
+    top: -10px;
+    height: 100%;
+    z-index: 99;
+  }
+}
+
+.MuiPaper-root {
+  background-color: transparent !important;
+}

@@ -1,0 +1,65 @@
+$baseRadius: 10px;
+$paddingBlock: 24px;
+$lg: 18px;
+$xl2: 24px;
+
+@mixin center-between() {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@mixin between() {
+  display: flex;
+  justify-content: space-between;
+}
+@mixin center() {
+  display: flex;
+  align-items: center;
+}
+@mixin center-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin end-center() {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+@mixin end-end() {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+@mixin column() {
+  display: flex;
+  flex-direction: column;
+}
+@mixin column-reverse() {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+@mixin remove-scroll() {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+@mixin smooth-scroll() {
+  scroll-behavior: smooth;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin commonShadow () {
+  box-shadow: -1px 0px 0px 0px #E2E2EA inset
+}
+
+.commonShadow {
+  box-shadow: -1px 0px 0px 0px #E2E2EA inset
+}

@@ -1,0 +1,42 @@
+.HFInput {
+  width: 100%;
+  .MuiFormControl-root {
+    position: relative;
+    width: 100%;
+    .MuiInputBase-root {
+      border-radius: 10px;
+      &.Mui-focused {
+        .MuiOutlinedInput-notchedOutline {
+          border-color: $main;
+        }
+      }
+      .MuiInputBase-input {
+        min-height: 30px;
+        overflow: hidden;
+        border-radius: 10px;
+      }
+      .Mui-disabled {
+        background-color: $gray;
+      }
+      .MuiOutlinedInput-notchedOutline {
+        border-color: $lineGray;
+        font-size: 16px;
+      }
+    }
+
+    .MuiFormHelperText-root {
+      color: $error;
+      // font-size: 12px !important;
+      position: absolute;
+      bottom: -18px;
+      left: -10px;
+    }
+  }
+
+  .visibility {
+    position: absolute;
+    right: 10px;
+    top: 38px;
+    cursor: pointer;
+  }
+}

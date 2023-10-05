@@ -1,0 +1,20 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 20px;
+    height: 70px;
+    background-color: white;
+
+    .title {
+        font-size: 24px;
+        font-weight: 500;
+        width: 230px;
+        overflow: hidden;
+    }
+}
+
+.line {
+    width: 2px;
+    height: 23px;
+}

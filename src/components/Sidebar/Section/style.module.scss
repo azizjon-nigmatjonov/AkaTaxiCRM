@@ -1,0 +1,24 @@
+.section {
+  height: 100%;
+  overflow: scroll;
+  .title {
+    padding: $paddingBlock $paddingBlock 20px $paddingBlock;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .menu {
+    &__link {
+      padding: 0 $paddingBlock;
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+      height: 50px;
+      cursor: pointer;
+
+      &:last-child {
+        margin-bottom: 6px;
+      }
+    }
+  }
+}
