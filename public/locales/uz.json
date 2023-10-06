@@ -22,5 +22,6 @@
   "freez": "Muzlatib qo'yish",
   "new_roll": "Yangi rol",
   "add_new_roll": "Yangi rol qo'shish",
-  "add_new_admin": "Yangi admin qo'shish"
+  "add_new_admin": "Yangi admin qo'shish",
+  "required_field": "Majburiy maydon"
 }

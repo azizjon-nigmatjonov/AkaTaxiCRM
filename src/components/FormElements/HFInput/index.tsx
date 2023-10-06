@@ -7,7 +7,6 @@ interface Props {
   register?: any;
   type?: string;
   placeholder?: string;
-  classes?: string;
   classesInput?: string;
   errors?: any;
   disabled?: boolean;
@@ -23,7 +22,6 @@ export default function HFInput({
   register,
   type = "text",
   placeholder = "",
-  classes = '',
   classesInput = "",
   errors = {},
   disabled = false,
@@ -40,28 +38,28 @@ export default function HFInput({
   );
   return (
     <div
-      className={`${classes} flex items-center w-full bg-[var(--softGray)] rounded-[14px] px-[14px] h-[50px] font-[500]`}
+      className={`w-full bg-[var(--softGray)] font-[500] relative`}
     >
       {label && (
         <p className="font-[500] mb-[6px]">
-          {required ? <span className="text-error pr-1">*</span> : ""}
+          {required ? <span className="text-[var(--error)] pr-1">*</span> : ""}
           {t(label)}
         </p>
       )}
-      {icon ? icon : ""}
+      <div className="absolute left-4 top-4">{icon ? icon : ""}</div>
       <input
         type={type}
         placeholder={t(placeholder)}
         disabled={disabled}
         defaultValue={defaultValue}
-        className={`w-full h-full bg-transparent px-2 placeholder:text-[var(--gray)] ${
-          errors[name] ? "border border-error" : ""
+        className={`w-full bg-transparent focus:border-[var(--main)] px-2 placeholder:text-[var(--gray)] rounded-[14px] px-[14px] pl-[40px] h-[50px] ${
+          errors[name] ? "border border-[var(--error)]" : ""
         } ${classesInput}`}
         {...props}
         {...registerProps}
       />
       {errors[name]?.message && (
-        <p className="text-sm text-error">{t(errors[name].message || "")}</p>
+        <p className="text-sm text-[var(--error)] absolute -bottom-5">{t(errors[name].message || "")}</p>
       )}
     </div>
   );

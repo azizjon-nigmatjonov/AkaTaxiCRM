@@ -10,20 +10,8 @@ import Router from "./router";
 import PageFallback from "./components/PageFallback";
 import { persistor, store } from "./store";
 import "./i18next";
-import { ColorConstants } from "./constants/website";
 
 function App() {
-  useEffect(() => {
-    (Object.keys(ColorConstants) as (keyof typeof ColorConstants)[]).forEach(
-      (key) => {
-        document.documentElement.style.setProperty(
-          "--" + key,
-          ColorConstants[key]
-        );
-      }
-    );
-  }, []);
-
   return (
     <Suspense fallback={<PageFallback />}>
       <div className="app">
