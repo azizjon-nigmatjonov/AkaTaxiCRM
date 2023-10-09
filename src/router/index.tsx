@@ -1,6 +1,6 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { websiteActions } from "../store/website/index";
 
 import MainLayout from "../layouts/MainLayout";
@@ -35,8 +35,7 @@ interface Path {
 
 const Router = () => {
   const dispatch = useDispatch();
-  // const isAuth = useSelector((state: any) => state.auth.isAuth);
-  const isAuth = true
+  const isAuth = useSelector((state: any) => state.auth.isAuth);
   const [list, setList] = useState<string[]>([]);
   const [routes, setRoutes] = useState({
     passengers: [],
@@ -73,16 +72,16 @@ const Router = () => {
     dispatch(websiteActions.setRoutes({ ...routes }));
   }, []);
 
-  if (isAuth) {
+  if (!isAuth) {
     return (
       <Routes>
         <Route path="/" element={<AuthLayout />}>
-          <Route index element={<Navigate to="/login" />} />
-          <Route path="login" element={<Login />} />
+          <Route index element={<Navigate to="/" />} />
+          <Route path="/" element={<Login />} />
           <Route path="registration" element={<Registration />} />
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     );
   }

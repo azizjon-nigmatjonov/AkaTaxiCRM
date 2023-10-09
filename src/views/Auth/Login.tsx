@@ -6,9 +6,12 @@ import { useState } from "react";
 import useAuth from "../../services/auth/useAuth";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { authActions } from "../../store/auth/auth.slice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [password, setPassword] = useState(true);
+  const dispatch = useDispatch()
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -23,6 +26,7 @@ const Login = () => {
   const { login } = useAuth({
     loginProps: {
       onSuccess: (value: any) => {
+        dispatch(authActions.login(value))
         console.log("va", value);
       },
     },
