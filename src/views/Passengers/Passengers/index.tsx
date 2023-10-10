@@ -5,9 +5,26 @@ import AddButton from "../../../components/Buttons/AddButton";
 import FilterButton from "../../../components/Buttons/FilterButton";
 import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
+import { useQuery } from "react-query";
+import passengerService from "../../../services/passengers";
 
 const Passengers = () => {
   const { navigateQuery } = usePageRouter();
+
+  const { data: passengers } = useQuery(
+    ["GET_PASSENGER_LIST"],
+    () => {
+      return passengerService.getList();
+    },
+    {
+      enabled: true,
+    }
+  );
+
+  console.log('passengers', passengers);
+  
+
+
   const headColumns = useMemo(() => {
     return [
       {

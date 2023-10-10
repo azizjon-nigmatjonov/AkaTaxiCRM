@@ -15,6 +15,7 @@ import { DotsIcon } from "../../IconGenerator/Svg";
 import { t } from "i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { tableSizeAction } from "../../../store/tableSize/tableSizeSlice";
+import { TableDelete } from "./Details/Actions/EdtinDelete";
 
 interface Props {
   count?: number;
@@ -60,7 +61,7 @@ const CTable = ({
   const [currentLimit, setCurrentLimit] = useState(10);
   //   const { currentSort } = useGetQueries();
   const [currentIndex, setCurrentIndex] = useState(null);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const bodySource = useMemo(() => {
     if (!bodyColumns?.length) return [];
     let list = [];
@@ -77,9 +78,9 @@ const CTable = ({
     } else list = bodyColumns;
 
     const checks = (status: any) => {
-      if (status === undefined) return true
-      return status
-    }
+      if (status === undefined) return true;
+      return status;
+    };
 
     return (
       list.map((item: any, index) => ({
@@ -122,7 +123,11 @@ const CTable = ({
       });
     };
 
-    const createResizableColumn = function (col: any, resizer: any, idx: number) {
+    const createResizableColumn = function (
+      col: any,
+      resizer: any,
+      idx: number
+    ) {
       let x = 0;
       let w = 0;
 
@@ -230,15 +235,15 @@ const CTable = ({
     }
   };
 
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     console.log(isLoading);
     setTimeout(() => {
-      setLoading(false)
+      setLoading(false);
     }, 300);
-  }, [])
-  
+  }, []);
+
   return (
     <div id="table">
       <CTableWrapper
@@ -383,20 +388,29 @@ const CTable = ({
                         {
                           column.id === "actions" && !item.empty && (
                             <div className="relative">
-                              <button
-                                className="p-2"
-                                onClick={() => setCurrentIndex(rowIndex)}
-                              >
-                                <DotsIcon />
-                              </button>
-                              <TabbleActions
-                                element={item}
-                                rowIndex={rowIndex}
-                                currentIndex={currentIndex}
-                                setCurrentIndex={setCurrentIndex}
-                                handleActions={handleActions}
-                                permissions={column.permission}
-                              />
+                              {column.permission.length <= 2 ? (
+                                <TableDelete
+                                  element={item}
+                                  handleActions={handleActions}
+                                />
+                              ) : (
+                                <>
+                                  <button
+                                    className="p-2"
+                                    onClick={() => setCurrentIndex(rowIndex)}
+                                  >
+                                    <DotsIcon />
+                                  </button>
+                                  <TabbleActions
+                                    element={item}
+                                    rowIndex={rowIndex}
+                                    currentIndex={currentIndex}
+                                    setCurrentIndex={setCurrentIndex}
+                                    handleActions={handleActions}
+                                    permissions={column.permission}
+                                  />
+                                </>
+                              )}
                             </div>
                           )
                           // <TabbleActions

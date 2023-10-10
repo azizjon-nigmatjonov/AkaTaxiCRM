@@ -5,9 +5,24 @@ import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
+import driverService from "../../../services/drivers";
+import { useQuery } from "react-query";
 
 const Drivers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
+
+  const { data: drivers } = useQuery(
+    ["GET_PASSENGER_LIST"],
+    () => {
+      return driverService.getList();
+    },
+    {
+      enabled: true,
+    }
+  );
+
+  console.log('drivers', drivers);
+
   const headColumns = useMemo(() => {
     return [
       {

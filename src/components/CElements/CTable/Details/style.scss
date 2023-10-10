@@ -53,7 +53,7 @@
           }
         }
         li:first-child {
-          border: 1px solid $lineGray;
+          border: 1px solid $lightGray;
           button {
             background-image: url('/svg/arrow-left.svg');
             background-repeat: no-repeat;
@@ -61,7 +61,7 @@
           }
         }
         li:last-child {
-          border: 1px solid $lineGray;
+          border: 1px solid $lightGray;
           button {
             background-image: url('/svg/arrow-right.svg');
             background-repeat: no-repeat;
@@ -77,21 +77,39 @@
   position: sticky;
   top: 0;
   z-index: 2;
+  height: auto !important;
 }
 
 .CTableCell {
   padding: 0 24px !important;
   background-color: transparent !important;
   color: $black;
+  border-right: 1px solid $lightGray;
+  border-bottom: 1px solid $lightGray;
+  // border-top: 1px solid $lightGray;
+  // border-bottom: 1px solid $lightGray;
 
   &:first-child {
     margin-top: 30px;
     border-left: 0;
   }
+  &:last-child {
+    border-right: 0;
+  }
 }
 
 .MuiTableRow-root {
   height: 45px !important;
+  // &:nth-child(2n) {
+  //   background-color: $softGray;
+  // }
+
+  &:last-child {
+    .CTableCell {
+      border-bottom: 0;
+    }
+  }
+
   &.clickable {
     cursor: pointer;
     transition-duration: 0.2s;
@@ -110,11 +128,12 @@
     border-radius: 18px !important;
     border: 1px solid $lightGray;
     box-shadow: none;
+    overflow: scroll;
   }
 
-  #resizeMe {
-    padding: 12px;
-  }
+  // #resizeMe {
+  //   // padding: 12px;
+  // }
 }
 
 thead {
@@ -124,13 +143,15 @@ thead {
     padding: 0 !important;
     div {
       height: 40px;
-      padding: 0 24px !important;
-      background-color: $softGray !important;
+      padding: 24px !important;
+      // background-color: $softGray !important;
       color: $black;
       font-weight: 600;
       text-transform: uppercase;
       width: 100%;
       @include center;
+      border-right: 1px solid $lightGray;
+      border-bottom: 1px solid $lightGray;
     }
     
     &:first-child {

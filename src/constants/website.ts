@@ -10,6 +10,7 @@ export const ColorConstants = {
   darkGray: "#92929D",
   darkestGray: "#696974",
   green: "#0BD976",
+  softGray: "#FAFAFB",
   darkerGreen: "#0F855B",
   ink: "#1C299B"
 } as const;
