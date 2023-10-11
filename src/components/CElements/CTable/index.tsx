@@ -15,12 +15,13 @@ import { DotsIcon } from "../../IconGenerator/Svg";
 import { t } from "i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { tableSizeAction } from "../../../store/tableSize/tableSizeSlice";
-import { TableDelete } from "./Details/Actions/EdtinDelete";
+import { TableDelete } from "./Details/Actions/EditDelete";
+import { PopoverDelete } from "./Details/Actions/EditDelete/PopOver";
 
 interface Props {
   count?: number;
   headColumns: any[];
-  bodyColumns: object[];
+  bodyColumns?: object[] | any;
   currentPage?: number;
   clickable?: boolean;
   isLoading?: boolean;
@@ -61,6 +62,7 @@ const CTable = ({
   const [currentLimit, setCurrentLimit] = useState(10);
   //   const { currentSort } = useGetQueries();
   const [currentIndex, setCurrentIndex] = useState(null);
+  const [currDelete, setCurrDelete] = useState<any>({});
   const dispatch = useDispatch();
   const bodySource = useMemo(() => {
     if (!bodyColumns?.length) return [];
@@ -83,7 +85,7 @@ const CTable = ({
     };
 
     return (
-      list.map((item: any, index) => ({
+      list.map((item: any, index?: any) => ({
         ...item,
         is_delete: checks(item?.is_delete),
         is_edit: checks(item?.is_edit),
@@ -235,21 +237,18 @@ const CTable = ({
     }
   };
 
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    console.log(isLoading);
-    setTimeout(() => {
-      setLoading(false);
-    }, 300);
-  }, []);
+  const tableActions = (status: string, el: any) => {
+    if (status === "delete") {
+      setCurrDelete(el);
+    }
+  };
 
   return (
     <div id="table">
       <CTableWrapper
         count={count}
         currentLimit={currentLimit}
-        loader={loading}
+        loader={isLoading}
         height={tableHeight}
         limitCount={limitCount}
         passRouter={passRouter}
@@ -328,7 +327,7 @@ const CTable = ({
           </CTableRow>
         </CTableHead>
         <CTableBody
-          loader={loading}
+          loader={isLoading}
           columnsCount={headColumns?.length}
           rowsCount={currentLimit}
           dataLength={bodySource?.length}
@@ -389,10 +388,25 @@ const CTable = ({
                           column.id === "actions" && !item.empty && (
                             <div className="relative">
                               {column.permission.length <= 2 ? (
-                                <TableDelete
-                                  element={item}
-                                  handleActions={handleActions}
-                                />
+                                <div>
+                                  <TableDelete
+                                    element={item}
+                                    tableActions={tableActions}
+                                  />
+                                  {currDelete.index === item.index ? (
+                                    <PopoverDelete
+                                      closePopover={(status) => {
+                                        setCurrDelete({});
+                                        handleActions(
+                                          status,
+                                          item
+                                        );
+                                      }}
+                                    />
+                                  ) : (
+                                    ""
+                                  )}
+                                </div>
                               ) : (
                                 <>
                                   <button

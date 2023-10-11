@@ -11,7 +11,7 @@ import { useQuery } from "react-query";
 const Drivers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
 
-  const { data: drivers } = useQuery(
+  const { data: drivers, isLoading } = useQuery(
     ["GET_PASSENGER_LIST"],
     () => {
       return driverService.getList();
@@ -21,8 +21,6 @@ const Drivers = () => {
     }
   );
 
-  console.log('drivers', drivers);
-
   const headColumns = useMemo(() => {
     return [
       {
@@ -31,49 +29,41 @@ const Drivers = () => {
       },
       {
         title: "phone_number",
-        id: "phone_number",
+        id: "phone",
       },
       {
         title: "Tug‘ilgan sana",
-        id: "birth_date",
+        id: "birthday",
       },
       {
         title: "car",
-        id: "vehicle",
+        id: "car_id",
       },
       {
-        title: 'mashina raqami',
-        id: "car_number"
+        title: "mashina raqami",
+        id: "car_number",
       },
       {
-        title: 'raqam viloyati',
-        id: 'car_number_region'
+        title: "raqam viloyati",
+        id: "car_number_region",
       },
       {
         title: "",
         id: "actions",
-        permission: ['learn_more', 'edit', 'delete']
+        permission: ["learn_more", "edit", "delete"],
       },
     ];
   }, []);
 
-  const bodyColumns = [
-    {
-      full_name: "Alisher Hakimov",
-      phone_number: "+998 99 499 31 30",
-      birth_date: "2001-yil, 17-dekabr",
-      vehicle: 'Onix',
-      car_number: "70R481EC",
-      car_number_region: "Qashqadaryo",
-      id: '123'
-    },
-  ];
+  const bodyColumns = useMemo(() => {
+    return drivers ?? [];
+  }, [drivers]);
 
   const handleActions = useCallback((element: any, status: string) => {
-    if (status === 'learn_more') {
-      navigateTo(`/drivers/driver/${element.id}`)
+    if (status === "learn_more") {
+      navigateTo(`/drivers/driver/${element.id}`);
     }
-  }, [])
+  }, []);
 
   return (
     <>
@@ -86,7 +76,13 @@ const Drivers = () => {
           />
         </div>
       </SectionHeader>
-      <CTable headColumns={headColumns} bodyColumns={bodyColumns} count={1} handleActions={handleActions} />
+      <CTable
+        headColumns={headColumns}
+        bodyColumns={bodyColumns}
+        count={1}
+        handleActions={handleActions}
+        isLoading={isLoading}
+      />
 
       <Form />
     </>

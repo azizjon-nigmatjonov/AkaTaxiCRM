@@ -1,4 +1,5 @@
 export const ColorConstants = {
+  primary: "#09B0E7",
   main: "#DD431F",
   black: "#151515",
   lineGray: "#E2E2EA",

@@ -152,6 +152,7 @@ thead {
       @include center;
       border-right: 1px solid $lightGray;
       border-bottom: 1px solid $lightGray;
+      position: relative;
     }
     
     &:first-child {

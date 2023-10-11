@@ -11,7 +11,7 @@ import passengerService from "../../../services/passengers";
 const Passengers = () => {
   const { navigateQuery } = usePageRouter();
 
-  const { data: passengers } = useQuery(
+  const { data: passengers, isLoading } = useQuery(
     ["GET_PASSENGER_LIST"],
     () => {
       return passengerService.getList();
@@ -20,10 +20,6 @@ const Passengers = () => {
       enabled: true,
     }
   );
-
-  console.log('passengers', passengers);
-  
-
 
   const headColumns = useMemo(() => {
     return [
@@ -37,82 +33,27 @@ const Passengers = () => {
       },
       {
         title: "Tel.raqam",
-        id: "phone_number",
+        id: "username",
       },
       {
         title: "Tug‘ilgan sana",
-        id: "birth_date",
+        id: "birthday",
       },
       {
         title: "",
         id: "actions",
-        permission: ['edit', 'delete']
+        permission: ["edit", "delete"],
       },
     ];
   }, []);
 
-  const bodyColumns = [
-    {
-      full_name: "Javohir Zokirov",
-      region: "Qashqadaryo",
-      phone_number: "+998 99 499 31 30",
-      birth_date: "2001-yil, 17-dekabr",
-    },
-    {
-      full_name: "Javohir Zokirov",
-      region: "Qashqadaryo",
-      phone_number: "+998 99 499 31 30",
-      birth_date: "2001-yil, 17-dekabr",
-    },
-    {
-      full_name: "Javohir Zokirov",
-      region: "Qashqadaryo",
-      phone_number: "+998 99 499 31 30",
-      birth_date: "2001-yil, 17-dekabr",
-    },
-    {
-      full_name: "Javohir Zokirov",
-      region: "Qashqadaryo",
-      phone_number: "+998 99 499 31 30",
-      birth_date: "2001-yil, 17-dekabr",
-    },
-    {
-      full_name: "Javohir Zokirov",
-      region: "Qashqadaryo",
-      phone_number: "+998 99 499 31 30",
-      birth_date: "2001-yil, 17-dekabr",
-    },
-    {
-      full_name: "Javohir Zokirov",
-      region: "Qashqadaryo",
-      phone_number: "+998 99 499 31 30",
-      birth_date: "2001-yil, 17-dekabr",
-    },
-    {
-      full_name: "Javohir Zokirov",
-      region: "Qashqadaryo",
-      phone_number: "+998 99 499 31 30",
-      birth_date: "2001-yil, 17-dekabr",
-    },
-    {
-      full_name: "Javohir Zokirov",
-      region: "Qashqadaryo",
-      phone_number: "+998 99 499 31 30",
-      birth_date: "2001-yil, 17-dekabr",
-    },
-    {
-      full_name: "Javohir Zokirov",
-      region: "Qashqadaryo",
-      phone_number: "+998 99 499 31 30",
-      birth_date: "2001-yil, 17-dekabr",
-    },
-    {
-      full_name: "Javohir Zokirov",
-      region: "Qashqadaryo",
-      phone_number: "+998 99 499 31 30",
-      birth_date: "2001-yil, 17-dekabr",
-    },
-  ];
+  const bodyColumns = useMemo(() => {
+    return passengers ?? []
+  }, [passengers])
+
+  const handleActions = (status: string, el: any) => {
+    console.log("1", status, el);
+  };
 
   return (
     <>
@@ -125,7 +66,13 @@ const Passengers = () => {
           />
         </div>
       </SectionHeader>
-      <CTable headColumns={headColumns} bodyColumns={bodyColumns} count={10} />
+      <CTable
+        headColumns={headColumns}
+        bodyColumns={bodyColumns}
+        count={10}
+        isLoading={isLoading}
+        handleActions={handleActions}
+      />
 
       <Form />
     </>
