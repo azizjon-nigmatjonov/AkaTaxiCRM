@@ -6,6 +6,7 @@ import {
   Select,
 } from "@mui/material";
 import { Controller } from "react-hook-form";
+import CLabel from "../../CElements/CLabel";
 // import IconGenerator from "../IconPicker/IconGenerator";
 
 interface Props {
@@ -55,10 +56,9 @@ const HFSelect = ({
           fieldState: { error },
         }) => (
           <FormControl style={{ width }}>
-            <InputLabel size="small">{label}</InputLabel>
+            <CLabel title={label} required={required} />
             <Select
               value={value || ""}
-              label={label}
               size="small"
               // error={error}
               inputProps={{ placeholder }}

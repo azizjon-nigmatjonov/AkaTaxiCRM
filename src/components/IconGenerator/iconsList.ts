@@ -9,6 +9,8 @@ import {
   GraphIcon,
   CalendarIcon,
   ChatIcon,
+  RolsIcon,
+  LockIcon
 } from "./Svg/Sidebar";
 
 export const iconsList = [
@@ -52,4 +54,12 @@ export const iconsList = [
     name: "chat",
     component: ChatIcon,
   },
+  {
+    name: "rolls_icon",
+    component: RolsIcon,
+  },
+  {
+    name: 'lock',
+    component: LockIcon
+  }
 ];

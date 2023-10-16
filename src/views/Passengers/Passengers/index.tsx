@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import AddButton from "../../../components/Buttons/AddButton";
@@ -57,7 +57,6 @@ const Passengers = () => {
   const bodyColumns = useMemo(() => {
     return passengers ?? [];
   }, [passengers]);
-  console.log("bodyColumns", bodyColumns);
 
   const handleActions = (status: string, el: any) => {
     if (status === "delete") {

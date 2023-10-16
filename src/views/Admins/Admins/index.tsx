@@ -3,32 +3,48 @@ import CTable from "../../../components/CElements/CTable";
 import AddButton from "../../../components/Buttons/AddButton";
 import SectionHeader from "../../../components/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
-import Form from './Form'
+import Form from "./Form";
+import { useQuery } from "react-query";
+import adminService from "../../../services/admins";
 
 const Admins = () => {
   const { navigateQuery } = usePageRouter();
+
+  const { data: admins } = useQuery(
+    ["GET_ADMINS"],
+    () => {
+      return adminService.getList();
+    },
+    {
+      enabled: true,
+    }
+  );
+
+  const bodyColumns = useMemo(() => {
+    return admins ?? [];
+  }, [admins]);
 
   const headColumns = useMemo(() => {
     return [
       {
         title: "Ism familiya",
-        id: "full_name"
+        id: "name",
       },
       {
         title: "Login",
-        id: "login"
+        id: "email",
       },
       {
         title: "Tel.raqam",
         id: "phone_number",
       },
       {
-        title: "Roli",
+        title: "Rol",
         id: "rol",
       },
       {
         title: "Yaratilgan sana",
-        id: "created_date",
+        id: "created_at",
       },
       {
         title: "Status",
@@ -36,36 +52,25 @@ const Admins = () => {
         render: (val: any) => (
           <div
             className={
-              val === false
+              val === 'inactive'
                 ? "text-[var(--error)]"
-                : val === true
+                : val === 'active'
                 ? "text-[var(--green)]"
                 : ""
             }
           >
-            {val === false ? "Noaktiv" : val === true ? "Aktiv" : ""}
+            {val === 'inactive' ? "Noaktiv" : val === 'active' ? "Aktiv" : ""}
           </div>
         ),
       },
       {
-        title: '',
-        id: 'actions',
+        title: "",
+        id: "actions",
         width: 90,
-        permission: ['edit', 'delete', 'freez']
-      }
+        permission: ["edit", "delete", "freez"],
+      },
     ];
   }, []);
-
-  const bodyColumns = [
-    {
-      full_name: 'Javohir Zokirov',
-      login: '@javohir7777',
-      phone_number: "+998 (90) 948-48-10",
-      rol: 'Super admin',
-      created_date: '19.08.2023',
-      status: true,
-    },
-  ];
 
   return (
     <>

@@ -20,9 +20,10 @@ import Admins from "../views/Admins/Admins";
 import Rolls from "../views/Admins/Rolls";
 import Price from "../views/Settings/Price";
 import SMS from "../views/Settings/SMS";
+import Permissions from "../views/Admins/Permissions";
 
-const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"))
-const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"))
+const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
+const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
 
 interface Path {
   parent: string;
@@ -229,9 +230,19 @@ const Router = () => {
               link: "rolls",
               sidebar: true,
               title: "Rollar",
-              icon: "rolls",
+              icon: "rolls_icon",
             })}
             element={<Rolls />}
+          />
+          <Route
+            path={getPath({
+              parent: "admins",
+              link: "permissions",
+              sidebar: true,
+              title: "Permissions",
+              icon: "lock",
+            })}
+            element={<Permissions />}
           />
           <Route
             path={getPath({

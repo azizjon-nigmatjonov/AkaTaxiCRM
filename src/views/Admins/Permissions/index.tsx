@@ -5,15 +5,15 @@ import SectionHeader from "../../../components/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import Form from "./Form";
 import { useQuery } from "react-query";
-import roleService from "../../../services/rolls";
+import permissionService from "../../../services/admins";
 
-const Rolls = () => {
+const Permissions = () => {
   const { navigateQuery } = usePageRouter();
 
-  const { data: roles } = useQuery(
+  const { data: permissions } = useQuery(
     ["GET_ADMINS"],
     () => {
-      return roleService.getList();
+      return permissionService.getList();
     },
     {
       enabled: true,
@@ -21,8 +21,8 @@ const Rolls = () => {
   );
 
   const bodyColumns = useMemo(() => {
-    return roles ?? [];
-  }, [roles]);
+    return permissions ?? [];
+  }, [permissions]);
 
   const headColumns = useMemo(() => {
     return [
@@ -49,7 +49,7 @@ const Rolls = () => {
 
   return (
     <>
-      <SectionHeader title="Rollar ro‘yxati">
+      <SectionHeader title="Ruxsatlar">
         <div className="flex items-center gap-3">
           <AddButton
             text="new_roll"
@@ -67,4 +67,4 @@ const Rolls = () => {
     </>
   );
 };
-export default Rolls;
+export default Permissions;

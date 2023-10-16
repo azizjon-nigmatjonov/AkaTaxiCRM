@@ -38,6 +38,7 @@ const SidebarSection = () => {
                     icon={element?.icon}
                     fill={checkPath(element.path, "icon")}
                   />
+
                   <p>{t(element.title)}</p>
 
                   {checkPath(element.path) && (
@@ -50,6 +51,6 @@ const SidebarSection = () => {
       ))}
     </div>
   );
-}
+};
 
 export default SidebarSection;
