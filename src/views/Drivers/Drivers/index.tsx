@@ -63,6 +63,8 @@ const Drivers = () => {
     if (status === "learn_more") {
       navigateTo(`/drivers/driver/${element.id}`);
     }
+
+    if (status === 'edit') navigateQuery({ id: element.id })
   }, []);
 
   return (

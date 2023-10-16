@@ -11,3 +11,51 @@ input {
         outline: none;
     }
 }
+
+#cselect-cselect {
+    width: 100%;
+    .MuiInputBase-root {
+        height: 48px;
+        border-radius: 12px;
+        border-color: $lineGray;
+        width: 100%;
+        &.Mui-focused {
+            .MuiOutlinedInput-notchedOutline {
+                border-color: $main;
+            }
+        }
+
+        input {
+            width: 100%;
+        }
+    }
+
+
+}
+.MuiPaper-root {
+    border-radius: 12px !important;
+    ul {
+        background-color: white;
+        max-height: 300px;
+        overflow: scroll;
+        .Mui-selected  {
+            color: $main;
+            font-weight: 500;
+        }
+    }
+}
+
+#hfInputMask {
+    input {
+        background-color: transparent;
+        height: 48px;
+        width: 100%;
+        border: 1px solid $lightGray;
+        border-radius: 12px;
+        padding: 0 14px;
+
+        &:focus {
+            border-color: $main;
+        }
+    }
+}

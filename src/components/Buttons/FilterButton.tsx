@@ -6,7 +6,8 @@ import { ReactNode } from "react";
 interface Props {
   text?: string;
   left?: ReactNode
-  open?: boolean
+  open?: boolean;
+  onClick?: () => void
 }
 
 const FilterButton = ({ text = "", left, open = false, ...props }: Props) => {

@@ -1,0 +1,127 @@
+.rmdp-border-right {
+  border-right: none !important;
+}
+
+.rmdp-range {
+  background-color: $primary;
+
+  .highlight-red {
+    color: #fff !important;
+  }
+}
+
+.rmdp-day span {
+  border-radius: 50%;
+}
+
+.rmdp-day.rmdp-selected span {
+  box-shadow: none;
+}
+
+.rmdp-day.rmdp-selected span:not(.highlight) {
+  background-color: $primary;
+  box-shadow: none;
+}
+
+.rmdp-day.rmdp-today span {
+  background-color: #fff;
+  color: $primary;
+  // border: 1px solid $primary;
+}
+
+rmdp-day.rmdp-today.highlight span {
+  background-color: #fff;
+  color: $primary;
+  // border: 1px solid colors.$error;
+}
+
+.rmdp-week-day {
+  color: red;
+}
+
+.rmdp-header-values span {
+  font-weight: 500;
+  font-size: 24px;
+  color: $primary;
+
+  &:hover {
+    color: red;
+  }
+}
+
+.rmdp-range.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+  border-color: #fff;
+  color: #fff;
+}
+
+.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
+  background-color: transparent;
+  border: 1px solid $primary;
+  color: $primary;
+}
+
+.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) .highlight-red:hover {
+  background-color: transparent;
+  border: 1px solid #cc0402;
+  color: #cc0402;
+}
+
+.rmdp-calendar {
+  padding: 30px !important;
+  padding-bottom: 0px !important;
+}
+
+// ===================DATE PICKER================
+
+.datePicker {
+  .rmdp-calendar {
+    padding: 15px 40px !important;
+    // padding-bottom: 0px !important;
+  }
+}
+
+// =================CALENDAR======================
+
+.Calendar {
+  .rmdp-wrapper {
+    width: 100%;
+    margin-bottom: 10px;
+
+    .rmdp-calendar {
+      width: 100%;
+
+      .rmdp-day-picker > div {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.main_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .rmdp-container:first-child {
+    width: 40%;
+  }
+  .rmdp-container:last-child {
+    width: 60%;
+  }
+}
+
+
+.rmdp-container  {
+  width: 100%;
+  input {
+    background-color: transparent;
+    border-color: $lightGray;
+    height: 48px;
+    width: 100%;
+    border-radius: 12px;
+    padding: 0 14px;
+
+    &:focus {
+      border-color: $main;
+    }
+  }
+}

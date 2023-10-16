@@ -1,13 +1,17 @@
-import { BorderColorRounded, DeleteRounded } from "@mui/icons-material";
+import { BorderColorRounded, DeleteRounded, Visibility } from "@mui/icons-material";
 import cls from "./style.module.scss";
+
+interface Props {
+  permissions: string[];
+  element: any;
+  tableActions: (val: any, val2: any) => void;
+}
 
 export const TableDelete = ({
   element,
   tableActions = () => {},
-}: {
-  element: any;
-  tableActions: (val: any, val2: any) => void;
-}) => {
+  permissions = [],
+}: Props) => {
   return (
     <div className={cls.tableDelete}>
       <div
@@ -19,6 +23,11 @@ export const TableDelete = ({
       <div className={cls.edit} onClick={() => tableActions("edit", element)}>
         <BorderColorRounded style={{ color: "var(--main)" }} />
       </div>
+      {permissions.includes("learn_more") && (
+        <div className={cls.edit} onClick={() => tableActions("edit", element)}>
+          <Visibility style={{ color: "var(--black)" }} />
+        </div>
+      )}
     </div>
   );
 };

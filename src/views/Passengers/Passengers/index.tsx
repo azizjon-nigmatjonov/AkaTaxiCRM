@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import AddButton from "../../../components/Buttons/AddButton";
@@ -7,11 +7,17 @@ import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import { useQuery } from "react-query";
 import passengerService from "../../../services/passengers";
+import Filters from "./Filters";
 
 const Passengers = () => {
   const { navigateQuery } = usePageRouter();
+  const [open, setOpen] = useState("");
 
-  const { data: passengers, isLoading } = useQuery(
+  const {
+    data: passengers,
+    isLoading,
+    refetch,
+  } = useQuery(
     ["GET_PASSENGER_LIST"],
     () => {
       return passengerService.getList();
@@ -46,20 +52,32 @@ const Passengers = () => {
       },
     ];
   }, []);
+  console.log("passengers", passengers);
 
   const bodyColumns = useMemo(() => {
-    return passengers ?? []
-  }, [passengers])
+    return passengers ?? [];
+  }, [passengers]);
+  console.log("bodyColumns", bodyColumns);
 
   const handleActions = (status: string, el: any) => {
-    console.log("1", status, el);
+    if (status === "delete") {
+      passengerService.deleteElement(el.id).then(() => {
+        refetch();
+      });
+    }
+    if (status === "edit") {
+      navigateQuery({ id: el.id });
+    }
   };
 
   return (
     <>
       <SectionHeader title="Yo‘lovchilar ro‘yxati">
         <div className="flex items-center gap-3">
-          <FilterButton text="filter" />
+          <div className="relative">
+            <FilterButton text="filter" onClick={() => setOpen("filter")} />
+            {open === "filter" && <Filters handleOpen={() => setOpen("")} />}
+          </div>
           <AddButton
             text="new_passenger"
             onClick={() => navigateQuery({ id: "create" })}

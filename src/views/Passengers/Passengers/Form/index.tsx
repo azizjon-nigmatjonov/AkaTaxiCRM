@@ -4,9 +4,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import HFTextField from "../../../../components/FormElements/HFTextField";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 import CModal from "../../../../components/CElements/CModal";
-// import HFInputMask from "../../../../components/FormElements/HFInputMask";
-// import { useMutation } from "react-query";
-// import passengerService from "../../../../services/passengers";
+import { useMutation, useQuery } from "react-query";
+import regionService from "../../../../services/regions";
+import { useMemo } from "react";
+import HFSelect from "../../../../components/FormElements/HFSelect";
+import HFDatePicker from "../../../../components/FormElements/HFDatePicker";
+import HFInputMask from "../../../../components/FormElements/HFInputMask";
+import passengerService from "../../../../services/passengers";
 
 const Form = () => {
   const schema = Validation();
@@ -16,24 +20,39 @@ const Form = () => {
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
+  const { data: regions } = useQuery(["GET_REGIONS_LIST"], () => {
+    return regionService.getList();
+  });
 
-  // const createElement = useMutation({
-  //   mutationFn: (data) => {
-  //     return passengerService.createElement(data);
-  //   },
-  //   onSuccess: (val) => {
-  //     console.log("val", val);
-  //   },
-  // });
+  const SelecTList = useMemo(() => {
+    if (!regions) return [];
+    return (regions as any).map((item: any) => {
+      return {
+        ...item,
+        label: item.name?.uz,
+        value: item.id,
+      };
+    });
+  }, [regions]);
+
+  const createElement = useMutation({
+    mutationFn: (data) => {
+      return passengerService.createElement(data);
+    },
+    onSuccess: (val) => {
+      console.log("val", val);
+    },
+  });
 
   const handleSubmit = () => {
-    const data = getValues()
-    console.log("data", data)
+    const data = getValues();
+    console.log("data", data);
+    createElement.mutate(data)
   };
 
   return (
     <CModal
-      title="add_new_passenger"
+      title={query.id === 'create' ? 'add_new_passenger' : 'update_passenger'}
       open={!!query?.id}
       handleClose={() => navigateQuery({ id: "" })}
       textDeleteBtn="cancel"
@@ -48,16 +67,11 @@ const Form = () => {
           setValue={setValue}
           required={true}
         />
-        {/* <HFInputMask
-          control={control}
-          label="Telefon raqamn"
-          required={true}
-          name="phone"
-          placeholder="Foydalanuvchi tel.raqami"
-          mask={"+\\9\\9\\8 99 999 99 99"}
-          maskChar=" "
-          alwaysShowMask={false}
-        /> */}
+
+        <HFSelect name="region_id" control={control} options={SelecTList} />
+        <HFDatePicker control={control} name="birthday" />
+        <HFInputMask setValue={setValue} name="phone" mask={"+\\9\\9\\8 99 999 99 99"} />
+
       </div>
     </CModal>
   );

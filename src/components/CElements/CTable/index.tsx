@@ -241,6 +241,7 @@ const CTable = ({
     if (status === "delete") {
       setCurrDelete(el);
     }
+    handleActions(status, el)
   };
 
   return (
@@ -392,6 +393,7 @@ const CTable = ({
                                   <TableDelete
                                     element={item}
                                     tableActions={tableActions}
+                                    permissions={column.permission}
                                   />
                                   {currDelete.index === item.index ? (
                                     <PopoverDelete
