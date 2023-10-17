@@ -21,6 +21,7 @@ import Rolls from "../views/Admins/Rolls";
 import Price from "../views/Settings/Price";
 import SMS from "../views/Settings/SMS";
 import Permissions from "../views/Admins/Permissions";
+import Chats from "../views/Information/Chats";
 
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
@@ -211,7 +212,7 @@ const Router = () => {
               title: "Chatlar",
               icon: "chat",
             })}
-            element={<UndefinedPage />}
+            element={<Chats />}
           />
           <Route
             path={getPath({
