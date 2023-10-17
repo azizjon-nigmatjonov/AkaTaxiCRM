@@ -24,5 +24,8 @@
   "new_roll": "Yangi rol",
   "add_new_roll": "Yangi rol qo'shish",
   "add_new_admin": "Yangi admin qo'shish",
-  "required_field": "Majburiy maydon"
+  "required_field": "Majburiy maydon",
+  "light_truck": "Yengil yuk tashuvchi",
+  "lorry": "Yuk tashuvchi",
+  "hevier_truck": "O'g'ri yuk tashuvchi"
 }

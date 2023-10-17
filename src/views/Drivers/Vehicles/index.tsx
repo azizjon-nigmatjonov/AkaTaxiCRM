@@ -6,6 +6,7 @@ import Form from "./Form";
 import CTabs from "../../../components/CElements/CTab";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import Section from "./Section";
+import FilterButton from "../../../components/Buttons/FilterButton";
 
 const Vehicles = () => {
   const { navigateQuery } = usePageRouter();
@@ -13,6 +14,14 @@ const Vehicles = () => {
 
   const list = useMemo(() => {
     return [
+      {
+        title: "Malibu 1",
+        image: "/images/trash/malibu-1.svg",
+      },
+      {
+        title: "Malibu 1",
+        image: "/images/trash/malibu-1.svg",
+      },
       {
         title: "Malibu 1",
         image: "/images/trash/malibu-1.svg",
@@ -34,25 +43,26 @@ const Vehicles = () => {
       slug: "employees",
     },
     {
-      name: "Labo",
-      slug: "cashback",
+      name: "light_truck",
+      slug: "light_truck",
     },
     {
-      name: "Gurzavik",
-      slug: "menu",
+      name: "lorry",
+      slug: "lorry",
     },
     {
-      name: "Fura",
-      slug: "bonus",
+      name: "hevier_truck",
+      slug: "hevier_truck",
     },
   ];
 
-  console.log('currentTab', currentTab);
-  
+  console.log("currentTab", currentTab);
+
   return (
     <>
       <SectionHeader title="Mashinalar ro‘yxati">
         <div className="flex items-center gap-3">
+          <FilterButton text="filter" />
           <AddButton
             text="new_mark"
             onClick={() => navigateQuery({ id: "create" })}
@@ -62,7 +72,7 @@ const Vehicles = () => {
 
       <CTabs tabList={tabList} />
 
-      <Section list={list}/>
+      <Section list={list} />
 
       {/* <div className="space-y-[18px]">
         <Section list={list}/>

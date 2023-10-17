@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import "./style.scss";
 import { ColorConstants } from "../../../constants/website";
+import { useTranslation } from "react-i18next";
 function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
 
@@ -49,6 +50,7 @@ export default function CTab({
   value = 0,
   handleCustomClick = () => {},
 }: Props) {
+  const { t } = useTranslation()
   const customization = {
     "& .tabs": {
       gap: "30px",
@@ -63,7 +65,6 @@ export default function CTab({
       fontWight: "500",
       padding: "0 20px",
       textAlign: "left",
-      height: "40px !important",
       border: "1px solid #d95c35",
     },
     "& .MuiButtonBase-root, & .MuiTab-root": {
@@ -100,7 +101,7 @@ export default function CTab({
                   maxWidth: "auto",
                 },
               }}
-              label={<p className="text">{tab?.name}</p>}
+              label={<p className="text">{t(tab?.name)}</p>}
               {...a11yProps(tab.id)}
             />
           ))}

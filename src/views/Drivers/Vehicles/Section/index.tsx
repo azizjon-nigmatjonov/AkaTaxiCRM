@@ -21,8 +21,8 @@ const Section = ({ list = [] }: Props) => {
 
   return (
     <CCard
-      classes="bg-transparent rounded-[30px] border-[var(--lineGray)]"
-      style={{ background: "transparent", padding: "18px", minHeight: "0" }}
+      classes="bg-transparent border-0 p-0"
+      style={{ background: "transparent", minHeight: "0" }}
     >
 
       {!loading && (
