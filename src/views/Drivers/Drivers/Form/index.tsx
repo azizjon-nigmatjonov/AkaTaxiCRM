@@ -36,8 +36,6 @@ const Form = () => {
     });
   }, [cars]);
 
-  console.log("cars", cars);
-
   const createElement = useMutation({
     mutationFn: (data?: any) => {
       return driverService.createElement(data);
@@ -76,6 +74,7 @@ const Form = () => {
           required={true}
           control={control}
           options={SelecTList}
+          placeholder="Mashina rusumi"
         />
         <HFTextField
           name="car_number"
@@ -89,10 +88,12 @@ const Form = () => {
           control={control}
           name="birthday"
           label={`Tug'ulgan kun`}
+          placeholder={`Tug'ulgan kun`}
           required={true}
         />
         <HFInputMask
           label={`Telefon raqam`}
+          placeholder={`Telefon raqam`}
           required={true}
           mask={"+\\9\\9\\8 99 999 99 99"}
         />

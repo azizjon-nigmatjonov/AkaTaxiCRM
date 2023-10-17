@@ -6,8 +6,7 @@ interface Props {
   control?: any;
   name?: any;
   width?: string;
-  placeholder?: any;
-  isBlackBg?: boolean;
+  placeholder?: string;
   required?: boolean;
   onChange?: (val?: any) => void;
   defaultValue?: any;
@@ -22,7 +21,6 @@ interface Props {
 
 const HFDatePicker = ({
   control,
-  isBlackBg = false,
   className,
   name,
   mask,
@@ -48,7 +46,6 @@ const HFDatePicker = ({
               isFormEdit={isFormEdit}
               name={name}
               placeholder={placeholder}
-              isBlackBg={isBlackBg}
               mask={mask}
               tabIndex={tabIndex}
               value={value}

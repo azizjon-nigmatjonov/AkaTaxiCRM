@@ -17,7 +17,8 @@ input {
     .MuiInputBase-root {
         height: 48px;
         border-radius: 12px;
-        border-color: $lineGray;
+        border-color: $lineGray !important;
+        outline: none;
         width: 100%;
         &.Mui-focused {
             .MuiOutlinedInput-notchedOutline {
@@ -50,7 +51,7 @@ input {
         background-color: transparent;
         height: 48px;
         width: 100%;
-        border: 1px solid $lightGray;
+        border: 1px solid $lineGray;
         border-radius: 12px;
         padding: 0 14px;
 

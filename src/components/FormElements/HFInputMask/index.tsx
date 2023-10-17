@@ -6,12 +6,14 @@ interface Props {
   mask?: string;
   label?: string;
   required?: boolean;
+  placeholder?: string
 }
 
 const HFInputMask = ({
   mask = "",
   required = false,
   label = "",
+  placeholder = ""
 }: Props) => {
   const [curValue, setCurValue] = useState("");
 
@@ -23,6 +25,7 @@ const HFInputMask = ({
         onChange={(e) => setCurValue(e.target.value)}
         mask={mask}
         maskChar=" "
+        placeholder={placeholder}
       />
     </div>
   );

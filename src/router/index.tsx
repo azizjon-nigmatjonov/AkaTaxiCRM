@@ -70,7 +70,6 @@ const Router = () => {
   };
 
   useEffect(() => {
-    console.log("mergedObjects", routes);
     dispatch(websiteActions.setRoutes({ ...routes }));
   }, []);
 

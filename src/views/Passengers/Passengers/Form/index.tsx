@@ -47,12 +47,12 @@ const Form = () => {
   const handleSubmit = () => {
     const data = getValues();
     console.log("data", data);
-    createElement.mutate(data)
+    createElement.mutate(data);
   };
 
   return (
     <CModal
-      title={query.id === 'create' ? 'add_new_passenger' : 'update_passenger'}
+      title={query.id === "create" ? "add_new_passenger" : "update_passenger"}
       open={!!query?.id}
       handleClose={() => navigateQuery({ id: "" })}
       textDeleteBtn="cancel"
@@ -62,16 +62,33 @@ const Form = () => {
         <HFTextField
           name="full_name"
           control={control}
-          placeholder="Nomi"
-          label="Nomi"
+          placeholder="Ism sharif"
+          label="Ism sharif"
           setValue={setValue}
           required={true}
         />
 
-        <HFSelect name="region_id" control={control} options={SelecTList} />
-        <HFDatePicker control={control} name="birthday" />
-        <HFInputMask mask={"+\\9\\9\\8 99 999 99 99"} />
-
+        <HFSelect
+          name="region_id"
+          control={control}
+          options={SelecTList}
+          label="Viloyatni tanlang"
+          placeholder="Viloyatni tanlang"
+          required={true}
+        />
+        <HFDatePicker
+          control={control}
+          name="birthday"
+          label="Tug'ulgan kuningizni kiriting"
+          placeholder="Tug'ulgan kuningizni kiriting"
+          required={true}
+        />
+        <HFInputMask
+          mask={"+\\9\\9\\8 99 999 99 99"}
+          label="Tel.raqam"
+          placeholder="Tel.raqam"
+          required={true}
+        />
       </div>
     </CModal>
   );

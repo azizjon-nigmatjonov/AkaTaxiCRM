@@ -7,8 +7,6 @@ interface Props {
   name?: any;
   width?: string;
   placeholder?: any;
-  isBlackBg?: boolean;
-  required?: boolean;
   handleChange?: (val: any) => void;
   defaultValue?: any;
   className?: string;
@@ -19,10 +17,10 @@ interface Props {
   disabled?: boolean;
 }
 
-const CDatePicker = ({ handleChange = () => {} }: Props) => {
+const CDatePicker = ({ handleChange = () => {}, placeholder }: Props) => {
 
   return (
-    <DatePicker onChange={(val?: any) => handleChange(val ? new Date(val) : "")} />
+    <DatePicker placeholder={placeholder} onChange={(val?: any) => handleChange(val ? new Date(val) : "")} />
   );
 };
 
