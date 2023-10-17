@@ -1,0 +1,31 @@
+#CTabID {
+  .MuiButtonBase-root.MuiTabScrollButton-root {
+    background-color: $main !important;
+    width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+
+    &:first-child {
+      right: 40px;
+    }
+    &:last-child {
+      right: 0;
+    }
+    &.Mui-disabled {
+      opacity: 1;
+      background-color: $main !important;
+    }
+  }
+  .MuiButtonBase-root {
+    margin-right: 16px !important;
+  }
+
+  .text {
+    z-index: 2;
+    position: relative;
+  }
+}
