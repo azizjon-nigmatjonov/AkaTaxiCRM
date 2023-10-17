@@ -92,8 +92,6 @@ const Form = () => {
           required={true}
         />
         <HFInputMask
-          setValue={setValue}
-          name="phone"
           label={`Telefon raqam`}
           required={true}
           mask={"+\\9\\9\\8 99 999 99 99"}

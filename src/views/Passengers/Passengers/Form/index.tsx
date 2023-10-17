@@ -70,7 +70,7 @@ const Form = () => {
 
         <HFSelect name="region_id" control={control} options={SelecTList} />
         <HFDatePicker control={control} name="birthday" />
-        <HFInputMask setValue={setValue} name="phone" mask={"+\\9\\9\\8 99 999 99 99"} />
+        <HFInputMask mask={"+\\9\\9\\8 99 999 99 99"} />
 
       </div>
     </CModal>
