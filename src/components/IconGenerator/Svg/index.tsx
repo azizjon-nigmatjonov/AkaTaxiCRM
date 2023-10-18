@@ -367,7 +367,7 @@ export const SaveIcon = ({ fill = ColorConstants.ink }: { fill?: string }) => (
   </svg>
 );
 
-export const UserIcon = () => (
+export const UserIcon = ({ fill = "#858592" }: { fill?: string }) => (
   <svg
     width="24"
     height="24"
@@ -377,14 +377,14 @@ export const UserIcon = () => (
   >
     <path
       d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z"
-      stroke="#858592"
+      stroke={fill}
       stroke-width="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
     <path
       d="M7.16003 14.56C4.74003 16.18 4.74003 18.82 7.16003 20.43C9.91003 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.92003 12.73 7.16003 14.56Z"
-      stroke="#858592"
+      stroke={fill}
       stroke-width="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"

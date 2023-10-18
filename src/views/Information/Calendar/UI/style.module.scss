@@ -1,0 +1,27 @@
+.calendar {
+  .header,
+  .body {
+    .cell {
+      height: 40px;
+      border-right: 1px solid $lineGray;
+      border-top: 1px solid $lineGray;
+      border-bottom: 1px solid $lineGray;
+      @include center-center;
+
+      &:nth-child(7n) {
+        border-right: 0;
+      }
+    }
+  }
+  .body {
+    .cell {
+      border-top: 0;
+      border-bottom: 1px solid $lineGray;
+      height: 120px;
+      @include end-between;
+      flex-direction: column;
+      padding: 10px 6px;
+      
+    }
+  }
+}

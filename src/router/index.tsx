@@ -11,7 +11,6 @@ import Passengers from "../views/Passengers/Passengers";
 import ActivePassengers from "../views/Passengers/Active";
 import Statistics from "../views/Passengers/Statistics";
 import Drivers from "../views/Drivers/Drivers";
-import UndefinedPage from "../views/Undefined";
 import ActiveDrivers from "../views/Drivers/Actives";
 import Vehicles from "../views/Drivers/Vehicles";
 import RegionRoute from "../views/Drivers/RegionRoute";
@@ -22,6 +21,7 @@ import Price from "../views/Settings/Price";
 import SMS from "../views/Settings/SMS";
 import Permissions from "../views/Admins/Permissions";
 import Chats from "../views/Information/Chats";
+import Calendar from '../views/Information/Calendar'
 
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
@@ -202,7 +202,7 @@ const Router = () => {
               title: "Kalendar",
               icon: "calendar",
             })}
-            element={<UndefinedPage />}
+            element={<Calendar />}
           />
           <Route
             path={getPath({
