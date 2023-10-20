@@ -6,7 +6,7 @@ import chatService from "../../../services/chats";
 import { useMemo, useState } from "react";
 
 const Chats = () => {
-  const { data: chats } = useQuery(
+  const { data: chats, isLoading } = useQuery(
     ["GET_CHAT_LIST"],
     () => {
       return chatService.getList();
@@ -18,18 +18,24 @@ const Chats = () => {
   const list: any = useMemo(() => {
     return chats ?? [];
   }, [chats]);
-  const [current, setCurrent] = useState({})
+  const [current, setCurrent] = useState({});
 
   return (
-    <div className="flex justify-between space-x-6">
-      <div className="w-[550px]">
-        <SectionHeader title="Chatlar" />
-        <ChatList list={list} setCurrent={setCurrent} />
-      </div>
-      <div className="w-full">
-        <ChatSinglePage current={current} />
-      </div>
-    </div>
+    <>
+      {!isLoading && !list.length ? (
+        "not"
+      ) : (
+        <div className="flex justify-between space-x-6">
+          <div className="w-[550px]">
+            <SectionHeader title="Chatlar" />
+            <ChatList list={list} setCurrent={setCurrent} />
+          </div>
+          <div className="w-full">
+            <ChatSinglePage current={current} />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

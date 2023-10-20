@@ -24,7 +24,7 @@ const errorHandler = (error: any) => {
     // const data = {
     //   refresh_token,
     // };
-
+    store.dispatch(authActions.logout())
     // const originalRequest = error.config;
 
     // authService

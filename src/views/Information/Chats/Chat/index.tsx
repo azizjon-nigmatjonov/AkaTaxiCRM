@@ -19,8 +19,8 @@ const ChatSinglePage = ({ current }: { current?: any }) => {
   console.log("chat", chat);
 
   return (
-    <div>
-      <Header current={current} />
+    <div className="bg-white rounded-[14px] p-5">
+      {currentTab ? <Header current={current} /> : ""}
     </div>
   );
 };

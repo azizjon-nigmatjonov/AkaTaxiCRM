@@ -27,7 +27,6 @@ const Login = () => {
     loginProps: {
       onSuccess: (value: any) => {
         dispatch(authActions.login(value))
-        console.log("va", value);
       },
     },
   });

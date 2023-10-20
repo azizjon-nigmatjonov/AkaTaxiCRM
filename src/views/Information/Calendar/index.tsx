@@ -3,9 +3,10 @@ import calendarService from "../../../services/calendar";
 import SectionHeader from "../../../components/Sections/Header";
 import FilterButton from "../../../components/Buttons/FilterButton";
 import CalendarUI from "./UI";
+import { Skeleton } from "@mui/material";
 
 const Calendar = () => {
-  const { data: calendar } = useQuery(
+  const { data: calendar, isLoading } = useQuery(
     ["GET_CALENDAR"],
     () => {
       return calendarService.getList();
@@ -23,7 +24,13 @@ const Calendar = () => {
         <FilterButton text="filter" />
       </SectionHeader>
 
-      <CalendarUI list={calendar} />
+      {!isLoading ? (
+        <CalendarUI list={calendar} />
+      ) : (
+        <div className="h-[1000px] mt-[-220px]">
+          <Skeleton style={{ height: "100%", borderRadius: '14px' }} />
+        </div>
+      )}
     </>
   );
 };

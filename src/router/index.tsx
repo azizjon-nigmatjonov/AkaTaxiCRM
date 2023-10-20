@@ -21,7 +21,7 @@ import Price from "../views/Settings/Price";
 import SMS from "../views/Settings/SMS";
 import Permissions from "../views/Admins/Permissions";
 import Chats from "../views/Information/Chats";
-import Calendar from '../views/Information/Calendar'
+import Calendar from "../views/Information/Calendar";
 
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
@@ -76,15 +76,17 @@ const Router = () => {
 
   if (!isAuth) {
     return (
-      <Routes>
-        <Route path="/" element={<AuthLayout />}>
-          <Route index element={<Navigate to="/" />} />
-          <Route path="/" element={<Login />} />
-          <Route path="registration" element={<Registration />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Route>
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+      <Suspense fallback={"Loading..."}>
+        <Routes>
+          <Route path="/" element={<AuthLayout />}>
+            <Route index element={<Navigate to="/login" />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="registration" element={<Registration />} />
+            <Route path="*" element={<Navigate to="/login" />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
+      </Suspense>
     );
   }
 
