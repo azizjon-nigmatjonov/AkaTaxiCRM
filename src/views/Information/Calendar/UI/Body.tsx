@@ -1,5 +1,5 @@
 import { ColorConstants } from "../../../../constants/website";
-import Lighter from "./lighter";
+import Lighter from "./Lighter";
 import cls from "./style.module.scss";
 
 const Body = ({ list = [] }: { list: any }) => {

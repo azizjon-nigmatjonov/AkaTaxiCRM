@@ -1,8 +1,8 @@
 import { UserIcon } from "../../../../components/IconGenerator/Svg";
-
+import cls from './style.module.scss'
 const Header = ({ current }: { current?: any }) => {
   return (
-    <div className="flex items-center justify-between text-[var(--black)]">
+    <div className={`flex items-center justify-between text-[var(--black)] p-5 ${cls.header}`}>
       <div className="flex items-center space-x-3">
         <div className="border border-[var(--lineGray)] w-[30px] h-[30px] rounded-full flex items-center justify-center">
           {current.driver?.image ? (
@@ -15,7 +15,7 @@ const Header = ({ current }: { current?: any }) => {
             <UserIcon />
           )}
         </div>
-        <p className="font-[600]">{current.driver.name}</p>
+        <p className="font-[600]">{current.driver?.name}</p>
         <div className="w-[1px] h-[20px] bg-[var(--lineGray)]"></div>
         <span className="text-[var(--gray)]">Haydovchi</span>
       </div>
@@ -34,7 +34,7 @@ const Header = ({ current }: { current?: any }) => {
             <UserIcon />
           )}
         </div>
-        <p className="font-[600]">{current.passenger.name}</p>
+        <p className="font-[600]">{current.passenger?.name}</p>
       </div>
     </div>
   );

@@ -6,19 +6,14 @@ import chatService from "../../../services/chats";
 import { useMemo, useState } from "react";
 
 const Chats = () => {
-  const { data: chats, isLoading } = useQuery(
-    ["GET_CHAT_LIST"],
-    () => {
-      return chatService.getList();
-    },
-    {
-      enabled: true,
-    }
-  );
+  const { data: chats, isLoading } = useQuery(["GET_CHAT_LIST"], () => {
+    return chatService.getList();
+  });
+  const [current, setCurrent] = useState({})
+
   const list: any = useMemo(() => {
     return chats ?? [];
   }, [chats]);
-  const [current, setCurrent] = useState({});
 
   return (
     <>

@@ -5,12 +5,14 @@ import { ColorConstants } from "../../../../../constants/website";
 const Card = ({
   element,
   handleClick = () => {},
+  active = false
 }: {
   element: any;
   handleClick?: (val?: any) => void;
+  active: boolean | any
 }) => {
   return (
-    <CCard classes="p-4 cursor-pointer rounded-[14px]" style={{ minHeight: 0 }}>
+    <CCard classes={`p-4 cursor-pointer rounded-[14px] ${active ? "bg-[var(--main)]" : ""}`} style={{ minHeight: 0 }}>
       <div
         className="flex items-center"
         onClick={() => handleClick(element.id)}

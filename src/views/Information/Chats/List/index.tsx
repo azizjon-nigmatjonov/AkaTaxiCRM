@@ -1,8 +1,14 @@
 import Card from "./Card";
-import usePageRouter from "../../../../hooks/useObjectRouter";
+import { useGetQueries } from "../../../../hooks/useGetQueries";
 
-const ChatList = ({ list = [], setCurrent = () => {} }: { list?: any, setCurrent: (val: any) => void }) => {
-  const { navigateQuery } = usePageRouter();
+const ChatList = ({
+  list = [],
+  setCurrent = () => {},
+}: {
+  list?: any;
+  setCurrent: (val: any) => void;
+}) => {
+  const { currentTab } = useGetQueries();
 
   return (
     <div className="grid gap-y-2">
@@ -10,10 +16,10 @@ const ChatList = ({ list = [], setCurrent = () => {} }: { list?: any, setCurrent
         <Card
           key={index}
           element={el}
-          handleClick={(id: any) => {
+          handleClick={() => {
             setCurrent(el)
-            navigateQuery({ tab: id }, true)
           }}
+          active={currentTab === el.id}
         />
       ))}
     </div>
