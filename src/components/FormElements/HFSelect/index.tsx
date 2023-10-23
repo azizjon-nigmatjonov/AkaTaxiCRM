@@ -57,7 +57,7 @@ const HFSelect = ({
           <FormControl style={{ width }}>
             <CLabel title={label} required={required} />
             <Select
-              value={value || ""}
+              value={value || defaultValue || ""}
               size="small"
               // error={error}
               inputProps={{ placeholder }}

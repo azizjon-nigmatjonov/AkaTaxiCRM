@@ -12,7 +12,11 @@ import HFDatePicker from "../../../../components/FormElements/HFDatePicker";
 import HFInputMask from "../../../../components/FormElements/HFInputMask";
 import passengerService from "../../../../services/passengers";
 
-const Form = () => {
+interface Props {
+  refetch: () => void;
+}
+
+const Form = ({ refetch }: Props) => {
   const schema = Validation();
   const { navigateQuery, getQueries } = usePageRouter();
   const query = getQueries();
@@ -35,20 +39,37 @@ const Form = () => {
     });
   }, [regions]);
 
+  const { data: passenger } = useQuery(
+    ["GET_PASSENGER", query.id],
+    () => {
+      return passengerService.getElement(query.id);
+    },
+    {
+      enabled: query.id !== "create" && query.id ? true : false,
+    }
+  );
+
+  const userData: any = useMemo(() => {
+    return passenger;
+  }, [passenger]);
+
   const createElement = useMutation({
     mutationFn: (data?: any) => {
       return passengerService.createElement(data);
     },
-    onSuccess: (val) => {
-      console.log("val", val);
+    onSuccess: () => {
+      navigateQuery({ id: "" });
+      refetch();
     },
   });
 
   const handleSubmit = () => {
     const data = getValues();
-    console.log("data", data);
+    data.phone = data.phone?.substring(1)?.replace(/\s+/g, "");
     createElement.mutate(data);
   };
+
+  console.log("passenger", passenger);
 
   return (
     <CModal
@@ -66,6 +87,7 @@ const Form = () => {
           label="Ism sharif"
           setValue={setValue}
           required={true}
+          defaultValue={userData?.full_name}
         />
 
         <HFSelect
@@ -75,15 +97,21 @@ const Form = () => {
           label="Viloyatni tanlang"
           placeholder="Viloyatni tanlang"
           required={true}
+          defaultValue={userData?.region_id}
         />
+
         <HFDatePicker
           control={control}
           name="birthday"
           label="Tug'ulgan kuningizni kiriting"
           placeholder="Tug'ulgan kuningizni kiriting"
           required={true}
+          defaultValue={userData?.birthday}
         />
         <HFInputMask
+          defaultValue={userData?.phone}
+          name="phone"
+          setValue={setValue}
           mask={"+\\9\\9\\8 99 999 99 99"}
           label="Tel.raqam"
           placeholder="Tel.raqam"

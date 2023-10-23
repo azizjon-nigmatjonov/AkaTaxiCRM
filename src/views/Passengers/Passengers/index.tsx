@@ -52,7 +52,6 @@ const Passengers = () => {
       },
     ];
   }, []);
-  console.log("passengers", passengers);
 
   const bodyColumns = useMemo(() => {
     return passengers ?? [];
@@ -91,7 +90,7 @@ const Passengers = () => {
         handleActions={handleActions}
       />
 
-      <Form />
+      <Form refetch={refetch} />
     </>
   );
 };
