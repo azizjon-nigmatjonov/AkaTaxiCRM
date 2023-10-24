@@ -30,19 +30,17 @@ const HFInputMask = ({
   }, [curValue, name, setValue]);
 
   useEffect(() => {
-    console.log('defaultValue', defaultValue);
-    
     if (defaultValue && !curValue) setCurValue(defaultValue)
   }, [defaultValue])
 
   return (
     <div id="hfInputMask">
       <CLabel title={label} required={required} />
-      {curValue}
       <ReactInputMask
         onChange={(e) => setCurValue(e.target.value)}
         mask={mask}
         maskChar=" "
+        value={defaultValue}
         placeholder={placeholder}
       />
     </div>

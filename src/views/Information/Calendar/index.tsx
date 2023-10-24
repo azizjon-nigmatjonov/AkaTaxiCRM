@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import calendarService from "../../../services/calendar";
 import SectionHeader from "../../../components/Sections/Header";
-import FilterButton from "../../../components/Buttons/FilterButton";
+import FilterButton from "../../../components/Filters";
 import CalendarUI from "./UI";
 import { Skeleton } from "@mui/material";
 

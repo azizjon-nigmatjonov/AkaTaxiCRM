@@ -3,9 +3,9 @@
     width: 100%;
     height: 4.5px;
     border-radius: 2.5px;
+    overflow: hidden;
 
     .inner {
-        width: 12%;
         height: 100%;
         border-radius: 2.5px;
         background-color: $green;

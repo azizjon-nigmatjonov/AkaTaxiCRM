@@ -2,12 +2,24 @@ import { useMemo } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import AddButton from "../../../components/Buttons/AddButton";
-import FilterButton from "../../../components/Buttons/FilterButton";
+import FilterButton from "../../../components/Filters";
 import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
+import { useQuery } from "react-query";
+import driverService from "../../../services/drivers";
 
 const ActiveDrivers = () => {
   const { navigateQuery } = usePageRouter();
+
+  const { data: drivers, isLoading } = useQuery(
+    ["GET_ACTIVE_DRIVERS"],
+    () => {
+      return driverService.getActives();
+    }
+  );
+
+  console.log("drivers", drivers);
+
   const headColumns = useMemo(() => {
     return [
       {
@@ -55,7 +67,7 @@ const ActiveDrivers = () => {
       from: "Toshkent shahar, Barcha t.",
       phone_number: "+998 (90) 948-48-10",
       where: "Andijon, Andijon sh.",
-      time_search: "1 soat, 17 daqiqa"
+      time_search: "1 soat, 17 daqiqa",
     },
   ];
 
@@ -70,7 +82,12 @@ const ActiveDrivers = () => {
           />
         </div>
       </SectionHeader>
-      <CTable headColumns={headColumns} bodyColumns={bodyColumns} count={1} />
+      <CTable
+        headColumns={headColumns}
+        bodyColumns={bodyColumns}
+        count={1}
+        isLoading={isLoading}
+      />
 
       <Form />
     </>

@@ -1,6 +1,6 @@
 import request from "../../utils/request";
 const carService = {
-  getList: () => request.get("/cars"),
+  getList: (car: any) => request.get(`/cars?class=${car}`),
 };
 
 export default carService;

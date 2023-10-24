@@ -108,6 +108,7 @@ const Form = ({ refetch }: Props) => {
           required={true}
           defaultValue={userData?.birthday}
         />
+        
         <HFInputMask
           defaultValue={userData?.phone}
           name="phone"

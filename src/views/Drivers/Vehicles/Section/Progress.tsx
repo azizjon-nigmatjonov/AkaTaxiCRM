@@ -1,14 +1,19 @@
 import CProgress from "../../../../components/CElements/CProgress";
 
-const Progress = () => {
+interface Props {
+  all?: number;
+  current?: number
+}
+
+const Progress = ({ all = 0, current = 0 }: Props) => {
   return (
     <div>
       <div className="text-[var(--gray))] flex justify-between mb-2">
         <p>Jarayondagilar</p>
-        <span>12%</span>
+        <span>{(current / all) * 100}%</span>
       </div>
 
-      <CProgress />
+      <CProgress percent={(current / all) * 100} />
     </div>
   );
 };

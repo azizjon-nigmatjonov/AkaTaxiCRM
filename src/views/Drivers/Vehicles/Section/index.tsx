@@ -1,33 +1,21 @@
 import CCard from "../../../../components/CElements/CCard";
 import Card from "./Card";
 import usePageRouter from "../../../../hooks/useObjectRouter";
-import { useEffect, useState } from "react";
 import SkeletonCard from "./SkeletonCard";
 
 interface Props {
-  list: object[];
+  list: any;
+  isLoading?: boolean;
 }
 
-const Section = ({ list = [] }: Props) => {
+const Section = ({ list = [], isLoading = false }: Props) => {
   const { navigateTo } = usePageRouter();
 
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 300);
-  }, []);
-
   return (
-    <CCard
-      classes="bg-transparent border-0 p-0"
-      style={{ background: "transparent", minHeight: "0" }}
-    >
-
-      {!loading && (
+    <>
+      {!isLoading && (
         <div className="grid grid-cols-3 gap-[18px]">
-          {list.map((element, index) => (
+          {list.map((element: any, index: number) => (
             <div
               key={index}
               onClick={() => navigateTo(`/drivers/car/${index}`)}
@@ -38,8 +26,8 @@ const Section = ({ list = [] }: Props) => {
           ))}
         </div>
       )}
-      {loading && <SkeletonCard />}
-    </CCard>
+      {isLoading && <SkeletonCard />}
+    </>
   );
 };
 

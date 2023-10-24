@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs";
 import CTable from "../../../../components/CElements/CTable";
 import SectionHeader from "../../../../components/Sections/Header";
-import FilterButton from "../../../../components/Buttons/FilterButton";
+import FilterButton from "../../../../components/Filters";
 
 const breadCrumbItems = [
   {

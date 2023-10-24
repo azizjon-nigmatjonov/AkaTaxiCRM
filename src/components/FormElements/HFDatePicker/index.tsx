@@ -51,6 +51,7 @@ const HFDatePicker = ({
               value={value}
               handleChange={onChange}
               disabled={disabled}
+              defaultValue={defaultValue}
             />
           </div>
         )}

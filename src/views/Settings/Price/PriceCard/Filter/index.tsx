@@ -1,4 +1,4 @@
-import FilterButton from "../../../../../components/Buttons/FilterButton";
+import FilterButton from "../../../../../components/Filters";
 
 const PriceFiler = () => {
   return (

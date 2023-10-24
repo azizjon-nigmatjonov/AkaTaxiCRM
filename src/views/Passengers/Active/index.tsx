@@ -1,9 +1,25 @@
 import { useMemo } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
-import FilterButton from "../../../components/Buttons/FilterButton";
+import FilterButton from "../../../components/Filters";
+import { useQuery } from "react-query";
+import passengerService from "../../../services/passengers";
 
 const ActivePassengers = () => {
+
+  const {
+    data: passengers,
+    isLoading,
+  } = useQuery(
+    ["GET_ACTIVE_PASSENGERS"],
+    () => {
+      return passengerService.getActivePassengers();
+    }
+  );
+
+  console.log('passengers', passengers);
+  
+
   const headColumns = useMemo(() => {
     return [
       {
@@ -92,6 +108,7 @@ const ActivePassengers = () => {
         bodyColumns={bodyColumns}
         count={6}
         isResizeble={true}
+        isLoading={isLoading}
       />
     </>
   );

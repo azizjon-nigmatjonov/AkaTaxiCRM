@@ -19,14 +19,23 @@ interface Props {
   disabled?: boolean;
 }
 
-const CDatePicker = ({ handleChange = () => {}, placeholder }: Props) => {
-  const maxYear = 2023 - 10;
-  const maxDate = startOfYear(new Date(maxYear, 0, 1));
-  const initialDate = new Date(2000, 0, 1); // January 1, 2020
-  const [selectedDate, setSelectedDate] = useState<string>(initialDate);
+const CDatePicker = ({
+  handleChange = () => {},
+  placeholder,
+  defaultValue,
+}: Props) => {
+  const maxYear = 2023
+  const date = new Date()
+  
+  const maxDate = startOfYear(new Date(maxYear, date.getDate(), date.getMonth()));
+console.log('maxDate', maxDate);
 
+  const [selectedDate, setSelectedDate] = useState<string>(
+    defaultValue ? defaultValue : ""
+  );
+    
   const handleDateChange = (dates: any) => {
-    setSelectedDate(dates ? new Date(dates) : "");
+    // setSelectedDate(dates ? new Date(dates) : "");
     handleChange(dates ? new Date(dates) : "");
   };
 

@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import AddButton from "../../../components/Buttons/AddButton";
-import FilterButton from "../../../components/Buttons/FilterButton";
+import FilterButton from "../../../components/Filters";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import Form from "./Form";
@@ -12,13 +12,10 @@ const Drivers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
 
   const { data: drivers, isLoading } = useQuery(
-    ["GET_PASSENGER_LIST"],
+    ["GER_DRIVERS_LIST"],
     () => {
       return driverService.getList();
     },
-    {
-      enabled: true,
-    }
   );
 
   const headColumns = useMemo(() => {
@@ -55,10 +52,6 @@ const Drivers = () => {
     ];
   }, []);
 
-  const bodyColumns = useMemo(() => {
-    return drivers ?? [];
-  }, [drivers]);
-
   const handleActions = useCallback((element: any, status: string) => {
     if (status === "learn_more") {
       navigateTo(`/drivers/driver/${element.id}`);
@@ -80,7 +73,7 @@ const Drivers = () => {
       </SectionHeader>
       <CTable
         headColumns={headColumns}
-        bodyColumns={bodyColumns}
+        bodyColumns={drivers ?? []}
         count={1}
         handleActions={handleActions}
         isLoading={isLoading}

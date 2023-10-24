@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import AddButton from "../../../components/Buttons/AddButton";
 import SectionHeader from "../../../components/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
@@ -6,7 +6,9 @@ import Form from "./Form";
 import CTabs from "../../../components/CElements/CTab";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import Section from "./Section";
-import FilterButton from "../../../components/Buttons/FilterButton";
+import FilterButton from "../../../components/Filters";
+import { useQuery } from "react-query";
+import carService from "../../../services/cars";
 
 const Vehicles = () => {
   const { navigateQuery } = usePageRouter();
@@ -32,15 +34,15 @@ const Vehicles = () => {
   const tabList = [
     {
       name: "Standart",
-      slug: "guests",
+      slug: "standart",
     },
     {
       name: "Comfort",
-      slug: "settings",
+      slug: "comfort",
     },
     {
       name: "Business",
-      slug: "employees",
+      slug: "business",
     },
     {
       name: "light_truck",
@@ -52,11 +54,22 @@ const Vehicles = () => {
     },
     {
       name: "hevier_truck",
-      slug: "hevier_truck",
+      slug: "truck",
     },
   ];
 
-  console.log("currentTab", currentTab);
+  const { data: cars, isLoading } = useQuery(
+    ["GET_CAR_LIST", currentTab],
+    () => {
+      return carService.getList(currentTab);
+    },
+    {
+      enabled: !!currentTab,
+    }
+  );
+
+    
+  console.log("cars", cars);
 
   return (
     <>
@@ -72,7 +85,7 @@ const Vehicles = () => {
 
       <CTabs tabList={tabList} />
 
-      <Section list={list} />
+      <Section list={cars} isLoading={isLoading} />
 
       {/* <div className="space-y-[18px]">
         <Section list={list}/>
