@@ -110,7 +110,7 @@ const Form = ({ refetch }: Props) => {
         />
         
         <HFInputMask
-          defaultValue={userData?.phone}
+          // defaultValue={userData?.phone}
           name="phone"
           setValue={setValue}
           mask={"+\\9\\9\\8 99 999 99 99"}

@@ -33,7 +33,7 @@ const Passengers = () => {
       },
       {
         title: "Viloyat",
-        id: "region",
+        id: "region_name",
       },
       {
         title: "Tel.raqam",

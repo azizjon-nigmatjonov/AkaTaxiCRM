@@ -34,7 +34,7 @@ const Drivers = () => {
       },
       {
         title: "car",
-        id: "car_id",
+        id: "car_name",
       },
       {
         title: "mashina raqami",
