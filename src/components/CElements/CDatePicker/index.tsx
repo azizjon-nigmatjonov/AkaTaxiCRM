@@ -28,7 +28,6 @@ const CDatePicker = ({
   const date = new Date()
   
   const maxDate = startOfYear(new Date(maxYear, date.getDate(), date.getMonth()));
-console.log('maxDate', maxDate);
 
   const [selectedDate, setSelectedDate] = useState<string>(
     defaultValue ? defaultValue : ""

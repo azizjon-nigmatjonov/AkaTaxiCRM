@@ -11,12 +11,9 @@ import { useQuery } from "react-query";
 const Drivers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
 
-  const { data: drivers, isLoading } = useQuery(
-    ["GER_DRIVERS_LIST"],
-    () => {
-      return driverService.getList();
-    },
-  );
+  const { data: drivers, isLoading, refetch } = useQuery(["GER_DRIVERS_LIST"], () => {
+    return driverService.getList();
+  });
 
   const headColumns = useMemo(() => {
     return [
@@ -52,13 +49,23 @@ const Drivers = () => {
     ];
   }, []);
 
-  const handleActions = useCallback((element: any, status: string) => {
+  const handleActions = useCallback((status: string, element: any) => {
     if (status === "learn_more") {
       navigateTo(`/drivers/driver/${element.id}`);
     }
 
-    if (status === 'edit') navigateQuery({ id: element.id })
+    if (status === "edit") navigateQuery({ id: element.id });
+
+    if (status === "delete") {
+      driverService.deleteElement(element.id).then(() => {
+        refetch();
+      });
+    }
   }, []);
+
+  const handleRowClick = (item: any) => {
+    navigateTo(`/drivers/driver/${item.id}`);
+  }
 
   return (
     <>
@@ -76,6 +83,7 @@ const Drivers = () => {
         bodyColumns={drivers ?? []}
         count={1}
         handleActions={handleActions}
+        handleRowClick={handleRowClick}
         isLoading={isLoading}
       />
 

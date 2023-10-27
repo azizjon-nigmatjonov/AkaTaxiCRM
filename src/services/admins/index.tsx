@@ -1,7 +1,6 @@
 import request from "../../utils/request";
-const permissionService = {
-  getList: () => request.get("/permissions"),
-  createElement: (data?: any) => request.post("/permissions", { ...data })
+const adminService = {
+  getList: () => request.get("/admins"),
 };
 
-export default permissionService;
+export default adminService;

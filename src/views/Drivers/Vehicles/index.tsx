@@ -14,62 +14,35 @@ const Vehicles = () => {
   const { navigateQuery } = usePageRouter();
   const { currentTab } = useGetQueries();
 
-  const list = useMemo(() => {
-    return [
-      {
-        title: "Malibu 1",
-        image: "/images/trash/malibu-1.svg",
-      },
-      {
-        title: "Malibu 1",
-        image: "/images/trash/malibu-1.svg",
-      },
-      {
-        title: "Malibu 1",
-        image: "/images/trash/malibu-1.svg",
-      },
-    ];
-  }, []);
+  const { data: classes } = useQuery(["GET_TAB_LIST"], () => {
+    return carService.getCarClasses();
+  });
 
-  const tabList = [
-    {
-      name: "Standart",
-      slug: "standart",
-    },
-    {
-      name: "Comfort",
-      slug: "comfort",
-    },
-    {
-      name: "Business",
-      slug: "business",
-    },
-    {
-      name: "light_truck",
-      slug: "light_truck",
-    },
-    {
-      name: "lorry",
-      slug: "lorry",
-    },
-    {
-      name: "hevier_truck",
-      slug: "truck",
-    },
-  ];
+  const tabList = useMemo(() => {
+    if (!classes) return [];
+    const list: any = classes;
+
+    return list.map((item: any) => {
+      return {
+        slug: item,
+        name: item,
+      };
+    });
+  }, [classes]);
+
+  const tab = useMemo(() => {
+    return currentTab ? currentTab : "standart";
+  }, [currentTab]);
 
   const { data: cars, isLoading } = useQuery(
-    ["GET_CAR_LIST", currentTab],
+    ["GET_CAR_LIST", tab],
     () => {
-      return carService.getList(currentTab);
+      return carService.getList(tab);
     },
     {
-      enabled: !!currentTab,
+      enabled: !!tab,
     }
   );
-
-    
-  console.log("cars", cars);
 
   return (
     <>
@@ -83,15 +56,16 @@ const Vehicles = () => {
         </div>
       </SectionHeader>
 
-      <CTabs tabList={tabList} />
+      {tabList ? (
+        <>
+          <CTabs tabList={tabList ?? []} />
 
-      <Section list={cars} isLoading={isLoading} />
-
-      {/* <div className="space-y-[18px]">
-        <Section list={list}/>
-        <Section list={list2}/>
-      </div> */}
-
+          <Section list={cars} isLoading={isLoading} />
+        </>
+      ) : (
+        ""
+      )}
+      
       <Form />
     </>
   );

@@ -26,6 +26,9 @@
   "add_new_admin": "Yangi admin qo'shish",
   "required_field": "Majburiy maydon",
   "light_truck": "Yengil yuk tashuvchi",
-  "lorry": "Yuk tashuvchi",
-  "hevier_truck": "O'g'ri yuk tashuvchi"
+  "lorry": "Og'ir yuk tashuvchi",
+  "hevier_truck": "O'g'ri yuk tashuvchi",
+  "standart": "Standart",
+  "business": "Biznes",
+  "truck": "Fura"
 }

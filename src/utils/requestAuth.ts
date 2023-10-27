@@ -9,7 +9,6 @@ const requestAuth = axios.create({
 });
 
 const errorHandler = (error: any) => {
-  console.log("error", error);
   // if (error.response?.data?.data)
   //   store.dispatch(showAlert({ title: error.response.data.data }));
   // else store.dispatch(showAlert({ title: "___ERROR___" }));

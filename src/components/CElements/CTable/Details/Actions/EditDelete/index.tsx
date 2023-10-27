@@ -24,8 +24,8 @@ export const TableDelete = ({
         <BorderColorRounded style={{ color: "var(--main)" }} />
       </div>
       {permissions.includes("learn_more") && (
-        <div className={cls.edit} onClick={() => tableActions("edit", element)}>
-          <Visibility style={{ color: "var(--black)" }} />
+        <div className={cls.edit} onClick={() => tableActions("learn_more", element)}>
+          <Visibility style={{ color: "var(--main)" }} />
         </div>
       )}
     </div>

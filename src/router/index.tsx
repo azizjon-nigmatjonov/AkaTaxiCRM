@@ -19,7 +19,6 @@ import Admins from "../views/Admins/Admins";
 import Rolls from "../views/Admins/Rolls";
 import Price from "../views/Settings/Price";
 import SMS from "../views/Settings/SMS";
-import Permissions from "../views/Admins/Permissions";
 import Chats from "../views/Information/Chats";
 import Calendar from "../views/Information/Calendar";
 
@@ -238,16 +237,6 @@ const Router = () => {
           />
           <Route
             path={getPath({
-              parent: "admins",
-              link: "permissions",
-              sidebar: true,
-              title: "Permissions",
-              icon: "lock",
-            })}
-            element={<Permissions />}
-          />
-          <Route
-            path={getPath({
               parent: "settings",
               link: "price_control",
               sidebar: true,
@@ -267,6 +256,7 @@ const Router = () => {
             element={<SMS />}
           />
         </Route>
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Suspense>
   );

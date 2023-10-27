@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import AddButton from "../../../components/Buttons/AddButton";
@@ -9,34 +9,54 @@ import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
 
 const ActiveDrivers = () => {
-  const { navigateQuery } = usePageRouter();
+  const { navigateQuery, navigateTo } = usePageRouter();
 
-  const { data: drivers, isLoading } = useQuery(
-    ["GET_ACTIVE_DRIVERS"],
-    () => {
-      return driverService.getActives();
-    }
-  );
+  const {
+    data: drivers,
+    isLoading,
+    refetch,
+  } = useQuery(["GET_ACTIVE_DRIVERS"], () => {
+    return driverService.getActives();
+  });
 
   console.log("drivers", drivers);
+
+  const bodyColumns = useMemo(() => {
+    if (!drivers) return [];
+    const list: any = drivers;
+    return list.map((item: any) => {
+      return {
+        ...item,
+        data: {
+          car_name: item.car_name,
+          full_name: item.full_name,
+          car_number: item.car_number,
+        },
+      };
+    });
+  }, [drivers]);
 
   const headColumns = useMemo(() => {
     return [
       {
         title: "Ism / mashina",
-        id: "name_vehicle",
+        id: "data",
         render: (obj: any) => {
-          return (
+          return obj?.full_name ? (
             <>
-              <p>{obj?.name}</p>
-              <span className="text-[var(--gray)] uppercase">{obj?.car}</span>
+              <p>{obj.full_name}</p>
+              <span className="text-[var(--gray)] uppercase">
+                {obj.car_name} - {obj.car_number}
+              </span>
             </>
+          ) : (
+            ""
           );
         },
       },
       {
         title: "Tel.raqam",
-        id: "phone_number",
+        id: "phone",
       },
       {
         title: "Qayerdan",
@@ -53,23 +73,20 @@ const ActiveDrivers = () => {
       {
         title: "",
         id: "actions",
-        permission: ["edit", "delete"],
+        permission: ["delete", "edit"],
       },
     ];
   }, []);
 
-  const bodyColumns = [
-    {
-      name_vehicle: {
-        car: "cobalt - 60Y418BC",
-        name: "Muhammad Karim S.",
-      },
-      from: "Toshkent shahar, Barcha t.",
-      phone_number: "+998 (90) 948-48-10",
-      where: "Andijon, Andijon sh.",
-      time_search: "1 soat, 17 daqiqa",
-    },
-  ];
+  const handleActions = useCallback((status: string, element: any) => {
+    if (status === "edit") navigateQuery({ id: element.id });
+
+    if (status === "delete") {
+      // driverService.deleteActive(element.id).then(() => {
+      //   refetch();
+      // });
+    }
+  }, []);
 
   return (
     <>
@@ -86,6 +103,7 @@ const ActiveDrivers = () => {
         headColumns={headColumns}
         bodyColumns={bodyColumns}
         count={1}
+        handleActions={handleActions}
         isLoading={isLoading}
       />
 

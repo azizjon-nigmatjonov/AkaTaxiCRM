@@ -12,7 +12,7 @@ interface Props {
   passRouter?: boolean,
   currentTab?: any,
   setCurrentTab?: (val?: any) => void,
-  tabList: object[],
+  tabList?: any,
   handleTabClick?: (val?: any) => void,
   extra?: any,
 }

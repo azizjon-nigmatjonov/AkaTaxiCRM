@@ -240,8 +240,9 @@ const CTable = ({
   const tableActions = (status: string, el: any) => {
     if (status === "delete") {
       setCurrDelete(el);
+    } else {
+      handleActions(status, el);
     }
-    handleActions(status, el)
   };
 
   return (
@@ -388,7 +389,7 @@ const CTable = ({
                         {
                           column.id === "actions" && !item.empty && (
                             <div className="relative">
-                              {column.permission.length <= 2 ? (
+                              {column.permission.length <= 3 ? (
                                 <div>
                                   <TableDelete
                                     element={item}
@@ -399,10 +400,7 @@ const CTable = ({
                                     <PopoverDelete
                                       closePopover={(status) => {
                                         setCurrDelete({});
-                                        handleActions(
-                                          status,
-                                          item
-                                        );
+                                        handleActions(status, item);
                                       }}
                                     />
                                   ) : (
