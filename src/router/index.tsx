@@ -21,6 +21,7 @@ import Price from "../views/Settings/Price";
 import SMS from "../views/Settings/SMS";
 import Chats from "../views/Information/Chats";
 import Calendar from "../views/Information/Calendar";
+import AmoCrm from "../views/Settings/AmoCrm";
 
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
@@ -254,6 +255,16 @@ const Router = () => {
               icon: "sms",
             })}
             element={<SMS />}
+          />
+          <Route
+            path={getPath({
+              parent: "settings",
+              link: "amocrm",
+              sidebar: true,
+              title: "Amo Crm",
+              icon: "amocrm",
+            })}
+            element={<AmoCrm />}
           />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
