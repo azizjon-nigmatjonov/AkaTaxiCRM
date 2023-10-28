@@ -2,7 +2,6 @@ import DatePicker from "react-multi-date-picker";
 import "react-multi-date-picker/styles/layouts/mobile.css";
 import "./style2.scss";
 import { startOfYear } from "date-fns";
-import { useState } from "react";
 
 interface Props {
   value?: any;
@@ -22,16 +21,15 @@ interface Props {
 const CDatePicker = ({
   handleChange = () => {},
   placeholder,
-  defaultValue,
 }: Props) => {
   const maxYear = 2023
   const date = new Date()
   
   const maxDate = startOfYear(new Date(maxYear, date.getDate(), date.getMonth()));
 
-  const [selectedDate, setSelectedDate] = useState<string>(
-    defaultValue ? defaultValue : ""
-  );
+  // const [selectedDate, setSelectedDate] = useState<string>(
+  //   defaultValue ? defaultValue : ""
+  // );
     
   const handleDateChange = (dates: any) => {
     // setSelectedDate(dates ? new Date(dates) : "");
@@ -41,7 +39,7 @@ const CDatePicker = ({
   return (
     <DatePicker
       format="dd.MM.YYYY"
-      value={selectedDate}
+      // value={selectedDate}
       placeholder={placeholder}
       maxDate={maxDate}
       onChange={(val?: any) => handleDateChange(val)}

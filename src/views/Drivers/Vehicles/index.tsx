@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import AddButton from "../../../components/Buttons/AddButton";
 import SectionHeader from "../../../components/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";

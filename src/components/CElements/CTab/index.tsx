@@ -31,7 +31,7 @@ export default function CTabs({
   const query = Object.fromEntries(searchParams.entries());
   const navigate = useNavigate();
   const optimizedTabList = useMemo(() => {
-    return tabList?.map((i, index) => ({
+    return tabList?.map((i: any, index: number) => ({
       ...i,
       index,
     }));

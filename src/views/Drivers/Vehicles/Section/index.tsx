@@ -1,4 +1,3 @@
-import CCard from "../../../../components/CElements/CCard";
 import Card from "./Card";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 import SkeletonCard from "./SkeletonCard";

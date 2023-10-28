@@ -9,12 +9,11 @@ import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
 
 const ActiveDrivers = () => {
-  const { navigateQuery, navigateTo } = usePageRouter();
+  const { navigateQuery } = usePageRouter();
 
   const {
     data: drivers,
     isLoading,
-    refetch,
   } = useQuery(["GET_ACTIVE_DRIVERS"], () => {
     return driverService.getActives();
   });

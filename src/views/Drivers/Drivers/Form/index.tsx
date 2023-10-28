@@ -22,7 +22,9 @@ const Form = () => {
   });
 
   const { data: cars } = useQuery(["GET_CAR_LIST"], () => {
-    return carService.getList();
+    return carService.getList(query.id);
+  }, {
+    enabled: !!query?.id
   });
 
   const SelecTList = useMemo(() => {
@@ -92,6 +94,7 @@ const Form = () => {
           required={true}
         />
         <HFInputMask
+          name="phone"
           label={`Telefon raqam`}
           placeholder={`Telefon raqam`}
           required={true}
