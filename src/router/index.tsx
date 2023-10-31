@@ -94,7 +94,7 @@ const Router = () => {
     <Suspense fallback={"Loading..."}>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Navigate to="passengers/main" />} />
+          <Route index element={<Navigate to="/passengers/main" />} />
           <Route
             path={getPath({
               parent: "passengers",
