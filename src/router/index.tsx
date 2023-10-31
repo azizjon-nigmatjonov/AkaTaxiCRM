@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { websiteActions } from "../store/website/index";
 
@@ -22,6 +22,7 @@ import SMS from "../views/Settings/SMS";
 import Chats from "../views/Information/Chats";
 import Calendar from "../views/Information/Calendar";
 import AmoCrm from "../views/Settings/AmoCrm";
+import usePageRouter from "../hooks/useObjectRouter";
 
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
@@ -39,6 +40,8 @@ const Router = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector((state: any) => state.auth.isAuth);
   const [list, setList] = useState<string[]>([]);
+  const location = useLocation();
+  const { navigateTo } = usePageRouter()
   const [routes, setRoutes] = useState({
     passengers: [],
     drivers: [],
@@ -89,6 +92,13 @@ const Router = () => {
       </Suspense>
     );
   }
+
+  useEffect(() => {
+    if (isAuth && location.pathname === '/') {
+      window.location.reload()
+      navigateTo('/passengers/main')
+    }
+  }, [isAuth])
 
   return (
     <Suspense fallback={"Loading..."}>

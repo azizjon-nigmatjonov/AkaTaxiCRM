@@ -58,7 +58,7 @@ request.interceptors.request.use(
 );
 
 request.interceptors.response.use(
-  (response) => response.data.data,
+  (response) => response.data,
   errorHandler
 );
 

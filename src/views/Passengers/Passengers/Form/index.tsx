@@ -29,8 +29,8 @@ const Form = ({ refetch }: Props) => {
   });
 
   const SelecTList = useMemo(() => {
-    if (!regions) return [];
-    return (regions as any).map((item: any) => {
+    if (!regions?.data) return [];
+    return (regions.data as any).map((item: any) => {
       return {
         ...item,
         label: item.name?.uz,

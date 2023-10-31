@@ -7,23 +7,26 @@ import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import { useQuery } from "react-query";
 import passengerService from "../../../services/passengers";
+import { useGetQueries } from "../../../hooks/useGetQueries";
+import { FormatTime } from "../../../utils/formatTime";
 
 const Passengers = () => {
   const { navigateQuery } = usePageRouter();
+  const { currentPage } = useGetQueries();
 
-  const {
-    data: passengers,
-    isLoading,
-    refetch,
-  } = useQuery(
-    ["GET_PASSENGER_LIST"],
+  const { data, isLoading, refetch } = useQuery(
+    ["GET_PASSENGER_LIST", currentPage],
     () => {
-      return passengerService.getList();
+      return passengerService.getList({ page: currentPage, perPage: 10 });
     },
     {
       enabled: true,
     }
   );
+
+  const passengers: any = useMemo(() => {
+    return data ?? {};
+  }, [data]);
 
   const headColumns = useMemo(() => {
     return [
@@ -42,6 +45,11 @@ const Passengers = () => {
       {
         title: "Tug‘ilgan sana",
         id: "birthday",
+        render: (val?: any) => {
+          return (
+            <>{FormatTime(val)}</>
+          )
+        }
       },
       {
         title: "",
@@ -52,7 +60,7 @@ const Passengers = () => {
   }, []);
 
   const bodyColumns = useMemo(() => {
-    return passengers ?? [];
+    return passengers?.data ?? [];
   }, [passengers]);
 
   const handleActions = (status: string, el: any) => {
@@ -71,9 +79,7 @@ const Passengers = () => {
       <SectionHeader title="Yo‘lovchilar ro‘yxati">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <FilterButton text="filter">
-              filter
-            </FilterButton>
+            <FilterButton text="filter">filter</FilterButton>
             {/* {open === "filter" && <Filters handleOpen={() => setOpen("")} />} */}
           </div>
           <AddButton
@@ -85,9 +91,10 @@ const Passengers = () => {
       <CTable
         headColumns={headColumns}
         bodyColumns={bodyColumns}
-        count={10}
+        count={passengers?.meta?.pageCount}
         isLoading={isLoading}
         handleActions={handleActions}
+        currentPage={currentPage}
       />
 
       <Form refetch={refetch} />
