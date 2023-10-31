@@ -21,7 +21,7 @@ const Admins = () => {
   );
 
   const bodyColumns = useMemo(() => {
-    return admins ?? [];
+    return admins?.data ?? [];
   }, [admins]);
 
   const headColumns = useMemo(() => {

@@ -16,8 +16,6 @@ const Calendar = () => {
     }
   );
 
-  console.log("calendar,", calendar);
-
   return (
     <>
       <SectionHeader title="Kalendar bo‘yicha ma’lumotlar">
@@ -25,7 +23,7 @@ const Calendar = () => {
       </SectionHeader>
 
       {!isLoading ? (
-        <CalendarUI list={calendar} />
+        <CalendarUI list={calendar?.data} />
       ) : (
         <div className="h-[1000px] mt-[-220px]">
           <Skeleton style={{ height: "100%", borderRadius: '14px' }} />

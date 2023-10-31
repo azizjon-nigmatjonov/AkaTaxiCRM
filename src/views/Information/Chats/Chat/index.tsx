@@ -14,15 +14,20 @@ const ChatSinglePage = ({ current }: { current?: any }) => {
       enabled: !!current.id,
     }
   );
-  console.log("chat", chat);
 
   return (
     <div className="bg-white rounded-[14px] h-[85vh] overflow-hidden">
-      {current.id ? <Header current={current} /> : ""}
-      <div className="mt-5">
-        <CDriver title="Bugun" />
-      </div>
-      <MessageUI chat={chat} />
+      {current.id ? (
+        <div >
+          <Header current={current} />
+          <div className="mt-5">
+            <CDriver title="Bugun" />
+          </div>
+          <MessageUI chat={chat?.data} />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

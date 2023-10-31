@@ -16,8 +16,6 @@ const ActivePassengers = () => {
       return passengerService.getActivePassengers();
     }
   );
-
-  console.log('passengers', passengers);
   
 
   const headColumns = useMemo(() => {
@@ -53,50 +51,9 @@ const ActivePassengers = () => {
     ];
   }, []);
 
-  const bodyColumns = [
-    {
-      full_name: "Diyor Asqarov",
-      from: "Toshkent shahar, Yunusobod t.",
-      to: "Andijon, Andijon sh.",
-      search_time: "1 soat, 17 daqiqa",
-      taxi: 74,
-    },
-    {
-      full_name: "Diyor Asqarov",
-      from: "Toshkent shahar, Yunusobod t.",
-      to: "Andijon, Andijon sh.",
-      search_time: "1 soat, 17 daqiqa",
-      taxi: 74,
-    },
-    {
-      full_name: "Diyor Asqarov",
-      from: "Toshkent shahar, Yunusobod t.",
-      to: "Andijon, Andijon sh.",
-      search_time: "1 soat, 17 daqiqa",
-      taxi: 74,
-    },
-    {
-      full_name: "Diyor Asqarov",
-      from: "Toshkent shahar, Yunusobod t.",
-      to: "Andijon, Andijon sh.",
-      search_time: "1 soat, 17 daqiqa",
-      taxi: 74,
-    },
-    {
-      full_name: "Diyor Asqarov",
-      from: "Toshkent shahar, Yunusobod t.",
-      to: "Andijon, Andijon sh.",
-      search_time: "1 soat, 17 daqiqa",
-      taxi: 74,
-    },
-    {
-      full_name: "Diyor Asqarov",
-      from: "Toshkent shahar, Yunusobod t.",
-      to: "Andijon, Andijon sh.",
-      search_time: "1 soat, 17 daqiqa",
-      taxi: 74,
-    },
-  ];
+  const bodyColumns = useMemo(() => {
+    return passengers?.data ?? [];
+  }, [passengers]);
 
   return (
     <>

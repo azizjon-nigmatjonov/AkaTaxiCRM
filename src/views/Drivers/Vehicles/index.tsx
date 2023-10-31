@@ -19,8 +19,8 @@ const Vehicles = () => {
   });
 
   const tabList = useMemo(() => {
-    if (!classes) return [];
-    const list: any = classes;
+    if (!classes?.data) return [];
+    const list: any = classes.data;
 
     return list.map((item: any) => {
       return {
@@ -60,7 +60,7 @@ const Vehicles = () => {
         <>
           <CTabs tabList={tabList ?? []} />
 
-          <Section list={cars} isLoading={isLoading} />
+          <Section list={cars?.data} isLoading={isLoading} />
         </>
       ) : (
         ""

@@ -21,7 +21,7 @@ const Rolls = () => {
   );
 
   const bodyColumns = useMemo(() => {
-    return roles ?? [];
+    return roles?.data ?? [];
   }, [roles]);
 
   const headColumns = useMemo(() => {

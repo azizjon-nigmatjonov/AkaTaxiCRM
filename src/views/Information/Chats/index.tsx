@@ -12,7 +12,7 @@ const Chats = () => {
   const [current, setCurrent] = useState({})
 
   const list: any = useMemo(() => {
-    return chats ?? [];
+    return chats?.data ?? [];
   }, [chats]);
 
   return (

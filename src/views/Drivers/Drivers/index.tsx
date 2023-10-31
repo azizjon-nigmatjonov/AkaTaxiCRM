@@ -7,13 +7,19 @@ import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import driverService from "../../../services/drivers";
 import { useQuery } from "react-query";
+import { useGetQueries } from "../../../hooks/useGetQueries";
+import { FormatTime } from "../../../utils/formatTime";
 
 const Drivers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
+  const { currentPage } = useGetQueries();
 
-  const { data: drivers, isLoading, refetch } = useQuery(["GER_DRIVERS_LIST"], () => {
-    return driverService.getList();
-  });
+  const { data, isLoading, refetch } = useQuery(
+    ["GER_DRIVERS_LIST", currentPage],
+    () => {
+      return driverService.getList({ page: currentPage, perPage: 10 });
+    }
+  );
 
   const headColumns = useMemo(() => {
     return [
@@ -28,6 +34,9 @@ const Drivers = () => {
       {
         title: "Tug‘ilgan sana",
         id: "birthday",
+        render: (val?: any) => {
+          return <>{FormatTime(val)}</>;
+        },
       },
       {
         title: "car",
@@ -65,7 +74,11 @@ const Drivers = () => {
 
   const handleRowClick = (item: any) => {
     navigateTo(`/drivers/driver/${item.id}`);
-  }
+  };
+
+  const drivers: any = useMemo(() => {
+    return data ?? {};
+  }, [data]);
 
   return (
     <>
@@ -80,11 +93,12 @@ const Drivers = () => {
       </SectionHeader>
       <CTable
         headColumns={headColumns}
-        bodyColumns={drivers ?? []}
-        count={1}
+        bodyColumns={drivers?.data ?? []}
+        count={drivers?.meta?.pageCount}
         handleActions={handleActions}
         handleRowClick={handleRowClick}
         isLoading={isLoading}
+        currentPage={currentPage}
       />
 
       <Form />
