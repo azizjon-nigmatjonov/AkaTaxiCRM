@@ -11,6 +11,7 @@ import HFSelect from "../../../../components/FormElements/HFSelect";
 import HFDatePicker from "../../../../components/FormElements/HFDatePicker";
 import HFInputMask from "../../../../components/FormElements/HFInputMask";
 import passengerService from "../../../../services/passengers";
+import { FormatTime } from "../../../../utils/formatTime";
 
 interface Props {
   refetch: () => void;
@@ -66,10 +67,10 @@ const Form = ({ refetch }: Props) => {
   const handleSubmit = () => {
     const data = getValues();
     data.phone = data.phone?.substring(1)?.replace(/\s+/g, "");
+    data.birthday = FormatTime(data.birthday)
+  
     createElement.mutate(data);
   };
-
-  console.log("passenger", passenger);
 
   return (
     <CModal

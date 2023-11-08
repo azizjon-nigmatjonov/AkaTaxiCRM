@@ -46,7 +46,7 @@ const CPagination = ({
     if (queryObj?.limit) queryObj.limit = parseInt(queryObj.limit, 10);
     if (!passRouter) {
       if (queryObj?.page) setCurrentPage(queryObj.page);
-      if (queryObj?.limit) setCurrentLimit(queryObj.queryLimit);
+      if (queryObj?.limit) setCurrentLimit(queryObj.queryLimit ?? 10);
       return;
     }
     

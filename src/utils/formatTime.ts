@@ -1,4 +1,4 @@
-import { format } from "date-fns/esm"
+import { format } from "date-fns"
 
 export const FormatTime = (time: string, type?: string) => {
     if (!time) return ''

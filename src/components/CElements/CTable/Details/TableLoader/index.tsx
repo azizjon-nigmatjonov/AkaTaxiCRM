@@ -9,7 +9,7 @@ interface Props {
 
 const TableLoader = ({
   isVisible = false,
-  rowsCount = 10,
+  rowsCount = 12,
 }: Props) => {
   const rows = useMemo(() => {
     return new Array(rowsCount - 1).fill(0);
