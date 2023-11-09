@@ -9,6 +9,9 @@ import { useQuery } from "react-query";
 import passengerService from "../../../services/passengers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
+import CSelect from "../../../components/CElements/CSelect";
+import CLabel from "../../../components/CElements/CLabel";
+import CDriver from "../../../components/CElements/CDivider";
 
 const Passengers = () => {
   const { navigateQuery } = usePageRouter();
@@ -46,10 +49,8 @@ const Passengers = () => {
         title: "Tug‘ilgan sana",
         id: "birthday",
         render: (val?: any) => {
-          return (
-            <>{FormatTime(val)}</>
-          )
-        }
+          return <>{FormatTime(val)}</>;
+        },
       },
       {
         title: "",
@@ -74,13 +75,39 @@ const Passengers = () => {
     }
   };
 
+  const handleSearch = (value: any) => {
+    console.log("va", value);
+  };
+
+  const Regions = useMemo(() => {
+    return [
+      {
+        value: "all",
+        label: "Barchasi",
+      },
+      {
+        value: "reg1",
+        label: "Tashkent",
+      },
+    ];
+  }, []);
+
   return (
     <>
-      <SectionHeader title="Yo‘lovchilar ro‘yxati">
+      <SectionHeader handleSearch={handleSearch}>
         <div className="flex items-center gap-3">
           <div className="relative">
-            <FilterButton text="filter">filter</FilterButton>
-            {/* {open === "filter" && <Filters handleOpen={() => setOpen("")} />} */}
+            <FilterButton text="filter">
+              
+              <div>
+                <CLabel title="Viloyat" />
+                <CSelect options={Regions} id="filter" />
+              </div>
+              <CDriver classes="my-4" />
+              <div>
+                aa
+              </div>
+            </FilterButton>
           </div>
           <AddButton
             text="new_passenger"

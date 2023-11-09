@@ -1,10 +1,11 @@
 interface Props {
   title?: string;
+  classes?: string
 }
 
-const CDriver = ({ title = "" }: Props) => {
+const CDriver = ({ title, classes }: Props) => {
   return (
-    <div className="flex items-center space-x-3">
+    <div className={`flex items-center ${classes} ${title ? 'space-x-3' : ''}`}>
       <div className="w-full h-[2px] bg-[var(--lightGray)]"></div>
       {title && <span className="font-medium">{title}</span>}
       <div className="w-full h-[2px] bg-[var(--lightGray)]"></div>

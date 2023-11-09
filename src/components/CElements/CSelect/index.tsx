@@ -9,9 +9,8 @@ interface Props {
 const CSelect = ({ id = "cselect", options = [] }: Props) => {
   return (
     <div id={`cselect-${id}`}>
-      <Select
-        displayEmpty
-        defaultValue={options[0]}
+      <Select        
+        defaultValue={options[0].value}
         inputProps={{
           "aria-label": "Without label",
         }}

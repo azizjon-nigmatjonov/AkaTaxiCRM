@@ -4,9 +4,9 @@ import { header } from "./state";
 export default function useLocationLang() {
   const location = useLocation();
 
-  const state = { header };
+  const state: any = { header };
 
-  const GetTitle = (status) => {
+  const GetTitle = (status: string) => {
     return state[status][location.pathname.substring(1)] ?? "";
   };
 
