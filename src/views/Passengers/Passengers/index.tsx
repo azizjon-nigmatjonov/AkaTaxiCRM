@@ -98,7 +98,6 @@ const Passengers = () => {
         <div className="flex items-center gap-3">
           <div className="relative">
             <FilterButton text="filter">
-              
               <div>
                 <CLabel title="Viloyat" />
                 <CSelect options={Regions} id="filter" />

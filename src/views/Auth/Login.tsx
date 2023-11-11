@@ -42,7 +42,7 @@ const Login = () => {
 
   const onSubmit = (data: any) => {
     login.mutate(data);
-    console.log("data", data);
+
   };
 
   return (

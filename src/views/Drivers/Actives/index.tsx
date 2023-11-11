@@ -18,11 +18,9 @@ const ActiveDrivers = () => {
     return driverService.getActives();
   });
 
-  console.log("drivers", drivers);
-
   const bodyColumns = useMemo(() => {
     if (!drivers) return [];
-    const list: any = drivers;
+    const list: any = drivers?.data;
     return list.map((item: any) => {
       return {
         ...item,
@@ -89,7 +87,7 @@ const ActiveDrivers = () => {
 
   return (
     <>
-      <SectionHeader title="Aktiv haydovchilar ro'yxati">
+      <SectionHeader>
         <div className="flex items-center gap-3">
           <FilterButton text="filter" />
           <AddButton

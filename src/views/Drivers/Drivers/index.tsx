@@ -82,7 +82,7 @@ const Drivers = () => {
 
   return (
     <>
-      <SectionHeader title="Haydovchilar ro‘yxati">
+      <SectionHeader>
         <div className="flex items-center gap-3">
           <FilterButton text="filter" />
           <AddButton

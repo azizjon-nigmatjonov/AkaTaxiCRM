@@ -22,11 +22,11 @@ const Form = () => {
   });
 
   const { data: cars } = useQuery(["GET_CAR_LIST"], () => {
-    return carService.getList(query.id);
+    return carService.getList();
   }, {
     enabled: !!query?.id
   });
-
+  
   const SelecTList = useMemo(() => {
     if (!cars) return [];
     return (cars as any).map((item: any) => {
@@ -49,8 +49,10 @@ const Form = () => {
 
   const handleSubmit = () => {
     const data = getValues();
-    console.log("data", data);
-    createElement.mutate(data);
+
+    if (query.id === 'create') {
+      createElement.mutate(data);
+    }
   };
 
   return (

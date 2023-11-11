@@ -50,10 +50,6 @@ const Form = ({ refetch }: Props) => {
     }
   );
 
-  const userData: any = useMemo(() => {
-    return passenger;
-  }, [passenger]);
-
   const createElement = useMutation({
     mutationFn: (data?: any) => {
       return passengerService.createElement(data);
@@ -67,10 +63,16 @@ const Form = ({ refetch }: Props) => {
   const handleSubmit = () => {
     const data = getValues();
     data.phone = data.phone?.substring(1)?.replace(/\s+/g, "");
-    data.birthday = FormatTime(data.birthday)
-  
-    createElement.mutate(data);
+    data.birthday = FormatTime(data.birthday);
+
+    if (query.id === "create") {
+      createElement.mutate(data);
+    }
   };
+
+  const passengerInfo: any = useMemo(() => {
+    return passenger?.data;
+  }, []);
 
   return (
     <CModal
@@ -88,7 +90,7 @@ const Form = ({ refetch }: Props) => {
           label="Ism sharif"
           setValue={setValue}
           required={true}
-          defaultValue={userData?.full_name}
+          defaultValue={passengerInfo?.full_name}
         />
 
         <HFSelect
@@ -98,7 +100,7 @@ const Form = ({ refetch }: Props) => {
           label="Viloyatni tanlang"
           placeholder="Viloyatni tanlang"
           required={true}
-          defaultValue={userData?.region_id}
+          defaultValue={passengerInfo?.region_id}
         />
 
         <HFDatePicker
@@ -107,9 +109,9 @@ const Form = ({ refetch }: Props) => {
           label="Tug'ulgan kuningizni kiriting"
           placeholder="Tug'ulgan kuningizni kiriting"
           required={true}
-          defaultValue={userData?.birthday}
+          defaultValue={passengerInfo?.birthday}
         />
-        
+
         <HFInputMask
           // defaultValue={userData?.phone}
           name="phone"

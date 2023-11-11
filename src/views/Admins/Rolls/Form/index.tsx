@@ -27,7 +27,7 @@ const Form = () => {
 
   const handleSubmit = () => {
     const data = getValues();
-    console.log("data", data);
+    
     createElement.mutate(data)
   };
 

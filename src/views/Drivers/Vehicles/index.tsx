@@ -46,7 +46,7 @@ const Vehicles = () => {
 
   return (
     <>
-      <SectionHeader title="Mashinalar ro‘yxati">
+      <SectionHeader>
         <div className="flex items-center gap-3">
           <FilterButton text="filter" />
           <AddButton

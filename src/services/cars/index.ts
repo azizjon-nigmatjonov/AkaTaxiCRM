@@ -1,6 +1,6 @@
 import request from "../../utils/request";
 const carService = {
-  getList: (car: any) => request.get(`/cars?class=${car}`),
+  getList: (car?: any) => request.get(`/cars${car ? `?class=${car}` : ''}`),
   getCarClasses: () => request.get('/car-classes')
 };
 
