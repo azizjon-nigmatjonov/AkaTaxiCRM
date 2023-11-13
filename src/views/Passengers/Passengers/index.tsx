@@ -12,6 +12,7 @@ import { FormatTime } from "../../../utils/formatTime";
 import CSelect from "../../../components/CElements/CSelect";
 import CLabel from "../../../components/CElements/CLabel";
 import CDriver from "../../../components/CElements/CDivider";
+import CSlider from "../../../components/CElements/CSlider";
 
 const Passengers = () => {
   const { navigateQuery } = usePageRouter();
@@ -104,7 +105,7 @@ const Passengers = () => {
               </div>
               <CDriver classes="my-4" />
               <div>
-                aa
+                <CSlider />
               </div>
             </FilterButton>
           </div>
