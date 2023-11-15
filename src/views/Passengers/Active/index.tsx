@@ -4,19 +4,20 @@ import SectionHeader from "../../../components/Sections/Header";
 import FilterButton from "../../../components/Filters";
 import { useQuery } from "react-query";
 import passengerService from "../../../services/passengers";
+import CLabel from "../../../components/CElements/CLabel";
+import CSelect from "../../../components/CElements/CSelect";
+import CDriver from "../../../components/CElements/CDivider";
+import CSlider from "../../../components/CElements/CSlider";
+import { useSelector } from "react-redux";
 
 const ActivePassengers = () => {
-
-  const {
-    data: passengers,
-    isLoading,
-  } = useQuery(
+  const { data: passengers, isLoading } = useQuery(
     ["GET_ACTIVE_PASSENGERS"],
     () => {
       return passengerService.getActivePassengers();
     }
   );
-  
+  const regions = useSelector((state: any) => state.regions.regions);
 
   const headColumns = useMemo(() => {
     return [
@@ -46,7 +47,7 @@ const ActivePassengers = () => {
       {
         title: "",
         id: "actions",
-        permission: ['edit', 'delete']
+        permission: ["edit", "delete"],
       },
     ];
   }, []);
@@ -57,8 +58,17 @@ const ActivePassengers = () => {
 
   return (
     <>
-      <SectionHeader title="Aktiv yo‘lovchilar ro‘yxati">
-        <FilterButton text="filter" />
+      <SectionHeader>
+        <FilterButton text="filter">
+          <div>
+            <CLabel title="Viloyat" />
+            <CSelect options={regions} id="filter" />
+          </div>
+          <CDriver classes="my-4" />
+          <div>
+            <CSlider />
+          </div>
+        </FilterButton>
       </SectionHeader>
       <CTable
         headColumns={headColumns}

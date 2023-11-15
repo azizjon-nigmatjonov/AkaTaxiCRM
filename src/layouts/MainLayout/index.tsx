@@ -4,8 +4,22 @@ import { Header } from "../../components/Header";
 import cls from "./style.module.scss";
 import { useEffect } from "react";
 import { ColorConstants } from "../../constants/website";
+import regionService from "../../services/regions";
+import { regionActions } from "../../store/regions/index";
+import { useDispatch } from "react-redux";
 
 const MainLayout = () => {
+  const dispatch = useDispatch()
+  const GetRegions = () => {
+    regionService.getList().then((res) => {
+      dispatch(regionActions.setRegions(res?.data ?? []))
+    });
+  }
+
+  useEffect(() => {
+    GetRegions()
+  }, [])
+
   useEffect(() => {
     (Object.keys(ColorConstants) as (keyof typeof ColorConstants)[]).forEach(
       (key) => {

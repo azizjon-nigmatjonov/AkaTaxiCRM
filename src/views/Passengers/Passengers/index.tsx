@@ -13,10 +13,12 @@ import CSelect from "../../../components/CElements/CSelect";
 import CLabel from "../../../components/CElements/CLabel";
 import CDriver from "../../../components/CElements/CDivider";
 import CSlider from "../../../components/CElements/CSlider";
+import { useSelector } from "react-redux";
 
 const Passengers = () => {
   const { navigateQuery } = usePageRouter();
   const { currentPage } = useGetQueries();
+  const regions = useSelector((state: any) => state.regions.regions);
 
   const { data, isLoading, refetch } = useQuery(
     ["GET_PASSENGER_LIST", currentPage],
@@ -81,17 +83,13 @@ const Passengers = () => {
   };
 
   const Regions = useMemo(() => {
-    return [
-      {
-        value: "all",
-        label: "Barchasi",
-      },
-      {
-        value: "reg1",
-        label: "Tashkent",
-      },
-    ];
-  }, []);
+    return regions?.map((i: any) => {
+      return {
+        value: i.id,
+        label: i.name.uz,
+      };
+    });
+  }, [regions]);
 
   return (
     <>
@@ -100,8 +98,8 @@ const Passengers = () => {
           <div className="relative">
             <FilterButton text="filter">
               <div>
-                <CLabel title="Viloyat" />
-                <CSelect options={Regions} id="filter" />
+
+                <CSelect options={Regions} id="filter" label="Viloyat" />
               </div>
               <CDriver classes="my-4" />
               <div>

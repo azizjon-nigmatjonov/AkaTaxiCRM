@@ -47,21 +47,21 @@ export const AdminIcon = ({ fill = "red" }) => (
       stroke-width="2"
       stroke-miterlimit="10"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M12.07 8.95C12.03 8.95 11.97 8.95 11.92 8.95C10.87 8.91 10.04 8.06 10.04 7C10.04 5.92 10.91 5.05 11.99 5.05C13.07 5.05 13.94 5.93 13.94 7C13.95 8.06 13.12 8.92 12.07 8.95Z"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M9.25 11.96C7.92 12.85 7.92 14.3 9.25 15.19C10.76 16.2 13.24 16.2 14.75 15.19C16.08 14.3 16.08 12.85 14.75 11.96C13.24 10.96 10.77 10.96 9.25 11.96Z"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -79,14 +79,14 @@ export const StatisticsIcon = ({ fill = "red" }) => (
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M20 14.7C19.07 19.33 14.63 22.69 9.58 21.87C5.79 21.26 2.74 18.21 2.12 14.42C1.31 9.39001 4.65 4.95001 9.26 4.01001"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -104,70 +104,70 @@ export const DrivingIcon = ({ fill = "red" }) => (
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M19.24 14.32C19.32 15.17 18.64 15.9 17.77 15.9H16.41C15.63 15.9 15.52 15.57 15.38 15.15L15.23 14.72C15.03 14.13 14.9 13.73 13.85 13.73H10.14C9.09999 13.73 8.93999 14.18 8.75999 14.72L8.60999 15.15C8.46999 15.56 8.35999 15.9 7.57999 15.9H6.21999C5.34999 15.9 4.66999 15.17 4.74999 14.32L5.16 9.90002C5.26 8.81002 5.46999 7.91998 7.36999 7.91998H16.62C18.52 7.91998 18.73 8.81002 18.83 9.90002L19.24 14.32Z"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M6.2 5.75H5.47"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M18.53 5.75H17.8"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M7.64999 10.83H9.82001"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M14.18 10.83H16.35"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M12 17V18"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M12 21V22"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M3 18L2 22"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M21 18L22 22"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -185,56 +185,56 @@ export const SmartCarIcon = ({ fill = "red" }) => (
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M16.99 20.36C17.07 21.24 16.37 22 15.47 22H14.06C13.25 22 13.14 21.65 12.99 21.23L12.84 20.78C12.63 20.17 12.49 19.75 11.41 19.75H7.57001C6.49001 19.75 6.33 20.22 6.14 20.78L5.99001 21.23C5.85001 21.66 5.74 22 4.92 22H3.50999C2.60999 22 1.90001 21.24 1.99001 20.36L2.41 15.79C2.52 14.66 2.73 13.74 4.7 13.74H14.27C16.24 13.74 16.45 14.66 16.56 15.79L16.99 20.36Z"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M3.5 11.5H2.75"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M16.25 11.5H15.5"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M5 16.75H7.25"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M11.75 16.75H14"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M18.71 8.73998C18.99 8.08998 18.89 7.20999 18.37 6.43999C17.86 5.66999 17.08 5.23999 16.37 5.24999"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M21.82 9.72998C22.24 8.21998 21.94 6.37002 20.87 4.77002C19.8 3.17002 18.2 2.19 16.64 2"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -252,56 +252,56 @@ export const CarIcon = ({ fill = "red" }) => (
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M21.99 19.82C22.1 20.99 21.16 22 19.96 22H18.08C17 22 16.85 21.54 16.66 20.97L16.46 20.37C16.18 19.55 16 19 14.56 19H9.44C8 19 7.79 19.62 7.54 20.37L7.34 20.97C7.15 21.54 7 22 5.92 22H4.04C2.84 22 1.9 20.99 2.01 19.82L2.57 13.73C2.71 12.23 3 11 5.62 11H18.38C21 11 21.29 12.23 21.43 13.73L21.99 19.82Z"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M4 8H3"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M21 8H20"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M12 3V5"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M10.5 5H13.5"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M6 15H9"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M15 15H18"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -337,21 +337,21 @@ export const RoutingIcon = ({
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M5.48622 5.5H5.49777"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M18.4862 17.5H18.4978"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -369,14 +369,14 @@ export const GraphIcon = ({ fill = "#858592" }) => (
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M20 14.7C19.07 19.33 14.63 22.69 9.58 21.87C5.79 21.26 2.74 18.21 2.12 14.42C1.31 9.39001 4.65 4.95001 9.26 4.01001"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -395,7 +395,7 @@ export const CalendarIcon = ({ fill = "#858592" }) => (
       stroke-width="2"
       stroke-miterlimit="10"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M16 2V5"
@@ -403,7 +403,7 @@ export const CalendarIcon = ({ fill = "#858592" }) => (
       stroke-width="2"
       stroke-miterlimit="10"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M3.5 9.08997H20.5"
@@ -411,7 +411,7 @@ export const CalendarIcon = ({ fill = "#858592" }) => (
       stroke-width="2"
       stroke-miterlimit="10"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
@@ -419,49 +419,49 @@ export const CalendarIcon = ({ fill = "#858592" }) => (
       stroke-width="2"
       stroke-miterlimit="10"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M15.6947 13.7H15.7037"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M15.6947 16.7H15.7037"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M11.9955 13.7H12.0045"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M11.9955 16.7H12.0045"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M8.29431 13.7H8.30329"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M8.29431 16.7H8.30329"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -479,14 +479,14 @@ export const ChatIcon = ({ fill = "#858592" }) => (
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <path
       d="M13 15.23C13 16.42 12.56 17.52 11.82 18.39C10.83 19.59 9.26 20.36 7.5 20.36L4.89 21.91C4.45 22.18 3.89 21.81 3.95 21.3L4.2 19.33C2.86 18.4 2 16.91 2 15.23C2 13.47 2.94 11.92 4.38 11C5.27 10.42 6.34 10.09 7.5 10.09C10.54 10.09 13 12.39 13 15.23Z"
       stroke={fill}
       stroke-width="2"
       strokeLinecap="round"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
