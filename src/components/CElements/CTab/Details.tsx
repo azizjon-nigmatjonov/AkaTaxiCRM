@@ -52,9 +52,8 @@ export default function CTab({
 }: Props) {
   const { t } = useTranslation()
   const customization = {
-    "& .tabs": {
-      gap: "30px",
-      display: "flex",
+    "&": {
+      width: 'auto'
     },
     "& .MuiButtonBase-root": {
       background: "#white",
@@ -65,7 +64,6 @@ export default function CTab({
       fontWight: "500",
       padding: "0 20px",
       textAlign: "left",
-      border: "1px solid #d95c35",
     },
     "& .MuiButtonBase-root, & .MuiTab-root": {
       maxWidth: "auto",

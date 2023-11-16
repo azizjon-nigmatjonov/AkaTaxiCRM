@@ -9,6 +9,8 @@ import driverService from "../../../services/drivers";
 import { useQuery } from "react-query";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
+import CDriver from "../../../components/CElements/CDivider";
+import CSlider from "../../../components/CElements/CSlider";
 
 const Drivers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
@@ -80,11 +82,23 @@ const Drivers = () => {
     return data ?? {};
   }, [data]);
 
+  const handleSearch = (evt: any) => {
+    console.log(evt);
+  };
   return (
     <>
-      <SectionHeader>
+      <SectionHeader handleSearch={handleSearch}>
         <div className="flex items-center gap-3">
-          <FilterButton text="filter" />
+          <FilterButton text="filter">
+            <div>
+              {/* <CSelect options={Regions} id="filter" label="Viloyat" /> */}
+            </div>
+            <CDriver classes="my-4" />
+            <div>
+              <CSlider />
+            </div>
+          </FilterButton>
+
           <AddButton
             text="new_driver"
             onClick={() => navigateQuery({ id: "create" })}

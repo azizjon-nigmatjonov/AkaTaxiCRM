@@ -14,11 +14,9 @@ const breadCrumbItems = [
 const Driver = () => {
   return (
     <>
-      <SectionHeader
-        extra={
-          <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
-        }
-      />
+      <SectionHeader>
+        <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
+      </SectionHeader>
     </>
   );
 };

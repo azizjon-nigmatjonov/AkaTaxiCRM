@@ -1,10 +1,22 @@
 #CTabID {
+  min-width: auto;
+  max-width: auto;
+  width: auto;
+  height: 50px !important;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  border: 1px solid $lightGray;
+  border-radius: 10px;
+  background-color: white;
+  .MuiBox-root  {
+    height: 40px;
+  }
   .MuiTabs-scroller {
     height: 40px;
   }
   .MuiButtonBase-root {
     height: 40px !important;
-    margin-right: 12px !important;
     min-height: 40px;
     max-height: 40px;
   }

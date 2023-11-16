@@ -17,18 +17,20 @@ const FilterButton = ({ text = "", left, children, ...props }: Props) => {
   const toggle = () => setOpen((prev) => !prev);
 
   return (
-    <div id="filterButton" {...props}>
-      <Button onClick={() => toggle()}>
-        {left ? left : <span className="text-[var(--gray)]">{t(text)}</span>}
+    <div className="relative">
+      <div id="filterButton" {...props}>
+        <Button onClick={() => toggle()}>
+          {left ? left : <span className="text-[var(--gray)]">{t(text)}</span>}
 
-        <div className="icon">
-          <div className={open ? "rotate-0" : "rotate-[180deg]"}>
-            <ArrowDownFilled />
+          <div className="icon">
+            <div className={open ? "rotate-0" : "rotate-[180deg]"}>
+              <ArrowDownFilled />
+            </div>
           </div>
-        </div>
-      </Button>
+        </Button>
 
-      {children && open ? <Filters toggle={toggle}>{children}</Filters> : ""}
+        {children && open ? <Filters toggle={toggle}>{children}</Filters> : ""}
+      </div>
     </div>
   );
 };

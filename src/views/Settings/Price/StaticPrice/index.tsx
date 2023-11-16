@@ -1,0 +1,63 @@
+import CCard from "../../../../components/CElements/CCard";
+import PriceField from "../PriceCard/PriceField";
+
+const StaticPrice = () => {
+  return (
+    <div className="space-y-5">
+      <CCard
+        classes="rounded-[18px] border-[var(--lightGray)]"
+        style={{
+          background: "white",
+          padding: "24px",
+          minHeight: "100%",
+        }}
+      >
+        <div className="grid grid-cols-4 gap-4">
+          <PriceField title="Uygacha olib borish" price={5} />
+          <PriceField title="Uygacha olib ketish" price={5} />
+        </div>
+      </CCard>
+      <CCard
+        classes="rounded-[18px] border-[var(--lightGray)]"
+        style={{
+          background: "white",
+          padding: "24px",
+          minHeight: "100%",
+        }}
+      >
+        <div className="grid grid-cols-4 gap-4">
+          <PriceField title="Oldi o'rindiq" price={5} />
+          <PriceField title="O'rta o'rindiq" price={5} />
+        </div>
+      </CCard>
+      <CCard
+        classes="rounded-[18px] border-[var(--lightGray)]"
+        style={{
+          background: "white",
+          padding: "24px",
+          minHeight: "100%",
+        }}
+      >
+        <div className="grid grid-cols-4 gap-4">
+          <PriceField title="Kamfort klass" price={5} />
+          <PriceField title="Biznes klass" price={5} />
+        </div>
+      </CCard>
+      <CCard
+        classes="rounded-[18px] border-[var(--lightGray)]"
+        style={{
+          background: "white",
+          padding: "24px",
+          minHeight: "100%",
+        }}
+      >
+        <div className="grid grid-cols-4 gap-4">
+          <PriceField title="Hamkorlar min. foiz" price={0} />
+          <PriceField title="Hamkorlar max. foiz" price={20} />
+        </div>
+      </CCard>
+    </div>
+  );
+};
+
+export default StaticPrice;

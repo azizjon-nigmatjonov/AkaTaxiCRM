@@ -82,11 +82,7 @@ const SingleCar = () => {
 
   return (
     <>
-      <SectionHeader
-        extra={
-          <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
-        }
-      >
+      <SectionHeader>
         <FilterButton text="filter" />
       </SectionHeader>
 

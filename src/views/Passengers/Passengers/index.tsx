@@ -94,18 +94,16 @@ const Passengers = () => {
     <>
       <SectionHeader handleSearch={handleSearch}>
         <div className="flex items-center gap-3">
-          <div className="relative">
-            <FilterButton text="filter">
-              <div>
+          <FilterButton text="filter">
+            <div>
+              <CSelect options={Regions} id="filter" label="Viloyat" />
+            </div>
+            <CDriver classes="my-4" />
+            <div>
+              <CSlider />
+            </div>
+          </FilterButton>
 
-                <CSelect options={Regions} id="filter" label="Viloyat" />
-              </div>
-              <CDriver classes="my-4" />
-              <div>
-                <CSlider />
-              </div>
-            </FilterButton>
-          </div>
           <AddButton
             text="new_passenger"
             onClick={() => navigateQuery({ id: "create" })}
