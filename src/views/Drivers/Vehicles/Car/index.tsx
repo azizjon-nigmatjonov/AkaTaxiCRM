@@ -1,18 +1,7 @@
 import { useCallback, useMemo } from "react";
-import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs";
 import CTable from "../../../../components/CElements/CTable";
 import SectionHeader from "../../../../components/Sections/Header";
 import FilterButton from "../../../../components/Filters";
-
-const breadCrumbItems = [
-  {
-    label: "Mashinalar ro‘yxati",
-    link: -1,
-  },
-  {
-    label: "Malibu 2",
-  },
-];
 
 const SingleCar = () => {
   const headColumns = useMemo(() => {
