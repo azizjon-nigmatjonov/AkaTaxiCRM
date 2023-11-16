@@ -18,7 +18,7 @@ const Calendar = () => {
 
   return (
     <>
-      <SectionHeader title="Kalendar bo‘yicha ma’lumotlar">
+      <SectionHeader >
         <FilterButton text="filter" />
       </SectionHeader>
 

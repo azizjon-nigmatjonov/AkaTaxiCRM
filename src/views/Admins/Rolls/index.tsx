@@ -49,7 +49,7 @@ const Rolls = () => {
 
   return (
     <>
-      <SectionHeader title="Rollar ro‘yxati">
+      <SectionHeader >
         <div className="flex items-center gap-3">
           <AddButton
             text="new_roll"

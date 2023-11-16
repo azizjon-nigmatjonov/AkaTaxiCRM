@@ -7,7 +7,6 @@ import EmptyDataComponent from "../../../EmptyDataComponent";
 import "./style.scss";
 import { ReactNode, } from "react";
 import TableLoader from "./TableLoader";
-import CPagination from "./Pagination";
 
 interface Props {
   loader: boolean;

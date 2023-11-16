@@ -14,6 +14,7 @@ const CSlider = () => {
     if (!Array.isArray(newValue)) {
       return;
     }
+    console.log('event', event);
 
     if (activeThumb === 0) {
       setValue1([Math.min(newValue[0], value1[1] - minDistance), value1[1]]);

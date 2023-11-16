@@ -32,7 +32,7 @@ const ListPerson = [
 const SMS = () => {
   return (
     <>
-      <SectionHeader title="SMS xabarnoma" />
+      <SectionHeader />
 
       <div className="space-y-[18px]">
         <TypeCard List={ListSms} title="Xabar turi" />

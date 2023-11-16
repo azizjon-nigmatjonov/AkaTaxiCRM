@@ -74,7 +74,7 @@ const Admins = () => {
 
   return (
     <>
-      <SectionHeader title="Adminlar ro‘yxati">
+      <SectionHeader >
         <div className="flex items-center gap-3">
           <AddButton
             text="new_admin"

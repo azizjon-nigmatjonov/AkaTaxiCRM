@@ -4,7 +4,7 @@ import SectionHeader from "../../../components/Sections/Header";
 const DriverStatistics = () => {
   return (
     <>
-      <SectionHeader title="Statistika: haydovchi" />
+      <SectionHeader />
       <CCard>
         
       </CCard>

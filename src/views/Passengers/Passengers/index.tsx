@@ -10,7 +10,6 @@ import passengerService from "../../../services/passengers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
 import CSelect from "../../../components/CElements/CSelect";
-import CLabel from "../../../components/CElements/CLabel";
 import CDriver from "../../../components/CElements/CDivider";
 import CSlider from "../../../components/CElements/CSlider";
 import { useSelector } from "react-redux";

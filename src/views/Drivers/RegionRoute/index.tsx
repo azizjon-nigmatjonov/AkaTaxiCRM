@@ -5,7 +5,7 @@ import Result from "./Result";
 const RegionRoute = () => {
   return (
     <>
-      <SectionHeader title="Viloyat qatnovi" />
+      <SectionHeader />
 
       <div className="grid grid-cols-2 gap-x-3 w-full h-[90vh]">
         <div>

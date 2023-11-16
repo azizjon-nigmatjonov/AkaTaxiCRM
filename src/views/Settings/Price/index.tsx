@@ -39,7 +39,7 @@ const Regions = [
 const Price = () => {
   return (
     <>
-      <SectionHeader title="Narxlar nazorati" />
+      <SectionHeader />
 
       {AllPrice?.map((element, index) => (
         <PriceCard key={index} title="Umumiy narxlar" element={element} />
