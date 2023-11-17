@@ -1,3 +1,4 @@
+import AddButton from "../../../components/Buttons/AddButton";
 import CTabs from "../../../components/CElements/CTab";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import DynamicPrice from "./DynamicPrice";
@@ -17,7 +18,10 @@ const Price = () => {
   const { currentTab } = useGetQueries();
   return (
     <>
-      <CTabs tabList={tabList} />
+      <div className="flex justify-between">
+        <CTabs tabList={tabList} />
+        <AddButton iconLeft={false} text="Tahrirlash" style={{ maxWidth: '200px' }} />
+      </div>
 
       <div>
         {currentTab === "regional_price" ? <DynamicPrice /> : <StaticPrice />}
