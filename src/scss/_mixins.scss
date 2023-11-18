@@ -73,3 +73,6 @@ $xl2: 24px;
 .commonShadow {
   box-shadow: -1px 0px 0px 0px #E2E2EA inset
 }
+* {
+  @include remove-scroll;
+}

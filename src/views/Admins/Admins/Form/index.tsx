@@ -4,6 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import HFTextField from "../../../../components/FormElements/HFTextField";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 import CModal from "../../../../components/CElements/CModal";
+import HFInputMask from "../../../../components/FormElements/HFInputMask";
+import { useQuery } from "react-query";
+import roleService from "../../../../services/rolls";
 
 const Form = () => {
   const schema = Validation();
@@ -14,6 +17,14 @@ const Form = () => {
     resolver: yupResolver(schema),
   });
 
+  const { data: rolls } = useQuery(['GET_ROLLS'], () => {
+    return roleService.getList()
+  },
+  {
+    enabled: true
+  })
+  console.log('rolls', rolls);
+  
   return (
     <CModal
       title="add_new_admin"
@@ -28,6 +39,31 @@ const Form = () => {
           placeholder="Nomi"
           label="Nomi"
           setValue={setValue}
+          required={true}
+        />
+        <HFInputMask
+          name="phone"
+          label={`Telefon raqam`}
+          placeholder={`Telefon raqam`}
+          required={true}
+          mask={"+\\9\\9\\8 99 999 99 99"}
+        />
+        <HFTextField
+          name="email"
+          control={control}
+          placeholder="Email"
+          label="Email"
+          setValue={setValue}
+          type="email"
+        />
+        <HFTextField
+          name="password"
+          control={control}
+          placeholder="Password"
+          label="Password"
+          setValue={setValue}
+          type="password"
+          activatePassword={true}
           required={true}
         />
       </div>

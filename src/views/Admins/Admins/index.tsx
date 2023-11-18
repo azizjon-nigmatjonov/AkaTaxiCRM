@@ -6,11 +6,12 @@ import usePageRouter from "../../../hooks/useObjectRouter";
 import Form from "./Form";
 import { useQuery } from "react-query";
 import adminService from "../../../services/admins";
+import { FormatTime } from "../../../utils/formatTime";
 
 const Admins = () => {
   const { navigateQuery } = usePageRouter();
 
-  const { data: admins } = useQuery(
+  const { data: admins, isLoading } = useQuery(
     ["GET_ADMINS"],
     () => {
       return adminService.getList();
@@ -45,6 +46,9 @@ const Admins = () => {
       {
         title: "Yaratilgan sana",
         id: "created_at",
+        render: (val: any) => {
+          return <>{FormatTime(val)}</>
+        }
       },
       {
         title: "Status",
@@ -86,6 +90,7 @@ const Admins = () => {
         headColumns={headColumns}
         bodyColumns={bodyColumns}
         isResizeble={true}
+        isLoading={isLoading}
       />
 
       <Form />

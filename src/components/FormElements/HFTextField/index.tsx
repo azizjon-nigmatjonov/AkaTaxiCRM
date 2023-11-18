@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form";
 import CLabel from "../../CElements/CLabel";
 import "../style.scss";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   control: any;
@@ -12,13 +12,12 @@ interface Props {
   rules?: object;
   label?: string;
   disabled?: boolean;
-  password?: boolean;
   defaultValue?: any;
-  setPassword?: (val?: any) => void;
   setValue?: (val1?: any, val2?: any) => void;
   type?: string;
-  placeholder?: string
+  placeholder?: string;
   style?: any;
+  activatePassword?: boolean;
 }
 
 const HFTextField = ({
@@ -28,12 +27,13 @@ const HFTextField = ({
   rules = {},
   label,
   disabled = false,
-  password = false,
   defaultValue = "",
-  setPassword = () => {},
   setValue = () => {},
+  activatePassword = false,
+  type = "text",
   ...props
 }: Props) => {
+  const [password, setPassword] = useState(true);
   useEffect(() => {
     if (defaultValue) {
       setValue(name, defaultValue);
@@ -41,7 +41,7 @@ const HFTextField = ({
   }, [defaultValue, name, setValue]);
 
   return (
-    <div className="HFInput">
+    <div className="HFInput relative">
       {label && <CLabel title={label} required={required} />}
       <Controller
         control={control}
@@ -60,17 +60,23 @@ const HFTextField = ({
             error={Boolean(error)}
             helperText={error?.message}
             {...props}
-            type={props.type || "text"}
+            type={
+              activatePassword && password
+                ? "password"
+                : activatePassword && !password
+                ? "text"
+                : type
+            }
             disabled={disabled}
           />
         )}
       ></Controller>
-      {password && (
+      {activatePassword && (
         <span
           className="visibility"
-          onClick={() => setPassword((prev: boolean) => !prev)}
+          onClick={() => setPassword((prev) => !prev)}
         >
-          {props.type === "password" ? <VisibilityOff /> : <Visibility />}
+          {!password ? <VisibilityOff /> : <Visibility />}
         </span>
       )}
     </div>
