@@ -12,7 +12,8 @@ export const useGetQueries = () => {
       search: query?.search,
       currentTab: query?.tab,
       restaurant_id: query?.restaurant_id,
-      currentSort: query?.sort
+      currentSort: query?.sort,
+      ...query
     };
     return result;
   }, [query]);
