@@ -1,8 +1,7 @@
-import { useQuery } from "react-query";
 import Points from "./Points";
 import PriceTable from "./Table";
 import priceService from "../../../../services/price";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
 
 const DynamicPrice = () => {
@@ -85,11 +84,11 @@ const DynamicPrice = () => {
     } else {
       setChanges([obj]);
     }
-    console.log(changes);
+    // console.log(changes);
 
-    // priceService.updateElement(obj).then((res) => {
-    //   console.log("res", res);
-    // });
+    priceService.updateElement(obj).then((res) => {
+      console.log("res", res);
+    });
   };
 
   return (
