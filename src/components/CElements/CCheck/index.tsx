@@ -1,5 +1,5 @@
 interface Props {
-  label: string;
+  label?: string;
   value: any;
   checked: any;
   onClick?: (val?: any) => void

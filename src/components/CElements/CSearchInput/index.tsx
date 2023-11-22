@@ -1,12 +1,13 @@
 import useDebounce from "../../../hooks/useDebounce";
 import { SearchIcon } from "../../IconGenerator/Svg";
 
-interface Prosp {
+interface Props {
   handleChange: (val: any) => void;
   delay?: number;
+  classes?: string
 }
 
-const CSearchInput = ({ handleChange = () => {}, delay = 500 }: Prosp) => {
+const CSearchInput = ({ handleChange = () => {}, delay = 500, classes = "" }: Props) => {
   const debounce = useDebounce((search: any) => {
     handleChange(search);
   }, delay);
@@ -20,7 +21,7 @@ const CSearchInput = ({ handleChange = () => {}, delay = 500 }: Prosp) => {
         onChange={(val) => debounce(val)}
         type="text"
         placeholder="Izlash..."
-        className="w-[250px] bg-transparent h-[40px] outline-none pl-10 pr-5 text=[var(--black)] placeholder-gray border border-[var(--lineGray)] focus:border-[var(--main)] rounded-[10px]"
+        className={`w-[250px] bg-transparent h-[40px] outline-none pl-10 pr-5 text=[var(--black)] placeholder-gray border border-[var(--lineGray)] focus:border-[var(--main)] rounded-[10px] ${classes}`}
       />
     </div>
   );

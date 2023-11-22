@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Collapse, Skeleton } from "@mui/material";
+import { ColorConstants } from "../../../../../constants/website";
 
 const PointSelector = ({
   step,
@@ -8,7 +9,6 @@ const PointSelector = ({
   handleSelect = () => {},
   checked = {},
   color = "",
-  loading = true,
 }: {
   step: string;
   element: any;
@@ -22,22 +22,18 @@ const PointSelector = ({
 
   return (
     <div className="w-full relative">
-      {loading ? (
-        <Skeleton style={{ height: '40px' }} />
-      ) : (
+      <div
+        onClick={() => setOpen((prev) => !prev)}
+        className="bg-white rounded-[18px] border border-[var(--lightGray)] flex items-center p-[14px] space-x-2 cursor-pointer"
+      >
         <div
-          onClick={() => setOpen((prev) => !prev)}
-          className="bg-white rounded-[18px] border border-[var(--lightGray)] flex items-center p-[14px] space-x-2 cursor-pointer"
+          className="w-[32px] h-[32px] rounded-full font-medium text-white flex items-center justify-center uppercase"
+          style={{ background: element?.name?.uz ? color : ColorConstants.lineGray }}
         >
-          <div
-            className="w-[32px] h-[32px] rounded-full font-medium text-white flex items-center justify-center uppercase"
-            style={{ background: color }}
-          >
-            {element?.name?.uz?.substring(0, 2)}
-          </div>
-          <span className="font-medium">{element?.name?.uz}</span>
+          {element?.name?.uz ? element?.name?.uz?.substring(0, 2) : 'XX'}
         </div>
-      )}
+        <span className="font-medium">{element?.name?.uz ? element?.name?.uz : 'Manzilni tanlang'}</span>
+      </div>
 
       <Collapse in={open} timeout="auto" unmountOnExit>
         <div className="absolute w-full z-[2]">

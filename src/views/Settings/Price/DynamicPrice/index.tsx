@@ -6,8 +6,7 @@ import { useGetQueries } from "../../../../hooks/useGetQueries";
 
 const DynamicPrice = () => {
   const { start, end } = useGetQueries();
-  const [changes, setChanges] = useState<any>([]);
-  const [locations, setLocations] = useState({});
+  const [locations, setLocations] = useState<any>({});
   const [loading, setLoading] = useState(false);
 
   const GetPrices = () => {
@@ -67,6 +66,7 @@ const DynamicPrice = () => {
 
   const updateCell = (status: string, val: any, el: any) => {
     const obj: any = {};
+    if (!val) val = "0"
     obj.start_location_id = el.start_location_id;
     obj.end_location_id = el.end_location_id;
     if (status === "price") {
@@ -76,15 +76,6 @@ const DynamicPrice = () => {
       obj.price = el.price;
       obj.fee = val;
     }
-
-    if (
-      changes?.find((i: any) => i.start_location_id === obj.start_location_id)
-    ) {
-      setChanges((prev: any) => [...prev, obj]);
-    } else {
-      setChanges([obj]);
-    }
-    // console.log(changes);
 
     priceService.updateElement(obj).then((res) => {
       console.log("res", res);
@@ -98,7 +89,13 @@ const DynamicPrice = () => {
       {loading ? (
         <h2>Loading...</h2>
       ) : (
-        <PriceTable locations={locations} updateCell={updateCell} />
+        <div>
+          {locations?.list ? (
+            <PriceTable locations={locations} updateCell={updateCell} />
+          ) : (
+            ""
+          )}
+        </div>
       )}
     </>
   );

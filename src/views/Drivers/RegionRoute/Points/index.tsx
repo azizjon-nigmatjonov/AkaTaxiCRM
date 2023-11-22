@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { ExchangeIcon } from "../../../../../components/IconGenerator/Svg";
+import { ExchangeIcon } from "../../../../components/IconGenerator/Svg"; 
 import PointSelector from "./Point";
 import { useSelector } from "react-redux";
-import { ColorConstants } from "../../../../../constants/website";
-import usePageRouter from "../../../../../hooks/useObjectRouter";
-import { useGetQueries } from "../../../../../hooks/useGetQueries";
+import { ColorConstants } from "../../../../constants/website";
+import usePageRouter from "../../../../hooks/useObjectRouter";
+import { useGetQueries } from "../../../../hooks/useGetQueries";
 
-const Points = () => {
+const Points = ({ hanldeSelect = () => {} }: { hanldeSelect: (val?: any) => void }) => {
   const [current, setCurrent] = useState(0);
   const regions = useSelector((state: any) => state.regions.regions);
   const [selected, setSelected] = useState<any>([]);
@@ -37,6 +37,7 @@ const Points = () => {
       navigateQuery({ end: el.id }, true);
     }
     setSelected([]);
+    hanldeSelect(list)
     setTimeout(() => {
       setSelected(list);
     }, 0);
@@ -50,6 +51,7 @@ const Points = () => {
     navigateQuery({ start: list[0].id, end: list[1].id }, true);
 
     setSelected([]);
+    hanldeSelect(list)
     setTimeout(() => {
       setSelected(list);
     }, 0);

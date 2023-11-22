@@ -1,19 +1,22 @@
 import { useMemo } from "react";
-import CCard from "../../../../components/CElements/CCard";
 import CTable from "../../../../components/CElements/CTable";
 
 const Result = () => {
   const headColumns = useMemo(() => {
     return [
       {
-        title: "Ism / mashina",
-        id: "name_vehicle",
-        render: (obj: any) => {
+        title: "Ism familya",
+        id: "name",
+      },
+      {
+        title: "Mashina / raqam",
+        id: "car",
+        render: (val: any) => {
           return (
-            <div className="flex justify-center flex-col" style={{ height: '60px' }}>
-              <p>{obj?.name}</p>
-              <span className="text-[var(--gray)] uppercase">{obj?.car}</span>
-            </div>
+            <>
+              <p>{val?.model}</p>
+              <span className="text-[var(--gray)]">{val?.number}</span>
+            </>
           );
         },
       },
@@ -43,29 +46,24 @@ const Result = () => {
 
   const bodyColumns = [
     {
-      name_vehicle: {
-        car: "cobalt - 60Y418BC",
-        name: "Muhammad Karim S.",
+      name: "Muhammad Karim S.",
+      car: {
+        model: "Cobalt",
+        number: "60Y418BC",
       },
       phone_number: "+998 (90) 948-48-10",
       status: true,
     },
     {
-      name_vehicle: {
-        car: "cobalt - 60Y418BC",
-        name: "Muhammad Karim S.",
-      },
+      name: "Muhammad Karim S.",
       phone_number: "+998 (90) 948-48-10",
       status: true,
     },
   ];
 
   return (
-    <CCard
-      classes="bg-transparent rounded-[30px] border-[var(--lineGray)]"
-      style={{ background: "transparent", padding: "18px", minHeight: "100%" }}
-    >
-      <div className="flex justify-between mb-[14px] ">
+    <div>
+      <div className="flex justify-between mb-[6px] mt-8">
         <p className="text-[var(--gray)] text-base font-medium">Natijalar</p>
         <span className="text-[var(--main)] text-base font-medium">
           371 ta haydovchi
@@ -78,7 +76,7 @@ const Result = () => {
         disablePagination={true}
         isResizeble={false}
       />
-    </CCard>
+    </div>
   );
 };
 

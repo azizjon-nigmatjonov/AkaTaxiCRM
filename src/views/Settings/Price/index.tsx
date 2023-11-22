@@ -16,7 +16,7 @@ const tabList = [
 ];
 
 const Price = () => {
-  const { currentTab } = useGetQueries();
+  const { currentTab, edit } = useGetQueries();
   const { navigateQuery } = usePageRouter();
 
   return (
@@ -26,8 +26,9 @@ const Price = () => {
         <AddButton
           onClick={() => navigateQuery({ edit: true })}
           iconLeft={false}
-          text="Tahrirlash"
+          text={edit ? "Bekor qilish" : "Tahrirlash"}
           style={{ maxWidth: "200px" }}
+          id={edit ? "disableButton" : "addBtn"}
         />
       </div>
 

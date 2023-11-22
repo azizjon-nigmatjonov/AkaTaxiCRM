@@ -2,6 +2,7 @@ export const ColorConstants = {
   primary: "#09B0E7",
   blue: '#0062FF',
   main: "#DD431F",
+  mainLight: "#FF5B01",
   black: "#151515",
   lineGray: "#E2E2EA",
   lightGray: "#F1F1F5",

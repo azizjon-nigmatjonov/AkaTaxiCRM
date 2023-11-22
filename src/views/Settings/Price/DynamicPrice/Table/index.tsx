@@ -1,6 +1,8 @@
 import cls from "./style.module.scss";
 import useDebounce from "../../../../../hooks/useDebounce";
 import { useGetQueries } from "../../../../../hooks/useGetQueries";
+import { useSelector } from "react-redux";
+import { useMemo } from "react";
 const PriceTable = ({
   locations = {},
   updateCell = () => {},
@@ -8,10 +10,19 @@ const PriceTable = ({
   locations?: any;
   updateCell: (val: any, val2: any, val3: any) => void;
 }) => {
-  const { edit } = useGetQueries()
+  const { edit, start, end } = useGetQueries()
+  const regions = useSelector((state: any) => state.regions.regions);
   const updateElement = useDebounce((value: any) => {
     updateCell(value.status, value.value, value.column);
-  }, 3000);
+  }, 1000);
+
+  const currentRegions = useMemo(() => {
+    return {
+      start: regions?.find((i: any) => i.id == start),
+      end: regions?.find((i: any) => i.id == end)
+    }
+  }, [regions, start, end])
+
 
   return (
     <div
@@ -20,14 +31,14 @@ const PriceTable = ({
       <div className={cls.body}>
         <div className="border-r-2 border-[var(--lineGray)]">
           <div
-            className={`whitespace-nowrap h-[48px] flex items-center px-[100px] relative ${cls.cell}`}
+            className={`whitespace-nowrap h-[48px] flex items-center px-[130px] relative ${cls.cell}`}
           >
-            <div className="bg-[var(--lineGray)] w-[102%] h-[2px] absolute left-0 rotate-[14deg]"></div>
+            <div className="bg-[var(--lineGray)] w-[101%] h-[2px] absolute left-0 rotate-[10deg]"></div>
             <div className="absolute top-1 right-[14px] font-bold">
-              Samarqand
+              {currentRegions?.end?.name?.uz.substring(0, 15)}...
             </div>
             <div className="absolute bottom-1 left-[14px] font-bold">
-              Buxoro
+            {currentRegions?.start?.name?.uz.substring(0, 15)}...
             </div>
           </div>
           {locations?.directions?.starting_cities?.map(

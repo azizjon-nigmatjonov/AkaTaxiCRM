@@ -1,4 +1,4 @@
-#addBtn, #filterButton, #deleteButton {
+#addBtn, #filterButton, #deleteButton, #saveButton, #disableButton {
     margin: 0;
     width: 100%;
     button {
@@ -12,6 +12,19 @@
         width: 100%;
         white-space: nowrap;
         font-weight: 500;
+    }
+}
+
+#saveButton {
+    button {
+        background-color: $green;
+    }
+}
+
+#disableButton {
+    button {
+        background-color: $darkGray;
+        color: $black;
     }
 }
 

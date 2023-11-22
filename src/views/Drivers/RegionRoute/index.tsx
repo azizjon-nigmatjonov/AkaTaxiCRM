@@ -1,20 +1,18 @@
-import Directions from "./Directions";
-import SectionHeader from "../../../components/Sections/Header";
+import Points from "./Points";
 import Result from "./Result";
 
 const RegionRoute = () => {
+
+  const hanldeSelect = (list: any) => {
+    console.log(list);
+    
+  }
+
   return (
     <>
-      <SectionHeader />
+      <Points hanldeSelect={hanldeSelect} />
 
-      <div className="grid grid-cols-2 gap-x-3 w-full h-[90vh]">
-        <div>
-          <Directions />
-        </div>
-        <div>
-          <Result />
-        </div>
-      </div>
+      <Result />
     </>
   );
 };
