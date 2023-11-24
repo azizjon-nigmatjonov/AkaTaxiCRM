@@ -15,8 +15,6 @@ const Points = ({
   const [selected, setSelected] = useState<any>([]);
   const { navigateQuery } = usePageRouter();
 
-  const handleSelect = (el: any, status: string) => {};
-
   const handleExchange = () => {
     const list: any = selected;
     const prev = list[0];
@@ -38,7 +36,6 @@ const Points = ({
         regions={regions}
         selected={selected}
         setSelected={setSelected}
-        handleSelect={handleSelect}
         color={current === 0 ? ColorConstants.darkerGreen : ColorConstants.ink}
       />
 
@@ -58,7 +55,6 @@ const Points = ({
         regions={regions}
         selected={selected}
         setSelected={setSelected}
-        handleSelect={handleSelect}
         color={current === 1 ? ColorConstants.darkerGreen : ColorConstants.ink}
       />
     </div>

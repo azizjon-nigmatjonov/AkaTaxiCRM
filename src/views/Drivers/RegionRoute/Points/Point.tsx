@@ -10,14 +10,12 @@ const PointSelector = ({
   color = "",
   selected = [],
   setSelected = () => {},
-  handleSelect = () => {},
 }: {
   step: number;
   regions?: any;
   color: string;
   selected: any;
   setSelected: (val: any) => void;
-  handleSelect: (val: any, val2: any) => void;
 }) => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(false);

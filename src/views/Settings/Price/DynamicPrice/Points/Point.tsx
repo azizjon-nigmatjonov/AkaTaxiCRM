@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Collapse, Skeleton } from "@mui/material";
+import { Collapse } from "@mui/material";
 import { ColorConstants } from "../../../../../constants/website";
 
 const PointSelector = ({
