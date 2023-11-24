@@ -3,14 +3,13 @@ import Result from "./Result";
 
 const RegionRoute = () => {
 
-  const hanldeSelect = (list: any) => {
+  const handleChange = (list: any) => {
     console.log(list);
-    
   }
 
   return (
     <>
-      <Points hanldeSelect={hanldeSelect} />
+      <Points handleChange={handleChange} />
 
       <Result />
     </>

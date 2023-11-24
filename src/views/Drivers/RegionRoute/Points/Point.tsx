@@ -1,80 +1,146 @@
 import { useState } from "react";
 import { Collapse } from "@mui/material";
-import { ColorConstants } from "../../../../constants/website";
 import { CheckLine } from "../../../../components/IconGenerator/Svg";
+import { Closer } from "../../../../components/Closer";
+import { ColorConstants } from "../../../../constants/website";
 
 const PointSelector = ({
-  step,
-  element = {},
+  step = 0,
   regions = [],
-  handleSelect = () => {},
-  checked = {},
   color = "",
+  selected = [],
+  setSelected = () => {},
+  handleSelect = () => {},
 }: {
-  step: string;
-  element: any;
+  step: number;
   regions?: any;
-  checked?: any;
   color: string;
-  loading: boolean;
+  selected: any;
+  setSelected: (val: any) => void;
   handleSelect: (val: any, val2: any) => void;
 }) => {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(false);
+  const [checkedList, setCheckedList] = useState([]);
+  const handleList = (element: any) => {
+    const selectList: any = selected;
+    if (step === 0) {
+      selectList[0] = element;
+    } else {
+      selectList[1] = element;
+    }
+    console.log(active);
+    setActive((prev) => !prev);
+    setSelected(selectList);
+  };
 
-  const [checkedRegions, setcheckedRegions] = useState([]);
+  const handleCheck = (parent: any, child: any) => {
+    const obj: any = {
+      ...child,
+      checked: !child.checked,
+    };
+    const checked: any = [];
+    const list: any = [];
+
+    parent.list?.forEach((element: any) => {
+      if (element.id === obj.id) {
+        element = obj;
+      }
+      if (element.checked) checked.push(obj);
+      list.push(element);
+    });
+    setCheckedList(checked);
+    handleList({ ...parent, list });
+  };
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative z-[99]">
       <div
         onClick={() => setOpen((prev) => !prev)}
-        className="bg-white rounded-[18px] border border-[var(--lightGray)] flex items-center p-[14px] space-x-2 cursor-pointer"
+        className="bg-white rounded-[18px] border border-[var(--lightGray)] flex items-center h-[70px] px-[14px] space-x-2 cursor-pointer"
       >
         <div
           className="w-[32px] h-[32px] rounded-full font-medium text-white flex items-center justify-center uppercase"
           style={{
-            background: element?.name?.uz ? color : ColorConstants.lineGray,
+            background: selected[step]?.name?.uz
+              ? color
+              : ColorConstants.lineGray,
           }}
         >
-          {element?.name?.uz ? element?.name?.uz?.substring(0, 2) : "XX"}
+          {selected[step]?.name?.uz
+            ? selected[step]?.name?.uz?.substring(0, 2)
+            : "XX"}
         </div>
-        <span className="font-medium">
-          {element?.name?.uz ? element?.name?.uz : "Manzilni tanlang"}
-        </span>
+        <div className="font-medium">
+          {selected[step]?.name?.uz
+            ? selected[step]?.name?.uz
+            : "Manzilni tanlang"}
+          {checkedList?.length ? (
+            <p className="text-[var(--gray)]">
+              {checkedList?.length < 2 ? (
+                <>
+                  {checkedList?.map((i: any) => (
+                    <span>{i.name.uz}</span>
+                  ))}
+                </>
+              ) : (
+                <>Tumanlar soni {checkedList.length}</>
+              )}
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
 
       <Collapse in={open} timeout="auto" unmountOnExit>
         <div className="absolute w-full z-[99] flex space-x-2">
-          <ul className="w-full bg-white border border-[var(--lightGray)] rounded-[18px] mt-2 overflow-hidden px-4">
-            {regions?.map(
-              (el: any, index: number, row: any) =>
-                el.id !== checked.id && (
-                  <li
-                    key={index}
-                    onClick={() => {
-                      handleSelect(el, step);
-                      setOpen(false);
-                    }}
-                    className={`py-2 cursor-pointer border-[var(--lineGray)] font-medium ${
-                      element.id === el.id
-                        ? "text-[var(--black)]"
-                        : "text-[var(--gray)]"
-                    } ${index === row.length - 1 ? "" : "border-b"}`}
-                  >
-                    {el.name.uz}
-                  </li>
-                )
-            )}
+          <ul className="w-full bg-white border border-[var(--lightGray)] rounded-[18px] mt-2 overflow-hidden px-4 shadow-xl">
+            {regions?.map((el: any, index: number, row: any) => (
+              <li
+                key={index}
+                onClick={() => handleList(el)}
+                className={`py-2 cursor-pointer border-[var(--lineGray)] font-medium ${
+                  el.id === selected[step]?.id
+                    ? "text-[var(--black)]"
+                    : "text-[var(--gray)]"
+                } ${index === row.length - 1 ? "" : "border-b"}`}
+              >
+                {el.name.uz}
+              </li>
+            ))}
           </ul>
-          <ul className="w-full bg-white border border-[var(--lightGray)] rounded-[18px] mt-2 overflow-hidden px-4">
-            <li className="py-2 cursor-pointer flex items-center justify-between border-b border-[var(--lineGray)] font-medium">
-              <span>Chilonzor</span>
-              <div className="w-[18px] h-[18px] rounded-[4px] border-2 border-[var(--mainLight)] bg-[var(--mainLight)]">
-                <CheckLine />
-              </div>
-            </li>
+          <ul className="w-full bg-white border border-[var(--lightGray)] rounded-[18px] mt-2 overflow-hidden px-4 shadow-xl">
+            {selected[step]?.list?.map((item: any, index: number) => (
+              <li
+                key={index}
+                onClick={() => handleCheck(selected[step], item)}
+                className="py-2 cursor-pointer flex items-center justify-between border-b border-[var(--lineGray)] font-medium"
+              >
+                <span>{item?.name?.uz}</span>
+                <div
+                  className={`w-[18px] h-[18px] rounded-[4px] border-2 ${
+                    item.checked
+                      ? "border-[var(--mainLight)] bg-[var(--mainLight)]"
+                      : "border-[var(--lineGray)]"
+                  }`}
+                >
+                  {item.checked ? <CheckLine /> : ""}
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </Collapse>
+
+      {open && (
+        <Closer
+          handleClose={() => {
+            // handleSelect(selected, step);
+            setOpen(false);
+          }}
+        />
+      )}
     </div>
   );
 };

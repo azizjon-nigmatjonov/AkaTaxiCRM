@@ -9,33 +9,42 @@ import { regionActions } from "../../store/regions/index";
 import { useDispatch } from "react-redux";
 
 const MainLayout = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
   const GetRegions = () => {
     regionService.getList().then((regions) => {
-      regionService.getDistrict().then((discricts) => {        
-        const arr: any = regions?.data ?? []
-        const arr2 = discricts?.data ?? []
-        for (let i = 0; i < arr.length; i++) {
-          arr[i].discricts = [] 
-          console.log('111',  arr[i].discricts);
-          
-          // for (let j = 0; j < arr2.length; j++) {
-          //   if (arr[i].id === arr2[j].region_id) {
-          //     arr[i].discricts.push(arr2[j])
-          //   }
-          // }
-          
-        }
-        console.log('arr', arr);
-        
-      })
-      dispatch(regionActions.setRegions(regions?.data ?? []))
+      GetDisctricts(
+        regions?.data?.map((el: any) => {
+          return {
+            ...el,
+            list: [],
+          };
+        }) ?? []
+      );
     });
-  }
+  };
+
+  const GetDisctricts = (array: any) => {
+    if (!array) return;
+    const arr = array
+    regionService.getDistrict().then((response) => {
+      const list = response?.data ?? [];
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < list.length; j++) {   
+          list[j].checked = false         
+          if (list[j].region_id == arr[i].id) {
+            arr[i].list.push(list[j])
+          }
+        }
+      }
+
+      dispatch(regionActions.setRegions(arr ?? []));
+    });
+  };
 
   useEffect(() => {
-    GetRegions()
-  }, [])
+    GetRegions();
+  }, []);
 
   useEffect(() => {
     (Object.keys(ColorConstants) as (keyof typeof ColorConstants)[]).forEach(
