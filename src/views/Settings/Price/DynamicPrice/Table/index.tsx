@@ -5,24 +5,28 @@ import { useSelector } from "react-redux";
 import { useMemo } from "react";
 const PriceTable = ({
   locations = {},
+  edit = false,
   updateCell = () => {},
 }: {
   locations?: any;
-  updateCell: (val: any, val2: any, val3: any) => void;
+  edit: boolean;
+  updateCell?: (val: string, val2: any, val3: any) => void;
 }) => {
-  const { edit, start, end } = useGetQueries()
+  const { start, end } = useGetQueries();
   const regions = useSelector((state: any) => state.regions.regions);
+
   const updateElement = useDebounce((value: any) => {
+    console.log('eee');
+    
     updateCell(value.status, value.value, value.column);
-  }, 1000);
+  }, 0);
 
   const currentRegions = useMemo(() => {
     return {
       start: regions?.find((i: any) => i.id == start),
-      end: regions?.find((i: any) => i.id == end)
-    }
-  }, [regions, start, end])
-
+      end: regions?.find((i: any) => i.id == end),
+    };
+  }, [regions, start, end]);
 
   return (
     <div
@@ -38,10 +42,10 @@ const PriceTable = ({
               {currentRegions?.end?.name?.uz.substring(0, 15)}...
             </div>
             <div className="absolute bottom-1 left-[14px] font-bold">
-            {currentRegions?.start?.name?.uz.substring(0, 15)}...
+              {currentRegions?.start?.name?.uz.substring(0, 15)}...
             </div>
           </div>
-          {locations?.directions?.starting_cities?.map(
+          {locations?.starting_cities?.map(
             (item: any, index: number) => (
               <div
                 key={index}
@@ -53,7 +57,7 @@ const PriceTable = ({
           )}
         </div>
         <div className="flex">
-          {locations?.directions?.ending_cities?.map(
+          {locations?.ending_cities?.map(
             (row: any, index: number) => (
               <div
                 key={index}
@@ -93,8 +97,9 @@ const PriceTable = ({
                         className="pl-2 w-full"
                         type="number"
                         readOnly={!edit}
-                        defaultValue={column.fee}
+                        defaultValue={column.fee ?? 0}
                       />
+    
                       <span>%</span>
                     </div>
                   </div>

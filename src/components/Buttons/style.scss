@@ -1,4 +1,4 @@
-#addBtn, #filterButton, #deleteButton, #saveButton, #disableButton {
+#addBtn, #filterButton, #deleteButton, #saveButton, #disableButton, #successBtn {
     margin: 0;
     width: 100%;
     button {
@@ -12,6 +12,12 @@
         width: 100%;
         white-space: nowrap;
         font-weight: 500;
+    }
+}
+
+#successBtn {
+    button {
+        background-color: $green;
     }
 }
 

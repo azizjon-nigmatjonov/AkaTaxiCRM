@@ -11,7 +11,7 @@ const priceService = {
       `/distance-prices?start_region_id=${start_region_id}&end_region_id=${end_region_id}`
     ),
   updateElement: (data: any) =>
-    request.put(`distance-prices/update`, { prices: [data] }),
+    request.put(`distance-prices/update`, { prices: data }),
   createElement: (data: any) =>
     request.post("/prices", { ...data, team_id: 1 }),
 };

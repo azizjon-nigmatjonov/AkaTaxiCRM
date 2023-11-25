@@ -15,7 +15,6 @@ const PointSelector = ({
   regions?: any;
   checked?: any;
   color: string;
-  loading: boolean;
   handleSelect: (val: any, val2: any) => void;
 }) => {
   const [open, setOpen] = useState(false);

@@ -1,102 +1,52 @@
 import Points from "./Points";
 import PriceTable from "./Table";
-import priceService from "../../../../services/price";
-import { useEffect, useState } from "react";
-import { useGetQueries } from "../../../../hooks/useGetQueries";
 
-const DynamicPrice = () => {
-  const { start, end } = useGetQueries();
-  const [locations, setLocations] = useState<any>({});
-  const [loading, setLoading] = useState(false);
+const DynamicPrice = ({
+  regions = [],
+  selected = [],
+  locations = {},
+  edit = false,
+  changesLis = [],
+  setChangesList = () => {},
+}: {
+  regions: any;
+  selected: any;
+  locations: any;
+  edit: boolean;
+  changesLis: any;
+  setChangesList: (val: any) => void;
+}) => {
+  
+  const updateCell = (status: string, val: any, object: any) => {
+    console.log(status, val, object);
 
-  const GetPrices = () => {
-    setLoading(true);
-    priceService
-      .getList({
-        start_region_id: start,
-        end_region_id: end,
-      })
-      .then((res) => {
-        if (!res?.data?.length) return {};
-        const arr: any = res?.data;
+    const obj: any = object;
+    status === "price" ? (obj.price = val) : (obj.fee = val);
 
-        const starting_cities = getCities(arr, "start_location_id");
-        const ending_cities = getCities(arr, "end_location_id");
-
-        for (let i = 0; i < arr.length; i++) {
-          const obj = arr[i];
-          for (let j = 0; j < ending_cities.length; j++) {
-            if (obj.end_location_id === ending_cities[j]?.end_location_id) {
-              ending_cities[j].list.push(obj);
-            }
-          }
-        }
-
-        setLocations({
-          list: arr,
-          directions: { starting_cities, ending_cities },
-        });
-      })
-      .finally(() => setLoading(false));
-  };
-
-  useEffect(() => {
-    if (start && end) GetPrices();
-  }, [start, end]);
-
-  const getCities = (arr: any, direction: string) => {
-    const result = arr.reduce((accumulator: any, currentObject: any) => {
-      const existingObject = accumulator.find(
-        (obj: any) => obj[direction] === currentObject[direction]
-      );
-
-      if (existingObject) {
-        existingObject.list = [];
-        existingObject.value += currentObject.value;
-      } else {
-        accumulator.list = [];
-        accumulator.push({ ...currentObject });
-      }
-
-      return accumulator;
-    }, []);
-
-    return result;
-  };
-
-  const updateCell = (status: string, val: any, el: any) => {
-    const obj: any = {};
-    if (!val) val = "0"
-    obj.start_location_id = el.start_location_id;
-    obj.end_location_id = el.end_location_id;
-    if (status === "price") {
-      obj.price = val;
-      obj.fee = el.fee;
+    if (changesLis.some((i: any) => i.id === obj.id)) {
+      const list: any = changesLis.filter((i: any) => i.id !== obj.id);
+      list.push(obj);
+      setChangesList(list);
     } else {
-      obj.price = el.price;
-      obj.fee = val;
+      setChangesList((prev: any) => [...prev, obj]);
     }
-
-    priceService.updateElement(obj).then((res) => {
-      console.log("res", res);
-    });
   };
 
   return (
     <>
-      <Points />
+      <Points regions={regions} selected={selected} />
 
-      {loading ? (
-        <h2>Loading...</h2>
-      ) : (
-        <div>
-          {locations?.list ? (
-            <PriceTable locations={locations} updateCell={updateCell} />
-          ) : (
-            ""
-          )}
-        </div>
-      )}
+      <div>
+        {locations ? (
+          <PriceTable
+            locations={locations}
+            edit={edit}
+            updateCell={updateCell}
+          />
+        ) : (
+          ""
+        )}
+      </div>
     </>
   );
 };

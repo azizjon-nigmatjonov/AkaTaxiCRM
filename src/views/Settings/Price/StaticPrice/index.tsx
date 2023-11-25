@@ -38,9 +38,13 @@ const StaticPrice = () => {
           minHeight: "100%",
         }}
       >
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-x-4 gap-y-8">
+          <PriceField title="Standart klass" price={0} />
           <PriceField title="Kamfort klass" price={5} />
           <PriceField title="Biznes klass" price={5} />
+          <PriceField title="Yengil yuk tashuvchi" price={5} />
+          <PriceField title="Og'ir yuk tashuvchi" price={5} />
+          <PriceField title="Fura" price={5} />
         </div>
       </CCard>
       <CCard
