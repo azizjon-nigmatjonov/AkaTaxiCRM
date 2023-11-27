@@ -43,15 +43,17 @@ const Price = () => {
   const regions = useSelector((state: any) => state.regions.regions);
 
   const selected: any = useMemo(() => {
-    if (!start || !end) return;
     const first = regions.find((i: any) => i.id == start);
     const second = regions.find((i: any) => i.id == end);
     return [first, second];
   }, [start, end, regions]);
+
   const [locations, setLocations] = useState<any>({});
   const [changesList, setChangesList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const GetPrices = () => {
+    setLoading(true);
     priceService
       .getList({
         start_region_id: start,
@@ -74,11 +76,12 @@ const Price = () => {
         }
 
         setLocations({ starting_cities, ending_cities });
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   const handleSave = () => {
-    if (!changesList.length) return
+    if (!changesList.length) return;
     if (edit) {
       priceService
         .updateElement(changesList)
@@ -90,8 +93,11 @@ const Price = () => {
   };
 
   useEffect(() => {
-    GetPrices();
-  }, []);
+    setLocations({});
+    if (start && end) GetPrices();
+  }, [start, end]);
+
+  console.log("selected", selected);
 
   return (
     <>
@@ -123,6 +129,7 @@ const Price = () => {
             edit={edit}
             changesLis={changesList}
             setChangesList={setChangesList}
+            loading={loading}
           />
         ) : (
           <StaticPrice />

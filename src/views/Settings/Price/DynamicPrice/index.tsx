@@ -8,15 +8,16 @@ const DynamicPrice = ({
   edit = false,
   changesLis = [],
   setChangesList = () => {},
+  loading = false,
 }: {
   regions: any;
   selected: any;
   locations: any;
   edit: boolean;
   changesLis: any;
+  loading: boolean;
   setChangesList: (val: any) => void;
 }) => {
-  
   const updateCell = (status: string, val: any, object: any) => {
     console.log(status, val, object);
 
@@ -37,14 +38,23 @@ const DynamicPrice = ({
       <Points regions={regions} selected={selected} />
 
       <div>
-        {locations ? (
+        {Object.keys(locations).length !== 0 && !loading ? (
           <PriceTable
             locations={locations}
             edit={edit}
             updateCell={updateCell}
           />
         ) : (
-          ""
+          <div className="flex justify-center mt-10">
+            {loading ? (
+              <h1 className="text-lg">Yuklanmoqda...</h1>
+            ) : (
+              <div className="text-center">
+                <img className="w-[200px]" src="/images/no-data.png" />
+                <h2>Ma'lumot mavjud emas</h2>
+              </div>
+            )}
+          </div>
         )}
       </div>
     </>

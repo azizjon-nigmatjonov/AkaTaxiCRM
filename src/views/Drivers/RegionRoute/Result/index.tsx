@@ -62,8 +62,8 @@ const Result = () => {
   ];
 
   return (
-    <div>
-      <div className="flex justify-between mb-[6px] mt-8">
+    <div className="mt-8">
+      <div className="flex justify-between mb-[6px]">
         <p className="text-[var(--gray)] text-base font-medium">Natijalar</p>
         <span className="text-[var(--main)] text-base font-medium">
           371 ta haydovchi
