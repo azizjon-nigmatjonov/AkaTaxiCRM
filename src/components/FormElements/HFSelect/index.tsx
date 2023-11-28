@@ -6,6 +6,7 @@ import {
 } from "@mui/material";
 import { Controller } from "react-hook-form";
 import CLabel from "../../CElements/CLabel";
+import { useEffect } from "react";
 // import IconGenerator from "../IconPicker/IconGenerator";
 
 interface Props {
@@ -21,7 +22,8 @@ interface Props {
   optionType?: any;
   defaultValue?: any;
   rules?: any;
-  id?: string
+  id?: string;
+  setValue?: (val1?: any, val2?: any) => void;
 }
 
 const HFSelect = ({
@@ -38,8 +40,15 @@ const HFSelect = ({
   defaultValue = "",
   rules = {},
   id = "cselect",
+  setValue = () => {},
   ...props
 }: Props) => {
+
+  useEffect(() => {
+    if (defaultValue) {
+      setValue(name, defaultValue);
+    }
+  }, [defaultValue, name, setValue]);
   return (
     <div id={`cselect-${id}`}>
       <Controller

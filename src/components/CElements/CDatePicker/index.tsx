@@ -3,23 +3,15 @@ import "react-multi-date-picker/styles/layouts/mobile.css";
 import "./style2.scss";
 
 interface Props {
-  value?: any;
-  name?: any;
-  width?: string;
   placeholder?: any;
   handleChange?: (val: any) => void;
   defaultValue?: any;
-  className?: string;
-  mask?: any;
-  tabIndex?: any;
-  inputProps?: any;
-  isFormEdit?: boolean;
-  disabled?: boolean;
 }
 
 const CDatePicker = ({
   handleChange = () => {},
   placeholder,
+  defaultValue,
 }: Props) => {
   const handleDateChange = (dates: any) => {
     handleChange(dates ? new Date(dates) : "");
@@ -29,6 +21,7 @@ const CDatePicker = ({
     <DatePicker
       // format="dd.MM.YYYY"
       // value={selectedDate}
+      value={defaultValue}
       placeholder={placeholder}
       // maxDate={maxDate}
       onChange={(val?: any) => handleDateChange(val)}

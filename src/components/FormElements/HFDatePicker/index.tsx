@@ -1,6 +1,7 @@
 import { Controller } from "react-hook-form";
 import CDatePicker from "../../CElements/CDatePicker";
 import CLabel from "../../CElements/CLabel";
+import { useEffect } from "react";
 
 interface Props {
   control?: any;
@@ -17,6 +18,7 @@ interface Props {
   isFormEdit?: boolean;
   disabled?: boolean;
   label?: string;
+  setValue?: (val1?: any, val2?: any) => void;
 }
 
 const HFDatePicker = ({
@@ -31,7 +33,14 @@ const HFDatePicker = ({
   disabled,
   required = false,
   label = "",
+  setValue = () => {},
 }: Props) => {
+  useEffect(() => {
+    if (defaultValue) {
+      setValue(name, defaultValue);
+    }
+  }, [defaultValue, name, setValue]);
+
   return (
     <div>
       <CLabel title={label} required={required} />
@@ -43,15 +52,9 @@ const HFDatePicker = ({
         render={({ field: { onChange, value } }) => (
           <div className={className}>
             <CDatePicker
-              isFormEdit={isFormEdit}
-              name={name}
               placeholder={placeholder}
-              mask={mask}
-              tabIndex={tabIndex}
-              value={value}
               handleChange={onChange}
-              disabled={disabled}
-              defaultValue={defaultValue}
+              defaultValue={value}
             />
           </div>
         )}

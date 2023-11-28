@@ -40,7 +40,7 @@ const HFInputMask = ({
         onChange={(e) => setCurValue(e.target.value)}
         mask={mask}
         maskChar=" "
-        // value={defaultValue}
+        defaultValue={defaultValue}
         placeholder={placeholder}
       />
     </div>

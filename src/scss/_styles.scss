@@ -1,67 +1,84 @@
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 input {
-    caret-color: $main;
+  caret-color: $main;
 
-    &:focus {
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 }
 
-#cselect-cselect, #cselect-filter {
+#cselect-cselect,
+#cselect-filter {
+  width: 100%;
+  .MuiInputBase-root {
+    height: 48px;
+    border-radius: 12px;
+    border-color: $lineGray !important;
+    outline: none;
     width: 100%;
-    .MuiInputBase-root {
-        height: 48px;
-        border-radius: 12px;
-        border-color: $lineGray !important;
-        outline: none;
-        width: 100%;
-        &.Mui-focused {
-            .MuiOutlinedInput-notchedOutline {
-                border-color: $main;
-            }
-        }
-
-        input {
-            width: 100%;
-        }
+    &.Mui-focused {
+      .MuiOutlinedInput-notchedOutline {
+        border-color: $main;
+      }
     }
+
+    input {
+      width: 100%;
+    }
+  }
 }
 #cselect-filter {
-    .MuiInputBase-root {
-        height: 33px;
-        width: 100%;
-        border-radius: 8px;
-    }
+  .MuiInputBase-root {
+    height: 33px;
+    width: 100%;
+    border-radius: 8px;
+  }
 }
 .MuiPaper-root {
-    border-radius: 12px !important;
-    ul {
-        background-color: white;
-        max-height: 300px;
-        overflow: scroll;
-        .Mui-selected  {
-            color: $main;
-            font-weight: 500;
-        }
+  border-radius: 12px !important;
+  ul {
+    background-color: white;
+    max-height: 300px;
+    overflow: scroll;
+    .Mui-selected {
+      color: $main;
+      font-weight: 500;
     }
+  }
 }
 
 #hfInputMask {
-    input {
-        background-color: transparent;
-        height: 48px;
-        width: 100%;
-        border: 1px solid $lineGray;
-        border-radius: 12px;
-        padding: 0 14px;
+  input {
+    background-color: transparent;
+    height: 48px;
+    width: 100%;
+    border: 1px solid $lineGray;
+    border-radius: 12px;
+    padding: 0 14px;
 
-        &:focus {
-            border-color: $main;
-        }
+    &:focus {
+      border-color: $main;
     }
+  }
+}
+
+#SwitchBtn {
+  &.checked {
+    .MuiSwitch-track {
+      background-color: #ff5b01;
+      opacity: 1;
+    }
+  }
+  .MuiSwitch-root {
+    .MuiSwitch-thumb {
+      background-color: white;
+      border: 1px solid $lineGray;
+      box-shadow: none;
+    }
+  }
 }

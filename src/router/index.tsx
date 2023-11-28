@@ -23,6 +23,7 @@ import Chats from "../views/Information/Chats";
 import Calendar from "../views/Information/Calendar";
 import AmoCrm from "../views/Settings/AmoCrm";
 import usePageRouter from "../hooks/useObjectRouter";
+import ProfilePage from "../views/Settings/Profile";
 
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
@@ -50,7 +51,7 @@ const Router = () => {
     settings: [],
   });
 
-  const getPath = ({ parent, link, title, icon, sidebar, card_info }: Path) => {
+  const getPath = ({ parent = "", link, title, icon, sidebar, card_info }: Path) => {
     const path = `${parent}/${link}`;
     const obj = {
       path: path,
@@ -275,6 +276,16 @@ const Router = () => {
               icon: "amocrm",
             })}
             element={<AmoCrm />}
+          />
+          <Route
+            path={getPath({
+              parent: "settings",
+              link: "profile",
+              sidebar: false,
+              title: "Profile",
+              icon: "",
+            })}
+            element={<ProfilePage />}
           />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />

@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 export const Header = () => {
   const { GetTitle } = useLocationLang();
   const { t } = useTranslation();
+  
   return (
     <div className="pb-[70px]">
       <div className="fixed w-full left-0 pl-[229px] z-[99]">

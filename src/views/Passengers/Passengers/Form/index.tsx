@@ -63,17 +63,21 @@ const Form = ({ refetch }: Props) => {
   const handleSubmit = () => {
     const data = getValues();
     data.phone = data.phone?.substring(1)?.replace(/\s+/g, "");
-    data.birthday = FormatTime(data.birthday);
-
-    if (query.id === "create") {
-      createElement.mutate(data);
-    }
+    console.log('  data.birthday',   data.birthday);
+    
+    // data.birthday = FormatTime(data.birthday);
+    console.log('birthday', data.birthday);
+    
+    // if (query.id === "create") {
+    //   createElement.mutate(data);
+    // }
   };
 
   const passengerInfo: any = useMemo(() => {
     return passenger?.data;
   }, []);
-
+  console.log('passengerInfo', passengerInfo);
+  
   return (
     <CModal
       title={query.id === "create" ? "add_new_passenger" : "update_passenger"}
@@ -100,6 +104,7 @@ const Form = ({ refetch }: Props) => {
           label="Viloyatni tanlang"
           placeholder="Viloyatni tanlang"
           required={true}
+          setValue={setValue}
           defaultValue={passengerInfo?.region_id}
         />
 
@@ -109,11 +114,12 @@ const Form = ({ refetch }: Props) => {
           label="Tug'ulgan kuningizni kiriting"
           placeholder="Tug'ulgan kuningizni kiriting"
           required={true}
+          setValue={setValue}
           defaultValue={passengerInfo?.birthday}
         />
 
         <HFInputMask
-          // defaultValue={userData?.phone}
+          defaultValue={passengerInfo?.phone}
           name="phone"
           setValue={setValue}
           mask={"+\\9\\9\\8 99 999 99 99"}

@@ -6,10 +6,11 @@ import { useEffect } from "react";
 import { ColorConstants } from "../../constants/website";
 import regionService from "../../services/regions";
 import { regionActions } from "../../store/regions/index";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
+  const regions = useSelector((state: any) => state.regions.regions);
 
   const GetRegions = () => {
     regionService.getList().then((regions) => {
@@ -43,8 +44,8 @@ const MainLayout = () => {
   };
 
   useEffect(() => {
-    GetRegions();
-  }, []);
+    if (!regions) GetRegions();
+  }, [regions]);
 
   useEffect(() => {
     (Object.keys(ColorConstants) as (keyof typeof ColorConstants)[]).forEach(
