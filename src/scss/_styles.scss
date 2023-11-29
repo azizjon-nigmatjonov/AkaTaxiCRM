@@ -82,3 +82,7 @@ input {
     }
   }
 }
+
+.MuiModal-root {
+  z-index: 99 !important;
+}

@@ -7,10 +7,31 @@ import { ColorConstants } from "../../constants/website";
 import regionService from "../../services/regions";
 import { regionActions } from "../../store/regions/index";
 import { useDispatch, useSelector } from "react-redux";
+import CAlert from "../../components/CElements/CAlert";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
   const regions = useSelector((state: any) => state.regions.regions);
+  const alertData = useSelector((state: any) => state.website.alert);
+
+  const GetDisctricts = (array: any) => {
+    if (!array) return;
+    const arr = array;
+    regionService.getDistrict().then((response) => {
+      const list = response?.data ?? [];
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < list.length; j++) {
+          list[j].checked = false;
+          if (list[j].region_id == arr[i].id) {
+            arr[i].list.push(list[j]);
+          }
+        }
+      }
+      console.log('arr', arr);
+      
+      dispatch(regionActions.setRegions(arr ?? []));
+    });
+  };
 
   const GetRegions = () => {
     regionService.getList().then((regions) => {
@@ -25,26 +46,8 @@ const MainLayout = () => {
     });
   };
 
-  const GetDisctricts = (array: any) => {
-    if (!array) return;
-    const arr = array
-    regionService.getDistrict().then((response) => {
-      const list = response?.data ?? [];
-      for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < list.length; j++) {   
-          list[j].checked = false         
-          if (list[j].region_id == arr[i].id) {
-            arr[i].list.push(list[j])
-          }
-        }
-      }
-
-      dispatch(regionActions.setRegions(arr ?? []));
-    });
-  };
-
   useEffect(() => {
-    if (!regions) GetRegions();
+    if (!regions?.length) GetRegions();
   }, [regions]);
 
   useEffect(() => {
@@ -67,6 +70,8 @@ const MainLayout = () => {
         </div>
         {/* <MainSkeleton /> */}
       </div>
+
+      {alertData?.title && <CAlert data={alertData} />}
     </div>
   );
 };

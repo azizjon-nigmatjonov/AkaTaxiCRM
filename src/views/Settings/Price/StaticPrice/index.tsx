@@ -1,7 +1,19 @@
+import { useEffect } from "react";
 import CCard from "../../../../components/CElements/CCard";
+import priceService from "../../../../services/price";
 import PriceField from "../PriceCard/PriceField";
 
 const StaticPrice = () => {
+  const getPrices = () => {
+    priceService.getStaticPrices().then((res) => {
+      console.log('reee', res);
+      
+    })
+  }
+
+  useEffect(() => {
+    getPrices()
+  }, [getPrices])
   return (
     <div className="space-y-5">
       <CCard

@@ -63,7 +63,7 @@ const Vehicles = () => {
         ""
       )}
 
-      <Form classes={tabList} />
+      <Form classes={tabList} tab={tab} getCarList={getCarList} />
     </>
   );
 };

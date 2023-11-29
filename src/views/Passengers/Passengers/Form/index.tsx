@@ -8,10 +8,11 @@ import { useMutation, useQuery } from "react-query";
 import regionService from "../../../../services/regions";
 import { useMemo } from "react";
 import HFSelect from "../../../../components/FormElements/HFSelect";
-import HFDatePicker from "../../../../components/FormElements/HFDatePicker";
+import HFDatePicker from "../../../../components/FormElements/HFDatepicker";
 import HFInputMask from "../../../../components/FormElements/HFInputMask";
 import passengerService from "../../../../services/passengers";
-import { FormatTime } from "../../../../utils/formatTime";
+import { useDispatch } from "react-redux";
+import { websiteActions } from "../../../../store/website";
 
 interface Props {
   refetch: () => void;
@@ -21,7 +22,8 @@ const Form = ({ refetch }: Props) => {
   const schema = Validation();
   const { navigateQuery, getQueries } = usePageRouter();
   const query = getQueries();
-  const { control, setValue, getValues } = useForm({
+  const dispatch = useDispatch();
+  const { control, setValue, getValues, reset } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
@@ -55,34 +57,53 @@ const Form = ({ refetch }: Props) => {
       return passengerService.createElement(data);
     },
     onSuccess: () => {
+      dispatch(
+        websiteActions.setAlertData({
+          title: "Ma'lumot yaratildi!",
+          translation: "common",
+        })
+      );
+
       navigateQuery({ id: "" });
       refetch();
+      reset();
     },
   });
 
   const handleSubmit = () => {
     const data = getValues();
     data.phone = data.phone?.substring(1)?.replace(/\s+/g, "");
-    console.log('  data.birthday',   data.birthday);
-    
-    // data.birthday = FormatTime(data.birthday);
-    console.log('birthday', data.birthday);
-    
-    // if (query.id === "create") {
-    //   createElement.mutate(data);
-    // }
+
+    if (query.id === "create") {
+      createElement.mutate(data);
+    } else {
+      passengerService.updateElement(query.id, data).then((res) => {
+        dispatch(
+          websiteActions.setAlertData({
+            title: "Ma'lumotlar yangilandi!",
+            translation: "common",
+          })
+        );
+
+        navigateQuery({ id: "" });
+        refetch();
+        reset();
+      });
+    }
   };
 
   const passengerInfo: any = useMemo(() => {
     return passenger?.data;
-  }, []);
-  console.log('passengerInfo', passengerInfo);
-  
+  }, [passenger]);
+
   return (
     <CModal
-      title={query.id === "create" ? "add_new_passenger" : "update_passenger"}
+      title={query.id === "create" ? "add_new_passenger" : "Tahrirlash"}
       open={!!query?.id}
-      handleClose={() => navigateQuery({ id: "" })}
+      handleClose={() => {
+        navigateQuery({ id: "" });
+        reset();
+      }}
       textDeleteBtn="cancel"
       handleSave={() => handleSubmit()}
     >
@@ -109,23 +130,24 @@ const Form = ({ refetch }: Props) => {
         />
 
         <HFDatePicker
+          label="Tug'ilgan sana"
           control={control}
+          defaultValue={passengerInfo?.birthday}
           name="birthday"
-          label="Tug'ulgan kuningizni kiriting"
-          placeholder="Tug'ulgan kuningizni kiriting"
+          placeholder="Tug'ilgan kuni"
           required={true}
           setValue={setValue}
-          defaultValue={passengerInfo?.birthday}
         />
 
         <HFInputMask
-          defaultValue={passengerInfo?.phone}
+          control={control}
           name="phone"
           setValue={setValue}
           mask={"+\\9\\9\\8 99 999 99 99"}
           label="Tel.raqam"
           placeholder="Tel.raqam"
           required={true}
+          defaultValue={passengerInfo?.phone}
         />
       </div>
     </CModal>

@@ -97,8 +97,6 @@ const Price = () => {
     if (start && end) GetPrices();
   }, [start, end]);
 
-  console.log("selected", selected);
-
   return (
     <>
       <div className="flex justify-between">

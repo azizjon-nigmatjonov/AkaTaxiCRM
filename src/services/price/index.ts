@@ -14,6 +14,7 @@ const priceService = {
     request.put(`distance-prices/update`, { prices: data }),
   createElement: (data: any) =>
     request.post("/prices", { ...data, team_id: 1 }),
+  getStaticPrices: () => request.get("/prices"),
 };
 
 export default priceService;

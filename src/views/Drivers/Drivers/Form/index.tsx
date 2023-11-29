@@ -7,29 +7,51 @@ import CModal from "../../../../components/CElements/CModal";
 import { useMutation, useQuery } from "react-query";
 import driverService from "../../../../services/drivers";
 import HFSelect from "../../../../components/FormElements/HFSelect";
-import HFDatePicker from "../../../../components/FormElements/HFDatePicker";
+import HFDatePicker from "../../../../components/FormElements/HFDatepicker";
 import HFInputMask from "../../../../components/FormElements/HFInputMask";
 import { useMemo } from "react";
 import carService from "../../../../services/cars";
+import { useDispatch } from "react-redux";
+import { websiteActions } from "../../../../store/website";
 
-const Form = () => {
+interface Props {
+  refetch: () => void;
+}
+
+const Form = ({ refetch }: Props) => {
   const schema = Validation();
   const { navigateQuery, getQueries } = usePageRouter();
   const query = getQueries();
-  const { control, setValue, getValues } = useForm({
+  const dispatch = useDispatch();
+  const { control, setValue, getValues, reset } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
 
-  const { data: cars } = useQuery(["GET_CAR_LIST"], () => {
-    return carService.getList();
-  }, {
-    enabled: !!query?.id
-  });
-  
+  const { data: cars } = useQuery(
+    ["GET_CAR_LIST"],
+    () => {
+      return carService.getList();
+    },
+    {
+      enabled: !!query?.id,
+    }
+  );
+
+  const { data: driver } = useQuery(
+    ["GET_DRIVER", query.id],
+    () => {
+      return driverService.getElement(query.id);
+    },
+    {
+      enabled: query.id !== "create" && query.id ? true : false,
+    }
+  );
+
   const SelecTList = useMemo(() => {
     if (!cars) return [];
-    return (cars as any).map((item: any) => {
+    const list: any = cars.data;
+    return list?.map((item: any) => {
       return {
         ...item,
         label: item.name,
@@ -42,24 +64,52 @@ const Form = () => {
     mutationFn: (data?: any) => {
       return driverService.createElement(data);
     },
-    onSuccess: (val) => {
-      console.log("val", val);
+    onSuccess: () => {
+      dispatch(
+        websiteActions.setAlertData({
+          title: "Ma'lumot yaratildi!",
+          translation: "common",
+        })
+      );
+
+      navigateQuery({ id: "" });
+      refetch();
+      reset();
     },
   });
 
   const handleSubmit = () => {
     const data = getValues();
+    data.phone = data.phone?.substring(1)?.replace(/\s+/g, "");
 
-    if (query.id === 'create') {
+    if (query.id === "create") {
       createElement.mutate(data);
+    } else {
+      driverService.updateElement(query.id, data).then((res) => {
+        if (res?.data) {
+          dispatch(
+            websiteActions.setAlertData({
+              title: "Ma'lumot yangilandi!",
+              translation: "common",
+            })
+          );
+
+          navigateQuery({ id: "" });
+          refetch();
+          reset();
+        }
+      });
     }
   };
 
   return (
     <CModal
-      title="Yangi haydovchi qo'shish"
+      title={query?.id === "create" ? "Yangi haydovchi qo'shish" : "Tahrirlash"}
       open={!!query?.id}
-      handleClose={() => navigateQuery({ id: "" })}
+      handleClose={() => {
+        navigateQuery({ id: "" });
+        reset();
+      }}
       textDeleteBtn="cancel"
       handleSave={() => handleSubmit()}
     >
@@ -71,6 +121,7 @@ const Form = () => {
           label="Ism sharif"
           setValue={setValue}
           required={true}
+          defaultValue={driver?.data?.full_name}
         />
         <HFSelect
           name="car_id"
@@ -79,6 +130,8 @@ const Form = () => {
           control={control}
           options={SelecTList}
           placeholder="Mashina rusumi"
+          setValue={setValue}
+          defaultValue={driver?.data?.car_id}
         />
         <HFTextField
           name="car_number"
@@ -87,20 +140,26 @@ const Form = () => {
           label="Mashina raqami"
           setValue={setValue}
           required={true}
+          defaultValue={driver?.data?.car_number}
         />
         <HFDatePicker
+          label="Tug'ilgan sana"
           control={control}
           name="birthday"
-          label={`Tug'ulgan kun`}
-          placeholder={`Tug'ulgan kun`}
+          placeholder="Tug'ilgan kuni"
           required={true}
+          setValue={setValue}
+          defaultValue={driver?.data?.birthday}
         />
         <HFInputMask
           name="phone"
+          control={control}
           label={`Telefon raqam`}
           placeholder={`Telefon raqam`}
           required={true}
           mask={"+\\9\\9\\8 99 999 99 99"}
+          setValue={setValue}
+          defaultValue={driver?.data?.phone}
         />
       </div>
     </CModal>

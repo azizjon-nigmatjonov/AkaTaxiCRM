@@ -4,31 +4,32 @@ import { Divider } from "@mui/material";
 
 interface Props {
   classes: any;
+  defaultValue?: any;
+  setValue?: (val1?: any, val2?: any) => void;
 }
 
-const Classes = ({ classes = [] }: Props) => {
+const Classes = ({
+  classes = [],
+  defaultValue = [],
+  setValue = () => {},
+}: Props) => {
   const [groupA, setGroupA] = useState([]);
   const [groupB, setGroupB] = useState([]);
 
   useEffect(() => {
     if (!classes?.length) return;
 
-    const a = classes.slice(0, 3).map((i: any) => {
-      return {
-        ...i,
-        checked: true,
-      };
-    });
+    const a = classes.slice(0, 3)
 
-    const b = classes.slice(3).map((i: any) => {
-      return {
-        ...i,
-        checked: false,
-      };
-    });
+    const b = classes.slice(3)
 
     setGroupA(a);
     setGroupB(b);
+    const ids = groupA
+      .concat(groupB)
+      .filter((item: any) => item.checked)
+      .map((item: any) => item.slug);
+    setValue("ids", ids);
   }, [classes]);
 
   const handleCheck = (name: string, check: boolean, group: string) => {
@@ -67,6 +68,11 @@ const Classes = ({ classes = [] }: Props) => {
 
       setGroupB(b);
     }
+    const ids = groupA
+      .concat(groupB)
+      .filter((item: any) => item.checked)
+      .map((item: any) => item.slug);
+    setValue("ids", ids);
   };
 
   return (
@@ -81,15 +87,18 @@ const Classes = ({ classes = [] }: Props) => {
         />
       ))}
       <Divider />
-      {groupB?.map((item: any) => (
-        <SwitchBtn
-          text={item.name}
-          name={item.name}
-          handleCheck={handleCheck}
-          checked={item.checked}
-          group="b"
-        />
-      ))}
+      {groupB?.map(
+        (item: any) =>
+          item.name !== "standart" && (
+            <SwitchBtn
+              text={item.name}
+              name={item.name}
+              handleCheck={handleCheck}
+              checked={item.checked}
+              group="b"
+            />
+          )
+      )}
     </>
   );
 };

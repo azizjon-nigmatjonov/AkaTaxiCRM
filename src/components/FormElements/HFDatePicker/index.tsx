@@ -1,40 +1,47 @@
+import { makeStyles } from "@mui/styles";
 import { Controller } from "react-hook-form";
-import CDatePicker from "../../CElements/CDatePicker";
+import CDatePicker from "../CDatePicker";
 import CLabel from "../../CElements/CLabel";
 import { useEffect } from "react";
 
+const useStyles = makeStyles(() => ({
+  input: {
+    "&::placeholder": {
+      color: "#fff",
+    },
+  },
+}));
+
 interface Props {
-  control?: any;
-  name?: any;
-  width?: string;
-  placeholder?: string;
-  required?: boolean;
-  onChange?: (val?: any) => void;
-  defaultValue?: any;
+  control: any;
+  isBlackBg?: any;
   className?: string;
-  mask?: string;
-  tabIndex?: any;
-  inputProps?: any;
-  isFormEdit?: boolean;
-  disabled?: boolean;
+  name: string;
   label?: string;
+  inputProps?: any;
+  disabledHelperText?: any;
+  placeholder?: string;
+  isFormEdit?: boolean;
+  defaultValue?: string;
+  disabled?: boolean;
+  required?: boolean;
   setValue?: (val1?: any, val2?: any) => void;
 }
 
 const HFDatePicker = ({
   control,
+  isBlackBg = false,
   className,
   name,
-  mask,
-  tabIndex,
+  label = "",
   placeholder = "",
   isFormEdit = false,
   defaultValue = "",
-  disabled,
   required = false,
-  label = "",
   setValue = () => {},
 }: Props) => {
+  const classes = useStyles();
+
   useEffect(() => {
     if (defaultValue) {
       setValue(name, defaultValue);
@@ -42,24 +49,28 @@ const HFDatePicker = ({
   }, [defaultValue, name, setValue]);
 
   return (
-    <div>
-      <CLabel title={label} required={required} />
+    <>
+      {label ? <CLabel required={required} title={label} /> : ""}
       <Controller
         control={control}
         name={name}
         disabled
         defaultValue={defaultValue}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
           <div className={className}>
             <CDatePicker
+              isFormEdit={isFormEdit}
               placeholder={placeholder}
-              handleChange={onChange}
-              defaultValue={value}
+              isBlackBg={isBlackBg}
+              value={value}
+              onChange={onChange}
+              classes={classes}
+              error={error}
             />
           </div>
         )}
-      />
-    </div>
+      ></Controller>
+    </>
   );
 };
 

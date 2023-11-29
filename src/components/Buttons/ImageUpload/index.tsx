@@ -1,24 +1,25 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ImageFrame } from "../../IconGenerator/Svg";
 import fileService from "../../../services/fileService";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { CircularProgress } from "@mui/material";
 
 interface Props {
   isDelete?: boolean;
+  defaultValue?: string;
+  name: string;
+  setValue?: (val?: any, val2?: any) => void;
 }
 
-const ImageUploadBtn = ({ isDelete = false }: Props) => {
+const ImageUploadBtn = ({
+  isDelete = false,
+  defaultValue = "",
+  name,
+  setValue = () => {},
+}: Props) => {
   const inputRef: any = useRef(null);
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const handleFileChange = (event: any) => {
-    const reader: any = new FileReader();
-    reader.onload = () => {
-      setImage(reader.result);
-    };
-    reader.readAsDataURL(event.target.files[0]);
-  };
 
   const inputChangeHandler = (e: any) => {
     setLoading(true);
@@ -30,8 +31,10 @@ const ImageUploadBtn = ({ isDelete = false }: Props) => {
     fileService
       .upload(data)
       .then((res: any) => {
-        console.log("res", res);
-        handleFileChange(res);
+        console.log(name, res?.data?.id);
+        
+        setValue(name, res?.data?.id);
+        setImage(res?.data?.id);
       })
       .finally(() => {
         setLoading(false);
@@ -42,6 +45,11 @@ const ImageUploadBtn = ({ isDelete = false }: Props) => {
     e.stopPropagation();
     setImage("");
   };
+  // console.log('de', defaultValue, image);
+
+  // useEffect(() => {
+  //   if (defaultValue) setValue(name, defaultValue);
+  // }, [defaultValue]);
 
   return (
     <div
@@ -49,7 +57,21 @@ const ImageUploadBtn = ({ isDelete = false }: Props) => {
       className="cursor-pointer flex items-center justify-between px-[14px] text-[var(--gray)] font-medium border border-[var(--lineGray)] rounded-[10px] h-[48px]"
     >
       <span>Marka rasmi</span>
-      <ImageFrame />
+      {defaultValue || (image && !loading) ? (
+        <img
+          className="h-[60px]"
+          src={
+            image
+              ? `https://cdn.akataxi.uz/media/get-image/${image}`
+              : defaultValue
+          }
+          alt={defaultValue || "image"}
+        />
+      ) : loading ? (
+        <CircularProgress />
+      ) : (
+        <ImageFrame />
+      )}
 
       <input
         type="file"

@@ -1,6 +1,6 @@
 import Slider from "@mui/material/Slider";
 import { useState } from "react";
-import './style.scss'
+import "./style.scss";
 
 const CSlider = () => {
   const minDistance = 5;
@@ -14,7 +14,7 @@ const CSlider = () => {
     if (!Array.isArray(newValue)) {
       return;
     }
-    console.log('event', event);
+    console.log("event", event);
 
     if (activeThumb === 0) {
       setValue1([Math.min(newValue[0], value1[1] - minDistance), value1[1]]);
@@ -25,16 +25,18 @@ const CSlider = () => {
 
   return (
     <div>
-      <Slider
-        getAriaLabel={() => "Minimum distance shift"}
-        value={value1}
-        onChange={handleChange1}
-        //   valueLabelDisplay="auto"
-        //   getAriaValueText={valuetext}
-        disableSwap
-        max={2023}
-        min={1975}
-      />
+      <div className="px-1">
+        <Slider
+          getAriaLabel={() => "Minimum distance shift"}
+          value={value1}
+          onChange={handleChange1}
+          //   valueLabelDisplay="auto"
+          //   getAriaValueText={valuetext}
+          disableSwap
+          max={2023}
+          min={1975}
+        />
+      </div>
       <div className="flex justify-between items-center">
         <div className="border border-[#E2E2EA] bg-[#fafafb] rounded-[8px] p-2 py-1 w-full">
           {value1[0]}-yil

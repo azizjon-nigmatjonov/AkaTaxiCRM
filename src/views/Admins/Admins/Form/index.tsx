@@ -23,7 +23,6 @@ const Form = () => {
   {
     enabled: true
   })
-  console.log('rolls', rolls);
   
   return (
     <CModal

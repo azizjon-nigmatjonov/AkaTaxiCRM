@@ -14,7 +14,7 @@ const CSelect = ({ id = "cselect", options = [], label = "" }: Props) => {
       {label && <CLabel title={label} />}
       <div id={`cselect-${id}`}>
         <Select
-          defaultValue={options[0].value}
+          defaultValue={options?.[0]?.value}
           inputProps={{
             "aria-label": "Without label",
           }}

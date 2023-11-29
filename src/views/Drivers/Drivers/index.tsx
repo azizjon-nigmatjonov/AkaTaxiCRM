@@ -48,10 +48,10 @@ const Drivers = () => {
         title: "mashina raqami",
         id: "car_number",
       },
-      {
-        title: "raqam viloyati",
-        id: "car_number_region",
-      },
+      // {
+      //   title: "raqam viloyati",
+      //   id: "car_number_region",
+      // },
       {
         title: "",
         id: "actions",
@@ -115,7 +115,7 @@ const Drivers = () => {
         currentPage={currentPage}
       />
 
-      <Form />
+      <Form refetch={refetch} />
     </>
   );
 };

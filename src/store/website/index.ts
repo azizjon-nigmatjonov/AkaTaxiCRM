@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  routes: {}
+  routes: {},
+  alert: {},
 };
 
 export const { actions: websiteActions, reducer: websiteReducer } = createSlice(
@@ -11,6 +12,9 @@ export const { actions: websiteActions, reducer: websiteReducer } = createSlice(
     reducers: {
       setRoutes: (state: any, { payload }) => {
         state.routes = payload;
+      },
+      setAlertData: (state, { payload }) => {
+        state.alert = payload;
       },
     },
   }
