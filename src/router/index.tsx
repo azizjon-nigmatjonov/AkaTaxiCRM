@@ -24,6 +24,11 @@ import Calendar from "../views/Information/Calendar";
 import AmoCrm from "../views/Settings/AmoCrm";
 import usePageRouter from "../hooks/useObjectRouter";
 import ProfilePage from "../views/Settings/Profile";
+import Partners from "../views/Partners";
+import Partner from "../views/Partners/Partner";
+import Push from "../views/Settings/SMS/Push";
+import SMSPage from "../views/Settings/SMS/SMSPage";
+import NewsPage from "../views/Settings/SMS/NewsPage";
 
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
@@ -42,16 +47,24 @@ const Router = () => {
   const isAuth = useSelector((state: any) => state.auth.isAuth);
   const [list, setList] = useState<string[]>([]);
   const location = useLocation();
-  const { navigateTo } = usePageRouter()
+  const { navigateTo } = usePageRouter();
   const [routes, setRoutes] = useState({
     passengers: [],
     drivers: [],
     infos: [],
     admins: [],
     settings: [],
+    partners: [],
   });
 
-  const getPath = ({ parent = "", link, title, icon, sidebar, card_info }: Path) => {
+  const getPath = ({
+    parent = "",
+    link,
+    title,
+    icon,
+    sidebar,
+    card_info,
+  }: Path) => {
     const path = `${parent}/${link}`;
     const obj = {
       path: path,
@@ -77,7 +90,7 @@ const Router = () => {
   useEffect(() => {
     dispatch(websiteActions.setRoutes({ ...routes }));
   }, []);
-
+  
   if (!isAuth) {
     return (
       <Suspense fallback={"Loading..."}>
@@ -95,11 +108,11 @@ const Router = () => {
   }
 
   useEffect(() => {
-    if (isAuth && location.pathname === '/') {
-      window.location.reload()
-      navigateTo('/passengers/main')
+    if (isAuth && location.pathname === "/") {
+      window.location.reload();
+      navigateTo("/passengers/main");
     }
-  }, [isAuth])
+  }, [isAuth]);
 
   return (
     <Suspense fallback={"Loading..."}>
@@ -270,6 +283,36 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "settings",
+              link: "sms/push",
+              sidebar: false,
+              title: "",
+              icon: "",
+            })}
+            element={<Push />}
+          />
+          <Route
+            path={getPath({
+              parent: "settings",
+              link: "sms/sms",
+              sidebar: false,
+              title: "",
+              icon: "",
+            })}
+            element={<SMSPage />}
+          />
+          <Route
+            path={getPath({
+              parent: "settings",
+              link: "sms/news",
+              sidebar: false,
+              title: "",
+              icon: "",
+            })}
+            element={<NewsPage />}
+          />
+          <Route
+            path={getPath({
+              parent: "settings",
               link: "amocrm",
               sidebar: true,
               title: "Amo Crm",
@@ -286,6 +329,26 @@ const Router = () => {
               icon: "",
             })}
             element={<ProfilePage />}
+          />
+          <Route
+            path={getPath({
+              parent: "partners",
+              link: "list",
+              sidebar: true,
+              title: "partners",
+              icon: "partners",
+            })}
+            element={<Partners />}
+          />
+          <Route
+            path={getPath({
+              parent: "partners",
+              link: "partner/:id",
+              sidebar: false,
+              title: "Partnyor",
+              icon: "",
+            })}
+            element={<Partner />}
           />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />

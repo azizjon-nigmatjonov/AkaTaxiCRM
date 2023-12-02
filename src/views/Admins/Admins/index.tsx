@@ -86,6 +86,7 @@ const Admins = () => {
           />
         </div>
       </SectionHeader>
+      
       <CTable
         headColumns={headColumns}
         bodyColumns={bodyColumns}

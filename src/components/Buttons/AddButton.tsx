@@ -8,16 +8,29 @@ interface Props {
   iconLeft?: any;
   style?: any;
   id?: string;
-  onClick?: (val?: any) => void
+  children?: any;
+  classes?: string;
+  onClick?: (val?: any) => void;
 }
 
-const AddButton = ({ text = '', iconLeft = true, id, ...props }: Props) => {
-  const { t } = useTranslation()
+const AddButton = ({
+  text = "",
+  iconLeft = true,
+  id,
+  children,
+  classes,
+  ...props
+}: Props) => {
+  const { t } = useTranslation();
   return (
     <div id={id ? id : "addBtn"} {...props}>
-      <Button>
+      <Button className={classes}>
         {iconLeft === true ? <PlusIcon /> : iconLeft}
-        <span className="font-[600] ml-1">{t(text)}</span>
+        {children ? (
+          children
+        ) : (
+          <span className="font-[600] ml-1">{t(text)}</span>
+        )}
       </Button>
     </div>
   );

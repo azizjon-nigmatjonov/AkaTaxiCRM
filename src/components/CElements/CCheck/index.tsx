@@ -7,7 +7,7 @@ interface Props {
 
 const CCheck = ({ label = "", value, checked, ...props }: Props) => {
   return (
-    <div className="bg-white border border-[var(--lineGray)] flex justify-between items-center rounded-[12px] h-[45px] px-[18px]" {...props}>
+    <div className="cursor-pointer bg-white border border-[var(--lineGray)] flex justify-between items-center rounded-[12px] h-[45px] px-[18px]" {...props}>
       <p>{label}</p>
 
       <div

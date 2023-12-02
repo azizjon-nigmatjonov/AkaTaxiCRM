@@ -27,6 +27,7 @@ const Login = () => {
     loginProps: {
       onSuccess: (value: any) => {
         dispatch(authActions.login(value))
+        window.location.reload()
       },
     },
   });

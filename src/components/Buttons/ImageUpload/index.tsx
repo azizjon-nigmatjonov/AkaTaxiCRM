@@ -1,13 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ImageFrame } from "../../IconGenerator/Svg";
 import fileService from "../../../services/fileService";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { CircularProgress } from "@mui/material";
+import CLabel from "../../CElements/CLabel";
 
 interface Props {
   isDelete?: boolean;
   defaultValue?: string;
   name: string;
+  text?: string;
+  label?: string;
   setValue?: (val?: any, val2?: any) => void;
 }
 
@@ -16,6 +19,8 @@ const ImageUploadBtn = ({
   defaultValue = "",
   name,
   setValue = () => {},
+  text = "",
+  label = "",
 }: Props) => {
   const inputRef: any = useRef(null);
   const [image, setImage] = useState("");
@@ -32,7 +37,7 @@ const ImageUploadBtn = ({
       .upload(data)
       .then((res: any) => {
         console.log(name, res?.data?.id);
-        
+
         setValue(name, res?.data?.id);
         setImage(res?.data?.id);
       })
@@ -52,41 +57,44 @@ const ImageUploadBtn = ({
   // }, [defaultValue]);
 
   return (
-    <div
-      onClick={() => inputRef.current.click()}
-      className="cursor-pointer flex items-center justify-between px-[14px] text-[var(--gray)] font-medium border border-[var(--lineGray)] rounded-[10px] h-[48px]"
-    >
-      <span>Marka rasmi</span>
-      {defaultValue || (image && !loading) ? (
-        <img
-          className="h-[60px]"
-          src={
-            image
-              ? `https://cdn.akataxi.uz/media/get-image/${image}`
-              : defaultValue
-          }
-          alt={defaultValue || "image"}
+    <div className="flex flex-col">
+      {label ? <CLabel title={label} /> : ""}
+      <div
+        onClick={() => inputRef.current.click()}
+        className="cursor-pointer flex items-center justify-between px-[14px] text-[var(--gray)] font-medium border border-[var(--lineGray)] rounded-[10px] h-[50px]"
+      >
+        <span>{text}</span>
+        {defaultValue || (image && !loading) ? (
+          <img
+            className="h-[48px] rounded-[4px]"
+            src={
+              image
+                ? `https://cdn.akataxi.uz/media/get-image/${image}`
+                : defaultValue
+            }
+            alt={defaultValue || "image"}
+          />
+        ) : loading ? (
+          <CircularProgress />
+        ) : (
+          <ImageFrame />
+        )}
+
+        <input
+          type="file"
+          className="hidden"
+          ref={inputRef}
+          onChange={inputChangeHandler}
         />
-      ) : loading ? (
-        <CircularProgress />
-      ) : (
-        <ImageFrame />
-      )}
 
-      <input
-        type="file"
-        className="hidden"
-        ref={inputRef}
-        onChange={inputChangeHandler}
-      />
-
-      {isDelete ? (
-        <button onClick={(e) => deleteImage(e)}>
-          <CancelIcon />
-        </button>
-      ) : (
-        ""
-      )}
+        {isDelete ? (
+          <button onClick={(e) => deleteImage(e)}>
+            <CancelIcon />
+          </button>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };

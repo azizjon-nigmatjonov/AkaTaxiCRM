@@ -49,7 +49,7 @@ const HFDatePicker = ({
   }, [defaultValue, name, setValue]);
 
   return (
-    <>
+    <div className="flex flex-col">
       {label ? <CLabel required={required} title={label} /> : ""}
       <Controller
         control={control}
@@ -70,7 +70,7 @@ const HFDatePicker = ({
           </div>
         )}
       ></Controller>
-    </>
+    </div>
   );
 };
 

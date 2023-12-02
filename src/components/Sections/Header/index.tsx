@@ -11,7 +11,7 @@ interface Props {
 const SectionHeader: FC<Props> = ({ extra, children, handleSearch}) => {
   return (
     <div className="pb-6 flex items-center justify-between">
-      {handleSearch ? <CSearchInput handleChange={handleSearch} classes="bg-white" /> : <div></div>}
+      {handleSearch ? <CSearchInput handleChange={handleSearch} classes="bg-white" /> : ""}
       {extra && <div>{extra}</div>}
       <div className="min-h-[40px]">{children}</div>
     </div>

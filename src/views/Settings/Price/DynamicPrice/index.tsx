@@ -1,3 +1,4 @@
+import NullData from "../../../../components/NullData";
 import Points from "./Points";
 import PriceTable from "./Table";
 
@@ -49,10 +50,7 @@ const DynamicPrice = ({
             {loading ? (
               <h1 className="text-lg">Yuklanmoqda...</h1>
             ) : (
-              <div className="text-center">
-                <img className="w-[200px]" src="/images/no-data.png" />
-                <h2>Ma'lumot mavjud emas</h2>
-              </div>
+              <NullData />
             )}
           </div>
         )}

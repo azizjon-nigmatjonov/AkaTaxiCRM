@@ -1,40 +1,84 @@
+import { useCallback, useMemo } from "react";
 import AddButton from "../../../components/Buttons/AddButton";
-import SectionHeader from "../../../components/Sections/Header";
-import SMSMessage from "./Message";
-import TypeCard from "./SMSType";
+import CTabs from "../../../components/CElements/CTab";
+import usePageRouter from "../../../hooks/useObjectRouter";
+import CTable from "../../../components/CElements/CTable";
 
-const ListSms = [
+const tabList = [
   {
-    label: "SMS xabar",
-    value: "sms",
+    slug: "push",
+    name: "Push xabar",
   },
   {
-    label: "Push xabar",
-    value: "push",
-  },
-];
-
-const ListPerson = [
-  {
-    label: "Barchasi",
-    value: "all",
+    slug: "sms",
+    name: "Sms xabarnoma",
   },
   {
-    label: "Haydovchi",
-    value: "drivers",
-  },
-  {
-    label: "Yo‘lovchi",
-    value: "passenger",
+    slug: "news",
+    name: "Yangiliklar",
   },
 ];
 
 const SMS = () => {
+  const { navigateTo, navigateQuery } = usePageRouter();
+
+  const headColumns = useMemo(() => {
+    return [
+      {
+        title: "Kimga",
+        id: "partners_name",
+      },
+      {
+        title: "Xabar",
+        id: "login",
+      },
+      {
+        title: "sana",
+        id: "full_name",
+      },
+      {
+        title: "",
+        id: "actions",
+        permission: ["learn_more", "edit", "delete"],
+      },
+    ];
+  }, []);
+
+  const handleActions = useCallback((status: string, element: any) => {
+    if (status === "learn_more") {
+      navigateTo(`/drivers/driver/${element.id}`);
+    }
+
+    if (status === "edit") navigateQuery({ id: element.id });
+
+    if (status === "delete") {
+    }
+  }, []);
+
+  const handleRowClick = (item: any) => {
+    navigateTo(`/drivers/driver/${item.id}`);
+  };
   return (
     <>
-      <SectionHeader />
+      <div className="flex justify-between">
+        <CTabs tabList={tabList} />
 
-      <div className="space-y-[18px]">
+        <div>
+          <AddButton text="Yangi xabar" onClick={() => navigateTo('/settings/sms/news')} />
+        </div>
+      </div>
+
+      <CTable
+        headColumns={headColumns}
+        bodyColumns={[]}
+        count={1}
+        handleActions={handleActions}
+        handleRowClick={handleRowClick}
+        isLoading={false}
+        currentPage={1}
+      />
+
+      {/* <div className="space-y-[18px]">
         <TypeCard List={ListSms} title="Xabar turi" />
         <TypeCard List={ListPerson} title="Kimga yuborish kerak?" />
         <SMSMessage title="Xabar matni" />
@@ -44,7 +88,7 @@ const SMS = () => {
         <div className="inline-block">
           <AddButton iconLeft={false} text="Xabarni yuborish" />
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

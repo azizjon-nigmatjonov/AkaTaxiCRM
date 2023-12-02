@@ -1,5 +1,4 @@
 import cls from "./style.module.scss";
-import Notification from "./Notification";
 import UserInfo from "./UserInfo";
 import useLocationLang from "../../hooks/useLocationLang";
 import { useTranslation } from "react-i18next";
@@ -17,8 +16,8 @@ export const Header = () => {
             {t(GetTitle("header"))}
           </h3>
           <div className="flex items-center">
-            <Notification />
-            <div className={`${cls.line} mx-[30px] bg-[var(--lineGray)]`}></div>
+            {/* <Notification />
+            <div className={`${cls.line} mx-[30px] bg-[var(--lineGray)]`}></div> */}
             <UserInfo />
           </div>
         </div>

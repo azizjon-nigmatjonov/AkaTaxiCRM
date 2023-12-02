@@ -6,7 +6,8 @@ const driverService = {
   getActives: () => request.get("/drivers-popular"),
   updateElement: (id: string, data: any) => request.put(`/drivers/${id}`, data),
   deleteElement: (id: string) => request.delete(`/drivers/${id}`),
-  getElement: (id: string) => request.get(`/drivers/${id}`)
+  getElement: (id: string | undefined) => request.get(`/drivers/${id}`),
+  getDriverTripHistory: (id: string | undefined) => request.get(`booking/driver-trips/${id}`)
 };
 
 export default driverService;

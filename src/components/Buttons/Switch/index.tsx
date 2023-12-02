@@ -1,5 +1,4 @@
 import { Switch } from "@mui/material";
-import { useEffect, useState } from "react";
 
 interface Props {
   text: string;

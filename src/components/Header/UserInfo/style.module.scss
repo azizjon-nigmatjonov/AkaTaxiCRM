@@ -8,6 +8,8 @@
         height: 42px;
         border-radius: 50%;
         overflow: hidden;
+        background-color: $lineGray;
+        @include center-center;
 
         img {
             width: 100%;

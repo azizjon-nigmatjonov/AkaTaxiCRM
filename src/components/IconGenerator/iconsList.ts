@@ -1,3 +1,4 @@
+import { PartnersIcon } from "./Svg";
 import {
   AdminsIcon,
   AdminIcon,
@@ -61,5 +62,9 @@ export const iconsList = [
   {
     name: 'lock',
     component: LockIcon
+  },
+  {
+    name: 'partners',
+    component: PartnersIcon
   }
 ];

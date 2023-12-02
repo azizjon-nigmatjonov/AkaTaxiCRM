@@ -1,14 +1,16 @@
 import Card from "./Card";
+import NullData from "../../../../components/NullData";
 
 interface Props {
   list: any;
   isLoading?: boolean;
+  loading: boolean
 }
 
-const Section = ({ list = [] }: Props) => {
+const Section = ({ list = [], loading = true }: Props) => {
   return (
     <>
-      {list?.length ? (
+      {list?.length && !loading ? (
         <div className="grid grid-cols-3 gap-[18px]">
           {list.map((element: any, index: number) => (
             <div key={index}>
@@ -17,7 +19,7 @@ const Section = ({ list = [] }: Props) => {
           ))}
         </div>
       ) : (
-        <img className="w-[150px] mx-auto mt-10" src="../../../../../public/images/no-data.png" alt="no data" />
+        loading ? "Yuklanmoqda..." : <NullData />
       )}
     </>
   );

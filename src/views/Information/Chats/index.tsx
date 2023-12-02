@@ -22,7 +22,6 @@ const Chats = () => {
       ) : (
         <div className="flex justify-between space-x-6">
           <div className="w-[550px]">
-            <SectionHeader />
             <ChatList list={list} setCurrent={setCurrent} />
           </div>
           <div className="w-full">
