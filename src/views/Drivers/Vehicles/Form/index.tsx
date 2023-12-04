@@ -10,7 +10,7 @@ import Classes from "./Classes";
 import { useQuery } from "react-query";
 import { websiteActions } from "../../../../store/website";
 import { useDispatch } from "react-redux";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
 interface Props {
   classes: any;

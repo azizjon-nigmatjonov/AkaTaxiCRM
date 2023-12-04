@@ -77,7 +77,7 @@ const Form = ({ refetch }: Props) => {
     if (query.id === "create") {
       createElement.mutate(data);
     } else {
-      passengerService.updateElement(query.id, data).then((res) => {
+      passengerService.updateElement(query.id, data).then(() => {
         dispatch(
           websiteActions.setAlertData({
             title: "Ma'lumotlar yangilandi!",

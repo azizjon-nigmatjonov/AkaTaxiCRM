@@ -10,7 +10,6 @@ interface Props {
 
 const Classes = ({
   classes = [],
-  defaultValue = [],
   setValue = () => {},
 }: Props) => {
   const [groupA, setGroupA] = useState([]);

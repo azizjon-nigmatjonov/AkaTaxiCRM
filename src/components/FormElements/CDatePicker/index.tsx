@@ -2,7 +2,6 @@ import DatePicker from "react-multi-date-picker";
 import weekends from "react-multi-date-picker/plugins/highlight_weekends";
 import { InputAdornment, TextField } from "@mui/material";
 import { Today } from "@mui/icons-material";
-import InputMask from "react-input-mask";
 import { useRef } from "react";
 
 import { locale } from "./Plugins/locale";

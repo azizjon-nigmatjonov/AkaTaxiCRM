@@ -44,7 +44,7 @@ const HFInputMask = ({
         rules={{
           required: required ? "This is required field" : false,
         }}
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
+        render={({ field: { onChange, value }, fieldState: {} }) => (
           <ReactInputMask
             onChange={(e) => onChange(e.target.value)}
             mask={mask}

@@ -1,5 +1,4 @@
 import { useQuery } from "react-query";
-import SectionHeader from "../../../components/Sections/Header";
 import ChatSinglePage from "./Chat";
 import ChatList from "./List";
 import chatService from "../../../services/chats";

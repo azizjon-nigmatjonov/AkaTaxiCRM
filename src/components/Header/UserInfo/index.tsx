@@ -1,7 +1,6 @@
 import { useQuery } from "react-query";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import authService from "../../../services/auth/authService";
-import { UserIcon } from "../../IconGenerator/Svg";
 import cls from "./style.module.scss";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
