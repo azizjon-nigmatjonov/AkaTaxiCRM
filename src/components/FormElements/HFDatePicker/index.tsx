@@ -1,16 +1,16 @@
-import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles";
 import { Controller } from "react-hook-form";
 import CLabel from "../../CElements/CLabel";
 import { useEffect } from "react";
-import FormDatePicker from "../FormDatePicker";
+// import FormDatePicker from "../FormDatePicker";
 
-const useStyles = makeStyles(() => ({
-  input: {
-    "&::placeholder": {
-      color: "#fff",
-    },
-  },
-}));
+// const useStyles = makeStyles(() => ({
+//   input: {
+//     "&::placeholder": {
+//       color: "#fff",
+//     },
+//   },
+// }));
 
 interface Props {
   control: any;
@@ -30,17 +30,17 @@ interface Props {
 
 const HFDatepicker = ({
   control,
-  isBlackBg = false,
+  // isBlackBg = false,
   className,
   name,
   label = "",
-  placeholder = "",
-  isFormEdit = false,
+  // placeholder = "",
+  // isFormEdit = false,
   defaultValue = "",
   required = false,
   setValue = () => {},
 }: Props) => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   useEffect(() => {
     if (defaultValue) {
@@ -56,9 +56,10 @@ const HFDatepicker = ({
         name={name}
         disabled
         defaultValue={defaultValue}
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
+        render={({ field: { onChange, value } }) => (
           <div className={className}>
-            <FormDatePicker
+            <input type="text" onChange={onChange} value={value} />
+            {/* <FormDatePicker
               isFormEdit={isFormEdit}
               placeholder={placeholder}
               isBlackBg={isBlackBg}
@@ -66,7 +67,7 @@ const HFDatepicker = ({
               onChange={onChange}
               classes={classes}
               error={error}
-            />
+            /> */}
           </div>
         )}
       ></Controller>
