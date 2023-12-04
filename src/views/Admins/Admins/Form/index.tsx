@@ -5,8 +5,8 @@ import HFTextField from "../../../../components/FormElements/HFTextField";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 import CModal from "../../../../components/CElements/CModal";
 import HFInputMask from "../../../../components/FormElements/HFInputMask";
-import { useQuery } from "react-query";
-import roleService from "../../../../services/rolls";
+// import { useQuery } from "react-query";
+// import roleService from "../../../../services/rolls";
 
 const Form = () => {
   const schema = Validation();
@@ -17,13 +17,13 @@ const Form = () => {
     resolver: yupResolver(schema),
   });
 
-  const { data: rolls } = useQuery(['GET_ROLLS'], () => {
-    return roleService.getList()
-  },
-  {
-    enabled: true
-  })
-  
+  // const { data: rolls } = useQuery(['GET_ROLLS'], () => {
+  //   return roleService.getList()
+  // },
+  // {
+  //   enabled: true
+  // })
+
   return (
     <CModal
       title="add_new_admin"

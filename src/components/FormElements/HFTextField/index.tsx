@@ -4,6 +4,7 @@ import CLabel from "../../CElements/CLabel";
 import "../style.scss";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   control: any;
@@ -18,6 +19,7 @@ interface Props {
   placeholder?: string;
   style?: any;
   activatePassword?: boolean;
+  errors?: any;
 }
 
 const HFTextField = ({
@@ -31,9 +33,11 @@ const HFTextField = ({
   setValue = () => {},
   activatePassword = false,
   type = "text",
+  errors = {},
   ...props
 }: Props) => {
   const [password, setPassword] = useState(true);
+  const { t } = useTranslation();
   useEffect(() => {
     if (defaultValue) {
       setValue(name, defaultValue);
@@ -78,6 +82,12 @@ const HFTextField = ({
         >
           {!password ? <VisibilityOff /> : <Visibility />}
         </span>
+      )}
+
+      {errors[name]?.message && (
+        <p className="text-sm text-[var(--error)] absolute -bottom-5">
+          {t(errors[name].message || "")}
+        </p>
       )}
     </div>
   );

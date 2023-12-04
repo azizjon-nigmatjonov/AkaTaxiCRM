@@ -9,8 +9,11 @@ import CSelect from "../../../components/CElements/CSelect";
 import CDriver from "../../../components/CElements/CDivider";
 import CSlider from "../../../components/CElements/CSlider";
 import { useSelector } from "react-redux";
+import { useGetQueries } from "../../../hooks/useGetQueries";
+import { FormatTime } from "../../../utils/formatTime";
 
 const ActivePassengers = () => {
+  const { currentPage } = useGetQueries()
   const { data: passengers, isLoading } = useQuery(
     ["GET_ACTIVE_PASSENGERS"],
     () => {
@@ -36,6 +39,9 @@ const ActivePassengers = () => {
       {
         title: "qidiruv vaqti",
         id: "search_time",
+        render: (val?: any) => {
+          return <>{FormatTime(val, "time")}</>
+        }
       },
       {
         title: "Mavjud taksilar",
@@ -44,16 +50,16 @@ const ActivePassengers = () => {
           return val && <>{val} ta</>;
         },
       },
-      {
-        title: "",
-        id: "actions",
-        permission: ["edit", "delete"],
-      },
     ];
   }, []);
 
-  const bodyColumns = useMemo(() => {
-    return passengers?.data ?? [];
+  const bodyColumns: any = useMemo(() => {
+    return (
+      {
+        list: passengers?.data,
+        ...passengers,
+      } ?? []
+    );
   }, [passengers]);
 
   return (
@@ -72,10 +78,11 @@ const ActivePassengers = () => {
       </SectionHeader>
       <CTable
         headColumns={headColumns}
-        bodyColumns={bodyColumns}
-        count={6}
+        bodyColumns={bodyColumns?.list}
+        count={bodyColumns?.meta?.totalCount}
         isResizeble={true}
         isLoading={isLoading}
+        currentPage={currentPage}
       />
     </>
   );

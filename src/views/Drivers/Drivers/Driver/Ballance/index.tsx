@@ -1,5 +1,5 @@
 const DriverBallance = () => {
-    return <>info</>
+    return <>Backend tayyor emas</>
 }
 
 export default DriverBallance

@@ -30,6 +30,7 @@ export default function CTabs({
   const [searchParams] = useSearchParams();
   const query = Object.fromEntries(searchParams.entries());
   const navigate = useNavigate();
+
   const optimizedTabList = useMemo(() => {
     return tabList?.map((i: any, index: number) => ({
       ...i,
@@ -44,7 +45,7 @@ export default function CTabs({
       return;
     }
     const newQuery = {
-      // ...query,
+      ...query,
       tab: i?.slug,
     };
     const queryParams = createSearchParams(newQuery);

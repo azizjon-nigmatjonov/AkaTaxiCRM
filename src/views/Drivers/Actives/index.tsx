@@ -1,36 +1,37 @@
 import { useCallback, useMemo } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
-import AddButton from "../../../components/Buttons/AddButton";
 import FilterButton from "../../../components/Filters";
 import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
+import { useGetQueries } from "../../../hooks/useGetQueries";
 
 const ActiveDrivers = () => {
   const { navigateQuery } = usePageRouter();
+  const { currentPage } = useGetQueries();
 
-  const {
-    data: drivers,
-    isLoading,
-  } = useQuery(["GET_ACTIVE_DRIVERS"], () => {
+  const { data: drivers, isLoading } = useQuery(["GET_ACTIVE_DRIVERS"], () => {
     return driverService.getActives();
   });
 
-  const bodyColumns = useMemo(() => {
+  const driversData = useMemo(() => {
     if (!drivers) return [];
     const list: any = drivers?.data;
-    return list.map((item: any) => {
-      return {
-        ...item,
-        data: {
-          car_name: item.car_name,
-          full_name: item.full_name,
-          car_number: item.car_number,
-        },
-      };
-    });
+    return {
+      list: list.map((item: any) => {
+        return {
+          ...item,
+          data: {
+            car_name: item.car_name,
+            full_name: item.full_name,
+            car_number: item.car_number,
+          },
+        };
+      }),
+      ...drivers?.data,
+    };
   }, [drivers]);
 
   const headColumns = useMemo(() => {
@@ -66,12 +67,7 @@ const ActiveDrivers = () => {
       {
         title: "qidiruv vaqti",
         id: "time_search",
-      },
-      {
-        title: "",
-        id: "actions",
-        permission: ["delete", "edit"],
-      },
+      }
     ];
   }, []);
 
@@ -90,18 +86,15 @@ const ActiveDrivers = () => {
       <SectionHeader>
         <div className="flex items-center gap-3">
           <FilterButton text="filter" />
-          <AddButton
-            text="Yangi marshrut"
-            onClick={() => navigateQuery({ id: "create" })}
-          />
         </div>
       </SectionHeader>
       <CTable
         headColumns={headColumns}
-        bodyColumns={bodyColumns}
-        count={1}
+        bodyColumns={driversData?.list}
+        count={driversData?.meta?.totalCount}
         handleActions={handleActions}
         isLoading={isLoading}
+        currentPage={currentPage}
       />
 
       <Form />

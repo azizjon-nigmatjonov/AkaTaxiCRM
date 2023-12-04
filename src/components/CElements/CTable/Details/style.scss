@@ -114,7 +114,7 @@
     cursor: pointer;
     transition-duration: 0.2s;
     &:hover {
-      background-color: #999;
+      background-color: $lightGray;
     }
   }
 }

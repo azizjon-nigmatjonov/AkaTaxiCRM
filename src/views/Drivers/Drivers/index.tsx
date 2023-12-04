@@ -58,7 +58,7 @@ const Drivers = () => {
 
   const handleActions = useCallback((status: string, element: any) => {
     if (status === "learn_more") {
-      navigateTo(`/drivers/driver/${element.id}`);
+      navigateTo(`/drivers/driver?id=${element.id}`);
     }
 
     if (status === "edit") navigateQuery({ id: element.id });
@@ -69,10 +69,6 @@ const Drivers = () => {
       });
     }
   }, []);
-
-  const handleRowClick = (item: any) => {
-    navigateTo(`/drivers/driver/${item.id}`);
-  };
 
   const drivers: any = useMemo(() => {
     return data ?? {};
@@ -107,9 +103,9 @@ const Drivers = () => {
         bodyColumns={drivers?.data ?? []}
         count={drivers?.meta?.pageCount}
         handleActions={handleActions}
-        handleRowClick={handleRowClick}
         isLoading={isLoading}
         currentPage={currentPage}
+        clickable={true}
       />
 
       <Form refetch={refetch} />

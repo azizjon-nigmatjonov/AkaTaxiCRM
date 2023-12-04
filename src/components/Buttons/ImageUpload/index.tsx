@@ -36,8 +36,6 @@ const ImageUploadBtn = ({
     fileService
       .upload(data)
       .then((res: any) => {
-        console.log(name, res?.data?.id);
-
         setValue(name, res?.data?.id);
         setImage(res?.data?.id);
       })

@@ -2,8 +2,37 @@ import { useCallback, useMemo } from "react";
 import CTable from "../../../../components/CElements/CTable";
 import SectionHeader from "../../../../components/Sections/Header";
 import FilterButton from "../../../../components/Filters";
+import { useQuery } from "react-query";
+import driverService from "../../../../services/drivers";
+import { useGetQueries } from "../../../../hooks/useGetQueries";
+import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs";
+import carService from "../../../../services/cars";
+import { FormatTime } from "../../../../utils/formatTime";
 
 const SingleCar = () => {
+  const { id, currentPage } = useGetQueries();
+  const { data: driversData } = useQuery(
+    ["GET_DRIVERS_BY_CAR"],
+    () => {
+      return driverService.getList({ car_id: id });
+    },
+    {
+      enabled: !!id,
+    }
+  );
+
+  const { data: carData } = useQuery(
+    ["GET_BY_CAR"],
+    () => {
+      return carService.getElement(id);
+    },
+    {
+      enabled: !!id,
+    }
+  );
+
+  console.log("driversData", driversData);
+
   const headColumns = useMemo(() => {
     return [
       {
@@ -12,19 +41,18 @@ const SingleCar = () => {
       },
       {
         title: "phone_number",
-        id: "phone_number",
+        id: "phone",
       },
       {
         title: "Tug‘ilgan sana",
-        id: "birth_date",
+        id: "birthday",
+        render: (val?: any) => {
+          return <>{FormatTime(val)}</>
+        }
       },
       {
         title: "mashina raqami",
         id: "car_number",
-      },
-      {
-        title: "raqam viloyati",
-        id: "car_number_region",
       },
       {
         title: "status",
@@ -46,22 +74,17 @@ const SingleCar = () => {
       {
         title: "",
         id: "actions",
-        permission: ["edit", "delete"],
+        permission: ["edit", "delete", "learn_more"],
       },
     ];
   }, []);
 
-  const bodyColumns = [
-    {
-      full_name: "Alisher Hakimov",
-      phone_number: "+998 99 499 31 30",
-      birth_date: "2001-yil, 17-dekabr",
-      status: true,
-      car_number: "70R481EC",
-      car_number_region: "Qashqadaryo",
-      id: "123",
-    },
-  ];
+  const drivers: any = useMemo(() => {
+    return {
+      list: driversData?.data ?? [],
+      ...driversData,
+    };
+  }, [driversData]);
 
   const handleActions = useCallback((element: any, status: string) => {
     if (status === "edit") {
@@ -69,17 +92,34 @@ const SingleCar = () => {
     }
   }, []);
 
+  const breadCrumbItems = useMemo(() => {
+    return [
+      {
+        label: "Haydovchilar ro‘yxati ",
+        link: "/drivers/cars",
+      },
+      {
+        label: carData?.data?.name || "Mashina",
+      },
+    ];
+  }, [carData]);
+
   return (
     <>
-      <SectionHeader>
+      <SectionHeader
+        extra={
+          <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
+        }
+      >
         <FilterButton text="filter" />
       </SectionHeader>
 
       <CTable
         headColumns={headColumns}
-        bodyColumns={bodyColumns}
-        count={1}
+        bodyColumns={drivers?.list}
+        count={drivers?.meta?.totalCount}
         handleActions={handleActions}
+        currentPage={currentPage}
       />
     </>
   );

@@ -163,9 +163,9 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "drivers",
-              link: "driver/:id",
+              link: "driver",
               sidebar: false,
-              title: "Haydovchilar",
+              title: "",
               icon: "",
             })}
             element={<Driver />}
@@ -183,7 +183,7 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "drivers",
-              link: "car/:id",
+              link: "car",
               sidebar: false,
               title: "",
               icon: "",
@@ -343,9 +343,9 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "partners",
-              link: "partner/:id",
+              link: "partner",
               sidebar: false,
-              title: "Partnyor",
+              title: "",
               icon: "",
             })}
             element={<Partner />}

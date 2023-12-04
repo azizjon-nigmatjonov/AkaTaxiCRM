@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import ReactInputMask from "react-input-mask";
 import CLabel from "../../CElements/CLabel";
 import { Controller } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   mask?: string;
@@ -12,6 +13,7 @@ interface Props {
   control?: any;
   setValue?: (val1?: any, val2?: any) => void;
   defaultValue?: any;
+  errors?: any;
 }
 
 const HFInputMask = ({
@@ -23,7 +25,9 @@ const HFInputMask = ({
   control,
   setValue = () => {},
   defaultValue = "",
+  errors = {},
 }: Props) => {
+  const { t } = useTranslation();
   useEffect(() => {
     if (defaultValue) {
       setValue(name, defaultValue);
@@ -31,7 +35,7 @@ const HFInputMask = ({
   }, [name, setValue, defaultValue]);
 
   return (
-    <div id="hfInputMask">
+    <div id="hfInputMask" className="relative">
       <CLabel title={label} required={required} />
       <Controller
         control={control}
@@ -51,6 +55,12 @@ const HFInputMask = ({
           />
         )}
       ></Controller>
+
+      {errors[name]?.message && (
+        <p className="text-sm text-[var(--error)] absolute -bottom-5">
+          {t(errors[name].message || "")}
+        </p>
+      )}
     </div>
   );
 };

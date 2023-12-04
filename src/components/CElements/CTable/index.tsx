@@ -346,7 +346,7 @@ const CTable = ({
                       key={colIndex}
                       className={`overflow-ellipsis ${tableHeight}`}
                       onClick={() => {
-                        if (clickable && column?.click !== "custom")
+                        if (clickable && column?.click !== "custom" && column?.id !== "actions")
                           handleRowClick(item);
                       }}
                       style={{

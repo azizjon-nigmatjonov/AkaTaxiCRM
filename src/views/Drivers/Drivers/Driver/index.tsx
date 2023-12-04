@@ -1,4 +1,3 @@
-import { useLocation, useParams } from "react-router-dom";
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs";
 import SectionHeader from "../../../../components/Sections/Header";
 import { useQuery } from "react-query";
@@ -26,8 +25,7 @@ const tabList = [
 ];
 
 const Driver = () => {
-  const { id } = useParams();
-  const { tab } = useGetQueries();
+  const { tab, id } = useGetQueries();
 
   const { data: driver } = useQuery(
     ["GET_DRIVER", id],
@@ -43,21 +41,21 @@ const Driver = () => {
     return [
       {
         label: "Haydovchilar ro‘yxati ",
-        link: -1,
+        link: "/drivers/main",
       },
       {
         label: driver?.data?.full_name || "Haydovchi",
       },
     ];
-  }, [driver])
-
-  console.log('driver', driver?.data);
+  }, [driver]);
 
   return (
     <>
-      <SectionHeader>
-        <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
-      </SectionHeader>
+      <SectionHeader
+        extra={
+          <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
+        }
+      />
 
       <CTabs tabList={tabList} />
 

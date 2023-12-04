@@ -5,10 +5,10 @@ export const header = {
   "drivers/cars": "Mashinalar",
   "admins/admin": "Adminlar",
   "passengers/active_passengers": "Aktiv yo'lovchilar",
-  "passengers/statistics": "Yo'lovchilar statistikasi",
+  "passengers/statistics": "Statistika: yo‘lovchi",
   "drivers/main": "Haydovchilar ro'yxati",
   "drivers/active": "Aktiv haydovchilar",
-  "drivers/statistics": "Haydovchilar statistikasi",
+  "drivers/statistics": "Statistika: haydovchi",
   "infos/calendar": "Kalendar",
   "infos/chats": "Chatlar",
   "admins/rolls": "Rollar",
@@ -16,5 +16,7 @@ export const header = {
   "settings/sms": "SMS xabarnoma",
   "settings/amocrm": "Amo CRM login",
   "partners/list": "Hamkorlar sahifasi",
-  "partners/partner": "Hamkor"
+  "partners/partner": "Hamkor",
+  "drivers/driver": "Haydovchi",
+  "drivers/car": "Haydovchilar ro'yxati"
 };

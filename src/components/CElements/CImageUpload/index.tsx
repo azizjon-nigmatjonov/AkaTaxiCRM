@@ -31,8 +31,6 @@ const CImageUpload = ({
     fileService
       .upload(data)
       .then((res: any) => {
-        console.log(name, res?.data?.id);
-
         setValue(name, res?.data?.id);
         setImage(res?.data?.id);
       })
@@ -61,14 +59,12 @@ const CImageUpload = ({
           }
           alt={defaultValue || "image"}
         />
-      ) : loading ? (
-        <CircularProgress />
       ) : (
         ""
       )}
 
       <div className="z-[2] absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2">
-        <PhotoIcon />
+        {loading ? <CircularProgress /> : <PhotoIcon />}
       </div>
 
       {isDelete ? (
