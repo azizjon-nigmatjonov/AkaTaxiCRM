@@ -23,7 +23,7 @@ interface Props {
   error?: any;
 }
 
-const CDatePicker = ({
+const FormDatePicker = ({
   value,
   onChange,
   disabled,
@@ -98,4 +98,4 @@ const CDatePicker = ({
   );
 };
 
-export default CDatePicker;
+export default FormDatePicker;

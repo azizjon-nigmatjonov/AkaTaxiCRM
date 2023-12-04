@@ -2,7 +2,7 @@ import { makeStyles } from "@mui/styles";
 import { Controller } from "react-hook-form";
 import CLabel from "../../CElements/CLabel";
 import { useEffect } from "react";
-import CDatePicker from "../CDatePicker";
+import FormDatePicker from "../FormDatePicker";
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -58,7 +58,7 @@ const HFDatepicker = ({
         defaultValue={defaultValue}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <div className={className}>
-            <CDatePicker
+            <FormDatePicker
               isFormEdit={isFormEdit}
               placeholder={placeholder}
               isBlackBg={isBlackBg}
