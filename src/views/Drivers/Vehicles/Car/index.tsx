@@ -31,8 +31,6 @@ const SingleCar = () => {
     }
   );
 
-  console.log("driversData", driversData);
-
   const headColumns = useMemo(() => {
     return [
       {

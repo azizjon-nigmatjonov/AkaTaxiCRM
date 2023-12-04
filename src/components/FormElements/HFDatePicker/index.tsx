@@ -1,16 +1,14 @@
 // import { makeStyles } from "@mui/styles";
 import { Controller } from "react-hook-form";
 import CLabel from "../../CElements/CLabel";
-import { useEffect } from "react";
-// import FormDatePicker from "../FormDatePicker";
-
-// const useStyles = makeStyles(() => ({
-//   input: {
-//     "&::placeholder": {
-//       color: "#fff",
-//     },
-//   },
-// }));
+import { useEffect, useRef } from "react";
+import { InputAdornment, TextField } from "@mui/material";
+import DatePicker from "react-multi-date-picker";
+import { Today } from "@mui/icons-material";
+import weekends from "react-multi-date-picker/plugins/highlight_weekends";
+import CustomNavButton from "../FormDatePicker/Plugins/CustomNavButton";
+import { locale } from "../FormDatePicker/Plugins/locale";
+import { ColorConstants } from "../../../constants/website";
 
 interface Props {
   control: any;
@@ -30,18 +28,16 @@ interface Props {
 
 const HFDatepicker = ({
   control,
-  // isBlackBg = false,
   className,
   name,
   label = "",
-  // placeholder = "",
-  // isFormEdit = false,
   defaultValue = "",
   required = false,
   setValue = () => {},
+  disabled = false,
+  placeholder = ""
 }: Props) => {
-  // const classes = useStyles();
-
+  const datePickerRef: any = useRef();
   useEffect(() => {
     if (defaultValue) {
       setValue(name, defaultValue);
@@ -58,16 +54,58 @@ const HFDatepicker = ({
         defaultValue={defaultValue}
         render={({ field: { onChange, value } }) => (
           <div className={className}>
-            <input type="text" onChange={onChange} value={value} />
-            {/* <FormDatePicker
-              isFormEdit={isFormEdit}
-              placeholder={placeholder}
-              isBlackBg={isBlackBg}
-              value={value}
-              onChange={onChange}
-              classes={classes}
-              error={error}
-            /> */}
+            <div id="cDatepicker">
+              <DatePicker
+                disabled={disabled}
+                ref={datePickerRef}
+                render={(value, openCalendar) => {
+                  document.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      datePickerRef.current.closeCalendar();
+                    }
+                  });
+                  return (
+                    <TextField
+                      value={value}
+                      size="small"
+                      name={name}
+                      placeholder={placeholder}
+                      onClick={openCalendar}
+                      fullWidth
+                      autoComplete="off"
+                      InputProps={{
+                        readOnly: disabled,
+          
+                        style: disabled
+                          ? {
+                              background: "#fff",
+                            }
+                          : {
+                              background: "#fff",
+                              color: ColorConstants.black,
+                            },
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Today />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className={"custom_textfield"}
+                    />
+                  );
+                }}
+                renderButton={<CustomNavButton />}
+                plugins={[weekends()]}
+                weekStartDayIndex={1}
+                portal
+                locale={locale}
+                className="datePicker"
+                format="DD.MM.YYYY"
+                value={new Date(value) || ""}
+                onChange={(val: any) => onChange(val ? new Date(val) : "")}
+              />
+            </div>
           </div>
         )}
       ></Controller>
