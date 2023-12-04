@@ -1,7 +1,7 @@
 import HFInputMask from "../../../../../components/FormElements/HFInputMask";
 import HFSelect from "../../../../../components/FormElements/HFSelect";
 import HFTextField from "../../../../../components/FormElements/HFTextField";
-import HFDatePicker from "../../../../../components/FormElements/HFDatepicker";
+import HFDatePick from "../../../../../components/FormElements/HFDatepicker";
 
 interface Props {
   control?: any;
@@ -40,7 +40,7 @@ const MainInfo = ({ control, setValue, driver = {} }: Props) => {
         setValue={setValue}
         defaultValue={driver?.phone}
       />
-      <HFDatePicker
+      <HFDatePick
         label="Tug'ilgan sana"
         control={control}
         name="birthday"

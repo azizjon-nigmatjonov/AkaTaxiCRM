@@ -28,7 +28,7 @@ interface Props {
   setValue?: (val1?: any, val2?: any) => void;
 }
 
-const HFDatePicker = ({
+const HFDatePick = ({
   control,
   isBlackBg = false,
   className,
@@ -74,4 +74,4 @@ const HFDatePicker = ({
   );
 };
 
-export default HFDatePicker;
+export default HFDatePick;
