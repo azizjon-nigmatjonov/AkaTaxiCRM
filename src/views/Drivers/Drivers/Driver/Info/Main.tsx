@@ -1,4 +1,5 @@
-import HFDatepicker from "../../../../../components/FormElements/HFDatepicker";
+import HDatepicker from "../../../../../components/FormElements/HDatepicker";
+// import HFDatepicker from "../../../../../components/FormElements/HFDatepicker";
 import HFInputMask from "../../../../../components/FormElements/HFInputMask";
 import HFSelect from "../../../../../components/FormElements/HFSelect";
 import HFTextField from "../../../../../components/FormElements/HFTextField";
@@ -40,14 +41,15 @@ const MainInfo = ({ control, setValue, driver = {} }: Props) => {
         setValue={setValue}
         defaultValue={driver?.phone}
       />
-      <HFDatepicker
+      <HDatepicker />
+      {/* <HFDatepicker
         label="Tug'ilgan sana"
         control={control}
         name="birthday"
         placeholder="Tug'ilgan kuni"
         setValue={setValue}
         defaultValue={driver?.birthday}
-      />
+      /> */}
       <HFSelect
         name="region_id"
         control={control}
