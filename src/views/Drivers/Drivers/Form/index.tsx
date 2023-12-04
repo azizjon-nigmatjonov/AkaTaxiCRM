@@ -12,7 +12,7 @@ import { useMemo } from "react";
 import carService from "../../../../services/cars";
 import { useDispatch } from "react-redux";
 import { websiteActions } from "../../../../store/website";
-import HFDatePick from "../../../../components/FormElements/HFDatepicker";
+import HFDatepicker from "../../../../components/FormElements/HFDatepicker";
 
 interface Props {
   refetch: () => void;
@@ -142,7 +142,7 @@ const Form = ({ refetch }: Props) => {
           required={true}
           defaultValue={driver?.data?.car_number}
         />
-        <HFDatePick
+        <HFDatepicker
           label="Tug'ilgan sana"
           control={control}
           name="birthday"
