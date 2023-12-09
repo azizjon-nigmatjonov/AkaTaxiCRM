@@ -42,6 +42,7 @@ function a11yProps(index: any) {
 interface Props {
   tabList: any;
   value: any;
+  customStyles?: any;
   handleCustomClick?: (val?: any) => void;
 }
 
@@ -49,6 +50,7 @@ export default function CTab({
   tabList,
   value = 0,
   handleCustomClick = () => {},
+  customStyles
 }: Props) {
   const { t } = useTranslation()
   const customization = {
@@ -66,7 +68,7 @@ export default function CTab({
       textAlign: "left",
     },
     "& .MuiButtonBase-root, & .MuiTab-root": {
-      maxWidth: "auto",
+      maxWidth: "100%",
     },
     "& .Mui-selected": {
       transition: "0.7s",
@@ -77,6 +79,7 @@ export default function CTab({
       backgroundColor: ColorConstants.main,
       height: "100%",
     },
+    ...customStyles
   };
 
   return (

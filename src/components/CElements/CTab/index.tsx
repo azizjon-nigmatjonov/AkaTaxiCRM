@@ -15,6 +15,7 @@ interface Props {
   tabList?: any,
   handleTabClick?: (val?: any) => void,
   extra?: any,
+  customStyles?: any
 }
 
 export default function CTabs({
@@ -24,6 +25,7 @@ export default function CTabs({
   tabList = [],
   handleTabClick = () => {},
   extra,
+  customStyles
 }: Props) {
   const location = useLocation();
   const pathname = location.pathname;
@@ -68,6 +70,7 @@ export default function CTabs({
         value={value}
         tabList={optimizedTabList}
         handleCustomClick={handleTabAction}
+        customStyles={customStyles}
       />
       {extra && <>{extra}</>}
     </div>
