@@ -7,6 +7,7 @@ import usePageRouter from "../../../hooks/useObjectRouter";
 import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
+import CSlider from "../../../components/CElements/CSlider";
 
 const ActiveDrivers = () => {
   const { navigateQuery } = usePageRouter();
@@ -67,7 +68,7 @@ const ActiveDrivers = () => {
       {
         title: "qidiruv vaqti",
         id: "time_search",
-      }
+      },
     ];
   }, []);
 
@@ -81,11 +82,17 @@ const ActiveDrivers = () => {
     }
   }, []);
 
+  const handleSearch = (evt: any) => {
+    console.log(evt);
+  };
+
   return (
     <>
-      <SectionHeader>
+      <SectionHeader handleSearch={handleSearch}>
         <div className="flex items-center gap-3">
-          <FilterButton text="filter" />
+          <FilterButton text="filter">
+            <CSlider />
+          </FilterButton>
         </div>
       </SectionHeader>
       <CTable

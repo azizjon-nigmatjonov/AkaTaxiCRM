@@ -1,6 +1,5 @@
 import { useCallback, useMemo } from "react";
 import AddButton from "../../components/Buttons/AddButton";
-import CSlider from "../../components/CElements/CSlider";
 import CTable from "../../components/CElements/CTable";
 import FilterButton from "../../components/Filters";
 import SectionHeader from "../../components/Sections/Header";
@@ -8,9 +7,12 @@ import usePageRouter from "../../hooks/useObjectRouter";
 import { useQuery } from "react-query";
 import partnerService from "../../services/partners";
 import ImageFrame from "../../components/ImageFrame";
+import CSelect from "../../components/CElements/CSelect";
+import { useSelector } from "react-redux";
 
 const Partners = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
+  const regions = useSelector((state: any) => state.regions.regions);
 
   const { data: partnerData, isLoading } = useQuery(["GET_PARTNERS"], () => {
     return partnerService.getList();
@@ -90,13 +92,22 @@ const Partners = () => {
     navigateTo(`/partners/partner?id=${item.id}`);
   };
 
+  const Regions = useMemo(() => {
+    return regions?.map((i: any) => {
+      return {
+        value: i.id,
+        label: i.name.uz,
+      };
+    });
+  }, [regions]);
+
   return (
     <>
       <SectionHeader handleSearch={handleSearch}>
         <div className="flex items-center gap-3">
           <FilterButton text="filter">
             <div>
-              <CSlider />
+              <CSelect options={Regions} id="filter" label="Viloyat" />
             </div>
           </FilterButton>
 

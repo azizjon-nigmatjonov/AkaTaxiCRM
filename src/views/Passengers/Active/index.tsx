@@ -4,7 +4,6 @@ import SectionHeader from "../../../components/Sections/Header";
 import FilterButton from "../../../components/Filters";
 import { useQuery } from "react-query";
 import passengerService from "../../../services/passengers";
-import CLabel from "../../../components/CElements/CLabel";
 import CSelect from "../../../components/CElements/CSelect";
 import CDriver from "../../../components/CElements/CDivider";
 import CSlider from "../../../components/CElements/CSlider";
@@ -13,7 +12,7 @@ import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
 
 const ActivePassengers = () => {
-  const { currentPage } = useGetQueries()
+  const { currentPage } = useGetQueries();
   const { data: passengers, isLoading } = useQuery(
     ["GET_ACTIVE_PASSENGERS"],
     () => {
@@ -40,8 +39,8 @@ const ActivePassengers = () => {
         title: "qidiruv vaqti",
         id: "search_time",
         render: (val?: any) => {
-          return <>{FormatTime(val, "time")}</>
-        }
+          return <>{FormatTime(val, "time")}</>;
+        },
       },
       {
         title: "Mavjud taksilar",
@@ -62,13 +61,26 @@ const ActivePassengers = () => {
     );
   }, [passengers]);
 
+  const Regions = useMemo(() => {
+    return regions?.map((i: any) => {
+      return {
+        value: i.id,
+        label: i.name.uz,
+      };
+    });
+  }, [regions]);
+
+  const handleSearch = (value: any) => {
+    console.log("va", value);
+  };
+
+
   return (
     <>
-      <SectionHeader>
+      <SectionHeader handleSearch={handleSearch}>
         <FilterButton text="filter">
           <div>
-            <CLabel title="Viloyat" />
-            <CSelect options={regions} id="filter" />
+            <CSelect options={Regions} id="filter" label="Viloyat" />
           </div>
           <CDriver classes="my-4" />
           <div>

@@ -33,8 +33,8 @@ const ProfilePage = () => {
   });
 
   const onSubmit = () => {
-    const params = getValues();
-
+    const params: any = getValues();
+    params.phone = params.phone?.substring(1)?.replace(/\s+/g, "");
     authService.updateUserInfo(params).then(() => {
       dispatch(
         websiteActions.setAlertData({
