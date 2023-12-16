@@ -14,17 +14,21 @@ import { Header } from "../../../components/Header";
 
 const Drivers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
-  const { currentPage } = useGetQueries();
+  const { currentPage, q } = useGetQueries();
 
   const { data, isLoading, refetch } = useQuery(
-    ["GER_DRIVERS_LIST", currentPage],
+    ["GER_DRIVERS_LIST", currentPage, q],
     () => {
-      return driverService.getList({ page: currentPage, perPage: 10 });
+      return driverService.getList({ page: currentPage, perPage: 10, q });
     }
   );
 
   const headColumns = useMemo(() => {
     return [
+      {
+        title: "NO",
+        id: "index",
+      },
       {
         title: "Ism familya",
         id: "full_name",
@@ -75,7 +79,7 @@ const Drivers = () => {
   }, [data]);
 
   const handleSearch = (evt: any) => {
-    console.log(evt);
+    navigateQuery({ q: evt })
   };
   return (
     <>

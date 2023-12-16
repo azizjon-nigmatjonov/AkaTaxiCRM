@@ -12,10 +12,10 @@ import { Header } from "../../../components/Header";
 
 const ActiveDrivers = () => {
   const { navigateQuery } = usePageRouter();
-  const { currentPage } = useGetQueries();
+  const { currentPage, q } = useGetQueries();
 
-  const { data: drivers, isLoading } = useQuery(["GET_ACTIVE_DRIVERS"], () => {
-    return driverService.getActives();
+  const { data: drivers, isLoading } = useQuery(["GET_ACTIVE_DRIVERS", q], () => {
+    return driverService.getActives({ q });
   });
 
   const driversData = useMemo(() => {
@@ -84,7 +84,7 @@ const ActiveDrivers = () => {
   }, []);
 
   const handleSearch = (evt: any) => {
-    console.log(evt);
+    navigateQuery({ q: evt })
   };
 
   return (

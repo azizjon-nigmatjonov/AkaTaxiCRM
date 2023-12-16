@@ -17,13 +17,13 @@ import { Header } from "../../../components/Header";
 
 const Passengers = () => {
   const { navigateQuery } = usePageRouter();
-  const { currentPage } = useGetQueries();
+  const { currentPage, q } = useGetQueries();
   const regions = useSelector((state: any) => state.regions.regions);
 
   const { data, isLoading, refetch } = useQuery(
-    ["GET_PASSENGER_LIST", currentPage],
+    ["GET_PASSENGER_LIST", currentPage, q],
     () => {
-      return passengerService.getList({ page: currentPage, perPage: 10 });
+      return passengerService.getList({ page: currentPage, perPage: 10, q });
     },
     {
       enabled: true,
@@ -36,6 +36,10 @@ const Passengers = () => {
 
   const headColumns = useMemo(() => {
     return [
+      {
+        title: "NO",
+        id: "index",
+      },
       {
         title: "Ism familya",
         id: "full_name",
@@ -79,7 +83,7 @@ const Passengers = () => {
   };
 
   const handleSearch = (value: any) => {
-    console.log("va", value);
+    navigateQuery({ q: value })
   };
 
   const Regions = useMemo(() => {

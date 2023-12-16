@@ -11,13 +11,15 @@ import { useSelector } from "react-redux";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
 import { Header } from "../../../components/Header";
+import usePageRouter from "../../../hooks/useObjectRouter";
 
 const ActivePassengers = () => {
-  const { currentPage } = useGetQueries();
+  const { currentPage, q } = useGetQueries();
+  const { navigateQuery } = usePageRouter()
   const { data: passengers, isLoading } = useQuery(
-    ["GET_ACTIVE_PASSENGERS"],
+    ["GET_ACTIVE_PASSENGERS", q],
     () => {
-      return passengerService.getActivePassengers();
+      return passengerService.getActivePassengers({ q });
     }
   );
   const regions = useSelector((state: any) => state.regions.regions);
@@ -72,7 +74,7 @@ const ActivePassengers = () => {
   }, [regions]);
 
   const handleSearch = (value: any) => {
-    console.log("va", value);
+    navigateQuery({ q: value })
   };
 
   return (

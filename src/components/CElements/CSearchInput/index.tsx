@@ -18,7 +18,7 @@ const CSearchInput = ({ handleChange = () => {}, delay = 500, classes = "" }: Pr
         <SearchIcon />
       </div>
       <input
-        onChange={(val) => debounce(val)}
+        onChange={(e) => debounce(e.target.value)}
         type="text"
         placeholder="Izlash..."
         className={`w-[250px] bg-transparent h-[40px] outline-none pl-10 pr-5 text=[var(--black)] placeholder-gray border border-[var(--lineGray)] focus:border-[var(--main)] rounded-[10px] ${classes}`}
