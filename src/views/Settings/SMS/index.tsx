@@ -3,6 +3,7 @@ import AddButton from "../../../components/Buttons/AddButton";
 import CTabs from "../../../components/CElements/CTab";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import CTable from "../../../components/CElements/CTable";
+import { Header } from "../../../components/Header";
 
 const tabList = [
   {
@@ -58,37 +59,32 @@ const SMS = () => {
   const handleRowClick = (item: any) => {
     navigateTo(`/drivers/driver/${item.id}`);
   };
+
   return (
     <>
-      <div className="flex justify-between">
-        <CTabs tabList={tabList} />
+      <Header title="Header" />
+      <div className="px-6">
+        <div className="flex justify-between">
+          <CTabs tabList={tabList} />
 
-        <div>
-          <AddButton text="Yangi xabar" onClick={() => navigateTo('/settings/sms/news')} />
+          <div>
+            <AddButton
+              text="Yangi xabar"
+              onClick={() => navigateTo("/settings/sms/create/${")}
+            />
+          </div>
         </div>
+
+        <CTable
+          headColumns={headColumns}
+          bodyColumns={[]}
+          count={1}
+          handleActions={handleActions}
+          handleRowClick={handleRowClick}
+          isLoading={false}
+          currentPage={1}
+        />
       </div>
-
-      <CTable
-        headColumns={headColumns}
-        bodyColumns={[]}
-        count={1}
-        handleActions={handleActions}
-        handleRowClick={handleRowClick}
-        isLoading={false}
-        currentPage={1}
-      />
-
-      {/* <div className="space-y-[18px]">
-        <TypeCard List={ListSms} title="Xabar turi" />
-        <TypeCard List={ListPerson} title="Kimga yuborish kerak?" />
-        <SMSMessage title="Xabar matni" />
-      </div>
-
-      <div className="flex justify-end mt-6">
-        <div className="inline-block">
-          <AddButton iconLeft={false} text="Xabarni yuborish" />
-        </div>
-      </div> */}
     </>
   );
 };

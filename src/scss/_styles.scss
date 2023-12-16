@@ -86,3 +86,41 @@ input {
 .MuiModal-root {
   z-index: 99 !important;
 }
+
+#basicDatePicker {
+  width: 100%;
+  .rmdp-container {
+    width: 100%;
+  }
+  .MuiInputBase-root {
+    height: 48px;
+    .MuiOutlinedInput-notchedOutline {
+      border-color: $lineGray;
+      border-radius: 12px;
+    }
+  }
+  .MuiFormControl-root {
+    width: 100%;
+  }
+  .MuiTextField-root.error {
+    .MuiInputBase-root {
+      .MuiOutlinedInput-notchedOutline {
+        border-color: $error;
+      }
+    }
+  }
+  .Mui-focused {
+    .MuiOutlinedInput-notchedOutline {
+      border-color: $primary;
+      border-width: 1px;
+    }
+  }
+  .MuiInputAdornment-root {
+    z-index: 9;
+    background-color: $black;
+    height: 100%;
+    width: 40px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

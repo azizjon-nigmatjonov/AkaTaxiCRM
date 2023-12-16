@@ -1,0 +1,16 @@
+#cDatepicker {
+  .MuiOutlinedInput-notchedOutline {
+    border: 1px solid $main;
+    border-radius: 10px;
+  }
+  .Mui-focused {
+    .MuiOutlinedInput-notchedOutline {
+      border: 2px solid $primary !important;
+    }
+  }
+  &:hover {
+    .MuiOutlinedInput-notchedOutline {
+      border-color: $black;
+    }
+  }
+}

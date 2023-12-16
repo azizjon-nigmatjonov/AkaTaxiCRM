@@ -15,7 +15,8 @@ interface Props {
   tabList?: any,
   handleTabClick?: (val?: any) => void,
   extra?: any,
-  customStyles?: any
+  customStyles?: any;
+  slug?: string
 }
 
 export default function CTabs({
@@ -25,7 +26,8 @@ export default function CTabs({
   tabList = [],
   handleTabClick = () => {},
   extra,
-  customStyles
+  customStyles,
+  slug = "tab"
 }: Props) {
   const location = useLocation();
   const pathname = location.pathname;
@@ -48,7 +50,7 @@ export default function CTabs({
     }
     const newQuery = {
       ...query,
-      tab: i?.slug,
+      [slug]: i?.slug,
     };
     const queryParams = createSearchParams(newQuery);
     navigate({
@@ -59,10 +61,10 @@ export default function CTabs({
 
   const value = useMemo(() => {
     if (currentTab?.index) return currentTab.index;
-    if (!query?.tab) return 0;
-    const tab = optimizedTabList.find((tab: any) => tab.slug === query.tab);
+    if (!query?.[slug]) return 0;
+    const tab = optimizedTabList.find((tab: any) => tab.slug === query?.[slug]);
     return tab?.index;
-  }, [optimizedTabList, query, currentTab]);
+  }, [optimizedTabList, query, currentTab, slug]);
 
   return (
     <div className={cls.wrapper}>

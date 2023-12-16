@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import CSlider from "../../../components/CElements/CSlider";
+import { Header } from "../../../components/Header";
 
 const ActiveDrivers = () => {
   const { navigateQuery } = usePageRouter();
@@ -88,23 +89,26 @@ const ActiveDrivers = () => {
 
   return (
     <>
-      <SectionHeader handleSearch={handleSearch}>
-        <div className="flex items-center gap-3">
-          <FilterButton text="filter">
-            <CSlider />
-          </FilterButton>
-        </div>
-      </SectionHeader>
-      <CTable
-        headColumns={headColumns}
-        bodyColumns={driversData?.list}
-        count={driversData?.meta?.totalCount}
-        handleActions={handleActions}
-        isLoading={isLoading}
-        currentPage={currentPage}
-      />
+      <Header title="Aktiv haydovchilar" />
+      <div className="px-6">
+        <SectionHeader handleSearch={handleSearch}>
+          <div className="flex items-center gap-3">
+            <FilterButton text="filter">
+              <CSlider />
+            </FilterButton>
+          </div>
+        </SectionHeader>
+        <CTable
+          headColumns={headColumns}
+          bodyColumns={driversData?.list}
+          count={driversData?.meta?.totalCount}
+          handleActions={handleActions}
+          isLoading={isLoading}
+          currentPage={currentPage}
+        />
 
-      <Form />
+        <Form />
+      </div>
     </>
   );
 };

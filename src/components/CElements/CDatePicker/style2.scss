@@ -1,9 +1,11 @@
+// @use "/src/scss/colors";
+
 .rmdp-border-right {
   border-right: none !important;
 }
 
 .rmdp-range {
-  background-color: red;
+  background-color: $primary;
 
   .highlight-red {
     color: #fff !important;
@@ -11,7 +13,7 @@
 }
 
 .rmdp-day span {
-  border-radius: 4px !important;
+  border-radius: 50%;
 }
 
 .rmdp-day.rmdp-selected span {
@@ -19,25 +21,34 @@
 }
 
 .rmdp-day.rmdp-selected span:not(.highlight) {
-  background-color: red;
+  background-color: $primary;
   box-shadow: none;
 }
 
 .rmdp-day.rmdp-today span {
   background-color: #fff;
-  // color: yellow;
+  color: $primary;
   // border: 1px solid $primary;
 }
 
 rmdp-day.rmdp-today.highlight span {
   background-color: #fff;
-  // border: 1px solid colors.$error;
+  color: $primary;
+  // border: 1px solid $error;
+}
+
+.rmdp-week-day {
+  color: $primary;
 }
 
 .rmdp-header-values span {
   font-weight: 500;
   font-size: 24px;
-  color: $main;
+  color: $primary;
+
+  &:hover {
+    color: $primary;
+  }
 }
 
 .rmdp-range.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
@@ -46,9 +57,9 @@ rmdp-day.rmdp-today.highlight span {
 }
 
 .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
-  background-color: $lightestGray;
-  border: 1px solidred;
-  color: $main;
+  background-color: transparent;
+  border: 1px solid $primary;
+  color: $primary;
 }
 
 .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) .highlight-red:hover {
@@ -97,22 +108,5 @@ rmdp-day.rmdp-today.highlight span {
   }
   .rmdp-container:last-child {
     width: 60%;
-  }
-}
-
-
-.rmdp-container  {
-  width: 100%;
-  input {
-    background-color: transparent;
-    border-color: $lineGray;
-    height: 48px;
-    width: 100%;
-    border-radius: 12px;
-    padding: 0 14px;
-
-    &:focus {
-      border-color: $main;
-    }
   }
 }

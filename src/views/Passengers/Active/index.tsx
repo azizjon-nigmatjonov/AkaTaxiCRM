@@ -10,6 +10,7 @@ import CSlider from "../../../components/CElements/CSlider";
 import { useSelector } from "react-redux";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
+import { Header } from "../../../components/Header";
 
 const ActivePassengers = () => {
   const { currentPage } = useGetQueries();
@@ -74,29 +75,31 @@ const ActivePassengers = () => {
     console.log("va", value);
   };
 
-
   return (
-    <>
-      <SectionHeader handleSearch={handleSearch}>
-        <FilterButton text="filter">
-          <div>
-            <CSelect options={Regions} id="filter" label="Viloyat" />
-          </div>
-          <CDriver classes="my-4" />
-          <div>
-            <CSlider />
-          </div>
-        </FilterButton>
-      </SectionHeader>
-      <CTable
-        headColumns={headColumns}
-        bodyColumns={bodyColumns?.list}
-        count={bodyColumns?.meta?.totalCount}
-        isResizeble={true}
-        isLoading={isLoading}
-        currentPage={currentPage}
-      />
-    </>
+    <div>
+        <Header title="Aktiv yo'lovchilar" />
+      <div className="px-6">
+        <SectionHeader handleSearch={handleSearch}>
+          <FilterButton text="filter">
+            <div>
+              <CSelect options={Regions} id="filter" label="Viloyat" />
+            </div>
+            <CDriver classes="my-4" />
+            <div>
+              <CSlider />
+            </div>
+          </FilterButton>
+        </SectionHeader>
+        <CTable
+          headColumns={headColumns}
+          bodyColumns={bodyColumns?.list}
+          count={bodyColumns?.meta?.totalCount}
+          isResizeble={true}
+          isLoading={isLoading}
+          currentPage={currentPage}
+        />
+      </div>
+    </div>
   );
 };
 

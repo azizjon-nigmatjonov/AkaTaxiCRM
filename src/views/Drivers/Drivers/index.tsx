@@ -10,6 +10,7 @@ import { useQuery } from "react-query";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
 import CSlider from "../../../components/CElements/CSlider";
+import { Header } from "../../../components/Header";
 
 const Drivers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
@@ -78,30 +79,33 @@ const Drivers = () => {
   };
   return (
     <>
-      <SectionHeader handleSearch={handleSearch}>
-        <div className="flex items-center gap-3">
-          <FilterButton text="filter">
-            <CSlider />
-          </FilterButton>
+      <Header title="Haydovchilar" />
+      <div className="px-6">
+        <SectionHeader handleSearch={handleSearch}>
+          <div className="flex items-center gap-3">
+            <FilterButton text="filter">
+              <CSlider />
+            </FilterButton>
 
-          <AddButton
-            text="new_driver"
-            onClick={() => navigateQuery({ id: "create" })}
-          />
-        </div>
-      </SectionHeader>
+            <AddButton
+              text="new_driver"
+              onClick={() => navigateQuery({ id: "create" })}
+            />
+          </div>
+        </SectionHeader>
 
-      <CTable
-        headColumns={headColumns}
-        bodyColumns={drivers?.data ?? []}
-        count={drivers?.meta?.pageCount}
-        handleActions={handleActions}
-        isLoading={isLoading}
-        currentPage={currentPage}
-        clickable={true}
-      />
+        <CTable
+          headColumns={headColumns}
+          bodyColumns={drivers?.data ?? []}
+          count={drivers?.meta?.pageCount}
+          handleActions={handleActions}
+          isLoading={isLoading}
+          currentPage={currentPage}
+          clickable={true}
+        />
 
-      <Form refetch={refetch} />
+        <Form refetch={refetch} />
+      </div>
     </>
   );
 };

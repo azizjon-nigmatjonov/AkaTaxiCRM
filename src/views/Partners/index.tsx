@@ -9,6 +9,7 @@ import partnerService from "../../services/partners";
 import ImageFrame from "../../components/ImageFrame";
 import CSelect from "../../components/CElements/CSelect";
 import { useSelector } from "react-redux";
+import { Header } from "../../components/Header";
 
 const Partners = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
@@ -103,31 +104,34 @@ const Partners = () => {
 
   return (
     <>
-      <SectionHeader handleSearch={handleSearch}>
-        <div className="flex items-center gap-3">
-          <FilterButton text="filter">
-            <div>
-              <CSelect options={Regions} id="filter" label="Viloyat" />
-            </div>
-          </FilterButton>
+      <Header title="Adminlar" />
+      <div className="px-5">
+        <SectionHeader handleSearch={handleSearch}>
+          <div className="flex items-center gap-3">
+            <FilterButton text="filter">
+              <div>
+                <CSelect options={Regions} id="filter" label="Viloyat" />
+              </div>
+            </FilterButton>
 
-          <AddButton
-            text="Yangi hamkor"
-            onClick={() => navigateQuery({ id: "create" })}
-          />
-        </div>
-      </SectionHeader>
+            <AddButton
+              text="Yangi hamkor"
+              onClick={() => navigateQuery({ id: "create" })}
+            />
+          </div>
+        </SectionHeader>
 
-      <CTable
-        headColumns={headColumns}
-        bodyColumns={partnersInfo?.list}
-        count={1}
-        handleActions={handleActions}
-        handleRowClick={handleRowClick}
-        isLoading={isLoading}
-        currentPage={1}
-        clickable={true}
-      />
+        <CTable
+          headColumns={headColumns}
+          bodyColumns={partnersInfo?.list}
+          count={1}
+          handleActions={handleActions}
+          handleRowClick={handleRowClick}
+          isLoading={isLoading}
+          currentPage={1}
+          clickable={true}
+        />
+      </div>
     </>
   );
 };

@@ -12,7 +12,7 @@ import HFInputMask from "../../../../components/FormElements/HFInputMask";
 import passengerService from "../../../../services/passengers";
 import { useDispatch } from "react-redux";
 import { websiteActions } from "../../../../store/website";
-import HDatepicker from "../../../../components/FormElements/HDatepicker";
+import {HFDatePicker} from "../../../../components/FormElements/HFDatePicker";
 
 interface Props {
   refetch: () => void;
@@ -128,7 +128,7 @@ const Form = ({ refetch }: Props) => {
           setValue={setValue}
           defaultValue={passengerInfo?.region_id}
         />
-        <HDatepicker />
+        <HFDatePicker name="birthday" control={control} label="Tug'ilgan kuni" required={true} />
         {/* <HFDatepicker
           label="Tug'ilgan sana"
           control={control}

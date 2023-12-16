@@ -44,35 +44,18 @@ const Result = () => {
     ];
   }, []);
 
-  const bodyColumns = [
-    {
-      name: "Muhammad Karim S.",
-      car: {
-        model: "Cobalt",
-        number: "60Y418BC",
-      },
-      phone_number: "+998 (90) 948-48-10",
-      status: true,
-    },
-    {
-      name: "Muhammad Karim S.",
-      phone_number: "+998 (90) 948-48-10",
-      status: true,
-    },
-  ];
-
   return (
     <div className="mt-8">
       <div className="flex justify-between mb-[6px]">
         <p className="text-[var(--gray)] text-base font-medium">Natijalar</p>
         <span className="text-[var(--main)] text-base font-medium">
-          371 ta haydovchi
+          0 ta haydovchi
         </span>
       </div>
 
       <CTable
         headColumns={headColumns}
-        bodyColumns={bodyColumns}
+        bodyColumns={[]}
         disablePagination={true}
         isResizeble={false}
       />

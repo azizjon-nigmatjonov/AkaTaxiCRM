@@ -6,6 +6,7 @@ import DynamicPrice from "./DynamicPrice";
 import StaticPrice from "./StaticPrice";
 import { useSelector } from "react-redux";
 import priceService from "../../../services/price";
+import { Header } from "../../../components/Header";
 const tabList = [
   {
     slug: "static",
@@ -99,39 +100,42 @@ const Price = () => {
 
   return (
     <>
-      <div className="flex justify-between">
-        <CTabs tabList={tabList} />
+      <Header title="Adminlar" />
+      <div className="px-5"> 
+        <div className="flex justify-between">
+          <CTabs tabList={tabList} />
 
-        {currentTab === "regional_price" ? (
-          <AddButton
-            onClick={() => {
-              setEdit((prev) => !prev);
-              handleSave();
-            }}
-            iconLeft={false}
-            text={edit ? "Saqlash" : "Tahrirlash"}
-            style={{ maxWidth: "200px" }}
-            id={edit ? "successBtn" : "addBtn"}
-          />
-        ) : (
-          ""
-        )}
-      </div>
+          {currentTab === "regional_price" ? (
+            <AddButton
+              onClick={() => {
+                setEdit((prev) => !prev);
+                handleSave();
+              }}
+              iconLeft={false}
+              text={edit ? "Saqlash" : "Tahrirlash"}
+              style={{ maxWidth: "200px" }}
+              id={edit ? "successBtn" : "addBtn"}
+            />
+          ) : (
+            ""
+          )}
+        </div>
 
-      <div>
-        {currentTab === "regional_price" ? (
-          <DynamicPrice
-            regions={regions}
-            selected={selected}
-            locations={locations}
-            edit={edit}
-            changesLis={changesList}
-            setChangesList={setChangesList}
-            loading={loading}
-          />
-        ) : (
-          <StaticPrice />
-        )}
+        <div>
+          {currentTab === "regional_price" ? (
+            <DynamicPrice
+              regions={regions}
+              selected={selected}
+              locations={locations}
+              edit={edit}
+              changesLis={changesList}
+              setChangesList={setChangesList}
+              loading={loading}
+            />
+          ) : (
+            <StaticPrice />
+          )}
+        </div>
       </div>
     </>
   );

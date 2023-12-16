@@ -8,6 +8,7 @@ import DriverBallance from "./Ballance";
 import DriverTrip from "./Trip";
 import DriverInfo from "./Info";
 import { useMemo } from "react";
+import { Header } from "../../../../components/Header";
 
 const tabList = [
   {
@@ -51,6 +52,7 @@ const Driver = () => {
 
   return (
     <>
+      <Header />
       <SectionHeader
         extra={
           <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />

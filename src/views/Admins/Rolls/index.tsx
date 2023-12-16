@@ -6,6 +6,7 @@ import usePageRouter from "../../../hooks/useObjectRouter";
 import Form from "./Form";
 import { useQuery } from "react-query";
 import roleService from "../../../services/rolls";
+import { Header } from "../../../components/Header";
 
 const Rolls = () => {
   const { navigateQuery } = usePageRouter();
@@ -49,21 +50,24 @@ const Rolls = () => {
 
   return (
     <>
-      <SectionHeader >
-        <div className="flex items-center gap-3">
-          <AddButton
-            text="new_roll"
-            onClick={() => navigateQuery({ id: "create" })}
-          />
-        </div>
-      </SectionHeader>
-      <CTable
-        headColumns={headColumns}
-        bodyColumns={bodyColumns}
-        isResizeble={true}
-      />
+      <Header title="Adminlar" />
+      <div className="px-5">
+        <SectionHeader>
+          <div className="flex items-center gap-3">
+            <AddButton
+              text="new_roll"
+              onClick={() => navigateQuery({ id: "create" })}
+            />
+          </div>
+        </SectionHeader>
+        <CTable
+          headColumns={headColumns}
+          bodyColumns={bodyColumns}
+          isResizeble={true}
+        />
 
-      <Form />
+        <Form />
+      </div>
     </>
   );
 };

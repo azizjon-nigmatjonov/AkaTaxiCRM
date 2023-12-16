@@ -70,7 +70,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
     const data: any = getValues();
     const params: any = {};
     params.car_class_ids = data.ids;
-    params.name = data.name;
+    params.name ={ uz:  data.name_uz || "", ru:  data.name_ru || "", en:  data.name_en || "" };
 
     params.file_id = data?.file_id;
 
@@ -108,27 +108,54 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
       textDeleteBtn="cancel"
     >
       <CTabs
+        slug="lang"
         tabList={tabList ?? []}
         customStyles={{
           "&": {
             width: "100%",
           },
           "& .MuiButtonBase-root": {
-            width: '33%'
+            width: "33%",
           },
         }}
       />
       <div className="grid space-y-3">
-        <HFTextField
-          name="name"
-          control={control}
-          placeholder="Marka nomi"
-          label="Marka nomi"
-          setValue={setValue}
-          required={true}
-          defaultValue={car?.data?.name}
-        />
+        {query?.lang === "uz" && (
+          <HFTextField
+            name="name_uz"
+            control={control}
+            placeholder="Marka nomi"
+            label="Marka nomi"
+            setValue={setValue}
+            required={true}
+            defaultValue={car?.data?.name}
+          />
+        )}
+        {query?.lang === "ru" && (
+          <HFTextField
+            name="name_ru"
+            control={control}
+            placeholder="Marka nomi"
+            label="Marka nomi"
+            setValue={setValue}
+            required={true}
+            defaultValue={car?.data?.name}
+          />
+        )}
+        {query?.lang === "en" && (
+          <HFTextField
+            name="name_en"
+            control={control}
+            placeholder="Marka nomi"
+            label="Marka nomi"
+            setValue={setValue}
+            required={true}
+            defaultValue={car?.data?.name}
+          />
+        )}
+
         <ImageUploadBtn
+          text="Mashina rasmi"
           name="file_id"
           setValue={setValue}
           defaultValue={car?.data?.image}

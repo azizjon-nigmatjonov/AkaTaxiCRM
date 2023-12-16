@@ -8,24 +8,26 @@ interface Props {
   setValue?: (val1?: any, val2?: any) => void;
 }
 
-const Classes = ({
-  classes = [],
-  setValue = () => {},
-}: Props) => {
+const Classes = ({ classes = [], setValue = () => {} }: Props) => {
   const [groupA, setGroupA] = useState([]);
   const [groupB, setGroupB] = useState([]);
 
   useEffect(() => {
     if (!classes?.length) return;
 
-    const a = classes.slice(0, 3)
+    const a = classes.slice(0, 3)?.map((i: any, index: number) => {
+      return {
+        ...i,
+        checked: index === 0,
+      };
+    });
 
-    const b = classes.slice(3)
+    const b = classes.slice(3);
 
     setGroupA(a);
     setGroupB(b);
-    const ids = groupA
-      .concat(groupB)
+    const ids = a
+      .concat(b)
       .filter((item: any) => item.checked)
       .map((item: any) => item.slug);
     setValue("ids", ids);

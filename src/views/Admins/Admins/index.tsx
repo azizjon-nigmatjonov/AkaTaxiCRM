@@ -7,6 +7,7 @@ import Form from "./Form";
 import { useQuery } from "react-query";
 import adminService from "../../../services/admins";
 import { FormatTime } from "../../../utils/formatTime";
+import { Header } from "../../../components/Header";
 
 const Admins = () => {
   const { navigateQuery } = usePageRouter();
@@ -47,8 +48,8 @@ const Admins = () => {
         title: "Yaratilgan sana",
         id: "created_at",
         render: (val: any) => {
-          return <>{FormatTime(val)}</>
-        }
+          return <>{FormatTime(val)}</>;
+        },
       },
       {
         title: "Status",
@@ -56,14 +57,14 @@ const Admins = () => {
         render: (val: any) => (
           <div
             className={
-              val === 'inactive'
+              val === "inactive"
                 ? "text-[var(--error)]"
-                : val === 'active'
+                : val === "active"
                 ? "text-[var(--green)]"
                 : ""
             }
           >
-            {val === 'inactive' ? "Noaktiv" : val === 'active' ? "Aktiv" : ""}
+            {val === "inactive" ? "Noaktiv" : val === "active" ? "Aktiv" : ""}
           </div>
         ),
       },
@@ -78,23 +79,26 @@ const Admins = () => {
 
   return (
     <>
-      <SectionHeader >
-        <div className="flex items-center gap-3">
-          <AddButton
-            text="new_admin"
-            onClick={() => navigateQuery({ id: "create" })}
-          />
-        </div>
-      </SectionHeader>
-      
-      <CTable
-        headColumns={headColumns}
-        bodyColumns={bodyColumns}
-        isResizeble={true}
-        isLoading={isLoading}
-      />
+      <Header title="Adminlar" />
+      <div className="px-5">
+        <SectionHeader>
+          <div className="flex items-center gap-3">
+            <AddButton
+              text="new_admin"
+              onClick={() => navigateQuery({ id: "create" })}
+            />
+          </div>
+        </SectionHeader>
 
-      <Form />
+        <CTable
+          headColumns={headColumns}
+          bodyColumns={bodyColumns}
+          isResizeble={true}
+          isLoading={isLoading}
+        />
+
+        <Form />
+      </div>
     </>
   );
 };

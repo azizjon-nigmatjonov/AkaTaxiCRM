@@ -8,6 +8,7 @@ import Section from "./Section";
 import { useQuery } from "react-query";
 import carService from "../../../services/cars";
 import { Skeleton } from "@mui/material";
+import { Header } from "../../../components/Header";
 
 const Vehicles = () => {
   const { navigateQuery } = usePageRouter();
@@ -25,10 +26,13 @@ const Vehicles = () => {
 
   const getCarList = (tab: string) => {
     setCarList([]);
-    setLoading(true)
-    carService.getList(tab).then((res) => {
-      setCarList(res?.data);
-    }).finally(() => setLoading(false))
+    setLoading(true);
+    carService
+      .getList(tab)
+      .then((res) => {
+        setCarList(res?.data);
+      })
+      .finally(() => setLoading(false));
   };
 
   const tabList = useMemo(() => {
@@ -49,24 +53,29 @@ const Vehicles = () => {
 
   return (
     <>
-      {tabList && !isLoading ? (
-        <>
-          <div className="flex justify-between">
-            <CTabs tabList={tabList ?? []} />
-            <AddButton
-              text="new_mark"
-              style={{ width: "auto" }}
-              onClick={() => navigateQuery({ id: "create" })}
-            />
-          </div>
+      <Header title="Mashinalar" />
+      <div className="px-6">
+        {tabList && !isLoading ? (
+          <>
+            <div className="flex justify-between">
+              <CTabs tabList={tabList ?? []} />
+              <AddButton
+                text="new_mark"
+                style={{ width: "auto" }}
+                onClick={() => navigateQuery({ id: "create" })}
+              />
+            </div>
 
-          <Section list={carList} loading={loading} />
-        </>
-      ) : (
-        isLoading ? <Skeleton style={{ height: '80px' }} /> : ""
-      )}
+            <Section list={carList} loading={loading} />
+          </>
+        ) : isLoading ? (
+          <Skeleton style={{ height: "80px" }} />
+        ) : (
+          ""
+        )}
 
-      <Form classes={tabList} tab={tab} getCarList={getCarList} />
+        <Form classes={tabList} tab={tab} getCarList={getCarList} />
+      </div>
     </>
   );
 };

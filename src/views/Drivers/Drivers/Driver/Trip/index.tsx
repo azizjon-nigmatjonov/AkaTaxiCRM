@@ -21,7 +21,7 @@ const DriverTrip = () => {
       enabled: !!id,
     }
   );
-
+    
   const TripData = useMemo(() => {
     const data: any = trip;
     return {
