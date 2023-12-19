@@ -91,6 +91,7 @@ const Router = () => {
   }, []);
 
   if (!isAuth) {
+
     return (
       <Suspense fallback={"Loading..."}>
         <Routes>
@@ -106,12 +107,12 @@ const Router = () => {
     );
   }
 
-  useEffect(() => {
-    if (isAuth && location.pathname === "/") {
-      window.location.reload();
-      navigateTo("/passengers/main");
-    }
-  }, [isAuth]);
+  // useEffect(() => {
+  //   if (isAuth && location.pathname === "/") {
+  //     window.location.reload();
+  //     navigateTo("/passengers/main");
+  //   }
+  // }, [isAuth]);
 
   return (
     <Suspense fallback={"Loading..."}>
