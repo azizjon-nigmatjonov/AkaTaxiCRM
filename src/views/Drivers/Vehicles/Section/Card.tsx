@@ -22,7 +22,7 @@ const Card: FC<Props> = ({ element }) => {
       classes="min-h-0 rounded-[24px]"
       style={{ minHeight: "0", padding: 0 }}
     >
-      <div className="flex items-center justify-between border-b border-[var(--lineGray)] p-6 cursor-pointer">
+      <div className="flex items-center justify-between border-b border-[var(--lineGray)] p-6">
         <div>
           <h5 className="text-2xl text-black font-[600]">{element.name}</h5>
 
@@ -56,7 +56,7 @@ const Card: FC<Props> = ({ element }) => {
 
       <div className="flex">
         <div
-          onClick={() => navigateTo(`/drivers/car?id=${element.id}`)}
+          onClick={() => navigateTo(`/drivers/car/${element.id}`)}
           className="cursor-pointer px-6 border-r border-[var(--lineGray)] h-[50px] flex items-center w-full font-medium"
         >
           <div className="border border-[var(--lineGray)] h-[30px] w-[30px] flex items-center justify-center rounded-full mr-2">

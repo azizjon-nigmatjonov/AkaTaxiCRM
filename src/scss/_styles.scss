@@ -124,3 +124,9 @@ input {
     justify-content: flex-end;
   }
 }
+
+.MuiButtonBase-root {
+  &.Mui-checked {
+    color: $main !important;
+  }
+}

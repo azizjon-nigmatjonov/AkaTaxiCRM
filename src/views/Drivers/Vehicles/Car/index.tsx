@@ -8,6 +8,7 @@ import { useGetQueries } from "../../../../hooks/useGetQueries";
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs";
 import carService from "../../../../services/cars";
 import { FormatTime } from "../../../../utils/formatTime";
+import { Header } from "../../../../components/Header";
 
 const SingleCar = () => {
   const { id, currentPage } = useGetQueries();
@@ -45,8 +46,8 @@ const SingleCar = () => {
         title: "Tug‘ilgan sana",
         id: "birthday",
         render: (val?: any) => {
-          return <>{FormatTime(val)}</>
-        }
+          return <>{FormatTime(val)}</>;
+        },
       },
       {
         title: "mashina raqami",
@@ -97,18 +98,16 @@ const SingleCar = () => {
         link: "/drivers/cars",
       },
       {
-        label: carData?.data?.name || "Mashina",
+        label: carData?.data?.name.uz || "Mashina",
       },
     ];
   }, [carData]);
 
   return (
     <>
-      <SectionHeader
-        extra={
-          <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
-        }
-      >
+      <Header><CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" /></Header>
+      <div className="px-5">
+      <SectionHeader>
         <FilterButton text="filter" />
       </SectionHeader>
 
@@ -119,6 +118,7 @@ const SingleCar = () => {
         handleActions={handleActions}
         currentPage={currentPage}
       />
+      </div>
     </>
   );
 };

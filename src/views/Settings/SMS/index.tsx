@@ -72,7 +72,7 @@ const SMS = () => {
           <div>
             <AddButton
               text="Yangi xabar"
-              onClick={() => navigateTo(`/settings/sms/create/${tab}`)}
+              onClick={() => navigateTo(`/settings/sms/create/${tab || "push"}`)}
             />
           </div>
         </div>

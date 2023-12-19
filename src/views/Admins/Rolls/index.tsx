@@ -50,7 +50,7 @@ const Rolls = () => {
 
   return (
     <>
-      <Header title="Adminlar" />
+      <Header title="Rollar" />
       <div className="px-5">
         <SectionHeader>
           <div className="flex items-center gap-3">

@@ -4,6 +4,7 @@ import ChatList from "./List";
 import chatService from "../../../services/chats";
 import { useMemo, useState } from "react";
 import { Header } from "../../../components/Header";
+import NullData from "../../../components/NullData";
 
 const Chats = () => {
   const { data: chats, isLoading } = useQuery(["GET_CHAT_LIST"], () => {
@@ -20,7 +21,9 @@ const Chats = () => {
       <Header title="Chat" />
       <div className="px-5">
         {!isLoading && !list.length ? (
-          "not"
+          <NullData />
+        ) : isLoading ? (
+          "Yuklanmoqda..."
         ) : (
           <div className="flex justify-between space-x-6">
             <div className="w-[550px]">
@@ -31,7 +34,6 @@ const Chats = () => {
             </div>
           </div>
         )}
-        s
       </div>
     </>
   );

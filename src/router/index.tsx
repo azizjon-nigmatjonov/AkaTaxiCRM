@@ -26,7 +26,6 @@ import usePageRouter from "../hooks/useObjectRouter";
 import ProfilePage from "../views/Settings/Profile";
 import Partners from "../views/Partners";
 import Partner from "../views/Partners/Partner";
-import NewsPage from "../views/Settings/SMS/NewsPage";
 import { SmsCreateForm } from "../views/Settings/SMS/Form";
 
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
@@ -183,7 +182,7 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "drivers",
-              link: "car",
+              link: "car/:id",
               sidebar: false,
               title: "",
               icon: "",
@@ -289,16 +288,6 @@ const Router = () => {
               icon: "",
             })}
             element={<SmsCreateForm />}
-          />
-          <Route
-            path={getPath({
-              parent: "settings",
-              link: "sms/news",
-              sidebar: false,
-              title: "",
-              icon: "",
-            })}
-            element={<NewsPage />}
           />
           <Route
             path={getPath({

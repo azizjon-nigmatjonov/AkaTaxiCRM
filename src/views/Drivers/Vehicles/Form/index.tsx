@@ -70,7 +70,11 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
     const data: any = getValues();
     const params: any = {};
     params.car_class_ids = data.ids;
-    params.name ={ uz:  data.name_uz || "", ru:  data.name_ru || "", en:  data.name_en || "" };
+    params.name = {
+      uz: data.name_uz || "",
+      ru: data.name_ru || "",
+      en: data.name_en || "",
+    };
 
     params.file_id = data?.file_id;
 
@@ -120,39 +124,15 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
         }}
       />
       <div className="grid space-y-3">
-        {query?.lang === "uz" || !query?.lang && (
-          <HFTextField
-            name="name_uz"
-            control={control}
-            placeholder="Marka nomi"
-            label="Marka nomi"
-            setValue={setValue}
-            required={true}
-            defaultValue={car?.data?.name?.[query?.lang || "uz"]}
-          />
-        )}
-        {query?.lang === "ru" && (
-          <HFTextField
-            name="name_ru"
-            control={control}
-            placeholder="Marka nomi"
-            label="Marka nomi"
-            setValue={setValue}
-            required={true}
-            defaultValue={car?.data?.name}
-          />
-        )}
-        {query?.lang === "en" && (
-          <HFTextField
-            name="name_en"
-            control={control}
-            placeholder="Marka nomi"
-            label="Marka nomi"
-            setValue={setValue}
-            required={true}
-            defaultValue={car?.data?.name}
-          />
-        )}
+        <HFTextField
+          name={`name_${query?.lang || "uz"}`}
+          control={control}
+          placeholder="Marka nomi"
+          // label="Marka nomi"
+          setValue={setValue}
+          required={true}
+          defaultValue={car?.data?.name?.[query?.lang || "uz"]}
+        />
 
         <ImageUploadBtn
           text="Mashina rasmi"
