@@ -128,7 +128,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
             label="Marka nomi"
             setValue={setValue}
             required={true}
-            defaultValue={car?.data?.name}
+            defaultValue={car?.data?.name?.[query?.lang || "uz"]}
           />
         )}
         {query?.lang === "ru" && (
