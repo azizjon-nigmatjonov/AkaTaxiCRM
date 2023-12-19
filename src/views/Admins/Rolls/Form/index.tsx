@@ -6,6 +6,8 @@ import usePageRouter from "../../../../hooks/useObjectRouter";
 import CModal from "../../../../components/CElements/CModal";
 import { useMutation } from "react-query";
 import roleService from "../../../../services/rolls";
+import { useEffect } from "react";
+import permissionService from "../../../../services/permissions";
 
 const Form = () => {
   const schema = Validation();
@@ -15,6 +17,13 @@ const Form = () => {
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    permissionService.getList().then((res: any) => {
+      console.log('res', res);
+    })
+  }, [])
+
 
   const createElement = useMutation({
     mutationFn: (data?: any) => {

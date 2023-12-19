@@ -26,9 +26,8 @@ import usePageRouter from "../hooks/useObjectRouter";
 import ProfilePage from "../views/Settings/Profile";
 import Partners from "../views/Partners";
 import Partner from "../views/Partners/Partner";
-import Push from "../views/Settings/SMS/Push";
-import SMSPage from "../views/Settings/SMS/SMSPage";
 import NewsPage from "../views/Settings/SMS/NewsPage";
+import { SmsCreateForm } from "../views/Settings/SMS/Form";
 
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
@@ -90,7 +89,7 @@ const Router = () => {
   useEffect(() => {
     dispatch(websiteActions.setRoutes({ ...routes }));
   }, []);
-  
+
   if (!isAuth) {
     return (
       <Suspense fallback={"Loading..."}>
@@ -283,22 +282,12 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "settings",
-              link: "sms/push",
+              link: "sms/create/:slug",
               sidebar: false,
               title: "",
               icon: "",
             })}
-            element={<Push />}
-          />
-          <Route
-            path={getPath({
-              parent: "settings",
-              link: "sms/sms",
-              sidebar: false,
-              title: "",
-              icon: "",
-            })}
-            element={<SMSPage />}
+            element={<SmsCreateForm />}
           />
           <Route
             path={getPath({

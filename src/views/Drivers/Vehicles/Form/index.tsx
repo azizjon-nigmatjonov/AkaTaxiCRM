@@ -120,7 +120,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
         }}
       />
       <div className="grid space-y-3">
-        {query?.lang === "uz" && (
+        {query?.lang === "uz" || !query?.lang && (
           <HFTextField
             name="name_uz"
             control={control}

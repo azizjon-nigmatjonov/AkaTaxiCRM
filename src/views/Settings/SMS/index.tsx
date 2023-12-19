@@ -4,6 +4,7 @@ import CTabs from "../../../components/CElements/CTab";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import CTable from "../../../components/CElements/CTable";
 import { Header } from "../../../components/Header";
+import { useGetQueries } from "../../../hooks/useGetQueries";
 
 const tabList = [
   {
@@ -21,6 +22,7 @@ const tabList = [
 ];
 
 const SMS = () => {
+  const { tab } = useGetQueries()
   const { navigateTo, navigateQuery } = usePageRouter();
 
   const headColumns = useMemo(() => {
@@ -70,7 +72,7 @@ const SMS = () => {
           <div>
             <AddButton
               text="Yangi xabar"
-              onClick={() => navigateTo("/settings/sms/create/${")}
+              onClick={() => navigateTo(`/settings/sms/create/${tab}`)}
             />
           </div>
         </div>
