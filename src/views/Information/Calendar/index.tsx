@@ -5,6 +5,9 @@ import FilterButton from "../../../components/Filters";
 import CalendarUI from "./UI";
 import { Skeleton } from "@mui/material";
 import { Header } from "../../../components/Header";
+import BasicDatepicker from "../../../components/CElements/CDatePicker/BasicDatepicker";
+import MultiDatePicker from "../../../components/CElements/CDatePicker/MultiDatepicker";
+// import { MultiDatePicker } from "../../../components/CElements/CDatePicker/MultiDatepicker";
 
 const Calendar = () => {
   const { data: calendar, isLoading } = useQuery(
@@ -22,7 +25,9 @@ const Calendar = () => {
       <Header title="Kalendar" />
       <div className="px-5">
         <SectionHeader>
-          <FilterButton text="filter" />
+          <FilterButton text="filter" >
+            <MultiDatePicker />
+          </FilterButton>
         </SectionHeader>
 
         {!isLoading ? (
