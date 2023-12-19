@@ -22,7 +22,6 @@ import SMS from "../views/Settings/SMS";
 import Chats from "../views/Information/Chats";
 import Calendar from "../views/Information/Calendar";
 import AmoCrm from "../views/Settings/AmoCrm";
-import usePageRouter from "../hooks/useObjectRouter";
 import ProfilePage from "../views/Settings/Profile";
 import Partners from "../views/Partners";
 import Partner from "../views/Partners/Partner";
@@ -44,8 +43,6 @@ const Router = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector((state: any) => state.auth.isAuth);
   const [list, setList] = useState<string[]>([]);
-  const location = useLocation();
-  const { navigateTo } = usePageRouter();
   const [routes, setRoutes] = useState({
     passengers: [],
     drivers: [],
