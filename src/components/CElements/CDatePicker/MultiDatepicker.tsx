@@ -1,8 +1,8 @@
 import DatePicker from "react-multi-date-picker";
 import weekends from "react-multi-date-picker/plugins/highlight_weekends";
-import { InputAdornment, TextField } from "@mui/material";
-import { Today } from "@mui/icons-material";
-import { useRef, useState } from "react";
+// import { InputAdornment, TextField } from "@mui/material";
+// import { Today } from "@mui/icons-material";
+import { useRef } from "react";
 
 import { locale } from "./Plugins/locale";
 import CustomNavButton from "./Plugins/CustomNavButton";
@@ -25,18 +25,16 @@ interface Props {
 
 const MultiDatePicker = ({
   field,
-  error,
   disabled,
-  placeholder,
   label,
   // defaultValue,
   required,
 }: Props) => {
   const datePickerRef: any = useRef();
-  const [value, setValue] = useState([]);
+//   const [value, setValue] = useState([]);
 
   const handleValue = (value: any) => {
-    setValue(value);
+    // setValue(value);
 
     if (field) field.onChange(FormatTime(value));
   };
@@ -48,7 +46,7 @@ const MultiDatePicker = ({
         multiple={true}
         disabled={disabled}
         ref={datePickerRef}
-        render={(value, openCalendar) => {
+        render={(value) => {
           return (
             <>
             {value}
