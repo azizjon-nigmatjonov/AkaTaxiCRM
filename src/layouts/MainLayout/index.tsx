@@ -27,7 +27,6 @@ const MainLayout = () => {
           }
         }
       }
-      console.log("arr", arr);
 
       dispatch(regionActions.setRegions(arr ?? []));
     });

@@ -279,7 +279,7 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "settings",
-              link: "sms/create/:slug",
+              link: "sms/create/:type",
               sidebar: false,
               title: "",
               icon: "",

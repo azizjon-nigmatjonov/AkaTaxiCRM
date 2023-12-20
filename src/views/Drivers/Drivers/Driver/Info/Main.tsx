@@ -1,4 +1,3 @@
-
 // import HFDatepicker from "../../../../../components/FormElements/HFDatepicker";
 import { HFDatePicker } from "../../../../../components/FormElements/HFDatePicker";
 import HFInputMask from "../../../../../components/FormElements/HFInputMask";
@@ -42,7 +41,12 @@ const MainInfo = ({ control, setValue, driver = {} }: Props) => {
         setValue={setValue}
         defaultValue={driver?.phone}
       />
-      <HFDatePicker name="birthdate" control={control} />
+      <HFDatePicker
+        name="birthday"
+        control={control}
+        label="Tug'ulgan sana"
+        defaultValue={driver?.birthday}
+      />
       {/* <HFDatepicker
         label="Tug'ilgan sana"
         control={control}

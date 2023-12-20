@@ -1,5 +1,4 @@
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs";
-import SectionHeader from "../../../../components/Sections/Header";
 import { useQuery } from "react-query";
 import driverService from "../../../../services/drivers";
 import CTabs from "../../../../components/CElements/CTab";
@@ -52,22 +51,21 @@ const Driver = () => {
 
   return (
     <>
-      <Header />
-      <SectionHeader
-        extra={
-          <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
-        }
-      />
+      <Header>
+        <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
+      </Header>
 
-      <CTabs tabList={tabList} />
+      <div className="p-5">
+        <CTabs tabList={tabList} />
 
-      {tab === "ballance" ? (
-        <DriverBallance />
-      ) : tab === "trip_hostory" ? (
-        <DriverTrip />
-      ) : (
-        <DriverInfo driver={driver?.data} />
-      )}
+        {tab === "ballance" ? (
+          <DriverBallance />
+        ) : tab === "trip_hostory" ? (
+          <DriverTrip />
+        ) : (
+          <DriverInfo driver={driver?.data} />
+        )}
+      </div>
     </>
   );
 };

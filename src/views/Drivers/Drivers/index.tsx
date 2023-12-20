@@ -11,6 +11,7 @@ import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
 import CSlider from "../../../components/CElements/CSlider";
 import { Header } from "../../../components/Header";
+import ImageFrame from "../../../components/ImageFrame";
 
 const Drivers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
@@ -26,12 +27,18 @@ const Drivers = () => {
   const headColumns = useMemo(() => {
     return [
       {
-        title: "NO",
-        id: "index",
+        title: "ID",
+        id: "id",
       },
       {
         title: "Ism familya",
-        id: "full_name",
+        id: "info",
+        render: (val: any) => val && (
+          <div className="flex items-center space-x-2 py-2">
+            <ImageFrame image={val.image} gender={val.gender} />
+            <span>{val.full_name}</span>
+          </div>
+        ),
       },
       {
         title: "phone_number",
@@ -78,6 +85,21 @@ const Drivers = () => {
     return data ?? {};
   }, [data]);
 
+  const bodyColumns = useMemo(() => {
+    return (
+      drivers?.data?.map((el: any) => {
+        return {
+          ...el,
+          info: {
+            full_name: el.full_name,
+            image: el?.image,
+            gender: el.gender
+          },
+        };
+      }) ?? []
+    );
+  }, [drivers]);
+
   const handleSearch = (evt: any) => {
     navigateQuery({ q: evt })
   };
@@ -100,7 +122,7 @@ const Drivers = () => {
 
         <CTable
           headColumns={headColumns}
-          bodyColumns={drivers?.data ?? []}
+          bodyColumns={bodyColumns ?? []}
           count={drivers?.meta?.pageCount}
           handleActions={handleActions}
           isLoading={isLoading}

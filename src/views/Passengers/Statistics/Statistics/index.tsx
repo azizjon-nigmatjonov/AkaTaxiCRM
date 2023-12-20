@@ -1,7 +1,7 @@
 import CSelect from "../../../../components/CElements/CSelect";
 import CCard from "../../../../components/CElements/CCard";
 import CDriver from "../../../../components/CElements/CDivider";
-import { MainIcon, WomenIcon } from "../../../../components/IconGenerator/Svg";
+import { ManIcon, WomenIcon } from "../../../../components/IconGenerator/Svg";
 import { PercentCard } from "./PercentCard";
 import { useEffect, useState } from "react";
 
@@ -17,7 +17,7 @@ const StatisticsCard = () => {
         <h3 className="font-[600]">Umumiy yo‘lovchilar</h3>
         <p className="text-[var(--gray)] mb-4">8,499 ta</p>
         <div className="flex flex-col">
-          <PercentCard icon={<MainIcon />} text="Erkak" percent={100} />
+          <PercentCard icon={<ManIcon />} text="Erkak" percent={100} />
           <CDriver classes="my-4" />
           <PercentCard
             icon={<WomenIcon />}
@@ -31,7 +31,7 @@ const StatisticsCard = () => {
         <CSelect options={dates} />
         <div className="mt-4">
           <PercentCard
-            icon={<MainIcon />}
+            icon={<ManIcon />}
             text="Aktiv yo‘lovchilar"
             percent={100}
             column={true}

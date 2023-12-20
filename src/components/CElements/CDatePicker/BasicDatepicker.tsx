@@ -2,7 +2,7 @@ import DatePicker from "react-multi-date-picker";
 import weekends from "react-multi-date-picker/plugins/highlight_weekends";
 import { InputAdornment, TextField } from "@mui/material";
 import { Today } from "@mui/icons-material";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { locale } from "./Plugins/locale";
 import CustomNavButton from "./Plugins/CustomNavButton";
@@ -14,13 +14,13 @@ import { FormatTime } from "../../../utils/formatTime";
 import CLabel from "../CLabel";
 
 interface Props {
-  field?: any
-  error?: any
-  disabled?: boolean
-  placeholder?: string
-  label?: string
-  defaultValue?: any
-  required?: boolean
+  field?: any;
+  error?: any;
+  disabled?: boolean;
+  placeholder?: string;
+  label?: string;
+  defaultValue?: any;
+  required?: boolean;
 }
 
 const BasicDatepicker = ({
@@ -29,7 +29,7 @@ const BasicDatepicker = ({
   disabled,
   placeholder,
   label,
-  // defaultValue,
+  defaultValue,
   required,
 }: Props) => {
   const datePickerRef: any = useRef();
@@ -40,6 +40,14 @@ const BasicDatepicker = ({
 
     if (field) field.onChange(FormatTime(value));
   };
+
+  useEffect(() => {
+    if (defaultValue) {
+      setValue(defaultValue);
+
+      if (field) field.onChange(FormatTime(defaultValue));
+    }
+  }, [defaultValue]);
 
   return (
     <div id="basicDatePicker" className="w-full relative">
@@ -60,7 +68,6 @@ const BasicDatepicker = ({
                 value={value}
                 size="small"
                 placeholder={placeholder}
-                // inputFormat="dd.MM.yyyy"
                 onClick={openCalendar}
                 fullWidth
                 autoComplete="off"
@@ -73,9 +80,6 @@ const BasicDatepicker = ({
                 }}
                 className={`${error?.message ? "error" : ""}`}
               />
-
-
-              {/* <CError error={error} /> */}
             </>
           );
         }}
@@ -83,10 +87,9 @@ const BasicDatepicker = ({
         plugins={[weekends()]}
         weekStartDayIndex={1}
         portal
-        locale={{...locale, name: ''}}
+        locale={{ ...locale, name: "" }}
         className="datePicker"
         format="DD.MM.YYYY"
-        // inputFormat="dd.MM.yyyy"
         value={new Date(value) || ""}
         onChange={(val: any) => handleValue(val ? new Date(val) : "")}
       />

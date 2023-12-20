@@ -43,12 +43,12 @@ const ActiveDrivers = () => {
         id: "data",
         render: (obj: any) => {
           return obj?.full_name ? (
-            <>
+            <div className="py-2">
               <p>{obj.full_name}</p>
               <span className="text-[var(--gray)] uppercase">
                 {obj.car_name} - {obj.car_number}
               </span>
-            </>
+            </div>
           ) : (
             ""
           );
@@ -98,6 +98,7 @@ const ActiveDrivers = () => {
             </FilterButton>
           </div>
         </SectionHeader>
+
         <CTable
           headColumns={headColumns}
           bodyColumns={driversData?.list}

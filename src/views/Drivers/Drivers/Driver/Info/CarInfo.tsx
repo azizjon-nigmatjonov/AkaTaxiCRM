@@ -15,14 +15,16 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
           text="Oldi qism rasmi"
           name="file_id"
           setValue={setValue}
-          // defaultValue={driver?.image}
+          defaultValue={driver?.images?.[0]}
+          readOnly={true}
         />
         <ImageUploadBtn
           label="Salon qism rasmi"
           text="Salon qism rasmi"
           name="file_id"
           setValue={setValue}
-          // defaultValue={driver?.image}
+          readOnly={true}
+          defaultValue={driver?.images?.[1]}
         />
       </div>
       <div className="grid grid-cols-4 gap-4 mt-5">
@@ -32,14 +34,8 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
           placeholder="Mashina rusumu"
           label="Mashina rusumu"
           setValue={setValue}
+          readOnly={true}
           defaultValue={driver?.car_name}
-        />
-        <ImageUploadBtn
-          label="Oldi qism rasmi"
-          text="Oldi qism rasmi"
-          name="file_id"
-          setValue={setValue}
-          // defaultValue={driver?.image}
         />
         <HFTextField
           name="car_number"
@@ -47,7 +43,17 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
           placeholder="Mashina raqami"
           label="Mashina raqami"
           setValue={setValue}
+          readOnly={true}
           defaultValue={driver?.car_number}
+        />
+        <HFTextField
+          name="region_name"
+          control={control}
+          placeholder="Mashina voloyati"
+          label="Mashina viloyati"
+          setValue={setValue}
+          readOnly={true}
+          defaultValue={driver?.region_name}
         />
       </div>
     </div>

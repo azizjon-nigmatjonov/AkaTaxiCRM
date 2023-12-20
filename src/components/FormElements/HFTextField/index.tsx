@@ -20,6 +20,7 @@ interface Props {
   style?: any;
   activatePassword?: boolean;
   errors?: any;
+  readOnly?: boolean
 }
 
 const HFTextField = ({
@@ -34,6 +35,7 @@ const HFTextField = ({
   activatePassword = false,
   type = "text",
   errors = {},
+  readOnly = false,
   ...props
 }: Props) => {
   const [password, setPassword] = useState(true);
@@ -51,6 +53,7 @@ const HFTextField = ({
         control={control}
         name={name}
         defaultValue=""
+     
         rules={{
           required: required ? "This is required field" : false,
           ...rules,
@@ -71,6 +74,9 @@ const HFTextField = ({
                 ? "text"
                 : type
             }
+            InputProps={{
+              readOnly: readOnly,
+            }}
             disabled={disabled}
           />
         )}

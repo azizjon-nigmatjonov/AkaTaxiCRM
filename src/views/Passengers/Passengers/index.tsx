@@ -14,6 +14,7 @@ import CDriver from "../../../components/CElements/CDivider";
 import CSlider from "../../../components/CElements/CSlider";
 import { useSelector } from "react-redux";
 import { Header } from "../../../components/Header";
+import ImageFrame from "../../../components/ImageFrame";
 
 const Passengers = () => {
   const { navigateQuery } = usePageRouter();
@@ -37,12 +38,19 @@ const Passengers = () => {
   const headColumns = useMemo(() => {
     return [
       {
-        title: "NO",
-        id: "index",
+        title: "ID",
+        id: "id",
       },
       {
         title: "Ism familya",
-        id: "full_name",
+        id: "info",
+        render: (val: any) =>
+          val && (
+            <div className="flex items-center space-x-2 py-2">
+              <ImageFrame image={val.image} gender={val.gender} />
+              <span>{val.full_name}</span>
+            </div>
+          ),
       },
       {
         title: "Viloyat",
@@ -51,6 +59,13 @@ const Passengers = () => {
       {
         title: "Tel.raqam",
         id: "username",
+      },
+      {
+        title: "Yaratilgan sana",
+        id: "created_at",
+        render: (val?: any) => {
+          return <>{FormatTime(val)}</>;
+        },
       },
       {
         title: "Tug‘ilgan sana",
@@ -68,7 +83,18 @@ const Passengers = () => {
   }, []);
 
   const bodyColumns = useMemo(() => {
-    return passengers?.data ?? [];
+    return (
+      passengers?.data?.map((el: any) => {
+        return {
+          ...el,
+          info: {
+            full_name: el.full_name,
+            image: el?.image,
+            gender: el.gender
+          },
+        };
+      }) ?? []
+    );
   }, [passengers]);
 
   const handleActions = (status: string, el: any) => {
@@ -83,7 +109,7 @@ const Passengers = () => {
   };
 
   const handleSearch = (value: any) => {
-    navigateQuery({ q: value })
+    navigateQuery({ q: value });
   };
 
   const Regions = useMemo(() => {

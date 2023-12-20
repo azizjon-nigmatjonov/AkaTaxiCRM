@@ -87,7 +87,7 @@ input {
   z-index: 99 !important;
 }
 
-#basicDatePicker {
+#basicDatePicker, #multiDatePicker {
   width: 100%;
   .rmdp-container {
     width: 100%;
@@ -123,10 +123,33 @@ input {
     display: flex;
     justify-content: flex-end;
   }
+  .sd:hover {
+    background-color: white;
+    color: $black !important;
+  }
+
 }
 
 .MuiButtonBase-root {
   &.Mui-checked {
     color: $main !important;
+  }
+}
+
+#multiDatePicker {
+  .rmdp-day {
+    &:hover {
+      background-color: red !important;
+    }
+  }
+  .rmdp-day span {
+    &:hover {
+      background-color: red;
+    }
+  }
+  .rmdp-input {
+    background-color: transparent;
+    height: 42px;
+    border-radius: 10px;
   }
 }

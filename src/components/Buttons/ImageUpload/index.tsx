@@ -11,6 +11,7 @@ interface Props {
   name: string;
   text?: string;
   label?: string;
+  readOnly?: boolean;
   setValue?: (val?: any, val2?: any) => void;
 }
 
@@ -20,6 +21,7 @@ const ImageUploadBtn = ({
   name,
   setValue = () => {},
   text = "",
+  readOnly = false,
   label = "",
 }: Props) => {
   const inputRef: any = useRef(null);
@@ -58,7 +60,9 @@ const ImageUploadBtn = ({
     <div className="flex flex-col">
       {label ? <CLabel title={label} /> : ""}
       <div
-        onClick={() => inputRef.current.click()}
+        onClick={() => {
+          if (!readOnly) inputRef.current.click()
+        }}
         className="cursor-pointer flex items-center justify-between px-[14px] text-[var(--gray)] font-medium border border-[var(--lineGray)] rounded-[10px] h-[50px]"
       >
         <span>{text}</span>

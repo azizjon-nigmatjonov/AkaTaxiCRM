@@ -33,10 +33,16 @@ const ActivePassengers = () => {
       {
         title: "Qayerdan",
         id: "from",
+        render: (val: any) => val && (
+          <p>{val.from_region_name}, {val.from_district_name}</p>
+        )
       },
       {
         title: "Qayerga",
         id: "to",
+        render: (val: any) => val && (
+          <p>{val.to_region_name}, {val.to_district_name}</p>
+        )
       },
       {
         title: "qidiruv vaqti",
@@ -56,9 +62,22 @@ const ActivePassengers = () => {
   }, []);
 
   const bodyColumns: any = useMemo(() => {
+    const list = passengers?.data?.map((item: any) => {
+      return {
+        ...item,
+        from: {
+          from_region_name: item?.from_region_name,
+          from_district_name: item?.from_district_name
+        },
+        to: {
+          to_region_name: item?.to_region_name,
+          to_district_name: item?.to_district_name
+        }
+      }
+    })
     return (
       {
-        list: passengers?.data,
+        list,
         ...passengers,
       } ?? []
     );

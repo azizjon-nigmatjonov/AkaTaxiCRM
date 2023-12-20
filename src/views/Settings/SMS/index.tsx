@@ -5,25 +5,32 @@ import usePageRouter from "../../../hooks/useObjectRouter";
 import CTable from "../../../components/CElements/CTable";
 import { Header } from "../../../components/Header";
 import { useGetQueries } from "../../../hooks/useGetQueries";
+import { useQuery } from "react-query";
+import smsService from "../../../services/sms";
 
 const tabList = [
-  {
-    slug: "push",
-    name: "Push xabar",
-  },
   {
     slug: "sms",
     name: "Sms xabarnoma",
   },
   {
-    slug: "news",
-    name: "Yangiliklar",
+    slug: "firebase",
+    name: "Push xabar",
   },
+  // {
+  //   slug: "news",
+  //   name: "Yangiliklar",
+  // },
 ];
 
 const SMS = () => {
-  const { tab } = useGetQueries()
+  const { tab } = useGetQueries();
   const { navigateTo, navigateQuery } = usePageRouter();
+
+  const { data: sms } = useQuery(["GET_SMS_LIST", tab], () => {
+    return smsService.getList(tab || "sms");
+  });
+  console.log("sms", sms);
 
   const headColumns = useMemo(() => {
     return [
@@ -64,7 +71,7 @@ const SMS = () => {
 
   return (
     <>
-      <Header title="Header" />
+      <Header title="Header"></Header>
       <div className="px-6">
         <div className="flex justify-between">
           <CTabs tabList={tabList} />
@@ -72,7 +79,9 @@ const SMS = () => {
           <div>
             <AddButton
               text="Yangi xabar"
-              onClick={() => navigateTo(`/settings/sms/create/${tab || "push"}`)}
+              onClick={() =>
+                navigateTo(`/settings/sms/create/${tab || "push"}`)
+              }
             />
           </div>
         </div>

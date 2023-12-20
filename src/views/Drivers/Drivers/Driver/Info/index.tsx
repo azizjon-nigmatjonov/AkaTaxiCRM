@@ -8,6 +8,8 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
   const { control, setValue } = useForm({
     mode: "onSubmit",
   });
+  console.log('driver', driver);
+  
   return (
     <div className="grid gap-5">
       <CCard style={{ minHeight: "auto" }}>

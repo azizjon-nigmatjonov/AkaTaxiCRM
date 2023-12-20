@@ -13,6 +13,7 @@ const DriverImages = ({ setValue, driver = {} }: Props) => {
         label="Profil avatari"
         text="Profil avatari"
         name="file_id"
+        readOnly={true}
         setValue={setValue}
         // defaultValue={driver?.driver_license}
       />
@@ -20,6 +21,7 @@ const DriverImages = ({ setValue, driver = {} }: Props) => {
         label="Tex.pasport rasmi"
         text="Tex.pasport rasmi"
         name="file_id"
+        readOnly={true}
         setValue={setValue}
         defaultValue={driver?.tex_passport}
       />
@@ -27,6 +29,7 @@ const DriverImages = ({ setValue, driver = {} }: Props) => {
         label="Prava rasmi"
         text="Prava rasmi"
         name="file_id"
+        readOnly={true}
         setValue={setValue}
         defaultValue={driver?.driver_license}
       />
@@ -35,6 +38,7 @@ const DriverImages = ({ setValue, driver = {} }: Props) => {
         text="Prava bilan selfi"
         name="file_id"
         setValue={setValue}
+        readOnly={true}
         defaultValue={driver?.selfie_driver_license}
       />
     </div>

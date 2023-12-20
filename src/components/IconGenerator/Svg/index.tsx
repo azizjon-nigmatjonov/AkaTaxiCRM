@@ -574,7 +574,7 @@ export const ArrowUp = ({ fill = "#0BD976" }) => (
   </svg>
 );
 
-export const MainIcon = () => (
+export const ManIcon = () => (
   <svg
     width="24"
     height="24"

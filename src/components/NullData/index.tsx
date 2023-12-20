@@ -13,7 +13,7 @@ const NullData = ({
     <div className={`flex items-center justify-center flex-col ${classes}`}>
       <img
         className="mx-auto mt-10"
-        src="../../../../../public/images/no-data.png"
+        src="/images/no-data.png"
         alt="no data"
         style={{ width: `${width}px` }}
       />

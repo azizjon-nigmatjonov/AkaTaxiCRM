@@ -20,11 +20,12 @@ export const HFDatePicker = ({
   required,
   placeholder,
 }: Props) => {
+  console.log('defaultValue 11', defaultValue);
+  
   return (
     <Controller
       control={control}
       name={name}
-      defaultValue={defaultValue}
       // placeholder={placeholder}
       rules={{
         required: required ? "required_field" : false,
@@ -36,6 +37,7 @@ export const HFDatePicker = ({
           error={error}
           label={label}
           required={required}
+          defaultValue={defaultValue}
           placeholder={placeholder}
         />
       )}

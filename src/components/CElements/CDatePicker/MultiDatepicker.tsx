@@ -2,7 +2,7 @@ import DatePicker from "react-multi-date-picker";
 import weekends from "react-multi-date-picker/plugins/highlight_weekends";
 // import { InputAdornment, TextField } from "@mui/material";
 // import { Today } from "@mui/icons-material";
-import { useRef } from "react";
+// import { useRef } from "react";
 
 import { locale } from "./Plugins/locale";
 import CustomNavButton from "./Plugins/CustomNavButton";
@@ -10,7 +10,7 @@ import "react-multi-date-picker/styles/layouts/mobile.css";
 import "./style2.scss";
 import "./styles.scss";
 // import CError from "../CError";
-import { FormatTime } from "../../../utils/formatTime";
+// import { FormatTime } from "../../../utils/formatTime";
 import CLabel from "../CLabel";
 
 interface Props {
@@ -24,55 +24,28 @@ interface Props {
 }
 
 const MultiDatePicker = ({
-  field,
+  // field,
   disabled,
   label,
   // defaultValue,
   required,
 }: Props) => {
-  const datePickerRef: any = useRef();
+//   const datePickerRef: any = useRef();
 //   const [value, setValue] = useState([]);
 
-  const handleValue = (value: any) => {
-    // setValue(value);
+  // const handleValue = (value: any) => {
+  //   // setValue(value);
 
-    if (field) field.onChange(FormatTime(value));
-  };
+  //   if (field) field.onChange(FormatTime(value));
+  // };
 
   return (
-    <div id="basicDatePicker" className="w-full relative">
+    <div id="multiDatePicker" className="w-full relative">
       {label && <CLabel title={label} required={required} />}
       <DatePicker
         multiple={true}
         disabled={disabled}
-        ref={datePickerRef}
-        render={(value) => {
-          return (
-            <>
-            {value}
-              {/* <TextField
-                value={value}
-                size="small"
-                placeholder={placeholder}
-                // inputFormat="dd.MM.yyyy"
-                onClick={openCalendar}
-                fullWidth
-                autoComplete="off"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <Today />
-                    </InputAdornment>
-                  ),
-                }}
-                className={`${error?.message ? "error" : ""}`}
-              /> */}
-
-
-              {/* <CError error={error} /> */}
-            </>
-          );
-        }}
+        // ref={datePickerRef}
         renderButton={<CustomNavButton />}
         plugins={[weekends()]}
         weekStartDayIndex={1}
@@ -82,7 +55,7 @@ const MultiDatePicker = ({
         format="DD.MM.YYYY"
         // inputFormat="dd.MM.yyyy"
         // value={new Date(value) || ""}
-        onChange={(val: any) => handleValue(val ? new Date(val) : "")}
+        // onChange={(val: any) => handleValue(val ? new Date(val) : "")}
       />
     </div>
   );
