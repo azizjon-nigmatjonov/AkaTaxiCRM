@@ -71,7 +71,7 @@ const SMS = () => {
 
   return (
     <>
-      <Header title="Header"></Header>
+      <Header title="SMS xabarnoma"></Header>
       <div className="px-6">
         <div className="flex justify-between">
           <CTabs tabList={tabList} />
@@ -80,7 +80,7 @@ const SMS = () => {
             <AddButton
               text="Yangi xabar"
               onClick={() =>
-                navigateTo(`/settings/sms/create/${tab || "push"}`)
+                navigateTo(`/settings/sms/create/${tab || "sms"}`)
               }
             />
           </div>

@@ -1,15 +1,19 @@
 import { useQuery } from "react-query";
 import calendarService from "../../../services/calendar";
-import SectionHeader from "../../../components/Sections/Header";
-import FilterButton from "../../../components/Filters";
+// import SectionHeader from "../../../components/Sections/Header";
+// import FilterButton from "../../../components/Filters";
 import CalendarUI from "./UI";
 import { Skeleton } from "@mui/material";
 import { Header } from "../../../components/Header";
+import { GetMonth } from "../../../utils/getMonth";
 // import BasicDatepicker from "../../../components/CElements/CDatePicker/BasicDatepicker";
-import MultiDatePicker from "../../../components/CElements/CDatePicker/MultiDatepicker";
+// import MultiDatePicker from "../../../components/CElements/CDatePicker/MultiDatepicker";
 // import { MultiDatePicker } from "../../../components/CElements/CDatePicker/MultiDatepicker";
 
 const Calendar = () => {
+  console.log(GetMonth());
+  
+
   const { data: calendar, isLoading } = useQuery(
     ["GET_CALENDAR"],
     () => {
@@ -24,11 +28,11 @@ const Calendar = () => {
     <>
       <Header title="Kalendar" />
       <div className="px-5">
-        <SectionHeader>
+        {/* <SectionHeader>
           <FilterButton text="filter" >
             <MultiDatePicker />
           </FilterButton>
-        </SectionHeader>
+        </SectionHeader> */}
 
         {!isLoading ? (
           <CalendarUI list={calendar?.data} />

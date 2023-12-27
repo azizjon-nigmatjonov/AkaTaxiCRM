@@ -3,10 +3,9 @@ import Lighter from "./Lighter";
 import cls from "./style.module.scss";
 
 const Body = ({ list = [] }: { list: any }) => {
-    const date = new Date()
+  const date = new Date();
+  console.log("d", date.getDay());
 
-    console.log('d', date.getDay());
-    
   return (
     <div className={cls.calendar}>
       <div className={cls.header}>
@@ -40,9 +39,18 @@ const Body = ({ list = [] }: { list: any }) => {
           {list.map((element: any, index: number) => (
             <div className={cls.cell} key={index}>
               <span className="font-medium">{index + 1}</span>
-              <Lighter text={`${element.passenger_count} ta`} color={ColorConstants.blue} />
-              <Lighter text={`${element.driver_count} ta`} color={ColorConstants.error} />
-              <Lighter text={`${element.trip_count} ta`} color={ColorConstants.darkerGreen} />
+              <Lighter
+                text={`${element.passenger_count} ta`}
+                color={ColorConstants.blue}
+              />
+              <Lighter
+                text={`${element.driver_count} ta`}
+                color={ColorConstants.error}
+              />
+              <Lighter
+                text={`${element.trip_count} ta`}
+                color={ColorConstants.darkerGreen}
+              />
             </div>
           ))}
         </div>

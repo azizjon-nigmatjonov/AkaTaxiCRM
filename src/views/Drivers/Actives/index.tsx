@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import FilterButton from "../../../components/Filters";
@@ -14,11 +14,14 @@ const ActiveDrivers = () => {
   const { navigateQuery } = usePageRouter();
   const { currentPage, q } = useGetQueries();
 
-  const { data: drivers, isLoading } = useQuery(["GET_ACTIVE_DRIVERS", q], () => {
-    return driverService.getActives({ q });
-  });
+  const { data: drivers, isLoading } = useQuery(
+    ["GET_ACTIVE_DRIVERS", q, currentPage],
+    () => {
+      return driverService.getActives({ q, page: currentPage });
+    }
+  );
 
-  const driversData = useMemo(() => {
+  const driversData: any = useMemo(() => {
     if (!drivers) return [];
     const list: any = drivers?.data;
     return {
@@ -32,7 +35,7 @@ const ActiveDrivers = () => {
           },
         };
       }),
-      ...drivers?.data,
+      ...drivers,
     };
   }, [drivers]);
 
@@ -64,7 +67,7 @@ const ActiveDrivers = () => {
       },
       {
         title: "qayerga",
-        id: "where",
+        id: "to",
       },
       {
         title: "qidiruv vaqti",
@@ -73,24 +76,14 @@ const ActiveDrivers = () => {
     ];
   }, []);
 
-  const handleActions = useCallback((status: string, element: any) => {
-    if (status === "edit") navigateQuery({ id: element.id });
-
-    if (status === "delete") {
-      // driverService.deleteActive(element.id).then(() => {
-      //   refetch();
-      // });
-    }
-  }, []);
-
   const handleSearch = (evt: any) => {
-    navigateQuery({ q: evt })
+    navigateQuery({ q: evt });
   };
 
   return (
     <>
       <Header title="Aktiv haydovchilar" />
-      <div className="px-6">
+      <div className="p-6">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <FilterButton text="filter">
@@ -102,8 +95,7 @@ const ActiveDrivers = () => {
         <CTable
           headColumns={headColumns}
           bodyColumns={driversData?.list}
-          count={driversData?.meta?.totalCount}
-          handleActions={handleActions}
+          count={driversData?.meta?.pageCount}
           isLoading={isLoading}
           currentPage={currentPage}
         />

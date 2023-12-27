@@ -4,7 +4,7 @@ import CLabel from "../../CElements/CLabel";
 import "../style.scss";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 
 interface Props {
   control: any;
@@ -20,7 +20,7 @@ interface Props {
   style?: any;
   activatePassword?: boolean;
   errors?: any;
-  readOnly?: boolean
+  readOnly?: boolean;
 }
 
 const HFTextField = ({
@@ -39,7 +39,7 @@ const HFTextField = ({
   ...props
 }: Props) => {
   const [password, setPassword] = useState(true);
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   useEffect(() => {
     if (defaultValue) {
       setValue(name, defaultValue);
@@ -53,48 +53,49 @@ const HFTextField = ({
         control={control}
         name={name}
         defaultValue=""
-     
         rules={{
-          required: required ? "This is required field" : false,
           ...rules,
         }}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
-            size="small"
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            name={name}
-            error={Boolean(error)}
-            helperText={error?.message}
-            {...props}
-            type={
-              activatePassword && password
-                ? "password"
-                : activatePassword && !password
-                ? "text"
-                : type
-            }
-            InputProps={{
-              readOnly: readOnly,
-            }}
-            disabled={disabled}
-          />
+          <>
+            <TextField
+              size="small"
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+              name={name}
+              error={Boolean(error)}
+              helperText={error?.message}
+              {...props}
+              type={
+                activatePassword && password
+                  ? "password"
+                  : activatePassword && !password
+                  ? "text"
+                  : type
+              }
+              InputProps={{
+                readOnly: readOnly,
+              }}
+              className={error ? "error" : ""}
+              disabled={disabled}
+            />
+            {activatePassword && (
+              <span
+                className="visibility"
+                onClick={() => setPassword((prev) => !prev)}
+              >
+                {!password ? <VisibilityOff /> : <Visibility />}
+              </span>
+            )}
+
+            {/* {errors[name]?.message && (
+              <p className="text-sm text-[var(--error)] absolute -bottom-5">
+                {t(errors[name].message || "")}
+              </p>
+            )} */}
+          </>
         )}
       ></Controller>
-      {activatePassword && (
-        <span
-          className="visibility"
-          onClick={() => setPassword((prev) => !prev)}
-        >
-          {!password ? <VisibilityOff /> : <Visibility />}
-        </span>
-      )}
-
-      {errors[name]?.message && (
-        <p className="text-sm text-[var(--error)] absolute -bottom-5">
-          {t(errors[name].message || "")}
-        </p>
-      )}
     </div>
   );
 };

@@ -1,6 +1,11 @@
 .HFInput {
   width: 100%;
   .MuiFormControl-root {
+    &.error {
+      .MuiOutlinedInput-notchedOutline {
+        border-color: red !important;
+      }
+    }
     position: relative;
     width: 100%;
     .MuiInputBase-root {

@@ -12,7 +12,11 @@ const passengerService = {
     request.put(`passengers/${id}`, { ...data }),
   getElement: (id: string) => request.get(`passengers/${id}`),
   getActivePassengers: (params: any) =>
-    request.get(`/passengers-popular${params.q ? `?q=${params.q}` : ""}`),
+    request.get(
+      `/passengers-popular${
+        params.page ? `?page=${params.page || 1}` : ""
+      }${params.q ? `&q=${params.q}` : ""}`
+    ),
 };
 
 export default passengerService;

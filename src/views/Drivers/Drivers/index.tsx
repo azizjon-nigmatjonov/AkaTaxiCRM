@@ -60,6 +60,13 @@ const Drivers = () => {
         id: "car_number",
       },
       {
+        title: "Yaratilgan sana",
+        id: "created_at",
+        render: (val: any) => {
+          return <>{FormatTime(val)}</>
+        }
+      },
+      {
         title: "",
         id: "actions",
         permission: ["learn_more", "edit", "delete"],

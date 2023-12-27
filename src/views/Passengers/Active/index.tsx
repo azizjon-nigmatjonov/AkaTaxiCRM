@@ -16,10 +16,11 @@ import usePageRouter from "../../../hooks/useObjectRouter";
 const ActivePassengers = () => {
   const { currentPage, q } = useGetQueries();
   const { navigateQuery } = usePageRouter()
+
   const { data: passengers, isLoading } = useQuery(
-    ["GET_ACTIVE_PASSENGERS", q],
+    ["GET_ACTIVE_PASSENGERS", q, currentPage],
     () => {
-      return passengerService.getActivePassengers({ q });
+      return passengerService.getActivePassengers({ q, page: currentPage });
     }
   );
   const regions = useSelector((state: any) => state.regions.regions);
@@ -114,7 +115,7 @@ const ActivePassengers = () => {
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns?.list}
-          count={bodyColumns?.meta?.totalCount}
+          count={bodyColumns?.meta?.pageCount}
           isResizeble={true}
           isLoading={isLoading}
           currentPage={currentPage}
