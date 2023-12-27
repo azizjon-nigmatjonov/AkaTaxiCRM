@@ -121,7 +121,7 @@ const HFSelect = ({
                   ))}
             </Select>
             {!disabledHelperText && error?.message && (
-              <FormHelperText error>{error?.message}</FormHelperText>
+              <FormHelperText style={{ color: 'var(--error)', margin: '0 5px' }} error>{error?.message}</FormHelperText>
             )}
           </FormControl>
         )}

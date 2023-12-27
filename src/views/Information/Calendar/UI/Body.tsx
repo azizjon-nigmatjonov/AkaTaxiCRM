@@ -2,9 +2,9 @@ import { ColorConstants } from "../../../../constants/website";
 import Lighter from "./Lighter";
 import cls from "./style.module.scss";
 
-const Body = ({ list = [] }: { list: any }) => {
-  const date = new Date();
-  console.log("d", date.getDay());
+const Body = ({ list = [], month = {} }: { list: any, month: any }) => {
+  console.log('month', month);
+  
 
   return (
     <div className={cls.calendar}>

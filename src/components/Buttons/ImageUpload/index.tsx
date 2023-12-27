@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ImageFrame } from "../../IconGenerator/Svg";
 import fileService from "../../../services/fileService";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -45,6 +45,13 @@ const ImageUploadBtn = ({
         setLoading(false);
       });
   };
+
+
+  useEffect(() => {
+    if (defaultValue) {
+      setValue(name, defaultValue);
+    }
+  }, [defaultValue, name, setValue]);
 
   const deleteImage = (e: any) => {
     e.stopPropagation();

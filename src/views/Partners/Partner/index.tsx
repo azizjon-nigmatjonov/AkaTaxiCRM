@@ -2,9 +2,9 @@ import { useQuery } from "react-query";
 import InfoCard from "../../../components/InfoCard";
 import partnerService from "../../../services/partners";
 import { useGetQueries } from "../../../hooks/useGetQueries";
-import SectionHeader from "../../../components/Sections/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { useMemo } from "react";
+import { Header } from "../../../components/Header";
 
 const Partner = () => {
   const { id } = useGetQueries();
@@ -32,10 +32,10 @@ const Partner = () => {
 
   return (
     <>
-      <SectionHeader>
+      <Header>
         <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
-      </SectionHeader>
-      <div className="grid grid-cols-3 gap-2">
+      </Header>
+      <div className="grid grid-cols-3 gap-2 px-6">
         <InfoCard />
         <InfoCard />
         <InfoCard />

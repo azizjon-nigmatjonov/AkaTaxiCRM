@@ -25,9 +25,9 @@ const HFInputMask = ({
   control,
   setValue = () => {},
   defaultValue = "",
-  errors = {},
 }: Props) => {
   const { t } = useTranslation();
+
   useEffect(() => {
     if (defaultValue) {
       setValue(name, defaultValue);
@@ -44,23 +44,24 @@ const HFInputMask = ({
         rules={{
           required: required ? "This is required field" : false,
         }}
-        render={({ field: { onChange, value }, fieldState: {} }) => (
-          <ReactInputMask
-            onChange={(e) => onChange(e.target.value)}
-            mask={mask}
-            maskChar=" "
-            value={value}
-            placeholder={placeholder}
-            required={required}
-          />
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <>
+            <ReactInputMask
+              onChange={(e) => onChange(e.target.value)}
+              mask={mask}
+              maskChar=" "
+              value={value}
+              placeholder={placeholder}
+              required={required}
+            />
+            {error?.message && (
+              <p className="text-sm text-[var(--error)] absolute -bottom-5">
+                {t(error.message || "")}
+              </p>
+            )}
+          </>
         )}
       ></Controller>
-
-      {errors[name]?.message && (
-        <p className="text-sm text-[var(--error)] absolute -bottom-5">
-          {t(errors[name].message || "")}
-        </p>
-      )}
     </div>
   );
 };

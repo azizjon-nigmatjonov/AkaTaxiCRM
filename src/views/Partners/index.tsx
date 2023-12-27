@@ -10,12 +10,19 @@ import ImageFrame from "../../components/ImageFrame";
 import CSelect from "../../components/CElements/CSelect";
 import { useSelector } from "react-redux";
 import { Header } from "../../components/Header";
+import Form from "./Form";
+import { useGetQueries } from "../../hooks/useGetQueries";
 
 const Partners = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
   const regions = useSelector((state: any) => state.regions.regions);
+  const { currentPage } = useGetQueries()
 
-  const { data: partnerData, isLoading } = useQuery(["GET_PARTNERS"], () => {
+  const {
+    data: partnerData,
+    isLoading,
+    refetch,
+  } = useQuery(["GET_PARTNERS"], () => {
     return partnerService.getList();
   });
 
@@ -46,7 +53,7 @@ const Partners = () => {
         render: (val: any) => {
           return (
             val && (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 py-2">
                 <ImageFrame image={val?.image} />
                 <span>{val?.name}</span>
               </div>
@@ -86,6 +93,8 @@ const Partners = () => {
     if (status === "edit") navigateQuery({ id: element.id });
 
     if (status === "delete") {
+      partnerService.deleteElement(element.id)
+      refetch()
     }
   }, []);
 
@@ -101,11 +110,11 @@ const Partners = () => {
       };
     });
   }, [regions]);
-
+  
   return (
     <>
       <Header title="Adminlar" />
-      <div className="px-5">
+      <div className="px-6">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <FilterButton text="filter">
@@ -124,14 +133,16 @@ const Partners = () => {
         <CTable
           headColumns={headColumns}
           bodyColumns={partnersInfo?.list}
-          count={1}
+          count={partnersInfo?.meta?.pageCount}
           handleActions={handleActions}
           handleRowClick={handleRowClick}
           isLoading={isLoading}
-          currentPage={1}
+          currentPage={currentPage}
           clickable={true}
         />
       </div>
+
+      <Form refetch={refetch} />
     </>
   );
 };

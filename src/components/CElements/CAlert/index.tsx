@@ -21,7 +21,7 @@ export default function CAlert({ data = {} }: { data: any }) {
   }, [timeClose]);
 
   return (
-    <div className="fixed top-0 text-white w-full z-[9999] bg-[var(--green)]" id="calert">
+    <div className="fixed top-0 text-[#fff] w-full z-[9999] bg-[var(--green)]" id="calert">
       <Alert
         severity={data?.type || "success"}
         onClose={() => handleAlertActions()}

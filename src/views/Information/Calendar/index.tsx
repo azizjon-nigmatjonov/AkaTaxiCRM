@@ -10,9 +10,10 @@ import { GetMonth } from "../../../utils/getMonth";
 // import MultiDatePicker from "../../../components/CElements/CDatePicker/MultiDatepicker";
 // import { MultiDatePicker } from "../../../components/CElements/CDatePicker/MultiDatepicker";
 
+
+
 const Calendar = () => {
-  console.log(GetMonth());
-  
+  const month: any = GetMonth()
 
   const { data: calendar, isLoading } = useQuery(
     ["GET_CALENDAR"],
@@ -35,7 +36,7 @@ const Calendar = () => {
         </SectionHeader> */}
 
         {!isLoading ? (
-          <CalendarUI list={calendar?.data} />
+          <CalendarUI list={calendar?.data} month={month} />
         ) : (
           <div className="h-[1000px] mt-[-220px]">
             <Skeleton style={{ height: "100%", borderRadius: "14px" }} />

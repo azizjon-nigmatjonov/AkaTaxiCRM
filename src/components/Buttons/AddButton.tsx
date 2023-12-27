@@ -10,6 +10,7 @@ interface Props {
   id?: string;
   children?: any;
   classes?: string;
+  type?: string;
   onClick?: (val?: any) => void;
 }
 
@@ -19,12 +20,13 @@ const AddButton = ({
   id,
   children,
   classes,
+  type = "button",
   ...props
 }: Props) => {
   const { t } = useTranslation();
   return (
     <div id={id ? id : "addBtn"} {...props}>
-      <Button className={classes}>
+      <Button className={classes} >
         {iconLeft === true ? <PlusIcon /> : iconLeft}
         {children ? (
           children

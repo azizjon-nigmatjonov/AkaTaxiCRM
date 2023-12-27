@@ -11,7 +11,7 @@ const getDaysInCurrentMonth = () => {
   return lastDayOfMonth.getDate();
 };
 
-const currentMonth = getCurrentMonth();
+const currentMonth = getCurrentMonth() + 1;
 const days = getDaysInCurrentMonth();
 
 const getFirstDayOfMonth = () => {
