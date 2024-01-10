@@ -5,6 +5,8 @@ export const header = {
   "drivers/cars": "Mashinalar",
   "admins/admin": "Adminlar",
   "passengers/active_passengers": "Aktiv yo'lovchilar",
+  // "passengers/actives_passengers": "Statistika: aktiv yo'lovchilar",
+
   "passengers/statistics": "Statistika: yo‘lovchi",
   "drivers/main": "Haydovchilar ro'yxati",
   "drivers/active": "Aktiv haydovchilar",
@@ -18,5 +20,5 @@ export const header = {
   "partners/list": "Hamkorlar sahifasi",
   "partners/partner": "Hamkor",
   "drivers/driver": "Haydovchi",
-  "drivers/car": "Haydovchilar ro'yxati"
+  "drivers/car": "Haydovchilar ro'yxati",
 };

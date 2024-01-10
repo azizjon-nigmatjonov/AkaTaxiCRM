@@ -14,6 +14,7 @@ const SidebarSection = () => {
   const List = useMemo(() => {
     return routes ?? [];
   }, [routes]);
+  console.log(routes);
 
   return (
     <div className={cls.section}>

@@ -139,7 +139,7 @@ const Router = () => {
             path={getPath({
               parent: "passengers",
               link: "statistics",
-              sidebar: false,
+              sidebar: true,
               title: "Statistika: yo‘lovchi",
               icon: "statistics",
             })}
