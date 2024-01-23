@@ -30,8 +30,8 @@ const CSlider = () => {
           getAriaLabel={() => "Minimum distance shift"}
           value={value1}
           onChange={handleChange1}
-          //   valueLabelDisplay="auto"
-          //   getAriaValueText={valuetext}
+            // valueLabelDisplay="auto"
+            // getAriaValueText={valuetext}
           disableSwap
           max={2023}
           min={1975}

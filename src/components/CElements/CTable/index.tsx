@@ -64,25 +64,29 @@ const CTable = ({
   const [currentIndex, setCurrentIndex] = useState(null);
   const [currDelete, setCurrDelete] = useState<any>({});
   const dispatch = useDispatch();
-  const bodySource = useMemo(() => {
-    if (!bodyColumns?.length) return [];
-    let list = [];
 
+
+  const bodySource = useMemo(() => {
+    
+    if (!bodyColumns?.length) return [];
+    let list = [];    
     if (bodyColumns.length < currentLimit) {
       for (let i = 0; i < currentLimit; i++) {
         const obj: Record<string, any> = {};
-        headColumns.forEach((col) => {
+        headColumns.forEach((col) => {                    
           obj[col.title] = "";
           obj.empty = true;
-        });
+        });        
         list.push(bodyColumns[i] ?? obj);
       }
+      console.log(list);
     } else list = bodyColumns;
 
     const checks = (status: any) => {
       if (status === undefined) return true;
       return status;
     };
+
 
     return (
       list.map((item: any, index?: any) => ({
@@ -97,6 +101,8 @@ const CTable = ({
       })) ?? []
     );
   }, [bodyColumns, currentLimit, currentPage, headColumns]);
+
+  
 
   const pageName: any = useMemo(() => {
     const strLen =
@@ -244,7 +250,6 @@ const CTable = ({
       handleActions(status, el);
     }
   };
-
   return (
     <div id="table">
       <CTableWrapper
@@ -330,18 +335,18 @@ const CTable = ({
         </CTableHead>
         <CTableBody
           loader={isLoading}
-          columnsCount={headColumns?.length}
+          columnscount={headColumns?.length}
           rowsCount={currentLimit}
           dataLength={bodySource?.length}
         >
           {bodySource?.length
-            ? bodySource?.map((item: any, rowIndex: any) => (
+            ? bodySource?.map((item: any, rowIndex: any) => (              
                 <TableRow
                   key={rowIndex}
                   ref={(e) => handleBodycolRef(item, e)}
                   className={clickable ? "clickable" : ""}
                 >
-                  {headColumns.map((column, colIndex) => (
+                  {headColumns.map((column, colIndex) => (                    
                     <CTableCell
                       key={colIndex}
                       className={`overflow-ellipsis ${tableHeight}`}

@@ -14,10 +14,13 @@ const MainLayout = () => {
   const regions = useSelector((state: any) => state.regions.regions);
   const alertData = useSelector((state: any) => state.website.alert);
 
+
   const GetDisctricts = (array: any) => {
+    
     if (!array) return;
     const arr = array;
-    regionService.getDistrict().then((response) => {
+    
+    regionService.getDistrict().then((response) => {      
       const list = response?.data ?? [];
       for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < list.length; j++) {
@@ -33,7 +36,7 @@ const MainLayout = () => {
   };
 
   const GetRegions = () => {
-    regionService.getList().then((regions) => {
+    regionService.getList().then((regions) => {                  
       GetDisctricts(
         regions?.data?.map((el: any) => {
           return {
@@ -51,7 +54,7 @@ const MainLayout = () => {
 
   useEffect(() => {
     (Object.keys(ColorConstants) as (keyof typeof ColorConstants)[]).forEach(
-      (key) => {
+      (key) => {        
         document.documentElement.style.setProperty(
           "--" + key,
           ColorConstants[key]
@@ -59,6 +62,7 @@ const MainLayout = () => {
       }
     );
   }, []);
+
   return (
     <div className={cls.layout}>
       <Sidebar />

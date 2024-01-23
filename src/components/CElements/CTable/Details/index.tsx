@@ -120,9 +120,11 @@ export const CTableBody = ({
   loader: boolean;
   ref?: any;
   dataLength: any;
-  columnsCount?: any;
+  columnscount?: any;
 }) => {
+  // console.log(props);
   return (
+    
     <>
       <TableLoader isVisible={loader} rowsCount={rowsCount} />
 

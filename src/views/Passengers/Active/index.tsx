@@ -23,6 +23,7 @@ const ActivePassengers = () => {
       return passengerService.getActivePassengers({ q, page: currentPage });
     }
   );
+
   const regions = useSelector((state: any) => state.regions.regions);
 
   const headColumns = useMemo(() => {
@@ -52,15 +53,16 @@ const ActivePassengers = () => {
           return <>{FormatTime(val, "time")}</>;
         },
       },
-      {
-        title: "Mavjud taksilar",
-        id: "taxi",
-        render: (val: number) => {
-          return val && <>{val} ta</>;
-        },
-      },
+      // {
+      //   title: "Mavjud taksilar",
+      //   id: "taxi",
+      //   render: (val: number) => {
+      //     return val && <>{val} ta</>;
+      //   },
+      // },
     ];
   }, []);
+
 
   const bodyColumns: any = useMemo(() => {
     const list = passengers?.data?.map((item: any) => {
@@ -76,6 +78,8 @@ const ActivePassengers = () => {
         }
       }
     })
+
+
     return (
       {
         list,
@@ -99,7 +103,7 @@ const ActivePassengers = () => {
 
   return (
     <div>
-        <Header title="Aktiv yo'lovchilar" />
+      <Header title="Aktiv yo'lovchilar" />
       <div className="px-6">
         <SectionHeader handleSearch={handleSearch}>
           <FilterButton text="filter">

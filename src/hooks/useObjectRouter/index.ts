@@ -44,11 +44,11 @@ export default function usePageRouter() {
 
   const checkPath = (path: string, status?: string) => {
     const result = path === location.pathname.substring(1)
-
+    
     if (status === 'icon') {
       return result ? ColorConstants.main : ColorConstants.gray
     }
-    
+        
     return result
   }
 
