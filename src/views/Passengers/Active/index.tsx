@@ -15,7 +15,9 @@ import usePageRouter from "../../../hooks/useObjectRouter";
 
 const ActivePassengers = () => {
   const { currentPage, q } = useGetQueries();
+
   const { navigateQuery } = usePageRouter()
+
 
   const { data: passengers, isLoading } = useQuery(
     ["GET_ACTIVE_PASSENGERS", q, currentPage],
@@ -24,7 +26,10 @@ const ActivePassengers = () => {
     }
   );
 
+
+
   const regions = useSelector((state: any) => state.regions.regions);
+
 
   const headColumns = useMemo(() => {
     return [
@@ -79,7 +84,7 @@ const ActivePassengers = () => {
       }
     })
 
-
+    
     return (
       {
         list,
@@ -87,6 +92,9 @@ const ActivePassengers = () => {
       } ?? []
     );
   }, [passengers]);
+
+ 
+    
 
   const Regions = useMemo(() => {
     return regions?.map((i: any) => {
@@ -96,6 +104,7 @@ const ActivePassengers = () => {
       };
     });
   }, [regions]);
+  
 
   const handleSearch = (value: any) => {
     navigateQuery({ q: value })
@@ -116,6 +125,7 @@ const ActivePassengers = () => {
             </div>
           </FilterButton>
         </SectionHeader>
+
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns?.list}

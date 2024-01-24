@@ -1,11 +1,11 @@
 import { Divider } from "@mui/material";
 import CCard from "../../../../components/CElements/CCard";
-import InfoChart from "../../../../components/InfoChart";
+// import InfoChart from "../../../../components/InfoChart";
 
 export const StatisticsMap = () => {
   return (
     <CCard classes="flex gap-[18px] p-[0] min-h-[0] h-[100%]  w-[100%] ">
-      <InfoChart />
+      {/* <InfoChart /> */}
       <Divider
         orientation="vertical"
         flexItem

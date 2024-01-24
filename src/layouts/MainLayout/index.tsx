@@ -15,30 +15,29 @@ const MainLayout = () => {
   const alertData = useSelector((state: any) => state.website.alert);
 
 
-  const GetDisctricts = (array: any) => {
-    
+  const GetDisctricts = (array: any, ) => {    
     if (!array) return;
     const arr = array;
     
     regionService.getDistrict().then((response) => {      
       const list = response?.data ?? [];
       for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < list.length; j++) {
+        for (let j = 0; j < list.length; j++) {          
           list[j].checked = false;
           if (list[j].region_id == arr[i].id) {
             arr[i].list.push(list[j]);
           }
         }
       }
-
       dispatch(regionActions.setRegions(arr ?? []));
     });
   };
 
   const GetRegions = () => {
-    regionService.getList().then((regions) => {                  
+    regionService.getList().then((regions) => {
       GetDisctricts(
         regions?.data?.map((el: any) => {
+          
           return {
             ...el,
             list: [],
@@ -54,7 +53,7 @@ const MainLayout = () => {
 
   useEffect(() => {
     (Object.keys(ColorConstants) as (keyof typeof ColorConstants)[]).forEach(
-      (key) => {        
+      (key) => {
         document.documentElement.style.setProperty(
           "--" + key,
           ColorConstants[key]
