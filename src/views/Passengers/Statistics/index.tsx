@@ -4,7 +4,7 @@ import { StatisticsMap } from "./Statistics/Map";
 import StatisticsLineChart from "./LineChart";
 import SearchHeader from "../../../components/Header/SearchHeader";
 import statistics from "../../../services/statistics";
-import RegionStats from "./Statistics/PieChart";
+// import RegionStats from "./Statistics/PieChart";
 import { useQuery } from "react-query";
 import { useMemo } from "react";
 
@@ -42,7 +42,7 @@ const Statistics = () => {
         </div>
 
         <div className="flex  mb-[20px]  w-[100%]">
-          <RegionStats />
+          {/* <RegionStats /> */}
           <StatisticsMap />
         </div>
       </div>
