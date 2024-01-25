@@ -104,6 +104,9 @@ const Regions = useMemo(() => {
 }, [regions]);
 
 
+
+
+
 const handleSearch = (value: any) => {
   navigateQuery({ q: value })
 };

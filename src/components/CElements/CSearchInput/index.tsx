@@ -8,9 +8,11 @@ interface Props {
 }
 
 const CSearchInput = ({ handleChange = () => {}, delay = 500, classes = "" }: Props) => {
-  const debounce = useDebounce((search: any) => {
+  const debounce = useDebounce((search: any) => {    
     handleChange(search);
   }, delay);
+
+  
   
   return (
     <div className="relative">
