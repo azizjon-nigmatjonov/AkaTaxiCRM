@@ -23,6 +23,8 @@ const CancelButton = ({
   ...props
 }: Props) => {
   const { t } = useTranslation();
+ 
+  
   return (
     <div id="deleteButton" {...props}>
       <Button

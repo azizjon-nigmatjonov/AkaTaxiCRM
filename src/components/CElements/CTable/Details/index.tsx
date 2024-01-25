@@ -120,12 +120,11 @@ export const CTableBody = ({
   loader: boolean;
   ref?: any;
   dataLength: any;
-  columnsCount?: any;
+  columnscount?: any;
 }) => {
   return (
     <>
       <TableLoader isVisible={loader} rowsCount={rowsCount} />
-
       <tbody className="CTableBody" {...props} ref={ref}>
         {!loader && children}
         <EmptyDataComponent isVisible={dataLength < 1 && !loader} />

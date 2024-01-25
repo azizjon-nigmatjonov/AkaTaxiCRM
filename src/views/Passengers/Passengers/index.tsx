@@ -125,6 +125,7 @@ const Passengers = () => {
     <>
       <Header title="Yo'lovchilar" />
       <div className="px-6">
+        
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <FilterButton text="filter">
@@ -143,6 +144,7 @@ const Passengers = () => {
             />
           </div>
         </SectionHeader>
+
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns}

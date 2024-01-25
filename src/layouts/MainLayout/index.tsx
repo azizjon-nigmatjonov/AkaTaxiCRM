@@ -14,20 +14,21 @@ const MainLayout = () => {
   const regions = useSelector((state: any) => state.regions.regions);
   const alertData = useSelector((state: any) => state.website.alert);
 
-  const GetDisctricts = (array: any) => {
+
+  const GetDisctricts = (array: any, ) => {    
     if (!array) return;
     const arr = array;
-    regionService.getDistrict().then((response) => {
+    
+    regionService.getDistrict().then((response) => {      
       const list = response?.data ?? [];
       for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < list.length; j++) {
+        for (let j = 0; j < list.length; j++) {          
           list[j].checked = false;
           if (list[j].region_id == arr[i].id) {
             arr[i].list.push(list[j]);
           }
         }
       }
-
       dispatch(regionActions.setRegions(arr ?? []));
     });
   };
@@ -36,6 +37,7 @@ const MainLayout = () => {
     regionService.getList().then((regions) => {
       GetDisctricts(
         regions?.data?.map((el: any) => {
+          
           return {
             ...el,
             list: [],
@@ -59,6 +61,7 @@ const MainLayout = () => {
       }
     );
   }, []);
+
   return (
     <div className={cls.layout}>
       <Sidebar />

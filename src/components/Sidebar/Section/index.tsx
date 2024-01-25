@@ -11,17 +11,17 @@ const SidebarSection = () => {
   const { t } = useTranslation();
   const routes = useSelector((state: any) => state.website.routes);
 
+
   const List = useMemo(() => {
     return routes ?? [];
   }, [routes]);
-  console.log(routes);
+  
 
   return (
     <div className={cls.section}>
       {Object.entries(List)?.map(([key, value]) => (
-        <div key={key} className={cls.menu}>
+        <div key={key} className={cls.menu}>          
           <h3 className={`${cls.title} text-[var(--gray)]`}>{t(key)}</h3>
-
           {Object.values(value as keyof typeof value)?.map(
             (element: any) =>
               element.sidebar && (
@@ -42,6 +42,7 @@ const SidebarSection = () => {
 
                   <p>{t(element.title)}</p>
 
+                  
                   {checkPath(element.path) && (
                     <div className="bg-[var(--main)] w-[6px] h-[32px] rounded-[10px] absolute left-[-3px]"></div>
                   )}

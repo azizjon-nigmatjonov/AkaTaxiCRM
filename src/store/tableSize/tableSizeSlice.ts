@@ -9,7 +9,7 @@ export const { actions: tableSizeAction, reducer: tableSizeReducer } =
       tableHeight: 'medium',
     },
     reducers: {
-      setTableSize: (state: any, { payload: { pageName, colID, colWidth } }) => {
+      setTableSize: (state: any, { payload: { pageName, colID, colWidth} }) => {
         state.tableSize[pageName] = state.tableSize[pageName] || {};
         state.tableSize[pageName][colID] = colWidth;
       },

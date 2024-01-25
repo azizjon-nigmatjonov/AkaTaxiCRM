@@ -41,8 +41,9 @@ interface Path {
 
 const Router = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state: any) => state.auth.isAuth);
+  const isAuth = useSelector((state: any) => state.auth.isAuth);  
   const [list, setList] = useState<string[]>([]);
+  
   const [routes, setRoutes] = useState({
     passengers: [],
     drivers: [],
@@ -60,7 +61,9 @@ const Router = () => {
     sidebar,
     card_info,
   }: Path) => {
-    const path = `${parent}/${link}`;
+
+    const path = `${parent}/${link}`;  
+
     const obj = {
       path: path,
       sidebar,
@@ -70,24 +73,23 @@ const Router = () => {
       icon,
       card_info,
     };
-
+    
     if (!list.includes(obj.id)) {
-      setRoutes((prev: any) => ({
-        ...prev,
-        [parent]: [...prev[parent], obj],
-      }));
-      setList((prev) => [...prev, obj.id]);
+      setRoutes((prev: any) => ({        
+        ...prev,        
+        [parent]: [...prev[parent], obj],  
+      }));      
+      setList((prev) => [...prev, obj.id]);  
     }
-
     return path;
   };
+    
 
   useEffect(() => {
     dispatch(websiteActions.setRoutes({ ...routes }));
   }, []);
 
   if (!isAuth) {
-
     return (
       <Suspense fallback={"Loading..."}>
         <Routes>
@@ -115,6 +117,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/passengers/main" />} />
+
           <Route
             path={getPath({
               parent: "passengers",
@@ -125,6 +128,7 @@ const Router = () => {
             })}
             element={<Passengers />}
           />
+
           <Route
             path={getPath({
               parent: "passengers",
@@ -135,6 +139,7 @@ const Router = () => {
             })}
             element={<ActivePassengers />}
           />
+          
           <Route
             path={getPath({
               parent: "passengers",
@@ -327,6 +332,7 @@ const Router = () => {
             element={<Partner />}
           />
         </Route>
+
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Suspense>

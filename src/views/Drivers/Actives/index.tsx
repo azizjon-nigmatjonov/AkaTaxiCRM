@@ -9,6 +9,7 @@ import driverService from "../../../services/drivers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import CSlider from "../../../components/CElements/CSlider";
 import { Header } from "../../../components/Header";
+import { FormatTime } from "../../../utils/formatTime";
 
 const ActiveDrivers = () => {
   const { navigateQuery } = usePageRouter();
@@ -69,14 +70,25 @@ const ActiveDrivers = () => {
         title: "qayerga",
         id: "to",
       },
+      // {
+      //   title: "qidiruv vaqti",
+      //   id: "time_search",
+      // },
       {
-        title: "qidiruv vaqti",
-        id: "time_search",
+        title: 'Sayohat turi',
+        id:'search_type'
       },
+      {
+        title: 'Online vaqti',
+        id: 'last_seen',
+        render: (val?: any) => {
+          return <>{FormatTime(val, "time")}</>;
+        },
+      }
     ];
   }, []);
 
-  const handleSearch = (evt: any) => {
+  const handleSearch = (evt: any) => {    
     navigateQuery({ q: evt });
   };
 
