@@ -69,10 +69,14 @@ const ActiveDrivers = () => {
         title: "qayerga",
         id: "to",
       },
+      // {
+      //   title: "qidiruv vaqti",
+      //   id: "time_search",
+      // },
       {
-        title: "qidiruv vaqti",
-        id: "time_search",
-      },
+        title: 'Sayohat turi',
+        id:'search_type'
+      }
     ];
   }, []);
 

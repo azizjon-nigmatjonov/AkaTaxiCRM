@@ -1,6 +1,6 @@
 import { Divider } from "@mui/material";
 import CCard from "../../../../components/CElements/CCard";
-// import InfoChart from "../../../../components/InfoChart";
+// import InfoChart f rom "../../../../components/InfoChart";
 
 export const StatisticsMap = () => {
   return (

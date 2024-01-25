@@ -122,12 +122,9 @@ export const CTableBody = ({
   dataLength: any;
   columnscount?: any;
 }) => {
-  // console.log(props);
   return (
-    
     <>
       <TableLoader isVisible={loader} rowsCount={rowsCount} />
-
       <tbody className="CTableBody" {...props} ref={ref}>
         {!loader && children}
         <EmptyDataComponent isVisible={dataLength < 1 && !loader} />

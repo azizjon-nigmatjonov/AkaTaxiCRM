@@ -70,7 +70,7 @@ const CTable = ({
     if (!bodyColumns?.length) return [];
 
     let list = [];
-    
+
     if (bodyColumns.length < currentLimit) {
       for (let i = 0; i < currentLimit; i++) {
         const obj: Record<string, any> = {};
@@ -87,7 +87,7 @@ const CTable = ({
       if (status === undefined) return true;
       return status;
     };
-    
+
 
     return (
       list.map((item: any, index?: any) => ({
@@ -104,21 +104,24 @@ const CTable = ({
   }, [bodyColumns, currentLimit, currentPage, headColumns]);
 
 
-
   const pageName: any = useMemo(() => {
     const strLen =
       location.pathname.split("/")[2].length +
       location.pathname.split("/")[1].length;
+
     let result = location.pathname.substring(0, strLen + 2);
+
     if (idForTable) result = result + "/" + idForTable;
     return result;
   }, [location, idForTable]);
 
   useEffect(() => {
     if (!isResizeble) return;
+
     const createResizableTable = function (table: any) {
       if (!table) return;
       const cols = table.querySelectorAll("th");
+
       [].forEach.call(cols, function (col: any, idx: number) {
         // Add a resizer element to the column
         const resizer = document.createElement("span");
@@ -182,6 +185,8 @@ const CTable = ({
   }, [bodySource]);
 
   const calculateWidth = (colId: any, index: number) => {
+
+
     const colIdx = tableSettings?.[pageName]
       ?.filter((item: any) => item?.isStiky === true)
       ?.findIndex((item: any) => item?.id === colId);
@@ -230,6 +235,7 @@ const CTable = ({
     bodySource?.forEach((item: any) => {
       if (item?.ref) res = res + item.ref.offsetHeight;
     });
+
     const currentHeight = res + headColHeight + 2;
     if (currentHeight && currentHeight > 400) setTableHeight(currentHeight);
     else setTableHeight(500);
@@ -251,6 +257,9 @@ const CTable = ({
       handleActions(status, el);
     }
   };
+
+
+
   return (
     <div id="table">
       <CTableWrapper
@@ -304,15 +313,8 @@ const CTable = ({
               >
                 <div style={{ textAlign: column?.textAlign || "left" }}>
                   {column.renderHead
-                    ? Array.isArray(column.renderHead)
-                      ? column.renderHead(
-                        column.renderHead.map((data: any) => column[data])
-                      )
-                      : column.renderHead()
-                    : column?.id === "index"
-                      ? "№"
-                      : t(column.title)}
-
+                    ? Array.isArray(column.renderHead) ? column.renderHead(column.renderHead.map((data: any) => column[data])) : column.renderHead() : column?.id === "index" ? "№" : t(column.title)
+                  }
                   {/* {column?.filter && (
                     <div
                       style={{
@@ -383,13 +385,7 @@ const CTable = ({
                     >
                       {column.id !== "actions" && (
                         <span>
-                          {column.render
-                            ? Array.isArray(column.id)
-                              ? column.render(
-                                column.id.map((data: any) => item[data])
-                              )
-                              : column.render(item[column.id])
-                            : item[column.id]}
+                          {column.render ? Array.isArray(column.id) ? column.render(column.id.map((data: any) => item[data])) : column.render(item[column.id]) : item[column.id]}
                         </span>
                       )}
                       {
