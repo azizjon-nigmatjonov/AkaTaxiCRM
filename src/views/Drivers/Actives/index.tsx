@@ -130,21 +130,22 @@ const ActiveDrivers = () => {
     <>
       <Header title="Aktiv haydovchilar" />
       <div className="p-6">
-        <SectionHeader handleSearch={handleSearch}>
+        <SectionHeader  handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
-            <FilterButton text="filter">
+            <FilterButton  text="filter">
               <div>
                 <CSelect options={Regions} id='filter' label='Viloyat' />
               </div>
               <CDriver classes="my-4" />
               <div >
-                <CSelect options={[{ value: 'man', label: 'Male' }, { value: 'female', label: 'Female' }]} id='filter' label='Jinsi' />
+                <CSelect options={[{ value: 'man', label: 'Male' }, { value: 'female', label: 'Female' }]} id='filter' label='Jins' />
               </div>
               <CDriver classes="my-4" />
               <div >
                 <CSelect options={carModalData.list} id='filter' label='Model' />
               </div>
-              <CSlider />
+              <CDriver classes="my-4" />
+              <CSlider label='Yosh' />
             </FilterButton>
           </div>
         </SectionHeader>
