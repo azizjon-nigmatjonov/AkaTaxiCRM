@@ -4,12 +4,12 @@ import "./style.scss";
 import CLabel from "../CLabel";
 
 
-const CSlider = ({label=''}) => {
+const CSlider = ({ label = '' }) => {
   const minDistance = 5;
   const [value1, setValue1] = useState<number[]>([1975, 2023]);
 
   const handleChange1 = (
-    event: Event,
+    _: Event,
     newValue: number | number[],
     activeThumb: number
   ) => {
@@ -26,7 +26,7 @@ const CSlider = ({label=''}) => {
 
   return (
     <>
-    {label && <CLabel title={label}/>}
+      {label && <CLabel title={label} />}
       <div>
         <div className="px-1">
           <Slider

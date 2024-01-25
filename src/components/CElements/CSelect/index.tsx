@@ -13,7 +13,6 @@ const CSelect = ({
   id = "cselect",
   options = [],
   label = "",
- 
 }: Props) => {
 
   
@@ -27,6 +26,7 @@ const CSelect = ({
           inputProps={{
             "aria-label": "Without label",
           }}
+          // onChange={handleChange}
         >
           {options.map(({ value, label }: { value: any; label: string }) => (
             <MenuItem value={value}>{label}</MenuItem>
