@@ -1,5 +1,5 @@
 import CCard from "../../../../components/CElements/CCard";
-import PieChart from "../../../../components/PieChart/index";
+// import PieChart from "../../../../components/PieChart/index";
 // import CSelect from "../../../../components/CElements/CSelect";
 import { useMemo, useState } from "react";
 import {
@@ -90,7 +90,7 @@ export default function RegionStats() {
             </FormControl>
           </div>
 
-          <PieChart coins={coins} />
+          {/* <PieChart coins={coins} />
           {coins.map((coin) => {
             return (
               <div className="flex justify-between">
@@ -104,7 +104,7 @@ export default function RegionStats() {
                 <p className="text-[var(--gray)]">{coin.amount}</p>
               </div>
             );
-          })}
+          })} */}
 
           <div className="flex flex-col"></div>
         </CCard>
