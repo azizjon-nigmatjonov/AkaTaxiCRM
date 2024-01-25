@@ -20,6 +20,7 @@ const Vehicles = () => {
     return carService.getCarClasses();
   });
 
+
   const tab = useMemo(() => {
     return currentTab ? currentTab : "1";
   }, [currentTab]);

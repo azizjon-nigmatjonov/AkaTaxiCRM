@@ -10,10 +10,15 @@ import { useGetQueries } from "../../../hooks/useGetQueries";
 import CSlider from "../../../components/CElements/CSlider";
 import { Header } from "../../../components/Header";
 import { FormatTime } from "../../../utils/formatTime";
+import CSelect from "../../../components/CElements/CSelect";
+import { useSelector } from "react-redux";
+import CDriver from "../../../components/CElements/CDivider";
+import carService from '../../../services/cars'
 
 const ActiveDrivers = () => {
   const { navigateQuery } = usePageRouter();
   const { currentPage, q } = useGetQueries();
+  const regions = useSelector((state: any) => state.regions.regions)
 
   const { data: drivers, isLoading } = useQuery(
     ["GET_ACTIVE_DRIVERS", q, currentPage],
@@ -39,6 +44,26 @@ const ActiveDrivers = () => {
       ...drivers,
     };
   }, [drivers]);
+
+  // console.log(driversData);
+
+
+  const { data: carModals } = useQuery(['GET_CAR_MODELS'], () => {
+    return carService.getCarModel()
+  });
+
+  const carModalData: any = useMemo(() => {
+    if (!carModals) return [];
+    const list = carModals?.data;
+    return {
+      list: list.map((model: any) => {
+        return {
+          value: model.id,
+          label: model.name
+        }
+      })
+    }
+  }, [carModals])
 
   const headColumns = useMemo(() => {
     return [
@@ -76,7 +101,7 @@ const ActiveDrivers = () => {
       // },
       {
         title: 'Sayohat turi',
-        id:'search_type'
+        id: 'search_type'
       },
       {
         title: 'Online vaqti',
@@ -88,9 +113,18 @@ const ActiveDrivers = () => {
     ];
   }, []);
 
-  const handleSearch = (evt: any) => {    
+  const handleSearch = (evt: any) => {
     navigateQuery({ q: evt });
   };
+
+  const Regions = useMemo(() => {
+    return regions?.map((i: any) => {
+      return {
+        value: i.id,
+        label: i.name.uz
+      }
+    })
+  }, [regions])
 
   return (
     <>
@@ -99,6 +133,17 @@ const ActiveDrivers = () => {
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <FilterButton text="filter">
+              <div>
+                <CSelect options={Regions} id='filter' label='Viloyat' />
+              </div>
+              <CDriver classes="my-4" />
+              <div >
+                <CSelect options={[{ value: 'man', label: 'Male' }, { value: 'female', label: 'Female' }]} id='filter' label='Jinsi' />
+              </div>
+              <CDriver classes="my-4" />
+              <div >
+                <CSelect options={carModalData.list} id='filter' label='Model' />
+              </div>
               <CSlider />
             </FilterButton>
           </div>
@@ -111,7 +156,6 @@ const ActiveDrivers = () => {
           isLoading={isLoading}
           currentPage={currentPage}
         />
-
         <Form />
       </div>
     </>
