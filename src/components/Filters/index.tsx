@@ -23,7 +23,7 @@ const FilterButton = ({ text = "", left, children, ...props }: Props) => {
           {left ? left : <span className="text-[var(--gray)]">{t(text)}</span>}
 
           <div className="icon">
-            <div className={open ? "rotate-0" : "rotate-[180deg]"}>
+            <div className={!open ? "rotate-0" : "rotate-[180deg]"}>
               <ArrowDownFilled />
             </div>
           </div>

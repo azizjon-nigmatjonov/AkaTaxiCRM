@@ -80,7 +80,6 @@ const CTable = ({
         });
         list.push(bodyColumns[i] ?? obj);
       }
-      console.log(list);
     } else list = bodyColumns;
 
     const checks = (status: any) => {

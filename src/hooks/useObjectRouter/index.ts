@@ -7,7 +7,7 @@ export default function usePageRouter() {
   const [searchParams] = useSearchParams();
   const query = Object.fromEntries(searchParams.entries());
   
-  const navigateTo = (path: string, state?: object) => {
+  const navigateTo = (path: string, state?: object) => {    
     const link = path;    
   
     if (state) {
@@ -18,6 +18,7 @@ export default function usePageRouter() {
   };
 
   const navigateQuery = (obj?: any, check?: boolean) => {
+
     Object.keys(obj).forEach((key) => {
       if (obj[key] === "" || !obj[key]?.length && key in query && !check) {
         delete obj[key]
