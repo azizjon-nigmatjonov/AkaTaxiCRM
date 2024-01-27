@@ -103,7 +103,7 @@ const Regions = useMemo(() => {
   });
 }, [regions]);
 
-
+// console.log(regions);
 
 
 

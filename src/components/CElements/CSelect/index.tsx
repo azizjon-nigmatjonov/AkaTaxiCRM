@@ -1,11 +1,12 @@
 import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CLabel from "../CLabel";
 
 interface Props {
   id?: string;
   options: any;
   label?: string;
+  handlerValue?: (val: any) => void
   // classes?: string;
 }
 
@@ -13,9 +14,15 @@ const CSelect = ({
   id = "cselect",
   options = [],
   label = "",
+  handlerValue
 }: Props) => {
 
-  
+
+
+  const handleChange = (event: SelectChangeEvent) => {
+    handlerValue!(event.target?.value)
+  }
+
   return (
     <>
       {label && <CLabel title={label} />}
@@ -26,7 +33,7 @@ const CSelect = ({
           inputProps={{
             "aria-label": "Without label",
           }}
-          // onChange={handleChange}
+          onChange={handleChange}
         >
           {options.map(({ value, label }: { value: any; label: string }) => (
             <MenuItem value={value}>{label}</MenuItem>
