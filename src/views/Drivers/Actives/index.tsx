@@ -17,15 +17,17 @@ import carService from '../../../services/cars'
 
 const ActiveDrivers = () => {
   const { navigateQuery } = usePageRouter();
-  const { currentPage, q } = useGetQueries();
-  const regions = useSelector((state: any) => state.regions.regions)
+  const { currentPage, q, gender, region_id, f, car_model_id, } = useGetQueries();
+
+  const regions = useSelector((state: any) => state.regions.regions);
 
   const { data: drivers, isLoading } = useQuery(
-    ["GET_ACTIVE_DRIVERS", q, currentPage],
+    ["GET_ACTIVE_DRIVERS", q, gender, region_id, f,  car_model_id, currentPage],
     () => {
-      return driverService.getActives({ q, page: currentPage });
+      return driverService.getActives({ q, gender, region_id, f,  car_model_id, page: currentPage });
     }
   );
+
 
   const driversData: any = useMemo(() => {
     if (!drivers) return [];
@@ -44,8 +46,6 @@ const ActiveDrivers = () => {
       ...drivers,
     };
   }, [drivers]);
-
-  // console.log(driversData);
 
 
   const { data: carModals } = useQuery(['GET_CAR_MODELS'], () => {
@@ -114,38 +114,57 @@ const ActiveDrivers = () => {
   }, []);
 
   const handleSearch = (evt: any) => {
-    navigateQuery({ q: evt });
+    console.log(evt);
+    
+    // navigateQuery({ q: evt });
   };
+
 
   const Regions = useMemo(() => {
     return regions?.map((i: any) => {
       return {
         value: i.id,
-        label: i.name.uz
+        label: i.name.uz,
       }
     })
   }, [regions])
+
+  const handleRegion = (evt: any) => {
+    navigateQuery({ region_id: evt })
+  }
+
+  const handleGender = (evt: any) => {
+    navigateQuery({ gender: evt })
+  }
+
+  const handleCarModel = (evt: any) => {
+    navigateQuery({ car_model_id: evt })
+  }
+
+  const handleAge = (evt: any) => {    
+    navigateQuery({ birthday: [...evt]})
+  }
 
   return (
     <>
       <Header title="Aktiv haydovchilar" />
       <div className="p-6">
-        <SectionHeader  handleSearch={handleSearch}>
+        <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
-            <FilterButton  text="filter">
+            <FilterButton text="filter">
               <div>
-                <CSelect options={Regions} id='filter' label='Viloyat' />
+                <CSelect handlerValue={handleRegion} options={Regions} id='filter' label='Viloyat' />
               </div>
               <CDriver classes="my-4" />
               <div >
-                <CSelect options={[{ value: 'man', label: 'Male' }, { value: 'female', label: 'Female' }]} id='filter' label='Jins' />
+                <CSelect handlerValue={handleGender} options={[{ value: 'm', label: 'Male' }, { value: 'f', label: 'Female' }]} id='filter' label='Jins' />
               </div>
               <CDriver classes="my-4" />
               <div >
-                <CSelect options={carModalData.list} id='filter' label='Model' />
+                <CSelect handlerValue={handleCarModel} options={carModalData.list} id='filter' label='Model' />
               </div>
               <CDriver classes="my-4" />
-              <CSlider label='Yosh' />
+              <CSlider handleValue={handleAge} label="Tug'ilgan yili" />
             </FilterButton>
           </div>
         </SectionHeader>

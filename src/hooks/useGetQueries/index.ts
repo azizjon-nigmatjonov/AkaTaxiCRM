@@ -5,7 +5,9 @@ export const useGetQueries = () => {
   const [searchParams] = useSearchParams();
 
   const query = Object.fromEntries(searchParams.entries());
+  
 
+  
   
   const params: any = useMemo(() => {
     const result = {
@@ -20,6 +22,9 @@ export const useGetQueries = () => {
     
     return result;
   }, [query]);
+
+  // console.log(params);
+  
 
   
   return params;
