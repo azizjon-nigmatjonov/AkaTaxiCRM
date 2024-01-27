@@ -119,7 +119,6 @@ const Drivers = () => {
             <FilterButton text="filter">
               <CSlider />
             </FilterButton>
-
             <AddButton
               text="new_driver"
               onClick={() => navigateQuery({ id: "create" })}

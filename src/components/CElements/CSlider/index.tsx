@@ -4,7 +4,7 @@ import "./style.scss";
 import CLabel from "../CLabel";
 
 
-const CSlider = ({ label = '', handleValue }: {label: string, handleValue?: (evt:any) => void }) => {
+const CSlider = ({ label = '', handleValue }: {label?: string, handleValue?: (evt:any) => void }) => {
   const minDistance = 5;
   const [value1, setValue1] = useState<number[]>([1975, 2023]);
 

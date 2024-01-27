@@ -1,4 +1,4 @@
-import { format, parseISO } from "date-fns"
+import { format } from "date-fns"
 
 export const FormatTime = (time: string, type?: string) => {
 
@@ -6,7 +6,7 @@ export const FormatTime = (time: string, type?: string) => {
     if (!time) return '';
     const current = new Date(time);
 
-    const timeFormat = 'HH:mm '
+    // const timeFormat = 'HH:mm '
     const dateFormat = ' dd.MM.yyyy'
 
     const formattedDate = new Intl.DateTimeFormat('en-US', {
