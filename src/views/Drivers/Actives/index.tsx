@@ -22,9 +22,9 @@ const ActiveDrivers = () => {
   const regions = useSelector((state: any) => state.regions.regions);
 
   const { data: drivers, isLoading } = useQuery(
-    ["GET_ACTIVE_DRIVERS", q, gender, region_id, f,  car_model_id, currentPage],
+    ["GET_ACTIVE_DRIVERS", q, gender, region_id, f, car_model_id, currentPage],
     () => {
-      return driverService.getActives({ q, gender, region_id, f,  car_model_id, page: currentPage });
+      return driverService.getActives({ q, gender, region_id, f, car_model_id, page: currentPage });
     }
   );
 
@@ -114,11 +114,8 @@ const ActiveDrivers = () => {
   }, []);
 
   const handleSearch = (evt: any) => {
-    console.log(evt);
-    
-    // navigateQuery({ q: evt });
+    navigateQuery({ q: evt });
   };
-
 
   const Regions = useMemo(() => {
     return regions?.map((i: any) => {
@@ -131,6 +128,8 @@ const ActiveDrivers = () => {
 
   const handleRegion = (evt: any) => {
     navigateQuery({ region_id: evt })
+    console.log(evt);
+    
   }
 
   const handleGender = (evt: any) => {
@@ -141,8 +140,8 @@ const ActiveDrivers = () => {
     navigateQuery({ car_model_id: evt })
   }
 
-  const handleAge = (evt: any) => {    
-    navigateQuery({ birthday: [...evt]})
+  const handleAge = (evt: any) => {
+    navigateQuery({ birthday: [...evt] })
   }
 
   return (

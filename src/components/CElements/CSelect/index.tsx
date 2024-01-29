@@ -36,7 +36,7 @@ const CSelect = ({
           onChange={handleChange}
         >
           {options.map(({ value, label }: { value: any; label: string }) => (
-            <MenuItem value={value}>{label}</MenuItem>
+            <MenuItem key={value} value={value}>{label}</MenuItem>
           ))}
         </Select>
       </div>

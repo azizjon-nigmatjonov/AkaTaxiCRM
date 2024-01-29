@@ -6,12 +6,11 @@ export default function usePageRouter() {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const query = Object.fromEntries(searchParams.entries());
-    // console.log(query);
-    
-  
-  const navigateTo = (path: string, state?: object) => {    
-    const link = path;    
-  
+
+
+  const navigateTo = (path: string, state?: object) => {
+    const link = path;
+
     if (state) {
       navigate(link, { state: state });
       return;
@@ -19,26 +18,25 @@ export default function usePageRouter() {
     navigate(link);
   };
 
-  const navigateQuery = (obj?: any, check?: boolean) => { 
-    
+  const navigateQuery = (obj?: any, check?: boolean) => {
     Object.keys(obj).forEach((key) => {
       if (obj[key] === "" || !obj[key]?.length && key in query && !check) {
-        delete obj[key]
-        delete query[key]
+        // delete obj[key]
+        // delete query[key]
       }
     })
-    
+
     const newQuery = {
       ...query,
       ...obj,
     };
+    
 
-
-    const queryParams = createSearchParams(newQuery);
+    const queryParams = createSearchParams(newQuery);    
     navigate({
       pathname: location.pathname,
       search: queryParams.toString(),
-    });    
+    });
   }
 
   const getQueries = () => query;
@@ -47,11 +45,11 @@ export default function usePageRouter() {
 
   const checkPath = (path: string, status?: string) => {
     const result = path === location.pathname.substring(1)
-    
+
     if (status === 'icon') {
       return result ? ColorConstants.main : ColorConstants.gray
     }
-        
+
     return result
   }
 
