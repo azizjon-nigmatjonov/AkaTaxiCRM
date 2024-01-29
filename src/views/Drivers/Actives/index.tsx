@@ -14,9 +14,12 @@ import CSelect from "../../../components/CElements/CSelect";
 import { useSelector } from "react-redux";
 import CDriver from "../../../components/CElements/CDivider";
 import carService from '../../../services/cars'
-
+import { useSearchParams } from 'react-router-dom'
+import { useTranslation } from "react-i18next";
 const ActiveDrivers = () => {
+  const { t } = useTranslation()
   const { navigateQuery } = usePageRouter();
+  const setSearchParams = useSearchParams()[1]
   const { currentPage, q, gender, region_id, f, car_model_id, } = useGetQueries();
 
   const regions = useSelector((state: any) => state.regions.regions);
@@ -129,7 +132,7 @@ const ActiveDrivers = () => {
   const handleRegion = (evt: any) => {
     navigateQuery({ region_id: evt })
     console.log(evt);
-    
+
   }
 
   const handleGender = (evt: any) => {
@@ -143,7 +146,6 @@ const ActiveDrivers = () => {
   const handleAge = (evt: any) => {
     navigateQuery({ birthday: [...evt] })
   }
-
   return (
     <>
       <Header title="Aktiv haydovchilar" />
@@ -164,6 +166,8 @@ const ActiveDrivers = () => {
               </div>
               <CDriver classes="my-4" />
               <CSlider handleValue={handleAge} label="Tug'ilgan yili" />
+              <CDriver classes="my-4" />
+              <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer ">{t('ignore_text')}</span>
             </FilterButton>
           </div>
         </SectionHeader>

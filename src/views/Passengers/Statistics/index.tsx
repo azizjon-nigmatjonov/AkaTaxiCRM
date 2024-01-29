@@ -1,6 +1,6 @@
 import CCard from "../../../components/CElements/CCard";
 import StatisticsCard from "./Statistics";
-// import { StatisticsMap } from "./Statistics/Map";
+import { StatisticsMap } from "./Statistics/Map";
 import StatisticsLineChart from "./LineChart";
 import SearchHeader from "../../../components/Header/SearchHeader";
 import statistics from "../../../services/statistics";
@@ -22,13 +22,11 @@ const Statistics = () => {
     return stats?.data ?? [];
   }, [stats]);
 
-  console.log(stats);
 
   return (
     <section>
       <SearchHeader />
       <div className="fixed z-[12] pt-[24px] pl-[12px] pb-[12px] w-[100%] bg-[var(--softGray)] top-[70px]">
-        {" "}
         <h1 className="text-2xl font-[600] text-[var(--black)] mt-[26px] ml-[15px]">
           Statistika: yo‘lovchi
         </h1>
@@ -43,7 +41,7 @@ const Statistics = () => {
 
         <div className="flex  mb-[20px]  w-[100%]">
           {/* <RegionStats /> */}
-          {/* <StatisticsMap /> */}
+          <StatisticsMap />
         </div>
       </div>
     </section>
