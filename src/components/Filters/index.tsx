@@ -19,7 +19,7 @@ const FilterButton = ({ text = "", left, children, ...props }: Props) => {
 
   return (
     <div className="relative">
-      <div id="filterButton"  {...props}>
+      <div id="filterButton" {...props}>
         <Button onClick={() => toggle()}>
           {left ? left : <span className="text-[var(--gray)]">{t(text)}</span>}
           <div className="icon">

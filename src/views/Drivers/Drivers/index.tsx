@@ -110,6 +110,7 @@ const Drivers = () => {
   const handleSearch = (evt: any) => {
     navigateQuery({ q: evt })
   };
+
   return (
     <>
       <Header title="Haydovchilar" />

@@ -33,20 +33,18 @@
 //     return stats?.data ?? [];
 //   }, [stats]);
 
-//   console.log("trip", bodyColumns);
 //   let amount = Object.values(bodyColumns);
 //   let amount1 = Object.keys(bodyColumns);
 
-//   let obj: object[] = [];
+//   let obj = [];
 
-//   amount1.forEach((item: string, index) => {
-//     let obj1: object = {};
+//   let obj1 = {};
+//   amount1.forEach((item: string, index) => {    
 //     obj1.symbol = item;
 //     obj1.amount = amount[index];
 //     obj1.color = "#FFC542";
 //     obj.push(obj1);
 //   });
-//   console.log("obj", obj);
 
 //   const handleChange = (event: SelectChangeEvent) => {
 //     setAge(event.target.value);
