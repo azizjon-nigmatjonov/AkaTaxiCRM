@@ -12,8 +12,7 @@ const CSearchInput = ({ handleChange = () => {}, delay = 500, classes = "" }: Pr
     handleChange(search);
   }, delay);
 
-  
-  
+
   return (
     <div className="relative">
       <div className="absolute top-1/2 -translate-y-1/2 left-3">

@@ -5,10 +5,8 @@ export const useGetQueries = () => {
   const [searchParams] = useSearchParams();
 
   const query = Object.fromEntries(searchParams.entries());
-  
 
-  
-  
+
   const params: any = useMemo(() => {
     const result = {
       currentLimit: query?.limit ? parseInt(query.limit) : 10,
@@ -19,13 +17,9 @@ export const useGetQueries = () => {
       currentSort: query?.sort,
       ...query
     };
-    
+
     return result;
   }, [query]);
 
-  // console.log(params);
-  
-
-  
   return params;
 };

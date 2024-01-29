@@ -1,6 +1,6 @@
 import CCard from "../../../components/CElements/CCard";
 import StatisticsCard from "./Statistics";
-import { StatisticsMap } from "./Statistics/Map";
+// import { StatisticsMap } from "./Statistics/Map";
 import StatisticsLineChart from "./LineChart";
 import SearchHeader from "../../../components/Header/SearchHeader";
 import statistics from "../../../services/statistics";
@@ -22,7 +22,7 @@ const Statistics = () => {
     return stats?.data ?? [];
   }, [stats]);
 
-  console.log("body", bodyColumns);
+  console.log(stats);
 
   return (
     <section>
@@ -43,7 +43,7 @@ const Statistics = () => {
 
         <div className="flex  mb-[20px]  w-[100%]">
           {/* <RegionStats /> */}
-          <StatisticsMap />
+          {/* <StatisticsMap /> */}
         </div>
       </div>
     </section>
