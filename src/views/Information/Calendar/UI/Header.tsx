@@ -5,11 +5,12 @@ const Header = () => {
 
       <div className="flex space-x-[30px] font-medium">
         <p className="flex items-center">
-          Yangi yo‘lovchilar
+          Yangi haydovchilar
           <div className="w-[8px] h-[8px] bg-[var(--darkerGreen)] rounded-full ml-1"></div>
         </p>
         <p className="flex items-center">
-          Yangi haydovchilar
+
+          Yangi yo‘lovchilar
           <div className="w-[8px] h-[8px] bg-[var(--error)] rounded-full ml-1"></div>
         </p>
         <p className="flex items-center">

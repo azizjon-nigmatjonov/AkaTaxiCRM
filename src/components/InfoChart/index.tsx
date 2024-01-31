@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 
 export default function InfoChart() {
-  const  setAge = useState<any>("")[1];
+  const setAge = useState<any>("")[1];
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
@@ -68,7 +68,7 @@ export default function InfoChart() {
           </div>
           {coins.map((coin) => {
             return (
-              <div className="flex justify-between">
+              <div key={coin.symbol} className="flex justify-between">
                 <div className="flex items-center">
                   <div
                     className="w-[10px] h-[10px] rounded-[50%] mr-[10px]"

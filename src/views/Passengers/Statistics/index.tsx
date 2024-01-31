@@ -8,7 +8,9 @@ import statistics from "../../../services/statistics";
 import { useQuery } from "react-query";
 import { useMemo } from "react";
 
+
 const Statistics = () => {
+
   const { data: stats } = useQuery(
     ["GET_NEW_USER_STAT"],
     () => {
@@ -23,6 +25,7 @@ const Statistics = () => {
   }, [stats]);
 
 
+
   return (
     <section>
       <SearchHeader />
@@ -34,7 +37,7 @@ const Statistics = () => {
       <div className="p-[15px] pt-[160px] pl-[20px] pr-[30px]  ">
         <div className="flex   space-x-4 mb-[14px]">
           <CCard>
-            <StatisticsLineChart />
+            <StatisticsLineChart data={bodyColumns.graph}/>
           </CCard>
           <StatisticsCard data={bodyColumns?.passengers} />
         </div>
