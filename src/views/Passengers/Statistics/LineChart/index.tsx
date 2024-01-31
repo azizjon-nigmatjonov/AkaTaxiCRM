@@ -1,29 +1,66 @@
-import { LineChart } from "@mui/x-charts";
-import { FC } from "react";
+import { LineChart, } from "@mui/x-charts";
+import { FC, useMemo } from "react";
 interface Props {
   width?: number;
   height?: number;
+  data?: any
 }
-const StatisticsLineChart: FC<Props> = ({ width = 900, height = 570 }) => {
+const uData = [40, 30, 20, 27, 18, 23, 34];
+const pData = [24, 13, 90, 39, 48, 38, 43];
+const xLabels = [
+  'Yan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Iyun',
+  'Iyul',
+  'Avg',
+  'Sen',
+  'Okt',
+  'Noy',
+  'Dek'
+];
+
+const StatisticsLineChart: FC<Props> = ({ data, width = 947, height = 481 }) => {
+
+  const getGraph: any = useMemo(() => {
+    let trips: any = [];
+    let users: any = [];
+
+    if (!data) {
+      return []
+    } else {
+      trips = Object.values(data?.trips)
+      users = Object.values(data?.users)
+    }
+
+    return { trips, users }
+  }, [data])
+
+
   return (
     <div className="w-[100%]">
       <LineChart
-        xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }]}
-        series={[
-          { curve: "natural", data: [2, 3, 5.5, 8.5, 1.5, 5, 1, 4, 3, 8] },
-          { curve: "natural", data: [6, 3, 7, 9.5, 4, 2] },
-        ]}
         width={width}
         height={height}
-     
-      >
-        <defs>
-          <linearGradient id="myGradient" gradientTransform="rotate(90)">
-            <stop offset="5%" stopColor="gold" />
-            <stop offset="95%" stopColor="red" />
-          </linearGradient>
-        </defs>
-      </LineChart>
+        series={[
+          { data: getGraph.trips ?? uData, label: 'Trips', color: '#DD431F', showMark: false, },
+          { data: getGraph.users ?? pData, label: 'Users', color: '#0BD976', showMark: false, }
+        ]}
+        xAxis={[{ scaleType: 'point', data: xLabels }]}
+        yAxis={[{ data: [10, 20, 30] }]}
+        slotProps={{
+          legend: {
+            direction: 'row',
+            position: { vertical: 'top', horizontal: 'right', },
+            padding: 0,
+            itemMarkHeight: 7,
+            itemMarkWidth: 7,
+          }
+
+        }}
+      />
     </div>
   );
 };
