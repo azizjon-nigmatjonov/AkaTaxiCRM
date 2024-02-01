@@ -17,7 +17,8 @@ const driverService = {
   getElement: (id: string | undefined) => request.get(`/drivers/${id}`),
   getDriverTripHistory: (id: string | undefined) =>
     request.get(`booking/driver-trips/${id}`),
-  getWidgets:()=> request.get('statistics/drivers/widgets')
+  getWidgets:()=> request.get('statistics/drivers/widgets'),
+  getDriversGraph:()=>request.get('statistics/drivers/graph')
 };
 
 export default driverService;
