@@ -16,15 +16,15 @@ interface Props {
 const SearchHeader: FC<Props> = ({ extra }) => {
   return (
     <div className={stl.wrapper}>
-      <div className="relative w-[100%] flex items-center">
-        <div className="absolute top-1/2 -translate-y-1/2 left-3">
+      <div className="flex items-center gap-2  w-full">
+        <div className="">
           <SearchIcon />
         </div>
         <input
           //   onChange={(e) => debounce(e.target.value)}
           type="text"
           placeholder="Izlash..."
-          className={`w-[100%] bg-transparent h-[40px] outline-none pl-10 pr-5 text=[var(--black)] placeholder-gray focus:border-[var(--main)] rounded-[10px] `}
+          className={`w-full  bg-transparent h-[40px] outline-none pr-5 text=[var(--black)] placeholder-gray focus:border-[var(--main)] rounded-[10px] `}
         />
       </div>
 

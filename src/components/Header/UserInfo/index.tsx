@@ -35,7 +35,7 @@ const UserInfo = () => {
           <ImageFrame image={userInfo?.data?.image} />
         </div>
         <div className={cls.content}>
-          <h2 className="font-[600] text-black">{userInfo?.data?.name}</h2>
+          <h2 className="font-[600]  text-black">{userInfo?.data?.name}</h2>
           {/* <p className="text-[12px] text-[var(--gray)]">Super admin</p> */}
         </div>
       </div>

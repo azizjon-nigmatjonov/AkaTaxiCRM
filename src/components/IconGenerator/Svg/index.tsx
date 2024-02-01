@@ -308,6 +308,7 @@ export const CarIcon = ({ fill = "white" }: { fill?: string }) => (
   </svg>
 );
 
+
 export const ExchangeIcon = ({ fill = "#DD431F" }: { fill?: string }) => (
   <svg
     width="30"
@@ -547,30 +548,45 @@ export const PartnersIcon = ({ fill = "#111" }) => (
   </svg>
 );
 
-export const ArrowUp = ({ fill = "#0BD976" }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 18 18"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M13.5523 7.1775L8.99977 2.625L4.44727 7.1775"
-      stroke={fill}
-      strokeWidth="2"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M9 15.3749V2.75244"
-      stroke={fill}
-      strokeWidth="2"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+export const ArrowUp = ({ fill }: { fill?: any }) => (
+  // <svg
+  //   width="18"
+  //   height="18"
+  //   viewBox="0 0 18 18"
+  //   fill="none"
+  //   xmlns="http://www.w3.org/2000/svg"
+  // >
+  //   <rect opacity="0.1" y="0.5" width="36" height="36" rx="8" fill="#0BD976"/>
+  //   <path
+  //     d="M13.5523 7.1775L8.99977 2.625L4.44727 7.1775"
+  //     stroke={fill}
+  //     strokeWidth="2"
+  //     strokeMiterlimit="10"
+  //     strokeLinecap="round"
+  //     strokeLinejoin="round"
+  //   />
+  //   <path
+  //     d="M9 15.3749V2.75244"
+  //     stroke={fill}
+  //     strokeWidth="2"
+  //     strokeMiterlimit="10"
+  //     strokeLinecap="round"
+  //     strokeLinejoin="round"
+  //   />
+  // </svg>
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="37" viewBox="0 0 36 37" fill="none">
+    {fill && <rect opacity="0.1" y="0.5" width="36" height="36" rx="8" fill="#0BD976" />}
+    <path d="M22.5523 16.6775L17.9998 12.125L13.4473 16.6775" stroke="#0BD976" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M18 24.8754V12.2529" stroke="#0BD976" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+);
+
+export const ArrowDown = ({ fill }: { fill?: any }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+    {fill && <rect opacity="0.1" x="0.666992" y="0.5" width="36" height="36" rx="8" fill="#E82F0F" />}
+    <path d="M13.4477 19.8225L18.0002 24.375L22.5527 19.8225" stroke="#E82F0F" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M18 11.625L18 24.2475" stroke="#E82F0F" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 );
 

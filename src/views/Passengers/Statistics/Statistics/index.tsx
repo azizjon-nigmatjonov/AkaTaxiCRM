@@ -13,16 +13,17 @@ interface IProps {
 }
 const StatisticsCard = ({ data }: IProps) => {
   const [dates, setDates] = useState<any>([]);
-
+  
   useEffect(() => {
     setDates([{ label: "Haftalik", value: "weekly" }]);
   }, []);
   // let total: number = data?.men + data?.women;
+
   return (
     <div className="space-y-4">
       <CCard style={{ minHeight: "0px" }}>
         <h3 className="font-[600]">Umumiy yo‘lovchilar</h3>
-        <p className="text-[var(--gray)] mb-4">{0}</p>
+        <p className="text-[var(--gray)] mb-4">{'8,499ta'}</p>
         <div className="flex flex-col">
           <PercentCard
             icon={<ManIcon />}
@@ -38,6 +39,7 @@ const StatisticsCard = ({ data }: IProps) => {
           />
         </div>
       </CCard>
+      
       <CCard style={{ minHeight: "0px" }}>
         <CSelect options={dates} />
         <div className="mt-4">

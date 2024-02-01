@@ -112,6 +112,10 @@ const ActiveDrivers = () => {
         render: (val?: any) => {
           return <>{FormatTime(val, "time")}</>;
         },
+      },
+      {
+        title: `Yo'lovchi`,
+        id:'clients_name'
       }
     ];
   }, []);

@@ -74,8 +74,9 @@ const Router = () => {
       card_info,
     };
     
+    
     if (!list.includes(obj.id)) {
-      setRoutes((prev: any) => ({        
+      setRoutes((prev: any) => ({  
         ...prev,        
         [parent]: [...prev[parent], obj],  
       }));      
@@ -161,6 +162,7 @@ const Router = () => {
             })}
             element={<Drivers />}
           />
+
           <Route
             path={getPath({
               parent: "drivers",
@@ -171,6 +173,7 @@ const Router = () => {
             })}
             element={<Driver />}
           />
+          
           <Route
             path={getPath({
               parent: "drivers",
@@ -215,7 +218,7 @@ const Router = () => {
             path={getPath({
               parent: "drivers",
               link: "statistics",
-              sidebar: false,
+              sidebar: true,
               title: "Statistika: haydovchi",
               icon: "graph",
             })}
