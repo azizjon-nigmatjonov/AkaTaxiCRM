@@ -20,7 +20,7 @@ export const Header = ({
       {children ? (
         children
       ) : (
-        <h3 className="text-2xl font-[600] text-[var(--black)]">{title}</h3>
+        <h3 className="text-2xl font-[600] text-[var(--black)]">{title}</h3> 
       )}
 
       {user && <UserInfo />}

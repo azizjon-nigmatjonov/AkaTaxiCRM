@@ -65,6 +65,10 @@ const ActivePassengers = () => {
       //     return val && <>{val} ta</>;
       //   },
       // },
+      {
+        title: 'Haydovchi',
+        id:'driver_name'
+      }
      
     ];
   }, []);
