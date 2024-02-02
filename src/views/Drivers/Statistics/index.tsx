@@ -13,6 +13,8 @@ const DriverStatistics = () => {
   const { data: widgets, isLoading } = useQuery(['GET_GRAPH_LIST'], () => {
     return driverService.getWidgets()
   })
+
+
   const { data: graph, isLoading: barLoading } = useQuery(['GET_GRAPH_DATA'], () => {
     return driverService.getDriversGraph()
   })
@@ -25,6 +27,7 @@ const DriverStatistics = () => {
     return widgets?.data ?? []
   }, [widgets])
 
+
   const graphData: any = useMemo(() => {
     if (!graph?.data) return []
     return Object.values(graph?.data)
@@ -32,7 +35,6 @@ const DriverStatistics = () => {
 
   const regionUser: any = useMemo(() => {
     return userRegion?.data ?? []
-
   }, [userRegion])
 
 
@@ -78,12 +80,12 @@ const DriverStatistics = () => {
             </div>
 
             <div>
-              {isLoading ? <Skeleton height={200}/> : <Progress size={70} color='var(--main)' data={regionUser} />}
+              {isLoading ? <Skeleton height={200} /> : <Progress size={70} color='var(--main)' data={regionUser} />}
             </div>
 
           </CCard>
         </div>
-      </div >
+      </div>
     </>
   );
 };
