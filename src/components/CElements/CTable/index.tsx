@@ -335,6 +335,7 @@ const CTable = ({
             ))}
           </CTableRow>
         </CTableHead>
+        
         <CTableBody
           loader={isLoading}
           columnscount={headColumns?.length}

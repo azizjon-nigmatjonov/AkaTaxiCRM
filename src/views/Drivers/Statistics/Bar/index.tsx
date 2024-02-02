@@ -22,7 +22,7 @@ const StatisticsLineChart = ({ grapData, loading }: { grapData: any, loading?: a
     return (
         <div>
             {loading ? <Skeleton height={300}/> : <BarChart
-                width={1400}
+                // width={1400}
                 height={300}
                 series={[
                     { data: grapData, label: 'Mashrutlar soni', id: 'pvId', color: 'var(--main)', },
