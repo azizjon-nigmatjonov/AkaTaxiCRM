@@ -22,7 +22,7 @@ const xLabels = [
   'Dek'
 ];
 
-const StatisticsLineChart: FC<Props> = ({ data, width = 947, height = 481 }) => {
+const StatisticsLineChart: FC<Props> = ({ data, width = 875, height = 481 }) => {
 
   const getGraph: any = useMemo(() => {
     let trips: any = [];

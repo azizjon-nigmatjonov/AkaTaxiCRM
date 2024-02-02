@@ -17,13 +17,11 @@ const Calendar = () => {
 
   const { data: calendar, isLoading } = useQuery(
     ["GET_CALENDAR"],
-    () => {
-      return calendarService.getList();
-    },
-    {
-      enabled: true,
-    }
+    () => {return calendarService.getList()},{enabled: true,}
   );
+
+  console.log(month);
+  
 
   return (
     <>
