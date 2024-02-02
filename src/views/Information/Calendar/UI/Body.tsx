@@ -2,8 +2,7 @@ import { ColorConstants } from "../../../../constants/website";
 import Lighter from "./Lighter";
 import cls from "./style.module.scss";
 
-const Body = ({ list = [], month = {} }: { list: any, month: any }) => {
-  // console.log('month', month);
+const Body = ({ list = [],  }: { list?: any, month?: any }) => {
 
 
   return (
