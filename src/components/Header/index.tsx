@@ -3,6 +3,7 @@ import UserInfo from "./UserInfo";
 
 interface Props {
   title?: string;
+  titleIn?: string;
   children?: any;
   sticky?: boolean;
   user?: boolean;
@@ -10,6 +11,7 @@ interface Props {
 
 export const Header = ({
   title = "",
+  titleIn = '',
   sticky = false,
   children,
   user = true,
@@ -20,7 +22,7 @@ export const Header = ({
       {children ? (
         children
       ) : (
-        <h3 className="text-2xl font-[600] text-[var(--black)]">{title}</h3> 
+        <h3 className="text-2xl font-[600] text-[var(--black)]"><span className={`${titleIn && 'text-[var(--gray)]'}`}>{title}</span>{ '/' + titleIn}</h3> 
       )}
 
       {user && <UserInfo />}

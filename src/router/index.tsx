@@ -26,6 +26,7 @@ import ProfilePage from "../views/Settings/Profile";
 import Partners from "../views/Partners";
 import Partner from "../views/Partners/Partner";
 import { SmsCreateForm } from "../views/Settings/SMS/Form";
+import AddDriver from "../views/Drivers/Drivers/AddDriver";
 
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
@@ -41,9 +42,9 @@ interface Path {
 
 const Router = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state: any) => state.auth.isAuth);  
+  const isAuth = useSelector((state: any) => state.auth.isAuth);
   const [list, setList] = useState<string[]>([]);
-  
+
   const [routes, setRoutes] = useState({
     passengers: [],
     drivers: [],
@@ -62,7 +63,7 @@ const Router = () => {
     card_info,
   }: Path) => {
 
-    const path = `${parent}/${link}`;  
+    const path = `${parent}/${link}`;
 
     const obj = {
       path: path,
@@ -73,18 +74,18 @@ const Router = () => {
       icon,
       card_info,
     };
-    
-    
+
+
     if (!list.includes(obj.id)) {
-      setRoutes((prev: any) => ({  
-        ...prev,        
-        [parent]: [...prev[parent], obj],  
-      }));      
-      setList((prev) => [...prev, obj.id]);  
+      setRoutes((prev: any) => ({
+        ...prev,
+        [parent]: [...prev[parent], obj],
+      }));
+      setList((prev) => [...prev, obj.id]);
     }
     return path;
   };
-    
+
 
   useEffect(() => {
     dispatch(websiteActions.setRoutes({ ...routes }));
@@ -140,7 +141,7 @@ const Router = () => {
             })}
             element={<ActivePassengers />}
           />
-          
+
           <Route
             path={getPath({
               parent: "passengers",
@@ -173,7 +174,18 @@ const Router = () => {
             })}
             element={<Driver />}
           />
-          
+
+          <Route
+            path={getPath({
+              parent: "drivers",
+              link: "add",
+              sidebar: false,
+              title: "",
+              icon: "",
+            })}
+            element={<AddDriver />}
+          />
+
           <Route
             path={getPath({
               parent: "drivers",

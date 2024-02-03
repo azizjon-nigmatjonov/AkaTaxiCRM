@@ -122,6 +122,8 @@ export const CTableBody = ({
   dataLength: any;
   columnscount?: any;
 }) => {
+
+  
   return (
     <>
       <TableLoader isVisible={loader} rowsCount={rowsCount} />

@@ -39,6 +39,9 @@ const HFTextField = ({
   ...props
 }: Props) => {
   const [password, setPassword] = useState(true);
+
+  
+
   // const { t } = useTranslation();
   useEffect(() => {
     if (defaultValue) {
