@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <div className="flex justify-between h-[60px] items-center px-5">
-      <p className="text-[var(--error)] font-medium">1 Febral, 2024 - 31 Febral, 2024</p>
+      <p className="text-[var(--error)] font-medium">1 Fevral, 2024 - 31 Fevral, 2024</p>
 
       <div className="flex space-x-[30px] font-medium">
         <p className="flex items-center">

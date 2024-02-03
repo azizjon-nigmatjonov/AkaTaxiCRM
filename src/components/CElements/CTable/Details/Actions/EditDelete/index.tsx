@@ -9,9 +9,10 @@ interface Props {
 
 export const TableDelete = ({
   element,
-  tableActions = () => {},
+  tableActions = () => { },
   permissions = [],
 }: Props) => {
+  
   return (
     <div className={cls.tableDelete}>
       <div

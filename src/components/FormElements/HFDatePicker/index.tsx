@@ -20,7 +20,6 @@ export const HFDatePicker = ({
   required,
   placeholder,
 }: Props) => {
-  console.log('defaultValue 11', defaultValue);
   
   return (
     <Controller

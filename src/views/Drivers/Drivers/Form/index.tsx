@@ -19,6 +19,7 @@ interface Props {
 }
 
 const Form = ({ refetch }: Props) => {
+  
   const schema = Validation();
   const { navigateQuery, getQueries } = usePageRouter();
   const query = getQueries();
@@ -101,8 +102,10 @@ const Form = ({ refetch }: Props) => {
       });
     }
   };
+  
 
   return (
+
     <CModal
       title={query?.id === "create" ? "Yangi haydovchi qo'shish" : "Tahrirlash"}
       open={!!query?.id}
@@ -111,7 +114,8 @@ const Form = ({ refetch }: Props) => {
         reset();
       }}
       textDeleteBtn="cancel"
-      handleSave={() => handleSubmit()}
+      handleSave={() => handleSubmit()
+      }
     >
       <div className="grid space-y-3">
         <HFTextField
@@ -167,6 +171,7 @@ const Form = ({ refetch }: Props) => {
           setValue={setValue}
           defaultValue={driver?.data?.phone}
         />
+        
       </div>
     </CModal>
   );

@@ -19,8 +19,6 @@ const Calendar = () => {
     ["GET_CALENDAR"],
     () => {return calendarService.getList()},{enabled: true,}
   );
-
-  console.log(month);
   
 
   return (

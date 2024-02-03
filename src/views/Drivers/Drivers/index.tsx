@@ -16,6 +16,8 @@ import ImageFrame from "../../../components/ImageFrame";
 const Drivers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
   const { currentPage, q } = useGetQueries();
+  // const { getQueries } = usePageRouter();
+
 
   const { data, isLoading, refetch } = useQuery(
     ["GER_DRIVERS_LIST", currentPage, q],
@@ -23,6 +25,7 @@ const Drivers = () => {
       return driverService.getList({ page: currentPage, perPage: 10, q });
     }
   );
+
 
   const headColumns = useMemo(() => {
     return [
@@ -111,10 +114,11 @@ const Drivers = () => {
     navigateQuery({ q: evt })
   };
 
+
   return (
     <>
-      <Header title="Haydovchilar" />
-      <div className="px-6">
+      <Header title="Haydovchilar ro'yhati" />
+     <div className="px-6">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <FilterButton text="filter">
@@ -136,7 +140,6 @@ const Drivers = () => {
           currentPage={currentPage}
           clickable={true}
         />
-
         <Form refetch={refetch} />
       </div>
     </>

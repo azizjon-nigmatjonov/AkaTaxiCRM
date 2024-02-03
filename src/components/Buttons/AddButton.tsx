@@ -24,10 +24,11 @@ const AddButton = ({
   ...props
 }: Props) => {
   const { t } = useTranslation();
-  
+
+
   return (
     <div id={id ? id : "addBtn"} {...props}>
-      <Button  className={classes} >
+      <Button className={classes} >
         {iconLeft === true ? <PlusIcon /> : iconLeft}
         {children ? (
           children

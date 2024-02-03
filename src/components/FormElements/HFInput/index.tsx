@@ -52,7 +52,7 @@ export default function HFInput({
         placeholder={t(placeholder)}
         disabled={disabled}
         defaultValue={defaultValue}
-        className={`w-full bg-transparent focus:border-[var(--main)] px-2 placeholder:text-[var(--gray)] rounded-[14px] px-[14px] pl-[40px] h-[50px] ${
+        className={`w-full bg-transparent focus:border-[var(--main)] placeholder:text-[var(--gray)] rounded-[14px] px-[14px] pl-[40px] h-[50px] ${
           errors[name] ? "border border-[var(--error)]" : ""
         } ${classesInput}`}
         {...props}

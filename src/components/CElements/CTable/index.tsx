@@ -65,6 +65,7 @@ const CTable = ({
   const [currDelete, setCurrDelete] = useState<any>({});
   const dispatch = useDispatch();
 
+  
 
   const bodySource = useMemo(() => {
     if (!bodyColumns?.length) return [];
@@ -257,7 +258,7 @@ const CTable = ({
     }
   };
 
-
+  
 
   return (
     <div id="table">
@@ -388,8 +389,8 @@ const CTable = ({
                           {column.render ? Array.isArray(column.id) ? column.render(column.id.map((data: any) => item[data])) : column.render(item[column.id]) : item[column.id]}
                         </span>
                       )}
-                      {
-                        column.id === "actions" && !item.empty && (
+                      
+                      {column.id === "actions" && !item.empty && (
                           <div className="relative">
                             {column.permission.length <= 3 ? (
                               <div>
