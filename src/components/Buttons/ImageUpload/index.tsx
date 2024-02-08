@@ -17,7 +17,6 @@ interface Props {
   setValue?: (val?: any, val2?: any) => void;
   size?: boolean,
   style?: any,
-  loading?: boolean,
 }
 
 const ImageUploadBtn = ({
@@ -31,13 +30,12 @@ const ImageUploadBtn = ({
   label = "",
   size = false,
   style,
-  // loading = false
-
 }: Props) => {
   const inputRef: any = useRef(null);
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
   const location = useLocation()
+  
   const inputChangeHandler = (e: any) => {
     setLoading(true);
     const file = e?.target.files[0];
