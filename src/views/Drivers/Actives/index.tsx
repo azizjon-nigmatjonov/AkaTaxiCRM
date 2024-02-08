@@ -68,7 +68,6 @@ const ActiveDrivers = () => {
     }
   }, [carModals])
 
-  console.log(carModalData);
   
 
   const headColumns = useMemo(() => {
@@ -139,7 +138,6 @@ const ActiveDrivers = () => {
 
   const handleRegion = (evt: any) => {
     navigateQuery({ region_id: evt })
-    console.log(evt);
 
   }
 
