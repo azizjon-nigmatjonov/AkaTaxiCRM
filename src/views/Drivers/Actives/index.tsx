@@ -52,7 +52,7 @@ const ActiveDrivers = () => {
 
 
   const { data: carModals } = useQuery(['GET_CAR_MODELS'], () => {
-    return carService.getCarModel()
+    return carService.getCarModel();
   });
 
   const carModalData: any = useMemo(() => {
@@ -67,6 +67,9 @@ const ActiveDrivers = () => {
       })
     }
   }, [carModals])
+
+  console.log(carModalData);
+  
 
   const headColumns = useMemo(() => {
     return [
@@ -132,6 +135,7 @@ const ActiveDrivers = () => {
       }
     })
   }, [regions])
+
 
   const handleRegion = (evt: any) => {
     navigateQuery({ region_id: evt })

@@ -22,6 +22,7 @@ const genderList = [
 ];
 
 const MainInfo = ({ control, setValue, driver = {} }: Props) => {
+
   return (
     <div className="grid grid-cols-4 gap-4 mt-5">
       <HFTextField
@@ -37,7 +38,7 @@ const MainInfo = ({ control, setValue, driver = {} }: Props) => {
         control={control}
         label={`Telefon raqam`}
         placeholder={`Telefon raqam`}
-        mask={"+\\9\\9\\8 99 999 99 99"}
+        // mask={"+\\9\\9\\8 99 999 99 99"}
         setValue={setValue}
         defaultValue={driver?.phone}
       />
@@ -56,7 +57,7 @@ const MainInfo = ({ control, setValue, driver = {} }: Props) => {
         defaultValue={driver?.birthday}
       /> */}
       <HFSelect
-        name="region_id"
+        name="gender"
         control={control}
         options={genderList}
         label="Jins"

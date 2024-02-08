@@ -10,7 +10,7 @@ interface Props {
   id?: string;
   children?: any;
   classes?: string;
-  type?: string;
+  type?: any;
   onClick?: (val?: any) => void;
 }
 
@@ -28,7 +28,7 @@ const AddButton = ({
 
   return (
     <div id={id ? id : "addBtn"} {...props}>
-      <Button className={classes} >
+      <Button type={type} className={classes} >
         {iconLeft === true ? <PlusIcon /> : iconLeft}
         {children ? (
           children

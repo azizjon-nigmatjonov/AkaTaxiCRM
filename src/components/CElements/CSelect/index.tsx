@@ -25,8 +25,8 @@ const CSelect = ({
 
   return (
     <>
-      {label && <CLabel title={label} />}
       <div id={`cselect-${id}`}>
+        {label && <CLabel title={label} />}
         <Select
           // sx={{ m: 1, width: 112, height: 3 }}
           defaultValue={'options?.[0]?.value'}

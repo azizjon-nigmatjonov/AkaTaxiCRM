@@ -141,6 +141,7 @@ const Passengers = () => {
               text="new_passenger"
               onClick={() => navigateQuery({ id: "create" })}
             />
+
           </div>
         </SectionHeader>
 

@@ -16,11 +16,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { websiteActions } from "../../../store/website";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Validation } from "./validate";
+
+
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const schema = Validation();
   const user = useSelector((state: any) => state.auth.user);
   const [logout, setLogout] = useState(false);
+
   const {
     control,
     setValue,
@@ -31,9 +34,11 @@ const ProfilePage = () => {
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
+  
 
   const onSubmit = () => {
     const params: any = getValues();
+
     params.phone = params.phone?.substring(1)?.replace(/\s+/g, "");
     authService.updateUserInfo(params).then(() => {
       dispatch(
@@ -42,6 +47,7 @@ const ProfilePage = () => {
           translation: "common",
         })
       );
+
       setTimeout(() => {
         window.location.reload();
       }, 3000);
