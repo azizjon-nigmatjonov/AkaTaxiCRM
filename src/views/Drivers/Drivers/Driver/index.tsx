@@ -27,7 +27,6 @@ const tabList = [
 const Driver = () => {
   const { tab, id } = useGetQueries();
   
-
   const { data: driver } = useQuery(
     ["GET_DRIVER", id],
     () => {

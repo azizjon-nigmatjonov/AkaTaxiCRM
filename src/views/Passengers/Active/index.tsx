@@ -107,8 +107,6 @@ const Regions = useMemo(() => {
   });
 }, [regions]);
 
-// console.log(regions);
-
 
 
 const handleSearch = (value: any) => {

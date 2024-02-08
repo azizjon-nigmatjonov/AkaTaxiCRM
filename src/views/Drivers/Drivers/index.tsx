@@ -13,6 +13,7 @@ import CSlider from "../../../components/CElements/CSlider";
 import { Header } from "../../../components/Header";
 import ImageFrame from "../../../components/ImageFrame";
 
+
 const Drivers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
   const { currentPage, q } = useGetQueries();
@@ -25,7 +26,6 @@ const Drivers = () => {
       return driverService.getList({ page: currentPage, perPage: 10, q });
     }
   );
-
 
   const headColumns = useMemo(() => {
     return [
@@ -118,7 +118,7 @@ const Drivers = () => {
   return (
     <>
       <Header title="Haydovchilar ro'yhati" />
-     <div className="px-6">
+      <div className="px-6">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <FilterButton text="filter">
@@ -126,7 +126,7 @@ const Drivers = () => {
             </FilterButton>
             <AddButton
               text="new_driver"
-              onClick={() => navigateQuery({ id: "create" })}
+              onClick={() => navigateTo('/drivers/add')}
             />
           </div>
         </SectionHeader>

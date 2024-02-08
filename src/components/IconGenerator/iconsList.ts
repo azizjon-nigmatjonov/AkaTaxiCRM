@@ -11,8 +11,10 @@ import {
   CalendarIcon,
   ChatIcon,
   RolsIcon,
-  LockIcon
+  LockIcon,
 } from "./Svg/Sidebar";
+
+import { PassengerIcon, DriverIcon, PassengerVehicleIcon, DriverVehicleIcon } from './Svg'
 
 export const iconsList = [
   {
@@ -66,5 +68,23 @@ export const iconsList = [
   {
     name: 'partners',
     component: PartnersIcon
+  },
+  {
+    name: 'bookings_count',
+    component: DriverVehicleIcon
+  },
+  {
+    name: 'driver_count',
+    component: DriverIcon
+  },
+  {
+    name: 'trip_count',
+    component: PassengerVehicleIcon,
+  },
+  {
+    name: 'passenger_count',
+    component: PassengerIcon
   }
+
 ];
+

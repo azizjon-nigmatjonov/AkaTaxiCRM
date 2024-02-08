@@ -5,9 +5,10 @@ interface Props {
   icon: string;
   fill?: any
 }
+// console.log(iconsList);
 
 const IconGenerator: FC<Props> = ({ icon, fill, ...props }) => {
-  const findedIcon = iconsList.find((el) => el.name === icon);
+  const findedIcon = iconsList.find((el) => el.name === icon);  
   if (!findedIcon) return null;
 
   return <findedIcon.component fill={fill} {...props} />;

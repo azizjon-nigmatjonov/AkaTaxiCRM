@@ -7,8 +7,6 @@ export default function usePageRouter() {
   const [searchParams] = useSearchParams();
   const query = Object.fromEntries(searchParams.entries());
 
-  // console.log(query);
-
 
   const navigateTo = (path: string, state?: object) => {
     const link = path;

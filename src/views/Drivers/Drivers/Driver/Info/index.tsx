@@ -5,35 +5,45 @@ import CarInfo from "./CarInfo";
 import DriverImages from "./Images";
 
 const DriverInfo = ({ driver = {} }: { driver?: any }) => {
-  const { control, setValue } = useForm({
+  const { control, setValue, handleSubmit } = useForm({
     mode: "onSubmit",
   });
-  
+
+
+  const submitHandler = (e: any) => {
+    console.log(e);
+
+  }
+
+
   return (
     <div className="grid gap-5">
-      <CCard style={{ minHeight: "auto" }}>
-        <p className="bg-[var(--softGray)] p-3 rounded-[10px] font-[600]">
-          Asosiy ma’lumotlar
-        </p>
+      <form onSubmit={handleSubmit(submitHandler)}>
+        <CCard style={{ minHeight: "auto" }}>
+          <p className="bg-[var(--softGray)] p-3 rounded-[10px] font-[600]">
+            Asosiy ma’lumotlar
+          </p>
 
-        <MainInfo driver={driver} control={control} setValue={setValue} />
-      </CCard>
+          <MainInfo driver={driver} control={control} setValue={setValue} />
+        </CCard>
 
-      <CCard style={{ minHeight: "auto" }}>
-        <p className="bg-[var(--softGray)] p-3 rounded-[10px] font-[600]">
-          Mashina ma’lumotlari
-        </p>
+        <CCard style={{ minHeight: "auto" }}>
+          <p className="bg-[var(--softGray)] p-3 rounded-[10px] font-[600]">
+            Mashina ma’lumotlari
+          </p>
 
-        <CarInfo driver={driver} control={control} setValue={setValue} />
-      </CCard>
+          <CarInfo driver={driver} control={control} setValue={setValue} />
+        </CCard>
 
-      <CCard style={{ minHeight: "auto" }}>
-        <p className="bg-[var(--softGray)] p-3 rounded-[10px] font-[600]">
-          Haydovchi rasmlari
-        </p>
+        <CCard style={{ minHeight: "auto" }}>
+          <p className="bg-[var(--softGray)] p-3 rounded-[10px] font-[600]">
+            Haydovchi rasmlari
+          </p>
 
-        <DriverImages driver={driver} control={control} setValue={setValue} />
-      </CCard>
+          <DriverImages driver={driver} control={control} setValue={setValue} />
+          <button type='submit'>submit</button>
+        </CCard>
+      </form>
     </div>
   );
 };

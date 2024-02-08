@@ -4,7 +4,6 @@ import cls from "./style.module.scss";
 
 const Body = ({ list = [], }: { list?: any, month?: any }) => {
 
-
   console.log(list);
 
   return (
@@ -47,18 +46,22 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
               <Lighter
                 text={`${element.passenger_count} ta`}
                 color={ColorConstants.blue}
+                // icon={element.passenger_count}
               />
               <Lighter
                 text={`${element.driver_count} ta`}
                 color={ColorConstants.error}
+                // icon={element.driver_count}
               />
               <Lighter
                 text={`${element.trip_count} ta`}
                 color={ColorConstants.darkerGreen}
+                // icon={element.trip_count}
               />
               <Lighter
                 text={`${element.bookings_count} ta`}
                 color={'rgb(234 179 8)'}
+                // icon={element.bookings_count}
               />
             </div>
           ))}
