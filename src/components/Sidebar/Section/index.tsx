@@ -16,9 +16,7 @@ const SidebarSection = () => {
     return routes ?? [];
   }, [routes]);
 
- 
-  // console.log(List);
-  
+   
   return (
     <div className={cls.section}>
       {Object.entries(List)?.map(([key, value]) => <div key={key} className={cls.menu}>

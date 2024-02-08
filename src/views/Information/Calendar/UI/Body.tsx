@@ -1,10 +1,9 @@
-import { ColorConstants } from "../../../../constants/website";
+// import { ColorConstants } from "../../../../constants/website";
 import Lighter from "./Lighter";
 import cls from "./style.module.scss";
 
 const Body = ({ list = [], }: { list?: any, month?: any }) => {
 
-  console.log(list);
 
   return (
     <div className={cls.calendar}>
@@ -45,23 +44,23 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
               <span className="font-medium">{index + 1}</span>
               <Lighter
                 text={`${element.passenger_count} ta`}
-                color={ColorConstants.blue}
-                // icon={element.passenger_count}
+                // color={ColorConstants.blue}
+                icon={'passenger_count'}
               />
               <Lighter
                 text={`${element.driver_count} ta`}
-                color={ColorConstants.error}
-                // icon={element.driver_count}
+                // color={ColorConstants.error}
+                icon={'driver_count'}
               />
               <Lighter
                 text={`${element.trip_count} ta`}
-                color={ColorConstants.darkerGreen}
-                // icon={element.trip_count}
+                // color={ColorConstants.darkerGreen}
+                icon={'trip_count'}
               />
               <Lighter
                 text={`${element.bookings_count} ta`}
-                color={'rgb(234 179 8)'}
-                // icon={element.bookings_count}
+                // color={'rgb(234 179 8)'}
+                icon={'bookings_count'}
               />
             </div>
           ))}

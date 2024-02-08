@@ -6,24 +6,24 @@ const Header = () => {
 
       <div className="flex space-x-[30px] font-medium">
         <p className="flex gap-1 items-center">
-          {/* <PassengerVehicleIcon/> */}
+          <PassengerVehicleIcon/>
           Yangi mashurtlar
-          <div className="w-[8px] h-[8px] bg-[var(--darkerGreen)] rounded-full ml-1"></div>
+          {/* <div className="w-[8px] h-[8px] bg-[var(--darkerGreen)] rounded-full ml-1"></div> */}
         </p>
         <p className="flex gap-1 items-center">
-          {/* <DriverIcon /> */}
+          <DriverIcon />
           Yangi haydo'vchilar
-          <div className="w-[8px] h-[8px] bg-[var(--error)] rounded-full ml-1"></div>
+          {/* <div className="w-[8px] h-[8px] bg-[var(--error)] rounded-full ml-1"></div> */}
         </p>
         <p className="flex gap-1 items-center">
-          {/* <PassengerIcon /> */}
+          <PassengerIcon />
           Yangi yo'lovchilar
-          <div className="w-[8px] h-[8px] bg-[var(--blue)] rounded-full ml-1"></div>
+          {/* <div className="w-[8px] h-[8px] bg-[var(--blue)] rounded-full ml-1"></div> */}
         </p>
         <p className="flex gap-1 items-center">
-          {/* <DriverVehicleIcon/> */}
+          <DriverVehicleIcon/>
           Yangi qidiruvlar
-          <div className="w-[8px] h-[8px] bg-yellow-500 rounded-full ml-1"></div>
+          {/* <div className="w-[8px] h-[8px] bg-yellow-500 rounded-full ml-1"></div> */}
         </p>
       </div>
     </div>

@@ -53,6 +53,7 @@ const AddDriver = () => {
 
     const submitHandler = (e: any) => {
         setLoading(true)
+
         const data = new FormData();
         for (let i in e) {
             data.append(i, e[i])
