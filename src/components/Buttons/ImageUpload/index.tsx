@@ -35,7 +35,7 @@ const ImageUploadBtn = ({
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
   const location = useLocation()
-  
+
   const inputChangeHandler = (e: any) => {
     setLoading(true);
     const file = e?.target.files[0];
@@ -109,8 +109,8 @@ const ImageUploadBtn = ({
             )}
           </div>
         </div>
-      )}>
-      </Controller> : <div className="flex  flex-col">
+      )}/>
+       : <div className="flex  flex-col">
         {label ? <CLabel title={label} /> : ""}
         <div
           onClick={() => {
