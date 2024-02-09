@@ -37,6 +37,9 @@ const CPagination = ({
   const count: any = usePaginationCount(props?.count, limit);
   const navigate = useNavigate();
 
+  console.log(props, limit);
+
+
   function handleRouteActions(queryObj: {
     limit?: any;
     page: number;
@@ -49,7 +52,7 @@ const CPagination = ({
       if (queryObj?.limit) setCurrentLimit(queryObj.queryLimit ?? 10);
       return;
     }
-    
+
     const newPage = queryObj.page.toString();
     const newQuery = {
       ...query,
@@ -73,7 +76,7 @@ const CPagination = ({
       <p className="text-[var(--gray)]">{count.count} tadan 1-{dataLength} tasi</p>
       <Pagination
         onChange={(e, val) =>
-          handleRouteActions({ page: val, queryLimit: query?.limit, something: e  })
+          handleRouteActions({ page: val, queryLimit: query?.limit, something: e })
         }
         {...props}
         count={count.tableCount}

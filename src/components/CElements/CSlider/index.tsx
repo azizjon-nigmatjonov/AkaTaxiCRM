@@ -23,6 +23,8 @@ const CSlider = ({ label = '', handleValue }: {label?: string, handleValue?: (ev
       setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
     }
     
+    console.log(value1);
+    
     handleValue!(value1)
   };
 
