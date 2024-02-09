@@ -23,7 +23,7 @@ const Calendar = () => {
 
   return (
     <>
-      <Header title="Kalendar" />
+      <Header title="Kalendar bo’yicha ma’lumotlar" />
       <div className="px-5">
         {/* <SectionHeader>
           <FilterButton text="filter" >

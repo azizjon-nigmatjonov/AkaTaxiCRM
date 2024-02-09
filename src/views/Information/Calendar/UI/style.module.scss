@@ -13,6 +13,11 @@
       }
     }
   }
+  .header {
+    .cell{
+      color: $gray;
+    }
+  }
   .body {
     .cell {
       border-top: 0;

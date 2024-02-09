@@ -5,6 +5,9 @@ export const useGetQueries = () => {
   const [searchParams] = useSearchParams();
 
   const query = Object.fromEntries(searchParams.entries());
+  console.log(searchParams);
+  console.log(query.page);
+  console.log(parseInt(query.page), 'parse');
 
 
   const params: any = useMemo(() => {

@@ -29,10 +29,10 @@ const Drivers = () => {
 
   const headColumns = useMemo(() => {
     return [
-      {
-        title: "ID",
-        id: "id",
-      },
+      // {
+      //   title: "ID",
+      //   id: "id",
+      // },
       {
         title: "Ism familya",
         id: "info",
