@@ -36,7 +36,6 @@ const FormDatePicker = ({
   error,
 }: Props) => {
   const datePickerRef: any = useRef();
-  console.log(error);
 
   return (
     <div id="cDatepicker">

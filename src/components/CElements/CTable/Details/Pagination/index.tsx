@@ -37,7 +37,6 @@ const CPagination = ({
   const count: any = usePaginationCount(props?.count, limit);
   const navigate = useNavigate();
 
-  console.log(props, limit);
 
 
   function handleRouteActions(queryObj: {

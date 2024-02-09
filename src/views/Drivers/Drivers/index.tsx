@@ -27,6 +27,7 @@ const Drivers = () => {
     }
   );
 
+
   const headColumns = useMemo(() => {
     return [
       // {
@@ -46,6 +47,9 @@ const Drivers = () => {
       {
         title: "phone_number",
         id: "phone",
+        render: (val: any) => val && (
+          <p>+{val}</p>
+        )
       },
       {
         title: "Tug‘ilgan sana",
@@ -55,19 +59,26 @@ const Drivers = () => {
         },
       },
       {
-        title: "car",
-        id: "car_name",
+        title: "Mashina / raqam",
+        id: "car_info",
+        render: (val: any) => val && (
+          <p>{val.car}, <span className="block text-[var(--gray)]">{val.number}</span></p>
+        )
       },
       {
-        title: "mashina raqami",
-        id: "car_number",
+        title: "Hisob raqami",
+        id: "balance",
       },
+      // {
+      //   title: "Yaratilgan sana",
+      //   id: "created_at",
+      //   render: (val: any) => {
+      //     return <>{FormatTime(val)}</>
+      //   }
+      // },
       {
-        title: "Yaratilgan sana",
-        id: "created_at",
-        render: (val: any) => {
-          return <>{FormatTime(val)}</>
-        }
+        title:'Viloyat',
+        id:'from'
       },
       {
         title: "",
@@ -105,6 +116,10 @@ const Drivers = () => {
             image: el?.image,
             gender: el.gender
           },
+          car_info: {
+            car: el.car_name,
+            number: el.car_number
+          }
         };
       }) ?? []
     );

@@ -27,7 +27,6 @@ const ActivePassengers = () => {
   );
 
 
-
   const regions = useSelector((state: any) => state.regions.regions);
 
 

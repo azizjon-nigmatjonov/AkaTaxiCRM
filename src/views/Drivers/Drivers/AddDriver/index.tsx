@@ -3,7 +3,7 @@ import { Header } from '../../../../components/Header'
 import CCard from '../../../../components/CElements/CCard'
 import MainInfo from '../Driver/Info/Main'
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
+import {  useSelector } from 'react-redux'
 import HFSelect from '../../../../components/FormElements/HFSelect'
 import { useQuery } from 'react-query'
 import carService from '../../../../services/cars'
@@ -12,12 +12,12 @@ import ImageUploadBtn from '../../../../components/Buttons/ImageUpload'
 import AddButton from '../../../../components/Buttons/AddButton'
 import CancelButton from '../../../../components/Buttons/Cancel'
 import driverService from '../../../../services/drivers'
-import { websiteActions } from "../../../../store/website";
+// import { websiteActions } from "../../../../store/website";
 import usePageRouter from '../../../../hooks/useObjectRouter'
 
 const AddDriver = () => {
     const regions = useSelector((state: any) => state.regions.regions);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const { navigateTo } = usePageRouter()
     const [loading, setLoading] = useState(false)
 
@@ -59,19 +59,7 @@ const AddDriver = () => {
             data.append(i, e[i])
         }
 
-        driverService.createElement(data).then((_) => {
-            dispatch(
-                websiteActions.setAlertData({
-                    title: "Ma'lumotlar yangilandi!",
-                    translation: "common",
-                })
-            );
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000);
-        }).finally(() => {
-            setLoading(false)
-        })
+        driverService.createElement(data)
     }
 
 

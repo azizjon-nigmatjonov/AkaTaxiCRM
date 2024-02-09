@@ -31,16 +31,18 @@ const Passengers = () => {
     }
   );
 
+  
+
   const passengers: any = useMemo(() => {
     return data ?? {};
   }, [data]);
 
   const headColumns = useMemo(() => {
     return [
-      {
-        title: "ID",
-        id: "id",
-      },
+      // {
+      //   title: "ID",
+      //   id: "id",
+      // },
       {
         title: "Ism familya",
         id: "info",
@@ -59,14 +61,21 @@ const Passengers = () => {
       {
         title: "Tel.raqam",
         id: "username",
+        render: (val: any) => val && (
+          <p>+{val}</p>
+        )
       },
       {
-        title: "Yaratilgan sana",
-        id: "created_at",
-        render: (val?: any) => {
-          return <>{FormatTime(val)}</>;
-        },
+        title: 'telegram link',
+        id: 'telegram_link'
       },
+      // {
+      //   title: "Yaratilgan sana",
+      //   id: "created_at",
+      //   render: (val?: any) => {
+      //     return <>{FormatTime(val)}</>;
+      //   },
+      // },
       {
         title: "Tug‘ilgan sana",
         id: "birthday",
@@ -77,7 +86,7 @@ const Passengers = () => {
       {
         title: "",
         id: "actions",
-        permission: ["edit", "delete"],
+        permission: ["edit", "delete", 'add', 'remove'],
       },
     ];
   }, []);

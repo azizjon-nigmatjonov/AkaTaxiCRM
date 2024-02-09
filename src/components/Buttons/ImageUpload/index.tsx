@@ -37,6 +37,7 @@ const ImageUploadBtn = ({
   const location = useLocation()
 
   const inputChangeHandler = (e: any) => {
+    
     setLoading(true);
     const file = e?.target.files[0];
 
@@ -97,7 +98,7 @@ const ImageUploadBtn = ({
               className="hidden"
               ref={inputRef}
               // value={value}
-              onChange={(e: any) => [inputChangeHandler(e), onChange(e.target.files[0])]}
+              onChange={(e: any) => [inputChangeHandler(e), onChange(e)]}
             />
 
             {isDelete ? (
@@ -135,7 +136,6 @@ const ImageUploadBtn = ({
           ) : (
             <ImageFrame />
           )}
-          {size && !loading && <p className="underline mt-1">Rasmni yuklash</p>}
           <input
             type="file"
             className="hidden"
