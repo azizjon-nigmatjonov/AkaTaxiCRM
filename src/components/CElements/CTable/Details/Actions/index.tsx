@@ -22,12 +22,17 @@ const TabbleActions = ({
   currentIndex,
   setCurrentIndex = () => {},
 }: Props) => {
+
   const handleClick = (element: any, status?: string, active?: boolean) => {
+    
     if (active) {
+      console.log('render');
+      
       handleActions(element, status);
       setCurrentIndex(null);
     }
   };
+  
   return (
     <div>
       {currentIndex === rowIndex ? (
@@ -51,14 +56,14 @@ const TabbleActions = ({
           <Element
             text="edit"
             active={element?.is_edit}
-            onClick={() => handleClick(element, "edit", element.is_edit)}
+            onClick={() => handleClick( "edit", element, element.is_edit)}
             icon={<EditIcon fill={element?.is_edit ? "white" : ColorConstants.gray} />}
             show={permissions.includes('edit')}
           />
           <Element
             text="delete"
             active={element?.is_delete}
-            onClick={() => handleClick(element, "delete", element.is_delete)}
+            onClick={() => handleClick( "delete", element, element.is_delete)}
             icon={<DeleteIcon fill={element?.is_delete ? ColorConstants.error : ColorConstants.gray} />}
             border={false}
             show={permissions.includes('delete')}

@@ -47,18 +47,19 @@ const AddDriver = () => {
         }
     }, [carModals])
 
-    const { control, handleSubmit } = useForm({
+    const { control, handleSubmit} = useForm({
         mode: "onSubmit",
     })
 
-    const submitHandler = (e: any) => {
+    const submitHandler = (e: any) => {        
+        e.phone = e.phone?.substring(1).replace(/\s+/g, '');
+        
         setLoading(true)
 
         const data = new FormData();
         for (let i in e) {
             data.append(i, e[i])
         }
-
         driverService.createElement(data)
     }
 

@@ -15,23 +15,25 @@ import CSlider from "../../../components/CElements/CSlider";
 import { useSelector } from "react-redux";
 import { Header } from "../../../components/Header";
 import ImageFrame from "../../../components/ImageFrame";
+import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Passengers = () => {
   const { navigateQuery } = usePageRouter();
-  const { currentPage, q } = useGetQueries();
+  const {t} = useTranslation()
+  const { currentPage, q, region_id, birthday } = useGetQueries();
   const regions = useSelector((state: any) => state.regions.regions);
-
+  const setSearchParams = useSearchParams()[1]
   const { data, isLoading, refetch } = useQuery(
-    ["GET_PASSENGER_LIST", currentPage, q],
+    ["GET_PASSENGER_LIST", currentPage, q, region_id, birthday],
     () => {
-      return passengerService.getList({ page: currentPage, perPage: 10, q });
+      return passengerService.getList({ page: currentPage, perPage: 10, q, region_id, birthday });
     },
     {
       enabled: true,
     }
   );
 
-  
 
   const passengers: any = useMemo(() => {
     return data ?? {};
@@ -39,10 +41,6 @@ const Passengers = () => {
 
   const headColumns = useMemo(() => {
     return [
-      // {
-      //   title: "ID",
-      //   id: "id",
-      // },
       {
         title: "Ism familya",
         id: "info",
@@ -86,7 +84,7 @@ const Passengers = () => {
       {
         title: "",
         id: "actions",
-        permission: ["edit", "delete", 'add', 'remove'],
+        permission: ["edit", "delete",,'ds','da'],
       },
     ];
   }, []);
@@ -107,6 +105,8 @@ const Passengers = () => {
   }, [passengers]);
 
   const handleActions = (status: string, el: any) => {
+    console.log(status);
+    
     if (status === "delete") {
       passengerService.deleteElement(el.id).then(() => {
         refetch();
@@ -115,6 +115,7 @@ const Passengers = () => {
     if (status === "edit") {
       navigateQuery({ id: el.id });
     }
+    
   };
 
   const handleSearch = (value: any) => {
@@ -130,6 +131,14 @@ const Passengers = () => {
     });
   }, [regions]);
 
+  const handlerRegion = (evt: any) => {
+    navigateQuery({ region_id: evt })
+  }
+
+  const handlerAge = (evt: any) => {
+    navigateQuery({ birthday: evt })
+  }
+
   return (
     <>
       <Header title="Yo'lovchilar" />
@@ -138,19 +147,19 @@ const Passengers = () => {
           <div className="flex items-center gap-3">
             <FilterButton text="filter">
               <div>
-                <CSelect options={Regions} id="filter" label="Viloyat" />
+                <CSelect handlerValue={handlerRegion} options={Regions} id="filter" label="Viloyat" />
               </div>
               <CDriver classes="my-4" />
               <div>
-                <CSlider />
+                <CSlider handleValue={handlerAge} />
               </div>
+              <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer mt-3">{t('ignore_text')}</span>
             </FilterButton>
 
             <AddButton
               text="new_passenger"
               onClick={() => navigateQuery({ id: "create" })}
             />
-
           </div>
         </SectionHeader>
 

@@ -12,7 +12,7 @@ import HFInputMask from "../../../../components/FormElements/HFInputMask";
 import passengerService from "../../../../services/passengers";
 import { useDispatch } from "react-redux";
 import { websiteActions } from "../../../../store/website";
-import {HFDatePicker} from "../../../../components/FormElements/HFDatePicker";
+import { HFDatePicker } from "../../../../components/FormElements/HFDatePicker";
 
 interface Props {
   refetch: () => void;
@@ -27,6 +27,7 @@ const Form = ({ refetch }: Props) => {
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
+
   const { data: regions } = useQuery(["GET_REGIONS_LIST"], () => {
     return regionService.getList();
   });
@@ -72,6 +73,7 @@ const Form = ({ refetch }: Props) => {
 
   const handleSubmit = () => {
     const data = getValues();
+    
     data.phone = data.phone?.substring(1)?.replace(/\s+/g, "");
 
     if (query.id === "create") {
@@ -84,7 +86,6 @@ const Form = ({ refetch }: Props) => {
             translation: "common",
           })
         );
-
         navigateQuery({ id: "" });
         refetch();
         reset();
@@ -128,17 +129,8 @@ const Form = ({ refetch }: Props) => {
           setValue={setValue}
           defaultValue={passengerInfo?.region_id}
         />
-        <HFDatePicker name="birthday" control={control} label="Tug'ilgan kuni" required={true} />
-        {/* <HFDatepicker
-          label="Tug'ilgan sana"
-          control={control}
-          defaultValue={passengerInfo?.birthday}
-          name="birthday"
-          placeholder="Tug'ilgan kuni"
-          required={true}
-          setValue={setValue}
-        /> */}
-
+        <HFDatePicker name="birthday" control={control} placeholder="Tug'ilgan sana" label="Tug'ilgan kuni" required={true} />
+ 
         <HFInputMask
           control={control}
           name="phone"
@@ -148,6 +140,14 @@ const Form = ({ refetch }: Props) => {
           placeholder="Tel.raqam"
           required={true}
           defaultValue={passengerInfo?.phone}
+        />
+        <HFTextField
+          name="telegram_link"
+          control={control}
+          placeholder="Telegram.link"
+          label="Telegram Link"
+          setValue={setValue}
+          required={true}
         />
       </div>
     </CModal>

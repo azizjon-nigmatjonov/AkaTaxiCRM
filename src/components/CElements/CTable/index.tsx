@@ -251,6 +251,8 @@ const CTable = ({
   };
 
   const tableActions = (status: string, el: any) => {
+    console.log(status);
+    
     if (status === "delete") {
       setCurrDelete(el);
     } else {
@@ -259,7 +261,6 @@ const CTable = ({
   };
 
   
-
   return (
     <div id="table">
       <CTableWrapper

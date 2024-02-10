@@ -12,6 +12,7 @@ export const TableDelete = ({
   tableActions = () => { },
   permissions = [],
 }: Props) => {
+
   
   return (
     <div className={cls.tableDelete}>
