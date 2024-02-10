@@ -38,7 +38,7 @@ const MainInfo = ({ control, setValue, driver = {} }: Props) => {
         control={control}
         label={`Telefon raqam`}
         placeholder={`Telefon raqam`}
-        // mask={"+\\9\\9\\8 99 999 99 99"}
+        mask={"+\\9\\9\\8 99 999 99 99"}
         setValue={setValue}
         defaultValue={driver?.phone}
       />
@@ -46,6 +46,7 @@ const MainInfo = ({ control, setValue, driver = {} }: Props) => {
         name="birthday"
         control={control}
         label="Tug'ulgan sana"
+        placeholder="Tug'ulgan sana"
         defaultValue={driver?.birthday}
       />
       {/* <HFDatepicker

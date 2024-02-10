@@ -39,7 +39,6 @@ export default function usePageRouter() {
     });
   }
   
-
   const getQueries = () => query;
 
   const progmatic = () => navigate(-1);

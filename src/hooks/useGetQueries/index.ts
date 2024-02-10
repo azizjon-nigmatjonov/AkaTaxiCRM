@@ -6,8 +6,6 @@ export const useGetQueries = () => {
 
   const query = Object.fromEntries(searchParams.entries());
 
-
-
   const params: any = useMemo(() => {
     const result = {
       currentLimit: query?.limit ? parseInt(query.limit) : 10,

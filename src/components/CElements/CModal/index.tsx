@@ -38,6 +38,7 @@ const CModal: FC<Props> = ({
   handleClose = () => {},
   closable = false
 }) => {
+  
   return (
     <div id="modal">
       <Modal

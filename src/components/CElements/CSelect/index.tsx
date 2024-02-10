@@ -29,7 +29,7 @@ const CSelect = ({
         {label && <CLabel title={label} />}
         <Select
           // sx={{ m: 1, width: 112, height: 3 }}
-          defaultValue={'options?.[0]?.value'}
+          defaultValue={options?.[0]?.value}
           inputProps={{
             "aria-label": "Without label",
           }}
