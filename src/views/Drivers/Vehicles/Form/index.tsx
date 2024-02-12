@@ -68,6 +68,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
 
   const SubmitForm = () => {
     const data: any = getValues();
+    
     const params: any = {};
     params.car_class_ids = data.ids;
     params.name = {
@@ -78,6 +79,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
 
     params.file_id = data?.file_id;
 
+    
     if (query.id === "create") {
       carService.createElement(params).then(() => {
         HandleSuccess("Ma'lumot yaratildi!");

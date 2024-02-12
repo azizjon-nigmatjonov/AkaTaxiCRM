@@ -24,7 +24,7 @@ const CImageUpload = ({
   const inputChangeHandler = (e: any) => {
     setLoading(true);
     const file = e.target.files[0];
-
+        
     const data = new FormData();
     data.append("file", file);
 
