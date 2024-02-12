@@ -34,20 +34,20 @@ const BasicDatepicker = ({
 }: Props) => {
   const datePickerRef: any = useRef();
   const [value, setValue] = useState("");
-
-  const handleValue = (value: any) => {
+  
+  const handleValue = (value: any) => {    
     setValue(value);
-
     if (field) field.onChange(FormatTime(value));
   };
 
   useEffect(() => {
     if (defaultValue) {
       setValue(defaultValue);
-
       if (field) field.onChange(FormatTime(defaultValue));
     }
   }, [defaultValue]);
+
+
   return (
     <div id="basicDatePicker" className="w-full relative">
       {label && <CLabel title={label} required={required} />}

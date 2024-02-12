@@ -7,7 +7,7 @@ export const FormatTime = (time: string, type?: string) => {
     const current = new Date(time);
 
     // const timeFormat = 'HH:mm '
-    const dateFormat = ' dd.MM.yyyy'
+    const dateFormat = 'yyyy-MM-dd'
 
     const formattedDate = new Intl.DateTimeFormat('en-US', {
         hour: '2-digit',

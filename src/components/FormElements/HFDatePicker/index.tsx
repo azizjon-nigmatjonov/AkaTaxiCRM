@@ -25,7 +25,6 @@ export const HFDatePicker = ({
     <Controller
       control={control}
       name={name}
-      // placeholder={placeholder}
       rules={{
         required: required ? "required_field" : false,
         ...rules,

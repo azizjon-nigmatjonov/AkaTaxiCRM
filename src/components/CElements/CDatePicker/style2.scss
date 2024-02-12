@@ -58,8 +58,8 @@ rmdp-day.rmdp-today.highlight span {
 
 .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
   background-color: transparent;
-  border: 1px solid $primary;
-  color: $primary;
+  border: 1px solid black;
+  color: black;
 }
 
 .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) .highlight-red:hover {

@@ -13,7 +13,7 @@ export const TableDelete = ({
   permissions = [],
 }: Props) => {
 
-  
+
   return (
     <div className={cls.tableDelete}>
       <div
