@@ -19,8 +19,7 @@ import { websiteActions } from "../../../../store/website";
 const AddDriver = () => {
     const regions = useSelector((state: any) => state.regions.regions);
     const dispatch = useDispatch();
-    const { navigateTo } = usePageRouter()
-
+    const { navigateTo , navigateQuery} = usePageRouter()
     const Regions: any = useMemo(() => {
         return regions?.map((val: any) => {
             return {
@@ -64,10 +63,11 @@ const AddDriver = () => {
                     translation: "common",
                 })
             );
-
+            
             setTimeout(() => {
                 window.location.reload();
             }, 3000);
+            navigateQuery({ id: "" })
         })
     }
 
