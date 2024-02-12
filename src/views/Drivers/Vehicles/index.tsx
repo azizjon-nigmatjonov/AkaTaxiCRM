@@ -20,7 +20,6 @@ const Vehicles = () => {
     return carService.getCarClasses();
   });
 
-
   const tab = useMemo(() => {
     return currentTab ? currentTab : "1";
   }, [currentTab]);
@@ -74,7 +73,6 @@ const Vehicles = () => {
         ) : (
           ""
         )}
-
         <Form classes={tabList} tab={tab} getCarList={getCarList} />
       </div>
     </>
