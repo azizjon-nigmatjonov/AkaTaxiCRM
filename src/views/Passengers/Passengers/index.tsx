@@ -84,7 +84,7 @@ const Passengers = () => {
       {
         title: "",
         id: "actions",
-        permission: ["edit", "delete",,'ds','da'],
+        permission: ["learn_more",],
       },
     ];
   }, []);
@@ -105,7 +105,6 @@ const Passengers = () => {
   }, [passengers]);
 
   const handleActions = (status: string, el: any) => {
-    console.log(status);
     
     if (status === "delete") {
       passengerService.deleteElement(el.id).then(() => {
@@ -136,12 +135,12 @@ const Passengers = () => {
   }
 
   const handlerAge = (evt: any) => {
-    navigateQuery({ birthday: evt })
+    navigateQuery({birthday: evt })
   }
 
   return (
     <>
-      <Header title="Yo'lovchilar" />
+      <Header title="Yo'lovchilar ro'yhati" />
       <div className="px-6 ">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
@@ -160,6 +159,7 @@ const Passengers = () => {
               text="new_passenger"
               onClick={() => navigateQuery({ id: "create" })}
             />
+                
           </div>
         </SectionHeader>
 

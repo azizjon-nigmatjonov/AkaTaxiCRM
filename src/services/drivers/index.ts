@@ -1,5 +1,6 @@
 
 import request from "../../utils/request";
+import {requestjson} from '../../utils/request'
 const driverService = {
   getList: (params: any) =>
     request.get(
@@ -7,7 +8,7 @@ const driverService = {
       }&perPage=${params.perPage}${params?.car_id ? `&car_id=${params.car_id}` : ""
       }`
     ),
-  createElement: (data: any) => request.post("/drivers", data),
+  createElement: (data: any) => requestjson.post("/drivers", data),
 
   getActives: (params: any) =>
     request.get(

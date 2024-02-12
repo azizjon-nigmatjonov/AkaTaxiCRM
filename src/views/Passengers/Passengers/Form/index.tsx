@@ -27,6 +27,8 @@ const Form = ({ refetch }: Props) => {
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
+  console.log(query);
+  
 
   const { data: regions } = useQuery(["GET_REGIONS_LIST"], () => {
     return regionService.getList();
@@ -53,9 +55,14 @@ const Form = ({ refetch }: Props) => {
     }
   );
 
+  const gender =  [
+    {id: 1, value: 'm', label: 'Male'},
+    {id: 2, value: 'f', label: 'Female'}
+  ]
+
   const createElement = useMutation({
     mutationFn: (data?: any) => {
-      return passengerService.createElement(data);
+      return passengerService.createElement(data).then(data => console.log(data));
     },
     onSuccess: () => {
       dispatch(
@@ -73,7 +80,7 @@ const Form = ({ refetch }: Props) => {
 
   const handleSubmit = () => {
     const data = getValues();
-    
+
     data.phone = data.phone?.substring(1)?.replace(/\s+/g, "");
 
     if (query.id === "create") {
@@ -129,8 +136,20 @@ const Form = ({ refetch }: Props) => {
           setValue={setValue}
           defaultValue={passengerInfo?.region_id}
         />
+
+        <HFSelect
+          name="gender"
+          control={control}
+          options={gender}
+          label="Jins"
+          placeholder="Jinsingizni tanlang"
+          required={true}
+          setValue={setValue}
+          defaultValue={passengerInfo?.region_id}
+        />
+
         <HFDatePicker name="birthday" control={control} placeholder="Tug'ilgan sana" label="Tug'ilgan kuni" required={true} />
- 
+
         <HFInputMask
           control={control}
           name="phone"
