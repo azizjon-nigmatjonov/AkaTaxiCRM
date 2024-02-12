@@ -33,7 +33,7 @@ const FormDatePicker = ({
   tabIndex,
   classes,
   placeholder,
-  error,
+  // error,
 }: Props) => {
   const datePickerRef: any = useRef();
 
