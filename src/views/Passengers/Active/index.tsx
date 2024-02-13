@@ -112,6 +112,7 @@ const handleSearch = (value: any) => {
   navigateQuery({ q: value })
 };
 
+
 return (
   <div>
     <Header title="Aktiv yo'lovchilar" />
