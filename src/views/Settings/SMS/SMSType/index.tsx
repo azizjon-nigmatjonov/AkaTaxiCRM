@@ -5,7 +5,7 @@ import CCheck from "../../../../components/CElements/CCheck";
 
 interface Props {
   title: string;
-  List: object[]
+  List?: object[]
 }
 
 const TypeCard = ({ title = "", List = [] }: Props) => {

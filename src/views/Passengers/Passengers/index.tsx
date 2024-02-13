@@ -138,6 +138,8 @@ const Passengers = () => {
     navigateQuery({birthday: evt })
   }
 
+  console.log(bodyColumns);
+  
   return (
     <>
       <Header title="Yo'lovchilar ro'yhati" />

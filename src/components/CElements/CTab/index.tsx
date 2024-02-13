@@ -22,9 +22,9 @@ interface Props {
 export default function CTabs({
   passRouter = true,
   currentTab = {},
-  setCurrentTab = () => {},
+  setCurrentTab = () => { },
   tabList = [],
-  handleTabClick = () => {},
+  handleTabClick = () => { },
   extra,
   customStyles,
   slug = "tab"
@@ -42,7 +42,8 @@ export default function CTabs({
     }));
   }, [tabList]);
 
-  function handleTabAction(i: any) {
+
+  function handleTabAction(i: any) {    
     handleTabClick(i);
     if (!passRouter) {
       setCurrentTab(i);
@@ -66,6 +67,7 @@ export default function CTabs({
     return tab?.index;
   }, [optimizedTabList, query, currentTab, slug]);
 
+  
   return (
     <div className={cls.wrapper}>
       <CTab
