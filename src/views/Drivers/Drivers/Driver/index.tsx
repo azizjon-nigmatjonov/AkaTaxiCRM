@@ -26,7 +26,9 @@ const tabList = [
 
 const Driver = () => {
   const { tab, id } = useGetQueries();
+
   
+
   const { data: driver } = useQuery(
     ["GET_DRIVER", id],
     () => {
@@ -40,7 +42,7 @@ const Driver = () => {
   const breadCrumbItems = useMemo(() => {
     return [
       {
-        label: "Haydovchilar ro‘yxati ",
+        label: "Ro‘yxat",
         link: "/drivers/main",
       },
       {
@@ -58,13 +60,7 @@ const Driver = () => {
       <div className="p-5">
         <CTabs tabList={tabList} />
 
-        {tab === "ballance" ? (
-          <DriverBallance /> 
-        ) : tab === "trip_hostory" ? (
-          <DriverTrip />
-        ) : (
-          <DriverInfo driver={driver?.data} />
-        )}
+        {tab === "ballance" ? (<DriverBallance />) : tab === "trip_hostory" ? (<DriverTrip />) : (<DriverInfo driver={driver?.data} />)}
       </div>
     </>
   );

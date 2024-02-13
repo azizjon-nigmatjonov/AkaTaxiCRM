@@ -25,6 +25,6 @@ export const FormatTime = (time: string, type?: string) => {
         case "time":
             return formattedDate
         default:
-            return format(current, dateFormat)
+            return format(current ,dateFormat)
     }
 } 

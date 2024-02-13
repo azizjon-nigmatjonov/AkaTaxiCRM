@@ -1,6 +1,5 @@
 
 import request from "../../utils/request";
-// import {requestjson} from '../../utils/request'
 const driverService = {
   getList: (params: any) =>
     request.get(

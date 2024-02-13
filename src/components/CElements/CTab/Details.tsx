@@ -32,7 +32,7 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index: any) {
+function a11yProps(index: any) {  
   return {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
@@ -52,7 +52,8 @@ export default function CTab({
   handleCustomClick = () => {},
   customStyles
 }: Props) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+
   const customization = {
     "&": {
       width: 'auto'
@@ -81,6 +82,7 @@ export default function CTab({
     },
     ...customStyles
   };
+// console.log(value);
 
   return (
     <Box sx={{ width: "100%" }} id="CTabID">

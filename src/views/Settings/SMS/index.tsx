@@ -7,16 +7,23 @@ import { Header } from "../../../components/Header";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { useQuery } from "react-query";
 import smsService from "../../../services/sms";
+import TypeCard from "./SMSType";
+import SMSMessage from "./Message";
+import { FormatTime } from "../../../utils/formatTime";
 
 const tabList = [
+  {
+    slug: "firebase",
+    name: "Push xabar",
+  },
   {
     slug: "sms",
     name: "Sms xabarnoma",
   },
   {
-    slug: "firebase",
-    name: "Push xabar",
-  },
+    slug: 'sms_result',
+    name: 'Sms hisobotlar'
+  }
   // {
   //   slug: "news",
   //   name: "Yangiliklar",
@@ -27,29 +34,47 @@ const SMS = () => {
   const { tab } = useGetQueries();
   const { navigateTo, navigateQuery } = usePageRouter();
 
-  const { data: sms } = useQuery(["GET_SMS_LIST", tab], () => {
-    return smsService.getList(tab || "sms");
-  });
-  console.log("sms", sms);
+  // const { data: sms } = useQuery(["GET_SMS_LIST", tab], () => {
+  //   return smsService.getList(tab || "sms");
+  // });
+
+
+  const { data: smsReports } = useQuery(['GET_SMS_REPORTS', tab], () => {
+    return smsService.getReports();
+  })
+
+
+  const bodyColumns = useMemo(() => {
+    if (!smsReports?.data) return []
+    return smsReports?.data
+  }, [smsReports])
 
   const headColumns = useMemo(() => {
     return [
       {
         title: "Kimga",
-        id: "partners_name",
+        id: "phone",
+        render:(val:any)=>{
+          return <p>+{val}</p>
+        }
       },
       {
         title: "Xabar",
-        id: "login",
+        id: "text",
+      },
+      {
+        title: "Status",
+        id: "status",
+        render: (val?:any) => {
+          return <p className={`${val == 'DELIVERED'? 'text-green-500': 'text-red-500'}`}>{val == 'DELIVERED' ? 'Yuborildi':'Yuborilmadi'}</p>
+        }
       },
       {
         title: "sana",
-        id: "full_name",
-      },
-      {
-        title: "",
-        id: "actions",
-        permission: ["learn_more", "edit", "delete"],
+        id: "date",
+        render: (val?: any) => {
+          return <>{FormatTime(val, 'time')}</>;
+        },
       },
     ];
   }, []);
@@ -69,6 +94,7 @@ const SMS = () => {
     navigateTo(`/drivers/driver/${item.id}`);
   };
 
+
   return (
     <>
       <Header title="SMS xabarnoma"></Header>
@@ -86,15 +112,16 @@ const SMS = () => {
           </div>
         </div>
 
-        <CTable
+        {tab == 'firebase' ? <TypeCard title='Firebase' /> : tab == 'sms' ? <SMSMessage title='SMS' /> : <CTable
           headColumns={headColumns}
-          bodyColumns={[]}
+          bodyColumns={bodyColumns}
           count={1}
           handleActions={handleActions}
           handleRowClick={handleRowClick}
           isLoading={false}
           currentPage={1}
-        />
+        />}
+
       </div>
     </>
   );

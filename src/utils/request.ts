@@ -69,26 +69,3 @@ request.interceptors.response.use(
 export default request;
 
 
-// requestJSON;
-export const requestjson = axios.create({
-  baseURL,
-  timeout: 100000,
-  headers: { "Content-Type": "application/json" }
-});
-
-requestjson.interceptors.request.use(
-  (config) => {
-    const token = store.getState().auth.token;
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => errorHandler(error)
-);
-
-requestjson.interceptors.response.use(
-  (response) => response.data,
-  errorHandler
-);
-

@@ -25,6 +25,7 @@ const CBreadcrumbs = ({
   type = "element",
   progmatic = false,
 }: Props) => {
+    
   const navigate = useNavigate();
 
   const navigateLink = useMemo(() => {
