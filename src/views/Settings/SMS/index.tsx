@@ -30,8 +30,10 @@ const tabList = [
   // },
 ];
 
+
+
 const SMS = () => {
-  const { tab } = useGetQueries();
+  const { tab, currentPage } = useGetQueries();
   const { navigateTo, navigateQuery } = usePageRouter();
 
   // const { data: sms } = useQuery(["GET_SMS_LIST", tab], () => {
@@ -39,22 +41,23 @@ const SMS = () => {
   // });
 
 
-  const { data: smsReports } = useQuery(['GET_SMS_REPORTS', tab], () => {
-    return smsService.getReports();
+  const { data: smsReports } = useQuery(['GET_SMS_REPORTS', tab, currentPage], () => {
+    return smsService.getReports({ page: currentPage, perPage: 10 });
   })
 
 
-  const bodyColumns = useMemo(() => {
+  const bodyColumns:any = useMemo(() => {
     if (!smsReports?.data) return []
-    return smsReports?.data
-  }, [smsReports])
+    return smsReports
+  }, [smsReports]);
+
 
   const headColumns = useMemo(() => {
     return [
       {
         title: "Kimga",
         id: "phone",
-        render:(val:any)=>{
+        render: (val: any) => {
           return <p>+{val}</p>
         }
       },
@@ -65,8 +68,8 @@ const SMS = () => {
       {
         title: "Status",
         id: "status",
-        render: (val?:any) => {
-          return <p className={`${val == 'DELIVERED'? 'text-green-500': 'text-red-500'}`}>{val == 'DELIVERED' ? 'Yuborildi':'Yuborilmadi'}</p>
+        render: (val?: any) => {
+          return <p className={`${val == 'DELIVERED' ? 'text-green-500' : 'text-red-500'}`}>{val == 'DELIVERED' ? 'Yuborildi' : 'Yuborilmadi'}</p>
         }
       },
       {
@@ -114,12 +117,12 @@ const SMS = () => {
 
         {tab == 'firebase' ? <TypeCard title='Firebase' /> : tab == 'sms' ? <SMSMessage title='SMS' /> : <CTable
           headColumns={headColumns}
-          bodyColumns={bodyColumns}
-          count={1}
+          bodyColumns={bodyColumns?.data}
+          count={bodyColumns?.meta?.totalCount}
           handleActions={handleActions}
           handleRowClick={handleRowClick}
           isLoading={false}
-          currentPage={1}
+          currentPage={currentPage}
         />}
 
       </div>
