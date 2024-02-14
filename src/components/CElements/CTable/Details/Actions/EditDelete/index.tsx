@@ -1,4 +1,4 @@
-import { BorderColorRounded, DeleteRounded, Visibility } from "@mui/icons-material";
+import { Visibility } from "@mui/icons-material";
 import cls from "./style.module.scss";
 
 interface Props {
@@ -16,7 +16,7 @@ export const TableDelete = ({
 
   return (
     <div className={cls.tableDelete}>
-      <div
+      {/* <div
         className={cls.delete}
         onClick={() => tableActions("delete", element)}
       >
@@ -24,10 +24,10 @@ export const TableDelete = ({
       </div>
       <div className={cls.edit} onClick={() => tableActions("edit", element)}>
         <BorderColorRounded style={{ color: "var(--main)" }} />
-      </div>
+      </div> */}
       {permissions.includes("learn_more") && (
         <div className={cls.edit} onClick={() => tableActions("learn_more", element)}>
-          <Visibility style={{ color: "var(--main)" }} />
+          <Visibility style={{ color: "var(--gray)" }} />
         </div>
       )}
     </div>

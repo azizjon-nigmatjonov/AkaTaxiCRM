@@ -251,7 +251,6 @@ const CTable = ({
   };
 
   const tableActions = (status: string, el: any) => {
-    
     if (status === "delete") {
       setCurrDelete(el);
     } else {

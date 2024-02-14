@@ -78,7 +78,7 @@ const Drivers = () => {
       // },
       {
         title:'Viloyat',
-        id:'from'
+        id:'region_name'
       },
       {
         title: "",

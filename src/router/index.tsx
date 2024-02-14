@@ -28,6 +28,7 @@ import Partner from "../views/Partners/Partner";
 import { SmsCreateForm } from "../views/Settings/SMS/Form";
 import AddDriver from "../views/Drivers/Drivers/AddDriver";
 
+const Passanger = lazy(() => import("../views/Passengers/Passanger"))
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
 
@@ -129,6 +130,17 @@ const Router = () => {
               icon: "admins",
             })}
             element={<Passengers />}
+          />
+
+          <Route
+            path={getPath({
+              parent: "passengers",
+              link: "passenger",
+              sidebar: false,
+              title: "",
+              icon: "",
+            })}
+            element={<Passanger />}
           />
 
           <Route
