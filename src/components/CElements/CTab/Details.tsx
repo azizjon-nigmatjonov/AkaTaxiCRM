@@ -82,7 +82,6 @@ export default function CTab({
     },
     ...customStyles
   };
-// console.log(value);
 
   return (
     <Box sx={{ width: "100%" }} id="CTabID">

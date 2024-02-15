@@ -1,0 +1,64 @@
+.card {
+    width: 640px;
+    background-color: white;
+    border: 1px solid $lineGray;
+    padding-left: 28px;
+    padding-right: 40px;
+    padding-block: 28px;
+    border-top-left-radius: 32px;
+    border-bottom-left-radius: 32px;
+    border-top-right-radius: 32px;
+    border-bottom-right-radius: 32px;
+    font-size: 14px;
+    font-weight: 400;
+    position: relative;
+   
+    &:nth-child(1)::before{
+        content: '';
+        position: absolute;
+        top: -0.5px;
+        right: 0;
+        height: 27px;
+        width: 27px;
+        background-color: $softGray;
+        border-left:1px solid $lineGray;
+        border-bottom:1px solid $lineGray;
+        border-bottom-left-radius: 32px;
+    }
+
+    &:nth-child(1)::after{
+        content: '';
+        position: absolute;
+        bottom: -0.5px;
+        right: 0;
+        height: 27px;
+        width: 27px;
+        background-color: $softGray;
+        border-top:1px solid $lineGray;
+        border-left:1px solid $lineGray;
+        border-top-left-radius: 32px;
+    }
+    
+    span{
+        color: $gray;
+    }
+    p{
+        color: $black;
+        font-weight: 600;
+    }
+    p.price{
+        color: $main
+    }
+    .regionName {
+        font-size: 28px;
+        font-weight: 600;
+    }
+    .car {
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .username {
+        font-size: 18px;
+        font-weight: 500;
+    }
+}

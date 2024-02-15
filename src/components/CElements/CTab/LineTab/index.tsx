@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import LTab from "./Details";
+import LTab from "./LineDetails";
 import cls from "../style.module.scss";
 import {
     createSearchParams,
@@ -27,7 +27,7 @@ export default function LTabs({
     handleTabClick = () => { },
     extra,
     customStyles,
-    slug = "tab"
+    slug = "trips"
 }: Props) {
     const location = useLocation();
     const pathname = location.pathname;
