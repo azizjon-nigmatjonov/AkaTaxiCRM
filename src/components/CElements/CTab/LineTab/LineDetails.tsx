@@ -32,7 +32,7 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index: any) {  
+function a11yProps(index: any) {
   return {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
@@ -49,7 +49,7 @@ interface Props {
 export default function LTab({
   tabList,
   value = 0,
-  handleCustomClick = () => {},
+  handleCustomClick = () => { },
   customStyles
 }: Props) {
   const { t } = useTranslation();
@@ -72,45 +72,46 @@ export default function LTab({
       maxWidth: "100%",
     },
     "& .Mui-selected": {
-      transition: "0.7s",
+      transition: "0.3s",
       color: `${ColorConstants.main} !important`,
-    //   borderBottom
     },
     "& .MuiTabs-indicator": {
-      borderRadius: "10px",
-      backgroundColor: 'white',
+      // borderRadius: "10px",
+      backgroundColor: 'transparent',
+      borderBottom: `2px solid ${ColorConstants.main}`,
       color: 'black',
       height: "100%",
     },
     ...customStyles
   };
-// console.log(value);
 
   return (
-    <Box sx={{ width: "100%" }} id="CTabID">
+    <Box sx={{ width: "100%" }} >
       <Box sx={customization}>
-        <Tabs
-          value={value}
-          variant="scrollable"
-          scrollButtons={"auto"}
-          allowScrollButtonsMobile
-          aria-label="scrollable force tabs example"
-        >
-          {tabList?.map((tab: any, ind: number) => (
-            <Tab
-              disableRipple
-              key={ind}
-              onClick={() => handleCustomClick(tab)}
-              sx={{
-                "& .MuiButtonBase-root, & .MuiTab-root": {
-                  maxWidth: "auto",
-                },
-              }}
-              label={<p className="text">{t(tab?.name)}</p>}
-              {...a11yProps(tab.id)}
-            />
-          ))}
-        </Tabs>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs
+            value={value}
+            variant="scrollable"
+            scrollButtons={"auto"}
+            allowScrollButtonsMobile
+            aria-label="scrollable force tabs example"
+          >
+            {tabList?.map((tab: any, ind: number) => (
+              <Tab
+                disableRipple
+                key={ind}
+                onClick={() => handleCustomClick(tab)}
+                sx={{
+                  "& .MuiButtonBase-root, & .MuiTab-root": {
+                    maxWidth: "auto",
+                  },
+                }}
+                label={<p className="text">{t(tab?.name)}</p>}
+                {...a11yProps(tab.id)}
+              />
+            ))}
+          </Tabs>
+        </Box>
       </Box>
     </Box>
   );

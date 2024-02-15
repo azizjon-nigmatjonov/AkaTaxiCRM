@@ -1,5 +1,10 @@
 import LTabs from "../../../../components/CElements/CTab/LineTab"
-// import { useGetQueries } from "../../../../hooks/useGetQueries";
+import { useGetQueries } from "../../../../hooks/useGetQueries";
+import Canceled from "./Canceled";
+import CurrentlyTrip from "./Currently";
+import Rejected from "./Rejected";
+import Successfully from "./Successfully";
+
 const tabList = [
   {
     slug: "",
@@ -19,11 +24,12 @@ const tabList = [
   },
 ];
 const Trips = () => {
-  // const {tab} = useGetQueries()
+  const { trips } = useGetQueries()
+
   return (
     <div>
       <LTabs tabList={tabList} />
-
+      {trips == 'driver_reject' ? <Rejected /> : trips == 'success_trip' ? <Successfully /> : trips == 'reject_trip' ? <Canceled /> : <CurrentlyTrip />}
     </div>
   )
 }

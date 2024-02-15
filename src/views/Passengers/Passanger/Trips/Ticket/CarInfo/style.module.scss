@@ -1,0 +1,65 @@
+.Car {
+    width: 100%;
+    max-width: 450px;
+    background-color: white;
+    border: 1px solid $lineGray;
+    padding: 24px;
+    border-top-left-radius: 32px;
+    border-bottom-left-radius: 32px;
+    border-top-right-radius: 32px;
+    border-bottom-right-radius: 32px;
+    position: relative;
+
+    &:nth-child(2)::before {
+        content: '';
+        position: absolute;
+        top: -0.5px;
+        left: 0px;
+        height: 27px;
+        width: 27px;
+        background-color: $softGray;
+        border-right: 1px solid $lineGray;
+        border-bottom: 1px solid $lineGray;
+        border-bottom-right-radius: 32px;
+    }
+
+    &:nth-child(2)::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5px;
+        left: 0;
+        height: 27px;
+        width: 27px;
+        background-color: $softGray;
+        border-top: 1px solid $lineGray;
+        border-right: 1px solid $lineGray;
+        border-top-right-radius: 32px;
+    }
+
+    .rightTop {
+        position: absolute;
+        top: 0px;
+        right: 0;
+        height: 27px;
+        width: 27px;
+        background-color: $softGray;
+        border: 1px solid transparent;
+        border-bottom-color: $lineGray;
+        border-left-color:  $lineGray;
+        border-bottom-left-radius: 32px;
+    }
+
+    .rightBottom {
+        position: absolute;
+        bottom: 0px;
+        right: 0;
+        height: 27px;
+        width: 27px;
+        background-color: $softGray;
+        border: 1px solid transparent;
+        border-top-color: $lineGray;
+        border-left-color:  $lineGray;
+        border-top-left-radius: 32px;
+    }
+
+}

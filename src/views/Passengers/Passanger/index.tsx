@@ -10,7 +10,7 @@ import PassengerProfile from './PassangerProfile';
 
 const tabList = [
     {
-        slug: "trips",
+        slug: "",
         name: "Triplar",
     },
     {
@@ -52,7 +52,7 @@ const Passanger = () => {
 
             <div className='px-6'>
                 <CTabs tabList={tabList} />
-                {tab == 'trips' ? <PassengerProfile /> : <Trips />}
+                {tab === 'data' ? <PassengerProfile /> : <Trips />}
             </div>
         </>
     )
