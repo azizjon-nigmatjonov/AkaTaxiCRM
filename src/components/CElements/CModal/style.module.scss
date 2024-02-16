@@ -3,10 +3,14 @@
   align-items: center;
   justify-content: center;
   // overflow: auto;
+
   .card {
     border: none;
     background-color: white !important;
     border-radius: 10px;
+    background-color: red;
+    // max-height: 580px;
+    // overflow-y: scroll;
     .header {
       display: flex;
       justify-content: space-between;
