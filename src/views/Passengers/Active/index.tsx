@@ -32,7 +32,7 @@ const ActivePassengers = () => {
 
   const regions = useSelector((state: any) => state.regions.regions);
 
-  const driversHandle = (e: any) => {    
+  const driversHandle = (e: any) => {        
     setDriverLists(e);
   }
 

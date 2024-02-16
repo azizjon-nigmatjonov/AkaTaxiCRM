@@ -34,15 +34,11 @@ const Passengers = () => {
     }
   );
 
-
-
   const passengers: any = useMemo(() => {
     return data ?? {};
   }, [data]);
 
   
- 
-
   const headColumns = useMemo(() => {
     return [
       {
@@ -92,6 +88,7 @@ const Passengers = () => {
       },
     ];
   }, []);
+  
 
   const bodyColumns = useMemo(() => {
     return (

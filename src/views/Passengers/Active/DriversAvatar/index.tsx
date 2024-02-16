@@ -4,9 +4,9 @@ import usePageRouter from "../../../../hooks/useObjectRouter";
 const DriversAvater = ({ data, item, driversHandle = () => { } }: { data?: any, item?: any, driversHandle?: (val: any) => void }) => {
     const { navigateQuery } = usePageRouter()
 
-    const driverHandle = (e: any) => {
+    const driverHandle = () => {
         navigateQuery({ driver_list: item.id });
-        driversHandle(e)
+        driversHandle(item)
     }
 
     const classes = {
@@ -17,7 +17,7 @@ const DriversAvater = ({ data, item, driversHandle = () => { } }: { data?: any, 
     }
 
     return (
-        <AvatarGroup max={4} sx={classes} onClick={() => driverHandle(data)} >
+        <AvatarGroup max={4} sx={classes} onClick={driverHandle} >
             {data?.map((val: any) => (
                 <Avatar key={val?.id} alt={val?.full_name} src={val?.image}  />
             ))}
