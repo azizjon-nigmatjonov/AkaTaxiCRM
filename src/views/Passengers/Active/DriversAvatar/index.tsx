@@ -9,11 +9,15 @@ const DriversAvater = ({ data, item, driversHandle = () => { } }: { data?: any, 
         driversHandle(e)
     }
 
+
     return (
-        <AvatarGroup max={5} sx={{  height: 24}} onClick={()=> driverHandle(data)} >
+        <AvatarGroup max={4} onClick={()=> driverHandle(data)} >
             {data?.map((val: any) => (
-                <Avatar alt={val?.full_name} src={val?.image} sx={{ width: 24, height: 24 }} />
+                <Avatar alt={val?.full_name} src={val?.image}  />
             ))}
+            {/* {[0,1,1,1,1,1,1,]?.map((val: any) => (
+                <Avatar alt={'sad'} src={'das'}  />
+            ))} */}
         </AvatarGroup>
     )
 }
