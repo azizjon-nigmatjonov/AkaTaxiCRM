@@ -7,6 +7,9 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 const DriversList = ({ data }: { data?: any }) => {
     const query = useGetQueries();
     const { navigateQuery, } = usePageRouter();
+    
+    // console.log(data());
+    
 
     return (
         <div>
@@ -18,12 +21,12 @@ const DriversList = ({ data }: { data?: any }) => {
                 footerActive={false}
             >
                 <div className='flex items-center justify-between'>
-                    <p className='text-[24px] text-[var(--black)] font-semibold'>Toshkent</p>
+                    <p className='text-[24px] text-[var(--black)] font-semibold'>{data?.from_region_name.split('viloyati')}</p>
                     <IoIosArrowRoundForward size={24} />
-                    <p className='text-[24px] text-[var(--black)] font-semibold'>Navoiy</p>
+                    <p className='text-[24px] text-[var(--black)] font-semibold'>{data?.to_region_name.split('viloyati')}</p>
                 </div>
                 <div className='max-h-[500px] overflow-y-scroll'>
-                    {data?.map((val: any) => (
+                    {data?.bids?.map((val: any) => (
                         <div key={val?.id} className='flex items-center gap-3 p-4 border-b border-[#EAECF0]'>
                             <Avatar sx={{ width: 24, height: 24 }} alt={val?.full_name} src={val?.image} />
                             <div>
