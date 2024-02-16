@@ -27,7 +27,6 @@ const Form = ({ refetch }: Props) => {
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
-  console.log(query);
   
 
   const { data: regions } = useQuery(["GET_REGIONS_LIST"], () => {

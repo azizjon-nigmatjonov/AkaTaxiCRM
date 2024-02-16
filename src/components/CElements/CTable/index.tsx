@@ -385,7 +385,7 @@ const CTable = ({
                     >
                       {column.id !== "actions" && (
                         <span>
-                          {column.render ? Array.isArray(column.id) ? column.render(column.id.map((data: any) => item[data])) : column.render(item[column.id]) : item[column.id]}
+                          {column.render ? Array.isArray(column.id) ? column.render(column.id.map((data: any) => item[data])) : column.render(item[column.id], item) : item[column.id]}
                         </span>
                       )}
                       
@@ -428,7 +428,7 @@ const CTable = ({
                               </>
                             )}
                           </div>
-                        )
+                      )
                         // <TabbleActions
                         //   element={item}
                         //   rowIndex={rowIndex + 1}

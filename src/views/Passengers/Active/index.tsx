@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import FilterButton from "../../../components/Filters";
@@ -12,12 +12,14 @@ import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
 import { Header } from "../../../components/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
-import { Avatar, AvatarGroup } from '@mui/material';
+import DriversAvater from './DriversAvatar';
+import DriversList from "./DriversList";
+
 
 const ActivePassengers = () => {
   const { currentPage, q } = useGetQueries();
-
   const { navigateQuery } = usePageRouter()
+  const [driverLists, setDriverLists] = useState()
 
 
   const { data: passengers, isLoading } = useQuery(
@@ -29,6 +31,10 @@ const ActivePassengers = () => {
 
 
   const regions = useSelector((state: any) => state.regions.regions);
+
+  const driversHandle = (e: any) => {    
+    setDriverLists(e);
+  }
 
 
   const headColumns = useMemo(() => {
@@ -58,20 +64,11 @@ const ActivePassengers = () => {
           return <>{FormatTime(val, "time")}</>;
         },
       },
-      // {
-      //   title: "Mavjud taksilar",
-      //   id: "taxi",
-      //   render: (val: number) => {
-      //     return val && <>{val} ta</>;
-      //   },
-      // },
       {
         title: 'Mavjud taksilar',
         id: 'bids',
-        render: (val?: any) => val && (
-          !val.length ? null : <AvatarGroup max={4} >
-            <Avatar alt={val?.full_name} src={val?.image} sx={{ width: 24, height: 24 }} />
-          </AvatarGroup>
+        render: (val?: any, item?: any) => val && (
+          <DriversAvater data={val} item={item} driversHandle={driversHandle} />
         )
       }
 
@@ -113,7 +110,6 @@ const ActivePassengers = () => {
   }, [regions]);
 
 
-
   const handleSearch = (value: any) => {
     navigateQuery({ q: value })
   };
@@ -144,6 +140,9 @@ const ActivePassengers = () => {
           currentPage={currentPage}
         />
       </div>
+
+      <DriversList data={driverLists}/>
+
     </div>
   );
 };
