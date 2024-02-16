@@ -9,23 +9,18 @@ const DriversAvater = ({ data, item, driversHandle = () => { } }: { data?: any, 
         driversHandle(e)
     }
 
-    // const num = [1, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,]
-
+    const classes = {
+        "& .MuiAvatar-root": {
+            'height': '24px',
+            'width': '24px',
+        }
+    }
 
     return (
-        <AvatarGroup max={4} onClick={() => driverHandle(data)} >
-            {data?.map((val: any, index:number) => (
-                <Avatar alt={val?.full_name} src={val?.image} style={{
-                    width: index === data.length - 1 ? '24px' : '24px',
-                    height: index === data.length - 1 ? '24px' : '24px',
-                }} />
+        <AvatarGroup max={4} sx={classes} onClick={() => driverHandle(data)} >
+            {data?.map((val: any) => (
+                <Avatar key={val?.id} alt={val?.full_name} src={val?.image}  />
             ))}
-            {/* {num?.map((val: any, index: number) => (
-                <Avatar alt={'sad'} src={'das'} sx={{ width: 24, height: 24 }} style={{
-                    width: index === num.length - 1 ? '24px' : '24px',
-                    height: index === num.length - 1 ? '24px' : '24px',
-                }} />
-            ))} */}
         </AvatarGroup>
     )
 }

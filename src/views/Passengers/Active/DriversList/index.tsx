@@ -24,7 +24,7 @@ const DriversList = ({ data }: { data?: any }) => {
                 </div>
                 <div className='max-h-[500px] overflow-y-scroll'>
                     {data?.map((val: any) => (
-                        <div className='flex items-center gap-3 p-4 border-b border-[#EAECF0]'>
+                        <div key={val?.id} className='flex items-center gap-3 p-4 border-b border-[#EAECF0]'>
                             <Avatar sx={{ width: 24, height: 24 }} alt={val?.full_name} src={val?.image} />
                             <div>
                                 <p className='text-sm font-semibold text-[var(--black)]'>{val?.full_name}</p>
