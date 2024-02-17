@@ -14,6 +14,7 @@ const passengerService = {
       `/passengers-popular${params.page ? `?page=${params.page || 1}` : ""
       }${params.q ? `&q=${params.q}` : ""}`
     ),
+  getTicket: (params: any) => request.get(`/passengers-tickets/${params.id}${params?.status ? `?&status=${params.status}` : ''}`)
 };
 
 export default passengerService;

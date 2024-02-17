@@ -40,12 +40,10 @@ export default function CTabs({
       ...i,
       index,
     }));
-  }, [tabList]);
+  }, [tabList]);  
 
 
-  function handleTabAction(i: any) {    
-    console.log(i);
-    
+  function handleTabAction(i: any) {        
     handleTabClick(i);
     if (!passRouter) {
       setCurrentTab(i);
@@ -54,9 +52,8 @@ export default function CTabs({
     const newQuery = {
       ...query,
       [slug]: i?.slug,
-    };
-    console.log(newQuery);
-    
+    };  
+      
     const queryParams = createSearchParams(newQuery);
     navigate({
       pathname: pathname,

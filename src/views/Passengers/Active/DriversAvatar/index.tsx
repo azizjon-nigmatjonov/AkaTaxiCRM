@@ -17,7 +17,7 @@ const DriversAvater = ({ data, item, driversHandle = () => { } }: { data?: any, 
     }
 
     return (
-        <AvatarGroup max={4} sx={classes} onClick={driverHandle} >
+        <AvatarGroup max={4}  sx={classes} onClick={driverHandle}>
             {data?.map((val: any) => (
                 <Avatar key={val?.id} alt={val?.full_name} src={val?.image}  />
             ))}

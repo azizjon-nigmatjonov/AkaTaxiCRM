@@ -27,7 +27,7 @@ export default function LTabs({
     handleTabClick = () => { },
     extra,
     customStyles,
-    slug = "trips"
+    slug = "status"
 }: Props) {
     const location = useLocation();
     const pathname = location.pathname;

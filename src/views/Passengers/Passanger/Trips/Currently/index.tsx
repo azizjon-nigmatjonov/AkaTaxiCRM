@@ -1,9 +1,9 @@
 import Ticket from '../Ticket'
 
-const CurrentlyTrip = () => {
+const CurrentlyTrip = ({ data }: { data: any }) => {
     return (
         <div>
-            <Ticket />
+            <Ticket data={data} />
         </div>
     )
 }

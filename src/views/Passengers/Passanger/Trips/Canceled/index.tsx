@@ -1,7 +1,10 @@
+import Ticket from "../Ticket"
 
-const Canceled = () => {
+const Canceled = ({ data }: { data?: any }) => {
   return (
-    <div>Canceled</div>
+    <div>
+      <Ticket data={data} />
+    </div>
   )
 }
 

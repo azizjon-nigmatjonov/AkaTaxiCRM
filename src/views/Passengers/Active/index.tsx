@@ -14,6 +14,7 @@ import { Header } from "../../../components/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import DriversAvater from './DriversAvatar';
 import DriversList from "./DriversList";
+import ImageFrame from "../../../components/ImageFrame";
 
 
 const ActivePassengers = () => {
@@ -32,7 +33,7 @@ const ActivePassengers = () => {
 
   const regions = useSelector((state: any) => state.regions.regions);
 
-  const driversHandle = (e: any) => {        
+  const driversHandle = (e: any) => {
     setDriverLists(e);
   }
 
@@ -41,7 +42,13 @@ const ActivePassengers = () => {
     return [
       {
         title: "Ism familya",
-        id: "full_name",
+        id: "info",
+        render: (val: any) => val && (
+          <div className="flex items-center space-x-2 py-2">
+            <ImageFrame image={val.img} gender={val.gender} />
+            <span>{val.name}</span>
+          </div>
+        )
       },
       {
         title: "Qayerdan",
@@ -87,6 +94,11 @@ const ActivePassengers = () => {
         to: {
           to_region_name: item?.to_region_name,
           to_district_name: item?.to_district_name
+        },
+        info: {
+          name: item?.full_name,
+          gender: item?.gender,
+          img: item?.image
         }
       }
     })
@@ -99,6 +111,8 @@ const ActivePassengers = () => {
       } ?? []
     );
   }, [passengers]);
+
+
 
   const Regions = useMemo(() => {
     return regions?.map((i: any) => {
@@ -141,7 +155,7 @@ const ActivePassengers = () => {
         />
       </div>
 
-      <DriversList data={driverLists}/>
+      <DriversList data={driverLists} />
 
     </div>
   );

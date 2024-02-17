@@ -53,6 +53,7 @@ export default function CTab({
   customStyles
 }: Props) {
   const { t } = useTranslation();
+  
 
   const customization = {
     "&": {
