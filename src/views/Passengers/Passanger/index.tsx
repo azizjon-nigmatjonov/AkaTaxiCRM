@@ -24,7 +24,7 @@ const Passanger = () => {
 
     const { data: passenger } = useQuery(['GET_PASSENGER', id], () => {
         return passengerService.getElement(id)
-    })
+    });
 
     const breadCrubmsItems = useMemo(() => {
         return [

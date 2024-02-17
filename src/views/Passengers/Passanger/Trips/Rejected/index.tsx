@@ -1,7 +1,10 @@
+import Ticket from "../Ticket"
 
-const Rejected = () => {
+const Rejected = ({ data }: { data?: any }) => {
   return (
-    <div>Rejected</div>
+    <div>
+      <Ticket data={data} />
+    </div>
   )
 }
 

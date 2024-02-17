@@ -1,7 +1,10 @@
+import Ticket from "../Ticket"
 
-const Success = () => {
+const Success = ({ data }: { data?: any }) => {
   return (
-    <div>Success</div>
+    <div>
+      <Ticket data={data} />
+    </div>
   )
 }
 

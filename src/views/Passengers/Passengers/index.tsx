@@ -105,6 +105,8 @@ const Passengers = () => {
     );
   }, [passengers]);
 
+  
+
   const handleActions = (status: string, el: any) => { 
     if (status === "delete") {
       passengerService.deleteElement(el.id).then(() => {
@@ -142,7 +144,6 @@ const Passengers = () => {
     navigateQuery({birthday: evt })
   }
 
-
   
   return (
     <>
@@ -165,7 +166,6 @@ const Passengers = () => {
               text="new_passenger"
               onClick={() => navigateQuery({ id: "create" })}
             />
-                
           </div>
         </SectionHeader>
 
