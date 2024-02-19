@@ -74,7 +74,7 @@ const AddDriver = () => {
 
     return (
         <div className='relative'>
-            <Header title="Haydovchilar ro'yhati" titleIn="Yangi yo'lovchi" />
+            <Header sticky={true} title="Haydovchilar ro'yhati" titleIn="Yangi yo'lovchi" />
             <div className='px-6 '>
                 <form onSubmit={handleSubmit(submitHandler)}>
                     <div className='mt-3'>
@@ -103,7 +103,7 @@ const AddDriver = () => {
                         <CCard style={{ minHeight: 0, }}>
                             <div className='bg-[var(--softGray)] p-[10px] rounded-lg text-xs font-semibold'>Haydovchi rasmilari</div>
                             <div className='flex items-start justify-between  gap-5 mt-4'>
-                                <div className='flex items-center gap-5'>
+                                <div className='flex flex-wrap items-center gap-5'>
                                     <DImageUpload control={control} style={{ height: 200 }} name='profile_image' label='Profil avatar' />
                                     <DImageUpload control={control} style={{ height: 200 }} name='tex_passport' label='Tex.pasport' />
                                     <DImageUpload control={control} style={{ height: 200 }} name='driver_license' label='Prava rasmi' />
