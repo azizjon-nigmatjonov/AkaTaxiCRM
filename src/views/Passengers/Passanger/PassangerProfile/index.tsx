@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { useGetQueries } from "../../../../hooks/useGetQueries"
 import passengerService from "../../../../services/passengers";
 import CCard from "../../../../components/CElements/CCard";
-import CImageUpload from "../../../../components/CElements/CImageUpload";
 import { CameraIcon, InfoIcon } from '../../../../components/IconGenerator/Svg';
 import HFTextField from '../../../../components/FormElements/HFTextField';
 import { HFDatePicker } from '../../../../components/FormElements/HFDatePicker';
@@ -13,9 +12,9 @@ import regionService from '../../../../services/regions';
 import AddButton from '../../../../components/Buttons/AddButton';
 import CancelButton from '../../../../components/Buttons/Cancel';
 import HFInputMask from '../../../../components/FormElements/HFInputMask';
-import CModal from '../../../../components/CElements/CModal';
 import usePageRouter from '../../../../hooks/useObjectRouter';
 import { Modal } from '@mui/material'
+import PImageUpdate from './ImageUpdate';
 
 
 const SelectGender = [
@@ -25,10 +24,11 @@ const SelectGender = [
 
 const PassengerProfile = () => {
   const [send, setSend] = useState(false)
+  const [alert, setAlert] = useState('')
   const { id, } = useGetQueries();
   const { getQueries } = usePageRouter();
   const query = getQueries();
-  const { navigateQuery, } = usePageRouter()
+  const { navigateQuery, navigateTo } = usePageRouter()
 
   const { data } = useQuery(['GET_PASSANGER', id], () => {
     return passengerService.getElement(id)
@@ -57,21 +57,30 @@ const PassengerProfile = () => {
     return data?.data ?? {}
   }, [data])
 
-  const handleData = () => {
-    navigateQuery({ passenger: '' })
+
+  const deleteAccount = () => {
+    navigateQuery({ passenger: 'update' })
+    setAlert('Haqiqatdan ham o’chirishni istaysizmi?')
   }
 
-  const addHandle: any = () => {
-    navigateQuery({ passenger: 'update' })
-    if (send) {
-      const value = getValues()
-      console.log(value, 'allow');
-    } else {
+  const alertMessage = (e: boolean) => {
+    if (e == true) {
+      setSend(e)
+      passengerService.deleteElement(query?.id)
+      navigateQuery({ passenger: '' })
 
+    } else {
+      navigateQuery({ passenger: '' })
+      setSend(false)
+      console.log(send);
     }
   }
 
-
+  const updateProfile = () => {
+    navigateQuery({ passenger: 'update' })
+    setAlert('Haqiqatdan ham ma’lumotlarni yangilashni istaysizmi?')
+    // navigateTo('/passengers/main')
+  }
 
 
   return (
@@ -80,10 +89,7 @@ const PassengerProfile = () => {
         <div className='flex items-start gap-4 '>
 
           <div className='relative'>
-            <CImageUpload name={passenger?.full_name} />
-            <div className='bg-white p-[10px] border border-[var(--lightGray)] inline-flex rounded-full absolute bottom-[5px] right-[5px]'>
-              <CameraIcon />
-            </div>
+            <PImageUpdate name={passenger?.full_name} defaultValue={passenger?.image_link} />
           </div>
 
           <div className='w-full '>
@@ -129,10 +135,10 @@ const PassengerProfile = () => {
       </CCard>
 
       <div className='flex items-center justify-between mt-6'>
-        <div onClick={addHandle}><AddButton iconLeft={false} text="Akkauntni o'chirish" /></div>
+        <div ><AddButton onClick={deleteAccount} iconLeft={false} text="Akkauntni o'chirish" /></div>
         <div className='flex items-centet gap-2'>
-          <CancelButton text='Bekor qilish' />
-          <AddButton iconLeft={false} text="Saqlash" />
+          <CancelButton onClick={() => navigateTo('/passengers/main')} text='Bekor qilish' />
+          <AddButton onClick={updateProfile} iconLeft={false} text="Saqlash" />
         </div>
       </div>
 
@@ -141,15 +147,16 @@ const PassengerProfile = () => {
           <div className='bg-white px-6 py-8  max-w-[400px] mx-auto rounded-[20px]'>
             <div className='flex items-center gap-2'>
               <InfoIcon />
-              <p className='text-base font-medium text-[var(--black)]'>Haqiqatdan ham ma’lumotlarni yangilashni istaysizmi?</p>
+              <p className='text-base font-medium text-[var(--black)]'>{alert}</p>
             </div>
             <div className='flex items-center gap-2 mt-6'>
-              <CancelButton text="Yo'q" onClick={() => { setSend(false), handleData() }} />
-              <AddButton text='Ha' iconLeft={false} onClick={() => { setSend(true), handleData() }} />
+              <CancelButton text="Yo'q" onClick={() => alertMessage(false)} />
+              <AddButton text='Ha' iconLeft={false} onClick={() => alertMessage(true)} />
             </div>
           </div>
         </div>
       </Modal>
+
     </div>
   )
 }

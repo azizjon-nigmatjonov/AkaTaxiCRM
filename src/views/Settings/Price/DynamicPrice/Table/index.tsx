@@ -82,7 +82,7 @@ const PriceTable = ({
                         readOnly={!edit}
                         type="number"
                         defaultValue={column.price}
-                      />{" "}
+                      />
                       <span>so'm</span>
                     </div>
                     <div className="w-[35px] pr-2">

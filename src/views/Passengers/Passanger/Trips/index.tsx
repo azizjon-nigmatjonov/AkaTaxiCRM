@@ -2,12 +2,13 @@ import { useMemo } from 'react'
 import { useQuery } from "react-query";
 import LTabs from "../../../../components/CElements/CTab/LineTab"
 import { useGetQueries } from "../../../../hooks/useGetQueries";
-import Canceled from "./Canceled";
-import CurrentlyTrip from "./Currently";
-import Rejected from "./Rejected";
-import Successfully from "./Successfully";
+// import Canceled from "./Canceled";
+// import CurrentlyTrip from "./Currently";
+// import Rejected from "./Rejected";
+// import Successfully from "./Successfully";
 import passengerService from "../../../../services/passengers";
 import { Skeleton } from '@mui/material';
+import AllTrips from './Alltrips';
 
 const tabList = [
   {
@@ -49,9 +50,10 @@ const Trips = () => {
     <>
       <div className='sticky top-[160px] z-10 bg-[var(--softGray)]'> <LTabs tabList={tabList} /></div>
       {
-        loading ? Array.from(new Array(2)).map(() => <Skeleton variant="rounded" width={'70%'} height={150} style={{marginBottom: 20}}/>) : <div>
+        loading ? Array.from(new Array(2)).map(() => <Skeleton variant="rounded" width={'70%'} height={150} style={{ marginBottom: 20 }} />) : <div>
           <div className='h-[700px] pt-5  overflow-y-scroll'>
-            {status == 'canceled_by_driver' ? <Rejected data={ticketsData} /> : status == 'done' ? <Successfully data={ticketsData} /> : status == 'canceled_by_client' ? <Canceled data={ticketsData} /> : <CurrentlyTrip data={ticketsData} />}
+            <AllTrips data={ticketsData} />
+            {/* {status == 'canceled_by_driver' ? <Rejected data={ticketsData} /> : status == 'done' ? <Successfully data={ticketsData} /> : status == 'canceled_by_client' ? <Canceled data={ticketsData} /> : <CurrentlyTrip data={ticketsData} /> : <AllTrips data={ticketsData} />} */}
           </div>
         </div>
       }
