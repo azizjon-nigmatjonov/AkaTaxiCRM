@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react';
 import { useQuery } from "react-query";
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { useGetQueries } from "../../../../hooks/useGetQueries"
 import passengerService from "../../../../services/passengers";
 import CCard from "../../../../components/CElements/CCard";
-import {  InfoIcon } from '../../../../components/IconGenerator/Svg';
+import { InfoIcon } from '../../../../components/IconGenerator/Svg';
 import HFTextField from '../../../../components/FormElements/HFTextField';
 import { HFDatePicker } from '../../../../components/FormElements/HFDatePicker';
 import HFSelect from '../../../../components/FormElements/HFSelect';
@@ -15,6 +16,7 @@ import HFInputMask from '../../../../components/FormElements/HFInputMask';
 import usePageRouter from '../../../../hooks/useObjectRouter';
 import { Modal } from '@mui/material'
 import PImageUpdate from './ImageUpdate';
+import { websiteActions } from '../../../../store/website';
 
 
 const SelectGender = [
@@ -23,7 +25,7 @@ const SelectGender = [
 ]
 
 const PassengerProfile = () => {
-  const [send, setSend] = useState(false)
+  const dispatch = useDispatch()
   const [alert, setAlert] = useState('')
   const { id, } = useGetQueries();
   const { getQueries } = usePageRouter();
@@ -49,7 +51,7 @@ const PassengerProfile = () => {
     });
   }, [regions]);
 
-  const { control, setValue,  } = useForm({
+  const { control, setValue, getValues } = useForm({
     mode: 'onSubmit',
   })
 
@@ -57,30 +59,50 @@ const PassengerProfile = () => {
     return data?.data ?? {}
   }, [data])
 
-
   const deleteAccount = () => {
-    navigateQuery({ passenger: 'update' })
+    navigateQuery({ passenger: 'delete' })
     setAlert('Haqiqatdan ham o’chirishni istaysizmi?')
-  }
-
-  const alertMessage = (e: boolean) => {
-    if (e == true) {
-      setSend(e)
-      passengerService.deleteElement(query?.id)
-      navigateQuery({ passenger: '' })
-
-    } else {
-      navigateQuery({ passenger: '' })
-      setSend(false)
-      console.log(send);
-    }
   }
 
   const updateProfile = () => {
     navigateQuery({ passenger: 'update' })
     setAlert('Haqiqatdan ham ma’lumotlarni yangilashni istaysizmi?')
-    // navigateTo('/passengers/main')
   }
+
+  const alertMessage = (e: string) => {
+    if (e == 'delete') {
+      passengerService.deleteElement(query.id).then(() => {
+        dispatch(
+          websiteActions.setAlertData({
+            title: "Ma'lumotlar o'chirildi!",
+            translation: "common",
+          })
+        );
+        navigateTo('passengers/main')
+      })
+      navigateQuery({ passenger: '' })
+    } else if (e == 'update') {
+      const data = getValues()
+      data.phone = data.phone.substring(1).replace(/\s+/g, '')
+      data.image_id = String(data?.image_id)
+      passengerService.updateElement(query?.id, data).then(() => {
+        dispatch(
+          websiteActions.setAlertData({
+            title: "Ma'lumotlar yangilandi!",
+            translation: "common",
+          })
+        );
+        navigateTo('passengers/main')
+      })
+      navigateQuery({ passenger: '' })
+    } else {
+      navigateQuery({ passenger: '' })
+    }
+  }
+
+
+
+
 
 
   return (
@@ -89,7 +111,7 @@ const PassengerProfile = () => {
         <div className='flex items-start gap-4 '>
 
           <div className='relative'>
-            <PImageUpdate name={passenger?.full_name} defaultValue={passenger?.image_link} />
+            <PImageUpdate control={control} name={'image_id'} defaultValue={passenger?.image_id} />
           </div>
 
           <div className='w-full '>
@@ -119,7 +141,7 @@ const PassengerProfile = () => {
                 placeholder="Viloyat"
                 required={true}
                 setValue={setValue}
-                defaultValue={passenger?.gender}
+                defaultValue={passenger?.region_id}
               />
               <HFInputMask control={control}
                 name="phone"
@@ -150,8 +172,8 @@ const PassengerProfile = () => {
               <p className='text-base font-medium text-[var(--black)]'>{alert}</p>
             </div>
             <div className='flex items-center gap-2 mt-6'>
-              <CancelButton text="Yo'q" onClick={() => alertMessage(false)} />
-              <AddButton text='Ha' iconLeft={false} onClick={() => alertMessage(true)} />
+              <CancelButton text="Yo'q" onClick={() => alertMessage('')} />
+              <AddButton text='Ha' iconLeft={false} onClick={() => alertMessage(query?.passenger)} />
             </div>
           </div>
         </div>
