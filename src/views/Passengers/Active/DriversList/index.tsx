@@ -8,9 +8,6 @@ const DriversList = ({ data }: { data?: any }) => {
     const query = useGetQueries();
     const { navigateQuery, } = usePageRouter();
 
-    console.log(data);
-
-
     return (
         <div>
             <CModal title={query.driver_list ? "Aktiv haydovchilar" : "Tahrirlash"}
