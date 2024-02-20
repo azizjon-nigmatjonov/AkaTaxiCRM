@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useQuery } from "react-query";
 import { useForm } from 'react-hook-form';
 import { useGetQueries } from "../../../../hooks/useGetQueries"
 import passengerService from "../../../../services/passengers";
 import CCard from "../../../../components/CElements/CCard";
-import { CameraIcon, InfoIcon } from '../../../../components/IconGenerator/Svg';
+import {  InfoIcon } from '../../../../components/IconGenerator/Svg';
 import HFTextField from '../../../../components/FormElements/HFTextField';
 import { HFDatePicker } from '../../../../components/FormElements/HFDatePicker';
 import HFSelect from '../../../../components/FormElements/HFSelect';
@@ -49,7 +49,7 @@ const PassengerProfile = () => {
     });
   }, [regions]);
 
-  const { control, setValue, getValues, reset } = useForm({
+  const { control, setValue,  } = useForm({
     mode: 'onSubmit',
   })
 
