@@ -8,11 +8,9 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
   const { control, setValue, handleSubmit } = useForm({
     mode: "onSubmit",
   });
-
-
+  
   const submitHandler = (e: any) => {
     console.log(e);
-
   }
 
 

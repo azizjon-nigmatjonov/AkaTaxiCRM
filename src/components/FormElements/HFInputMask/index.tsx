@@ -35,7 +35,7 @@ const HFInputMask = ({
   }, [name, setValue, defaultValue]);
 
   return (
-    <div id="hfInputMask" className="relative">
+    <div id="hfInputMask" className="relative w-full">
       <CLabel title={label} required={required} />
       <Controller
         control={control}

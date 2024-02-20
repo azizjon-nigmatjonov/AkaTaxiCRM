@@ -38,7 +38,7 @@ const Header = () => {
       <div className="flex text-[14px] text-[var(--gray)] space-x-[30px] font-medium">
         <p className="flex gap-1 items-center">
           <PassengerVehicleIcon />
-          Yangi mashurtlar
+          Yo’lovchi marshruti
           {/* <div className="w-[8px] h-[8px] bg-[var(--darkerGreen)] rounded-full ml-1"></div> */}
         </p>
         <p className="flex  gap-1 items-center">
@@ -53,7 +53,7 @@ const Header = () => {
         </p>
         <p className="flex gap-1 items-center">
           <DriverVehicleIcon />
-          Yangi qidiruvlar
+          Haydovchi marshruti
           {/* <div className="w-[8px] h-[8px] bg-yellow-500 rounded-full ml-1"></div> */}
         </p>
       </div>

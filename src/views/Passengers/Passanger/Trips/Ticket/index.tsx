@@ -27,7 +27,8 @@ const Ticket = ({ data }: { data: any }) => {
             car_number: data?.car_number,
             place_order: data?.place_order,
             status: data?.status
-          }
+          },
+          
         }
       })
     )

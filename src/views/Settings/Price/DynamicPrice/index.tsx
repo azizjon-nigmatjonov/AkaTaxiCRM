@@ -2,6 +2,7 @@ import NullData from "../../../../components/NullData";
 import Points from "./Points";
 import PriceTable from "./Table";
 
+
 const DynamicPrice = ({
   regions = [],
   selected = [],
