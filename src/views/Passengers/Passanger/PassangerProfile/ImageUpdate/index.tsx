@@ -87,7 +87,7 @@ const PImageUpdate
                             type="file"
                             className="hidden"
                             ref={inputRef}
-                            onChange={(e: any) => { inputChangeHandler(e), onChange(image) }}
+                            onChange={(e: any) => [inputChangeHandler(e), onChange(image)]}
                         />
 
 
