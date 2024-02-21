@@ -49,8 +49,8 @@ const PImageUpdate
             setImage("");
             setImageTool(false)
         };
-            
-        
+
+
         return (
             <Controller control={control} name={name} render={({ field: { onChange } }) => {
                 return <div className="relative  rounded-full">
