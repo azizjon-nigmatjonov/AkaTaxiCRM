@@ -16,6 +16,7 @@ import driverService from '../../../../services/drivers'
 import usePageRouter from '../../../../hooks/useObjectRouter'
 import { useDispatch } from 'react-redux'
 import { websiteActions } from "../../../../store/website";
+
 const AddDriver = () => {
     const regions = useSelector((state: any) => state.regions.regions);
     const dispatch = useDispatch();
@@ -71,7 +72,6 @@ const AddDriver = () => {
         })
     }
 
-
     return (
         <div className='relative'>
             <Header sticky={true} title="Haydovchilar ro'yhati" titleIn="Yangi yo'lovchi" />
@@ -91,7 +91,7 @@ const AddDriver = () => {
                                 <HFTextField name='car_number' label='Mashina raqami' control={control} placeholder='eg: 01 AB 123 C' />
                                 <HFSelect placeholder='Tanlang' name='region_id' label="Viloyat" options={Regions} control={control} />
                                 <div>
-                                    <div className='flex items-center gap-5'>
+                                    <div className='flex items-start gap-5'>
                                         <DImageUpload control={control} style={{ height: 200 }} name='first_image' label='Oldi qismi rasmi' />
                                         <DImageUpload control={control} style={{ height: 200 }} name='second_image' label='Salon qismi rasmi' />
                                     </div>
@@ -103,7 +103,7 @@ const AddDriver = () => {
                         <CCard style={{ minHeight: 0, }}>
                             <div className='bg-[var(--softGray)] p-[10px] rounded-lg text-xs font-semibold'>Haydovchi rasmilari</div>
                             <div className='flex items-start justify-between  gap-5 mt-4'>
-                                <div className='flex flex-wrap items-center gap-5'>
+                                <div className='flex flex-wrap items-start gap-5'>
                                     <DImageUpload control={control} style={{ height: 200 }} name='profile_image' label='Profil avatar' />
                                     <DImageUpload control={control} style={{ height: 200 }} name='tex_passport' label='Tex.pasport' />
                                     <DImageUpload control={control} style={{ height: 200 }} name='driver_license' label='Prava rasmi' />
@@ -121,7 +121,7 @@ const AddDriver = () => {
                     </div>
                 </form>
             </div>
-        </div >
+        </div>
     )
 }
 

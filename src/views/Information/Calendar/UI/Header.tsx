@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { PassengerIcon, PassengerVehicleIcon, DriverIcon, DriverVehicleIcon } from '../../../../components/IconGenerator/Svg'
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-const MONTHS = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'August', 'Sentyabr', 'Obtyabr', 'Noyabr', 'Dekabr']
+const MONTHS = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'August', 'Sentyabr', 'Obtyabr', 'Noyabr', 'Dekabr'];
+const MONTHS_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const Header = () => {
   const [index, setIndex] = useState<any>(1)
@@ -22,6 +23,12 @@ const Header = () => {
       setIndex(11)
     }
   }
+
+  const date = new Date(`${MONTHS_EN[index]} 01, 2025`)
+  console.log(date);
+  
+  
+  
 
 
 

@@ -106,7 +106,7 @@ const PassengerProfile = () => {
         <div className='flex items-start gap-4 '>
 
           <div className='relative'>
-            <PImageUpdate control={control} setValue={setValue} name={'image_id'} defaultValue={passenger?.image_id} />
+            <PImageUpdate control={control} setValue={setValue} name='image_id' defaultValue={passenger?.image_id} />
           </div>
 
           <div className='w-full '>
@@ -163,7 +163,7 @@ const PassengerProfile = () => {
         <div className='grid place-items-center h-full'>
           <div className='bg-white px-6 py-8  max-w-[400px] mx-auto rounded-[20px]'>
             <div className='flex items-center gap-2'>
-              <InfoIcon />
+              <InfoIcon fill={'#FFC542'}/>
               <p className='text-base font-medium text-[var(--black)]'>{alert}</p>
             </div>
             <div className='flex items-center gap-2 mt-6'>
