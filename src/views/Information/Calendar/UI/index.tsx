@@ -7,10 +7,10 @@ interface Props {
 }
 
 const CalendarUI = ({ list = [], month }: Props) => {
-
-  const start = new Date()
-  start.setUTCDate(0)
-  console.log(start);
+  
+  const date = new Date();
+  let oneMonth = date.toLocaleString('default', { month: 'long' })
+  console.log(oneMonth);
   
 
   return (

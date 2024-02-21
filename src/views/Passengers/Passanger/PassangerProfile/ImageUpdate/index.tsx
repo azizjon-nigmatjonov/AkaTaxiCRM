@@ -50,10 +50,9 @@ const PImageUpdate
             setImageTool(false)
         };
 
-
         return (
-            <Controller control={control} name={name} render={({ field: { onChange } }) => {
-                return <div className="relative  rounded-full">
+            <Controller control={control} name={name} render={({ field: { onChange} }) => (
+                <div className="relative  rounded-full">
                     <div
                         className="border relative rounded-full w-[150px] h-[150px] overflow-hidden bg-[var(--lineGray)] flex items-center justify-center cursor-pointer "
                     >
@@ -106,7 +105,7 @@ const PImageUpdate
                         </div>
                     </div>}
                 </div>
-            }}>
+            )}>
             </Controller>
         );
     };
