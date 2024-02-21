@@ -7,6 +7,12 @@ interface Props {
 }
 
 const CalendarUI = ({ list = [], month }: Props) => {
+
+  const start = new Date()
+  start.setUTCDate(0)
+  console.log(start);
+  
+
   return (
     <div className="rounded-[18px] bg-white border border-[var(--lineGray)]">
       <Header />

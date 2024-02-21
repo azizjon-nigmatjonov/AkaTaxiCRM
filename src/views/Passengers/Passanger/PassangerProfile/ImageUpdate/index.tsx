@@ -49,8 +49,8 @@ const PImageUpdate
             setImage("");
             setImageTool(false)
         };
-            
-        
+
+
         return (
             <Controller control={control} name={name} render={({ field: { onChange } }) => {
                 return <div className="relative  rounded-full">
@@ -87,7 +87,7 @@ const PImageUpdate
                             type="file"
                             className="hidden"
                             ref={inputRef}
-                            onChange={(e: any) => { inputChangeHandler(e), onChange(image) }}
+                            onChange={(e: any) => [inputChangeHandler(e), onChange(image)]}
                         />
 
 

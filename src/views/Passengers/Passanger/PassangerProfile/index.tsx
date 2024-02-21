@@ -100,25 +100,20 @@ const PassengerProfile = () => {
     }
   }
 
-
-
-
-
-
   return (
     <div>
       <CCard style={{ minHeight: 0 }}>
         <div className='flex items-start gap-4 '>
 
           <div className='relative'>
-            <PImageUpdate control={control} name={'image_id'} defaultValue={passenger?.image_id} />
+            <PImageUpdate control={control} setValue={setValue} name={'image_id'} defaultValue={passenger?.image_id} />
           </div>
 
           <div className='w-full '>
             <div className='w-full  flex items-center gap-6'>
               <HFTextField control={control} name='full_name' setValue={setValue} required={true} placeholder='Ism familiya' label='Ism familiya' defaultValue={passenger?.full_name} />
 
-              <HFDatePicker name="birthday" label="Tug'ilgan sana" control={control} required={true} placeholder="Tug'ilgan sana" defaultValue={passenger?.birthday} />
+              <HFDatePicker name="birthday" label="Tug'ilgan sana" control={control} required={true} placeholder="Tug'ilgan sana" defaultValue={passenger?. birthday} />
 
               <HFSelect
                 name="gender"
