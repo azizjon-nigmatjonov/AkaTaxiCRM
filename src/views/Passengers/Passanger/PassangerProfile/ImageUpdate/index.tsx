@@ -51,7 +51,7 @@ const PImageUpdate
         };
 
         return (
-            <Controller control={control} name={name} render={({ field: { onChange} }) => (
+            <Controller control={control} name={name} render={({ field: { onChange } }) => (
                 <div className="relative  rounded-full">
                     <div
                         className="border relative rounded-full w-[150px] h-[150px] overflow-hidden bg-[var(--lineGray)] flex items-center justify-center cursor-pointer "
@@ -86,7 +86,7 @@ const PImageUpdate
                             type="file"
                             className="hidden"
                             ref={inputRef}
-                            onChange={(e: any) => [inputChangeHandler(e), onChange(e.files[0])]}
+                            onChange={(e: any) => [inputChangeHandler(e), onChange(image)]}
                         />
 
 
@@ -105,8 +105,8 @@ const PImageUpdate
                         </div>
                     </div>}
                 </div>
-            )}>
-            </Controller>
+            )} />
+
         );
     };
 
