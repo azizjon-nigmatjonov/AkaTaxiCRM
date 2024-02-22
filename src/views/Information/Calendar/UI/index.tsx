@@ -6,15 +6,10 @@ interface Props {
   list?: any
 }
 
-const CalendarUI = ({ list = [], month }: Props) => {
-  
-  const date = new Date();
-  let oneMonth = date.toLocaleString('default', { month: 'long' })
-  console.log(oneMonth);
-  
+const CalendarUI = ({ list = [], month }: Props) => {  
 
   return (
-    <div className="rounded-[18px] bg-white border border-[var(--lineGray)]">
+    <div className="rounded-[18px]  bg-white border border-[var(--lineGray)]">
       <Header />
 
       <Body list={list} month={month} />
