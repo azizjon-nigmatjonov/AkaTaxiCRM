@@ -17,13 +17,12 @@ const Calendar = () => {
 
   const { data: calendar, isLoading } = useQuery(
     ["GET_CALENDAR"],
-    () => {return calendarService.getList()},{enabled: true,}
+    () => { return calendarService.getList() }, { enabled: true, }
   );
-  
 
   return (
     <>
-      <Header title="Kalendar bo’yicha ma’lumotlar" />
+      <Header sticky={true} title="Kalendar bo’yicha ma’lumotlar" />
       <div className="px-5">
         {/* <SectionHeader>
           <FilterButton text="filter" >

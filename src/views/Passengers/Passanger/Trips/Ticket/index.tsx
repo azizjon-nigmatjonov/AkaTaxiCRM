@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import CarInfo from './CarInfo';
 import Location from './Location';
+import { InfoErrorIcon } from '../../../../../components/IconGenerator/Svg';
 
 
 const Ticket = ({ data }: { data: any }) => {
@@ -28,7 +29,7 @@ const Ticket = ({ data }: { data: any }) => {
             place_order: data?.place_order,
             status: data?.status
           },
-          
+
         }
       })
     )
@@ -38,9 +39,15 @@ const Ticket = ({ data }: { data: any }) => {
   return (
     <div >
       {ticketData?.map(({ location, carInfo }: { location?: any, carInfo?: any }) => (
-        <div className='flex items-center my-6 w-full '>
-          <Location data={location} />
-          <CarInfo data={carInfo} />
+        <div className='my-6 '>
+          <div className='flex items-center w-full '>
+            <Location data={location} />
+            <CarInfo data={carInfo} />
+          </div>
+          <div className='flex items-center gap-2 mt-3'>
+            <InfoErrorIcon />
+            <p className='text-sm font-normal'><span className='text-red-500'>Sabab:</span> - Lorem ipsum</p>
+          </div>
         </div>
       ))}
     </div>
