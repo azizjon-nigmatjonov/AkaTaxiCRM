@@ -32,7 +32,7 @@ const Header = () => {
           Yo’lovchi marshruti
           {/* <div className="w-[8px] h-[8px] bg-[var(--darkerGreen)] rounded-full ml-1"></div> */}
         </p>
-        <p className="flex  gap-1 items-center">
+        <p className="flex gap-1 items-center">
           <DriverIcon />
           Yangi haydo'vchilar
           {/* <div className="w-[8px] h-[8px] bg-[var(--error)] rounded-full ml-1"></div> */}

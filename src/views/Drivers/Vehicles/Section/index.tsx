@@ -8,12 +8,14 @@ interface Props {
 }
 
 const Section = ({ list = [], loading = true }: Props) => {
+
+
   return (
     <>
       {list?.length && !loading ? (
         <div className="grid grid-cols-3 gap-[18px]">
           {list.map((element: any, index: number) => (
-            <div key={index}>
+            <div key={element.id}>
               <Card element={element} />
             </div>
           ))}

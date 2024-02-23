@@ -46,8 +46,8 @@ const DImageUpload = ({
     fileService
       .upload(data)
       .then((res: any) => {
-        setValue(name, res?.data?.id);
-        setImage(res?.data?.id);
+        setValue(name, res?.data.data?.id);
+        setImage(res?.data?.data?.id);
       })
       .finally(() => {
         setLoading(false);

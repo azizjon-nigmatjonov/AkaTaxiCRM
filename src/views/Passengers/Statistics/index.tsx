@@ -28,21 +28,21 @@ const Statistics = () => {
 
   return (
     <section className="relative">
-      <SearchHeader /> 
+      <SearchHeader />
       <div className=" sticky top-20 z-20 left-0 py-[24px] pl-[12px]  w-[100%] bg-[var(--softGray)]">
         <h1 className="text-2xl block font-[600] text-[var(--black)] ml-[15px]">
           Statistika: yo‘lovchi
         </h1>
       </div>
-      <div className="p-[15px]  pl-[20px] pr-[30px]  ">
-        <div className="flex   space-x-4 mb-[14px]">
+      <div className="p-[15px] pl-[20px] pr-[30px]  ">
+        <div className="flex space-x-4 mb-[14px]">
           <CCard>
-            <StatisticsLineChart data={bodyColumns.graph}/>
+            <StatisticsLineChart data={bodyColumns.graph} />
           </CCard>
           <StatisticsCard data={bodyColumns?.passengers} />
         </div>
 
-        <div className="flex  mb-[20px]  w-[100%]">
+        <div className="flex mb-[20px] w-[100%]">
           <RegionStats />
           <StatisticsMap />
         </div>

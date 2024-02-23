@@ -38,8 +38,11 @@ const ImageUploadBtn = ({
     fileService
       .upload(data)
       .then((res: any) => {
-        setValue(name, res?.data?.id);
-        setImage(res?.data?.id);
+        // console.log(res.data.data);
+        
+        setValue(name, res?.data?.data?.id);
+        
+        setImage(res?.data?.data?.id);
       })
       .finally(() => {
         setLoading(false);
