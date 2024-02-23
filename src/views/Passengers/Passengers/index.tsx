@@ -143,7 +143,7 @@ const Passengers = () => {
   const handlerAge = (evt: any) => {
     navigateQuery({birthday: evt })
   }
-
+  
   
   return (
     <>

@@ -43,6 +43,7 @@ const Form = ({ refetch }: Props) => {
       };
     });
   }, [regions]);
+  
 
   const { data: passenger } = useQuery(
     ["GET_PASSENGER", query.id],

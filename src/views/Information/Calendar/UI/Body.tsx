@@ -55,7 +55,7 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
 
       <div className={cls.body}>
         <div className="grid grid-cols-7">
-          {calendarEmptyCell.map((el, i) => <div className={cls.cell} key={i}></div>)}
+          {calendarEmptyCell.map((_, i: any) => <div className={cls.cell} key={i}></div>)}
 
           {list.map((element: any, index: number) => (
             <div className={cls.cell} key={index}>

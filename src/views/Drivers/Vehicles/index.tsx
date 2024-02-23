@@ -57,7 +57,7 @@ const Vehicles = () => {
 
   return (
     <>
-      <Header title="Mashinalar" />
+      <Header title="Mashinalar ro'yhati" />
       <div className="px-6">
         {tabList && !isLoading ? (
           <>

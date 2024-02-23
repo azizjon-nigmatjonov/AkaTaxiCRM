@@ -14,7 +14,7 @@ const Section = ({ list = [], loading = true }: Props) => {
     <>
       {list?.length && !loading ? (
         <div className="grid grid-cols-3 gap-[18px]">
-          {list.map((element: any, index: number) => (
+          {list.map((element: any) => (
             <div key={element.id}>
               <Card element={element} />
             </div>

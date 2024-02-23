@@ -45,16 +45,16 @@ const Passanger = () => {
 
 
     return (
-        <>
-            <Header>
+        <div className='relative'>
+            <Header sticky={true}>
                 <CBreadcrumbs items={breadCrubmsItems} progmatic={true} type="link" />
             </Header>
 
             <div className='px-6'>
-                <CTabs tabList={tabList} />
+                <div className='sticky top-[97px] z-10 '><CTabs tabList={tabList} /></div>
                 {tab === 'data' ? <PassengerProfile /> : <Trips />}
             </div>
-        </>
+        </div>
     )
 }
 

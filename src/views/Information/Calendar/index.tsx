@@ -22,7 +22,7 @@ const Calendar = () => {
 
   return (
     <>
-      <Header title="Kalendar bo’yicha ma’lumotlar" />
+      <Header sticky={true} title="Kalendar bo’yicha ma’lumotlar" />
       <div className="px-5">
         {/* <SectionHeader>
           <FilterButton text="filter" >

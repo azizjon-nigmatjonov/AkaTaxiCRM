@@ -15,7 +15,7 @@ const CarInfo = ({ data: { car_class, car_name, driver_name, car_number_region, 
 
   return (
     <>
-      <div className={cls.Car}>
+      {status != 'canceled' && <div className={cls.Car}>
         <div>
           <div className='flex items-center justify-between'>
             <div className='flex items-center gap-2'>
@@ -51,7 +51,7 @@ const CarInfo = ({ data: { car_class, car_name, driver_name, car_number_region, 
           </div>
         </div>
         {status != 'created' && <div><div className={cls.rightTop} /> <div className={cls.rightBottom} /></div>}
-      </div>
+      </div>}
       {status != 'created' && <Result status={status} />}
     </>
 

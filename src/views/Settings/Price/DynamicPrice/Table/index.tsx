@@ -54,7 +54,7 @@ const PriceTable = ({
             </div>
           </div>
           {locations?.starting_cities?.map(
-            (item: any, index: number) => (
+            (item: any) => (
               <div
                 key={item.id}
                 className={`whitespace-nowrap border-t-2 border-[--(lineGray)] h-[50px] flex items-center px-4 ${cls.cell}`}
