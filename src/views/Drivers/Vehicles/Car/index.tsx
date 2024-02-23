@@ -62,8 +62,8 @@ const SingleCar = () => {
               val === false
                 ? "text-[var(--error)]"
                 : val === true
-                ? "text-[var(--green)]"
-                : ""
+                  ? "text-[var(--green)]"
+                  : ""
             }
           >
             {val === false ? "Noaktiv" : val === true ? "Aktiv" : ""}
@@ -107,17 +107,17 @@ const SingleCar = () => {
     <>
       <Header><CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" /></Header>
       <div className="px-5">
-      <SectionHeader>
-        <FilterButton text="filter" />
-      </SectionHeader>
+        <SectionHeader>
+          <FilterButton text="filter" />
+        </SectionHeader>
 
-      <CTable
-        headColumns={headColumns}
-        bodyColumns={drivers?.list}
-        count={drivers?.meta?.totalCount}
-        handleActions={handleActions}
-        currentPage={currentPage}
-      />
+        <CTable
+          headColumns={headColumns}
+          bodyColumns={drivers?.list}
+          count={drivers?.meta?.totalCount}
+          handleActions={handleActions}
+          currentPage={currentPage}
+        />
       </div>
     </>
   );

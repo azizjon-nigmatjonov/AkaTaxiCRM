@@ -4,7 +4,15 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const MONTHS = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'August', 'Sentyabr', 'Obtyabr', 'Noyabr', 'Dekabr']
 
-const Header = () => {
+const Header = ({ list, month }) => {
+
+  const startDate = list[0].day;
+  const endDate = list[list.length - 1].day;
+
+  const startDateFormat = new Date(startDate).toLocaleDateString('uz-Cyrl-UZ', { day: 'numeric', month: 'long', year: 'numeric' });
+  const endDateFormat = new Date(endDate).toLocaleDateString('uz-Cyrl-UZ', { day: 'numeric', month: 'long', year: 'numeric' });
+
+
   const [index, setIndex] = useState<any>(1)
 
   const nextButton = () => {
@@ -28,7 +36,7 @@ const Header = () => {
   return (
     <div className="flex justify-between h-[60px] items-center px-5">
       <div className='flex items-center gap-[18px]'>
-        <p className="text-[var(--error)] font-medium">1 {MONTHS[index]}, 2024 - 31 {MONTHS[index]}, 2024</p>
+        <p className="text-[var(--error)] font-medium">{startDateFormat} - {endDateFormat}</p>
         <div className='flex items-center gap-2 cursor-pointer'>
           <IoIosArrowBack onClick={prevButton} />
           <IoIosArrowForward onClick={nextButton} />
@@ -41,7 +49,7 @@ const Header = () => {
           Yangi mashurtlar
           {/* <div className="w-[8px] h-[8px] bg-[var(--darkerGreen)] rounded-full ml-1"></div> */}
         </p>
-        <p className="flex  gap-1 items-center">
+        <p className="flex gap-1 items-center">
           <DriverIcon />
           Yangi haydo'vchilar
           {/* <div className="w-[8px] h-[8px] bg-[var(--error)] rounded-full ml-1"></div> */}

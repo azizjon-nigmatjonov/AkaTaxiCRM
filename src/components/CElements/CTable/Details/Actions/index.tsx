@@ -26,7 +26,7 @@ const TabbleActions = ({
   const handleClick = (element: any, status?: string, active?: boolean) => {
     
     if (active) {
-      console.log('render');
+      // console.log('render');
       
       handleActions(element, status);
       setCurrentIndex(null);

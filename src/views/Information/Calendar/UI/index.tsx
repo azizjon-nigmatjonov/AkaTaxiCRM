@@ -9,7 +9,7 @@ interface Props {
 const CalendarUI = ({ list = [], month }: Props) => {
   return (
     <div className="rounded-[18px] bg-white border border-[var(--lineGray)]">
-      <Header />
+      <Header list={list} month={month}/>
 
       <Body list={list} month={month} />
     </div>

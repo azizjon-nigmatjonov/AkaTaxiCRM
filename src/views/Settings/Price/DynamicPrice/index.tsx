@@ -8,7 +8,7 @@ const DynamicPrice = ({
   locations = {},
   edit = false,
   changesLis = [],
-  setChangesList = () => {},
+  setChangesList = () => { },
   loading = false,
 }: {
   regions: any;
@@ -19,8 +19,8 @@ const DynamicPrice = ({
   loading: boolean;
   setChangesList: (val: any) => void;
 }) => {
-  const updateCell = (status: string, val: any, object: any) => {
-    console.log(status, val, object);
+  const updateCell = (status: string, val: any, object: any, row: any) => {
+    console.log(status, val, object, row);
 
     const obj: any = object;
     status === "price" ? (obj.price = val) : (obj.fee = val);
