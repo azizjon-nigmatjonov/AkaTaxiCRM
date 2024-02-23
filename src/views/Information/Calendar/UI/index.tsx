@@ -6,10 +6,11 @@ interface Props {
   list?: any
 }
 
-const CalendarUI = ({ list = [], month }: Props) => {
+const CalendarUI = ({ list = [], month }: Props) => {  
+
   return (
-    <div className="rounded-[18px] bg-white border border-[var(--lineGray)]">
-      <Header list={list} month={month}/>
+    <div className="rounded-[18px]  bg-white border border-[var(--lineGray)]">
+      <Header />
 
       <Body list={list} month={month} />
     </div>

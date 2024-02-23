@@ -35,7 +35,7 @@ const BasicDatepicker = ({
   const datePickerRef: any = useRef();
   const [value, setValue] = useState("");
   
-  const handleValue = (value: any) => {    
+  const handleValue = (value: any) => {        
     setValue(value);
     if (field) field.onChange(FormatTime(value));
   };
@@ -86,7 +86,7 @@ const BasicDatepicker = ({
         plugins={[weekends()]}
         weekStartDayIndex={1}
         portal
-        locale={{ ...locale, name: "" }}
+        locale={{ ...locale, name: ""}}
         className="datePicker"
         format="DD.MM.YYYY"
         value={new Date(value) || ""}

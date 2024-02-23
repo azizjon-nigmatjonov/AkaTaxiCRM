@@ -53,7 +53,7 @@ const CImageUpload = ({
         <img
           className="w-full h-full object-cover"
           src={
-            image
+            image 
               ? `https://cdn.akataxi.uz/media/get-image/${image}`
               : defaultValue
           }

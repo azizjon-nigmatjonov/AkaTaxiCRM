@@ -1,7 +1,7 @@
-import EmptyDataComponent from '../../../../../components/EmptyDataComponent'
 import Ticket from '../Ticket'
+import EmptyDataComponent from '../../../../../components/EmptyDataComponent'
 
-const CurrentlyTrip = ({ data }: { data: any }) => {
+const AllTrips = ({ data }: { data: any }) => {
     return (
         <div>
             <Ticket data={data} />
@@ -10,4 +10,4 @@ const CurrentlyTrip = ({ data }: { data: any }) => {
     )
 }
 
-export default CurrentlyTrip
+export default AllTrips

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ImageFrame } from "../../IconGenerator/Svg";
+import { DeleteIcon, DotsIcon, EditIcon, ImageFrame, InfoIcon } from "../../IconGenerator/Svg";
 import fileService from "../../../services/fileService";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { CircularProgress } from "@mui/material";
@@ -32,6 +32,7 @@ const DImageUpload = ({
   const inputRef: any = useRef(null);
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [imageTool, setImageTool] = useState(false)
 
   const inputChangeHandler = (e: any) => {
 
@@ -63,18 +64,40 @@ const DImageUpload = ({
   const deleteImage = (e: any) => {
     e.stopPropagation();
     setImage("");
+    setImageTool(false)
   };
+
+  const updateImage = (e: any) => {
+    e.stopPropagation();
+    if(!readOnly){
+      inputRef.current.click()
+      setImageTool(false)
+    }
+  }
 
 
   return (
     <>
       <Controller name={name} control={control} render={({ field: { onChange } }) => (
         <div className="flex  flex-col">
-          {label ? <CLabel title={label} /> : ""}
+          {label ?
+            <div className="flex items-center justify-between">
+              <CLabel title={label} />
+              <div className="relative p-5" onClick={() => setImageTool(true)}>
+                <DotsIcon />
+                {imageTool && <div className="bg-white divide-y-2 absolute w-[156px] top-[30px] right-0 z-10 rounded-xl border border-[var--softgray]">
+                  <div onClick={updateImage} className="flex items-center gap-2 p-2 hover:bg-[var(--lineGray)] rounded-t-xl cursor-pointer">
+                    <EditIcon fill="#858592" />
+                    <p className="text-xs font-normal text-[var(--gray)]">Rasm yuklash</p>
+                  </div>
+                  <div onClick={deleteImage} className="flex items-center gap-2 p-2  hover:bg-[var(--lineGray)] rounded-b-xl cursor-pointer">
+                    <DeleteIcon fill='#858592' />
+                    <p className="text-xs font-normal text-[var(--gray)]">O’chirish</p>
+                  </div>
+                </div>}
+              </div>
+            </div> : ""}
           <div
-            onClick={() => {
-              if (!readOnly) inputRef.current.click()
-            }}
             className={`cursor-pointer flex px-[14px] text-[var(--gray)] font-medium border border-[var(--lineGray)] rounded-[10px] h-[50px] bg-[var(--lightGray)] flex-col justify-center items-center max-w-[250px] min-w-[249px]`}
             style={style}
           >
@@ -105,10 +128,13 @@ const DImageUpload = ({
               ""
             )}
           </div>
+          {!image && <div className="flex items-start gap-1 mt-2">
+            <InfoIcon size={14} />
+            <span className="text-xs font-normal leading-[18px] text-[var(--gray)]">Rasm formati png, jpg bo’lishi kerak. <br />O’lchami maksimum 12 MB. </span>
+          </div>}
+
         </div>
       )}></Controller>
-
-
     </>
   );
 };

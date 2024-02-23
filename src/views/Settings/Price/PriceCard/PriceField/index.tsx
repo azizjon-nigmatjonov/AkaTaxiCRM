@@ -41,7 +41,7 @@ const PriceField = ({
       disabled
       defaultValue={price}
       render={({ field: { onChange, value } }) => (
-        <div className="flex relative border border-[var(--lightGray)] h-[45px] flex items-center rounded-[12px] bg-white">
+        <div className=" relative border border-[var(--lightGray)] h-[45px] flex items-center rounded-[12px] bg-white">
           <p className="px-1 text-[var(--gray)] whitespace-nowrap absolute top-[-10px] bg-white left-[16px]">
             {title}
           </p>
