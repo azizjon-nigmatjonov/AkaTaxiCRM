@@ -13,22 +13,6 @@ import { useDispatch } from "react-redux";
 import { useMemo } from "react";
 // import CTabs from "../../../../components/CElements/CTab";
 
-const tabList = [
-  {
-    name: "Uz",
-    slug: "uz",
-  },
-  {
-    name: "Ru",
-    slug: "ru",
-  },
-  {
-    name: "En",
-    slug: "en",
-  },
-];
-
-
 
 interface Props {
   classes: any;
