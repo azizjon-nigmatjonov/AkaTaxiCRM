@@ -1,6 +1,6 @@
 import request from "../../utils/request";
 const calendarService = {
-  getList: () => request.get("/calendar"),
+  getList: (params?: string) => request.get(`/calendar/?${params ? `&startDate=${params}` : ''}`),
 };
 
 export default calendarService;

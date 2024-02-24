@@ -115,6 +115,7 @@ const Passengers = () => {
     }
     if (status === "edit") {
       navigateQuery({ id: el.id });
+      
     }
     if(status === "learn_more"){
       navigateTo(`/passengers/passenger?id=${el.id}`)
@@ -172,7 +173,7 @@ const Passengers = () => {
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns}
-          count={passengers?.meta?.pageCount ?? 5}
+          count={passengers?.meta?.totalCount ?? 5}
           isLoading={isLoading}
           handleActions={handleActions}
           currentPage={currentPage}

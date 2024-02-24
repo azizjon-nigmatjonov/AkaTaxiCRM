@@ -68,7 +68,7 @@ const ActivePassengers = () => {
         title: "qidiruv vaqti",
         id: "search_time",
         render: (val?: any) => {
-          return <>{FormatTime(val, "time")}</>;
+          return FormatTime(val, "time")
         },
       },
       {

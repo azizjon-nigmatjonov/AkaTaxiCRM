@@ -26,14 +26,10 @@ const Drivers = () => {
       return driverService.getList({ page: currentPage, perPage: 10, q });
     }
   );
-
+  
 
   const headColumns = useMemo(() => {
     return [
-      // {
-      //   title: "ID",
-      //   id: "id",
-      // },
       {
         title: "Ism familya",
         id: "info",
@@ -149,7 +145,7 @@ const Drivers = () => {
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns ?? []}
-          count={drivers?.meta?.pageCount}
+          count={drivers?.meta?.totalCount}
           handleActions={handleActions}
           isLoading={isLoading}
           currentPage={currentPage}
