@@ -31,7 +31,7 @@ const PriceTable = ({
 
 
   // console.log(locations.starting_cities);
-  console.log(locations);
+
 
 
 
