@@ -63,7 +63,7 @@ const DriverBallance = () => {
 
 
     return <>
-        <div className="flex items-center gap-[10px] mb-6">
+        <div className="grid grid-cols-3 gap-[10px] mb-6">
             {ballanceData.generalAmount?.map((val: any) => (
                 <CCard style={{ minHeight: 0 }} classes="flex items-center gap-[18px]">
                     <div className="p-[9px] bg-[#DD431F]/10 rounded-lg inline-flex">

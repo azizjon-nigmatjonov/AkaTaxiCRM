@@ -9,11 +9,8 @@ export const baseURL = import.meta.env.VITE_BASE_URL;
 const request = axios.create({
   baseURL,
   timeout: 100000,
-  headers: { "Content-Type": "multipart/form-data" }
+  headers: { "Content-Type": "multipart/form-data" },
 });
-
-
-
 
 const errorHandler = (error: any) => {
   const status = error.response?.status;
@@ -28,7 +25,7 @@ const errorHandler = (error: any) => {
     // const data = {
     //   refresh_token,
     // };
-    store.dispatch(authActions.logout())
+    store.dispatch(authActions.logout());
     // const originalRequest = error.config;
 
     // authService
@@ -61,11 +58,6 @@ request.interceptors.request.use(
   (error) => errorHandler(error)
 );
 
-request.interceptors.response.use(
-  (response) => response.data,
-  errorHandler
-);
+request.interceptors.response.use((response) => response.data, errorHandler);
 
 export default request;
-
-

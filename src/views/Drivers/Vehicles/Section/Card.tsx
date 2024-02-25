@@ -16,6 +16,7 @@ interface Props {
 }
 
 const Card: FC<Props> = ({ element }) => {
+
   const { navigateTo, navigateQuery } = usePageRouter();
   return (
     <CCard
@@ -65,7 +66,7 @@ const Card: FC<Props> = ({ element }) => {
           <p className="text-[13px]">Batafsil ma‘lumot</p>
         </div>
         <div
-          onClick={() => navigateQuery({id: element.id})}
+          onClick={() => navigateQuery({ id: element.id })}
           className="px-6 h-[50px] flex items-center w-full font-medium cursor-pointer"
         >
           <div className="border border-[var(--lineGray)] h-[30px] w-[30px] flex items-center justify-center rounded-full mr-2">

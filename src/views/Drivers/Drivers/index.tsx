@@ -73,8 +73,8 @@ const Drivers = () => {
       //   }
       // },
       {
-        title:'Viloyat',
-        id:'region_name'
+        title: 'Viloyat',
+        id: 'region_name'
       },
       {
         title: "",

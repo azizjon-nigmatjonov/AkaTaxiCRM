@@ -11,22 +11,9 @@ import { useQuery } from "react-query";
 import { websiteActions } from "../../../../store/website";
 import { useDispatch } from "react-redux";
 import { useMemo } from "react";
-import CTabs from "../../../../components/CElements/CTab";
+// import CTabs from "../../../../components/CElements/CTab";
 
-const tabList = [
-  {
-    name: "Uz",
-    slug: "uz",
-  },
-  {
-    name: "Ru",
-    slug: "ru",
-  },
-  {
-    name: "En",
-    slug: "en",
-  },
-];
+
 interface Props {
   classes: any;
   tab?: any;
@@ -43,6 +30,9 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
     resolver: yupResolver(schema),
   });
 
+
+
+
   const { data: car } = useQuery(
     ["GET_CAR", query.id],
     () => {
@@ -52,6 +42,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
       enabled: query.id !== "create" && query.id ? true : false,
     }
   );
+
 
   const HandleSuccess = (title: string) => {
     dispatch(
@@ -67,22 +58,28 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
   };
 
   const SubmitForm = () => {
-    const data: any = getValues();
-    
-    const params: any = {};
-    params.car_class_ids = data.ids;
-    params.name = {
-      uz: data.name_uz || "",
-      ru: data.name_ru || "",
-      en: data.name_en || "",
-    };
 
+    const data: any = getValues();
+    const params: any = {};
+
+    console.log(data);
+    
+
+    params.car_class_ids = data.ids;
+    params.name = data.name_uz;
     params.file_id = data?.file_id;
 
-    
+
+    // params.name = {
+    //   // uz: data.name_uz || "",
+    //   // ru: data.name_ru || "",
+    //   en: data.name_en || "",
+    // };
+
     if (query.id === "create") {
       carService.createElement(params).then(() => {
         HandleSuccess("Ma'lumot yaratildi!");
+
       });
     } else {
       carService.updateElement(query.id, params).then((res) => {
@@ -113,7 +110,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
       handleSave={() => SubmitForm()}
       textDeleteBtn="cancel"
     >
-      <CTabs
+      {/* <CTabs
         slug="lang"
         tabList={tabList ?? []}
         customStyles={{
@@ -124,7 +121,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
             width: "33%",
           },
         }}
-      />
+      /> */}
       <div className="grid space-y-3">
         <HFTextField
           name={`name_${query?.lang || "uz"}`}

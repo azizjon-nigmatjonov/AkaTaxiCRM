@@ -6,19 +6,20 @@ import { useMemo } from "react";
 const PriceTable = ({
   locations = {},
   edit = false,
-  updateCell = () => {},
+  updateCell = () => { },
 }: {
   locations?: any;
   edit: boolean;
-  updateCell?: (val: string, val2: any, val3: any) => void;
+  updateCell?: (val: string, val2: any, val3: any, val4: any) => void;
 }) => {
   const { start, end } = useGetQueries();
   const regions = useSelector((state: any) => state.regions.regions);
 
+
+
   const updateElement = useDebounce((value: any) => {
-    console.log('eee');
-    
-    updateCell(value.status, value.value, value.column);
+
+    updateCell(value.status, value.value, value.column, value.row);
   }, 0);
 
   const currentRegions = useMemo(() => {
@@ -27,6 +28,13 @@ const PriceTable = ({
       end: regions?.find((i: any) => i.id == end),
     };
   }, [regions, start, end]);
+
+
+  // console.log(locations.starting_cities);
+
+
+
+
 
   return (
     <div
@@ -46,9 +54,9 @@ const PriceTable = ({
             </div>
           </div>
           {locations?.starting_cities?.map(
-            (item: any, index: number) => (
+            (item: any) => (
               <div
-                key={index}
+                key={item.id}
                 className={`whitespace-nowrap border-t-2 border-[--(lineGray)] h-[50px] flex items-center px-4 ${cls.cell}`}
               >
                 {item.start_location_name}
@@ -66,44 +74,52 @@ const PriceTable = ({
                 <div className={`${cls.cell} px-8 h-[48px]`}>
                   {row.end_location_name}
                 </div>
-                {row?.list?.map((column: any) => (
-                  <div
-                    className={`border-t-2 flex px-4 font-medium ${cls.cell}`}
-                  >
-                    <div className="border-r w-full flex items-center pr-2 h-[48px]">
-                      <input
-                        onChange={(e) =>
-                          updateElement({
-                            status: "price",
-                            value: e.target.value,
-                            column,
-                          })
-                        }
-                        readOnly={!edit}
-                        type="number"
-                        defaultValue={column.price}
-                      />
-                      <span>so'm</span>
+                {row?.list?.map((column: any) => {
+
+                  return (
+                    <div
+                      className={`border-t-2 flex px-4 font-medium ${cls.cell}`}
+                      key={column.id}
+                    >
+                      <div className="border-r w-full flex items-center pr-2 h-[48px]">
+                        <input
+                          onChange={(e) =>
+                            updateElement({
+                              status: "price",
+                              value: e.target.value,
+                              column,
+                              row
+                            })
+                          }
+                          readOnly={!edit}
+                          type="number"
+                          defaultValue={column.price}
+                        />{" "}
+                        <span>so'm</span>
+                      </div>
+                      <div className="w-[35px] pr-2">
+                        <input
+                          onChange={(e) =>
+                            updateElement({
+                              status: "fee",
+                              value: e.target.value,
+                              column,
+                              row
+                            })
+                          }
+                          className="pl-2 w-full"
+                          type="number"
+                          readOnly={!edit}
+                          defaultValue={column.fee ?? 0}
+                        />
+
+                        <span>%</span>
+                      </div>
                     </div>
-                    <div className="w-[35px] pr-2">
-                      <input
-                        onChange={(e) =>
-                          updateElement({
-                            status: "fee",
-                            value: e.target.value,
-                            column,
-                          })
-                        }
-                        className="pl-2 w-full"
-                        type="number"
-                        readOnly={!edit}
-                        defaultValue={column.fee ?? 0}
-                      />
-    
-                      <span>%</span>
-                    </div>
-                  </div>
-                ))}
+                  )
+
+
+                })}
               </div>
             )
           )}

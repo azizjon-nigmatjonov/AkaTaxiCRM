@@ -29,7 +29,7 @@ const PriceField = ({
     setEdit(status);
     if (status) currentRef.current.focus();
   };
-  
+
   useEffect(() => {
     setValue(name, price)
   }, [price])

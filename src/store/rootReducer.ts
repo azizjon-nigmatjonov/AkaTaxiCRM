@@ -3,7 +3,7 @@ import persistReducer from "redux-persist/es/persistReducer";
 import { authReducer } from "./auth/auth.slice";
 import { regionReducer } from "./regions";
 import storage from "redux-persist/lib/storage";
-import { websiteReducer } from "./website"
+import { websiteReducer } from "./website";
 import { tableSizeReducer } from "./tableSize/tableSizeSlice";
 
 const authPersistConfig = {

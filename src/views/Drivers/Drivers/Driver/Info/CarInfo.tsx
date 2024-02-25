@@ -1,7 +1,10 @@
+import { useMemo } from "react";
 // import ImageUploadBtn from "../../../../../components/Buttons/ImageUpload";
 import HFTextField from "../../../../../components/FormElements/HFTextField";
 import DImageUpload from "../../../../../components/CElements/CDivider/DImageUpload";
-
+import HFSelect from "../../../../../components/FormElements/HFSelect";
+import { useQuery } from "react-query";
+import carService from "../../../../../services/cars";
 interface Props {
   control?: any;
   driver?: any;
@@ -9,6 +12,27 @@ interface Props {
 }
 
 const CarInfo = ({ control, setValue, driver = {} }: Props) => {
+
+
+  const { data } = useQuery(['GET_CARS_LISTS'], () => {
+    return carService.getCarClasses()
+  })
+
+
+  const CarLists: any = useMemo(() => {
+    if(!data) return []
+    const list = data?.data
+    return {
+      list: list.map((val:any)=>{
+        return {
+          value: val.id,
+          label: val.name
+        }
+      })
+    }
+  }, [data])  
+
+
   return (
     <div className="space-y-8">
       <div className="flex items-start gap-5">
@@ -33,13 +57,13 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
         <DImageUpload control={control} style={{ height: 200 }} name='second_image' label='Salon qismi rasmi' defaultValue={driver?.images?.[1]} />
       </div>
       <div className="grid grid-cols-4 gap-4 mt-5">
-        <HFTextField
-          name="car_number"
+        <HFSelect
+          options={CarLists.list}
+          name="car_id"
           control={control}
           placeholder="Mashina rusumu"
           label="Mashina rusumu"
           setValue={setValue}
-          readOnly={false}
           defaultValue={driver?.car_name}
         />
         <HFTextField

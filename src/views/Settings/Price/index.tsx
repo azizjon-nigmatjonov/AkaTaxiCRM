@@ -7,6 +7,8 @@ import StaticPrice from "./StaticPrice";
 import { useSelector } from "react-redux";
 import priceService from "../../../services/price";
 import { Header } from "../../../components/Header";
+
+
 const tabList = [
   {
     slug: "static",
@@ -67,14 +69,17 @@ const Price = () => {
         const starting_cities = getCities(arr, "start_location_id");
         const ending_cities = getCities(arr, "end_location_id");
 
-        for (let i = 0; i < arr.length; i++) {
-          const obj = arr[i];
-          for (let j = 0; j < ending_cities.length; j++) {
-            if (obj.end_location_id === ending_cities[j]?.end_location_id) {
-              ending_cities[j].list.push(obj);
+        ending_cities.forEach((endingCity: any) => {
+          const filtered = arr.filter((city: any) => city.end_location_id === endingCity.end_location_id);
+
+          starting_cities.forEach((startingCity: any, index: number) => {
+            const found = filtered.find((city: any) => city.start_location_id === startingCity.start_location_id);
+
+            if (found) {
+              endingCity.list[index] = found;
             }
-          }
-        }
+          });
+        });
 
         setLocations({ starting_cities, ending_cities });
       })
@@ -101,10 +106,9 @@ const Price = () => {
   return (
     <>
       <Header title="Adminlar" />
-      <div className="px-5"> 
+      <div className="px-5">
         <div className="flex justify-between">
           <CTabs tabList={tabList} />
-
           {currentTab === "regional_price" ? (
             <AddButton
               onClick={() => {

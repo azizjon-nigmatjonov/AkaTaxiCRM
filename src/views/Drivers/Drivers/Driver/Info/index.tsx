@@ -13,17 +13,19 @@ import { useDispatch } from "react-redux";
 import driverService from "../../../../../services/drivers";
 import { websiteActions } from '../../../../../store/website';
 
+
 const DriverInfo = ({ driver = {} }: { driver?: any }) => {
-  const [alert, setAlert] = useState('')
+  const [alert, setAlert] = useState("Ma'lumotlarni o'zgartishish!")
   const dispatch = useDispatch()
   const { getQueries, navigateQuery, navigateTo } = usePageRouter();
   const query = getQueries();
 
-  const { control, setValue, handleSubmit, getValues, watch } = useForm({
+  const { control, setValue, getValues } = useForm({
     mode: "onSubmit",
   });
 
-  const watchedValues = watch()
+  
+
 
   const deleteAccount = () => {
     setAlert('Haqiqatdan ham o’chirishni istaysizmi?'),
@@ -34,7 +36,6 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
     setAlert('Haqiqatdan ham ma’lumotlarni yangilashni istaysizmi?'),
       navigateQuery({ passenger: 'update' })
   }
-
 
 
   const alertMessage = (e: string) => {
@@ -50,24 +51,33 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
       })
       navigateQuery({ passenger: '' })
     } else if (e == 'update') {
-      const values = getValues();
+      const value = getValues();
 
-      
+      let obj: any = {};
+      Object.entries(driver).map(([keys, _]) => {
+        return Object.entries(value).map(([newkeys, _]) => {
+          if (typeof value[newkeys] == 'undefined') return
+          if (value[newkeys] == 'undefined') return
+          if (driver[keys] != value[keys]) {
+            return obj[newkeys] = value[newkeys]
+          }
+        })
+      })
 
-      // values.phone = values.phone.substring(1).replace(/\s+/g, '');
-      // const data = new FormData();
-      // for (let i in values) {
-      //   data.append(i, values[i])
-      // }
-      // driverService.updateElement(query?.id, data).then(() => {
-      //   dispatch(
-      //     websiteActions.setAlertData({
-      //       title: "Ma'lumotlar yangilandi!",
-      //       translation: "common",
-      //     })
-      //   )
-      //   navigateTo('drivers/main')
-      // })
+      obj.phone = obj.phone.substring(1).replace(/\s+/g, '');
+      const data = new FormData();
+      for (let i in obj) {
+        data.append(i, obj[i])
+      }
+      driverService.updateElement(query?.id, data).then(() => {
+        dispatch(
+          websiteActions.setAlertData({
+            title: "Ma'lumotlar yangilandi!",
+            translation: "common",
+          })
+        )
+        navigateTo('drivers/main')
+      })
       navigateQuery({ passenger: '' })
     }
     else {

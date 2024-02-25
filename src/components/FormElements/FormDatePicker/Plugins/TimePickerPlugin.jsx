@@ -1,6 +1,6 @@
-import { useEffect, useMemo } from "react"
-import { useRef } from "react"
-import styles from "./style.module.scss"
+import { useEffect, useMemo } from "react";
+import { useRef } from "react";
+import styles from "./style.module.scss";
 
 const hours = [
   "00",
@@ -27,7 +27,7 @@ const hours = [
   "21",
   "22",
   "23",
-]
+];
 
 const minutes = [
   "00",
@@ -90,60 +90,57 @@ const minutes = [
   "57",
   "58",
   "59",
-]
+];
 
 const TimePickerPlugin = (props) => {
-  const hourBlockRef = useRef()
-  const minuteBlockRef = useRef()
+  const hourBlockRef = useRef();
+  const minuteBlockRef = useRef();
 
   let { date, selectedDate, multiple, range, focused } = props.state,
-    availbleDate = (multiple || range ? focused : selectedDate) || date
+    availbleDate = (multiple || range ? focused : selectedDate) || date;
 
   const clickHandler = (value, key) => {
-    availbleDate[key] = value
+    availbleDate[key] = value;
 
     props.handleChange(selectedDate, {
       ...props.state,
       selectedDate,
       focused,
-    })
-  }
+    });
+  };
 
   const hourValue = useMemo(() => {
-    if (!availbleDate.hour) availbleDate.hour = 0
+    if (!availbleDate.hour) availbleDate.hour = 0;
 
-    return availbleDate.hour
-  }, [availbleDate.hour])
+    return availbleDate.hour;
+  }, [availbleDate.hour]);
 
   const minuteValue = useMemo(() => {
-    if (!availbleDate.minute) availbleDate.minute = 0
+    if (!availbleDate.minute) availbleDate.minute = 0;
 
-    return availbleDate.minute
-  }, [availbleDate.minute])
+    return availbleDate.minute;
+  }, [availbleDate.minute]);
 
   useEffect(() => {
     if (!isNaN(hourValue)) {
       hourBlockRef.current.scrollTo({
         top: hourValue * 30,
         behavior: "smooth",
-      })
+      });
     }
-  }, [hourValue])
+  }, [hourValue]);
 
   useEffect(() => {
     if (!isNaN(minuteValue)) {
       minuteBlockRef.current.scrollTo({
         top: minuteValue * 30,
         behavior: "smooth",
-      })
+      });
     }
-  }, [minuteValue])
+  }, [minuteValue]);
 
   return (
-    <div
-      className={styles.timePicker}
-      style={{ padding: !props.disablePreview ? 0 : 10 }}
-    >
+    <div className={styles.timePicker} style={{ padding: !props.disablePreview ? 0 : 10 }}>
       {/* {!props.disablePreview && <div className={styles.previewBlock} >
 
         <div className={styles.date} >{availbleDate?.format('MMMM DD, ddd') ?? ''}</div>
@@ -157,9 +154,7 @@ const TimePickerPlugin = (props) => {
             <div
               onClick={() => clickHandler(index, "hour")}
               key={hour}
-              className={`${styles.item} ${
-                hourValue === index ? styles.active : ""
-              }`}
+              className={`${styles.item} ${hourValue === index ? styles.active : ""}`}
             >
               {hour}
             </div>
@@ -171,9 +166,7 @@ const TimePickerPlugin = (props) => {
             <div
               key={minute}
               onClick={() => clickHandler(index, "minute")}
-              className={`${styles.item} ${
-                minuteValue === index ? styles.active : ""
-              }`}
+              className={`${styles.item} ${minuteValue === index ? styles.active : ""}`}
             >
               {minute}
             </div>
@@ -181,7 +174,7 @@ const TimePickerPlugin = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TimePickerPlugin
+export default TimePickerPlugin;

@@ -13,21 +13,21 @@ import "./i18next";
 
 function App() {
   return (
-      <Suspense fallback={<PageFallback />}>
-        <div className="app">
-          <QueryClientProvider client={queryClient}>
-            <Provider store={store}>
-              <PersistGate persistor={persistor}>
-                <ThemeProvider theme={themeMui}>
-                  <BrowserRouter>
-                    <Router />
-                  </BrowserRouter>
-                </ThemeProvider>
-              </PersistGate>
-            </Provider>
-          </QueryClientProvider>
-        </div>
-      </Suspense>
+    <Suspense fallback={<PageFallback />}>
+      <div className="app">
+        <QueryClientProvider client={queryClient}>
+          <Provider store={store}>
+            <PersistGate persistor={persistor}>
+              <ThemeProvider theme={themeMui}>
+                <BrowserRouter>
+                  <Router />
+                </BrowserRouter>
+              </ThemeProvider>
+            </PersistGate>
+          </Provider>
+        </QueryClientProvider>
+      </div>
+    </Suspense>
   );
 }
 

@@ -30,7 +30,7 @@ const Header = () => {
           <PassengerVehicleIcon />
           Yo’lovchi marshruti
         </p>
-        <p className="flex  gap-1 items-center">
+        <p className="flex gap-1 items-center">
           <DriverIcon />
           Yangi haydo'vchilar
         </p>
