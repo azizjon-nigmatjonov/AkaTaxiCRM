@@ -1,4 +1,5 @@
-import ImageUploadBtn from "../../../../../components/Buttons/ImageUpload";
+import DImageUpload from "../../../../../components/CElements/CDivider/DImageUpload";
+// import ImageUploadBtn from/ "../../../../../components/Buttons/ImageUpload";
 
 interface Props {
   control?: any;
@@ -6,41 +7,48 @@ interface Props {
   setValue?: (val?: any, val2?: any) => void;
 }
 
-const DriverImages = ({ setValue, driver = {} }: Props) => {
+const DriverImages = ({ control, driver = {} }: Props) => {
   return (
-    <div className="grid grid-cols-4 gap-4 mt-5">
-      <ImageUploadBtn
+    <div className="flex items-start flex-wrap gap-4 mt-5">
+
+      {/* <ImageUploadBtn
         label="Profil avatari"
         text="Profil avatari"
-        name="file_id"
-        readOnly={true}
+        name="profile_image"
+        readOnly={false}
         setValue={setValue}
-        // defaultValue={driver?.driver_license}
+        defaultValue={driver?.driver_license}
       />
       <ImageUploadBtn
         label="Tex.pasport rasmi"
         text="Tex.pasport rasmi"
-        name="file_id"
-        readOnly={true}
+        name="tex_passport"
+        readOnly={false}
         setValue={setValue}
         defaultValue={driver?.tex_passport}
       />
       <ImageUploadBtn
         label="Prava rasmi"
         text="Prava rasmi"
-        name="file_id"
-        readOnly={true}
+        name="driver_license"
+        readOnly={false}
         setValue={setValue}
         defaultValue={driver?.driver_license}
       />
       <ImageUploadBtn
         label="Prava bilan selfi"
         text="Prava bilan selfi"
-        name="file_id"
+        name="selfie_driver_license"
         setValue={setValue}
-        readOnly={true}
+        readOnly={false}
         defaultValue={driver?.selfie_driver_license}
-      />
+      /> */}
+
+      <DImageUpload control={control} style={{ height: 200 }} name='profile_image' label='Profil avatari' defaultValue={driver?.driver_license} />
+      <DImageUpload control={control} style={{ height: 200 }} name='tex_passport' label='Tex.pasport rasmi' defaultValue={driver?.tex_passport} />
+      <DImageUpload control={control} style={{ height: 200 }} name='driver_license' label='Prava rasmi' defaultValue={driver?.driver_license} />
+      <DImageUpload control={control} style={{ height: 200 }} name='selfie_driver_license' label='Prava bilan selfi' defaultValue={driver?.selfie_driver_license} />
+      <DImageUpload control={control} style={{ height: 200 }} name='third_image' label="Qo'shimcha" defaultValue={driver?.tex_passport} />
     </div>
   );
 };

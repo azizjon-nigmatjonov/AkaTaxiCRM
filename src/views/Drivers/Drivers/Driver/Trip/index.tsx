@@ -1,5 +1,4 @@
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
 import driverService from "../../../../../services/drivers";
 import { useCallback, useMemo } from "react";
 import CTable from "../../../../../components/CElements/CTable";
@@ -9,18 +8,19 @@ import { useGetQueries } from "../../../../../hooks/useGetQueries";
 
 const DriverTrip = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
-  const { id } = useParams();
+  const { id } = useGetQueries();
   const { currentPage } = useGetQueries();
 
   const { data: trip, isLoading } = useQuery(
-    ["GET_TRIP_HISTORY", id],
+    ["GET_DRIVERS_TRIPS", id],
     () => {
-      return driverService.getDriverTripHistory("86");
+      return driverService.getDriverTripHistory(id);
     },
     {
       enabled: !!id,
     }
-  );
+    
+    );  
     
   const TripData = useMemo(() => {
     const data: any = trip;
@@ -43,11 +43,13 @@ const DriverTrip = () => {
     };
   }, [trip]);
 
+  
+
   const headColumns = useMemo(() => {
     return [
       {
         title: "marshrut raqami",
-        id: "partners_name",
+        id: "start_region_name",
       },
       {
         title: "Start manzil",
@@ -88,6 +90,9 @@ const DriverTrip = () => {
       {
         title: "umumiy summa",
         id: "price_formatted",
+        render:(val?:any)=>(
+          <p>{val} so'm</p>
+        )
       },
     ];
   }, []);

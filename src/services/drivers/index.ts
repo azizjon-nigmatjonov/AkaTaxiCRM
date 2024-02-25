@@ -16,10 +16,11 @@ const driverService = {
   deleteElement: (id: string) => request.delete(`/drivers/${id}`),
   getElement: (id: string | undefined) => request.get(`/drivers/${id}`),
   getDriverTripHistory: (id: string | undefined) =>
-    request.get(`booking/driver-trips/${id}`),
-  getWidgets:()=> request.get('statistics/drivers/widgets'),
-  getDriversGraph:()=>request.get('statistics/drivers/graph'),
-  getUserRegion:()=>request.get('statistics/drivers/users-by-region')
+    request.get(`drivers/${id}/trips`),
+  getWidgets: () => request.get('statistics/drivers/widgets'),
+  getDriversGraph: () => request.get('statistics/drivers/graph'),
+  getUserRegion: () => request.get('statistics/drivers/users-by-region'),
+  getDriverBallance: (id?: string) => request.get(`drivers/${id}/balance`),
 };
 
 export default driverService;

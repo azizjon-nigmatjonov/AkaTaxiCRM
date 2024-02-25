@@ -34,7 +34,7 @@ const ImageUploadBtn = ({
 
     const data = new FormData();
     data.append("file", file);
-
+    
     fileService
       .upload(data)
       .then((res: any) => {
@@ -60,11 +60,6 @@ const ImageUploadBtn = ({
     e.stopPropagation();
     setImage("");
   };
-  // console.log('de', defaultValue, image);
-
-  // useEffect(() => {
-  //   if (defaultValue) setValue(name, defaultValue);
-  // }, [defaultValue]);
 
   return (
     <div className="flex flex-col">

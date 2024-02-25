@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useQuery } from "react-query";
 import calendarService from "../../../services/calendar";
 // import SectionHeader from "../../../components/Sections/Header";
@@ -6,6 +7,7 @@ import CalendarUI from "./UI";
 import { Skeleton } from "@mui/material";
 import { Header } from "../../../components/Header";
 import { GetMonth } from "../../../utils/getMonth";
+import { useGetQueries } from "../../../hooks/useGetQueries";
 // import BasicDatepicker from "../../../components/CElements/CDatePicker/BasicDatepicker";
 // import MultiDatePicker from "../../../components/CElements/CDatePicker/MultiDatepicker";
 // import { MultiDatePicker } from "../../../components/CElements/CDatePicker/MultiDatepicker";
@@ -14,11 +16,17 @@ import { GetMonth } from "../../../utils/getMonth";
 
 const Calendar = () => {
   const month: any = GetMonth()
-
-  const { data: calendar, isLoading } = useQuery(
-    ["GET_CALENDAR"],
-    () => { return calendarService.getList() }, { enabled: true, }
+  const { startDate } = useGetQueries();
+  const { data, isLoading } = useQuery(
+    ["GET_CALENDAR", startDate],
+    () => { return calendarService.getList(startDate) }, { enabled: true, }
   );
+
+
+  const calendar: any = useMemo(() => {
+    return data?.data ?? []
+  }, [data])
+
 
   return (
     <>
@@ -31,7 +39,7 @@ const Calendar = () => {
         </SectionHeader> */}
 
         {!isLoading ? (
-          <CalendarUI list={calendar?.data} month={month} />
+          <CalendarUI list={calendar} month={month} />
         ) : (
           <div className="h-[1000px] mt-[-220px]">
             <Skeleton style={{ height: "100%", borderRadius: "14px" }} />

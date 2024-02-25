@@ -38,7 +38,8 @@ const DriverStatistics = () => {
   }, [userRegion])
 
 
-
+  console.log(widgetsData);
+  
   return (
     <>
       <SearchHeader />

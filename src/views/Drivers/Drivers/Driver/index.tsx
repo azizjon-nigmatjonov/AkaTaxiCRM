@@ -52,7 +52,7 @@ const Driver = () => {
 
   return (
     <>
-      <Header>
+      <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
       </Header>
 

@@ -1,33 +1,36 @@
 import { useState } from 'react'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { FormatTime } from '../../../../utils/formatTime';
+import usePageRouter from '../../../../hooks/useObjectRouter';
 
 const Tools = () => {
     const [date, setDate] = useState(new Date()); // June 2023
-
+    const { navigateQuery } = usePageRouter();
+    
     const handleNextMonth = () => {
-        const newDate = new Date(date);
+        const newDate: any = new Date(date);
         newDate.setMonth(newDate.getMonth() + 1);
         if (newDate.getMonth() === 0) {
             newDate.setFullYear(newDate.getFullYear());
         }
         setDate(newDate);
+        navigateQuery({ startDate: FormatTime(newDate) })
     };
 
     const handlePrevMonth = () => {
-        const newDate = new Date(date);
+        const newDate: any = new Date(date);
         newDate.setMonth(newDate.getMonth() - 1);
         if (newDate.getMonth() === 11) {
             newDate.setFullYear(newDate.getFullYear());
         }
         setDate(newDate);
-        // backend()
+        navigateQuery({ startDate: FormatTime(newDate) })
+
     };
 
     const monthNames: string[] = [
         'Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'
     ];
-
-
 
 
     return (
