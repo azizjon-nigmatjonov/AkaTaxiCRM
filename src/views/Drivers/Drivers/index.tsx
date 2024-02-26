@@ -145,7 +145,7 @@ const Drivers = () => {
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns ?? []}
-          count={drivers?.meta?.totalCount}
+          count={drivers?.meta?.pageCount}
           handleActions={handleActions}
           isLoading={isLoading}
           currentPage={currentPage}
