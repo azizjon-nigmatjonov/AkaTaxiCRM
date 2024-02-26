@@ -24,7 +24,6 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
     mode: "onSubmit",
   });
 
-  
 
 
   const deleteAccount = () => {

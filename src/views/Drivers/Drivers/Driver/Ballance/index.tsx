@@ -31,9 +31,9 @@ const DriverBallance = () => {
         return [
             {
                 title: 'Summa',
-                id: 'amount_formatted',
-                render: (val?: any) => val && (
-                    <p className={val == 'income' ? 'text-[var(--green)]' : 'text-[var(--main)]'}>{val + ' ' + "so'm"}</p>
+                id: 'amount',
+                render: (val?: any, item?: any) => val && (
+                    <p className={item.type == 'income' ? 'text-[var(--green)]' : 'text-[var(--main)]'}>{item.type == 'income' ? '+' : '-' + val + ' ' + "so'm"}</p>
                 )
             },
             {
@@ -59,7 +59,6 @@ const DriverBallance = () => {
     const bodyColumns = useMemo(() => {
         return ballanceData
     }, [ballanceData])
-    console.log(bodyColumns);
 
 
     return <>

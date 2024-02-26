@@ -8,6 +8,7 @@ interface Props {
 }
 
 const DriverImages = ({ control, driver = {} }: Props) => {
+
   return (
     <div className="flex items-start flex-wrap gap-4 mt-5">
 
@@ -43,6 +44,8 @@ const DriverImages = ({ control, driver = {} }: Props) => {
         readOnly={false}
         defaultValue={driver?.selfie_driver_license}
       /> */}
+
+      
 
       <DImageUpload control={control} style={{ height: 200 }} name='profile_image' label='Profil avatari' defaultValue={driver?.driver_license} />
       <DImageUpload control={control} style={{ height: 200 }} name='tex_passport' label='Tex.pasport rasmi' defaultValue={driver?.tex_passport} />

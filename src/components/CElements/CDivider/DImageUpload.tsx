@@ -32,7 +32,7 @@ const DImageUpload = ({
   const inputRef: any = useRef(null);
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [imageTool, setImageTool] = useState(false)
+  const [imageTool, setImageTool] = useState(false);
 
   const inputChangeHandler = (e: any) => {
 
@@ -61,22 +61,26 @@ const DImageUpload = ({
     }
   }, [defaultValue, name, setValue]);
 
-  const deleteImage = (e: any) => {
-    e.stopPropagation();
-    setImage("");
-    setImageTool(false)
-  };
-
+   
   
+
   const updateImage = (e: any) => {
     e.stopPropagation();
-    if(!readOnly){
+    if (!readOnly) {
       inputRef.current.click()
       setImageTool(false)
     }
   }
 
+  const deleteImage = (e: any) => {
+    e.stopPropagation();
+    setImage("");
+    setImageTool(false)
+    defaultValue = ''
+  };
 
+  
+  
   return (
     <>
       <Controller name={name} control={control} render={({ field: { onChange } }) => (
@@ -104,7 +108,7 @@ const DImageUpload = ({
                 className={`h-full  w-full `}
                 src={image ? `https://cdn.akataxi.uz/media/get-image/${image}` : defaultValue}
                 alt={defaultValue || "image"}
-              />
+              /> 
             ) : loading ? (
               <CircularProgress />
             ) : (
