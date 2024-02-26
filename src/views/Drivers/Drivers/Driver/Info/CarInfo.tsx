@@ -15,7 +15,7 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
 
 
   const { data } = useQuery(['GET_CARS_LISTS'], () => {
-    return carService.getCarClasses()
+    return carService.getList()
   })
 
 

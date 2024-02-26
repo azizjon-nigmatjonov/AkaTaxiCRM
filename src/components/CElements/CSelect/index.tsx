@@ -17,9 +17,6 @@ const CSelect = ({
   handlerValue
 }: Props) => {
 
-  
-
-
 
   const handleChange = (event: SelectChangeEvent) => {
     handlerValue!(event.target?.value)

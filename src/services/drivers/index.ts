@@ -7,7 +7,6 @@ const driverService = {
       }`
     ),
   createElement: (data: any) => request.post("/drivers", data),
-
   getActives: (params: any) =>
     request.get(
       `/drivers-popular${params.page ? `?page=${params.page || 1}` : ""}${params.q ? `&q=${params.q}` : ""}${params.region_id ? `&region_id=${params.region_id}` : ""}${params.gender ? `&gender=${params.gender}` : ""}${params.car_model_id ? `&car_model_id=${params.car_model_id}` : ""}${params.birthday ? `&birthday=${params.birthday}` : ""}`

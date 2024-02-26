@@ -916,3 +916,31 @@ export const SallaryIcon = () => (
     <path d="M17.1665 2L13.4165 5.75" stroke="#DD431F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 )
+
+export const IncreaseIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="130" height="66" viewBox="0 0 130 66" fill="none">
+    <path d="M129 1C108.204 2.73299 106.916 44.2218 86.3333 49C69.3602 52.9402 60.7655 30.5738 43.6667 33C25.1204 35.6316 19.1855 58.9382 1 65H129V1Z" fill="#ECFDF3" />
+    <path d="M129 1C108.204 2.73299 106.916 44.2218 86.3333 49C69.3602 52.9402 60.7655 30.5738 43.6667 33C25.1204 35.6316 19.1855 58.9382 1 65H129V1Z" fill="url(#paint0_linear_4561_48119)" />
+    <path d="M1 65C19.1855 58.9382 25.1204 35.6316 43.6667 33C60.7655 30.5738 69.3602 52.9402 86.3333 49C106.916 44.2218 108.204 2.73299 129 1" stroke="#12B76A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <defs>
+      <linearGradient id="paint0_linear_4561_48119" x1="65" y1="1" x2="65" y2="65" gradientUnits="userSpaceOnUse">
+        <stop offset="0.641167" stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="white" />
+      </linearGradient>
+    </defs>
+  </svg>
+)
+
+export const DecreaseIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="130" height="66" viewBox="0 0 130 66" fill="none">
+    <path d="M1 1C21.7959 2.73299 23.0837 44.2218 43.6667 49C60.6398 52.9402 69.2345 30.5738 86.3333 33C104.88 35.6316 110.815 58.9382 129 65H1V1Z" fill="#FEF3F2" />
+    <path d="M1 1C21.7959 2.73299 23.0837 44.2218 43.6667 49C60.6398 52.9402 69.2345 30.5738 86.3333 33C104.88 35.6316 110.815 58.9382 129 65H1V1Z" fill="url(#paint0_linear_4561_48147)" />
+    <path d="M129 65C110.815 58.9382 104.88 35.6316 86.3333 33C69.2345 30.5738 60.6398 52.9402 43.6667 49C23.0837 44.2218 21.7959 2.73299 0.999996 1" stroke="#F04438" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <defs>
+      <linearGradient id="paint0_linear_4561_48147" x1="65" y1="1" x2="65" y2="65" gradientUnits="userSpaceOnUse">
+        <stop offset="0.641167" stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="white" />
+      </linearGradient>
+    </defs>
+  </svg>
+)
