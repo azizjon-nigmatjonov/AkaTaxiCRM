@@ -173,7 +173,7 @@ const Passengers = () => {
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns}
-          count={passengers?.meta?.totalCount ?? 5}
+          count={passengers?.meta?.pageCount ?? 5}
           isLoading={isLoading}
           handleActions={handleActions}
           currentPage={currentPage}
