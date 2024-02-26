@@ -63,20 +63,18 @@ const DriverTrip = () => {
       {
         title: "borar manzil",
         id: "end",
-        render: (val?: any) => {
-          return (
-            <>
-              {val?.end_region_name}, {val?.end_district_name}
-            </>
-          );
-        },
+        render: (val?: any) => val && (
+          <div>
+            {val?.end_region_name}, {val?.end_district_name}
+          </div>
+        )
       },
       {
         title: "sana",
         id: "created_at",
-        render: (val?: any) => {
-          return <>{FormatTime(val)}</>;
-        },
+        render: (val?: any) => val && (
+          <>{FormatTime(val)}</>
+        )
       },
       {
         title: "mijozlar",
@@ -88,7 +86,7 @@ const DriverTrip = () => {
       {
         title: "umumiy summa",
         id: "price_formatted",
-        render: (val?: any) => (
+        render: (val?: any) => val && (
           <p>{val} so'm</p>
         )
       },
