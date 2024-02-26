@@ -19,9 +19,9 @@ const DriverTrip = () => {
     {
       enabled: !!id,
     }
-    
-    );  
-    
+
+  );
+
   const TripData = useMemo(() => {
     const data: any = trip;
     return {
@@ -43,7 +43,7 @@ const DriverTrip = () => {
     };
   }, [trip]);
 
-  
+
 
   const headColumns = useMemo(() => {
     return [
@@ -54,13 +54,11 @@ const DriverTrip = () => {
       {
         title: "Start manzil",
         id: "start",
-        render: (val?: any) => {
-          return (
-            <>
-              {val?.start_region_name}, {val?.start_district_name}
-            </>
-          );
-        },
+        render: (val?: any) => val && (
+          <div>
+            {val?.start_region_name}, {val?.start_district_name}
+          </div>
+        ),
       },
       {
         title: "borar manzil",
@@ -90,7 +88,7 @@ const DriverTrip = () => {
       {
         title: "umumiy summa",
         id: "price_formatted",
-        render:(val?:any)=>(
+        render: (val?: any) => (
           <p>{val} so'm</p>
         )
       },
@@ -114,7 +112,7 @@ const DriverTrip = () => {
       <CTable
         headColumns={headColumns}
         bodyColumns={TripData?.list}
-        count={TripData?.meta?.totalCount}
+        count={TripData?.meta?.pageCount}
         handleActions={handleActions}
         handleRowClick={handleRowClick}
         isLoading={isLoading}
