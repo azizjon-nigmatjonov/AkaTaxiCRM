@@ -54,8 +54,6 @@ const DriverBallance = () => {
     }, [])
 
 
-
-
     const bodyColumns = useMemo(() => {
         return ballanceData
     }, [ballanceData])
