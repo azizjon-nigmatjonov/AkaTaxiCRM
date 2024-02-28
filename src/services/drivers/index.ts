@@ -14,12 +14,12 @@ const driverService = {
   updateElement: (id: string, data: any) => request.put(`/drivers/${id}`, data),
   deleteElement: (id: string) => request.delete(`/drivers/${id}`),
   getElement: (id: string | undefined) => request.get(`/drivers/${id}`),
-  getDriverTripHistory: (id: string | undefined) =>
-    request.get(`drivers/${id}/trips`),
+  getDriverTripHistory: (data: any | undefined) =>
+    request.get(`drivers/${data.id}/trips?${data.page ? `page=${data.page}` : ''}`),
   getWidgets: () => request.get('statistics/drivers/widgets'),
   getDriversGraph: () => request.get('statistics/drivers/graph'),
   getUserRegion: () => request.get('statistics/drivers/users-by-region'),
-  getDriverBallance: (id?: string) => request.get(`drivers/${id}/balance`),
+  getDriverBallance: (data?: any) => request.get(`drivers/${data.id}/balance?${data.page ? `page=${data.page}`: ''}`),
 };
 
 export default driverService;

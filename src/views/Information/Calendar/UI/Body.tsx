@@ -9,10 +9,6 @@ const DAYS = ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'J
 const Body = ({ list = [], }: { list?: any, month?: any }) => {
 
 
-
-  
-
-
   const [calendarEmptyCell, setCalendarEmptyCell] = useState<any>([])
 
   const emtyCell: any = () => {
@@ -42,6 +38,7 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
 
   // console.log(new Date('2024-02-01').toLocaleDateString('en-US', { weekday: 'long' }));
 
+  
 
   return (
     <div className={cls.calendar}>
@@ -62,23 +59,19 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
               <span className="font-medium">{index + 1}</span>
               <Lighter
                 text={`${element.passenger_count} ta`}
-                // color={ColorConstants.blue}
                 icon={'passenger_count'}
               />
               <Lighter
                 text={`${element.driver_count} ta`}
-                // color={ColorConstants.error}
                 icon={'driver_count'}
               />
               <Lighter
                 text={`${element.trip_count} ta`}
-                // color={ColorConstants.darkerGreen}
-                icon={'trip_count'}
-              />
+                icon={'bookings_count'}
+                />
               <Lighter
                 text={`${element.bookings_count} ta`}
-                // color={'rgb(234 179 8)'}
-                icon={'bookings_count'}
+                icon={'trip_count'}
               />
             </div>
           ))}

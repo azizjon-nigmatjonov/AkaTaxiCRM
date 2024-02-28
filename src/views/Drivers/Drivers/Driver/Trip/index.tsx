@@ -8,13 +8,12 @@ import { useGetQueries } from "../../../../../hooks/useGetQueries";
 
 const DriverTrip = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
-  const { id } = useGetQueries();
-  const { currentPage } = useGetQueries();
+  const { id , currentPage} = useGetQueries();
 
   const { data: trip, isLoading } = useQuery(
-    ["GET_DRIVERS_TRIPS", id],
+    ["GET_DRIVERS_TRIPS", id, currentPage ],
     () => {
-      return driverService.getDriverTripHistory(id);
+      return driverService.getDriverTripHistory({id, page: currentPage});
     },
     {
       enabled: !!id,
@@ -42,8 +41,6 @@ const DriverTrip = () => {
       meta: data?.meta,
     };
   }, [trip]);
-
-
 
   const headColumns = useMemo(() => {
     return [
@@ -79,9 +76,9 @@ const DriverTrip = () => {
       {
         title: "mijozlar",
         id: "passengers_count",
-        render: (val?: any) => {
-          return <>{val}ta mijoz</>;
-        },
+        render: (val?: any) => val && (
+          <>{val}ta mijoz</>
+        )
       },
       {
         title: "umumiy summa",
@@ -97,7 +94,6 @@ const DriverTrip = () => {
     if (status === "learn_more") {
       navigateTo(`/drivers/driver/${element.id}`);
     }
-
     if (status === "edit") navigateQuery({ id: element.id });
   }, []);
 

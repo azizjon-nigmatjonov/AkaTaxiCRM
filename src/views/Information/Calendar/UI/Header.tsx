@@ -27,16 +27,16 @@ const Header = () => {
 
       <div className="flex text-[14px] text-[var(--gray)] space-x-[30px] font-medium">
         <p className="flex gap-1 items-center">
-          <PassengerVehicleIcon />
-          Yo’lovchi marshruti
+          <PassengerIcon />
+          Yangi yo'lovchilar
         </p>
         <p className="flex gap-1 items-center">
           <DriverIcon />
           Yangi haydo'vchilar
         </p>
         <p className="flex gap-1 items-center">
-          <PassengerIcon />
-          Yangi yo'lovchilar
+          <PassengerVehicleIcon />
+          Yo’lovchi marshruti
         </p>
         <p className="flex gap-1 items-center">
           <DriverVehicleIcon />
