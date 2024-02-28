@@ -32,11 +32,10 @@ const DriversList = ({ data }: { data?: any }) => {
                                     <p className='text-sm font-normal text-[#475467]'>+{val?.phone}</p>
                                 </div>
                             </div>
-                            <p className={`${val?.status == 'searching_driver' ? 'text-[var(--green)]' : 'text-red-500'}`}>{val?.status == 'searching_driver' ? 'Qidirilmoqda' : 'Rad etildi'}</p>
+                            <p className={`${val?.status == 'searching_driver' ? 'text-[var(--green)]' : 'text-red-500'}`}>{val?.status == 'searching_driver' ? 'Qidirmoqda' : 'Rad etildi'}</p>
                         </div>
                     ))}
                 </div>
-
             </CModal>
         </div>
     )

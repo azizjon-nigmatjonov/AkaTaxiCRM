@@ -9,8 +9,8 @@ import { FormatTime } from "../../../../../utils/formatTime"
 
 const DriverBallance = () => {
     const { id, currentPage } = useGetQueries()
-    const { data, isLoading } = useQuery(['GET_DRIVERS_BALLANCE', id], () => {
-        return driverService.getDriverBallance(id)
+    const { data, isLoading } = useQuery(['GET_DRIVERS_BALLANCE', id, currentPage], () => {
+        return driverService.getDriverBallance({id, page:currentPage})
     })
 
 
@@ -46,9 +46,9 @@ const DriverBallance = () => {
             {
                 title: 'Sana',
                 id: 'created_at',
-                render: (val?: any) => {
-                    return FormatTime(val)
-                },
+                render: (val?: any) => val && (
+                    FormatTime(val)
+                )
             }
         ]
     }, [])

@@ -10,10 +10,10 @@ import StatisticsLineChart from "./Bar";
 import Progress from '../../../components/Progress'
 
 const DriverStatistics = () => {
+
   const { data: widgets, isLoading } = useQuery(['GET_GRAPH_LIST'], () => {
     return driverService.getWidgets()
   })
-
 
   const { data: graph, isLoading: barLoading } = useQuery(['GET_GRAPH_DATA'], () => {
     return driverService.getDriversGraph()
@@ -27,7 +27,6 @@ const DriverStatistics = () => {
     return widgets?.data ?? []
   }, [widgets])
 
-
   const graphData: any = useMemo(() => {
     if (!graph?.data) return []
     return Object.values(graph?.data)
@@ -36,9 +35,6 @@ const DriverStatistics = () => {
   const regionUser: any = useMemo(() => {
     return userRegion?.data ?? []
   }, [userRegion])
-
-
-  console.log(widgetsData);
   
   return (
     <>

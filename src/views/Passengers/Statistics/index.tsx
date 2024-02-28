@@ -1,5 +1,5 @@
 import CCard from "../../../components/CElements/CCard";
-import StatisticsCard from "./Statistics";
+// import StatisticsCard from "./Statistics";
 import { StatisticsMap } from "./Statistics/Map";
 import StatisticsLineChart from "./LineChart";
 import SearchHeader from "../../../components/Header/SearchHeader";
@@ -8,7 +8,8 @@ import RegionStats from "./Statistics/PieChart";
 import { useQuery } from "react-query";
 import { useMemo } from "react";
 // import { Header } from "../../../components/Header";
-// import AccountStatistics from "./AccountStatistics";
+import AccountStatistics from "./AccountStatistics";
+import StatisticsGender from "./GenderRegions";
 
 
 const Statistics = () => {
@@ -31,9 +32,8 @@ const Statistics = () => {
   return (
     <section className="relative">
       <SearchHeader />
-      <div>
-        {/* <AccountStatistics /> */}
-      </div>
+      <AccountStatistics />
+      <StatisticsGender />
 
       <div className=" sticky top-20 z-20 left-0 py-[24px] pl-[12px]  w-[100%] bg-[var(--softGray)]">
         <h1 className="text-2xl block font-[600] text-[var(--black)] ml-[15px]">
@@ -45,7 +45,6 @@ const Statistics = () => {
           <CCard>
             <StatisticsLineChart data={bodyColumns.graph} />
           </CCard>
-          <StatisticsCard data={bodyColumns?.passengers} />
         </div>
 
         <div className="flex mb-[20px] w-[100%]">

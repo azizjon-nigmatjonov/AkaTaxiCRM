@@ -24,8 +24,6 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
     mode: "onSubmit",
   });
 
-
-
   const deleteAccount = () => {
     setAlert('Haqiqatdan ham o’chirishni istaysizmi?'),
       navigateQuery({ passenger: 'delete' })

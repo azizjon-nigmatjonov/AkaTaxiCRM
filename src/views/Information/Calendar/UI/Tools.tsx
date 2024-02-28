@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { FormatTime } from '../../../../utils/formatTime';
+import { FormatCalendar } from '../../../../utils/formatTime';
 import usePageRouter from '../../../../hooks/useObjectRouter';
 
 const Tools = () => {
@@ -14,7 +14,9 @@ const Tools = () => {
             newDate.setFullYear(newDate.getFullYear());
         }
         setDate(newDate);
-        navigateQuery({ startDate: FormatTime(newDate) })
+        console.log(FormatCalendar(newDate) );
+        
+        navigateQuery({ date: FormatCalendar(newDate) })
     };
 
     const handlePrevMonth = () => {
@@ -24,7 +26,7 @@ const Tools = () => {
             newDate.setFullYear(newDate.getFullYear());
         }
         setDate(newDate);
-        navigateQuery({ startDate: FormatTime(newDate) })
+        navigateQuery({ date: FormatCalendar(newDate) })
 
     };
 
