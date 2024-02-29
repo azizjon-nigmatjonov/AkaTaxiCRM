@@ -38,7 +38,7 @@ const ImageUploadBtn = ({
     fileService
       .upload(data)
       .then((res: any) => {
-        // console.log(res.data.data);
+        
         
         setValue(name, res?.data?.data?.id);
         
@@ -60,7 +60,7 @@ const ImageUploadBtn = ({
     e.stopPropagation();
     setImage("");
   };
-  // console.log('de', defaultValue, image);
+  
 
   // useEffect(() => {
   //   if (defaultValue) setValue(name, defaultValue);

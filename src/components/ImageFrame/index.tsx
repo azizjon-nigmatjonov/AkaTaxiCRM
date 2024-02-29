@@ -10,18 +10,23 @@ const ImageFrame = ({
   gender?: string;
 }) => {
   return (
-    <div className="w-[42px] h-[42px] relative">
+    <div className=" relative">
       <div
-        className={`w-[42px] h-[42px] rounded-[10px] bg-[var(--lightGray)] border border-[#C8C8C8] overflow-hidden flex items-center justify-center ${classes}`}
+        className={` flex items-center justify-center`}
       >
         {image ? (
-          <img
-            className="w-full h-full object-cover"
-            src={image}
-            alt={image || "image"}
-          />
+
+          <div>
+
+            <img
+              className="rounded-full block object-cover w-[40px] h-[40px]"
+              src={image}
+              alt={image || "image"}
+            />
+          </div>
         ) : (
           <UserIcon />
+
         )}
         {gender && (
           <div className="absolute right-[-5px] bottom-[-5px] w-[20px] h-[20px] p-[2px] rounded-full bg-white border border-border flex items-center justify-center">

@@ -1,8 +1,6 @@
-import { PartnersIcon } from "./Svg";
 import {
   AdminsIcon,
   AdminIcon,
-  StatisticsIcon,
   DrivingIcon,
   SmartCarIcon,
   CarIcon,
@@ -12,9 +10,11 @@ import {
   ChatIcon,
   RolsIcon,
   LockIcon,
+  StatisticsIcon,
+  SmsIcon,
 } from "./Svg/Sidebar";
 
-import { PassengerIcon, DriverIcon, PassengerVehicleIcon, DriverVehicleIcon } from './Svg'
+import { PassengerIcon, DriverIcon, PassengerVehicleIcon, DriverVehicleIcon, PartnersIcon } from "./Svg";
 
 export const iconsList = [
   {
@@ -26,13 +26,14 @@ export const iconsList = [
     component: AdminIcon,
   },
   {
-    name: "statistics",
-    component: StatisticsIcon,
-  },
-  {
     name: "driving",
     component: DrivingIcon,
   },
+  {
+    name: "statistics",
+    component: StatisticsIcon,
+  },
+
   {
     name: "smart_car",
     component: SmartCarIcon,
@@ -62,29 +63,35 @@ export const iconsList = [
     component: RolsIcon,
   },
   {
-    name: 'lock',
-    component: LockIcon
+    name: "price_control",
+    component: LockIcon,
   },
   {
-    name: 'partners',
+    name: "partners",
     component: PartnersIcon
   },
   {
-    name: 'bookings_count',
-    component: DriverVehicleIcon
+    name: "bookings_count",
+    component: DriverVehicleIcon,
   },
   {
-    name: 'driver_count',
-    component: DriverIcon
+    name: "driver_count",
+    component: DriverIcon,
   },
   {
-    name: 'trip_count',
+    name: "trip_count",
     component: PassengerVehicleIcon,
   },
   {
-    name: 'passenger_count',
-    component: PassengerIcon
-  }
-
+    name: "passenger_count",
+    component: PassengerIcon,
+  },
+  {
+    name: "sms",
+    component: SmsIcon,
+  },
+  {
+    name: "amocrm",
+    component: SmsIcon,
+  },
 ];
-

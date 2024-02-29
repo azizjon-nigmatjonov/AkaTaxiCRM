@@ -22,10 +22,10 @@ export const Header = ({
       {children ? (
         children
       ) : (
-        <h3 className="text-2xl font-[600] text-[var(--black)]"><span className={`${titleIn && 'text-[var(--gray)]'}`}>{title}</span>{ '/' + titleIn}</h3> 
+        <h3 className="text-2xl font-[600] text-[var(--black)]"><span className={`${titleIn && 'text-[var(--gray)]'}`}>{title}</span>{'/' + titleIn}</h3>
       )}
-
-      {user && <UserInfo />}
+    
+      {/* {user && <UserInfo />} */}
     </div>
   );
 };
