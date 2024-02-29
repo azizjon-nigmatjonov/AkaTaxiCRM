@@ -1,16 +1,17 @@
 import cls from "./style.module.scss";
 import { useEffect, useMemo, useState } from "react";
 import IconGenerator from "../../IconGenerator";
-import usePageRouter from "../../../hooks/useObjectRouter";
+// import usePageRouter from "../../../hooks/useObjectRouter";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ArrowIcon } from "../../IconGenerator/Svg";
-import UserInfo from "components/Header/UserInfo";
+import UserInfo from "../../../components/Header/UserInfo";
 
 
 const SidebarSection = () => {
-  const { checkPath } = usePageRouter();
+  // const { checkPath } = usePageRouter();
+
   const { t } = useTranslation();
   const routes = useSelector((state: any) => state.website.routes);
 
@@ -18,7 +19,7 @@ const SidebarSection = () => {
     return routes ?? [];
   }, [routes]);
 
-  console.log(List);
+
 
 
 
@@ -26,16 +27,16 @@ const SidebarSection = () => {
     const storedIndex = localStorage.getItem('activeAccordionIndex');
     return storedIndex !== null ? parseInt(storedIndex) : -1;
   })
-  const [activePage, setActivePage] = useState(null);
+  const [activePage, setActivePage] = useState<string | null>(null);
 
 
   useEffect(() => {
-    localStorage.setItem('activeAccordionIndex', activeIndex)
+    localStorage.setItem('activeAccordionIndex', String(activeIndex))
 
   }, [activeIndex]);
 
 
-  const toggleAccordion = (index) => {
+  const toggleAccordion = (index: any) => {
     setActiveIndex(prevIndex => prevIndex === index ? -1 : index);
   };
 
@@ -63,10 +64,9 @@ const SidebarSection = () => {
 
       <div className="mt-[10px] flex flex-col justify-between side">
         <div>
-          {Object.entries(List)?.map(([key, value], index) => {
+          {Object.entries(List)?.map(([key, value]: [string, any], index) => {
 
-            const visibleSidebarItems = value.filter((el) => el.sidebar)
-
+            const visibleSidebarItems: any = (value as any).filter((el: any) => el.sidebar)
 
             const isLastItem = index === Object.entries(List).length - 1;
 
@@ -78,7 +78,7 @@ const SidebarSection = () => {
                   onClick={() => toggleAccordion(index)}
                 >
                   <div className="flex items-center gap-3">
-                    <IconGenerator icon={value[0].icon} />
+                    <IconGenerator icon={(value as any[])[0].icon} />
                     <span className="text-[var(--black)] font-medium">{t(key)}</span>
                   </div>
                   <div>
@@ -86,7 +86,7 @@ const SidebarSection = () => {
                   </div>
                 </button>
                 <div className={`panel  ${activeIndex === index ? 'show' : ''}`}>
-                  {Object.values(value as keyof typeof value)?.map((el, i, arr) => {
+                  {Object.values(value as keyof typeof value)?.map((el: any, i, arr) => {
                     const isLastItem = i === arr.length - 1;
 
 

@@ -1,5 +1,4 @@
 import cls from "./style.module.scss";
-import UserInfo from "./UserInfo";
 
 interface Props {
   title?: string;
@@ -24,8 +23,8 @@ export const Header = ({
       ) : (
         <h3 className="text-2xl font-[600] text-[var(--black)]"><span className={`${titleIn && 'text-[var(--gray)]'}`}>{title}</span>{'/' + titleIn}</h3>
       )}
-    
-      {/* {user && <UserInfo />} */}
+
+
     </div>
   );
 };

@@ -1,4 +1,4 @@
-export const AdminsIcon = ({ fill = "#9092A3" }) => (
+export const AdminsIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="vuesax/linear/user">
       <g id="user">
@@ -11,7 +11,7 @@ export const AdminsIcon = ({ fill = "#9092A3" }) => (
 
 );
 
-export const AdminIcon = ({ fill = "red" }) => (
+export const AdminIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="vuesax/linear/security-safe">
       <g id="security-safe">
@@ -28,7 +28,7 @@ export const AdminIcon = ({ fill = "red" }) => (
 
 
 
-export const DrivingIcon = ({ fill = "red" }) => (
+export const DrivingIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="vuesax/linear/steering-wheel" clip-path="url(#clip0_4834_41559)">
       <path id="Vector" d="M8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14Z" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
@@ -46,7 +46,7 @@ export const DrivingIcon = ({ fill = "red" }) => (
 
 );
 
-export const SmartCarIcon = ({ fill = "red" }) => (
+export const SmartCarIcon = () => (
   <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="vuesax/linear/data">
       <g id="data">
@@ -62,7 +62,7 @@ export const SmartCarIcon = ({ fill = "red" }) => (
 
 );
 
-export const CarIcon = ({ fill = "red" }) => (
+export const CarIcon = () => (
   <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="vuesax/linear/car">
       <g id="car">

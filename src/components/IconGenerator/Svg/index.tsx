@@ -1,5 +1,9 @@
 import { ColorConstants } from "../../../constants/website";
 
+interface ArrowIconProps {
+  isOpen: boolean;
+}
+
 export const SearchIcon = ({ fill = "#9092A3" }) => (
   <svg
     width="18"
@@ -895,7 +899,7 @@ export const InfoErrorIcon = () => (
   </svg>
 )
 
-export const ArrowIcon = ({ isOpen }) => (
+export const ArrowIcon: React.FC<ArrowIconProps> = ({ isOpen }) => (
   <svg style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="vuesax/bold/arrow-down">
       <g id="arrow-down">
@@ -904,6 +908,59 @@ export const ArrowIcon = ({ isOpen }) => (
     </g>
   </svg>
 
+)
 
+export const IncreaseIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="130" height="66" viewBox="0 0 130 66" fill="none">
+    <path d="M129 1C108.204 2.73299 106.916 44.2218 86.3333 49C69.3602 52.9402 60.7655 30.5738 43.6667 33C25.1204 35.6316 19.1855 58.9382 1 65H129V1Z" fill="#ECFDF3" />
+    <path d="M129 1C108.204 2.73299 106.916 44.2218 86.3333 49C69.3602 52.9402 60.7655 30.5738 43.6667 33C25.1204 35.6316 19.1855 58.9382 1 65H129V1Z" fill="url(#paint0_linear_4561_48119)" />
+    <path d="M1 65C19.1855 58.9382 25.1204 35.6316 43.6667 33C60.7655 30.5738 69.3602 52.9402 86.3333 49C106.916 44.2218 108.204 2.73299 129 1" stroke="#12B76A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <defs>
+      <linearGradient id="paint0_linear_4561_48119" x1="65" y1="1" x2="65" y2="65" gradientUnits="userSpaceOnUse">
+        <stop offset="0.641167" stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="white" />
+      </linearGradient>
+    </defs>
+  </svg>
+)
 
+export const DecreaseIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="130" height="66" viewBox="0 0 130 66" fill="none">
+    <path d="M1 1C21.7959 2.73299 23.0837 44.2218 43.6667 49C60.6398 52.9402 69.2345 30.5738 86.3333 33C104.88 35.6316 110.815 58.9382 129 65H1V1Z" fill="#FEF3F2" />
+    <path d="M1 1C21.7959 2.73299 23.0837 44.2218 43.6667 49C60.6398 52.9402 69.2345 30.5738 86.3333 33C104.88 35.6316 110.815 58.9382 129 65H1V1Z" fill="url(#paint0_linear_4561_48147)" />
+    <path d="M129 65C110.815 58.9382 104.88 35.6316 86.3333 33C69.2345 30.5738 60.6398 52.9402 43.6667 49C23.0837 44.2218 21.7959 2.73299 0.999996 1" stroke="#F04438" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <defs>
+      <linearGradient id="paint0_linear_4561_48147" x1="65" y1="1" x2="65" y2="65" gradientUnits="userSpaceOnUse">
+        <stop offset="0.641167" stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="white" />
+      </linearGradient>
+    </defs>
+  </svg>
+)
+
+export const BallanceIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none">
+    <path d="M16.5 9.5V13.25C16.5 15.5 15 17 12.75 17H5.25C3 17 1.5 15.5 1.5 13.25V9.5C1.5 7.46 2.73 6.035 4.6425 5.795C4.8375 5.765 5.04 5.75 5.25 5.75H12.75C12.945 5.75 13.1325 5.75749 13.3125 5.78749C15.2475 6.01249 16.5 7.445 16.5 9.5Z" stroke="#DD431F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M13.3136 5.7875C13.1336 5.7575 12.9461 5.75001 12.7511 5.75001H5.25105C5.04105 5.75001 4.83855 5.76501 4.64355 5.79501C4.74855 5.58501 4.89855 5.39001 5.07855 5.21001L7.51606 2.765C8.54356 1.745 10.2086 1.745 11.2361 2.765L12.5486 4.09251C13.0286 4.56501 13.2836 5.165 13.3136 5.7875Z" stroke="#DD431F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M16.5 9.875H14.25C13.425 9.875 12.75 10.55 12.75 11.375C12.75 12.2 13.425 12.875 14.25 12.875H16.5" stroke="#DD431F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+)
+
+export const TaxIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+    <path d="M14.9585 9.875C14.9585 8.84 15.7985 8 16.8335 8V7.25C16.8335 4.25 16.0835 3.5 13.0835 3.5H5.5835C2.5835 3.5 1.8335 4.25 1.8335 7.25V7.625C2.8685 7.625 3.7085 8.465 3.7085 9.5C3.7085 10.535 2.8685 11.375 1.8335 11.375V11.75C1.8335 14.75 2.5835 15.5 5.5835 15.5H13.0835C16.0835 15.5 16.8335 14.75 16.8335 11.75C15.7985 11.75 14.9585 10.91 14.9585 9.875Z" stroke="#DD431F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M7.0835 11.5625L11.5835 7.0625" stroke="#DD431F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M11.5794 11.5625H11.5861" stroke="#DD431F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M7.07938 7.4375H7.08611" stroke="#DD431F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+)
+
+export const SallaryIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+    <path d="M7.7915 10.8122C7.7915 11.5397 8.35401 12.1247 9.04401 12.1247H10.454C11.054 12.1247 11.5415 11.6147 11.5415 10.9772C11.5415 10.2947 11.2415 10.0472 10.799 9.88969L8.5415 9.10218C8.099 8.94468 7.79901 8.70469 7.79901 8.01469C7.79901 7.38469 8.2865 6.86719 8.8865 6.86719H10.2965C10.9865 6.86719 11.549 7.45219 11.549 8.17969" stroke="#DD431F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9.6665 6.125V12.875" stroke="#DD431F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M17.1665 9.5C17.1665 13.64 13.8065 17 9.6665 17C5.5265 17 2.1665 13.64 2.1665 9.5C2.1665 5.36 5.5265 2 9.6665 2" stroke="#DD431F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M13.4165 2.75V5.75H16.4165" stroke="#DD431F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M17.1665 2L13.4165 5.75" stroke="#DD431F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
 )
