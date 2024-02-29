@@ -29,11 +29,11 @@ const Card: FC<Props> = ({ element }) => {
 
           <div className="mt-2 flex space-x-2">
             <div className="flex space-x-1">
-              <CarIcon fill={ColorConstants.gray} />
+              <CarIcon  />
               <span className="text-[var(--main)]">{element.all_cars} ta</span>
             </div>
             <div className="flex space-x-1">
-              <RoutingIcon fill={ColorConstants.gray} width={18} height={18} />
+              <RoutingIcon  />
               <span className="text-[var(--main)]">{element.in_trip} ta</span>
             </div>
           </div>

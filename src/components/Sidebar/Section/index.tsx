@@ -72,7 +72,7 @@ const SidebarSection = () => {
 
             return visibleSidebarItems.length > 1 ? (
 
-              <div className="ml-[15px] ">
+              <div className="ml-[15px]">
                 <button
                   className={`accordion  ${activeIndex === index ? 'active' : ''} flex justify-between items-center max-w-[280px]`}
                   onClick={() => toggleAccordion(index)}

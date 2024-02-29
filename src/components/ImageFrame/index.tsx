@@ -2,7 +2,6 @@ import { ManIcon, UserIcon, WomenIcon } from "../IconGenerator/Svg";
 
 const ImageFrame = ({
   image = "",
-  classes = "",
   gender = "",
 }: {
   image: any;
