@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 
 interface IProps {
   data: {
-    men: string;
-    women: string;
+    men: number;
+    women: number;
   };
 }
 const StatisticsCard = ({ data }: IProps) => {
   const setDates = useState<any>([])[1];
+
+  console.log(data);
+
 
   useEffect(() => {
     setDates([{ label: "Haftalik", value: "weekly" }]);
@@ -21,13 +24,13 @@ const StatisticsCard = ({ data }: IProps) => {
       <PercentCard
         icon={<ManIcon />}
         text="Erkak"
-        percent={parseInt(data?.men)}
+        percent={Number(data?.men)}
       />
       <PercentCard
         icon={<WomenIcon />}
         text="Ayol"
-        percent={parseInt(data?.women)}
-        color="#BB16D6"
+        percent={Number(data?.women)}
+        color="#FF35BA"
       />
     </div>
   )

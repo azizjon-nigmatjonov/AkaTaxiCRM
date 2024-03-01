@@ -6,6 +6,7 @@ interface Props {
 }
 
 const Progress = ({ all = 0, current = 0 }: Props) => {
+  
   return (
     <div>
       <div className="text-[var(--gray))] flex justify-between mb-2">

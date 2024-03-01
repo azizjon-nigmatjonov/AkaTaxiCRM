@@ -6,7 +6,8 @@ const statistics = {
   getTrip: () => request.get("/statistics/trips"),
   getUsers: () => request.get("/statistics/users"),
   getWidgets:()=>request.get('/passenger-statistics/widgets'),
-  getPassengerGenderRegions:() => request.get('/passenger-statistics/gender-by-region')
+  getPassengerGenderRegions:() => request.get('/passenger-statistics/gender-by-region'),
+  getProgress: ()=> request.get('/passenger-statistics/users-by-region')
 };
 
 export default statistics;
