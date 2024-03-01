@@ -20,6 +20,9 @@ const UserInfo = () => {
     }
   );
 
+  
+
+
   useEffect(() => {
     if (!userInfo?.data) return;
     dispatch(authActions.setUser(userInfo?.data));
@@ -33,10 +36,11 @@ const UserInfo = () => {
       <div className="flex items-center space-x-[10px]">
         <div className={cls.image}>
           <ImageFrame image={userInfo?.data?.image} />
+
         </div>
         <div className={cls.content}>
-          <h2 className="font-[600]  text-black">{userInfo?.data?.name}</h2>
-          {/* <p className="text-[12px] text-[var(--gray)]">Super admin</p> */}
+          <h2 className="font-[600] text-[14px] text-[#344054] capitalize">{userInfo?.data?.name}</h2>
+          {/* <p className="text-[14px] text-[#475467]">+998 9</p> */}
         </div>
       </div>
     </div>

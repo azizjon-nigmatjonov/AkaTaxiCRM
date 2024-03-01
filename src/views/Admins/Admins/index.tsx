@@ -60,8 +60,8 @@ const Admins = () => {
               val === "inactive"
                 ? "text-[var(--error)]"
                 : val === "active"
-                ? "text-[var(--green)]"
-                : ""
+                  ? "text-[var(--green)]"
+                  : ""
             }
           >
             {val === "inactive" ? "Noaktiv" : val === "active" ? "Aktiv" : ""}

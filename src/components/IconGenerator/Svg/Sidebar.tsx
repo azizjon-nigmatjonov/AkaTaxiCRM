@@ -1,510 +1,233 @@
-export const AdminsIcon = ({ fill = "#9092A3" }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M17.53 7.77C17.46 7.76 17.39 7.76 17.32 7.77C15.77 7.72 14.54 6.45 14.54 4.89C14.54 3.3 15.83 2 17.43 2C19.02 2 20.32 3.29 20.32 4.89C20.31 6.45 19.08 7.72 17.53 7.77Z"
-      fill={fill}
-    />
-    <path
-      d="M20.79 14.6999C19.67 15.4499 18.1 15.7299 16.65 15.5399C17.03 14.7199 17.23 13.8099 17.24 12.8499C17.24 11.8499 17.02 10.8999 16.6 10.0699C18.08 9.86991 19.65 10.1499 20.78 10.8999C22.36 11.9399 22.36 13.6499 20.79 14.6999Z"
-      fill={fill}
-    />
-    <path
-      d="M6.44 7.77C6.51 7.76 6.58 7.76 6.65 7.77C8.2 7.72 9.43 6.45 9.43 4.89C9.43 3.29 8.14 2 6.54 2C4.95 2 3.66 3.29 3.66 4.89C3.66 6.45 4.89 7.72 6.44 7.77Z"
-      fill={fill}
-    />
-    <path
-      d="M6.55 12.8501C6.55 13.8201 6.76 14.7401 7.14 15.5701C5.73 15.7201 4.26 15.4201 3.18 14.7101C1.6 13.6601 1.6 11.9501 3.18 10.9001C4.25 10.1801 5.76 9.8901 7.18 10.0501C6.77 10.8901 6.55 11.8401 6.55 12.8501Z"
-      fill={fill}
-    />
-    <path
-      d="M12.12 15.87C12.04 15.86 11.95 15.86 11.86 15.87C10.02 15.81 8.55 14.3 8.55 12.44C8.56 10.54 10.09 9 12 9C13.9 9 15.44 10.54 15.44 12.44C15.43 14.3 13.97 15.81 12.12 15.87Z"
-      fill={fill}
-    />
-    <path
-      d="M8.87 17.9399C7.36 18.9499 7.36 20.6099 8.87 21.6099C10.59 22.7599 13.41 22.7599 15.13 21.6099C16.64 20.5999 16.64 18.9399 15.13 17.9399C13.42 16.7899 10.6 16.7899 8.87 17.9399Z"
-      fill={fill}
-    />
+export const AdminsIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/user">
+      <g id="user">
+        <path id="Vector" d="M7.99996 7.99967C9.84091 7.99967 11.3333 6.50729 11.3333 4.66634C11.3333 2.82539 9.84091 1.33301 7.99996 1.33301C6.15901 1.33301 4.66663 2.82539 4.66663 4.66634C4.66663 6.50729 6.15901 7.99967 7.99996 7.99967Z" stroke="#101828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M13.7266 14.6667C13.7266 12.0867 11.16 10 7.99998 10C4.83998 10 2.27332 12.0867 2.27332 14.6667" stroke="#101828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
   </svg>
+
+
 );
 
-export const AdminIcon = ({ fill = "red" }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M18 18.86H17.24C16.44 18.86 15.68 19.17 15.12 19.73L13.41 21.42C12.63 22.19 11.36 22.19 10.58 21.42L8.87 19.73C8.31 19.17 7.54 18.86 6.75 18.86H6C4.34 18.86 3 17.53 3 15.89V4.97C3 3.33 4.34 2 6 2H18C19.66 2 21 3.33 21 4.97V15.88C21 17.52 19.66 18.86 18 18.86Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M12.07 8.95C12.03 8.95 11.97 8.95 11.92 8.95C10.87 8.91 10.04 8.06 10.04 7C10.04 5.92 10.91 5.05 11.99 5.05C13.07 5.05 13.94 5.93 13.94 7C13.95 8.06 13.12 8.92 12.07 8.95Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M9.25 11.96C7.92 12.85 7.92 14.3 9.25 15.19C10.76 16.2 13.24 16.2 14.75 15.19C16.08 14.3 16.08 12.85 14.75 11.96C13.24 10.96 10.77 10.96 9.25 11.96Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+export const AdminIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/security-safe">
+      <g id="security-safe">
+        <path id="Vector" d="M13.9401 7.41288C13.9401 10.6729 11.5734 13.7262 8.34007 14.6195C8.12007 14.6795 7.88005 14.6795 7.66005 14.6195C4.42672 13.7262 2.06006 10.6729 2.06006 7.41288V4.4862C2.06006 3.93953 2.4734 3.31954 2.98673 3.11287L6.70005 1.59289C7.53339 1.25289 8.47339 1.25289 9.30672 1.59289L13.0201 3.11287C13.5267 3.31954 13.9467 3.93953 13.9467 4.4862L13.9401 7.41288Z" stroke="#101828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <g id="Group">
+          <path id="Vector_2" d="M7.99996 8.33366C8.73634 8.33366 9.33329 7.73671 9.33329 7.00033C9.33329 6.26395 8.73634 5.66699 7.99996 5.66699C7.26358 5.66699 6.66663 6.26395 6.66663 7.00033C6.66663 7.73671 7.26358 8.33366 7.99996 8.33366Z" stroke="#101828" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+          <path id="Vector_3" d="M8 8.33398V10.334" stroke="#101828" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      </g>
+    </g>
   </svg>
+
 );
 
-export const StatisticsIcon = ({ fill = "red" }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M18.32 12C20.92 12 22 11 21.04 7.72C20.39 5.51 18.49 3.61 16.28 2.96C13 2 12 3.08 12 5.68V8.56C12 11 13 12 15 12H18.32Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M20 14.7C19.07 19.33 14.63 22.69 9.58 21.87C5.79 21.26 2.74 18.21 2.12 14.42C1.31 9.39001 4.65 4.95001 9.26 4.01001"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+
+
+export const DrivingIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/steering-wheel" clip-path="url(#clip0_4834_41559)">
+      <path id="Vector" d="M8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14Z" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector_2" d="M7.99996 9.33366C8.73634 9.33366 9.33329 8.73671 9.33329 8.00033C9.33329 7.26395 8.73634 6.66699 7.99996 6.66699C7.26358 6.66699 6.66663 7.26395 6.66663 8.00033C6.66663 8.73671 7.26358 9.33366 7.99996 9.33366Z" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector_3" d="M8 9.33301V13.9997" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector_4" d="M6.66663 8.00033L2.16663 6.66699" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+      <path id="Vector_5" d="M9.33337 8.00033L13.8334 6.66699" stroke="black" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <defs>
+      <clipPath id="clip0_4834_41559">
+        <rect width="16" height="16" fill="white" />
+      </clipPath>
+    </defs>
   </svg>
+
 );
 
-export const DrivingIcon = ({ fill = "red" }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M14.55 2H9.45C7.65 2 7.25 2.90001 7.02 4.01001L6.2 7.92999H17.8L16.98 4.01001C16.75 2.90001 16.35 2 14.55 2Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M19.24 14.32C19.32 15.17 18.64 15.9 17.77 15.9H16.41C15.63 15.9 15.52 15.57 15.38 15.15L15.23 14.72C15.03 14.13 14.9 13.73 13.85 13.73H10.14C9.09999 13.73 8.93999 14.18 8.75999 14.72L8.60999 15.15C8.46999 15.56 8.35999 15.9 7.57999 15.9H6.21999C5.34999 15.9 4.66999 15.17 4.74999 14.32L5.16 9.90002C5.26 8.81002 5.46999 7.91998 7.36999 7.91998H16.62C18.52 7.91998 18.73 8.81002 18.83 9.90002L19.24 14.32Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M6.2 5.75H5.47"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M18.53 5.75H17.8"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M7.64999 10.83H9.82001"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M14.18 10.83H16.35"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M12 17V18"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M12 21V22"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M3 18L2 22"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M21 18L22 22"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+export const SmartCarIcon = () => (
+  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/data">
+      <g id="data">
+        <path id="Vector" d="M12.1667 8.16634C12.811 8.16634 13.3333 7.64401 13.3333 6.99967C13.3333 6.35534 12.811 5.83301 12.1667 5.83301C11.5223 5.83301 11 6.35534 11 6.99967C11 7.64401 11.5223 8.16634 12.1667 8.16634Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M12.1667 3.50033C12.811 3.50033 13.3333 2.97799 13.3333 2.33366C13.3333 1.68933 12.811 1.16699 12.1667 1.16699C11.5223 1.16699 11 1.68933 11 2.33366C11 2.97799 11.5223 3.50033 12.1667 3.50033Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_3" d="M12.1667 12.8333C12.811 12.8333 13.3333 12.311 13.3333 11.6667C13.3333 11.0223 12.811 10.5 12.1667 10.5C11.5223 10.5 11 11.0223 11 11.6667C11 12.311 11.5223 12.8333 12.1667 12.8333Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_4" d="M2.83341 8.16634C3.47775 8.16634 4.00008 7.64401 4.00008 6.99967C4.00008 6.35534 3.47775 5.83301 2.83341 5.83301C2.18908 5.83301 1.66675 6.35534 1.66675 6.99967C1.66675 7.64401 2.18908 8.16634 2.83341 8.16634Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_5" d="M4 7H11" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_6" d="M11.0001 2.33301H8.66675C7.50008 2.33301 6.91675 2.91634 6.91675 4.08301V9.91634C6.91675 11.083 7.50008 11.6663 8.66675 11.6663H11.0001" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
   </svg>
+
 );
 
-export const SmartCarIcon = ({ fill = "red" }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M12.14 7.62H6.87C5.01 7.62 4.59 8.55001 4.36 9.70001L3.50999 13.75H15.51L14.66 9.70001C14.41 8.55001 14 7.62 12.14 7.62Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M16.99 20.36C17.07 21.24 16.37 22 15.47 22H14.06C13.25 22 13.14 21.65 12.99 21.23L12.84 20.78C12.63 20.17 12.49 19.75 11.41 19.75H7.57001C6.49001 19.75 6.33 20.22 6.14 20.78L5.99001 21.23C5.85001 21.66 5.74 22 4.92 22H3.50999C2.60999 22 1.90001 21.24 1.99001 20.36L2.41 15.79C2.52 14.66 2.73 13.74 4.7 13.74H14.27C16.24 13.74 16.45 14.66 16.56 15.79L16.99 20.36Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M3.5 11.5H2.75"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M16.25 11.5H15.5"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M5 16.75H7.25"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M11.75 16.75H14"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M18.71 8.73998C18.99 8.08998 18.89 7.20999 18.37 6.43999C17.86 5.66999 17.08 5.23999 16.37 5.24999"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M21.82 9.72998C22.24 8.21998 21.94 6.37002 20.87 4.77002C19.8 3.17002 18.2 2.19 16.64 2"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+export const CarIcon = () => (
+  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/car">
+      <g id="car">
+        <path id="Vector" d="M9.54742 1.65039H5.45242C3.99992 1.65039 3.67909 2.37372 3.49242 3.26039L2.83325 6.41622H12.1666L11.5074 3.26039C11.3208 2.37372 10.9999 1.65039 9.54742 1.65039Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M13.3276 11.562C13.3918 12.2445 12.8434 12.8337 12.1434 12.8337H11.0468C10.4168 12.8337 10.3293 12.5653 10.2184 12.2328L10.1018 11.8828C9.93842 11.4045 9.83342 11.0837 8.99342 11.0837H6.00676C5.16676 11.0837 5.04426 11.4453 4.89842 11.8828L4.78176 12.2328C4.67092 12.5653 4.58342 12.8337 3.95342 12.8337H2.85676C2.15676 12.8337 1.60842 12.2445 1.67259 11.562L1.99926 8.00949C2.08092 7.13449 2.25009 6.41699 3.77842 6.41699H11.2218C12.7501 6.41699 12.9193 7.13449 13.0009 8.00949L13.3276 11.562Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_3" d="M2.83333 4.66699H2.25" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_4" d="M12.7501 4.66699H12.1667" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_5" d="M7.5 1.75V2.91667" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_6" d="M6.625 2.91699H8.375" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_7" d="M4 8.75H5.75" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_8" d="M9.25 8.75H11" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
   </svg>
+
 );
 
-export const CarIcon = ({ fill = "red" }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M15.51 2.82999H8.49C6 2.82999 5.45 4.06999 5.13 5.58999L4 11H20L18.87 5.58999C18.55 4.06999 18 2.82999 15.51 2.82999Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M21.99 19.82C22.1 20.99 21.16 22 19.96 22H18.08C17 22 16.85 21.54 16.66 20.97L16.46 20.37C16.18 19.55 16 19 14.56 19H9.44C8 19 7.79 19.62 7.54 20.37L7.34 20.97C7.15 21.54 7 22 5.92 22H4.04C2.84 22 1.9 20.99 2.01 19.82L2.57 13.73C2.71 12.23 3 11 5.62 11H18.38C21 11 21.29 12.23 21.43 13.73L21.99 19.82Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M4 8H3"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M21 8H20"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M12 3V5"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M10.5 5H13.5"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M6 15H9"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M15 15H18"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+export const RoutingIcon = () => (
+  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/routing">
+      <g id="routing">
+        <path id="Vector" d="M1.70761 2.68367C2.17428 0.665339 5.21345 0.665339 5.67428 2.68367C5.94845 3.86784 5.19595 4.87117 4.54261 5.49534C4.06428 5.95034 3.31178 5.94451 2.83345 5.49534C2.18595 4.87117 1.43345 3.86784 1.70761 2.68367Z" stroke="#475467" stroke-width="1.5" />
+        <path id="Vector_2" d="M9.29083 9.68367C9.7575 7.66534 12.8142 7.66534 13.2808 9.68367C13.555 10.8678 12.8025 11.8712 12.1433 12.4953C11.665 12.9503 10.9067 12.9445 10.4283 12.4953C9.76916 11.8712 9.01666 10.8678 9.29083 9.68367Z" stroke="#475467" stroke-width="1.5" />
+        <path id="Vector_3" d="M7.49999 2.91699H9.06332C10.1425 2.91699 10.6442 4.25283 9.83332 4.96449L5.17249 9.04199C4.36166 9.74783 4.86332 11.0837 5.93665 11.0837H7.49999" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_4" d="M3.70017 3.20866H3.70691" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_5" d="M11.2837 10.2087H11.2904" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
   </svg>
+
 );
 
-export const RoutingIcon = ({
-  fill = "#858592",
-  width = 24,
-  height = 24,
-}: {
-  fill?: string;
-  width?: number;
-  height?: number;
-}) => (
-  <svg
-    width={width}
-    height={height}
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M2.07 4.6C2.87 1.14 8.08 1.14 8.87 4.6C9.34 6.63 8.05 8.35 6.93 9.42C6.11 10.2 4.82 10.19 4 9.42C2.89 8.35 1.6 6.63 2.07 4.6Z"
-      stroke={fill}
-      strokeWidth="2"
-    />
-    <path
-      d="M15.07 16.6C15.87 13.14 21.11 13.14 21.91 16.6C22.38 18.63 21.09 20.35 19.96 21.42C19.14 22.2 17.84 22.19 17.02 21.42C15.89 20.35 14.6 18.63 15.07 16.6Z"
-      stroke={fill}
-      strokeWidth="2"
-    />
-    <path
-      d="M12 5H14.68C16.53 5 17.39 7.29 16 8.51L8.01 15.5C6.62 16.71 7.48 19 9.32 19H12"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M5.48622 5.5H5.49777"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M18.4862 17.5H18.4978"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+export const GraphIcon = () => (
+  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/chart">
+      <g id="chart">
+        <path id="Vector" d="M1.66663 12.833H13.3333" stroke="#475467" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M6.1875 2.33366V12.8337H8.8125V2.33366C8.8125 1.69199 8.55 1.16699 7.7625 1.16699H7.2375C6.45 1.16699 6.1875 1.69199 6.1875 2.33366Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_3" d="M2.25 5.83366V12.8337H4.58333V5.83366C4.58333 5.19199 4.35 4.66699 3.65 4.66699H3.18333C2.48333 4.66699 2.25 5.19199 2.25 5.83366Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_4" d="M10.4166 8.74967V12.833H12.75V8.74967C12.75 8.10801 12.5166 7.58301 11.8166 7.58301H11.35C10.65 7.58301 10.4166 8.10801 10.4166 8.74967Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
   </svg>
+
 );
 
-export const GraphIcon = ({ fill = "#858592" }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M18.32 12C20.92 12 22 11 21.04 7.72C20.39 5.51 18.49 3.61 16.28 2.96C13 2 12 3.08 12 5.68V8.56C12 11 13 12 15 12H18.32Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M20 14.7C19.07 19.33 14.63 22.69 9.58 21.87C5.79 21.26 2.74 18.21 2.12 14.42C1.31 9.39001 4.65 4.95001 9.26 4.01001"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+export const CalendarIcon = () => (
+  <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/menu-board">
+      <g id="menu-board">
+        <path id="Vector" d="M15.6199 4.50635L13.3733 13.5264C13.2133 14.1997 12.6133 14.6663 11.9199 14.6663H3.15992C2.15326 14.6663 1.43327 13.6796 1.73327 12.713L4.53993 3.69971C4.73326 3.07304 5.31327 2.63965 5.9666 2.63965H14.1666C14.7999 2.63965 15.3266 3.02632 15.5466 3.55965C15.6733 3.84632 15.6999 4.17301 15.6199 4.50635Z" stroke="#101828" stroke-width="1.5" stroke-miterlimit="10" />
+        <path id="Vector_2" d="M11.6666 14.6667H14.8533C15.7133 14.6667 16.3866 13.94 16.3266 13.08L15.6666 4" stroke="#101828" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_3" d="M7.45337 4.25301L8.14671 1.37305" stroke="#101828" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_4" d="M11.92 4.2605L12.5467 1.36719" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_5" d="M6.1333 8H11.4666" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_6" d="M5.46667 10.667H10.8" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
   </svg>
+
 );
 
-export const CalendarIcon = ({ fill = "#858592" }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M8 2V5"
-      stroke={fill}
-      strokeWidth="2"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M16 2V5"
-      stroke={fill}
-      strokeWidth="2"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M3.5 9.08997H20.5"
-      stroke={fill}
-      strokeWidth="2"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M15.6947 13.7H15.7037"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M15.6947 16.7H15.7037"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M11.9955 13.7H12.0045"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M11.9955 16.7H12.0045"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M8.29431 13.7H8.30329"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M8.29431 16.7H8.30329"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+export const ChatIcon = () => (
+  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/message-text">
+      <g id="message-text">
+        <path id="Vector" d="M5.45841 11.0837H5.16675C2.83341 11.0837 1.66675 10.5003 1.66675 7.58366V4.66699C1.66675 2.33366 2.83341 1.16699 5.16675 1.16699H9.83341C12.1667 1.16699 13.3334 2.33366 13.3334 4.66699V7.58366C13.3334 9.91699 12.1667 11.0837 9.83341 11.0837H9.54175C9.36091 11.0837 9.18591 11.1712 9.07508 11.317L8.20008 12.4837C7.81508 12.997 7.18508 12.997 6.80008 12.4837L5.92508 11.317C5.83175 11.1887 5.61591 11.0837 5.45841 11.0837Z" stroke="#475467" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M4.58325 4.66699H10.4166" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_3" d="M4.58325 7.58301H8.08325" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
   </svg>
+
 );
 
-export const ChatIcon = ({ fill = "#858592" }) => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M18.47 16.83L18.86 19.99C18.96 20.82 18.07 21.4 17.36 20.97L13.17 18.48C12.71 18.48 12.26 18.45 11.82 18.39C12.56 17.52 13 16.42 13 15.23C13 12.39 10.54 10.09 7.5 10.09C6.34 10.09 5.27 10.42 4.38 11C4.35 10.75 4.34 10.5 4.34 10.24C4.34 5.68999 8.29 2 13.17 2C18.05 2 22 5.68999 22 10.24C22 12.94 20.61 15.33 18.47 16.83Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M13 15.23C13 16.42 12.56 17.52 11.82 18.39C10.83 19.59 9.26 20.36 7.5 20.36L4.89 21.91C4.45 22.18 3.89 21.81 3.95 21.3L4.2 19.33C2.86 18.4 2 16.91 2 15.23C2 13.47 2.94 11.92 4.38 11C5.27 10.42 6.34 10.09 7.5 10.09C10.54 10.09 13 12.39 13 15.23Z"
-      stroke={fill}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+export const RolsIcon = () => (
+  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/lock">
+      <g id="lock">
+        <path id="Vector" d="M4 5.83366V4.66699C4 2.73616 4.58333 1.16699 7.5 1.16699C10.4167 1.16699 11 2.73616 11 4.66699V5.83366" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M7.50008 10.7917C8.3055 10.7917 8.95841 10.1387 8.95841 9.33333C8.95841 8.52792 8.3055 7.875 7.50008 7.875C6.69467 7.875 6.04175 8.52792 6.04175 9.33333C6.04175 10.1387 6.69467 10.7917 7.50008 10.7917Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_3" d="M10.4167 12.833H4.58341C2.25008 12.833 1.66675 12.2497 1.66675 9.91634V8.74967C1.66675 6.41634 2.25008 5.83301 4.58341 5.83301H10.4167C12.7501 5.83301 13.3334 6.41634 13.3334 8.74967V9.91634C13.3334 12.2497 12.7501 12.833 10.4167 12.833Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
   </svg>
+
 );
 
-export const RolsIcon = ({ fill = "red" }: { fill?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={24} viewBox="0 0 24 24">
-    <path
-      d="M6.17071 18C6.58254 16.8348 7.69378 16 9 16C10.3062 16 11.4175 16.8348 11.8293 18H22V20H11.8293C11.4175 21.1652 10.3062 22 9 22C7.69378 22 6.58254 21.1652 6.17071 20H2V18H6.17071ZM12.1707 11C12.5825 9.83481 13.6938 9 15 9C16.3062 9 17.4175 9.83481 17.8293 11H22V13H17.8293C17.4175 14.1652 16.3062 15 15 15C13.6938 15 12.5825 14.1652 12.1707 13H2V11H12.1707ZM6.17071 4C6.58254 2.83481 7.69378 2 9 2C10.3062 2 11.4175 2.83481 11.8293 4H22V6H11.8293C11.4175 7.16519 10.3062 8 9 8C7.69378 8 6.58254 7.16519 6.17071 6H2V4H6.17071ZM9 6C9.55228 6 10 5.55228 10 5C10 4.44772 9.55228 4 9 4C8.44772 4 8 4.44772 8 5C8 5.55228 8.44772 6 9 6ZM15 13C15.5523 13 16 12.5523 16 12C16 11.4477 15.5523 11 15 11C14.4477 11 14 11.4477 14 12C14 12.5523 14.4477 13 15 13ZM9 20C9.55228 20 10 19.5523 10 19C10 18.4477 9.55228 18 9 18C8.44772 18 8 18.4477 8 19C8 19.5523 8.44772 20 9 20Z"
-      fill={fill}
-    ></path>
+export const LockIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/candle-2">
+      <g id="candle-2">
+        <path id="Vector" d="M14.6667 11.667H10" stroke="#101828" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M3.33337 11.667H1.33337" stroke="#101828" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_3" d="M14.6666 4.33301H12.6666" stroke="#101828" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_4" d="M6.00004 4.33301H1.33337" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_5" d="M4.66671 9.66699H8.66671C9.40004 9.66699 10 10.0003 10 11.0003V12.3337C10 13.3337 9.40004 13.667 8.66671 13.667H4.66671C3.93337 13.667 3.33337 13.3337 3.33337 12.3337V11.0003C3.33337 10.0003 3.93337 9.66699 4.66671 9.66699Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_6" d="M7.33333 2.33301H11.3333C12.0667 2.33301 12.6667 2.66634 12.6667 3.66634V4.99967C12.6667 5.99967 12.0667 6.33301 11.3333 6.33301H7.33333C6.6 6.33301 6 5.99967 6 4.99967V3.66634C6 2.66634 6.6 2.33301 7.33333 2.33301Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
   </svg>
+
 );
 
-export const LockIcon = ({ fill = "red" }: { fill?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={24} viewBox="0 0 24 24">
-    <path
-      d="M7 10H20C20.5523 10 21 10.4477 21 11V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V11C3 10.4477 3.44772 10 4 10H5V9C5 5.13401 8.13401 2 12 2C14.7405 2 17.1131 3.5748 18.2624 5.86882L16.4731 6.76344C15.6522 5.12486 13.9575 4 12 4C9.23858 4 7 6.23858 7 9V10ZM5 12V20H19V12H5ZM10 15H14V17H10V15Z"
-      fill={fill}
-    ></path>
+
+export const PassengersIcon = () => {
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/user">
+      <g id="user">
+        <path id="Vector" d="M7.99996 7.99967C9.84091 7.99967 11.3333 6.50729 11.3333 4.66634C11.3333 2.82539 9.84091 1.33301 7.99996 1.33301C6.15901 1.33301 4.66663 2.82539 4.66663 4.66634C4.66663 6.50729 6.15901 7.99967 7.99996 7.99967Z" stroke="#101828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M13.7266 14.6667C13.7266 12.0867 11.16 10 7.99998 10C4.83998 10 2.27332 12.0867 2.27332 14.6667" stroke="#101828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
   </svg>
-);
+}
+
+
+export const StatisticsIcon = () => (
+  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/chart">
+      <g id="chart">
+        <path id="Vector" d="M1.66663 12.833H13.3333" stroke="#475467" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M6.1875 2.33366V12.8337H8.8125V2.33366C8.8125 1.69199 8.55 1.16699 7.7625 1.16699H7.2375C6.45 1.16699 6.1875 1.69199 6.1875 2.33366Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_3" d="M2.25 5.83366V12.8337H4.58333V5.83366C4.58333 5.19199 4.35 4.66699 3.65 4.66699H3.18333C2.48333 4.66699 2.25 5.19199 2.25 5.83366Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_4" d="M10.4166 8.74967V12.833H12.75V8.74967C12.75 8.10801 12.5166 7.58301 11.8166 7.58301H11.35C10.65 7.58301 10.4166 8.10801 10.4166 8.74967Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  </svg>
+)
+
+export const SmsIcon = () => (
+  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/sms">
+      <g id="sms">
+        <path id="Vector" d="M10.4167 11.9587H4.58341C2.83341 11.9587 1.66675 11.0837 1.66675 9.04199V4.95866C1.66675 2.91699 2.83341 2.04199 4.58341 2.04199H10.4167C12.1667 2.04199 13.3334 2.91699 13.3334 4.95866V9.04199C13.3334 11.0837 12.1667 11.9587 10.4167 11.9587Z" stroke="#475467" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M10.4166 5.25L8.59075 6.70833C7.98992 7.18667 7.00408 7.18667 6.40325 6.70833L4.58325 5.25" stroke="#475467" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  </svg>
+
+)
+export const AmocrmIcon = () => (
+  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/activity">
+      <g id="activity">
+        <path id="Vector" d="M5.75008 12.8337H9.25008C12.1667 12.8337 13.3334 11.667 13.3334 8.75033V5.25033C13.3334 2.33366 12.1667 1.16699 9.25008 1.16699H5.75008C2.83341 1.16699 1.66675 2.33366 1.66675 5.25033V8.75033C1.66675 11.667 2.83341 12.8337 5.75008 12.8337Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M4.77588 8.45285L6.16421 6.65035C6.36255 6.39368 6.73005 6.34702 6.98671 6.54535L8.05421 7.38535C8.31088 7.58368 8.67838 7.53702 8.87671 7.28618L10.2242 5.54785" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  </svg>
+
+
+)
+
+export const PartnersIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/format-circle">
+      <g id="format-circle">
+        <path id="Vector" d="M14.3334 3.56699C14.3334 4.17366 14.0468 4.71366 13.6068 5.06033C13.2868 5.31366 12.8801 5.46699 12.4334 5.46699C11.3801 5.46699 10.5334 4.62033 10.5334 3.56699C10.5334 3.12033 10.6868 2.72033 10.9401 2.39366H10.9468C11.2868 1.95366 11.8268 1.66699 12.4334 1.66699C13.4868 1.66699 14.3334 2.51366 14.3334 3.56699Z" stroke="#101828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M5.46675 3.56699C5.46675 4.62033 4.62008 5.46699 3.56675 5.46699C3.12008 5.46699 2.72008 5.31366 2.39341 5.06033C1.95341 4.71366 1.66675 4.17366 1.66675 3.56699C1.66675 2.51366 2.51341 1.66699 3.56675 1.66699C4.17341 1.66699 4.71342 1.95366 5.06008 2.39366C5.31342 2.72033 5.46675 3.12033 5.46675 3.56699Z" stroke="#101828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_3" d="M14.3334 12.4332C14.3334 13.4865 13.4868 14.3332 12.4334 14.3332C11.8268 14.3332 11.2868 14.0465 10.9468 13.6065H10.9401C10.6868 13.2865 10.5334 12.8799 10.5334 12.4332C10.5334 11.3799 11.3801 10.5332 12.4334 10.5332C12.8801 10.5332 13.2801 10.6865 13.6068 10.9399V10.9465C14.0468 11.2865 14.3334 11.8265 14.3334 12.4332Z" stroke="#101828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_4" d="M5.46675 12.4332C5.46675 12.8799 5.31342 13.2799 5.06008 13.6065C4.71342 14.0532 4.17341 14.3332 3.56675 14.3332C2.51341 14.3332 1.66675 13.4865 1.66675 12.4332C1.66675 11.8265 1.95341 11.2865 2.39341 10.9465V10.9399C2.71341 10.6865 3.12008 10.5332 3.56675 10.5332C4.62008 10.5332 5.46675 11.3799 5.46675 12.4332Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_5" d="M14.3334 8.00033C14.3334 9.06699 14.0734 10.0603 13.6067 10.9403C13.2867 10.687 12.8801 10.5337 12.4334 10.5337C11.3801 10.5337 10.5334 11.3803 10.5334 12.4337C10.5334 12.8803 10.6867 13.2803 10.9401 13.607C10.0601 14.0737 9.06675 14.3337 8.00008 14.3337C6.94008 14.3337 5.94008 14.0737 5.06008 13.607C5.31341 13.287 5.46675 12.8803 5.46675 12.4337C5.46675 11.3803 4.62008 10.5337 3.56675 10.5337C3.12008 10.5337 2.72008 10.687 2.39341 10.9403C1.92675 10.0603 1.66675 9.06699 1.66675 8.00033C1.66675 6.94033 1.92675 5.94033 2.39341 5.06033C2.72008 5.31366 3.12008 5.46699 3.56675 5.46699C4.62008 5.46699 5.46675 4.62033 5.46675 3.56699C5.46675 3.12033 5.31341 2.72033 5.06008 2.39366C5.94008 1.92699 6.94008 1.66699 8.00008 1.66699C9.06675 1.66699 10.0601 1.92699 10.9401 2.39366C10.6867 2.71366 10.5334 3.12033 10.5334 3.56699C10.5334 4.62033 11.3801 5.46699 12.4334 5.46699C12.8801 5.46699 13.2801 5.31366 13.6067 5.06033C14.0734 5.94033 14.3334 6.94033 14.3334 8.00033Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  </svg>
+
+)
