@@ -23,16 +23,7 @@ const Detail = ({
         handlerValue!(event.target?.value)
     }
 
-    const labelhandler = (e: string) => {
-        switch (e) {
-            case 'Yil':
-                return 'year';
-            case 'Oy':
-                return 'month';
-            default:
-                return 'week'
-        }
-    }
+
 
 
 
