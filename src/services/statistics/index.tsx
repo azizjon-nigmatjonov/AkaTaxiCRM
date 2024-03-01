@@ -5,9 +5,9 @@ const statistics = {
   getNewUserStat: () => request.get("/statistics/new-users"),
   getTrip: () => request.get("/statistics/trips"),
   getUsers: () => request.get("/statistics/users"),
-  getWidgets:()=>request.get('/passenger-statistics/widgets'),
-  getPassengerGenderRegions:() => request.get('/passenger-statistics/gender-by-region'),
-  getProgress: ()=> request.get('/passenger-statistics/users-by-region')
+  getWidgets: () => request.get('/passenger-statistics/widgets'),
+  getPassengerGenderRegions: () => request.get('/passenger-statistics/gender-by-region'),
+  getProgress: (id?: string) => request.get(`/passenger-statistics/users-by-region${id ? `?date=${id}` : ''}`)
 };
 
 export default statistics;
