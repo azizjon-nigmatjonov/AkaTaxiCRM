@@ -88,7 +88,8 @@ input {
   z-index: 99 !important;
 }
 
-#basicDatePicker, #multiDatePicker {
+#basicDatePicker,
+#multiDatePicker {
   width: 100%;
   .rmdp-container {
     width: 100%;
@@ -128,7 +129,6 @@ input {
     background-color: white;
     color: $black !important;
   }
-
 }
 
 .MuiButtonBase-root {
