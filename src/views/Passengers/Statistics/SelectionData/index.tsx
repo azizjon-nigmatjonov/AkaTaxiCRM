@@ -4,41 +4,41 @@ import CCard from "../../../../components/CElements/CCard";
 import ChartGraph from "../ChartGraph"
 import Setting from "./Setting";
 import Form from "./Form";
-import { LinearProgress } from "@mui/material";
+import { LinearProgress, Skeleton } from "@mui/material";
 import { useQuery } from "react-query";
 import statistics from "../../../../services/statistics";
+import { useGetQueries } from "../../../../hooks/useGetQueries";
 
 const Selection = () => {
-    const { } = usePageRouter();
+    const { navigateQuery } = usePageRouter();
     const [graph, setGraph] = useState('year')
     const [count, setCount] = useState('year')
+    const { date } = useGetQueries()
 
     const graphHandler = (e: string) => {
         setGraph(e)
     }
 
     const countHandler = (e: string) => {
+        navigateQuery({ date: e })
         setCount(e)
     }
 
 
-    const { data } = useQuery(['GET_PROGRESS'], () => {
-        return statistics.getProgress()
+    const { data, isLoading } = useQuery(['GET_PROGRESS', date], () => {
+        return statistics.getProgress(date)
     })
 
 
     const progress = useMemo(() => {
         if (!data?.data) return [];
         let maxValue = Math.max(...data?.data.map((val: any) => val.users_count))
-
         return data?.data.map((val: any) => {
             return {
                 ...val,
                 value: maxValue == val.users_count ? 100 : maxValue / val.users_count
             }
         })
-
-
     }, [data])
 
 
@@ -65,7 +65,14 @@ const Selection = () => {
 
                 <CCard classes="w-[360px]">
                     <Setting value={count} chooseChange={countHandler} />
-                    <div className="mt-3 h-full">
+                    {isLoading ? <div>
+                        {Array.from(new Array(6)).map((_) => (
+                            <div>
+                                <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                                <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                            </div>
+                        ))}
+                    </div> : <div className="mt-3 h-full">
                         {progress?.map((val: any) => (
                             <div className="flex flex-col justify-between  h-full">
                                 <div className="flex items-center justify-between mt-2">
@@ -81,7 +88,7 @@ const Selection = () => {
                             </div>
                         ))}
 
-                    </div>
+                    </div>}
 
                 </CCard>
             </div>
