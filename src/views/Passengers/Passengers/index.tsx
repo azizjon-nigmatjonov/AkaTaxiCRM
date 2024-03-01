@@ -178,6 +178,7 @@ const Passengers = () => {
           handleActions={handleActions}
           currentPage={currentPage}
         />
+
         <Form refetch={refetch} />
       </div>
     </>
