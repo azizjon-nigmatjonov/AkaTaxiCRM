@@ -30,8 +30,6 @@ const PriceTable = ({
   }, [regions, start, end]);
 
 
-  // console.log(locations.starting_cities);
-
 
 
 

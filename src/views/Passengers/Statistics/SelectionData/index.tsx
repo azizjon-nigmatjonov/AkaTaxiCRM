@@ -8,15 +8,36 @@ import { LinearProgress, Skeleton } from "@mui/material";
 import { useQuery } from "react-query";
 import statistics from "../../../../services/statistics";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
+import { createSearchParams, useSearchParams, useNavigate } from "react-router-dom";
 
 const Selection = () => {
+    const navigate = useNavigate()
     const { navigateQuery } = usePageRouter();
+    const setSearchParams = useSearchParams()[1]
     const [graph, setGraph] = useState('year')
     const [count, setCount] = useState('year')
-    const { date } = useGetQueries()
+    const { date, year, month, week } = useGetQueries()
 
     const graphHandler = (e: string) => {
         setGraph(e)
+        const date = new Date()
+        let year = date.getFullYear()
+        let month = date.getMonth()
+
+
+        switch (e) {
+            case 'year':
+                return setSearchParams({})
+            case 'month':
+                return navigateQuery({ year: year })
+            default:
+                let newQuery: any = { year: year, month: month + 1, week: 1 }
+                const queryParams = createSearchParams(newQuery);
+                return navigate({
+                    pathname: location.pathname,
+                    search: queryParams.toString(),
+                });
+        }
     }
 
     const countHandler = (e: string) => {
@@ -24,11 +45,25 @@ const Selection = () => {
         setCount(e)
     }
 
-
-    const { data, isLoading } = useQuery(['GET_PROGRESS', date], () => {
-        return statistics.getProgress(date)
+    const { data: barCart, isLoading } = useQuery(['GET_GRAPH', year, month, week], () => {
+        return statistics.getPassangerGraph({ year, month, week })
     })
 
+    const graphData: any = useMemo(() => {
+        if (!barCart) return []
+        let list: any = barCart
+        const data: any = []
+        const label: any = []
+
+        list.map((val: any) => (data.push(val.count), label.push(val.time))
+        )
+        return { data, label }
+    }, [barCart])
+
+
+    const { data, isLoading: progressLoading } = useQuery(['GET_PROGRESS', date], () => {
+        return statistics.getProgress(date)
+    })
 
     const progress = useMemo(() => {
         if (!data?.data) return [];
@@ -42,55 +77,49 @@ const Selection = () => {
     }, [data])
 
 
-
-
-
-
     return (
-        <div className="px-6">
-            <div className="flex gap-6">
+        <div className="px-6 mb-6 h-[538px]">
+            <div className="flex gap-6 h-full">
                 <div className="w-full">
-                    <CCard classes="mb-6 flex flex-col justify-between min-w-[690px]">
-
-                        <div className="flex items-center justify-between">
-                            <p className="font-base font-semibold text-[var(--black)]">Ro’yhatdan o’tganlar</p>
-                            <Setting value={graph} chooseChange={graphHandler} />
+                    <CCard classes="flex flex-col h-[538px] justify-between w-full min-w-[690px]">
+                        <div>
+                            <div className="flex items-center justify-between">
+                                <p className="font-base font-semibold text-[var(--black)]">Ro’yhatdan o’tganlar</p>
+                                <Setting value={graph} chooseChange={graphHandler} />
+                            </div>
+                            <Form value={graph} />
                         </div>
-
-                        <Form value={graph} />
-
-                        <ChartGraph />
+                        <ChartGraph  loading={isLoading} data={graphData} />
                     </CCard>
                 </div>
 
-                <CCard classes="w-[360px]">
-                    <Setting value={count} chooseChange={countHandler} />
-                    {isLoading ? <div>
-                        {Array.from(new Array(6)).map((_) => (
-                            <div>
+                <CCard classes="w-[360px] h-full">
+                    <div>
+                        <Setting value={count} chooseChange={countHandler} />
+                        {progressLoading ? <div className="mt-5">
+                            {Array.from(new Array(12)).map((_) => (
                                 <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
-                                <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
-                            </div>
-                        ))}
-                    </div> : <div className="mt-3 h-full">
-                        {progress?.map((val: any) => (
-                            <div className="flex flex-col justify-between  h-full">
-                                <div className="flex items-center justify-between mt-2">
-                                    <p className="text-sm font-normal text-[var(--black)]">{val.region_name ? val.region_name : "Noma'lum viloyat"}</p>
-                                    <p className="text-sm font-semibold text-[var(--black)]">{val.users_count}</p>
+                            ))}
+                        </div> : <div className="mt-3 h-full">
+                            {progress?.map((val: any) => (
+                                <div className="flex flex-col justify-between  h-full">
+                                    <div className="flex items-center justify-between mt-2">
+                                        <p className="text-sm font-normal text-[var(--black)]">{val.region_name ? val.region_name : "Noma'lum viloyat"}</p>
+                                        <p className="text-sm font-semibold text-[var(--black)]">{val.users_count}</p>
+                                    </div>
+                                    <LinearProgress variant="determinate" sx={{
+                                        backgroundColor: '#FFEFE6',
+                                        '& .MuiLinearProgress-bar': {
+                                            backgroundColor: '#FF7C34'
+                                        }, marginTop: '3px', borderRadius: 5
+                                    }} value={val?.value} />
                                 </div>
-                                <LinearProgress variant="determinate" sx={{
-                                    backgroundColor: '#FFEFE6',
-                                    '& .MuiLinearProgress-bar': {
-                                        backgroundColor: '#FF7C34'
-                                    }, marginTop: '3px', borderRadius: 5
-                                }} value={val?.value} />
-                            </div>
-                        ))}
+                            ))}
 
-                    </div>}
-
+                        </div>}
+                    </div>
                 </CCard>
+
             </div>
         </div>
     )

@@ -153,6 +153,7 @@ const ActiveDrivers = () => {
   const handleAge = (evt: any) => {
     navigateQuery({ birthday: [...evt] })
   }
+  
   return (
     <>
       <Header title="Aktiv haydovchilar" />

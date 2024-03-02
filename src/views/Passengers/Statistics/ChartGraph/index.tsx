@@ -1,36 +1,28 @@
 import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
+import { Skeleton } from '@mui/material';
 
-const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
-const xLabels = [
-    'Page A',
-    'Page B',
-    'Page C',
-    'Page D',
-    'Page E',
-    'Page F',
-    'Page G',
-];
+const ChartGraph = ({ data, loading }: { data?: any, loading?: boolean }) => {
 
-const ChartGraph = () => {
     return (
-        <div >
-            <BarChart
-                height={300}
-                series={[
-                    { data: uData, label: 'uv', id: 'uvId', color: 'var(--main)' },
-                ]}
-                xAxis={[{ data: xLabels, scaleType: 'band', label: 'Oylar', }]}
-                yAxis={[{ label: 'Yangi foydalanuvhchilar' }]}
-                slotProps={{ legend: { hidden: true } }}
-                sx={{
-                    [`.${axisClasses.left} .${axisClasses.label}`]: {
-                        transform: 'translate(-25px, 0)',
-                        fontWeight: 500,
-                    },
-                    padding: '5px',
-                }}
-            />
+        <div>
+            {loading ?
+                <Skeleton height={300} width={'100%'} /> : <BarChart
+                    height={300}
+                    series={[
+                        { data: data.data, color: 'var(--main)' },
+                    ]}
+                    xAxis={[{ data: data.label, scaleType: 'band', label: 'Yillar' }]}
+                    yAxis={[{ label: 'Yangi foydalanuvhchilar' }]}
+                    slotProps={{ legend: { hidden: true } }}
+                    sx={{
+                        [`.${axisClasses.left} .${axisClasses.label}`]: {
+                            transform: 'translate(-15px, 0)',
+                            fontWeight: 500,
+                        },
+                        padding: '5px',
+                    }}
+                />}
         </div>
     )
 }
