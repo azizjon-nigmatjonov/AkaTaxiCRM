@@ -20,6 +20,8 @@ export default function usePageRouter() {
 
   const navigateQuery = (obj?: any, check?: boolean) => {
 
+    console.log(obj);
+    
     Object.keys(obj).forEach((key) => {
       if (obj[key] === "" || !obj[key]?.length && key in query && !check) {
         // delete obj[key]
@@ -31,6 +33,9 @@ export default function usePageRouter() {
       ...query,
       ...obj,
     };
+
+    console.log(newQuery);
+    
 
     const queryParams = createSearchParams(newQuery);
     navigate({

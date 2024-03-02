@@ -39,7 +39,6 @@ const ProfilePage = () => {
   const onSubmit = () => {
     const params: any = getValues();
 
-    console.log(params);
     
 
     params.phone = params.phone?.substring(1)?.replace(/\s+/g, "");

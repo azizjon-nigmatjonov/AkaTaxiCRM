@@ -11,8 +11,6 @@ interface IProps {
 const StatisticsCard = ({ data }: IProps) => {
   const setDates = useState<any>([])[1];
 
-  console.log(data);
-
 
   useEffect(() => {
     setDates([{ label: "Haftalik", value: "weekly" }]);

@@ -23,16 +23,25 @@ const Detail = ({
         handlerValue!(event.target?.value)
     }
 
-
-
-
+    const labelHandler = (e: string) => {
+        switch (e) {
+            case 'Yil':
+                return 'year';
+            case "Oy":
+                return 'month';
+            case "Harta (Du-Ya)":
+                return 'week'
+            default:
+                return e
+        }
+    }
 
     return (
         <>
             <div id={`cselect-${id}`}>
                 {label && <CLabel title={label} />}
                 <Select
-                    disabled={disabled == 'year' ? true : disabled == 'month' ? false :  true}
+                    disabled={disabled == 'year' ? true : disabled == 'week' ? false : disabled == labelHandler(label)}
                     // sx={{ m: 1, width: 112, height: 3 }}
                     defaultValue={options?.[0]?.value}
                     inputProps={{
