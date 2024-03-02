@@ -78,10 +78,10 @@ const Selection = () => {
 
 
     return (
-        <div className="px-6 mb-6 h-[538px]">
-            <div className="flex gap-6 h-full">
+        <div className="px-6 mb-6  h-[600px]">
+            <div className="flex gap-6 h-full  ">
                 <div className="w-full">
-                    <CCard classes="flex flex-col h-[538px] justify-between w-full min-w-[690px]">
+                    <CCard classes="flex flex-col justify-between  h-[600px] w-full min-w-[690px]">
                         <div>
                             <div className="flex items-center justify-between">
                                 <p className="font-base font-semibold text-[var(--black)]">Ro’yhatdan o’tganlar</p>
@@ -89,7 +89,7 @@ const Selection = () => {
                             </div>
                             <Form value={graph} />
                         </div>
-                        <ChartGraph  loading={isLoading} data={graphData} />
+                        <ChartGraph loading={isLoading} data={graphData} />
                     </CCard>
                 </div>
 

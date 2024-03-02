@@ -16,10 +16,10 @@ import { useGetQueries } from "../../../hooks/useGetQueries";
 
 const Calendar = () => {
   const month: any = GetMonth()
-  const { startDate } = useGetQueries();
+  const { date } = useGetQueries();
   const { data, isLoading } = useQuery(
-    ["GET_CALENDAR", startDate],
-    () => { return calendarService.getList(startDate) }, { enabled: true, }
+    ["GET_CALENDAR", date],
+    () => { return calendarService.getList(date) }, { enabled: true, }
   );
 
 
