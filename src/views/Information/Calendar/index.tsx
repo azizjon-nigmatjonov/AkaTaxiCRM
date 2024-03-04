@@ -8,6 +8,7 @@ import { Skeleton } from "@mui/material";
 import { Header } from "../../../components/Header";
 import { GetMonth } from "../../../utils/getMonth";
 import { useGetQueries } from "../../../hooks/useGetQueries";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 // import BasicDatepicker from "../../../components/CElements/CDatePicker/BasicDatepicker";
 // import MultiDatePicker from "../../../components/CElements/CDatePicker/MultiDatepicker";
 // import { MultiDatePicker } from "../../../components/CElements/CDatePicker/MultiDatepicker";
@@ -27,10 +28,23 @@ const Calendar = () => {
     return data?.data ?? []
   }, [data])
 
+  const breadCrumbs = useMemo(() => {
+    return [
+      {
+        label: "Ma'lumotlar",
+      },
+      {
+        label: "Kalendar",
+        link: 'infos/calendar'
+      }
+    ]
+  }, [])
 
   return (
     <>
-      <Header sticky={true} title="Kalendar bo’yicha ma’lumotlar" />
+      <Header sticky={true} >
+        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+      </Header>
       <div className="px-5">
         {/* <SectionHeader>
           <FilterButton text="filter" >

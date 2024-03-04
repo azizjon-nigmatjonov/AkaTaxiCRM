@@ -5,6 +5,7 @@ import chatService from "../../../services/chats";
 import { useMemo, useState } from "react";
 import { Header } from "../../../components/Header";
 import NullData from "../../../components/NullData";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 const Chats = () => {
   const { data: chats, isLoading } = useQuery(["GET_CHAT_LIST"], () => {
@@ -16,9 +17,18 @@ const Chats = () => {
     return chats?.data ?? [];
   }, [chats]);
 
+  const breadCrumbs = useMemo(() => {
+    return [
+      { label: "Ma'lumotlar" },
+      { label: 'Chat', link: 'infos/chats' }
+    ]
+  }, [])
+
   return (
     <>
-      <Header title="Chat" />
+      <Header sticky={true}>
+        <CBreadcrumbs items={breadCrumbs} progmatic={true}/>
+      </Header>
       <div className="px-5">
         {!isLoading && !list.length ? (
           <NullData />

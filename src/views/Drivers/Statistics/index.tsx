@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import SearchHeader from "../../../components/Header/SearchHeader";
 import CCard from "../../../components/CElements/CCard";
 import { ArrowUp, ArrowDown } from '../../../components/IconGenerator/Svg'
 import { useQuery } from "react-query";
@@ -8,6 +7,8 @@ import { Skeleton } from "@mui/material";
 import FilterButton from "../../../components/Filters";
 import StatisticsLineChart from "./Bar";
 import Progress from '../../../components/Progress'
+import { Header } from "../../../components/Header";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 const DriverStatistics = () => {
 
@@ -35,10 +36,19 @@ const DriverStatistics = () => {
   const regionUser: any = useMemo(() => {
     return userRegion?.data ?? []
   }, [userRegion])
-  
+
+  const breadCrumbs = useMemo(() => {
+    return [
+      { label: "Haydovchi" },
+      { label: 'Statistika', link: 'drivers/statistics' }
+    ]
+  }, [])
+
   return (
     <>
-      <SearchHeader />
+      <Header sticky={true}>
+        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+      </Header>
       <div className="sticky top-20 z-[12] py-[24px] pl-[12px]  w-[100%] bg-[var(--softGray)] ">
         <h1 className="text-2xl font-[600] text-[var(--black)] ml-[15px]">
           Statistika: haydovchi

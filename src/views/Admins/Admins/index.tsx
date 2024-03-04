@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import adminService from "../../../services/admins";
 import { FormatTime } from "../../../utils/formatTime";
 import { Header } from "../../../components/Header";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 const Admins = () => {
   const { navigateQuery } = usePageRouter();
@@ -77,9 +78,19 @@ const Admins = () => {
     ];
   }, []);
 
+
+  const breadCrumbs = useMemo(()=>{
+    return [
+      {label: 'Admin'},
+      {label:"Adminlar", link:"/admins/admin"}
+    ]
+  }, [])
+
   return (
     <>
-      <Header title="Adminlar" />
+      <Header sticky={true}>
+        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+      </Header>
       <div className="px-5">
         <SectionHeader>
           <div className="flex items-center gap-3">

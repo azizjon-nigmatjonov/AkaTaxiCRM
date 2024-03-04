@@ -1,4 +1,5 @@
 import request from "../../utils/request";
+
 const passengerService = {
   getList: (data: any) =>
     request.get(

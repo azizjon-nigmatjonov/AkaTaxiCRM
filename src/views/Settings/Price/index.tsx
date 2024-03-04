@@ -7,6 +7,7 @@ import StaticPrice from "./StaticPrice";
 import { useSelector } from "react-redux";
 import priceService from "../../../services/price";
 import { Header } from "../../../components/Header";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 
 const tabList = [
@@ -103,9 +104,19 @@ const Price = () => {
     if (start && end) GetPrices();
   }, [start, end]);
 
+
+  const breadCrumbs = useMemo(() => {
+    return [
+      { label: "Sozlamalar" },
+      { label: "Narx nazorati", link:"settings/price_control" }
+    ]
+  }, [])
+
   return (
     <>
-      <Header title="Adminlar" />
+      <Header sticky={true}>
+        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+      </Header>
       <div className="px-5">
         <div className="flex justify-between">
           <CTabs tabList={tabList} />

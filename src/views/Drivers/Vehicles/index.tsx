@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 import carService from "../../../services/cars";
 import { Skeleton } from "@mui/material";
 import { Header } from "../../../components/Header";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 const Vehicles = () => {
   const { navigateQuery } = usePageRouter();
@@ -54,10 +55,18 @@ const Vehicles = () => {
     if (tab) getCarList(tab);
   }, [tab]);
 
+  const breadCrumbs = useMemo(() => {
+    return [
+      { label: "Haydovchi" },
+      { label: 'Mashinalar', link: '/drivers/cars' }
+    ]
+  }, [])
 
   return (
     <>
-      <Header title="Mashinalar ro'yhati" />
+      <Header sticky={true} >
+        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+      </Header>
       <div className="px-6">
         {tabList && !isLoading ? (
           <>

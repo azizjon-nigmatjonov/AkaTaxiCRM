@@ -7,6 +7,7 @@ import Form from "./Form";
 import { useQuery } from "react-query";
 import roleService from "../../../services/rolls";
 import { Header } from "../../../components/Header";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 const Rolls = () => {
   const { navigateQuery } = usePageRouter();
@@ -48,9 +49,18 @@ const Rolls = () => {
     ];
   }, []);
 
+  const breadCrumbs = useMemo(()=>{
+    return [
+      {label: 'Admin'},
+      {label:'Rollar', link:'admins/rolls'}
+    ]
+  }, [])
+
   return (
     <>
-      <Header title="Rollar" />
+      <Header sticky={true}>
+        <CBreadcrumbs items={breadCrumbs}  progmatic={true} />
+      </Header>
       <div className="px-5">
         <SectionHeader>
           <div className="flex items-center gap-3">
