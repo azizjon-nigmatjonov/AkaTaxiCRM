@@ -15,6 +15,7 @@ import usePageRouter from "../../../hooks/useObjectRouter";
 import DriversAvater from './DriversAvatar';
 import DriversList from "./DriversList";
 import ImageFrame from "../../../components/ImageFrame";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 
 const ActivePassengers = () => {
@@ -128,10 +129,23 @@ const ActivePassengers = () => {
     navigateQuery({ q: value })
   };
 
+  const breadCrubmsItems = useMemo(() => {
+    return [
+      {
+        label: "Yo'lovchi",
+      },
+      {
+        label: "Aktiv",
+        link: "/passenger/active_passengers"
+      },
+    ]
+  }, []);
 
   return (
     <div>
-      <Header title="Aktiv yo'lovchilar" />
+      <Header>
+        <CBreadcrumbs items={breadCrubmsItems} type="link" progmatic={true}/>
+      </Header>
       <div className="px-6">
         <SectionHeader handleSearch={handleSearch}>
           <FilterButton text="filter">

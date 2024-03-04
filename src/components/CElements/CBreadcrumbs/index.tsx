@@ -37,13 +37,13 @@ const CBreadcrumbs = ({
     if (index === items?.length - 1) return null;
     navigate(link);
   };
-
+  
   return (
     <div className="CBreadcrumbs-wrapper">
       {navigateLink && <BackButton link={navigateLink} />}
       <Breadcrumbs
         className={`CBreadcrumbs ${size} ${className}`}
-        separator={<NavigateNextIcon fontSize="small" />}
+        separator={<NavigateNextIcon fontSize="small" color="disabled"/>}
       >
         {items?.map((item: any, index: number) => (
           <div

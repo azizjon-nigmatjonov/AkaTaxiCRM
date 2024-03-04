@@ -1,14 +1,32 @@
-import SearchHeader from "../../../components/Header/SearchHeader";
+// import SearchHeader from "../../../components/Header/SearchHeader";
 import AccountStatistics from "./AccountStatistics";
 import Selection from "./SelectionData";
 import StatisticsGender from "./GenderRegions";
+import { Header } from "../../../components/Header";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
+import { useMemo } from "react";
 
 
 const Statistics = () => {
 
+  const breadCrubmsItems = useMemo(() => {
+    return [
+      {
+        label: "Yo'lovchi",
+        // link: 'statistics'
+      },
+      {
+        label: 'Statistika',
+        link: '/statistics'
+      }
+    ]
+  }, [])
+
   return (
     <section className="relative">
-      <SearchHeader />
+      <Header>
+        <CBreadcrumbs items={breadCrubmsItems} progmatic={true}/>
+      </Header>
       <AccountStatistics />
       <Selection />
       <StatisticsGender />

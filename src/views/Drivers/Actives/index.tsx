@@ -16,6 +16,7 @@ import CDriver from "../../../components/CElements/CDivider";
 import carService from '../../../services/cars'
 import { useSearchParams } from 'react-router-dom'
 import { useTranslation } from "react-i18next";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 const ActiveDrivers = () => {
   const { t } = useTranslation()
   const { navigateQuery } = usePageRouter();
@@ -54,7 +55,7 @@ const ActiveDrivers = () => {
   const { data: carModals } = useQuery(['GET_CAR_MODELS'], () => {
     return carService.getCarModel();
   });
-  
+
 
   const carModalData: any = useMemo(() => {
     if (!carModals) return [];
@@ -69,7 +70,7 @@ const ActiveDrivers = () => {
     }
   }, [carModals])
 
-  
+
 
   const headColumns = useMemo(() => {
     return [
@@ -118,7 +119,7 @@ const ActiveDrivers = () => {
       },
       {
         title: `Yo'lovchi`,
-        id:'clients_name'
+        id: 'clients_name'
       }
     ];
   }, []);
@@ -153,10 +154,19 @@ const ActiveDrivers = () => {
   const handleAge = (evt: any) => {
     navigateQuery({ birthday: [...evt] })
   }
-  
+
+  const breadCrumbs = useMemo(() => {
+    return [
+      { label: "Haydovchi" },
+      { label: "Aktiv" , link: '/drivers/active'}
+    ]
+  }, [])
+
   return (
     <>
-      <Header title="Aktiv haydovchilar" />
+      <Header sticky={true}>
+        <CBreadcrumbs items={breadCrumbs} progmatic={true}/>
+      </Header>
       <div className="p-6">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">

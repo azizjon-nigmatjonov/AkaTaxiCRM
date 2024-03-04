@@ -17,10 +17,11 @@ import { Header } from "../../../components/Header";
 import ImageFrame from "../../../components/ImageFrame";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 const Passengers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const { currentPage, q, region_id, birthday } = useGetQueries();
   const regions = useSelector((state: any) => state.regions.regions);
   const setSearchParams = useSearchParams()[1]
@@ -38,7 +39,7 @@ const Passengers = () => {
     return data ?? {};
   }, [data]);
 
-  
+
   const headColumns = useMemo(() => {
     return [
       {
@@ -88,7 +89,7 @@ const Passengers = () => {
       },
     ];
   }, []);
-  
+
 
   const bodyColumns = useMemo(() => {
     return (
@@ -105,9 +106,9 @@ const Passengers = () => {
     );
   }, [passengers]);
 
-  
 
-  const handleActions = (status: string, el: any) => { 
+
+  const handleActions = (status: string, el: any) => {
     if (status === "delete") {
       passengerService.deleteElement(el.id).then(() => {
         refetch();
@@ -115,13 +116,13 @@ const Passengers = () => {
     }
     if (status === "edit") {
       navigateQuery({ id: el.id });
-      
+
     }
-    if(status === "learn_more"){
+    if (status === "learn_more") {
       navigateTo(`/passengers/passenger?id=${el.id}`)
       // navigateQuery({ passengers: el.id });
     }
-    
+
   };
 
   const handleSearch = (value: any) => {
@@ -142,13 +143,29 @@ const Passengers = () => {
   }
 
   const handlerAge = (evt: any) => {
-    navigateQuery({birthday: evt })
+    navigateQuery({ birthday: evt })
   }
-  
-  
+
+  const breadCrumbItems = useMemo(() => {
+    return [
+      {
+        label: "Yo'lovchi",
+        // link: '/passenger/main'
+      },
+      {
+        label: "Ro‘yxat",
+        link: "/passenger/main",
+      },
+    
+    ];
+  }, []);
+
+
   return (
     <>
-      <Header title="Yo'lovchilar ro'yhati" />
+      <Header>
+        <CBreadcrumbs items={breadCrumbItems} progmatic={true}/>
+      </Header> 
       <div className="px-6 ">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
