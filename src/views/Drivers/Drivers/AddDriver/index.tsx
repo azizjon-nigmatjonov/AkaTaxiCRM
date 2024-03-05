@@ -126,9 +126,8 @@ const AddDriver = () => {
                                 <div className='flex flex-wrap items-start gap-5'>
                                     <DImageUpload control={control} style={{ height: 200 }} name='profile_image' label='Profil avatar' />
                                     <DImageUpload control={control} style={{ height: 200 }} name='tex_passport' label='Tex.pasport' />
-                                    <DImageUpload control={control} style={{ height: 200 }} name='driver_license' label='Prava rasmi' />
-                                    <DImageUpload control={control} style={{ height: 200 }} name='third_image' label='Profil avatar' />
-                                    <DImageUpload control={control} style={{ height: 200 }} name='selfie_driver_license' label="Qo'shimcha " />
+                                    <DImageUpload control={control} style={{ height: 200 }} name='driver_license' label='Haydovchilik guvohnoma rasmi' />
+                                    <DImageUpload control={control} style={{ height: 200 }} name='selfie_driver_license' label='Haydovchilik guvohnoma bilan selfi' />
                                 </div>
                             </div>
                         </CCard>

@@ -50,6 +50,11 @@ const HFSelect = ({
       setValue(name, defaultValue);
     }
   }, [defaultValue, name, setValue]);
+
+
+  console.log(defaultValue);
+  
+
   return (
     <div id={`cselect-${id}`}>
       <Controller
