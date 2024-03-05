@@ -51,7 +51,6 @@ const DriverImages = ({ control, driver = {} }: Props) => {
       <DImageUpload control={control} style={{ height: 200 }} name='tex_passport' label='Tex.pasport rasmi' defaultValue={driver?.tex_passport} />
       <DImageUpload control={control} style={{ height: 200 }} name='driver_license' label='Prava rasmi' defaultValue={driver?.driver_license} />
       <DImageUpload control={control} style={{ height: 200 }} name='selfie_driver_license' label='Prava bilan selfi' defaultValue={driver?.selfie_driver_license} />
-      <DImageUpload control={control} style={{ height: 200 }} name='third_image' label="Qo'shimcha" defaultValue={driver?.tex_passport} />
     </div>
   );
 };

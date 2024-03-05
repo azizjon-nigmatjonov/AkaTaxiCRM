@@ -10,7 +10,8 @@ import "react-multi-date-picker/styles/layouts/mobile.css";
 import "./style2.scss";
 import "./styles.scss";
 // import CError from "../CError";
-import { FormatTime } from "../../../utils/formatTime";
+// import { FormatTime } from "../../../utils/formatTime";
+import { FormatCalendar } from "../../../utils/formatTime";
 import CLabel from "../CLabel";
 
 interface Props {
@@ -37,17 +38,17 @@ const BasicDatepicker = ({
   
   const handleValue = (value: any) => {        
     setValue(value);
-    if (field) field.onChange(FormatTime(value));
+    if (field) field.onChange(FormatCalendar(value));
   };
 
   useEffect(() => {
     if (defaultValue) {
       setValue(defaultValue);
-      if (field) field.onChange(FormatTime(defaultValue));
+      if (field) field.onChange(FormatCalendar(defaultValue));
     }
   }, [defaultValue]);
-
-
+  
+  
   return (
     <div id="basicDatePicker" className="w-full relative">
       {label && <CLabel title={label} required={required} />}

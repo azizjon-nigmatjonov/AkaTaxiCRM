@@ -5,6 +5,7 @@ import DImageUpload from "../../../../../components/CElements/CDivider/DImageUpl
 import HFSelect from "../../../../../components/FormElements/HFSelect";
 import { useQuery } from "react-query";
 import carService from "../../../../../services/cars";
+import { useSelector } from "react-redux";
 interface Props {
   control?: any;
   driver?: any;
@@ -12,26 +13,36 @@ interface Props {
 }
 
 const CarInfo = ({ control, setValue, driver = {} }: Props) => {
+  const regions = useSelector((state: any) => state.regions.regions);
 
-
+  
   const { data } = useQuery(['GET_CARS_LISTS'], () => {
     return carService.getList()
   })
 
-
   const CarLists: any = useMemo(() => {
-    if(!data) return []
+    if (!data) return []
     const list = data?.data
     return {
-      list: list.map((val:any)=>{
+      list: list.map((val: any) => {
         return {
           value: val.id,
           label: val.name
         }
       })
     }
-  }, [data])  
+  }, [data])
 
+
+  const Regions = useMemo(() => {
+    return regions?.map((i: any) => {
+      return {
+        value: i.id,
+        label: i.name.uz,
+      };
+    });
+  }, [regions]);
+  
 
   return (
     <div className="space-y-8">
@@ -53,7 +64,7 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
           readOnly={false}
           defaultValue={driver?.images?.[1]}
         /> */}
-        <DImageUpload control={control} style={{ height: 200 }} name='first_image' label='Oldi qismi rasmi' defaultValue={driver?.images?.[1]} />
+        <DImageUpload control={control} style={{ height: 200 }} name='first_image' label='Oldi qismi rasmi' defaultValue={driver?.images?.[0]} />
         <DImageUpload control={control} style={{ height: 200 }} name='second_image' label='Salon qismi rasmi' defaultValue={driver?.images?.[1]} />
       </div>
       <div className="grid grid-cols-4 gap-4 mt-5">
@@ -64,7 +75,7 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
           placeholder="Mashina rusumu"
           label="Mashina rusumu"
           setValue={setValue}
-          defaultValue={driver?.car_name}
+          defaultValue={driver?.car_id}
         />
         <HFTextField
           name="car_number"
@@ -75,14 +86,14 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
           readOnly={false}
           defaultValue={driver?.car_number}
         />
-        <HFTextField
+        <HFSelect
           name="region_name"
+          options={Regions}
           control={control}
           placeholder="Mashina voloyati"
           label="Mashina viloyati"
           setValue={setValue}
-          readOnly={false}
-          defaultValue={driver?.region_name}
+          defaultValue={driver?.region_id}
         />
       </div>
     </div>

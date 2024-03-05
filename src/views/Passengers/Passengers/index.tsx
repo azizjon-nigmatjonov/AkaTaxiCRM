@@ -124,6 +124,7 @@ const Passengers = () => {
     }
 
   };
+  
 
   const handleSearch = (value: any) => {
     navigateQuery({ q: value });

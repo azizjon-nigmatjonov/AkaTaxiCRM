@@ -1,4 +1,5 @@
 import request from "../../utils/request";
+import requestForm from '../../utils/requestFormdata'
 const driverService = {
   getList: (params: any) =>
     request.get(
@@ -6,7 +7,7 @@ const driverService = {
       }&perPage=${params.perPage}${params?.car_id ? `&car_id=${params.car_id}` : ""
       }`
     ),
-  createElement: (data: any) => request.post("/drivers", data),
+  createElement: (data: any) => requestForm.post("/drivers", data),
   getActives: (params: any) =>
     request.get(
       `/drivers-popular${params.page ? `?page=${params.page || 1}` : ""}${params.q ? `&q=${params.q}` : ""}${params.region_id ? `&region_id=${params.region_id}` : ""}${params.gender ? `&gender=${params.gender}` : ""}${params.car_model_id ? `&car_model_id=${params.car_model_id}` : ""}${params.birthday ? `&birthday=${params.birthday}` : ""}`
@@ -19,7 +20,7 @@ const driverService = {
   getWidgets: () => request.get('statistics/drivers/widgets'),
   getDriversGraph: () => request.get('statistics/drivers/graph'),
   getUserRegion: () => request.get('statistics/drivers/users-by-region'),
-  getDriverBallance: (data?: any) => request.get(`drivers/${data.id}/balance?${data.page ? `page=${data.page}`: ''}`),
+  getDriverBallance: (data?: any) => request.get(`drivers/${data.id}/balance?${data.page ? `page=${data.page}` : ''}`),
 };
 
 export default driverService;
