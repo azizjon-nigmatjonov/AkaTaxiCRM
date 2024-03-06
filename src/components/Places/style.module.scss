@@ -1,0 +1,36 @@
+.front {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 2px;
+    border-right: 2px solid $lineGray;
+}
+
+.back {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    justify-content: end;
+    padding: 2px;
+    border: 2px solid $lineGray;
+    border-top: none;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.seat {
+    height: 15px;
+    width: 15px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty {
+    background-color: $lineGray
+}
+
+.booked {
+    background-color: black;
+}

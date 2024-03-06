@@ -19,8 +19,6 @@ export default function usePageRouter() {
   };
 
   const navigateQuery = (obj?: any, check?: boolean) => {
-
-    console.log(obj);
     
     Object.keys(obj).forEach((key) => {
       if (obj[key] === "" || !obj[key]?.length && key in query && !check) {
