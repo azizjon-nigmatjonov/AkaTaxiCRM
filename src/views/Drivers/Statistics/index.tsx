@@ -33,6 +33,8 @@ const DriverStatistics = () => {
     return Object.values(graph?.data)
   }, [graph])
 
+  
+
   const regionUser: any = useMemo(() => {
     return userRegion?.data ?? []
   }, [userRegion])

@@ -16,6 +16,7 @@ import DriversAvater from './DriversAvatar';
 import DriversList from "./DriversList";
 import ImageFrame from "../../../components/ImageFrame";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
+import Statistics from "./Statistics";
 
 
 const ActivePassengers = () => {
@@ -35,7 +36,7 @@ const ActivePassengers = () => {
   const regions = useSelector((state: any) => state.regions.regions);
 
   const driversHandle = (e: any) => {
-    setDriverLists(e);
+    setDriverLists(e);    
   }
 
 
@@ -79,7 +80,6 @@ const ActivePassengers = () => {
           <DriversAvater data={val} item={item} driversHandle={driversHandle} />
         )
       }
-
     ];
   }, []);
 
@@ -144,7 +144,7 @@ const ActivePassengers = () => {
   return (
     <div>
       <Header>
-        <CBreadcrumbs items={breadCrubmsItems} type="link" progmatic={true}/>
+        <CBreadcrumbs items={breadCrubmsItems} type="link" progmatic={true} />
       </Header>
       <div className="px-6">
         <SectionHeader handleSearch={handleSearch}>
@@ -158,6 +158,8 @@ const ActivePassengers = () => {
             </div>
           </FilterButton>
         </SectionHeader>
+
+        <Statistics />
 
         <CTable
           headColumns={headColumns}

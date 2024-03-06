@@ -37,6 +37,8 @@ const Vehicles = () => {
       .finally(() => setLoading(false));
   };
 
+  console.log(classes?.data);
+  
 
   const tabList = useMemo(() => {
     if (!classes?.data) return [];
@@ -49,6 +51,8 @@ const Vehicles = () => {
       };
     });
   }, [classes]);
+
+  
 
 
   useEffect(() => {

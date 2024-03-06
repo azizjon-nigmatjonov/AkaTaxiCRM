@@ -115,7 +115,7 @@ const Router = () => {
   //   }
   // }, [isAuth]);
 
-  
+
   return (
     <Suspense fallback={"Loading..."}>
       <Routes>

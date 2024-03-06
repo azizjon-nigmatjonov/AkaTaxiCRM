@@ -114,7 +114,7 @@ const PassengerProfile = () => {
             <div className='w-full  flex items-center gap-6'>
               <HFTextField control={control} name='full_name' setValue={setValue} required={true} placeholder='Ism familiya' label='Ism familiya' defaultValue={passenger?.full_name} />
 
-              <HFDatePicker name="birthday" label="Tug'ilgan sana" control={control} required={true} placeholder="Tug'ilgan sana" defaultValue={passenger?. birthday} />
+              <HFDatePicker name="birthday" label="Tug'ilgan sana" control={control} required={true} placeholder="Tug'ilgan sana"  />
 
               <HFSelect
                 name="gender"
