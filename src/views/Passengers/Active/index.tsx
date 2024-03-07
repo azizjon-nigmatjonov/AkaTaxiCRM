@@ -172,7 +172,6 @@ const ActivePassengers = () => {
       </div>
 
       <DriversList data={driverLists} />
-
     </div>
   );
 };
