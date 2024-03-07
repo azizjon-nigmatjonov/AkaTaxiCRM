@@ -12,7 +12,7 @@ const PassengerList = ({ data }: { data: any }) => {
 
 
     const pasengerList = useMemo(() => {
-        if (!data) return []
+        if (!data && !data.passengers.length) return []
         let passenger = data?.passengers
         return passenger?.map((val: any) => {
             return {
@@ -26,6 +26,10 @@ const PassengerList = ({ data }: { data: any }) => {
             }
         })
     }, [data]);
+
+    console.log(data);
+    console.log(pasengerList);
+
 
 
 
@@ -47,7 +51,7 @@ const PassengerList = ({ data }: { data: any }) => {
                             </div>
                         </div>
                         <div>
-                            <Places data={val.seats}/>
+                            <Places data={val.seats} />
                         </div>
                     </div>
                 ))}

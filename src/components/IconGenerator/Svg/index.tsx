@@ -245,7 +245,7 @@ export const CloseIcon = ({
   </svg>
 );
 
-export const CarIcon = ({ fill = "white" }: { fill?: string }) => (
+export const CarIcon = ({ fill = "#667085" }: { fill?: string }) => (
   <svg
     width="18"
     height="18"
@@ -310,6 +310,7 @@ export const CarIcon = ({ fill = "white" }: { fill?: string }) => (
       strokeLinejoin="round"
     />
   </svg>
+
 );
 
 

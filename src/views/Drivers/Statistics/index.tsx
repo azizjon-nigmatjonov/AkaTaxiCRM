@@ -9,6 +9,7 @@ import StatisticsLineChart from "./Bar";
 import Progress from '../../../components/Progress'
 import { Header } from "../../../components/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
+import StatisticsHeader from "./Header";
 
 const DriverStatistics = () => {
 
@@ -33,7 +34,7 @@ const DriverStatistics = () => {
     return Object.values(graph?.data)
   }, [graph])
 
-  
+
 
   const regionUser: any = useMemo(() => {
     return userRegion?.data ?? []
@@ -73,10 +74,7 @@ const DriverStatistics = () => {
 
         <div className="pt-[18px]">
           <CCard style={{ minHeight: 0 }}>
-            <div className="flex items-center justify-between">
-              <p>Umumiy mashrutlar soni</p>
-              <FilterButton text='Umumiy' />
-            </div>
+            <StatisticsHeader />
             <StatisticsLineChart grapData={graphData} loading={barLoading} />
           </CCard>
         </div>

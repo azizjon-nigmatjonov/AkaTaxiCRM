@@ -23,8 +23,6 @@ const Selection = () => {
         const date = new Date()
         let year = date.getFullYear()
         let month = date.getMonth()
-
-
         switch (e) {
             case 'year':
                 return setSearchParams({})
