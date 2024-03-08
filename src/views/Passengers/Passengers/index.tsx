@@ -17,6 +17,7 @@ import { Header } from "../../../components/Header";
 import ImageFrame from "../../../components/ImageFrame";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 const Passengers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
@@ -123,6 +124,7 @@ const Passengers = () => {
     }
 
   };
+  
 
   const handleSearch = (value: any) => {
     navigateQuery({ q: value });
@@ -145,10 +147,26 @@ const Passengers = () => {
     navigateQuery({ birthday: evt })
   }
 
+  const breadCrumbItems = useMemo(() => {
+    return [
+      {
+        label: "Yo'lovchi",
+        // link: '/passenger/main'
+      },
+      {
+        label: "Ro‘yxat",
+        link: "/passenger/main",
+      },
+    
+    ];
+  }, []);
+
 
   return (
     <>
-      <Header title="Yo'lovchilar ro'yhati" />
+      <Header>
+        <CBreadcrumbs items={breadCrumbItems} progmatic={true}/>
+      </Header> 
       <div className="px-6 ">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
@@ -178,6 +196,7 @@ const Passengers = () => {
           handleActions={handleActions}
           currentPage={currentPage}
         />
+
         <Form refetch={refetch} />
       </div>
     </>

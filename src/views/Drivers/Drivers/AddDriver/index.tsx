@@ -16,11 +16,12 @@ import driverService from '../../../../services/drivers'
 import usePageRouter from '../../../../hooks/useObjectRouter'
 import { useDispatch } from 'react-redux'
 import { websiteActions } from "../../../../store/website";
+import CBreadcrumbs from '../../../../components/CElements/CBreadcrumbs'
 
 const AddDriver = () => {
     const regions = useSelector((state: any) => state.regions.regions);
     const dispatch = useDispatch();
-    const { navigateTo , navigateQuery} = usePageRouter()
+    const { navigateTo, navigateQuery } = usePageRouter()
     const Regions: any = useMemo(() => {
         return regions?.map((val: any) => {
             return {
@@ -64,7 +65,7 @@ const AddDriver = () => {
                     translation: "common",
                 })
             );
-            
+
             setTimeout(() => {
                 window.location.reload();
             }, 3000);
@@ -72,9 +73,28 @@ const AddDriver = () => {
         })
     }
 
+    const breadCrumbs = useMemo(() => {
+        return [
+            {
+                label: "Haydovchi",
+                link: '/drivers/main'
+            },
+            {
+                label: "Ro'yhat",
+                link: '/drivers/main'
+            },
+
+            {
+                label: "Yangi haydovchi qo’shish"
+            }
+        ]
+    }, [])
+
     return (
         <div className='relative'>
-            <Header sticky={true} title="Haydovchilar ro'yhati" titleIn="Yangi yo'lovchi" />
+            <Header sticky={true} >
+                <CBreadcrumbs items={breadCrumbs} progmatic={true} type='link'/>
+            </Header>
             <div className='px-6 '>
                 <form onSubmit={handleSubmit(submitHandler)}>
                     <div className='mt-3'>
@@ -106,9 +126,8 @@ const AddDriver = () => {
                                 <div className='flex flex-wrap items-start gap-5'>
                                     <DImageUpload control={control} style={{ height: 200 }} name='profile_image' label='Profil avatar' />
                                     <DImageUpload control={control} style={{ height: 200 }} name='tex_passport' label='Tex.pasport' />
-                                    <DImageUpload control={control} style={{ height: 200 }} name='driver_license' label='Prava rasmi' />
-                                    <DImageUpload control={control} style={{ height: 200 }} name='third_image' label='Profil avatar' />
-                                    <DImageUpload control={control} style={{ height: 200 }} name='selfie_driver_license' label="Qo'shimcha " />
+                                    <DImageUpload control={control} style={{ height: 200 }} name='driver_license' label='Haydovchilik guvohnoma rasmi' />
+                                    <DImageUpload control={control} style={{ height: 200 }} name='selfie_driver_license' label='Haydovchilik guvohnoma bilan selfi' />
                                 </div>
                             </div>
                         </CCard>

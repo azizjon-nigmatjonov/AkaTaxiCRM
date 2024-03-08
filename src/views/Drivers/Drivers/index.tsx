@@ -12,6 +12,7 @@ import { FormatTime } from "../../../utils/formatTime";
 import CSlider from "../../../components/CElements/CSlider";
 import { Header } from "../../../components/Header";
 import ImageFrame from "../../../components/ImageFrame";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 
 const Drivers = () => {
@@ -26,7 +27,7 @@ const Drivers = () => {
       return driverService.getList({ page: currentPage, perPage: 10, q });
     }
   );
-  
+
 
   const headColumns = useMemo(() => {
     return [
@@ -125,10 +126,20 @@ const Drivers = () => {
     navigateQuery({ q: evt })
   };
 
+  const breadCrubmsItems = useMemo(() => {
+    return [
+      { label: "Haydovchi" },
+      { label: "Ro'yxat", link: '/drivers/main' }
+      // { label: }
+    ]
+  }, [])
+
 
   return (
     <>
-      <Header title="Haydovchilar ro'yhati" />
+      <Header >
+        <CBreadcrumbs items={breadCrubmsItems} progmatic={true} />
+      </Header>
       <div className="px-6">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">

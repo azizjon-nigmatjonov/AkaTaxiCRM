@@ -31,7 +31,7 @@ const Passanger = () => {
         return [
             {
                 label: "Yo'lovchi",
-                link: '/passengers/main'
+                // link: '/passengers/main'
             },
             {
                 label: "Ro'yxat",

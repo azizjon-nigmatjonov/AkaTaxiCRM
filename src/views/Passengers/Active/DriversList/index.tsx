@@ -8,12 +8,13 @@ const DriversList = ({ data }: { data?: any }) => {
     const query = useGetQueries();
     const { navigateQuery, } = usePageRouter();
 
+    
     return (
         <div>
             <CModal title={query.driver_list ? "Aktiv haydovchilar" : "Tahrirlash"}
-                open={!!query.driver_list}
+                open={!!query.id}
                 handleClose={() => {
-                    navigateQuery({ driver_list: "" });
+                    navigateQuery({ id: "" });
                 }}
                 footerActive={false}
             >

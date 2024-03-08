@@ -10,8 +10,6 @@ const StatisticsGender = () => {
         return statistics.getPassengerGenderRegions()
     })
 
-    console.log(isLoading);
-    
 
     const RegionStatics = useMemo(() => {
         if (!data) return
@@ -21,19 +19,19 @@ const StatisticsGender = () => {
                 ...val,
                 all: val.male_users + val.female_users,
                 data: [
-                    {value: val.male_users, label: String(val.male_users)},
-                    {value: val.female_users, label: String(val.female_users)},
+                    { value: val.male_users, label: String(val.male_users) },
+                    { value: val.female_users, label: String(val.female_users) },
                 ]
             }
         })
-    }, [data])    
+    }, [data])
 
 
     return (
         <div className="px-6">
             <CCard style={{ minHeight: 0 }}>
-                <PStaticsHeader data={RegionStatics}/>
-                <RegionsPie data={RegionStatics} />
+                <PStaticsHeader loading={isLoading} data={RegionStatics} />
+                <RegionsPie loading={isLoading} data={RegionStatics} />
             </CCard>
         </div>
     )

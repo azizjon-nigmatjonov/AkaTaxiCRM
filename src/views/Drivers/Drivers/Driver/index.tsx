@@ -41,6 +41,9 @@ const Driver = () => {
   const breadCrumbItems = useMemo(() => {
     return [
       {
+        label: "Haydovchi"
+      },
+      {
         label: "Ro‘yxat",
         link: "/drivers/main",
       },

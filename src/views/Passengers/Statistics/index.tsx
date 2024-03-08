@@ -1,41 +1,45 @@
-import CCard from "../../../components/CElements/CCard";
-// import StatisticsCard from "./Statistics";
-import { StatisticsMap } from "./Statistics/Map";
-import StatisticsLineChart from "./LineChart";
-import SearchHeader from "../../../components/Header/SearchHeader";
-import statistics from "../../../services/statistics";
-import RegionStats from "./Statistics/PieChart";
-import { useQuery } from "react-query";
-import { useMemo } from "react";
-// import { Header } from "../../../components/Header";
+// import SearchHeader from "../../../components/Header/SearchHeader";
 import AccountStatistics from "./AccountStatistics";
+import Selection from "./SelectionData";
 import StatisticsGender from "./GenderRegions";
+import { Header } from "../../../components/Header";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
+import { useMemo } from "react";
 
 
 const Statistics = () => {
 
-  const { data: stats } = useQuery(
-    ["GET_NEW_USER_STAT"],
-    () => {
-      return statistics.getNewUserStat();
-    },
-    {
-      enabled: true,
-    }
-  );
-  const bodyColumns = useMemo(() => {
-    return stats?.data ?? [];
-  }, [stats]);
-
-
+  const breadCrubmsItems = useMemo(() => {
+    return [
+      {
+        label: "Yo'lovchi",
+        // link: 'statistics'
+      },
+      {
+        label: 'Statistika',
+        link: '/statistics'
+      }
+    ]
+  }, [])
 
   return (
     <section className="relative">
-      <SearchHeader />
+      <Header>
+        <CBreadcrumbs items={breadCrubmsItems} progmatic={true}/>
+      </Header>
       <AccountStatistics />
+      <Selection />
       <StatisticsGender />
+    </section>
+  );
+};
 
-      <div className=" sticky top-20 z-20 left-0 py-[24px] pl-[12px]  w-[100%] bg-[var(--softGray)]">
+export default Statistics;
+
+
+
+
+{/* <div className=" sticky top-20 z-20 left-0 py-[24px] pl-[12px]  w-[100%] bg-[var(--softGray)]">
         <h1 className="text-2xl block font-[600] text-[var(--black)] ml-[15px]">
           Statistika: yo‘lovchi
         </h1>
@@ -51,9 +55,7 @@ const Statistics = () => {
           <RegionStats />
           <StatisticsMap />
         </div>
-      </div>
-    </section>
-  );
-};
+      </div> */}
 
-export default Statistics;
+
+

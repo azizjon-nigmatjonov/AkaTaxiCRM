@@ -2,7 +2,6 @@ import EmptyDataComponent from "../../../../../components/EmptyDataComponent";
 import Ticket from "../Ticket"
 
 const Success = ({ data }: { data?: any }) => {
-  console.log(data.length);
 
   return (
     <div>

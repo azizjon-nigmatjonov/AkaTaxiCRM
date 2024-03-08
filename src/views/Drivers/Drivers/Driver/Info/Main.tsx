@@ -23,6 +23,8 @@ const genderList = [
 
 const MainInfo = ({ control, setValue, driver = {} }: Props) => {
 
+  console.log(driver);
+  
   return (
     <div className="grid grid-cols-4 gap-4 mt-5">
       <HFTextField
@@ -47,7 +49,7 @@ const MainInfo = ({ control, setValue, driver = {} }: Props) => {
         control={control}
         label="Tug'ulgan sana"
         placeholder="16-yanvar, 1996-yil"
-        defaultValue={driver?.birthday}
+        // defaultValue={driver?.birthday}
       />
       {/* <HFDatepicker
         label="Tug'ilgan sana"

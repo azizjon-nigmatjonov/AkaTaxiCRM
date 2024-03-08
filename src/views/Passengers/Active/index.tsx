@@ -15,6 +15,8 @@ import usePageRouter from "../../../hooks/useObjectRouter";
 import DriversAvater from './DriversAvatar';
 import DriversList from "./DriversList";
 import ImageFrame from "../../../components/ImageFrame";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
+import Statistics from "./Statistics";
 
 
 const ActivePassengers = () => {
@@ -34,7 +36,7 @@ const ActivePassengers = () => {
   const regions = useSelector((state: any) => state.regions.regions);
 
   const driversHandle = (e: any) => {
-    setDriverLists(e);
+    setDriverLists(e);    
   }
 
 
@@ -78,7 +80,6 @@ const ActivePassengers = () => {
           <DriversAvater data={val} item={item} driversHandle={driversHandle} />
         )
       }
-
     ];
   }, []);
 
@@ -128,10 +129,23 @@ const ActivePassengers = () => {
     navigateQuery({ q: value })
   };
 
+  const breadCrubmsItems = useMemo(() => {
+    return [
+      {
+        label: "Yo'lovchi",
+      },
+      {
+        label: "Aktiv",
+        link: "/passenger/active_passengers"
+      },
+    ]
+  }, []);
 
   return (
     <div>
-      <Header title="Aktiv yo'lovchilar" />
+      <Header>
+        <CBreadcrumbs items={breadCrubmsItems} type="link" progmatic={true} />
+      </Header>
       <div className="px-6">
         <SectionHeader handleSearch={handleSearch}>
           <FilterButton text="filter">
@@ -145,6 +159,8 @@ const ActivePassengers = () => {
           </FilterButton>
         </SectionHeader>
 
+        <Statistics />
+
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns?.list}
@@ -156,7 +172,6 @@ const ActivePassengers = () => {
       </div>
 
       <DriversList data={driverLists} />
-
     </div>
   );
 };

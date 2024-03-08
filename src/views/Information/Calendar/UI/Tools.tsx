@@ -13,9 +13,7 @@ const Tools = () => {
         if (newDate.getMonth() === 0) {
             newDate.setFullYear(newDate.getFullYear());
         }
-        setDate(newDate);
-        console.log(FormatCalendar(newDate));
-
+        setDate(newDate);        
         navigateQuery({ date: FormatCalendar(newDate) })
     };
 
@@ -27,7 +25,6 @@ const Tools = () => {
         }
         setDate(newDate);
         navigateQuery({ date: FormatCalendar(newDate) })
-
     };
 
     const monthNames: string[] = [

@@ -2,13 +2,15 @@ import { useEffect, useMemo, useState } from "react";
 import AddButton from "../../../components/Buttons/AddButton";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import Form from "./Form";
-import CTabs from "../../../components/CElements/CTab";
+// import CTabs from "../../../components/CElements/CTab";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import Section from "./Section";
 import { useQuery } from "react-query";
 import carService from "../../../services/cars";
 import { Skeleton } from "@mui/material";
 import { Header } from "../../../components/Header";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
+import SectionHeader from "../../../components/Sections/Header";
 
 const Vehicles = () => {
   const { navigateQuery } = usePageRouter();
@@ -54,15 +56,28 @@ const Vehicles = () => {
     if (tab) getCarList(tab);
   }, [tab]);
 
+  const breadCrumbs = useMemo(() => {
+    return [
+      { label: "Haydovchi" },
+      { label: 'Mashinalar', link: '/drivers/cars' }
+    ]
+  }, [])
+
+  const handleSearch = (value: any) => {
+    navigateQuery({ q: value });
+  };
 
   return (
     <>
-      <Header title="Mashinalar ro'yhati" />
+      <Header sticky={true} >
+        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+      </Header>
       <div className="px-6">
         {tabList && !isLoading ? (
           <>
             <div className="flex justify-between">
-              <CTabs tabList={tabList ?? []} />
+              {/* <CTabs tabList={tabList ?? []} /> */}
+              <SectionHeader handleSearch={handleSearch} />
               <AddButton
                 text="new_mark"
                 style={{ width: "auto" }}

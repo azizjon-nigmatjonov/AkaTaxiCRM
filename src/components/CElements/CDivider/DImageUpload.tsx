@@ -105,13 +105,13 @@ const DImageUpload = ({
             <span >{text}</span>
             {defaultValue || (image && !loading) ? (
               <img
-                className={`h-full  w-full `}
+                className={`h-full  w-full object-cover `}
                 src={image ? `https://cdn.akataxi.uz/media/get-image/${image}` : defaultValue}
                 alt={defaultValue || "image"}
               /> 
             ) : loading ? (
               <CircularProgress />
-            ) : (
+              ) : (
               <ImageFrame />
             )}
             <input

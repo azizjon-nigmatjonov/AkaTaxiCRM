@@ -1,4 +1,6 @@
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import WidgetsIcon from '@mui/icons-material/Widgets';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useNavigate } from "react-router-dom";
 import "./style.scss";
 
@@ -7,7 +9,8 @@ const BackButton = ({ link }: { link: string }) => {
 
   return (
     <button type="button" className="BackButton" onClick={() => navigate(link)}>
-      <ArrowBackIcon className="icon" />
+      <WidgetsIcon className="icon" />
+      <ArrowForwardIosIcon className='arrow'/>
     </button>
   );
 };

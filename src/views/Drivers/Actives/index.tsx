@@ -1,8 +1,7 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import FilterButton from "../../../components/Filters";
-import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
@@ -16,18 +15,33 @@ import CDriver from "../../../components/CElements/CDivider";
 import carService from '../../../services/cars'
 import { useSearchParams } from 'react-router-dom'
 import { useTranslation } from "react-i18next";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
+import Places from "../../../components/Places";
+import PassengerList from "./PassengerList";
+import ImageFrame from "../../../components/ImageFrame";
+import LTabs from "../../../components/CElements/CTab/LineTab";
+
+const tabList = [
+  { slug: '', name: 'Aktiv' },
+  { slug: 'on-way', name: "Yo'lda" },
+  { slug: 'canceled', name: 'Bekor qilingan' },
+  { slug: 'done', name: 'Yetib borgan' }
+]
+
+
 const ActiveDrivers = () => {
+  const [passenger, setPassenger] = useState([])
   const { t } = useTranslation()
   const { navigateQuery } = usePageRouter();
   const setSearchParams = useSearchParams()[1]
-  const { currentPage, q, gender, region_id, f, car_model_id, } = useGetQueries();
+  const { currentPage, q, gender, region_id, f, car_model_id, status } = useGetQueries();
 
   const regions = useSelector((state: any) => state.regions.regions);
 
   const { data: drivers, isLoading } = useQuery(
-    ["GET_ACTIVE_DRIVERS", q, gender, region_id, f, car_model_id, currentPage],
+    ["GET_ACTIVE_DRIVERS", q, gender, region_id, f, car_model_id, currentPage, status],
     () => {
-      return driverService.getActives({ q, gender, region_id, f, car_model_id, page: currentPage });
+      return driverService.getActives({ q, gender, region_id, f, car_model_id, page: currentPage, status });
     }
   );
 
@@ -40,10 +54,15 @@ const ActiveDrivers = () => {
         return {
           ...item,
           data: {
-            car_name: item.car_name,
+            phone: item.phone,
             full_name: item.full_name,
-            car_number: item.car_number,
+            gender: item.gender,
+            image: item.image
           },
+          carInfo: {
+            car_name: item.car_name,
+            car_number: item.car_number
+          }
         };
       }),
       ...drivers,
@@ -51,10 +70,11 @@ const ActiveDrivers = () => {
   }, [drivers]);
 
 
+
   const { data: carModals } = useQuery(['GET_CAR_MODELS'], () => {
     return carService.getCarModel();
   });
-  
+
 
   const carModalData: any = useMemo(() => {
     if (!carModals) return [];
@@ -69,20 +89,26 @@ const ActiveDrivers = () => {
     }
   }, [carModals])
 
-  
+  const passengerList = (e: any) => {
+    setPassenger(e)
+  }
+
 
   const headColumns = useMemo(() => {
     return [
       {
-        title: "Ism / mashina",
+        title: "Ism Familiya",
         id: "data",
         render: (obj: any) => {
           return obj?.full_name ? (
-            <div className="py-2">
-              <p>{obj.full_name}</p>
-              <span className="text-[var(--gray)] uppercase">
-                {obj.car_name} - {obj.car_number}
-              </span>
+            <div className="flex items-center gap-3">
+              <ImageFrame image={obj.image} gender={obj.gender} />
+              <div>
+                <p>{obj.full_name}</p>
+                <span className="text-[var(--gray)] uppercase">
+                  +{obj.phone}
+                </span>
+              </div>
             </div>
           ) : (
             ""
@@ -90,21 +116,13 @@ const ActiveDrivers = () => {
         },
       },
       {
-        title: "Tel.raqam",
-        id: "phone",
-      },
-      {
         title: "Qayerdan",
-        id: "from",
+        id: "from_region_name",
       },
       {
         title: "qayerga",
         id: "to",
       },
-      // {
-      //   title: "qidiruv vaqti",
-      //   id: "time_search",
-      // },
       {
         title: 'Sayohat turi',
         id: 'search_type'
@@ -117,8 +135,20 @@ const ActiveDrivers = () => {
         },
       },
       {
-        title: `Yo'lovchi`,
-        id:'clients_name'
+        title: 'Raqam',
+        id: 'carInfo',
+        render: (val: any) => val && (
+          <div>
+            <p className="text-[var(--black)]">{val.car_name}</p>
+            <p className="text-[var(--gray)]  text-xs">{val.car_number}</p>
+          </div>
+        )
+      },
+      {
+        id: 'places',
+        render: (val: any, items: any) => val && (
+          <Places data={val} item={items} clickHandle={passengerList} />
+        )
       }
     ];
   }, []);
@@ -153,9 +183,19 @@ const ActiveDrivers = () => {
   const handleAge = (evt: any) => {
     navigateQuery({ birthday: [...evt] })
   }
+
+  const breadCrumbs = useMemo(() => {
+    return [
+      { label: "Haydovchi" },
+      { label: "Aktiv", link: '/drivers/active' }
+    ]
+  }, [])
+
   return (
     <>
-      <Header title="Aktiv haydovchilar" />
+      <Header sticky={true}>
+        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+      </Header>
       <div className="p-6">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
@@ -179,6 +219,8 @@ const ActiveDrivers = () => {
           </div>
         </SectionHeader>
 
+        <LTabs tabList={tabList} />
+
         <CTable
           headColumns={headColumns}
           bodyColumns={driversData?.list}
@@ -186,7 +228,8 @@ const ActiveDrivers = () => {
           isLoading={isLoading}
           currentPage={currentPage}
         />
-        <Form />
+
+        <PassengerList data={passenger} />
       </div>
     </>
   );

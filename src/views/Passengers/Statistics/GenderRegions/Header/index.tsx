@@ -1,45 +1,59 @@
-import { useEffect, useMemo, useState, memo } from 'react'
+import { useMemo, memo } from 'react'
 import StatisticsCard from '../../Statistics'
+import { Skeleton } from '@mui/material';
 
-const PStaticsHeader = memo(({ data }: { data: any }) => {
-    const [allUsers, setAllUsers] = useState<any>(0)
-    const [men, setMen] = useState<any>(0)
-    const [women, setWomen] = useState<any>(0)
+const StaticsHeader = memo(({ data, loading }: { data: any, loading: boolean }) => {
 
-console.log(data);
-
-    const generalData: any = useMemo(() => {
-        return data?.map((val: any) => {
-            setAllUsers((prev: any) => prev + val?.all)
-            setMen((prev: any) => prev + val?.male_users)
-            setWomen((prev: any) => prev + val?.female_users)
-        })
+    const gender: any = useMemo(() => {
+        if (!data) return [];
+        return {
+            men: data?.map((val: any) => val.male_users).reduce((a: number, b: number) => { return a + b }, 0),
+            female: data?.map((val: any) => val.female_users).reduce((a: number, b: number) => { return a + b }, 0),
+        }
     }, [data])
 
-    useEffect(() => {
-        generalData
-    }, [data])
+
+
+    const percentage: any = useMemo(() => {
+        let allUsers = gender.men + gender.female
+        let men = Math.trunc(gender.men ? (gender.men / allUsers) * 100 : 0)
+        let female = Math.trunc(gender.female ? (gender.female / allUsers) * 100 : 0)
+        return { allUsers, men, female }
+    }, [gender, data])
 
 
 
     return (
-        <div className='flex items-center justify-between border-b pb-6 border-[var(--lineGray)]'>
-            <div>
-                <p className='text-[var(--darkerGray)] text-3xl font-semibold'>Umumiy {allUsers} ta</p>
-                <div className='flex items-center gap-6 mt-1'>
-                    <div className='flex items-center gap-2'>
-                        <div className='h-2 w-2 rounded-full bg-[var(--ink)]' />
-                        <p>{men} ta</p>
+        <>
+            {loading ?
+                <div className='flex items-center justify-between '>
+                    <div>
+                        <Skeleton variant="rectangular" width={210} height={50} />
+                        <Skeleton variant="rounded" width={150} height={20} sx={{ marginTop: 1 }} />
                     </div>
-                    <div className='flex items-center gap-2'>
-                        <div className='h-2 w-2 rounded-full bg-[#FF35BA]' />
-                        <p>{women} ta</p>
-                    </div>
+                    <Skeleton variant="circular" width={70} height={70} />
                 </div>
-            </div>
-            <StatisticsCard data={{ men: '100', women: '50' }} />
-        </div>
+                : <div className='flex items-center justify-between border-b pb-6 border-[var(--lineGray)]'>
+                    <div>
+                        <p className='text-[var(--darkerGray)] text-3xl font-semibold'>Umumiy {percentage.allUsers} ta</p>
+                        <div className='flex items-center gap-6 mt-1'>
+                            <div className='flex items-center gap-2'>
+                                <div className='h-2 w-2 rounded-full bg-[var(--ink)]' />
+                                <p>{gender.men} ta</p>
+                            </div>
+                            <div className='flex items-center gap-2'>
+                                <div className='h-2 w-2 rounded-full bg-[#FF35BA]' />
+                                <p>{gender.female} ta</p>
+                            </div>
+                        </div>
+                    </div>
+                    <StatisticsCard data={{ men: percentage.men, women: percentage.female }} />
+
+                </div>
+            }
+        </>
+
     )
 })
 
-export default PStaticsHeader
+export default StaticsHeader

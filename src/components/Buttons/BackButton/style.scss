@@ -1,7 +1,7 @@
 .BackButton {
   width: 25px;
   height: 25px;
-  border-radius: 8px;
+  // border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,14 +9,21 @@
   cursor: pointer;
   background-color: transparent;
   transition-duration: 0.3s;
-  border: 1px solid $main;
-
+  color: $gray;
+  // border: 1px solid $main;
+  
   .icon {
     font-size: 19px;
   }
-
-  &:hover {
-    border-color: $main;
-    color: $main;
+  
+  .arrow {
+    font-size: 12px;
+    margin-inline: 8px;
+    color: #D0D5DD;
   }
+
+  // &:hover {
+  //   border-color: $main;
+  //   color: $main;
+  // }
 }

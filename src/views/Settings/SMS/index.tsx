@@ -10,6 +10,7 @@ import smsService from "../../../services/sms";
 import TypeCard from "./SMSType";
 import SMSMessage from "./Message";
 import { FormatTime } from "../../../utils/formatTime";
+import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 const tabList = [
   {
@@ -46,7 +47,7 @@ const SMS = () => {
   })
 
 
-  const bodyColumns:any = useMemo(() => {
+  const bodyColumns: any = useMemo(() => {
     if (!smsReports?.data) return []
     return smsReports
   }, [smsReports]);
@@ -97,10 +98,18 @@ const SMS = () => {
     navigateTo(`/drivers/driver/${item.id}`);
   };
 
+  const breadCrumbs = useMemo(() => {
+    return [
+      { label: "Sozlamalar" },
+      { label: "SMS xabarnoma", link: "settings/sms" }
+    ]
+  }, [])
 
   return (
     <>
-      <Header title="SMS xabarnoma"></Header>
+      <Header sticky={true} >
+        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+      </Header>
       <div className="px-6">
         <div className="flex justify-between">
           <CTabs tabList={tabList} />
