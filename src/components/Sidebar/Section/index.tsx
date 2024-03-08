@@ -9,6 +9,7 @@ import { ArrowIcon } from "../../IconGenerator/Svg";
 import UserInfo from "../../../components/Header/UserInfo";
 
 
+
 const SidebarSection = () => {
   // const { checkPath } = usePageRouter();
 
@@ -19,6 +20,7 @@ const SidebarSection = () => {
     return routes ?? [];
   }, [routes]);
 
+  // console.log(routes);
 
 
 
@@ -62,6 +64,7 @@ const SidebarSection = () => {
     <div className={cls.section}>
 
 
+
       <div className="mt-[10px] flex flex-col justify-between side">
         <div>
           {Object.entries(List)?.map(([key, value]: [string, any], index) => {
@@ -89,12 +92,14 @@ const SidebarSection = () => {
                   {Object.values(value as keyof typeof value)?.map((el: any, i, arr) => {
                     const isLastItem = i === arr.length - 1;
 
+                    // console.log(el.path);
+
 
                     if (el.title && el.title.trim() !== '') {
                       return (
                         el.sidebar && (
                           <>
-                            <NavLink key={el.id} to={el.path} className={`${i < 10 ? 'steps__item steps__item--active' : 'steps__item'} flex items-center steps`}>
+                            <NavLink key={el.id} to={el.path} className={`${i < 100 ? 'steps__item steps__item--active' : 'steps__item'} flex items-center steps`}>
                               <p onClick={() => handleItemClick(el)} className={`${isLastItem ? 'mb-2' : ''} flex gap-2 capitalize menu_link cursor-pointer text-sm font-medium text-[#151515] ${el.path === activePage ? 'active' : ''}`}>
                                 <IconGenerator icon={el.icon} />
                                 <span>{el.title}</span>
@@ -116,7 +121,9 @@ const SidebarSection = () => {
               </div>
             </NavLink>
           })}
-
+          {/* <div className="mt-5">
+          <NavLink to="/views/Drivers/Map">map</NavLink>
+          </div> */}
         </div>
         <div className="ml-8 mb-8 ">
           <UserInfo />

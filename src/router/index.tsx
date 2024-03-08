@@ -27,7 +27,7 @@ import Partners from "../views/Partners";
 import Partner from "../views/Partners/Partner";
 import { SmsCreateForm } from "../views/Settings/SMS/Form";
 import AddDriver from "../views/Drivers/Drivers/AddDriver";
-
+import Map from "../views/Drivers/Map"
 const Passanger = lazy(() => import("../views/Passengers/Passanger"));
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
@@ -53,6 +53,7 @@ const Router = () => {
     admins: [],
     settings: [],
     partners: [],
+
   });
 
   const getPath = ({
@@ -115,7 +116,7 @@ const Router = () => {
   //   }
   // }, [isAuth]);
 
-  
+
   return (
     <Suspense fallback={"Loading..."}>
       <Routes>
@@ -228,6 +229,16 @@ const Router = () => {
               icon: "car",
             })}
             element={<Vehicles />}
+          />
+          <Route
+            path={getPath({
+              parent: "drivers",
+              link: "maps",
+              sidebar: true,
+              title: "Xarita",
+              icon: "map",
+            })}
+            element={<Map />}
           />
           <Route
             path={getPath({

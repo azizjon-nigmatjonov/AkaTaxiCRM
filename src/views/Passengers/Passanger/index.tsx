@@ -7,6 +7,7 @@ import passengerService from '../../../services/passengers';
 import CTabs from '../../../components/CElements/CTab';
 import Trips from './Trips'
 import PassengerProfile from './PassangerProfile';
+import cls from "./style.module.scss";
 
 const tabList = [
     {
@@ -50,8 +51,10 @@ const Passanger = () => {
                 <CBreadcrumbs items={breadCrubmsItems} progmatic={true} type="link" />
             </Header>
 
-            <div className='px-6'>
-                <div className='sticky top-[97px] z-10 '><CTabs tabList={tabList} /></div>
+            <div className={`px-6 `}>
+                <div className={`${cls.box} sticky  top-[90px] z-10`}>
+                    <CTabs tabList={tabList} />
+                </div>
                 {tab === 'data' ? <PassengerProfile /> : <Trips />}
             </div>
         </div>

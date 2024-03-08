@@ -6,7 +6,7 @@ import usePageRouter from '../../../../hooks/useObjectRouter';
 const Tools = () => {
     const [date, setDate] = useState(new Date()); // June 2023
     const { navigateQuery } = usePageRouter();
-    
+
     const handleNextMonth = () => {
         const newDate: any = new Date(date);
         newDate.setMonth(newDate.getMonth() + 1);
@@ -14,8 +14,8 @@ const Tools = () => {
             newDate.setFullYear(newDate.getFullYear());
         }
         setDate(newDate);
-        console.log(FormatCalendar(newDate) );
-        
+        console.log(FormatCalendar(newDate));
+
         navigateQuery({ date: FormatCalendar(newDate) })
     };
 

@@ -70,7 +70,7 @@ export default function CTabs({
 
 
   return (
-    <div className={cls.wrapper}>
+    <div className={`${cls.wrapper}`}>
 
       <CTab
         value={value}

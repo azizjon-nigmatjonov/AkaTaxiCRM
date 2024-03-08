@@ -229,5 +229,18 @@ export const PartnersIcon = () => (
       </g>
     </g>
   </svg>
-
 )
+
+export const MapIcon = () => (
+  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/map">
+      <g id="map">
+        <path id="Vector" d="M1.83594 4.53848V10.2143C1.83594 11.3226 2.62344 11.7776 3.5801 11.2293L4.95094 10.4476C5.24844 10.2785 5.74427 10.261 6.05344 10.4185L9.11594 11.9526C9.4251 12.1043 9.92094 12.0926 10.2184 11.9235L12.7443 10.4768C13.0651 10.2901 13.3334 9.83515 13.3334 9.46181V3.78598C13.3334 2.67765 12.5459 2.22265 11.5893 2.77098L10.2184 3.55265C9.92094 3.72182 9.4251 3.73932 9.11594 3.58182L6.05344 2.05348C5.74427 1.90182 5.24844 1.91348 4.95094 2.08265L2.4251 3.52932C2.09844 3.71598 1.83594 4.17098 1.83594 4.53848Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M5.49341 2.33301V9.91634" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_3" d="M9.67578 3.86133V11.6663" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  </svg>
+)
+
+
