@@ -8,11 +8,6 @@ const Tools = () => {
     const { navigateQuery, getQueries } = usePageRouter();
     const query = getQueries()
 
-    // console.log(date);
-    // console.log(new Date(date));
-    
-    
-
     const handleNextMonth = () => {
         const newDate: any = new Date(date);
         newDate.setMonth(newDate.getMonth() + 1);
@@ -21,16 +16,16 @@ const Tools = () => {
         }
         setDate(newDate);
         navigateQuery({ calendar: FormatCalendar(newDate) })
-        };
+    };
 
     const handlePrevMonth = () => {
         const newDate: any = new Date(date);
         newDate.setMonth(newDate.getMonth() - 1);
         if (newDate.getMonth() === 11) {
-            newDate.setFullYear(newDate.getFullYear() - 1);
+            newDate.setFullYear(newDate.getFullYear());
         }
         setDate(newDate);
-        navigateQuery({ calendar: FormatCalendar(newDate)})
+        navigateQuery({ calendar: FormatCalendar(newDate) })
     };
 
     const monthNames: string[] = [
