@@ -39,7 +39,7 @@ const Ticket = ({ data }: { data: any }) => {
   return (
     <div >
       {ticketData?.map(({ location, carInfo }: { location?: any, carInfo?: any }) => (
-        <div className='my-6 '>
+        <div className='my-6'>
           <div className='flex items-center w-full '>
             <Location data={location} />
             <CarInfo data={carInfo} />

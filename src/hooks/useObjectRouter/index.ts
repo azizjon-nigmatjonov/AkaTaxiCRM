@@ -31,10 +31,7 @@ export default function usePageRouter() {
       ...query,
       ...obj,
     };
-
-    console.log(newQuery);
     
-
     const queryParams = createSearchParams(newQuery);
     navigate({
       pathname: location.pathname,
