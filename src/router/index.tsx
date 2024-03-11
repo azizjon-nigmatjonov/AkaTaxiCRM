@@ -51,8 +51,8 @@ const Router = () => {
     drivers: [],
     infos: [],
     admins: [],
-    settings: [],
     partners: [],
+    settings: [],
 
   });
 

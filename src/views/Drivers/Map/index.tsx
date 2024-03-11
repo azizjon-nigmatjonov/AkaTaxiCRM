@@ -5,27 +5,29 @@ import MapOption from "./Select";
 import ModalMap from "./ModalMap";
 import mapService from "../../../services/map";
 import { useQuery } from "react-query";
-import { CarStandart } from "components/IconGenerator/Svg";
 
-import is from '../../../../public/svg/car.svg'
+
+
 
 
 
 
 function Map() {
 
-
     const [selectedDriverId, setSelectedDriverId] = useState<any>(null);
     const [selectedDriverData, setSelectedDriverData] = useState<any>(null);
     const [modalOpen, setisModal] = useState<boolean>(false);
+    const [currentZoom, setCurrentZoom] = useState<any>(7);
 
 
-    const { data, isLoading } = useQuery("mapData", () => {
+    const { data, } = useQuery("mapData", () => {
         return mapService.getList();
     })
 
 
-    console.log(selectedDriverData);
+
+    console.log(currentZoom);
+
 
 
     const handleMarkerClick = async (id: any) => {
@@ -36,9 +38,6 @@ function Map() {
         setisModal(true)
 
     }
-
-
-
 
 
     const { isLoaded } = useLoadScript({
@@ -55,8 +54,11 @@ function Map() {
     };
 
 
+
+
     return (
         <div className="h-full w-full ">
+
             <Header title="Xarita" />
             <div className="fixed z-50 flex">
                 <MapOption />
@@ -69,27 +71,36 @@ function Map() {
                 <GoogleMap
                     mapContainerClassName="map-container w-full h-full"
                     center={center}
-                    zoom={7}
+                    zoom={currentZoom}
                     options={mapOptions}
+                    onLoad={(map) => {
+                        map.addListener("zoom_changed", () => {
+                            const newZoom = map.getZoom();
+                            setCurrentZoom(newZoom);
+                        });
+                    }}
+
                 >
 
+
                     {data && data.data.map(item => (
+
                         <Marker
                             onClick={() => handleMarkerClick(item.id)}
                             key={item.id}
                             position={{ lat: parseFloat(item.lat), lng: parseFloat(item.long) }}
                             icon={{
-                                url: '../../../../public/svg/car.svg',
+                                url: currentZoom <= 3 ? `${item.length}` : '../../../../public/svg/car.svg',
                                 scaledSize: new window.google.maps.Size(50, 50)
                             }}
                         />
+
                     ))}
 
-
-
-                    <Marker position={{ lat: 41.3775, lng: 64.5853 }} />
                 </GoogleMap>
             )}
+
+
         </div>
     )
 }

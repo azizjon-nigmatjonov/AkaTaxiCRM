@@ -60,6 +60,7 @@ const SidebarSection = () => {
 
 
 
+
   return (
     <div className={cls.section}>
 
@@ -116,9 +117,11 @@ const SidebarSection = () => {
                 {!isLastItem && <div className="accordion-line"></div>}
               </div>
             ) : <NavLink to={visibleSidebarItems[0].path}>
-              <div className="flex items-center ml-10 gap-3 mt-4">
+
+              <div className="flex items-center ml-10 gap-3 mt-4 mb-4 ">
                 <IconGenerator icon={visibleSidebarItems[0].icon} /> {t(key)}
               </div>
+              <div className="accordion-line"></div>
             </NavLink>
           })}
           {/* <div className="mt-5">

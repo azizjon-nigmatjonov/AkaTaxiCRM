@@ -8,7 +8,7 @@ interface Props {
   label?: string;
   handlerValue?: (val: any) => void
   // classes?: string;
-  disabled?:boolean
+  disabled?: boolean
 }
 
 const CSelect = ({
@@ -19,16 +19,17 @@ const CSelect = ({
   disabled
 }: Props) => {
 
-  const handleChange = (event: SelectChangeEvent) => {    
+  const handleChange = (event: SelectChangeEvent) => {
     handlerValue!(event.target?.value)
   }
-  
+
 
   return (
     <>
       <div id={`cselect-${id}`}>
+
         {label && <CLabel title={label} />}
-        <Select 
+        <Select
           disabled={disabled}
           // sx={{ m: 1, width: 112, height: 3 }}
           defaultValue={options?.[0]?.value}
@@ -38,7 +39,7 @@ const CSelect = ({
           onChange={handleChange}
         >
           {options.map(({ value, label }: { value: any; label: string }) => (
-            <MenuItem  key={value} value={value}>{label}</MenuItem>
+            <MenuItem key={value} value={value}> {label}</MenuItem>
           ))}
         </Select>
       </div>
