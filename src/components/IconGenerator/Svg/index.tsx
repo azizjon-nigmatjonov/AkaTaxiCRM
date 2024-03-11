@@ -63,8 +63,8 @@ export const DotsIcon = ({ fill = "#9092A3" }) => (
 
 export const NotificationIcon = () => (
   <svg
-    width="24"
-    height="24"
+    width="20"
+    height="20"
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -974,5 +974,4 @@ export const UserTagIcon = () => (
     <path d="M16 15.6594C16 13.8594 14.21 12.3994 12 12.3994C9.79 12.3994 8 13.8594 8 15.6594" stroke="#039855" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 )
-
 

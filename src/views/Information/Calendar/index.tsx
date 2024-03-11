@@ -4,7 +4,6 @@ import calendarService from "../../../services/calendar";
 // import SectionHeader from "../../../components/Sections/Header";
 // import FilterButton from "../../../components/Filters";
 import CalendarUI from "./UI";
-import { Skeleton } from "@mui/material";
 import { Header } from "../../../components/Header";
 import { GetMonth } from "../../../utils/getMonth";
 import { useGetQueries } from "../../../hooks/useGetQueries";
@@ -17,14 +16,14 @@ import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 const Calendar = () => {
   const month: any = GetMonth()
-  const { date } = useGetQueries();
-  const { data, isLoading } = useQuery(
-    ["GET_CALENDAR", date],
-    () => { return calendarService.getList(date) }, { enabled: true, }
-  );
+  const { calendar } = useGetQueries();
+  const { data, isLoading, } = useQuery(
+    ["GET_CALENDAR", calendar],
+    () => { return calendarService.getList(calendar) }, { staleTime: Infinity },
+  )
 
 
-  const calendar: any = useMemo(() => {
+  const calendarData: any = useMemo(() => {
     return data?.data ?? []
   }, [data])
 
@@ -52,13 +51,7 @@ const Calendar = () => {
           </FilterButton>
         </SectionHeader> */}
 
-        {!isLoading ? (
-          <CalendarUI list={calendar} month={month} />
-        ) : (
-          <div className="h-[1000px] mt-[-220px]">
-            <Skeleton style={{ height: "100%", borderRadius: "14px" }} />
-          </div>
-        )}
+        <CalendarUI list={calendarData} month={month} loading={isLoading} />
       </div>
     </>
   );

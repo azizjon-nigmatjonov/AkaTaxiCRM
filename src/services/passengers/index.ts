@@ -13,10 +13,10 @@ const passengerService = {
   getActivePassengers: (params: any) =>
     request.get(
       `/passengers-popular${params.page ? `?page=${params.page || 1}` : ""
-      }${params.q ? `&q=${params.q}` : ""}`
+      }${params.q ? `&q=${params.q}` : ""}${params?.region_id ? `&region_id=${params.region_id}` : ''}${params.birthday ? `&birthday=${params.birthday}` : ''}`
     ),
   getTicket: (params: any) => request.get(`/passengers-tickets/${params.id}${params?.status ? `?status=${params.status}` : ''}`),
-  activePassengerWidget: ()=> request.get('/passenger-statistics/booking-widgets')
+  activePassengerWidget: () => request.get('/passenger-statistics/booking-widgets')
 };
 
 export default passengerService;

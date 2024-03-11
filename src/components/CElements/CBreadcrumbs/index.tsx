@@ -5,6 +5,7 @@ import FolderIcon from "@mui/icons-material/Folder";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import BackButton from "../../Buttons/BackButton";
+import { NotificationIcon } from "../../../components/IconGenerator/Svg";
 
 interface Props {
   icon?: any;
@@ -25,7 +26,7 @@ const CBreadcrumbs = ({
   type = "element",
   progmatic = false,
 }: Props) => {
-    
+
   const navigate = useNavigate();
 
   const navigateLink = useMemo(() => {
@@ -37,34 +38,39 @@ const CBreadcrumbs = ({
     if (index === items?.length - 1) return null;
     navigate(link);
   };
-  
+
   return (
-    <div className="CBreadcrumbs-wrapper">
-      {navigateLink && <BackButton link={navigateLink} />}
-      <Breadcrumbs
-        className={`CBreadcrumbs ${size} ${className}`}
-        separator={<NavigateNextIcon fontSize="small" color="disabled"/>}
-      >
-        {items?.map((item: any, index: number) => (
-          <div
-            key={index}
-            className={`breadcrumb-item ${item?.link ? "" : "last"} ${type}`}
-          >
-            {icon}
-            {withDefautlIcon && <FolderIcon />}
-            {type === "link" && item?.link ? (
-              <div
-                onClick={() => navigateHandler(item.link, index)}
-                className="breadcrumb-label"
-              >
-                {item.label}
-              </div>
-            ) : (
-              <div className="breadcrumb-label">{item.label}</div>
-            )}
-          </div>
-        ))}
-      </Breadcrumbs>
+    <div className="flex items-center justify-between  w-full">
+      <div className="CBreadcrumbs-wrapper">
+        {navigateLink && <BackButton link={navigateLink} />}
+        <Breadcrumbs
+          className={`CBreadcrumbs ${size} ${className}`}
+          separator={<NavigateNextIcon fontSize="small" color="disabled" />}
+        >
+          {items?.map((item: any, index: number) => (
+            <div
+              key={index}
+              className={`breadcrumb-item ${item?.link ? "" : "last"} ${type}`}
+            >
+              {icon}
+              {withDefautlIcon && <FolderIcon />}
+              {type === "link" && item?.link ? (
+                <div
+                  onClick={() => navigateHandler(item.link, index)}
+                  className="breadcrumb-label"
+                >
+                  {item.label}
+                </div>
+              ) : (
+                <div className="breadcrumb-label">{item.label}</div>
+              )}
+            </div>
+          ))}
+        </Breadcrumbs>
+      </div>
+      <div className="p-2 cursor-pointer rounded-full shadow-sm">
+        <NotificationIcon />
+      </div>
     </div>
   );
 };

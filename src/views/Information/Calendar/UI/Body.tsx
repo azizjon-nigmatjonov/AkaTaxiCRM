@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Lighter from "./Lighter";
 import cls from "./style.module.scss";
 
-const DAYS = ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba'];
+const DAYS = [ 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba', 'Yakshanba'];
 
 
 const Body = ({ list = [], }: { list?: any, month?: any }) => {
@@ -14,30 +14,20 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
   const emtyCell: any = () => {
     const startWeekDay = list[0].day;
     let now = new Date(startWeekDay)
-    let day = now.getDay() / 2
+    let day = now.getDay() /2 ;
+        
 
     if (calendarEmptyCell.length < day) {
-      for (let i = 1; i <= day; i++) {
+      for (let i = 1; i < day; i++) {
         setCalendarEmptyCell((e: any) => [...e, i])
       }
     }
   }
+  
 
   useEffect(() => {
     emtyCell()
   }, [list])
-
-
-  // const startWeekDay = () => {
-  //   const startWeekDay = list[0].day;
-  //   const now = new Date(startWeekDay)
-  //   let day = now.getDay()
-  // }
-
-  // startWeekDay()
-
-  // console.log(new Date('2024-02-01').toLocaleDateString('en-US', { weekday: 'long' }));
-
   
 
   return (
@@ -52,9 +42,9 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
 
       <div className={cls.body}>
         <div className="grid grid-cols-7">
-          {calendarEmptyCell.map((_: unknown, i: number) => <div className={cls.cell} key={i}></div>)}
+          {calendarEmptyCell.map((_: unknown, i: number) => <div className={cls.cell} key={i}/>)}
 
-          {list.map((element: any, index: number) => (
+          {list?.map((element: any, index: number) => (
             <div className={cls.cell} key={index}>
               <span className="font-medium">{index + 1}</span>
               <Lighter
