@@ -17,9 +17,9 @@ import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 const Calendar = () => {
   const month: any = GetMonth()
   const { calendar } = useGetQueries();
-  const { data, isLoading, } = useQuery(
+  const { data, isLoading} = useQuery(
     ["GET_CALENDAR", calendar],
-    () => { return calendarService.getList(calendar) }, { staleTime: Infinity },
+    () => { return calendarService.getList(calendar) }, { staleTime: Infinity, cacheTime:0 },
   )
 
 
