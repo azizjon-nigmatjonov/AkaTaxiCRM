@@ -8,7 +8,7 @@ const DriversList = ({ data }: { data?: any }) => {
     const query = useGetQueries();
     const { navigateQuery, } = usePageRouter();
 
-    
+
     return (
         <div>
             <CModal title={query.driver_list ? "Aktiv haydovchilar" : "Tahrirlash"}
@@ -33,7 +33,7 @@ const DriversList = ({ data }: { data?: any }) => {
                                     <p className='text-sm font-normal text-[#475467]'>+{val?.phone}</p>
                                 </div>
                             </div>
-                            <p className={`${val?.status == 'searching_driver' ? 'text-[var(--green)]' : 'text-red-500'}`}>{val?.status == 'searching_driver' ? 'Qidirmoqda' : 'Rad etildi'}</p>
+                            <p className={`${val?.status == 'searching_driver' ? 'text-[var(--green)]' : 'text-red-500'}`}>{val?.status == 'searching_driver' ? 'Qidirilmoqda' : val?.status == 'driver_accepted' ? 'Qabul qildi' : val?.status == 'driver_canceled' ? 'Haydovchi bekor qildi' : 'Yolovchi bekor qildi'}</p>
                         </div>
                     ))}
                 </div>

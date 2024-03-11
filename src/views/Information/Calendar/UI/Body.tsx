@@ -23,13 +23,7 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
         setCalendarEmptyCell((e: any) => [...e, i])
       }
     }
-    console.log(day);
-
   }
-
-  console.log(calendarEmptyCell);
-
-
 
   useEffect(() => {
     emtyCell()
