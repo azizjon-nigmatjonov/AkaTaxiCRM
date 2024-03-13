@@ -1,40 +1,24 @@
-import { BarChart } from '@mui/x-charts'
+import { BarChart} from '@mui/x-charts'
 import { Skeleton } from '@mui/material';
 import { axisClasses } from '@mui/x-charts';
-const MONTHS = [
-    'Yan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Iyun',
-    'Iyul',
-    'Avg',
-    'Sen',
-    'Okt',
-    'Noy',
-    'Dek'
-];
 
-
-const StatisticsLineChart = ({ grapData, loading }: { grapData: any, loading?: any }) => {
+const StatisticsLineChart = ({ grapData: data, loading }: { grapData: any, loading?: any }) => {
 
     return (
         <div>
             {loading ? <Skeleton height={300} /> : <BarChart
-                // width={1400}
                 height={300}
                 series={[
-                    { data: grapData, stack: 'drivers', label: 'Yo’lovchi topganlar', id: 'trip', color: 'var(--main)', },
-                    { data: grapData, stack: 'drivers', label: 'Trip amalga oshirganlar', id: 'passenger', color: 'var(--main)', }
+                    { data: data.trip, stack: 'driver', label: 'Trip amalga oshirganlar', id: 'found', color: 'var(--main)' },
+                    { data: data.trip, stack: 'driver', label: "Yo'lovchi topganlar", id: 'trip', color: '#FFDECC', },
                 ]}
                 sx={{
                     [`.${axisClasses.left} .${axisClasses.label}`]: {
                         transform: 'translate(-20px, 0)',
                     },
-                    padding: 0.5
+                    padding: 0.5,
                 }}
-                xAxis={[{ data: MONTHS, scaleType: 'band', label: 'Oylar' }]}
+                xAxis={[{ data: data.label, scaleType: 'band', label: 'Oylar' }]}
                 yAxis={[{ label: 'Yangi foydalanuvhchilar' }]}
                 slotProps={{ legend: { hidden: true } }}
                 skipAnimation={false}
