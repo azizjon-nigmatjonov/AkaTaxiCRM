@@ -23,7 +23,6 @@ const CSelect = ({
     handlerValue!(event.target?.value)
   }
   
-  console.log(options);
   
 
   return (

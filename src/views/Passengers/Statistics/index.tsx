@@ -25,7 +25,7 @@ const Statistics = () => {
   return (
     <section className="relative">
       <Header>
-        <CBreadcrumbs items={breadCrubmsItems} progmatic={true}/>
+        <CBreadcrumbs items={breadCrubmsItems} progmatic={true} />
       </Header>
       <AccountStatistics />
       <Selection />

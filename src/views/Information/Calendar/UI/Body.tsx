@@ -3,12 +3,11 @@ import { useState, useEffect } from "react";
 import Lighter from "./Lighter";
 import cls from "./style.module.scss";
 
+
 const DAYS = ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba', 'Yakshanba'];
 
 
 const Body = ({ list = [], }: { list?: any, month?: any }) => {
-
-
   const [calendarEmptyCell, setCalendarEmptyCell] = useState<any>([])
 
   const emtyCell: any = () => {
@@ -16,14 +15,14 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
     let now = new Date(startWeekDay)
     let day = now.getDay();
 
-    console.log(now.getDay());
-
     if (calendarEmptyCell.length < day) {
       for (let i = 1; i < day; i++) {
         setCalendarEmptyCell((e: any) => [...e, i])
       }
     }
   }
+  
+
 
   useEffect(() => {
     emtyCell()
@@ -69,6 +68,6 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Body;
