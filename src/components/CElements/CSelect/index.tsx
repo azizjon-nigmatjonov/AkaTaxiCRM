@@ -22,7 +22,9 @@ const CSelect = ({
   const handleChange = (event: SelectChangeEvent) => {
     handlerValue!(event.target?.value)
   }
-
+  
+  console.log(options);
+  
 
   return (
     <>
@@ -33,6 +35,7 @@ const CSelect = ({
           disabled={disabled}
           // sx={{ m: 1, width: 112, height: 3 }}
           defaultValue={options?.[0]?.value}
+          placeholder="Barchsi"
           inputProps={{
             "aria-label": "Without label",
           }}

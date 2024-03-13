@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Lighter from "./Lighter";
 import cls from "./style.module.scss";
 
-const DAYS = [ 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba', 'Yakshanba'];
+const DAYS = ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba', 'Yakshanba'];
 
 
 const Body = ({ list = [], }: { list?: any, month?: any }) => {
@@ -14,8 +14,9 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
   const emtyCell: any = () => {
     const startWeekDay = list[0].day;
     let now = new Date(startWeekDay)
-    let day = now.getDay() /2 ;
-        
+    let day = now.getDay();
+
+    console.log(now.getDay());
 
     if (calendarEmptyCell.length < day) {
       for (let i = 1; i < day; i++) {
@@ -23,12 +24,11 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
       }
     }
   }
-  
 
   useEffect(() => {
     emtyCell()
   }, [list])
-  
+
 
   return (
     <div className={cls.calendar}>
@@ -42,7 +42,7 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
 
       <div className={cls.body}>
         <div className="grid grid-cols-7">
-          {calendarEmptyCell.map((_: unknown, i: number) => <div className={cls.cell} key={i}/>)}
+          {calendarEmptyCell.map((_: unknown, i: number) => <div className={cls.cell} key={i} />)}
 
           {list?.map((element: any, index: number) => (
             <div className={cls.cell} key={index}>
@@ -58,7 +58,7 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
               <Lighter
                 text={`${element.trip_count} ta`}
                 icon={'bookings_count'}
-                />
+              />
               <Lighter
                 text={`${element.bookings_count} ta`}
                 icon={'trip_count'}
