@@ -61,7 +61,7 @@ function Map() {
             lat: e.latLng.lat(),
         }
 
-        // console.log(newCenter);
+        //// console.log(newCenter);
 
 
         try {
