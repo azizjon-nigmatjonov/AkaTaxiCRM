@@ -104,7 +104,7 @@ function MapOption() {
                             border: 'none',
                         },
                         '& .Mui-selected': {
-                            backgroundColor: 'transparent', // убираем фон для выбранного элемента
+                            backgroundColor: 'transparent', 
                         },
 
                     }}

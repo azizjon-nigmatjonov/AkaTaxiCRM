@@ -17,7 +17,7 @@ const MainLayout = () => {
 
   const GetDisctricts = (array: any, ) => {    
     if (!array) return;
-    const arr = array;
+    const arr = array;    
     
     regionService.getDistrict().then((response) => {      
       const list = response?.data ?? [];

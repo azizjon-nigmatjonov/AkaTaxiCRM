@@ -1,10 +1,10 @@
-import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { GoogleMap, Marker, useLoadScript, Circle } from "@react-google-maps/api";
+import { useMemo, useState } from "react";
 import { Header } from "../../../components/Header"
 import MapOption from "./Select";
 import ModalMap from "./ModalMap";
 import mapService from "../../../services/map";
-import { useQuery } from "react-query";
+
 
 
 
@@ -14,24 +14,34 @@ import { useQuery } from "react-query";
 
 function Map() {
 
-    const [selectedDriverId, setSelectedDriverId] = useState<any>(null);
+    const setSelectedDriverId = useState<any>(null)[1];
     const [selectedDriverData, setSelectedDriverData] = useState<any>(null);
     const [modalOpen, setisModal] = useState<boolean>(false);
-    const [currentZoom, setCurrentZoom] = useState<any>(7);
-
-
-    const { data, } = useQuery("mapData", () => {
-        return mapService.getList();
-    })
+    const [currentZoom] = useState<any>(7);
+    const [selectData, setSelectData] = useState<any>([]);
 
 
 
-    console.log(currentZoom);
+    const [circleOptions, setCircleOptions] = useState({
+        strokeColor: '#A52A2A',
+        strokeOpacity: 1,
+        strokeWeight: 2,
+        fillColor: '#A52A2A',
+        fillOpacity: 0,
+        clickable: false,
+        draggable: false,
+        editable: false,
+        visible: true,
+        radius: 10000,
+        center: { lat: 91.3775, lng: 84.5853 },
+    });
 
 
 
     const handleMarkerClick = async (id: any) => {
         const response = await mapService.getElement(id)
+        console.log(response);
+
         setSelectedDriverId(id)
         mapService.getElement(id)
         setSelectedDriverData(response.data)
@@ -46,15 +56,59 @@ function Map() {
 
     const center = useMemo(() => ({ lat: 41.3775, lng: 64.5853 }), [])
 
+
+
+
+
+    const handleMapClick = async (e: any) => {
+        const newCenter = {
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng(),
+        }
+
+
+
+        try {
+            const response = await mapService.getRadius(newCenter.lat, newCenter.lng, 1000);
+
+            setSelectData(response)
+
+            console.log(response);
+
+
+            setCircleOptions({
+                ...circleOptions,
+                visible: true,
+                center: newCenter,
+            });
+
+
+
+        } catch (error) {
+            console.log('error');
+
+        }
+
+
+    }
+
+    const uzbekistanBounds = {
+        north: 45.5909,
+        south: 37.1483,
+        west: 55.9289,
+        east: 73.1652,
+    }
+
     const mapOptions = {
         mapTypeControl: false,
         streetViewControl: true,
         fullscreenControl: false,
         zoomControl: false,
+        restriction: {
+            latLngBounds: uzbekistanBounds,
+            strictBounds: false,
+        }
     };
-
-
-
 
     return (
         <div className="h-full w-full ">
@@ -65,6 +119,7 @@ function Map() {
                 <ModalMap setisModal={setisModal} modalOpen={modalOpen} selectedDriverData={selectedDriverData} />
             </div>
 
+
             {!isLoaded ? (
                 <h1>Loading...</h1>
             ) : (
@@ -73,29 +128,33 @@ function Map() {
                     center={center}
                     zoom={currentZoom}
                     options={mapOptions}
-                    onLoad={(map) => {
-                        map.addListener("zoom_changed", () => {
-                            const newZoom = map.getZoom();
-                            setCurrentZoom(newZoom);
-                        });
-                    }}
+                    onClick={handleMapClick}
 
                 >
+                    {selectData?.data && selectData.data?.map((item: any,) => {
+                        return (
 
 
-                    {data && data.data.map(item => (
+                            <>
+                                <Marker
+                                    onClick={() => handleMarkerClick(item.id)}
+                                    key={item.id}
+                                    position={{ lat: parseFloat(item.lat), lng: parseFloat(item.long) }}
+                                    icon={{
+                                        url: '../../../../public/svg/car.svg',
+                                        scaledSize: new window.google.maps.Size(50, 50)
+                                    }}
+                                />
 
-                        <Marker
-                            onClick={() => handleMarkerClick(item.id)}
-                            key={item.id}
-                            position={{ lat: parseFloat(item.lat), lng: parseFloat(item.long) }}
-                            icon={{
-                                url: currentZoom <= 3 ? `${item.length}` : '../../../../public/svg/car.svg',
-                                scaledSize: new window.google.maps.Size(50, 50)
-                            }}
-                        />
 
-                    ))}
+                                {<Circle options={circleOptions} />}
+
+
+                            </>
+
+                        )
+                    })}
+
 
                 </GoogleMap>
             )}

@@ -3,13 +3,18 @@ import car from '../../../../public/images/car.png'
 import avatar from '../../../../public/images/website/avatar.png';
 import './modal.css';
 
+interface DriverData {
+    car_name: string;
+    car_number: string;
+    start_location_name: string | null;
+    end_location_name: string | null;
+    trip_price: number;
+    driver_full_name: string;
+    driver_phone: string;
+    trip_seats: any | null
+}
 
-function ModalMap({ selectedDriverData, modalOpen, setisModal }) {
-
-
-    // console.log(selectedDriverData?.trip_seats);
-
-    // passenger_gender
+function ModalMap({ selectedDriverData, modalOpen, setisModal }: { selectedDriverData: DriverData; modalOpen: boolean; setisModal: React.Dispatch<React.SetStateAction<boolean>> }) {
 
 
     return (

@@ -17,6 +17,7 @@ const Vehicles = () => {
   const { currentTab } = useGetQueries();
   const [carList, setCarList] = useState([]);
   const [loading, setLoading] = useState(false);
+  
 
   const { data: classes, isLoading } = useQuery(["GET_TAB_LIST"], () => {
     return carService.getCarClasses();
