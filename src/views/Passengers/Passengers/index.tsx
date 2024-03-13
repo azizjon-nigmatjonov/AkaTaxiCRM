@@ -126,7 +126,7 @@ const Passengers = () => {
     }
 
   };
-  
+
 
   const handleSearch = (value: any) => {
     navigateQuery({ q: value });
@@ -159,7 +159,7 @@ const Passengers = () => {
         label: "Ro‘yxat",
         link: "/passenger/main",
       },
-    
+
     ];
   }, []);
 
@@ -167,12 +167,13 @@ const Passengers = () => {
   return (
     <>
       <Header>
-        <CBreadcrumbs items={breadCrumbItems} progmatic={true}/>
-      </Header> 
+        <CBreadcrumbs items={breadCrumbItems} progmatic={true} />
+      </Header>
       <div className="px-6 ">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <FilterButton text="filter">
+              
               <div>
                 <CSelect handlerValue={handlerRegion} options={Regions} id="filter" label="Viloyat" />
               </div>

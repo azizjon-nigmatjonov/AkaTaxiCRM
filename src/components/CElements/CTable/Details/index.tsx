@@ -123,7 +123,7 @@ export const CTableBody = ({
   columnscount?: any;
 }) => {
 
-  
+
   return (
     <>
       <TableLoader isVisible={loader} rowsCount={rowsCount} />

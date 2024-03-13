@@ -65,7 +65,7 @@ const CTable = ({
   const [currDelete, setCurrDelete] = useState<any>({});
   const dispatch = useDispatch();
 
-  
+
 
   const bodySource = useMemo(() => {
     if (!bodyColumns?.length) return [];
@@ -258,7 +258,7 @@ const CTable = ({
     }
   };
 
-  
+
   return (
     <div id="table">
       <CTableWrapper
@@ -335,7 +335,7 @@ const CTable = ({
             ))}
           </CTableRow>
         </CTableHead>
-        
+
         <CTableBody
           loader={isLoading}
           columnscount={headColumns?.length}
@@ -385,49 +385,51 @@ const CTable = ({
                     >
                       {column.id !== "actions" && (
                         <span>
+
                           {column.render ? Array.isArray(column.id) ? column.render(column.id.map((data: any) => item[data])) : column.render(item[column.id], item) : item[column.id]}
                         </span>
                       )}
-                      
+
                       {column.id === "actions" && !item.empty && (
-                          <div className="relative">
-                            {column.permission.length <= 3 ? (
-                              <div>
-                                <TableDelete
-                                  element={item}
-                                  tableActions={tableActions}
-                                  permissions={column.permission}
+                        <div className="relative">
+                          {column.permission.length <= 3 ? (
+                            <div>
+                              <TableDelete
+                                element={item}
+                                tableActions={tableActions}
+                                permissions={column.permission}
+                              />
+                              {currDelete.index === item.index ? (
+                                <PopoverDelete
+                                  closePopover={(status) => {
+                                    setCurrDelete({});
+                                    handleActions(status, item);
+                                  }}
                                 />
-                                {currDelete.index === item.index ? (
-                                  <PopoverDelete
-                                    closePopover={(status) => {
-                                      setCurrDelete({});
-                                      handleActions(status, item);
-                                    }}
-                                  />
-                                ) : (
-                                  ""
-                                )}
-                              </div>
-                            ) : (
-                              <>
-                                <button
-                                  className="p-2"
-                                  onClick={() => setCurrentIndex(rowIndex)}
-                                >
-                                  <DotsIcon />
-                                </button>
-                                <TabbleActions
-                                  element={item}
-                                  rowIndex={rowIndex}
-                                  currentIndex={currentIndex}
-                                  setCurrentIndex={setCurrentIndex}
-                                  handleActions={handleActions}
-                                  permissions={column.permission}
-                                />
-                              </>
-                            )}
-                          </div>
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          ) : (
+                            <>
+                              <button
+                                className="p-2"
+                                onClick={() => setCurrentIndex(rowIndex)}
+                              >
+                                <DotsIcon />
+
+                              </button>
+                              <TabbleActions
+                                element={item}
+                                rowIndex={rowIndex}
+                                currentIndex={currentIndex}
+                                setCurrentIndex={setCurrentIndex}
+                                handleActions={handleActions}
+                                permissions={column.permission}
+                              />
+                            </>
+                          )}
+                        </div>
                       )
                         // <TabbleActions
                         //   element={item}

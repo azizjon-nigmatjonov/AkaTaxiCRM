@@ -43,7 +43,7 @@ const Partners = () => {
     );
   }, [partnerData]);
 
-  const handleSearch = () => {};
+  const handleSearch = () => { };
 
   const headColumns = useMemo(() => {
     return [
@@ -110,7 +110,7 @@ const Partners = () => {
       };
     });
   }, [regions]);
-  
+
   return (
     <>
       <Header title="Adminlar" />

@@ -12,6 +12,8 @@ export const { actions: websiteActions, reducer: websiteReducer } = createSlice(
     reducers: {
       setRoutes: (state: any, { payload }) => {                        
         state.routes = payload;
+        console.log(payload);
+         
       },
       setAlertData: (state, { payload }) => {
         state.alert = payload;

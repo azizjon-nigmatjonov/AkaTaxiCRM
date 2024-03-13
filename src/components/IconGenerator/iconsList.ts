@@ -12,6 +12,7 @@ import {
   LockIcon,
   StatisticsIcon,
   SmsIcon,
+  MapIcon
 } from "./Svg/Sidebar";
 
 import { PassengerIcon, DriverIcon, PassengerVehicleIcon, DriverVehicleIcon, PartnersIcon } from "./Svg";
@@ -21,6 +22,7 @@ export const iconsList = [
     name: "admins",
     component: AdminsIcon,
   },
+ 
   {
     name: "admin",
     component: AdminIcon,
@@ -94,4 +96,9 @@ export const iconsList = [
     name: "amocrm",
     component: SmsIcon,
   },
+
+  {
+    name: "map",
+    component: MapIcon,
+  }
 ];
