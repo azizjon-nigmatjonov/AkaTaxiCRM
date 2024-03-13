@@ -111,7 +111,7 @@ function Map() {
     };
 
     return (
-        <div className="h-full w-full ">
+        <div className="h-full w-full">
 
             <Header title="Xarita" />
             <div className="fixed z-50 flex">
@@ -123,40 +123,40 @@ function Map() {
             {!isLoaded ? (
                 <h1>Loading...</h1>
             ) : (
-                <GoogleMap
-                    mapContainerClassName="map-container w-full h-full"
-                    center={center}
-                    zoom={currentZoom}
-                    options={mapOptions}
-                    onClick={handleMapClick}
+                    <GoogleMap
+                        mapContainerClassName="map-container w-full h-full mt-[-24px]"
+                        center={center}
+                        zoom={currentZoom}
+                        options={mapOptions}
+                        onClick={handleMapClick}
 
-                >
-                    {selectData?.data && selectData.data?.map((item: any,) => {
-                        return (
-
-
-                            <>
-                                <Marker
-                                    onClick={() => handleMarkerClick(item.id)}
-                                    key={item.id}
-                                    position={{ lat: parseFloat(item.lat), lng: parseFloat(item.long) }}
-                                    icon={{
-                                        url: '../../../../public/svg/car.svg',
-                                        scaledSize: new window.google.maps.Size(50, 50)
-                                    }}
-                                />
+                    >
+                        {selectData?.data && selectData.data?.map((item: any,) => {
+                            return (
 
 
-                                {<Circle options={circleOptions} />}
+                                <>
+                                    <Marker
+                                        onClick={() => handleMarkerClick(item.id)}
+                                        key={item.id}
+                                        position={{ lat: parseFloat(item.lat), lng: parseFloat(item.long) }}
+                                        icon={{
+                                            url: '../../../../public/svg/car.svg',
+                                            scaledSize: new window.google.maps.Size(50, 50)
+                                        }}
+                                    />
 
 
-                            </>
-
-                        )
-                    })}
+                                    {<Circle options={circleOptions} />}
 
 
-                </GoogleMap>
+                                </>
+
+                            )
+                        })}
+
+
+                    </GoogleMap>
             )}
 
 

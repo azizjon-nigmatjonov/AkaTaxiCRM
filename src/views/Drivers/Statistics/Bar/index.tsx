@@ -9,8 +9,8 @@ const StatisticsLineChart = ({ grapData: data, loading }: { grapData: any, loadi
             {loading ? <Skeleton height={300} /> : <BarChart
                 height={300}
                 series={[
-                    { data: data.trip, stack: 'driver', label: 'Yo’lovchi topganlar', id: 'found', color: 'var(--main)' },
-                    { data: data.trip, stack: 'driver', label: 'Trip amalga oshirganlar', id: 'trip', color: '#FFDECC', },
+                    { data: data.trip, stack: 'driver', label: 'Trip amalga oshirganlar', id: 'found', color: 'var(--main)' },
+                    { data: data.trip, stack: 'driver', label: "Yo'lovchi topganlar", id: 'trip', color: '#FFDECC', },
                 ]}
                 sx={{
                     [`.${axisClasses.left} .${axisClasses.label}`]: {
