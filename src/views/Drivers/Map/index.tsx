@@ -7,11 +7,6 @@ import mapService from "../../../services/map";
 
 
 
-
-
-
-
-
 function Map() {
 
     const setSelectedDriverId = useState<any>(null)[1];
@@ -40,7 +35,7 @@ function Map() {
 
     const handleMarkerClick = async (id: any) => {
         const response = await mapService.getElement(id)
-        console.log(response);
+        // console.log(response);
 
         setSelectedDriverId(id)
         mapService.getElement(id)
@@ -62,14 +57,15 @@ function Map() {
 
     const handleMapClick = async (e: any) => {
         const newCenter = {
-            lat: e.latLng.lat(),
             lng: e.latLng.lng(),
+            lat: e.latLng.lat(),
         }
 
+        //// console.log(newCenter);
 
 
         try {
-            const response = await mapService.getRadius(newCenter.lat, newCenter.lng, 1000);
+            const response = await mapService.getRadius(newCenter.lng, newCenter.lat, 1000);
 
             setSelectData(response)
 
