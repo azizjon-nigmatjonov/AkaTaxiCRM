@@ -10,15 +10,16 @@ import Progress from '../../../components/Progress'
 import { Header } from "../../../components/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import StatisticsHeader from "./Header";
+import { useGetQueries } from "../../../hooks/useGetQueries";
 
 const DriverStatistics = () => {
-
+  const { year, month, week } = useGetQueries()
   const { data: widgets, isLoading } = useQuery(['GET_GRAPH_LIST'], () => {
     return driverService.getWidgets()
   })
 
-  const { data: graph, isLoading: barLoading } = useQuery(['GET_GRAPH_DATA'], () => {
-    return driverService.getDriversGraph()
+  const { data: graph, isLoading: barLoading } = useQuery(['GET_GRAPH_DATA', year, week, month], () => {
+    return driverService.getDriversGraph({ year, week, month })
   })
 
   const { data: userRegion } = useQuery(['GET_REGION_USER'], () => {
@@ -31,9 +32,15 @@ const DriverStatistics = () => {
 
   const graphData: any = useMemo(() => {
     if (!graph?.data) return []
-    return Object.values(graph?.data)
-  }, [graph])
+    let data = graph?.data;
+    let label: any = [];
+    let trip: any = [];
+    let founded: any = [];
 
+    data?.map((val: any) => (label.push(val?.time), trip.push(val?.count), founded.push(val?.bookings)))
+
+    return { label, trip, founded }
+  }, [graph])
 
 
   const regionUser: any = useMemo(() => {

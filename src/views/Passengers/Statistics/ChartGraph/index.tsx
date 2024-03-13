@@ -3,6 +3,7 @@ import { axisClasses } from '@mui/x-charts';
 import { Skeleton } from '@mui/material';
 
 const ChartGraph = ({ data, loading }: { data?: any, loading?: boolean }) => {
+    
 
     return (
         <div>
