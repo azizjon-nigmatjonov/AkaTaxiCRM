@@ -65,7 +65,7 @@ function Map() {
 
 
         try {
-            const response = await mapService.getRadius(newCenter.lng, newCenter.lat, 1000);
+            const response = await mapService.getRadius(newCenter.lng, newCenter.lat, 100);
 
             setSelectData(response)
 
