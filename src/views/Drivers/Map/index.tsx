@@ -119,40 +119,33 @@ function Map() {
             {!isLoaded ? (
                 <h1>Loading...</h1>
             ) : (
-                    <GoogleMap
-                        mapContainerClassName="map-container w-full h-full mt-[-24px]"
-                        center={center}
-                        zoom={currentZoom}
-                        options={mapOptions}
-                        onClick={handleMapClick}
+                <GoogleMap
+                    mapContainerClassName="map-container w-full h-full mt-[-24px]"
+                    center={center}
+                    zoom={currentZoom}
+                    options={mapOptions}
+                    onClick={handleMapClick}
 
-                    >
-                        {selectData?.data && selectData.data?.map((item: any,) => {
-                            return (
-
-
-                                <>
-                                    <Marker
-                                        onClick={() => handleMarkerClick(item.id)}
-                                        key={item.id}
-                                        position={{ lat: parseFloat(item.lat), lng: parseFloat(item.long) }}
-                                        icon={{
-                                            url: '../../../../public/svg/car.svg',
-                                            scaledSize: new window.google.maps.Size(50, 50)
-                                        }}
-                                    />
-
-
-                                    {<Circle options={circleOptions} />}
-
-
-                                </>
-
-                            )
-                        })}
+                >
+                    {selectData?.data && selectData.data?.map((item: any,) => {
+                        return (
+                            <>
+                                <Marker
+                                    onClick={() => handleMarkerClick(item.id)}
+                                    key={item.id}
+                                    position={{ lat: parseFloat(item.lat), lng: parseFloat(item.long) }}
+                                    icon={{
+                                        url: '/svg/car.svg',
+                                        scaledSize: new window.google.maps.Size(50, 50)
+                                    }}
+                                />
+                                {<Circle options={circleOptions} />}
+                            </>
+                        )
+                    })}
 
 
-                    </GoogleMap>
+                </GoogleMap>
             )}
 
 

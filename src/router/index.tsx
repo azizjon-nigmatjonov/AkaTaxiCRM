@@ -28,6 +28,7 @@ import Partner from "../views/Partners/Partner";
 import { SmsCreateForm } from "../views/Settings/SMS/Form";
 import AddDriver from "../views/Drivers/Drivers/AddDriver";
 import Map from "../views/Drivers/Map"
+import Dashboard from "../views/Dashboard";
 const Passanger = lazy(() => import("../views/Passengers/Passanger"));
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
@@ -47,6 +48,7 @@ const Router = () => {
   const [list, setList] = useState<string[]>([]);
 
   const [routes, setRoutes] = useState({
+    dashboard: [],
     passengers: [],
     drivers: [],
     infos: [],
@@ -122,7 +124,16 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/passengers/main" />} />
-
+          <Route
+            path={getPath({
+              parent: "dashboard",
+              link: "dashboard",
+              sidebar: true,
+              title: "Dashboard",
+              icon: "Dashboard",
+            })}
+            element={<Dashboard />}
+          />
           <Route
             path={getPath({
               parent: "passengers",
