@@ -20,6 +20,8 @@ const PointSelector = ({
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(false);
   const [checkedList, setCheckedList] = useState([]);
+  
+
   const handleList = (element: any) => {
     const selectList: any = selected;
     if (step === 0) {
@@ -69,6 +71,7 @@ const PointSelector = ({
             ? selected[step]?.name?.uz?.substring(0, 2)
             : "XX"}
         </div>
+
         <div className="font-medium">
           {selected[step]?.name?.uz
             ? selected[step]?.name?.uz

@@ -21,7 +21,8 @@ import CBreadcrumbs from '../../../../components/CElements/CBreadcrumbs'
 const AddDriver = () => {
     const regions = useSelector((state: any) => state.regions.regions);
     const dispatch = useDispatch();
-    const { navigateTo, navigateQuery } = usePageRouter()
+    const { navigateTo, navigateQuery } = usePageRouter();
+    
     const Regions: any = useMemo(() => {
         return regions?.map((val: any) => {
             return {

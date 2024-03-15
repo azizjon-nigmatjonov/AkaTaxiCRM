@@ -36,7 +36,6 @@ const Passengers = () => {
   );
 
 
-
   const passengers: any = useMemo(() => {
     return data ?? {};
   }, [data]);

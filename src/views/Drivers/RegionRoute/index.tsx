@@ -28,8 +28,8 @@ const RegionRoute = () => {
         <SectionHeader handleSearch={() => { }}>
           <AddButton text="Marshrut tashkil qilish" onClick={() => { }} />
         </SectionHeader>
-        <Points handleChange={handleChange} />
 
+        <Points handleChange={handleChange} />
         <Result />
       </div>
     </>
