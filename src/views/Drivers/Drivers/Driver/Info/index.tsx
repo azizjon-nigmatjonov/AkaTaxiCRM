@@ -52,6 +52,10 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
     }
     else if (e == 'update') {
       const value = getValues();
+      console.log(driver);
+      console.log(value);
+      
+      
       let obj: any = {};
       Object.entries(driver).map(([keys, _]) => {
         Object.entries(value).map(([newkeys, _]) => {
@@ -81,7 +85,7 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
             translation: "common",
           })
         )
-        navigateTo('/drivers/main')
+        // navigateTo('/drivers/main')
       })
       navigateQuery({ passenger: '' })
     }
