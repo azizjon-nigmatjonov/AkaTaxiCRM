@@ -14,12 +14,12 @@ const useCountDown = (status: any, count = 10) => {
     }
     if (!countDown) return;
     if (time === 0) return;
-
+    
     const timer = setInterval(() => {
       setCountDown(countDown - 1);
     }, time);
 
-    // clear the interval when we're done
+    // clear the interval when we're done;
     return () => clearInterval(timer);
   }, [countDown, status]);
 

@@ -27,7 +27,9 @@ import Partners from "../views/Partners";
 import Partner from "../views/Partners/Partner";
 import { SmsCreateForm } from "../views/Settings/SMS/Form";
 import AddDriver from "../views/Drivers/Drivers/AddDriver";
-import Map from "../views/Drivers/Map";
+import Map from "../views/Drivers/Map"
+import Dashboard from "../views/Dashboard";
+import Booking from "../views/Passengers/Active/Booking";
 
 const Passanger = lazy(() => import("../views/Passengers/Passanger"));
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
@@ -48,6 +50,7 @@ const Router = () => {
   const [list, setList] = useState<string[]>([]);
 
   const [routes, setRoutes] = useState({
+    dashboard: [],
     passengers: [],
     drivers: [],
     infos: [],
@@ -123,7 +126,16 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/passengers/main" />} />
-
+          <Route
+            path={getPath({
+              parent: "dashboard",
+              link: "dashboard",
+              sidebar: true,
+              title: "Dashboard",
+              icon: "Dashboard",
+            })}
+            element={<Dashboard />}
+          />
           <Route
             path={getPath({
               parent: "passengers",
@@ -155,6 +167,17 @@ const Router = () => {
               icon: "admin",
             })}
             element={<ActivePassengers />}
+          />
+
+          <Route
+            path={getPath({
+              parent: 'passengers',
+              link: 'booking',
+              sidebar: false,
+              title: 'Passengers booking',
+              icon: ''
+            })}
+            element={<Booking />}
           />
 
           <Route

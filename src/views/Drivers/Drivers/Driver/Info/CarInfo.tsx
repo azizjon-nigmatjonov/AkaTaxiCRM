@@ -87,7 +87,7 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
           defaultValue={driver?.car_number}
         />
         <HFSelect
-          name="region_name"
+          name="region_id"
           options={Regions}
           control={control}
           placeholder="Mashina voloyati"

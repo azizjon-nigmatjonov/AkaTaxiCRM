@@ -69,12 +69,9 @@ const ActiveDrivers = () => {
     };
   }, [drivers]);
 
-
-
   const { data: carModals } = useQuery(['GET_CAR_MODELS'], () => {
     return carService.getCarModel();
   });
-
 
   const carModalData: any = useMemo(() => {
     if (!carModals) return [];

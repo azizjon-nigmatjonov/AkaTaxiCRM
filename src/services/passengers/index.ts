@@ -1,12 +1,12 @@
 import request from "../../utils/request";
-
+import requestForm from '../../utils/requestFormdata'
 const passengerService = {
   getList: (data: any) =>
     request.get(
       `/passengers?page=${data.page}&perPage=${data.perPage}${data.q ? `&q=${data.q}` : ""}${data.region_id ? `&region_id=${data.region_id}` : ""}`
     ),
   createElement: (data: any) => request.post("/passengers", { ...data }),
-  deleteElement: (id: string) => request.delete(`passengers/${id}`),
+  deleteElement: (id: string) => requestForm.delete(`passengers/${id}`),
   updateElement: (id: string, data: any) =>
     request.put(`passengers/${id}`, { ...data }),
   getElement: (id: string) => request.get(`passengers/${id}`),

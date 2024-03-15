@@ -153,11 +153,11 @@ const Passengers = () => {
     return [
       {
         label: "Yo'lovchi",
-        // link: '/passenger/main'
+        // link: '/passengers/main'
       },
       {
         label: "Ro‘yxat",
-        link: "/passenger/main",
+        link: "/passengers/main",
       },
 
     ];

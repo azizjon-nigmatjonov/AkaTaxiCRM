@@ -10,7 +10,6 @@ export default function usePageRouter() {
 
   const navigateTo = (path: string, state?: object) => {
     const link = path;
-
     if (state) {
       navigate(link, { state: state });
       return;

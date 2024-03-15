@@ -20,7 +20,7 @@ const SidebarSection = () => {
     return routes ?? [];
   }, [routes]);
 
-  // console.log(routes);
+  console.log(List);
 
 
 
@@ -118,7 +118,7 @@ const SidebarSection = () => {
               </div>
             ) : <NavLink to={visibleSidebarItems[0].path}>
 
-              <div className="flex items-center ml-10 gap-3 mt-4 mb-4 ">
+              <div className={`flex items-center ml-10 gap-3 mt-4 mb-4 capitalize`}>
                 <IconGenerator icon={visibleSidebarItems[0].icon} /> {t(key)}
               </div>
               <div className="accordion-line"></div>
