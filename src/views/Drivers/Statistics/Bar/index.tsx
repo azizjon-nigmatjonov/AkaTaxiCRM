@@ -3,6 +3,7 @@ import { Skeleton } from '@mui/material';
 import { axisClasses } from '@mui/x-charts';
 
 const StatisticsLineChart = ({ grapData: data, loading }: { grapData: any, loading?: any }) => {
+console.log(data);
 
     return (
         <div>
@@ -10,7 +11,7 @@ const StatisticsLineChart = ({ grapData: data, loading }: { grapData: any, loadi
                 height={300}
                 series={[
                     { data: data.trip, stack: 'driver', label: 'Trip amalga oshirganlar', id: 'found', color: 'var(--main)' },
-                    { data: data.trip, stack: 'driver', label: "Yo'lovchi topganlar", id: 'trip', color: '#FFDECC', },
+                    { data: data.founded, stack: 'driver', label: "Yo'lovchi topganlar", id: 'trip', color: '#FFDECC', },
                 ]}
                 sx={{
                     [`.${axisClasses.left} .${axisClasses.label}`]: {

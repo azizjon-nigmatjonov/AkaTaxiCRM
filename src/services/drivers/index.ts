@@ -12,7 +12,7 @@ const driverService = {
     request.get(
       `/drivers-popular${params.page ? `?page=${params.page || 1}` : ""}${params.q ? `&q=${params.q}` : ""}${params.region_id ? `&region_id=${params.region_id}` : ""}${params.gender ? `&gender=${params.gender}` : ""}${params.car_model_id ? `&car_model_id=${params.car_model_id}` : ""}${params.birthday ? `&birthday=${params.birthday}` : ""}${params.status ? `&status=${params.status}` : ''}`
     ),
-  updateElement: (id: string, data: any) => request.put(`/drivers/${id}`, data),
+  updateElement: (id: string, data: any) => requestForm.put(`/drivers/${id}`, data),
   deleteElement: (id: string) => request.delete(`/drivers/${id}`),
   getElement: (id: string | undefined) => request.get(`/drivers/${id}`),
   getDriverTripHistory: (data: any | undefined) =>
