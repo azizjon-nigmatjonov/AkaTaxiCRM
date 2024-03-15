@@ -46,7 +46,7 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
             type: 'error'
           })
         );
-        navigateTo('drivers/main')
+        navigateTo('/drivers/main')
       })
       navigateQuery({ passenger: '' })
     }
@@ -56,13 +56,13 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
       Object.entries(driver).map(([keys, _]) => {
         Object.entries(value).map(([newkeys, _]) => {
           if (typeof value[newkeys] == 'undefined' || value[newkeys] == 'undefined') return;
-          else if (driver[keys] === null) return
+          else if (driver[keys] === null) return;
           else if (keys == newkeys) {
             if (driver[keys] !== value[keys]) {
               obj[newkeys] = value[newkeys]
             }
           }
-          return
+          return;
         })
       })
 
@@ -81,7 +81,7 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
             translation: "common",
           })
         )
-        navigateTo('drivers/main')
+        navigateTo('/drivers/main')
       })
       navigateQuery({ passenger: '' })
     }
@@ -89,8 +89,6 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
       navigateQuery({ passenger: '' })
     }
   }
-
-
 
   return (
     <>
