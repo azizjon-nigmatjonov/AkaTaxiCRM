@@ -85,7 +85,7 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
             translation: "common",
           })
         )
-        // navigateTo('/drivers/main')
+        navigateTo('/drivers/main')
       })
       navigateQuery({ passenger: '' })
     }
