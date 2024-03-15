@@ -7,11 +7,6 @@ import mapService from "../../../services/map";
 
 
 
-
-
-
-
-
 function Map() {
 
     const setSelectedDriverId = useState<any>(null)[1];
@@ -40,7 +35,7 @@ function Map() {
 
     const handleMarkerClick = async (id: any) => {
         const response = await mapService.getElement(id)
-        console.log(response);
+        // console.log(response);
 
         setSelectedDriverId(id)
         mapService.getElement(id)
@@ -62,14 +57,15 @@ function Map() {
 
     const handleMapClick = async (e: any) => {
         const newCenter = {
-            lat: e.latLng.lat(),
             lng: e.latLng.lng(),
+            lat: e.latLng.lat(),
         }
 
+        //// console.log(newCenter);
 
 
         try {
-            const response = await mapService.getRadius(newCenter.lat, newCenter.lng, 1000);
+            const response = await mapService.getRadius(newCenter.lng, newCenter.lat, 100);
 
             setSelectData(response)
 
@@ -123,40 +119,33 @@ function Map() {
             {!isLoaded ? (
                 <h1>Loading...</h1>
             ) : (
-                    <GoogleMap
-                        mapContainerClassName="map-container w-full h-full mt-[-24px]"
-                        center={center}
-                        zoom={currentZoom}
-                        options={mapOptions}
-                        onClick={handleMapClick}
+                <GoogleMap
+                    mapContainerClassName="map-container w-full h-full mt-[-24px]"
+                    center={center}
+                    zoom={currentZoom}
+                    options={mapOptions}
+                    onClick={handleMapClick}
 
-                    >
-                        {selectData?.data && selectData.data?.map((item: any,) => {
-                            return (
-
-
-                                <>
-                                    <Marker
-                                        onClick={() => handleMarkerClick(item.id)}
-                                        key={item.id}
-                                        position={{ lat: parseFloat(item.lat), lng: parseFloat(item.long) }}
-                                        icon={{
-                                            url: '../../../../public/svg/car.svg',
-                                            scaledSize: new window.google.maps.Size(50, 50)
-                                        }}
-                                    />
-
-
-                                    {<Circle options={circleOptions} />}
-
-
-                                </>
-
-                            )
-                        })}
+                >
+                    {selectData?.data && selectData.data?.map((item: any,) => {
+                        return (
+                            <>
+                                <Marker
+                                    onClick={() => handleMarkerClick(item.id)}
+                                    key={item.id}
+                                    position={{ lat: parseFloat(item.lat), lng: parseFloat(item.long) }}
+                                    icon={{
+                                        url: '/svg/car.svg',
+                                        scaledSize: new window.google.maps.Size(50, 50)
+                                    }}
+                                />
+                                {<Circle options={circleOptions} />}
+                            </>
+                        )
+                    })}
 
 
-                    </GoogleMap>
+                </GoogleMap>
             )}
 
 
