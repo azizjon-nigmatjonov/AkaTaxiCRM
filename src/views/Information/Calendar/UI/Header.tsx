@@ -35,12 +35,12 @@ const Header = () => {
           Yangi haydo'vchilar
         </p>
         <p className="flex gap-1 items-center">
-          <PassengerVehicleIcon />
-          Yo’lovchi marshruti
-        </p>
-        <p className="flex gap-1 items-center">
           <DriverVehicleIcon />
           Haydovchi marshruti
+        </p>
+        <p className="flex gap-1 items-center">
+          <PassengerVehicleIcon />
+          Yo’lovchi marshruti
         </p>
       </div>
     </div>

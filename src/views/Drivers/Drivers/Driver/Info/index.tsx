@@ -43,30 +43,37 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
           websiteActions.setAlertData({
             title: "Ma'lumotlar o'chirildi!",
             translation: "common",
+            type: 'error'
           })
         );
         navigateTo('drivers/main')
       })
       navigateQuery({ passenger: '' })
-    } else if (e == 'update') {
+    }
+    else if (e == 'update') {
       const value = getValues();
-
       let obj: any = {};
       Object.entries(driver).map(([keys, _]) => {
-        return Object.entries(value).map(([newkeys, _]) => {
-          if (typeof value[newkeys] == 'undefined') return
-          if (value[newkeys] == 'undefined') return
-          if (driver[keys] != value[keys]) {
-            return obj[newkeys] = value[newkeys]
+        Object.entries(value).map(([newkeys, _]) => {
+          if (typeof value[newkeys] == 'undefined' || value[newkeys] == 'undefined') return;
+          else if (driver[keys] === null) return
+          else if (keys == newkeys) {
+            if (driver[keys] !== value[keys]) {
+              obj[newkeys] = value[newkeys]
+            }
           }
+          return
         })
       })
 
-      obj.phone = obj.phone.substring(1).replace(/\s+/g, '');
+      obj.phone ? obj.phone = obj?.phone?.substring(1).replace(/\s+/g, '') : null;
+
       const data = new FormData();
+
       for (let i in obj) {
         data.append(i, obj[i])
       }
+
       driverService.updateElement(query?.id, data).then(() => {
         dispatch(
           websiteActions.setAlertData({
@@ -83,7 +90,7 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
     }
   }
 
-  
+
 
   return (
     <>

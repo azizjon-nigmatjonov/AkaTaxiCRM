@@ -52,7 +52,6 @@ const HFSelect = ({
   }, [defaultValue, name, setValue]);
 
 
-  console.log(defaultValue);
   
 
   return (

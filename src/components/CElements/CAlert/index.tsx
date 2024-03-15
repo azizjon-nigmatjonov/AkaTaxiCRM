@@ -10,6 +10,7 @@ export default function CAlert({ data = {} }: { data: any }) {
   const dispatch = useDispatch();
   const timeClose = useCountDown("secunds", data?.timer || 8);
 
+  
   const handleAlertActions = () => {
     dispatch(websiteActions.setAlertData({}));
   };
@@ -21,12 +22,12 @@ export default function CAlert({ data = {} }: { data: any }) {
   }, [timeClose]);
 
   return (
-    <div className="fixed top-0 text-[#fff] w-full z-[9999] bg-[var(--green)]" id="calert">
+    <div className={`fixed top-0 text-[#fff] w-full z-[9999] ${data?.type == 'error' ? 'bg-red-400' : 'bg-[var(--green)]'}`} id="calert">
       <Alert
         severity={data?.type || "success"}
         onClose={() => handleAlertActions()}
       >
-        {t(data?.title)}
+       {t(data?.title)}
       </Alert>
     </div>
   );
