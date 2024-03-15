@@ -29,6 +29,7 @@ import { SmsCreateForm } from "../views/Settings/SMS/Form";
 import AddDriver from "../views/Drivers/Drivers/AddDriver";
 import Map from "../views/Drivers/Map"
 import Dashboard from "../views/Dashboard";
+
 import Booking from "../views/Passengers/Active/Booking";
 
 const Passanger = lazy(() => import("../views/Passengers/Passanger"));
