@@ -20,10 +20,6 @@ const SidebarSection = () => {
     return routes ?? [];
   }, [routes]);
 
-  console.log(List);
-
-
-
 
   const [activeIndex, setActiveIndex] = useState(() => {
     const storedIndex = localStorage.getItem('activeAccordionIndex');

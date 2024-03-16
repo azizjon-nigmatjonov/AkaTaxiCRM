@@ -24,9 +24,17 @@ const Booking = () => {
         ]
     }, [])
 
-    const { control } = useForm({
+    const { control, getValues, handleSubmit } = useForm({
         mode: 'onSubmit'
     })
+
+    const formsubmit = (e: any) => {
+        console.log(e);
+
+        console.log(getValues);
+    }
+
+
 
     return (
         <>
@@ -45,8 +53,9 @@ const Booking = () => {
                 </div>
                 {/* <Divided /> */}
                 <div>
-                    <form>
+                    <form onSubmit={handleSubmit(formsubmit)}>
                         <Info control={control} />
+                        <AddButton iconLeft={false} text="Submit" type='submit' />
                     </form>
                 </div>
             </section>

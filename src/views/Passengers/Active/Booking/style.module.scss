@@ -4,6 +4,18 @@
     gap: 32px;
     padding-block: 20px;
 
+    .parent {
+        width: 100%;
+        max-width: 800px;
+
+        .inputs {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+        }
+    }
+
     .title {
         font-size: 14px;
         font-weight: 500;
