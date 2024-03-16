@@ -9,7 +9,7 @@ const PointSelector = ({
   regions = [],
   color = "",
   selected = [],
-  setSelected = () => {},
+  setSelected = () => { },
 }: {
   step: number;
   regions?: any;
@@ -20,7 +20,8 @@ const PointSelector = ({
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(false);
   const [checkedList, setCheckedList] = useState([]);
-  
+console.log(active);
+
 
   const handleList = (element: any) => {
     const selectList: any = selected;
@@ -29,7 +30,6 @@ const PointSelector = ({
     } else {
       selectList[1] = element;
     }
-    console.log(active);
     setActive((prev) => !prev);
     setSelected(selectList);
   };
@@ -53,11 +53,13 @@ const PointSelector = ({
     handleList({ ...parent, list });
   };
 
+
+
   return (
     <div className="w-full relative z-[99]">
       <div
         onClick={() => setOpen((prev) => !prev)}
-        className="bg-white rounded-[18px] border border-[var(--lightGray)] flex items-center h-[70px] px-[14px] space-x-2 cursor-pointer"
+        className="bg-white rounded-[18px] border border-[var(--lightGray)]  flex items-center h-[70px] px-[14px] space-x-2 cursor-pointer"
       >
         <div
           className="w-[32px] h-[32px] rounded-full font-medium text-white flex items-center justify-center uppercase"
@@ -101,11 +103,10 @@ const PointSelector = ({
               <li
                 key={index}
                 onClick={() => handleList(el)}
-                className={`py-2 cursor-pointer border-[var(--lineGray)] font-medium ${
-                  el.id === selected[step]?.id
+                className={`py-2 cursor-pointer border-[var(--lineGray)] font-medium ${el.id === selected[step]?.id
                     ? "text-[var(--black)]"
                     : "text-[var(--gray)]"
-                } ${index === row.length - 1 ? "" : "border-b"}`}
+                  } ${index === row.length - 1 ? "" : "border-b"}`}
               >
                 {el.name.uz}
               </li>
@@ -120,11 +121,10 @@ const PointSelector = ({
               >
                 <span>{item?.name?.uz}</span>
                 <div
-                  className={`w-[18px] h-[18px] rounded-[4px] border-2 ${
-                    item.checked
+                  className={`w-[18px] h-[18px] rounded-[4px] border-2 ${item.checked
                       ? "border-[var(--mainLight)] bg-[var(--mainLight)]"
                       : "border-[var(--lineGray)]"
-                  }`}
+                    }`}
                 >
                   {item.checked ? <CheckLine /> : ""}
                 </div>

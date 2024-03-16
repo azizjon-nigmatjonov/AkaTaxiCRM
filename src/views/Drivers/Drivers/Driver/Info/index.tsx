@@ -51,11 +51,7 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
       navigateQuery({ passenger: '' })
     }
     else if (e == 'update') {
-      const value = getValues();
-      console.log(driver);
-      console.log(value);
-      
-      
+      const value = getValues();     
       let obj: any = {};
       Object.entries(driver).map(([keys, _]) => {
         Object.entries(value).map(([newkeys, _]) => {
@@ -71,7 +67,7 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
       })
 
       obj.phone ? obj.phone = obj?.phone?.substring(1).replace(/\s+/g, '') : null;
-
+      obj._method = 'PUT'
       const data = new FormData();
 
       for (let i in obj) {
@@ -85,7 +81,7 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
             translation: "common",
           })
         )
-        // navigateTo('/drivers/main')
+        navigateTo('/drivers/main')
       })
       navigateQuery({ passenger: '' })
     }
