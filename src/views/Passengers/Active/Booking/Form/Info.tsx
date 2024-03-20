@@ -28,26 +28,19 @@ const Info = ({ control }: Props) => {
     const handlerDistrics = (e: any) => {
         for (let i = 0; i < regions.length; i++) {
             if (regions[i].id == e) {
-                if (!fromVillages.length) {
-                    setFromDistrics(regions[i].list?.map((i: any) => {
-                        return {
-                            value: i.id,
-                            label: i.name.uz,
-                            villages: i.village
-                        }
-                    }))
-                } else {
-                    setToDistrics(regions[i].list?.map((i: any) => {
-                        return {
-                            value: i.id,
-                            label: i.name.uz,
-                            villages: i.village
-                        }
-                    }))
-                }
+                setFromDistrics(regions[i].list?.map((i: any) => {
+                    return {
+                        value: i.id,
+                        label: i.name.uz,
+                        villages: i.village
+                    }
+                }))
+
             }
         }
     }
+
+
 
     const handlerVillage = (e: any) => {
         fromDistrics.map((val: any) => {
@@ -67,6 +60,34 @@ const Info = ({ control }: Props) => {
                         }
                     }))
                 }
+            }
+        })
+
+    }
+
+    const ToHandlerDistrics = (e: any) => {
+        for (let i = 0; i < regions.length; i++) {
+            if (regions[i].id == e) {
+                setToDistrics(regions[i].list?.map((i: any) => {
+                    return {
+                        value: i.id,
+                        label: i.name.uz,
+                        villages: i.village
+                    }
+                }))
+            }
+        }
+    }
+
+    const toHandlerVillage = (e: any) => {
+        fromDistrics.map((val: any) => {
+            if (e == val.value) {
+                setToVillages(val.villages?.map((val: any) => {
+                    return {
+                        value: val.id,
+                        label: val.name.uz
+                    }
+                }))
             }
         })
 
@@ -109,11 +130,11 @@ const Info = ({ control }: Props) => {
                 <p className={cls.title}>Qayerga</p>
                 <div className={cls.parent}>
                     <div className={cls.inputs}>
-                        <HFSelect name="to_region" onChange={handlerDistrics} control={control} label="Viloyat" options={Regions} placeholder="Select" />
-                        <HFSelect name="end_location_id" onChange={handlerVillage} control={control} options={toDistrics} label="Tuman" placeholder="Select" />
+                        <HFSelect name="to_region" onChange={ToHandlerDistrics} control={control} label="Viloyat" options={Regions} placeholder="Select" />
+                        <HFSelect name="end_location_id" onChange={toHandlerVillage} control={control} options={toDistrics} label="Tuman" placeholder="Select" />
                     </div>
                     <div className="mt-4">
-                        <HFSelect name='to_village_id' onChange={handlerVillage} control={control} options={toVillages} label="Qishloq (mahalla yoki ko'cha)" placeholder="Select" />
+                        <HFSelect name='to_village_id' onChange={toHandlerVillage} control={control} options={toVillages} label="Qishloq (mahalla yoki ko'cha)" placeholder="Select" />
                     </div>
                 </div>
             </div>
