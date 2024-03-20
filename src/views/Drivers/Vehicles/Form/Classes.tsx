@@ -11,6 +11,7 @@ interface Props {
 const Classes = ({ classes = [], setValue = () => {} }: Props) => {
   const [groupA, setGroupA] = useState([]);
   const [groupB, setGroupB] = useState([]);
+  
 
   useEffect(() => {
     if (!classes?.length) return;
@@ -30,10 +31,12 @@ const Classes = ({ classes = [], setValue = () => {} }: Props) => {
       .concat(b)
       .filter((item: any) => item.checked)
       .map((item: any) => item.slug);
+      
     setValue("ids", ids);
   }, [classes]);
 
   const handleCheck = (name: string, check: boolean, group: string) => {
+
     if (group === "a") {
       const b: any = groupB.map((i: any) => {
         return {
@@ -75,6 +78,7 @@ const Classes = ({ classes = [], setValue = () => {} }: Props) => {
       .map((item: any) => item.slug);
     setValue("ids", ids);
   };
+
 
   return (
     <>

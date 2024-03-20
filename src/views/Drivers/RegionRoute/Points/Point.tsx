@@ -33,8 +33,10 @@ console.log(active);
     setActive((prev) => !prev);
     setSelected(selectList);
   };
+  
 
-  const handleCheck = (parent: any, child: any) => {
+
+  const handleCheck = (parent: any, child: any) => {    
     const obj: any = {
       ...child,
       checked: !child.checked,

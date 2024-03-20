@@ -4,7 +4,7 @@ interface Props {
   text: string;
   handleCheck: any;
   name: string;
-  group: string;
+  group?: string;
   checked: boolean;
 }
 

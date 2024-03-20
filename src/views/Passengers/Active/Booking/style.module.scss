@@ -22,4 +22,15 @@
         color: $black;
         width: 280px;
     }
+
+    .seat {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        background-color: #EAEAEB;
+        display: relative;
+        cursor: pointer;
+    }
 }
