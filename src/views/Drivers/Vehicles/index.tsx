@@ -51,7 +51,7 @@ const Vehicles = () => {
       };
     });
   }, [classes]);
-
+  
 
   useEffect(() => {
     if (tab) getCarList(tab);
