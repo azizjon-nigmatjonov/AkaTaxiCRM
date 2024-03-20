@@ -19,17 +19,17 @@ const Places = ({ data, item, clickHandle = () => { } }: Props) => {
   }
 
   return (
-    <div className='max-w-[55px]' onClick={handleClick}>
+    <div className='max-w-[55px] w-full ' onClick={handleClick}>
       {front.map((val: any) => (
         <div className={cls.front}>
-          <div className={`${cls.seat} ${val.gender != 'false' ? cls.booked : cls.empty}`}>
+          <div className={`${cls.seat} ${val.gender != 'false' ? val.reserved ? cls.user : cls.driver : cls.empty}`}>
             {val.gender != 'false' ? val.gender == 'm' ? <PassengerManIcon /> : <PassangerFemaleIcon /> : null}
           </div>
         </div>
       ))}
       <div className={cls.back}>
         {back.map((val: any) => (
-          <div className={`${cls.seat} ${val.gender != 'false' ? cls.booked : cls.empty}`}>
+          <div className={`${cls.seat} ${val.gender != 'false' ? val.reserved ? cls.user : cls.driver : cls.empty}`}>
             {val.gender != 'false' ? val.gender == 'm' ? <PassengerManIcon /> : <PassangerFemaleIcon /> : null}
           </div>
         ))}

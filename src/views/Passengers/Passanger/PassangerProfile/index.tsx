@@ -79,7 +79,7 @@ const PassengerProfile = () => {
             type: 'error'
           })
         );
-        navigateTo('passengers/main')
+        navigateTo('/passengers/main')
       })
       navigateQuery({ passenger: '' })
     } else if (e == 'update') {
@@ -95,7 +95,7 @@ const PassengerProfile = () => {
             translation: "common",
           })
         );
-        navigateTo('passengers/main')
+        navigateTo('/passengers/main')
       })
       navigateQuery({ passenger: '' })
     } else {

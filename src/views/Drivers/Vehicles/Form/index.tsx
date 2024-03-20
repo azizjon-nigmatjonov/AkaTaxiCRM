@@ -25,13 +25,11 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
   const dispatch = useDispatch();
   const { navigateQuery, getQueries } = usePageRouter();
   const query = getQueries();
+
   const { control, setValue, getValues, reset } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
-
-
-
 
   const { data: car } = useQuery(
     ["GET_CAR", query.id],
@@ -42,7 +40,6 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
       enabled: query.id !== "create" && query.id ? true : false,
     }
   );
-
 
   const HandleSuccess = (title: string) => {
     dispatch(
@@ -61,8 +58,6 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
 
     const data: any = getValues();
     const params: any = {};
-
-    console.log(data);
     
 
     params.car_class_ids = data.ids;
@@ -98,6 +93,8 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
       };
     });
   }, [car, classes]);
+    
+
 
   return (
     <CModal
@@ -122,6 +119,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
           },
         }}
       /> */}
+      
       <div className="grid space-y-3">
         <HFTextField
           name={`name_${query?.lang || "uz"}`}

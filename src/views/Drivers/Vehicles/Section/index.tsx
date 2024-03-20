@@ -41,7 +41,6 @@ const Section = ({ list = [], loading = true }: Props) => {
     return bussniss?.data ?? []
   }, [bussniss])
 
-  console.log(standart);
 
   return (
     <>
