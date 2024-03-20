@@ -33,6 +33,8 @@ function ModalMap({ totalDistance, selectedDriverData, modalOpen, setisModal }: 
 
     const [driverProgressWidth, setDriverProgressWidth] = useState<number>(0);
     // const [progressIconPosition, setProgressIconPosition] = useState<number>(0);
+    console.log(driverProgressWidth);
+    
     const [driverDistance, setDriverDistance] = useState<number | null>(null);
     const earthRadiusKm = 6371; // радиус Земли в километрах
 
