@@ -19,11 +19,12 @@ import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import Statistics from "./Statistics";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import AddButton from "../../../components/Buttons/AddButton";
 
 
 const ActivePassengers = () => {
   const { currentPage, q, region_id, birthday } = useGetQueries();
-  const { navigateQuery } = usePageRouter()
+  const { navigateQuery, navigateTo } = usePageRouter()
   const [driverLists, setDriverLists] = useState()
   const setSearchParams = useSearchParams()[1]
   const { t } = useTranslation()
@@ -31,10 +32,9 @@ const ActivePassengers = () => {
   const { data: passengers, isLoading } = useQuery(
     ["GET_ACTIVE_PASSENGERS", q, currentPage, region_id, birthday],
     () => {
-      return passengerService.getActivePassengers({ q, page: currentPage, region_id , birthday});
+      return passengerService.getActivePassengers({ q, page: currentPage, region_id, birthday });
     }
   );
-
 
   const regions = useSelector((state: any) => state.regions.regions);
 
@@ -159,16 +159,21 @@ const ActivePassengers = () => {
       </Header>
       <div className="px-6">
         <SectionHeader handleSearch={handleSearch}>
-          <FilterButton text="filter">
-            <div>
-              <CSelect handlerValue={handleRegion} options={Regions} id="filter" label="Viloyat" />
-            </div>
-            <CDriver classes="my-4" />
-            <div>
-              <CSlider handleValue={handleBirthday} />
-            </div>
-            <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer mt-3">{t('ignore_text')}</span>
-          </FilterButton>
+          <div className="flex items-center gap-[14px]">
+
+            <FilterButton text="filter">
+              <div >
+                <CSelect handlerValue={handleRegion} options={Regions} id="filter" label="Viloyat" />
+              </div>
+              <CDriver classes="my-4" />
+              <div>
+                <CSlider handleValue={handleBirthday} />
+              </div>
+              <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer mt-3">{t('ignore_text')}</span>
+            </FilterButton>
+
+            <AddButton text="Buyurtma berish"  onClick={() => navigateTo('/passengers/booking')}/>
+          </div>
         </SectionHeader>
 
         <Statistics />

@@ -35,7 +35,7 @@ const SidebarSection = () => {
     const storedIndex = localStorage.getItem('activeAccordionIndex');
     return storedIndex !== null ? parseInt(storedIndex) : -1;
   })
-  const [activePage, setActivePage] = useState<string | null>(null);
+  // const [activePage, setActivePage] = useState<string | null>(null);
 
 
   useEffect(() => {

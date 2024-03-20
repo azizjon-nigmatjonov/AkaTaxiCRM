@@ -14,7 +14,7 @@ const Points = ({
   const regions = useSelector((state: any) => state.regions.regions);
   const [selected, setSelected] = useState<any>([]);
   const { navigateQuery } = usePageRouter();
-
+    
   const handleExchange = () => {
     const list: any = selected;
     const prev = list[0];
@@ -29,8 +29,12 @@ const Points = ({
     }, 0);
   };
 
+  
+  
+
   return (
     <div className="flex items-center justify-between space-x-2">
+      
       <PointSelector
         step={0}
         regions={regions}
@@ -50,6 +54,7 @@ const Points = ({
           <ExchangeIcon />
         </div>
       </div>
+
       <PointSelector
         step={1}
         regions={regions}

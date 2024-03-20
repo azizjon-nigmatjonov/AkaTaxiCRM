@@ -23,7 +23,6 @@ const genderList = [
 
 const MainInfo = ({ control, setValue, driver = {} }: Props) => {
 
-  console.log(driver);
   
   return (
     <div className="grid grid-cols-4 gap-4 mt-5">

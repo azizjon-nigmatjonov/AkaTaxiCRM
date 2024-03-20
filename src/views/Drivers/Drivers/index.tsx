@@ -78,6 +78,10 @@ const Drivers = () => {
         id: 'region_name'
       },
       {
+        title: 'Hamkor statusi',
+        
+      },
+      {
         title: "",
         id: "actions",
         permission: ["learn_more", "edit", "delete"],

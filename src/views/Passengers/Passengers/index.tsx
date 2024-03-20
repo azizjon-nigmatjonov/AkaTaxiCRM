@@ -36,7 +36,6 @@ const Passengers = () => {
   );
 
 
-
   const passengers: any = useMemo(() => {
     return data ?? {};
   }, [data]);
@@ -153,11 +152,11 @@ const Passengers = () => {
     return [
       {
         label: "Yo'lovchi",
-        // link: '/passenger/main'
+        // link: '/passengers/main'
       },
       {
         label: "Ro‘yxat",
-        link: "/passenger/main",
+        link: "/passengers/main",
       },
 
     ];

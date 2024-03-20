@@ -76,6 +76,7 @@ const PassengerProfile = () => {
           websiteActions.setAlertData({
             title: "Ma'lumotlar o'chirildi!",
             translation: "common",
+            type: 'error'
           })
         );
         navigateTo('passengers/main')
@@ -83,6 +84,8 @@ const PassengerProfile = () => {
       navigateQuery({ passenger: '' })
     } else if (e == 'update') {
       const data = getValues()
+
+      
       data.phone = data.phone.substring(1).replace(/\s+/g, '')
       data.image_id = String(data?.image_id)
       passengerService.updateElement(query?.id, data).then(() => {
@@ -110,7 +113,7 @@ const PassengerProfile = () => {
             <PImageUpdate control={control} setValue={setValue} name='image_id' defaultValue={passenger?.image_id} />
           </div>
 
-          <div className='w-full '>
+          <div className='w-full'>
             <div className='w-full  flex items-center gap-6'>
               <HFTextField control={control} name='full_name' setValue={setValue} required={true} placeholder='Ism familiya' label='Ism familiya' defaultValue={passenger?.full_name} />
 

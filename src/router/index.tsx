@@ -29,6 +29,9 @@ import { SmsCreateForm } from "../views/Settings/SMS/Form";
 import AddDriver from "../views/Drivers/Drivers/AddDriver";
 import Map from "../views/Drivers/Map"
 import Dashboard from "../views/Dashboard";
+
+import Booking from "../views/Passengers/Active/Booking";
+
 const Passanger = lazy(() => import("../views/Passengers/Passanger"));
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
@@ -165,6 +168,17 @@ const Router = () => {
               icon: "admin",
             })}
             element={<ActivePassengers />}
+          />
+
+          <Route
+            path={getPath({
+              parent: 'passengers',
+              link: 'booking',
+              sidebar: false,
+              title: 'Passengers booking',
+              icon: ''
+            })}
+            element={<Booking />}
           />
 
           <Route
