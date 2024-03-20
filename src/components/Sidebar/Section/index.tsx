@@ -1,17 +1,23 @@
-import cls from "./style.module.scss";
 import { useEffect, useMemo, useState } from "react";
 import IconGenerator from "../../IconGenerator";
 // import usePageRouter from "../../../hooks/useObjectRouter";
 import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ArrowIcon } from "../../IconGenerator/Svg";
 import UserInfo from "../../../components/Header/UserInfo";
+import cls from "./style.module.scss";
 
 
 
 const SidebarSection = () => {
   // const { checkPath } = usePageRouter();
+
+  const location = useLocation();
+
+  // console.log(location.pathname);
+
+
 
   const { t } = useTranslation();
   const routes = useSelector((state: any) => state.website.routes);
@@ -21,11 +27,15 @@ const SidebarSection = () => {
   }, [routes]);
 
 
+
+
+
+
   const [activeIndex, setActiveIndex] = useState(() => {
     const storedIndex = localStorage.getItem('activeAccordionIndex');
     return storedIndex !== null ? parseInt(storedIndex) : -1;
   })
-  const [activePage, setActivePage] = useState<string | null>(null);
+  // const [activePage, setActivePage] = useState<string | null>(null);
 
 
   useEffect(() => {
@@ -39,18 +49,15 @@ const SidebarSection = () => {
   };
 
 
-  useEffect(() => {
-    const savedActivePage = localStorage.getItem('activePage');
-    if (savedActivePage) {
-      setActivePage(savedActivePage);
-    }
+  // useEffect(() => {
+  //   const savedActivePage = localStorage.getItem('activePage');
+  //   if (savedActivePage) {
+  //     setActivePage(savedActivePage);
+  //   }
 
-  }, [])
+  // }, [])
 
-  const handleItemClick = (element: any) => {
-    setActivePage(element.path)
-    localStorage.setItem('activePage', element.path);
-  }
+
 
 
 
@@ -96,8 +103,12 @@ const SidebarSection = () => {
                       return (
                         el.sidebar && (
                           <>
-                            <NavLink key={el.id} to={el.path} className={`${i < 100 ? 'steps__item steps__item--active' : 'steps__item'} flex items-center steps`}>
-                              <p onClick={() => handleItemClick(el)} className={`${isLastItem ? 'mb-2' : ''} flex gap-2 capitalize menu_link cursor-pointer text-sm font-medium text-[#151515] ${el.path === activePage ? 'active' : ''}`}>
+                            <NavLink
+                              key={el.id}
+                              to={el.path}
+                              className={`${i < 100 ? 'steps__item steps__item--active' : 'steps__item'} menu_link2 flex items-center steps ${location.pathname.startsWith(el.path) ? 'active' : ''}`}
+                            >
+                              <p className={`${isLastItem ? 'mb-2' : ''} flex gap-2 capitalize menu_link cursor-pointer text-sm font-medium text-[#151515] `}>
                                 <IconGenerator icon={el.icon} />
                                 <span>{el.title}</span>
                               </p>
