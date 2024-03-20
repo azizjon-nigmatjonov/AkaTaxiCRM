@@ -1,21 +1,73 @@
-import { GoogleMap, Marker, useLoadScript, Circle } from "@react-google-maps/api";
-import { useMemo, useState } from "react";
-import { Header } from "../../../components/Header"
+import { GoogleMap, Marker, useLoadScript, Circle, DirectionsRenderer } from "@react-google-maps/api";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Header } from "../../../components/Header";
 import MapOption from "./Select";
 import ModalMap from "./ModalMap";
 import mapService from "../../../services/map";
-
+import React from "react";
 
 
 function Map() {
-
     const setSelectedDriverId = useState<any>(null)[1];
     const [selectedDriverData, setSelectedDriverData] = useState<any>(null);
     const [modalOpen, setisModal] = useState<boolean>(false);
     const [currentZoom] = useState<any>(7);
     const [selectData, setSelectData] = useState<any>([]);
+    const [route, setRoute] = useState<any>(null);
+    const [disableScroll] = useState(false);
+    const [selectedMarkerId, setSelectedMarkerId] = useState(null);
+    const [totalDistance, setTotalDistance] = useState<any | null>(null);
+    const [selectedStatus, setSelectedStatus] = useState<any>('Aktiv');
+
+    const [carClass, setCarClass] = useState<number>(0);
+
+    const [lang, setLang] = useState(null);
+    const [lat, setLat] = useState(null);
+
+    console.log(carClass);
+
+    // console.log(selectData);
 
 
+
+    useEffect(() => {
+        if (selectedDriverData && selectedDriverData.start_location_coordinate && selectedDriverData.end_location_coordinate) {
+            const directionsService = new window.google.maps.DirectionsService();
+            const origin = {
+                lat: parseFloat(selectedDriverData.start_location_coordinate[1]),
+                lng: parseFloat(selectedDriverData.start_location_coordinate[0])
+            };
+            const destination = {
+                lat: parseFloat(selectedDriverData.end_location_coordinate[1]),
+                lng: parseFloat(selectedDriverData.end_location_coordinate[0])
+            };
+
+            directionsService.route({
+                origin: origin,
+                destination: destination,
+                travelMode: google.maps.TravelMode.DRIVING,
+                optimizeWaypoints: false,
+            }, (result, status) => {
+                if (status === 'OK') {
+                    setRoute(result);
+                    const totalDistance = result?.routes[0].legs.reduce((total, leg) => {
+                        if (leg.distance && leg.distance.value) {
+                            return total + leg.distance.value;
+                        } else {
+                            return total;
+                        }
+                    }, 0);
+                    if (totalDistance !== undefined) {
+                        setTotalDistance(totalDistance / 1000);
+                    } else {
+
+                        console.error('Ошибка: расстояние не определено.');
+                    }
+                }
+            });
+
+        }
+    }, [selectedDriverData]);
 
     const [circleOptions, setCircleOptions] = useState({
         strokeColor: '#A52A2A',
@@ -34,66 +86,82 @@ function Map() {
 
 
     const handleMarkerClick = async (id: any) => {
-        const response = await mapService.getElement(id)
-        // console.log(response);
 
-        setSelectedDriverId(id)
-        mapService.getElement(id)
-        setSelectedDriverData(response.data)
-        setisModal(true)
+        if (id === selectedMarkerId) {
+            setisModal(false);
+            setSelectedMarkerId(null);
+        } else {
+            const response = await mapService.getElement(id);
+            setSelectedDriverId(id);
+            setSelectedDriverData(response.data);
+            setisModal(true);
+            setSelectedMarkerId(id);
+        }
 
-    }
 
+    };
 
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: 'AIzaSyAUIZ9m1RB8dErgH-sp5tgwUb-16otr_do',
-    })
+        googleMapsApiKey: 'AIzaSyBsNWxTBZ6tIBFK5YCS6IsYyimrmUVMV0Y',
+    });
 
-    const center = useMemo(() => ({ lat: 41.3775, lng: 64.5853 }), [])
+    const center = useMemo(() => ({ lat: 41.3775, lng: 64.5853 }), []);
+
+    const handleMapClick = useCallback(async (e: any) => {
 
 
-
-
-
-    const handleMapClick = async (e: any) => {
         const newCenter = {
             lng: e.latLng.lng(),
             lat: e.latLng.lat(),
+        };
+        if (selectedStatus === 'Aktiv') {
+            const activeResponse = await mapService.getActive(newCenter.lng, newCenter.lat, 100); // Отправить запрос с параметром status=pending
+            setSelectData(activeResponse.data);
+            console.log(activeResponse);
+
+        } else if (selectedStatus === 'Safardagilar') {
+            const travelResponse = await mapService.getTravellers(newCenter.lng, newCenter.lat, 100); // Отправить запрос с параметром status=on-way
+            setSelectData(travelResponse.data);
         }
 
-        //// console.log(newCenter);
+
+
+        // if (carClass === 1) {
+        //     const typesCars = await mapService.getCarClass(newCenter.lng, newCenter.lat, 100, 1);
+        //     setSelectData(typesCars.data)
+
+        // } else if (carClass === 2) {
+        //     const typesCars = await mapService.getCarClass(newCenter.lng, newCenter.lat, 100, 2);
+        // } else if (carClass === 3) {
+        //     const typesCars = await mapService.getCarClass(newCenter.lng, newCenter.lat, 100, 3);
+        // }
+
+
+
+
+        setLang(newCenter.lng)
+        setLat(newCenter.lat)
 
 
         try {
-            const response = await mapService.getRadius(newCenter.lng, newCenter.lat, 1000);
-
-            setSelectData(response)
-
-            console.log(response);
-
-
-            setCircleOptions({
-                ...circleOptions,
+            const response = await mapService.getRadius(newCenter.lng, newCenter.lat, 100);
+            setSelectData(response);
+            setCircleOptions((prevOptions) => ({
+                ...prevOptions,
                 visible: true,
                 center: newCenter,
-            });
-
-
-
+            }));
         } catch (error) {
             console.log('error');
-
         }
-
-
-    }
+    }, [selectedStatus]);
 
     const uzbekistanBounds = {
         north: 45.5909,
         south: 37.1483,
         west: 55.9289,
         east: 73.1652,
-    }
+    };
 
     const mapOptions = {
         mapTypeControl: false,
@@ -108,13 +176,11 @@ function Map() {
 
     return (
         <div className="h-full w-full">
-
             <Header title="Xarita" />
             <div className="fixed z-50 flex">
-                <MapOption />
-                <ModalMap setisModal={setisModal} modalOpen={modalOpen} selectedDriverData={selectedDriverData} />
+                <MapOption setSelectData={setSelectData} setCarClass={setCarClass} setSelectedStatus={setSelectedStatus} lang={lang} lat={lat} />
+                <ModalMap totalDistance={totalDistance} setisModal={setisModal} modalOpen={modalOpen} selectedDriverData={selectedDriverData} />
             </div>
-
 
             {!isLoaded ? (
                 <h1>Loading...</h1>
@@ -125,32 +191,57 @@ function Map() {
                     zoom={currentZoom}
                     options={mapOptions}
                     onClick={handleMapClick}
-
                 >
                     {selectData?.data && selectData.data?.map((item: any,) => {
+
+
+                        let iconUrl = '/svg/standart.svg';
+
+                        if (item.classes === 'standart') {
+                            iconUrl = '/svg/standart.svg';
+                        } else if (item.classes === 'comfort') {
+                            iconUrl = '/svg/comfort.svg';
+                        } else if (item.classes === 'busines') {
+                            iconUrl = '/svg/busines.svg';
+                        }
+
+
                         return (
-                            <>
+                            <React.Fragment key={item.id}>
                                 <Marker
                                     onClick={() => handleMarkerClick(item.id)}
-                                    key={item.id}
                                     position={{ lat: parseFloat(item.lat), lng: parseFloat(item.long) }}
                                     icon={{
-                                        url: '/svg/car.svg',
+                                        url: iconUrl,
                                         scaledSize: new window.google.maps.Size(50, 50)
                                     }}
                                 />
-                                {<Circle options={circleOptions} />}
-                            </>
+                                <Circle options={circleOptions} />
+                            </React.Fragment>
                         )
                     })}
 
-
+                    {route && (
+                        <DirectionsRenderer
+                            directions={route}
+                            options={{
+                                preserveViewport: true,
+                                suppressMarkers: true,
+                            }}
+                            onLoad={(directionsRenderer) => {
+                                if (disableScroll) {
+                                    const map = directionsRenderer.getMap();
+                                    if (map) {
+                                        map.setOptions({ scrollwheel: false });
+                                    }
+                                }
+                            }}
+                        />
+                    )}
                 </GoogleMap>
             )}
-
-
         </div>
-    )
+    );
 }
 
-export default Map
+export default Map;
