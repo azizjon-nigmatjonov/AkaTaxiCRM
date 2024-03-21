@@ -18,6 +18,9 @@ interface Props {
 const Card: FC<Props> = ({ element }) => {
   const { navigateTo, navigateQuery } = usePageRouter();
 
+  // console.log(element);
+
+
   return (
     <CCard
       classes="min-h-0 rounded-xl"

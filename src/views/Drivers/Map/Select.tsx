@@ -36,21 +36,27 @@ function MapOption({ setSelectData, setSelectedStatus, lang, lat, setCarClass }:
         if (event.target.value === 'Standart') {
             setTypeCar('Standart')
             const typesCars = await mapService.getCarClass(lang, lat, 100, 1);
-            console.log(typesCars);
-            setSelectData(typesCars)
+            
+            const {data} = typesCars
+
+
+            
+            setSelectData(data)
             setCarClass(1)
 
         } else if (event.target.value === 'Komfort') {
             const typesCars = await mapService.getCarClass(lang, lat, 100, 2);
+            const {data} = typesCars
             setTypeCar('Komfort')
             setCarClass(2)
-            setSelectData(typesCars)
+            setSelectData(data)
 
         } else if (event.target.value === 'Biznes') {
             const typesCars = await mapService.getCarClass(lang, lat, 100, 3);
+            const {data} = typesCars
             setTypeCar('Biznes')
             setCarClass(3)
-            setSelectData(typesCars)
+            setSelectData(data)
 
         } else {
             setTypeCar('Hammasi')
