@@ -17,7 +17,10 @@ const Vehicles = () => {
   const { currentTab } = useGetQueries();
   const [carList, setCarList] = useState([]);
   const [loading, setLoading] = useState(false);
-  
+
+  // console.log(carList);
+
+
 
   const { data: classes, isLoading } = useQuery(["GET_TAB_LIST"], () => {
     return carService.getCarClasses();
@@ -51,7 +54,10 @@ const Vehicles = () => {
       };
     });
   }, [classes]);
-  
+
+
+  console.log(classes);
+
 
   useEffect(() => {
     if (tab) getCarList(tab);

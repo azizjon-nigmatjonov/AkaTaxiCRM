@@ -144,8 +144,23 @@ function Map() {
 
 
         try {
-            const response = await mapService.getRadius(newCenter.lng, newCenter.lat, 100);
-            setSelectData(response);
+
+            let currentPage = 1;
+            let allData: any = [];
+            const shouldContinue: boolean = true;
+
+            while (shouldContinue) {
+                const response = await mapService.getRadius(newCenter.lng, newCenter.lat, 100, currentPage);
+                const { data } = response;
+
+                if (data.length === 0) {
+                    break;
+                }
+                allData = [...allData, ...data];
+                currentPage++;
+            }
+
+            setSelectData(allData);
             setCircleOptions((prevOptions) => ({
                 ...prevOptions,
                 visible: true,
@@ -192,7 +207,7 @@ function Map() {
                     options={mapOptions}
                     onClick={handleMapClick}
                 >
-                    {selectData?.data && selectData.data?.map((item: any,) => {
+                    {selectData && selectData?.map((item: any,) => {
 
 
                         let iconUrl = '/svg/standart.svg';

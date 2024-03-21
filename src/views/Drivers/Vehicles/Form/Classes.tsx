@@ -8,10 +8,15 @@ interface Props {
   setValue?: (val1?: any, val2?: any) => void;
 }
 
-const Classes = ({ classes = [], setValue = () => {} }: Props) => {
+const Classes = ({ classes = [], setValue = () => { } }: Props) => {
   const [groupA, setGroupA] = useState([]);
   const [groupB, setGroupB] = useState([]);
+
+  console.log(classes);
   
+
+  console.log(groupA);
+
 
   useEffect(() => {
     if (!classes?.length) return;
@@ -31,7 +36,7 @@ const Classes = ({ classes = [], setValue = () => {} }: Props) => {
       .concat(b)
       .filter((item: any) => item.checked)
       .map((item: any) => item.slug);
-      
+
     setValue("ids", ids);
   }, [classes]);
 
