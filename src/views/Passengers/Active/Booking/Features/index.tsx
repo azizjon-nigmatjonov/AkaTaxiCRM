@@ -15,7 +15,7 @@ const Features = ({ featureHandle = () => { } }: { featureHandle: (val: any) => 
         additional_trunk: false,
         chargers: false,
         heater: false,
-        petrol: false,
+        petrol: true,
         gas: false,
         electric: false,
         driver_gender: [],
