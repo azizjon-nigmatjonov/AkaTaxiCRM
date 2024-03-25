@@ -199,6 +199,31 @@ body {
   border-left: 2px solid #FF5B01;
 }
 
+.menu_link3.active {
+  display: flex;
+
+
+}
+
+.menus {
+  /* border-left: 2px solid #bd1717; */
+
+}
+
+.menu_link3 {
+  border-left: 2px solid #FFF;
+}
+
+.menus .active {
+  background: linear-gradient(90deg, rgba(255, 195, 162, 0.30) 0%, rgba(255, 91, 1, 0.00) 100%);
+  border-left: 2px solid #FF5B01;
+
+}
+
+.menu_link3 {}
+
+
+
 /* .menu_link:hover::before {
   position: absolute;
   content: "";
