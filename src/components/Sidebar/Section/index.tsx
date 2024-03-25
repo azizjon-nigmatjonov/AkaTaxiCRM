@@ -73,6 +73,9 @@ const SidebarSection = () => {
         <div>
           {Object.entries(List)?.map(([key, value]: [string, any], index) => {
 
+
+
+
             const visibleSidebarItems: any = (value as any).filter((el: any) => el.sidebar)
 
             const isLastItem = index === Object.entries(List).length - 1;
@@ -123,13 +126,16 @@ const SidebarSection = () => {
                 </div>
                 {!isLastItem && <div className="accordion-line"></div>}
               </div>
-            ) : <NavLink to={visibleSidebarItems[0].path}>
+            ) : <div className="menus">
+              <NavLink to={visibleSidebarItems[0].path} className={`menu_link3 mt-2 mb-2 py-[10px] ml-4 pl-[20px] w-[280px] flex items-center  gap-3  capitalize`}>
 
-              <div className={`flex items-center ml-10 gap-3 mt-4 mb-4 capitalize`}>
+                {/* {(console.log(location.pathname))} */}
+
                 <IconGenerator icon={visibleSidebarItems[0].icon} /> {t(key)}
-              </div>
+
+              </NavLink>
               <div className="accordion-line"></div>
-            </NavLink>
+            </div>
           })}
           {/* <div className="mt-5">
           <NavLink to="/views/Drivers/Map">map</NavLink>

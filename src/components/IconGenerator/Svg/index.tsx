@@ -1478,3 +1478,30 @@ export const BusnissCarImgIcon = () => (
 
 )
 
+
+
+export const WomenGenderIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="Vertical container">
+      <g id="Vertical container_2">
+        <path id="Vector" d="M9 12C11.8995 12 14.25 9.6495 14.25 6.75C14.25 3.85051 11.8995 1.5 9 1.5C6.10051 1.5 3.75 3.85051 3.75 6.75C3.75 9.6495 6.10051 12 9 12Z" stroke="#FF35BA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M9 12V16.5" stroke="#FF35BA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_3" d="M11.25 14.25H6.75" stroke="#FF35BA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  </svg>
+)
+
+
+export const ManGenderIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="Vertical container">
+      <g id="Vertical container_2">
+        <path id="Vector" d="M7.6875 16.125C10.8977 16.125 13.5 13.5227 13.5 10.3125C13.5 7.10234 10.8977 4.5 7.6875 4.5C4.47734 4.5 1.875 7.10234 1.875 10.3125C1.875 13.5227 4.47734 16.125 7.6875 16.125Z" stroke="#287EFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_2" d="M16.125 1.875L12 6" stroke="#287EFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Vector_3" d="M11.25 1.875H16.125V6.75" stroke="#287EFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  </svg>
+
+)
