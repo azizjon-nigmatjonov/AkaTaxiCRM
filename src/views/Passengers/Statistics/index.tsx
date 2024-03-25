@@ -24,7 +24,7 @@ const Statistics = () => {
 
   return (
     <section className="relative">
-      <Header>
+      <Header sticky={true}>
         <CBreadcrumbs items={breadCrubmsItems} progmatic={true} />
       </Header>
       <AccountStatistics />

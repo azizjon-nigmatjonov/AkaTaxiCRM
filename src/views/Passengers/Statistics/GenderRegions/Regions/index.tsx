@@ -41,7 +41,7 @@ const RegionsPie = ({ data, loading }: { data: any, loading: boolean }) => {
   return (
     <div className={`grid ${loading ? 'grid-cols-5' : 'grid-cols-4'} gap-8 py-6  `}>
       {loading ?
-        Array.from(new Array(20))?.map((_) => <Skeleton variant='circular' width={150} height={150} />)
+        Array.from(new Array(20))?.map((_) => <Skeleton variant='circular' width={120} height={120} />)
         : data?.map(({ region_name: region, all, data: pieData }: Props) => (
           <div key={region}>
             <Label>{region ?? 'Noma\'lum viloyat'}</Label>
