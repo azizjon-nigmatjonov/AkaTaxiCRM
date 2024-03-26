@@ -34,17 +34,17 @@ const CModal: FC<Props> = ({
   footerActive = true,
   open = false,
   classes = "",
-  handleSave = () => {},
-  handleClose = () => {},
+  handleSave = () => { },
+  handleClose = () => { },
   closable = false
 }) => {
-  
+
   return (
     <div id="modal">
       <Modal
         open={open}
         className={cls.modal}
-        onClose={() => {if (closable) handleClose()}}
+        onClose={() => { if (closable) handleClose() }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

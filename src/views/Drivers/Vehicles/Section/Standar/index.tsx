@@ -1,6 +1,6 @@
 import Card from "../Card";
 
-const Standard = ({ data }: { data: any }) => {
+const Standard = ({ data }: { data: any },) => {
     return (
         <div className="p-2">
             {data?.map((element: any) => (
