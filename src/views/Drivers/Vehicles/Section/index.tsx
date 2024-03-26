@@ -12,9 +12,15 @@ interface Props {
   list: any;
   isLoading?: boolean;
   loading: boolean
+
 }
 
-const Section = ({ list = [], loading = true }: Props) => {
+const Section = ({ list = [], loading = true, }: Props) => {
+
+
+
+  // console.log(list);
+
 
   const { data: standart } = useQuery(['GET_STANDART'], () => {
     return carService.getList(1)

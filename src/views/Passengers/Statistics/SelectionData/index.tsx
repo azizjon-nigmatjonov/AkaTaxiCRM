@@ -48,12 +48,12 @@ const Selection = () => {
     })
 
     console.log(barCart);
-    
+
 
     const graphData: any = useMemo(() => {
         if (!barCart) return []
         let list: any = barCart.data ?? []
-        const data: any = [] 
+        const data: any = []
         const label: any = []
 
         list.map((val: any) => (data.push(val.count), label.push(val.time))
