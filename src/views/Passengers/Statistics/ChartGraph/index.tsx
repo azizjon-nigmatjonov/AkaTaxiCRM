@@ -3,7 +3,7 @@ import { axisClasses } from '@mui/x-charts';
 import { Skeleton } from '@mui/material';
 import React from 'react'
 
-const ChartGraph: React.FC = ({ data, loading }: { data?: any, loading?: boolean }) => {
+const ChartGraph: React.FC<{ data?: any, loading?: boolean }> = ({ data, loading }) => {
 
 
     return (
