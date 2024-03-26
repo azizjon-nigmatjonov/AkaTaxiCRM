@@ -56,9 +56,6 @@ const Vehicles = () => {
   }, [classes]);
 
 
-  console.log(classes);
-
-
   useEffect(() => {
     if (tab) getCarList(tab);
   }, [tab]);
@@ -74,6 +71,7 @@ const Vehicles = () => {
     navigateQuery({ q: value });
   };
 
+  
   return (
     <>
       <Header sticky={true} >

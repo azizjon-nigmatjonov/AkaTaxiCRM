@@ -1,10 +1,11 @@
 import request from "../../utils/request";
-import requestForm from '../../utils/requestFormdata'
+import requestForm from '../../utils/requestFormdata';
+
 const driverService = {
   getList: (params: any) =>
     request.get(
-      `/drivers?page=${params.page}${params.q ? `&q=${params.q}` : ""
-      }&perPage=${params.perPage}${params?.car_id ? `&car_id=${params.car_id}` : ""
+      `/drivers?${params.page ? `page=${params.page}` : ''}${params.q ? `&q=${params.q}` : ""
+      }${params.perPage ? `&perPage=${params.perPage}` : ''}${params?.car_id ? `&car_id=${params.car_id}` : ""
       }`
     ),
   createElement: (data: any) => requestForm.post("/drivers", data),

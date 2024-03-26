@@ -22,9 +22,6 @@ interface Props {
 
 const Form = ({ classes = [], getCarList, tab }: Props) => {
 
-  console.log(classes);
-
-
   const schema = Validation();
   const dispatch = useDispatch();
   const { navigateQuery, getQueries } = usePageRouter();
@@ -64,15 +61,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
     const params: any = {};
 
 
-    console.log(data.file_id);
-
     const file_id = data.file_id.toString();
-
-    console.log(file_id);
-
-
-
-
 
 
     params.car_class_ids = data.ids;
