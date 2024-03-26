@@ -3,7 +3,7 @@
 // import { useMemo } from "react"
 import Card from "../Card"
 
-const Bussness = ({ data = [] }: { data: any }, { setInputValue }) => {
+const Bussness = ({ data = [] }: { data: any }) => {
     // const { data } = useQuery(['GET_BUSSNESS'], () => {
     //     return carService.getList(3)
     // })
