@@ -5,6 +5,7 @@ const Setting = ({ chooseChange = () => { }, value }: { chooseChange?: (e: strin
     const selectHandler = (e: string) => {
         chooseChange(e);
     }
+    
     return (
         <div className="flex">
             <Label value={value} label='year' border='left' selectHandler={selectHandler} />

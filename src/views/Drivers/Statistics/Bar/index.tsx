@@ -3,7 +3,6 @@ import { Skeleton } from '@mui/material';
 import { axisClasses } from '@mui/x-charts';
 
 const StatisticsLineChart = ({ grapData: data, loading }: { grapData: any, loading?: any }) => {
-console.log(data);
 
     return (
         <div>

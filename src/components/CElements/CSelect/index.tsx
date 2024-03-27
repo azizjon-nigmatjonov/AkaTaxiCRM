@@ -1,6 +1,7 @@
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CLabel from "../CLabel";
+import { useEffect } from "react";
 
 interface Props {
   id?: string;
@@ -23,7 +24,12 @@ const CSelect = ({
     handlerValue!(event.target?.value)
   }
   
-  
+  useEffect(()=>{
+
+  }, [])
+
+  options.unshift({value: 100, label: 'Barchasi'})
+
 
   return (
     <>

@@ -1,7 +1,7 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 import CTable from "../../../../components/CElements/CTable";
-import SectionHeader from "../../../../components/Sections/Header";
-import FilterButton from "../../../../components/Filters";
+// import SectionHeader from "../../../../components/Sections/Header";
+// import FilterButton from "../../../../components/Filters";
 import { useQuery } from "react-query";
 import driverService from "../../../../services/drivers";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
@@ -9,9 +9,28 @@ import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs";
 import carService from "../../../../services/cars";
 import { FormatTime } from "../../../../utils/formatTime";
 import { Header } from "../../../../components/Header";
+import { useParams } from "react-router-dom";
+import ImageFrame from "../../../../components/ImageFrame";
+import { useDispatch } from "react-redux";
+import { websiteActions } from "../../../../store/website";
+import usePageRouter from "../../../../hooks/useObjectRouter";
+import Form from "../Form";
+
+const tabList = [
+  { slug: 1, name: 'Standart' },
+  { slug: 2, name: 'Komfort' },
+  { slug: 3, name: 'Bisness' }
+]
 
 const SingleCar = () => {
-  const { id, currentPage } = useGetQueries();
+  const { id } = useParams()
+  const dispatch = useDispatch()
+  const { currentPage } = useGetQueries();
+  const { navigateQuery, navigateTo } = usePageRouter()
+  const { currentTab } = useGetQueries();
+  const setCarList = useState([])[1];
+  const  setLoading = useState(false)[1];
+
   const { data: driversData } = useQuery(
     ["GET_DRIVERS_BY_CAR"],
     () => {
@@ -22,6 +41,24 @@ const SingleCar = () => {
     }
   );
 
+  const tab = useMemo(() => {
+    return currentTab ? currentTab : "1";
+  }, [currentTab]);
+
+  const getCarList = (tab: string) => {
+    setCarList([]);
+    setLoading(true);
+    carService
+      .getList(tab)
+      .then((res) => {
+        setCarList(res?.data);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    if (tab) getCarList(tab);
+  }, [tab]);
   const { data: carData } = useQuery(
     ["GET_BY_CAR"],
     () => {
@@ -36,7 +73,13 @@ const SingleCar = () => {
     return [
       {
         title: "Ism familya",
-        id: "full_name",
+        id: "info",
+        render: (val: any) => val && (
+          <div className="flex items-center space-x-2 py-2">
+            <ImageFrame image={val.image} gender={val.gender} />
+            <span>{val.name}</span>
+          </div>
+        )
       },
       {
         title: "phone_number",
@@ -59,35 +102,59 @@ const SingleCar = () => {
         render: (val: any) => (
           <div
             className={
-              val === false
-                ? "text-[var(--error)]"
-                : val === true
-                  ? "text-[var(--green)]"
-                  : ""
+              val != 'Aktiv' ? "text-[var(--error)]" :
+                "text-[var(--green)]"
             }
           >
-            {val === false ? "Noaktiv" : val === true ? "Aktiv" : ""}
-          </div>
+            {val}
+          </div >
         ),
       },
       {
         title: "",
         id: "actions",
-        permission: ["edit", "delete", "learn_more"],
+        permission: ["edit", "delete", "learn_more", 'd'],
       },
     ];
   }, []);
 
   const drivers: any = useMemo(() => {
+    const lists: any = driversData ?? [];
+
     return {
-      list: driversData?.data ?? [],
-      ...driversData,
-    };
+      list: lists.data?.map((val: any) => {
+        return {
+          ...val,
+          info: {
+            name: val.full_name,
+            img: val.image,
+            gender: val.gender
+          }
+        }
+
+      }),
+      ...lists,
+    }
   }, [driversData]);
 
-  const handleActions = useCallback((element: any, status: string) => {
-    if (status === "edit") {
-      console.log(element);
+  const handleActions = useCallback((element: any, status: any) => {
+    console.log(status);
+    
+    if (element === "edit") {
+      navigateQuery({ id: id })
+    } else if (status == 'learn_more') {
+      navigateTo(`/drivers/driver?id=${element.id}`)
+    }
+    else {
+      driverService.deleteElement(status?.id).then(() => {
+        dispatch(
+          websiteActions.setAlertData({
+            title: "Ma'lumotlar o'chirildi!",
+            translation: "common",
+            type: 'error'
+          })
+        );
+      })
     }
   }, []);
 
@@ -98,7 +165,7 @@ const SingleCar = () => {
         link: "/drivers/cars",
       },
       {
-        label: carData?.data?.name.uz || "Mashina",
+        label: drivers?.list?.[0]?.car_name ?? "Mashina",
       },
     ];
   }, [carData]);
@@ -107,10 +174,9 @@ const SingleCar = () => {
     <>
       <Header><CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" /></Header>
       <div className="px-5">
-        <SectionHeader>
+        {/* <SectionHeader>
           <FilterButton text="filter" />
-        </SectionHeader>
-
+        </SectionHeader> */}
         <CTable
           headColumns={headColumns}
           bodyColumns={drivers?.list}
@@ -118,6 +184,7 @@ const SingleCar = () => {
           handleActions={handleActions}
           currentPage={currentPage}
         />
+        <Form classes={tabList} tab={tab} getCarList={getCarList} />
       </div>
     </>
   );
