@@ -1,9 +1,16 @@
 import { Select, MenuItem, OutlinedInput, } from '@mui/material';
-import mapService from "../../../services/map";
 import './modal.css'
 import { useState } from 'react';
 
 
+const optionsStatus = [{
+    value: 'pending', label: 'Aktiv'
+},
+{
+    value: 'on-way', label: 'Safardagilar'
+},
+
+]
 
 interface MapOptionProps {
     setSelectData: (data: any) => void;
@@ -11,60 +18,50 @@ interface MapOptionProps {
     lang: any;
     lat: any;
     setCarClass: (carClass: number) => void;
+    selectedStatus: any
+
 }
 
 
-function MapOption({ setSelectData, setSelectedStatus, lang, lat, setCarClass }: MapOptionProps) {
+function MapOption({ selectedStatus, setSelectedStatus, setCarClass }: MapOptionProps) {
 
 
-    const [selectedStatus, setSelectedStatusLocal] = useState<any>('Aktiv');
+
+
     const [typeCar, setTypeCar] = useState<any>('Hammasi');
 
 
     const handleStatusChange = async (event: any) => {
-        setSelectedStatusLocal(event.target.value);
+
         setSelectedStatus(event.target.value);
-        if (event.target.value === 'Aktiv') {
-            await mapService.getActive(lang, lat, 100);
-        } else if (event.target.value === 'Safardagilar') {
-            await mapService.getTravellers(lang, lat, 100);
-        }
+
     }
 
     const handleCarTypeStatus = async (event: any) => {
 
         if (event.target.value === 'Standart') {
             setTypeCar('Standart')
-            const typesCars = await mapService.getCarClass(lang, lat, 100, 1);
-            
-            const {data} = typesCars
 
-
-            
-            setSelectData(data)
             setCarClass(1)
 
         } else if (event.target.value === 'Komfort') {
-            const typesCars = await mapService.getCarClass(lang, lat, 100, 2);
-            const {data} = typesCars
-            setTypeCar('Komfort')
+
             setCarClass(2)
-            setSelectData(data)
 
         } else if (event.target.value === 'Biznes') {
-            const typesCars = await mapService.getCarClass(lang, lat, 100, 3);
-            const {data} = typesCars
+
             setTypeCar('Biznes')
             setCarClass(3)
-            setSelectData(data)
+
 
         } else {
             setTypeCar('Hammasi')
         }
 
-        // console.log(event.target.value);
+
 
     }
+
 
 
 
@@ -76,7 +73,7 @@ function MapOption({ setSelectData, setSelectedStatus, lang, lat, setCarClass }:
                 <Select
                     value={selectedStatus}
                     onChange={handleStatusChange}
-                    defaultValue={10}
+
                     className='w-[250px] bg-white'
                     input={<OutlinedInput sx={{ border: 'none' }} />}
                     sx={{
@@ -101,12 +98,14 @@ function MapOption({ setSelectData, setSelectedStatus, lang, lat, setCarClass }:
                         },
                     }}
                 >
-                    <MenuItem value={'Aktiv'} className='flex gap-1 lien' sx={{ paddingY: '8px' }}>
-                        <span className='text-[#151515]'>Aktiv </span> <span className='text-[#858592]'> (100)</span>
-                    </MenuItem>
-                    <MenuItem value={'Safardagilar'} className='flex gap-1' sx={{ paddingY: '8px' }}>
-                        <span className='text-[#151515]'>Safardagilar </span> <span className='text-[#858592]'> (30)</span>
-                    </MenuItem>
+
+                    {optionsStatus.map((item) => (
+                        <MenuItem value={item.value} className='flex gap-1 lien' sx={{ paddingY: '8px' }}>
+                            <span className='text-[#151515]'>{item.label} </span> <span className='text-[#858592]'> (100)</span>
+                        </MenuItem>
+
+                    ))}
+
 
                 </Select>
             </div>

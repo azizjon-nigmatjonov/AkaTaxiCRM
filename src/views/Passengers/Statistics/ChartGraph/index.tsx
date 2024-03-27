@@ -1,9 +1,9 @@
-import { BarChart} from '@mui/x-charts';
+import { BarChart } from '@mui/x-charts';
 import { axisClasses } from '@mui/x-charts';
 import { Skeleton } from '@mui/material';
 import React from 'react'
 
-const ChartGraph: React.FC = ({ data, loading }: { data?: any, loading?: boolean }) => {
+const ChartGraph: React.FC<{ data?: any, loading?: boolean }> = ({ data, loading }) => {
 
 
     return (
@@ -25,8 +25,8 @@ const ChartGraph: React.FC = ({ data, loading }: { data?: any, loading?: boolean
                         padding: '5px',
                     }}
                 />
-                  
-               }
+
+            }
         </div>
     )
 }

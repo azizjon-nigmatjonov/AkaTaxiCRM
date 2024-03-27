@@ -12,6 +12,11 @@ const Classes = ({ classes = [], setValue = () => { } }: Props) => {
   const [groupA, setGroupA] = useState([]);
   const [groupB, setGroupB] = useState([]);
 
+  // console.log(classes);
+
+
+  console.log(groupA);
+
 
   useEffect(() => {
     if (!classes?.length) return;

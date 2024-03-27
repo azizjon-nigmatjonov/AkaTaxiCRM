@@ -18,13 +18,16 @@ const Vehicles = () => {
   const [carList, setCarList] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // console.log(carList);
+
+
+
 
 
 
   const { data: classes, isLoading } = useQuery(["GET_TAB_LIST"], () => {
     return carService.getCarClasses();
   });
+
 
   const tab = useMemo(() => {
     return currentTab ? currentTab : "1";
@@ -38,6 +41,8 @@ const Vehicles = () => {
       .getList(tab)
       .then((res) => {
         setCarList(res?.data);
+
+
       })
       .finally(() => setLoading(false));
   };
@@ -54,6 +59,9 @@ const Vehicles = () => {
       };
     });
   }, [classes]);
+
+
+  // console.log(classes);
 
 
   useEffect(() => {

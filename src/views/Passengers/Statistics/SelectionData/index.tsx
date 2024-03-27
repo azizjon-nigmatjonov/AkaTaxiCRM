@@ -12,11 +12,14 @@ import { createSearchParams, useSearchParams, useNavigate } from "react-router-d
 
 const Selection = () => {
     const navigate = useNavigate()
-    const { navigateQuery } = usePageRouter();
+    const { navigateQuery, getQueries } = usePageRouter();
     const setSearchParams = useSearchParams()[1]
     const [graph, setGraph] = useState('year')
     const [count, setCount] = useState('year')
     const { date, year, month, week } = useGetQueries()
+    const query = getQueries()
+    // console.log(Object.keys(query).length);
+
 
     const graphHandler = (e: string) => {
         setGraph(e)
@@ -27,7 +30,16 @@ const Selection = () => {
             case 'year':
                 return setSearchParams({})
             case 'month':
-                return navigateQuery({ year: year })
+                if (Object.keys(query).length > 2) {
+                    Object.entries(query).map(([keys]) => {
+                        if (keys != 'year') {
+                            delete query[keys]
+                        }
+                    })
+                }
+                navigateQuery({ year: year })
+                break
+
             default:
                 let newQuery: any = { year: year, month: month + 1, week: 1 }
                 const queryParams = createSearchParams(newQuery);
@@ -38,6 +50,8 @@ const Selection = () => {
         }
     }
 
+
+
     const countHandler = (e: string) => {
         navigateQuery({ date: e })
         setCount(e)
@@ -47,13 +61,12 @@ const Selection = () => {
         return statistics.getPassangerGraph({ year, month, week })
     })
 
-    console.log(barCart);
-    
+
 
     const graphData: any = useMemo(() => {
         if (!barCart) return []
         let list: any = barCart.data ?? []
-        const data: any = [] 
+        const data: any = []
         const label: any = []
 
         list.map((val: any) => (data.push(val.count), label.push(val.time))

@@ -22,6 +22,8 @@ interface Props {
 
 const Form = ({ classes = [], getCarList, tab }: Props) => {
 
+  // console.log(classes);
+
   const schema = Validation();
   const dispatch = useDispatch();
   const { navigateQuery, getQueries } = usePageRouter();
@@ -55,14 +57,16 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
     reset();
   };
 
-  const SubmitForm = () => {
+  const SubmitForm = async () => {
 
     const data: any = getValues();
     const params: any = {};
 
+    // console.log(data.file_id);
 
     const file_id = data.file_id.toString();
 
+    // console.log(file_id);
 
     params.car_class_ids = data.ids;
     params.name = data.name_uz;
@@ -75,13 +79,33 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
     //   en: data.name_en || "",
     // };
 
+
+
+    const updatedParams: any = {};
+
+    // console.log(updatedParams.name);
+
+
+    if (query.id !== "create" && car?.data) {
+      if (params.car_class_ids && params.car_class_ids !== car.data.class_ids) {
+        updatedParams.car_class_ids = params.car_class_ids;
+      }
+      if (params.name && params.name !== car.data.name.uz) {
+        updatedParams.name = params.name;
+      }
+      if (params.file_id && params.file_id !== car.data.file_id) {
+        updatedParams.file_id = params.file_id;
+      }
+    }
+
+
     if (query.id === "create") {
-      carService.createElement(params).then(() => {
+      carService.createElement(updatedParams).then(() => {
         HandleSuccess("Ma'lumot yaratildi!");
 
       });
     } else {
-      carService.updateElement(query.id, params).then((res) => {
+      carService.updateElement(query.id, updatedParams).then((res) => {
         if (res?.data) {
           HandleSuccess("Ma'lumot yangilandi!");
         }
@@ -128,8 +152,9 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
         <HFTextField
           name={`name_${query?.lang || "uz"}`}
           control={control}
-          placeholder="Marka nomi"
+          placeholder={`Marka nomi`}
           // label="Marka nomi"
+          // label={undefined}
           setValue={setValue}
           required={true}
           defaultValue={car?.data?.name?.[query?.lang || "uz"]}

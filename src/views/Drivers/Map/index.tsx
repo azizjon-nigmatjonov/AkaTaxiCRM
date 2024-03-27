@@ -7,6 +7,15 @@ import mapService from "../../../services/map";
 import React from "react";
 
 
+
+interface CarResponse {
+    data: any;
+    meta?: {
+        pageCount: number;
+    }
+}
+
+
 function Map() {
     const setSelectedDriverId = useState<any>(null)[1];
     const [selectedDriverData, setSelectedDriverData] = useState<any>(null);
@@ -17,7 +26,7 @@ function Map() {
     const [disableScroll] = useState(false);
     const [selectedMarkerId, setSelectedMarkerId] = useState(null);
     const [totalDistance, setTotalDistance] = useState<any | null>(null);
-    const [selectedStatus, setSelectedStatus] = useState<any>('Aktiv');
+    const [selectedStatus, setSelectedStatus] = useState<any>('pending');
 
     const [carClass, setCarClass] = useState<number>(0);
 
@@ -26,8 +35,42 @@ function Map() {
 
     console.log(carClass);
 
-    // console.log(selectData);
+    console.log(selectData);
 
+
+    useEffect(() => {
+        console.log(selectedStatus, lang, lat);
+
+        const fetchData = async () => {
+            if (lang && lat) {
+                let allData: any = [];
+                // let currentPage = 1;
+                let totalPages: any = 1;
+
+                try {
+
+                    const firstResponse: CarResponse = await mapService.getCars({ lng: lang, lat: lat, radius: 100, page: 1, status: selectedStatus, car_class_id: carClass || undefined });
+                    const firstData = firstResponse.data;
+                    allData = allData.concat(firstData);
+                    totalPages = firstResponse?.meta?.pageCount;
+
+
+                    for (let currentPage = 2; currentPage <= totalPages; currentPage++) {
+                        const response = await mapService.getCars({ lng: lang, lat: lat, radius: 100, page: currentPage, status: selectedStatus, car_class_id: carClass || undefined });
+                        const data = response.data;
+                        allData = allData.concat(data);
+                    }
+
+
+                    setSelectData(allData);
+                } catch (error) {
+                    console.error("Ошибка при загрузке данных:", error);
+                }
+            }
+        };
+
+        fetchData();
+    }, [selectedStatus, lang, lat, carClass]);
 
 
     useEffect(() => {
@@ -114,27 +157,7 @@ function Map() {
             lng: e.latLng.lng(),
             lat: e.latLng.lat(),
         };
-        if (selectedStatus === 'Aktiv') {
-            const activeResponse = await mapService.getActive(newCenter.lng, newCenter.lat, 100); // Отправить запрос с параметром status=pending
-            setSelectData(activeResponse.data);
-            console.log(activeResponse);
 
-        } else if (selectedStatus === 'Safardagilar') {
-            const travelResponse = await mapService.getTravellers(newCenter.lng, newCenter.lat, 100); // Отправить запрос с параметром status=on-way
-            setSelectData(travelResponse.data);
-        }
-
-
-
-        // if (carClass === 1) {
-        //     const typesCars = await mapService.getCarClass(newCenter.lng, newCenter.lat, 100, 1);
-        //     setSelectData(typesCars.data)
-
-        // } else if (carClass === 2) {
-        //     const typesCars = await mapService.getCarClass(newCenter.lng, newCenter.lat, 100, 2);
-        // } else if (carClass === 3) {
-        //     const typesCars = await mapService.getCarClass(newCenter.lng, newCenter.lat, 100, 3);
-        // }
 
 
 
@@ -143,33 +166,33 @@ function Map() {
         setLat(newCenter.lat)
 
 
-        try {
+        // try {
 
-            let currentPage = 1;
-            let allData: any = [];
-            const shouldContinue: boolean = true;
+        //     let currentPage = 1;
+        //     let allData: any = [];
+        //     const shouldContinue: boolean = true;
 
-            while (shouldContinue) {
-                const response = await mapService.getRadius(newCenter.lng, newCenter.lat, 100, currentPage);
-                const { data } = response;
+        //     while (shouldContinue) {
+        //         const response = await mapService.getRadius(newCenter.lng, newCenter.lat, 100, currentPage);
+        //         const { data } = response;
 
-                if (data.length === 0) {
-                    break;
-                }
-                allData = [...allData, ...data];
-                currentPage++;
-            }
+        //         if (data.length === 0) {
+        //             break;
+        //         }
+        //         allData = [...allData, ...data];
+        //         currentPage++;
+        //     }
 
-            setSelectData(allData);
-            setCircleOptions((prevOptions) => ({
-                ...prevOptions,
-                visible: true,
-                center: newCenter,
-            }));
-        } catch (error) {
-            console.log('error');
-        }
-    }, [selectedStatus]);
+        //     setSelectData(allData);
+        setCircleOptions((prevOptions) => ({
+            ...prevOptions,
+            visible: true,
+            center: newCenter,
+        }));
+        // } catch (error) {
+        //     console.log('error');
+        // }
+    }, []);
 
     const uzbekistanBounds = {
         north: 45.5909,
@@ -193,7 +216,7 @@ function Map() {
         <div className="h-full w-full">
             <Header title="Xarita" />
             <div className="fixed z-50 flex">
-                <MapOption setSelectData={setSelectData} setCarClass={setCarClass} setSelectedStatus={setSelectedStatus} lang={lang} lat={lat} />
+                <MapOption setSelectData={setSelectData} selectedStatus={selectedStatus} setCarClass={setCarClass} setSelectedStatus={setSelectedStatus} lang={lang} lat={lat} />
                 <ModalMap totalDistance={totalDistance} setisModal={setisModal} modalOpen={modalOpen} selectedDriverData={selectedDriverData} />
             </div>
 

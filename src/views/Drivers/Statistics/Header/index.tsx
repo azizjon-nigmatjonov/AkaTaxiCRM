@@ -5,9 +5,10 @@ import { createSearchParams, useSearchParams, useNavigate } from "react-router-d
 import Form from "../../../../views/Passengers/Statistics/SelectionData/Form";
 const StatisticsHeader = () => {
     const [graph, setGraph] = useState('year');
-    const { navigateQuery } = usePageRouter();
+    const { navigateQuery, getQueries } = usePageRouter();
     const setSearchParams = useSearchParams()[1]
     const navigate = useNavigate();
+    const query = getQueries()
 
     const graphHandler = (e: any) => {
         setGraph(e)
@@ -19,7 +20,15 @@ const StatisticsHeader = () => {
             case 'year':
                 return setSearchParams({});
             case 'month':
-                return navigateQuery({ year: year });
+                if (Object.keys(query).length > 2) {
+                    Object.entries(query).map(([keys]) => {
+                        if (keys != 'year') {
+                            delete query[keys]
+                        }
+                    })
+                }
+                navigateQuery({ year: year })
+                break
             default:
                 let newQuery: any = { year: year, month: month + 1, week: 1 }
                 const queryParams = createSearchParams(newQuery);

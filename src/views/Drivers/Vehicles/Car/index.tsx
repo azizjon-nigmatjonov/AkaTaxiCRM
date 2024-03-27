@@ -26,10 +26,10 @@ const SingleCar = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const { currentPage } = useGetQueries();
-  const { navigateQuery } = usePageRouter()
+  const { navigateQuery, navigateTo } = usePageRouter()
   const { currentTab } = useGetQueries();
-  const [carList, setCarList] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const setCarList = useState([])[1];
+  const  setLoading = useState(false)[1];
 
   const { data: driversData } = useQuery(
     ["GET_DRIVERS_BY_CAR"],
@@ -138,10 +138,12 @@ const SingleCar = () => {
   }, [driversData]);
 
   const handleActions = useCallback((element: any, status: any) => {
+    console.log(status);
+    
     if (element === "edit") {
       navigateQuery({ id: id })
-    } else if (element == 'learn_more') {
-      
+    } else if (status == 'learn_more') {
+      navigateTo(`/drivers/driver?id=${element.id}`)
     }
     else {
       driverService.deleteElement(status?.id).then(() => {
