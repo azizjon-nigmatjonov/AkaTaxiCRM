@@ -40,8 +40,6 @@ const Info = ({ control }: Props) => {
         }
     }
 
-
-
     const handlerVillage = (e: any) => {
         fromDistrics.map((val: any) => {
             if (e == val.value) {

@@ -6,7 +6,7 @@ interface Props {
   classes: any;
   defaultValue?: any;
   setValue?: (val1?: any, val2?: any) => void;
-  clas: any
+  clas?: any
 }
 
 const Classes = ({ clas, classes = [], setValue = () => { } }: Props) => {

@@ -13,6 +13,7 @@ import passengerService from "../../../../services/passengers";
 import { useDispatch } from "react-redux";
 import { websiteActions } from "../../../../store/website";
 import { HFDatePicker } from "../../../../components/FormElements/HFDatePicker";
+import ImageUploadBtn from "../../../../components/Buttons/ImageUpload";
 
 interface Props {
   refetch: () => void;
@@ -27,7 +28,7 @@ const Form = ({ refetch }: Props) => {
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
-  
+
 
   const { data: regions } = useQuery(["GET_REGIONS_LIST"], () => {
     return regionService.getList();
@@ -43,7 +44,7 @@ const Form = ({ refetch }: Props) => {
       };
     });
   }, [regions]);
-  
+
 
   const { data: passenger } = useQuery(
     ["GET_PASSENGER", query.id],
@@ -55,27 +56,27 @@ const Form = ({ refetch }: Props) => {
     }
   );
 
-  const gender =  [
-    {id: 1, value: 'm', label: 'Male'},
-    {id: 2, value: 'f', label: 'Female'}
+  const gender = [
+    { id: 1, value: 'm', label: 'Male' },
+    { id: 2, value: 'f', label: 'Female' }
   ]
 
   const createElement = useMutation({
     mutationFn: (data?: any) => {
-      return passengerService.createElement(data).then(data => console.log(data));
-    },
-    onSuccess: () => {
-      dispatch(
-        websiteActions.setAlertData({
-          title: "Ma'lumot yaratildi!",
-          translation: "common",
-        })
-      );
+      return passengerService.createElement(data).then(() => {
+        dispatch(
+          websiteActions.setAlertData({
+            title: "Ma'lumot yaratildi!",
+            translation: "common",
+          })
+        );
 
-      navigateQuery({ id: "" });
-      refetch();
-      reset();
+        navigateQuery({ id: "" });
+        refetch();
+        reset();
+      },);
     },
+
   });
 
   const handleSubmit = () => {
@@ -126,6 +127,12 @@ const Form = ({ refetch }: Props) => {
           defaultValue={passengerInfo?.full_name}
         />
 
+        <ImageUploadBtn
+          text="Mashina rasmi"
+          name="image_id"
+          setValue={setValue}
+        // defaultValue={car?.data?.image}
+        />
         <HFSelect
           name="region_id"
           control={control}
