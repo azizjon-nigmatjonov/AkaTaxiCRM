@@ -19,10 +19,10 @@ interface Props {
     tab?: any;
     id: any
     getCarList: (val: any) => void;
-    clas: any;
+    clas?: any;
 }
 
-const Form = ({clas, classes = [], getCarList, tab, id }: Props) => {
+const Form = ({clas, classes = [], getCarList, tab }: Props) => {
 
     // console.log(classes);
 
