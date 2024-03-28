@@ -1,6 +1,6 @@
 import request from "../../utils/request";
 const chatService = {
-  getList: () => request.get("/chats"),
+  getList: (pageParam: any) => request.get("/chats", { params: { page: 2 } }),
   getChat: (id?: string) => request.get(`/chats/${id}`)
 };
 

@@ -21,9 +21,6 @@ const Vehicles = () => {
 
 
 
-
-
-
   const { data: classes, isLoading } = useQuery(["GET_TAB_LIST"], () => {
     return carService.getCarClasses();
   });
