@@ -79,6 +79,7 @@ const Features = ({ featureHandle = () => { } }: { featureHandle: (val: any) => 
                     </div>
                 </div>
             </div>
+
             <div className={cls.flex}>
                 <p className={cls.title}>Yoqilg‘i turi</p>
                 <div className={cls.parent}>
@@ -107,6 +108,7 @@ const Features = ({ featureHandle = () => { } }: { featureHandle: (val: any) => 
                     </div>
                 </div>
             </div>
+            
             <div className={cls.flex}>
                 <p className={cls.title}>Haydovchi jinsi</p>
                 <div className={`${cls.parent} grid grid-cols-2 gap-6`}>
@@ -133,6 +135,7 @@ const Features = ({ featureHandle = () => { } }: { featureHandle: (val: any) => 
                     </div>
                 </div>
             </div>
+
             <div className={cls.flex}>
                 <p className={cls.title}>Boshqalar</p>
                 <div className={cls.parent}>
@@ -145,6 +148,7 @@ const Features = ({ featureHandle = () => { } }: { featureHandle: (val: any) => 
                     />
                 </div>
             </div>
+
             <div className={cls.flex}>
                 <p className={cls.title}>Klas</p>
                 <div className={cls.parent}>
