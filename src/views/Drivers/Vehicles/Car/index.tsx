@@ -14,7 +14,7 @@ import ImageFrame from "../../../../components/ImageFrame";
 import { useDispatch } from "react-redux";
 import { websiteActions } from "../../../../store/website";
 import usePageRouter from "../../../../hooks/useObjectRouter";
-import Form from "../Form";
+import Form from "./Form";
 
 const tabList = [
   { slug: 1, name: 'Standart' },
@@ -29,7 +29,7 @@ const SingleCar = () => {
   const { navigateQuery, navigateTo } = usePageRouter()
   const { currentTab } = useGetQueries();
   const setCarList = useState([])[1];
-  const  setLoading = useState(false)[1];
+  const setLoading = useState(false)[1];
 
   const { data: driversData } = useQuery(
     ["GET_DRIVERS_BY_CAR"],
@@ -138,10 +138,8 @@ const SingleCar = () => {
   }, [driversData]);
 
   const handleActions = useCallback((element: any, status: any) => {
-    console.log(status);
-    
     if (element === "edit") {
-      navigateQuery({ id: id })
+      navigateQuery({ id: status.id })
     } else if (status == 'learn_more') {
       navigateTo(`/drivers/driver?id=${element.id}`)
     }
@@ -170,6 +168,8 @@ const SingleCar = () => {
     ];
   }, [carData]);
 
+
+
   return (
     <>
       <Header><CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" /></Header>
@@ -184,7 +184,7 @@ const SingleCar = () => {
           handleActions={handleActions}
           currentPage={currentPage}
         />
-        <Form classes={tabList} tab={tab} getCarList={getCarList} />
+        <Form classes={tabList} id={id} tab={tab} getCarList={getCarList} />
       </div>
     </>
   );
