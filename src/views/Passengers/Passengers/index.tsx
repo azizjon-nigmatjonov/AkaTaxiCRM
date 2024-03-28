@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import AddButton from "../../../components/Buttons/AddButton";
@@ -137,6 +137,10 @@ const Passengers = () => {
     });
   }, [regions]);
 
+  useEffect(() => {
+    Regions.unshift({ value: 0, label: 'Barchasi' })
+  }, [Regions])
+
   const handlerRegion = (evt: any) => {
     navigateQuery({ region_id: evt })
   }
@@ -167,7 +171,7 @@ const Passengers = () => {
       <div className="px-6 ">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
-            <FilterButton text="filter">   
+            <FilterButton text="filter">
               <div>
                 <CSelect handlerValue={handlerRegion} options={Regions} id="filter" label="Viloyat" />
               </div>
