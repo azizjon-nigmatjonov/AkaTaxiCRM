@@ -5,24 +5,23 @@ import HFTextField from "../../../../../components/FormElements/HFTextField";
 import usePageRouter from "../../../../../hooks/useObjectRouter";
 import CModal from "../../../../../components/CElements/CModal";
 import ImageUploadBtn from "../../../../../components/Buttons/ImageUpload";
-// import carService from "../../../../../services/cars";
+import driverService from "../../../../../services/drivers";
 import Classes from "../../Form/Classes";
 import { useQuery } from "react-query";
 import { websiteActions } from "../../../../../store/website";
 import { useDispatch } from "react-redux";
 import { useMemo } from "react";
-import driverService from "../../../../../services/drivers";
 // import CTabs from "../../../../components/CElements/CTab";
 
 
 interface Props {
     classes: any;
     tab?: any;
-    id?: any;
+    id: any
     getCarList: (val: any) => void;
 }
 
-const Form = ({ classes = [], getCarList, tab, id }: Props) => {
+const Form = ({ classes = [], getCarList, tab }: Props) => {
 
     // console.log(classes);
 
@@ -42,7 +41,7 @@ const Form = ({ classes = [], getCarList, tab, id }: Props) => {
             return driverService.getElement(query.id);
         },
         {
-            // enabled: query.id !== "create" && query.id ? true : false,
+            enabled: query.id !== "create" && query.id ? true : false,
         }
     );
 
@@ -53,10 +52,11 @@ const Form = ({ classes = [], getCarList, tab, id }: Props) => {
                 translation: "common",
             })
         );
-
         navigateQuery({ id: "" });
         getCarList(tab);
         reset();
+        console.log('dad');
+        
     };
 
     const SubmitForm = async () => {
@@ -81,7 +81,6 @@ const Form = ({ classes = [], getCarList, tab, id }: Props) => {
         //   en: data.name_en || "",
         // };
 
-        
 
 
         const updatedParams: any = {};
@@ -93,7 +92,7 @@ const Form = ({ classes = [], getCarList, tab, id }: Props) => {
             if (params.car_class_ids && params.car_class_ids !== car.data.class_ids) {
                 updatedParams.car_class_ids = params.car_class_ids;
             }
-            if (params.name && params.name !== car.data.name.uz) {
+            if (params.name && params.name !== car.data.car_name) {
                 updatedParams.name = params.name;
             }
             if (params.file_id && params.file_id !== car.data.file_id) {
@@ -103,15 +102,12 @@ const Form = ({ classes = [], getCarList, tab, id }: Props) => {
 
 
         if (query.id === "create") {
-            driverService.updateCarInfo(id, updatedParams).then(() => {
+            driverService.createElement(updatedParams).then(() => {
                 HandleSuccess("Ma'lumot yaratildi!");
-
             });
         } else {
-            driverService.updateCarInfo(query.id, params).then((res) => {
-                if (res?.data) {
-                    HandleSuccess("Ma'lumot yangilandi!");
-                }
+            driverService.updateCarInfo(query.id, updatedParams).then(() => {
+                HandleSuccess("Ma'lumot yangilandi!");
             });
         }
     };
@@ -125,7 +121,6 @@ const Form = ({ classes = [], getCarList, tab, id }: Props) => {
         });
     }, [car, classes]);
 
-console.log(car);
 
 
     return (
