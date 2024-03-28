@@ -33,9 +33,9 @@ function Map() {
     const [lang, setLang] = useState(null);
     const [lat, setLat] = useState(null);
 
-    console.log(carClass);
+    // console.log(carClass);
 
-    console.log(selectData);
+    // console.log(selectData);
 
 
     useEffect(() => {
