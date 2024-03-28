@@ -6,25 +6,29 @@ interface Props {
   classes: any;
   defaultValue?: any;
   setValue?: (val1?: any, val2?: any) => void;
+  clas: any
 }
 
-const Classes = ({ classes = [], setValue = () => { } }: Props) => {
+const Classes = ({ clas, classes = [], setValue = () => { } }: Props) => {
   const [groupA, setGroupA] = useState([]);
   const [groupB, setGroupB] = useState([]);
 
+  // console.log(clas);
   // console.log(classes);
 
 
-  console.log(groupA);
+  // console.log(groupA);
 
 
   useEffect(() => {
     if (!classes?.length) return;
 
-    const a = classes.slice(0, 3)?.map((i: any, index: number) => {
+    const a = classes.slice(0, 3)?.map((i: any) => {
+
+
       return {
         ...i,
-        checked: index === 0,
+        checked: i.name === clas,
       };
     });
 
@@ -38,9 +42,16 @@ const Classes = ({ classes = [], setValue = () => { } }: Props) => {
       .map((item: any) => item.slug);
 
     setValue("ids", ids);
-  }, [classes]);
+
+
+  }, [classes, clas, setValue]);
+
+
+
 
   const handleCheck = (name: string, check: boolean, group: string) => {
+
+    // console.log(name);
 
     if (group === "a") {
       const b: any = groupB.map((i: any) => {
@@ -84,11 +95,15 @@ const Classes = ({ classes = [], setValue = () => { } }: Props) => {
     setValue("ids", ids);
   };
 
+  // console.log(groupA);
 
   return (
     <>
+
+
       {groupA?.map((item: any) => (
         <SwitchBtn
+
           text={item.name}
           name={item.name}
           checked={item.checked}

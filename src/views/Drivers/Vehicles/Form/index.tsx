@@ -44,6 +44,9 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
     }
   );
 
+
+
+
   const HandleSuccess = (title: string) => {
     dispatch(
       websiteActions.setAlertData({
@@ -123,6 +126,10 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
   }, [car, classes]);
 
 
+  const clas = car?.data?.class_names.join('');
+
+  // console.log(clas);
+
 
   return (
     <CModal
@@ -170,6 +177,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
           classes={classList}
           defaultValue={car?.data?.class_ids}
           setValue={setValue}
+          clas={clas}
         />
       </div>
     </CModal>
