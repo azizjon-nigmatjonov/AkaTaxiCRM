@@ -126,7 +126,7 @@ const ActiveDrivers = () => {
       },
       {
         title: 'Online vaqti',
-        id: 'last_seen',
+        id: 'created_at',
         render: (val?: any) => {
           return <>{FormatTime(val, "time")}</>;
         },

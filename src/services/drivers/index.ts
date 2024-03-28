@@ -14,6 +14,7 @@ const driverService = {
       `/drivers-popular${params.page ? `?page=${params.page || 1}` : ""}${params.q ? `&q=${params.q}` : ""}${params.region_id ? `&region_id=${params.region_id}` : ""}${params.gender ? `&gender=${params.gender}` : ""}${params.car_model_id ? `&car_model_id=${params.car_model_id}` : ""}${params.birthday ? `&birthday=${params.birthday}` : ""}${params.status ? `&status=${params.status}` : ''}`
     ),
   updateElement: (id: string, data: any) => requestForm.post(`/drivers/${id}`, data),
+  updateCarInfo: (id: string, data: any) => request.patch(`/drivers/${id}`, data),
   deleteElement: (id: string) => request.delete(`/drivers/${id}`),
   getElement: (id: string | undefined) => request.get(`/drivers/${id}`),
   getDriverTripHistory: (data: any | undefined) =>
@@ -22,6 +23,7 @@ const driverService = {
   getDriversGraph: (data?: any) => request.get(`statistics/drivers/graph?${data?.year ? `year=${data.year}` : ''}${data?.month ? `&month=${data?.month}` : ''}${data.week ? `&week=${data.week}` : ''}`),
   getUserRegion: () => request.get('statistics/drivers/users-by-region'),
   getDriverBallance: (data?: any) => request.get(`drivers/${data.id}/balance?${data.page ? `page=${data.page}` : ''}`),
+
 };
 
 export default driverService;

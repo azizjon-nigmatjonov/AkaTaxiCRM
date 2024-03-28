@@ -15,9 +15,6 @@ const Classes = ({ classes = [], setValue = () => { } }: Props) => {
   // console.log(classes);
 
 
-  console.log(groupA);
-
-
   useEffect(() => {
     if (!classes?.length) return;
 
