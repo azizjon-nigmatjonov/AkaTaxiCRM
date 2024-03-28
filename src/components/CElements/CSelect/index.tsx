@@ -1,7 +1,6 @@
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CLabel from "../CLabel";
-import { useEffect } from "react";
 
 interface Props {
   id?: string;
@@ -23,24 +22,16 @@ const CSelect = ({
   const handleChange = (event: SelectChangeEvent) => {
     handlerValue!(event.target?.value)
   }
-  
-  useEffect(()=>{
-
-  }, [])
-
-  options.unshift({value: 100, label: 'Barchasi'})
-
 
   return (
     <>
       <div id={`cselect-${id}`}>
-
         {label && <CLabel title={label} />}
         <Select
           disabled={disabled}
           // sx={{ m: 1, width: 112, height: 3 }}
           defaultValue={options?.[0]?.value}
-          placeholder="Barchsi"
+          placeholder="Barchasi"
           inputProps={{
             "aria-label": "Without label",
           }}

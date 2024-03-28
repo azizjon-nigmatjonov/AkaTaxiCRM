@@ -102,7 +102,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
     if (query.id === "create") {
       carService.createElement(updatedParams).then(() => {
         HandleSuccess("Ma'lumot yaratildi!");
-
+        
       });
     } else {
       carService.updateElement(query.id, updatedParams).then((res) => {
