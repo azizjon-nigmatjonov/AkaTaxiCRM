@@ -26,10 +26,6 @@ const Vehicles = () => {
   });
 
 
-
-
-
-
   const tab = useMemo(() => {
     return currentTab ? currentTab : "1";
   }, [currentTab]);
@@ -80,6 +76,7 @@ const Vehicles = () => {
     navigateQuery({ q: value });
   };
 
+  
   return (
     <>
       <Header sticky={true} >

@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { Header } from "../../components/Header";
 import Form from "./Form";
 import { useGetQueries } from "../../hooks/useGetQueries";
+import CBreadcrumbs from "../../components/CElements/CBreadcrumbs";
 
 const Partners = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
@@ -80,7 +81,7 @@ const Partners = () => {
       {
         title: "",
         id: "actions",
-        permission: ["learn_more", "edit", "delete"],
+        permission: ["learn_more", "edit", "delete", 'more'],
       },
     ];
   }, []);
@@ -111,9 +112,18 @@ const Partners = () => {
     });
   }, [regions]);
 
+
+  const breadCrumbs = useMemo(() => {
+    return [
+      { label: "Hamkorlar", link: "partners/list" },
+    ]
+  }, [])
+
   return (
     <>
-      <Header title="Adminlar" />
+      <Header sticky={true}>
+        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+      </Header>
       <div className="px-6">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">

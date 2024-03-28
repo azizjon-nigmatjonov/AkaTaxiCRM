@@ -107,8 +107,6 @@ const Passengers = () => {
     );
   }, [passengers]);
 
-
-
   const handleActions = (status: string, el: any) => {
     if (status === "delete") {
       passengerService.deleteElement(el.id).then(() => {
@@ -125,7 +123,6 @@ const Passengers = () => {
     }
 
   };
-
 
   const handleSearch = (value: any) => {
     navigateQuery({ q: value });
@@ -162,7 +159,6 @@ const Passengers = () => {
     ];
   }, []);
 
-
   return (
     <>
       <Header>
@@ -171,8 +167,7 @@ const Passengers = () => {
       <div className="px-6 ">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
-            <FilterButton text="filter">
-              
+            <FilterButton text="filter">   
               <div>
                 <CSelect handlerValue={handlerRegion} options={Regions} id="filter" label="Viloyat" />
               </div>
