@@ -19,9 +19,10 @@ interface Props {
     tab?: any;
     id: any
     getCarList: (val: any) => void;
+    clas: any;
 }
 
-const Form = ({ classes = [], getCarList, tab }: Props) => {
+const Form = ({clas, classes = [], getCarList, tab, id }: Props) => {
 
     // console.log(classes);
 
@@ -121,6 +122,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
         });
     }, [car, classes]);
 
+// console.log(car);
 
 
     return (
@@ -166,6 +168,7 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
                     defaultValue={car?.data?.first_image}
                 />
                 <Classes
+                    clas={clas}
                     classes={classList}
                     defaultValue={car?.data?.class_ids}
                     setValue={setValue}

@@ -2,7 +2,7 @@ import Card from "./Card";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
 import { useState } from "react";
 
-const ChatList = ({ 
+const ChatList = ({
   list = [],
   setCurrent = () => { },
 }: {
@@ -38,7 +38,7 @@ const ChatList = ({
 
 
   return (
-    <div className="grid gap-y-2  h-[600px] overflow-y-scroll" >
+    <div className="grid gap-y-2" >
       {Object.keys(groupedMessages).map((date, index) => (
         <div key={index}>
           <h2 className="text-[#101828] font-semibold">{date}</h2> {/* Отобразить дату как заголовок группы */}

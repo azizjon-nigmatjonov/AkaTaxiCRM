@@ -9,10 +9,6 @@ import { useInfiniteQuery } from "react-query";
 
 
 
-
-
-
-
 const Chats = () => {
   const { data: queryData, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useInfiniteQuery(
     "GET_CHAT_LIST",
@@ -40,6 +36,9 @@ const Chats = () => {
   }, [queryData]);
 
   const handleScroll = (event: any) => {
+
+    console.log(event);
+
     const bottom = event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight;
     if (bottom && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
