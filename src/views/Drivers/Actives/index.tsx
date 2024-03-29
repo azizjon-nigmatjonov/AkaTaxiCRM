@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import FilterButton from "../../../components/Filters";
@@ -188,6 +188,11 @@ const ActiveDrivers = () => {
     ]
   }, [])
 
+  useEffect(() => {
+    Regions.unshift({ value: 0, label: 'Barchasi' })
+    carModalData?.list?.unshift({ value: 0, label: 'Barchasi' })
+  }, [Regions])
+
   return (
     <>
       <Header sticky={true}>
@@ -202,7 +207,7 @@ const ActiveDrivers = () => {
               </div>
               <CDriver classes="my-4" />
               <div >
-                <CSelect handlerValue={handleGender} options={[{ value: 'm', label: 'Male' }, { value: 'f', label: 'Female' }]} id='filter' label='Jins' />
+                <CSelect handlerValue={handleGender} options={[{ value: 'barchasi', label: 'Barchasi' },{ value: 'm', label: 'Male' }, { value: 'f', label: 'Female' }]} id='filter' label='Jins' />
               </div>
               <CDriver classes="my-4" />
               <div >

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import FilterButton from "../../../components/Filters";
@@ -28,6 +28,8 @@ const ActivePassengers = () => {
   const [driverLists, setDriverLists] = useState()
   const setSearchParams = useSearchParams()[1]
   const { t } = useTranslation()
+
+
 
   const { data: passengers, isLoading } = useQuery(
     ["GET_ACTIVE_PASSENGERS", q, currentPage, region_id, birthday],
@@ -117,7 +119,6 @@ const ActivePassengers = () => {
   }, [passengers]);
 
 
-
   const Regions = useMemo(() => {
     return regions?.map((i: any) => {
       return {
@@ -127,6 +128,9 @@ const ActivePassengers = () => {
     });
   }, [regions]);
 
+  useEffect(() => {
+    Regions.unshift({ value: 0, label: 'Barchasi' })
+  }, [Regions])
 
   const handleSearch = (value: any) => {
     navigateQuery({ q: value })
@@ -139,6 +143,10 @@ const ActivePassengers = () => {
   const handleBirthday = (evt: any) => {
     navigateQuery({ birthday: evt })
   }
+
+  useEffect(() => {
+    Regions.unshift({ value: 0, label: 'Barchasi' })
+  }, [Regions])
 
   const breadCrubmsItems = useMemo(() => {
     return [
@@ -172,7 +180,7 @@ const ActivePassengers = () => {
               <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer mt-3">{t('ignore_text')}</span>
             </FilterButton>
 
-            <AddButton text="Buyurtma berish"  onClick={() => navigateTo('/passengers/booking')}/>
+            <AddButton text="Buyurtma berish" onClick={() => navigateTo('/passengers/booking')} />
           </div>
         </SectionHeader>
 

@@ -84,8 +84,6 @@ const PassengerProfile = () => {
       navigateQuery({ passenger: '' })
     } else if (e == 'update') {
       const data = getValues()
-
-      
       data.phone = data.phone.substring(1).replace(/\s+/g, '')
       data.image_id = String(data?.image_id)
       passengerService.updateElement(query?.id, data).then(() => {
@@ -102,7 +100,7 @@ const PassengerProfile = () => {
       navigateQuery({ passenger: '' })
     }
   }
-
+  
   
   return (
     <div>

@@ -11,12 +11,21 @@ import passengerService from '../../../../services/passengers';
 import { useDispatch } from "react-redux"
 import { websiteActions } from "../../../../store/website"
 import usePageRouter from "../../../../hooks/useObjectRouter"
+import { useQuery } from "react-query"
+import priceService from "../../../../services/price"
 
 const Booking = () => {
     const [seating, setSeating] = useState({})
     const [features, setFeatures] = useState({})
     const dispatch = useDispatch()
     const { progmatic } = usePageRouter()
+
+    const { data } = useQuery(['GET_BOOKING_PRICE'], () => {
+        priceService.getBookingPrice({ start_location_id: 10, end_location_id: 1164 })
+    })
+
+    console.log(data);
+
 
     const breadcrumbs = useMemo(() => {
         return [
@@ -47,6 +56,7 @@ const Booking = () => {
     const FeatureHandle = (e: any) => {
         setFeatures(e)
     }
+
 
 
     const formsubmit = () => {
@@ -98,6 +108,7 @@ const Booking = () => {
                         <Info control={control} />
                         <Seating seatingHandle={SeatingHandle} />
                         <Features featureHandle={FeatureHandle} />
+
                         <div className={`flex  justify-end py-4`}>
                             <div className="flex gap-4 ">
                                 <CancelButton text='Bekor qilish' />
