@@ -17,14 +17,16 @@ import { useMemo } from "react";
 interface Props {
     classes: any;
     tab?: any;
-    id: any
+    id?: any
     getCarList: (val: any) => void;
     clas?: any
 }
 
-const Form = ({clas, classes = [], getCarList, tab }: Props) => {
+const Form = ({id, clas, classes = [], getCarList, tab }: Props) => {
 
     // console.log(classes);
+    console.log(id);
+    
 
     const schema = Validation();
     const dispatch = useDispatch();
