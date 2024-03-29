@@ -19,7 +19,7 @@ interface Props {
     tab?: any;
     id: any
     getCarList: (val: any) => void;
-    clas?: any;
+    clas?: any
 }
 
 const Form = ({clas, classes = [], getCarList, tab }: Props) => {
@@ -122,7 +122,7 @@ const Form = ({clas, classes = [], getCarList, tab }: Props) => {
         });
     }, [car, classes]);
 
-// console.log(car);
+    // console.log(car);
 
 
     return (

@@ -18,6 +18,8 @@ interface Props {
   classes: any;
   tab?: any;
   getCarList: (val: any) => void;
+  clas?: any
+
 }
 
 const Form = ({ classes = [], getCarList, tab }: Props) => {
