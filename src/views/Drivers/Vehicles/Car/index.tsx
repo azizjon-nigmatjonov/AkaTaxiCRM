@@ -16,6 +16,8 @@ import { websiteActions } from "../../../../store/website";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 import Form from "./Form";
 
+
+
 const tabList = [
   { slug: 1, name: 'Standart' },
   { slug: 2, name: 'Komfort' },
@@ -184,7 +186,7 @@ const SingleCar = () => {
           handleActions={handleActions}
           currentPage={currentPage}
         />
-        <Form classes={tabList} id={id} tab={tab} getCarList={getCarList} />
+        <Form classes={tabList} tab={tab} getCarList={getCarList} />
       </div>
     </>
   );
