@@ -186,7 +186,7 @@ const SingleCar = () => {
           handleActions={handleActions}
           currentPage={currentPage}
         />
-        <Form classes={tabList} tab={tab} getCarList={getCarList} />
+        <Form id={id} classes={tabList} tab={tab} getCarList={getCarList} />
       </div>
     </>
   );
