@@ -7,10 +7,10 @@ interface Props {
   defaultValue?: any;
   setValue?: (val1?: any, val2?: any) => void;
   clas?: any
-  
+  lastValue?: any
 }
 
-const Classes = ({clas, classes = [], setValue = () => { } }: Props) => {
+const Classes = ({ lastValue, clas, classes = [], setValue = () => { } }: Props) => {
   const [groupA, setGroupA] = useState([]);
   const [groupB, setGroupB] = useState([]);
 
@@ -22,6 +22,7 @@ const Classes = ({clas, classes = [], setValue = () => { } }: Props) => {
 
 
   // console.log(groupA);
+  console.log(lastValue);
 
 
   useEffect(() => {
@@ -29,10 +30,13 @@ const Classes = ({clas, classes = [], setValue = () => { } }: Props) => {
 
     const a = classes.slice(0, 3)?.map((i: any) => {
 
+      console.log(i);
+
+
 
       return {
         ...i,
-        checked: i.name === clas,
+        checked: i.slug == lastValue,
       };
     });
 
