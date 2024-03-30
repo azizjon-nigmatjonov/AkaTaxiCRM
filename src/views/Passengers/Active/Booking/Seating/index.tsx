@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Places from '../../../../../components/Places';
 import cls from '../style.module.scss';
 import { PassangerFemaleIcon, PassengerManIcon } from '../../../../../components/IconGenerator/Svg/index';
@@ -8,6 +8,7 @@ interface Props {
     title: string,
     data: any,
     fee: number
+
 }
 
 const DATA = [
@@ -54,7 +55,10 @@ const SelectedSeating = ({ style, clickHandle }: { style?: any, clickHandle: any
 
 }
 
-const Seating = ({ seatingHandle = () => { } }: { seatingHandle: (val: any) => void }) => {
+
+
+
+const Seating = ({ seatingHandle = () => { }, getHandler = () => { } }: { seatingHandle: (val: any) => void, getHandler?: (val: any) => void }) => {
     const [seat, setSeating] = useState<any>(null);
     const [show, setShow] = useState(false);
     const result = useState([
@@ -74,6 +78,7 @@ const Seating = ({ seatingHandle = () => { } }: { seatingHandle: (val: any) => v
             }
         })
         seatingHandle(result);
+        getHandler(result)
         setShow(false)
     }
 

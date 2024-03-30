@@ -14,9 +14,8 @@ const Classes = ({clas, classes = [], setValue = () => { } }: Props) => {
   const [groupA, setGroupA] = useState([]);
   const [groupB, setGroupB] = useState([]);
 
-  console.log(clas);
-  // console.log(customClass);
-  
+  // console.log(clas);
+
   // console.log(clas);
   // console.log(classes);
 

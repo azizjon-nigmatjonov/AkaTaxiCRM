@@ -144,9 +144,6 @@ const ActivePassengers = () => {
     navigateQuery({ birthday: evt })
   }
 
-  useEffect(() => {
-    Regions.unshift({ value: 0, label: 'Barchasi' })
-  }, [Regions])
 
   const breadCrubmsItems = useMemo(() => {
     return [

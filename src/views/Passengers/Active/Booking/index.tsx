@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs"
 import { Header } from "../../../../components/Header"
 import AddButton from "../../../../components/Buttons/AddButton"
@@ -11,21 +11,18 @@ import passengerService from '../../../../services/passengers';
 import { useDispatch } from "react-redux"
 import { websiteActions } from "../../../../store/website"
 import usePageRouter from "../../../../hooks/useObjectRouter"
-import { useQuery } from "react-query"
-import priceService from "../../../../services/price"
+import priceService from "../../../../services/price";
 
 const Booking = () => {
     const [seating, setSeating] = useState({})
     const [features, setFeatures] = useState({})
+    const [getPrice, setGetPrice] = useState<any>({});
     const dispatch = useDispatch()
-    const { progmatic } = usePageRouter()
+    const { progmatic } = usePageRouter();
 
-    const { data } = useQuery(['GET_BOOKING_PRICE'], () => {
-        priceService.getBookingPrice({ start_location_id: 10, end_location_id: 1164 })
+    const { control, getValues  } = useForm({
+        mode: 'onSubmit'
     })
-
-    console.log(data);
-
 
     const breadcrumbs = useMemo(() => {
         return [
@@ -44,20 +41,30 @@ const Booking = () => {
         ]
     }, [])
 
-    const { control, getValues } = useForm({
-        mode: 'onSubmit'
-    })
 
     const SeatingHandle = (e: any) => {
-        setSeating({ place_order: e })
+        setSeating({ place_order: e });
+        // let info: any = {};
+
+        // let value = getValues()
+        // Object.entries(value).map(([key, value]) => {
+        //     if (key == 'start_location_id' || key == 'end_location_id') {
+        //         info[key] = value
+        //     }
+        // })
+
+        // setGetPrice({ ...getPrice, ...info, place_order: e })
+
+        // priceService.getBookingPrice({ ...getPrice, ...info, place_order: e })
+        // console.log(getPrice);
+
     }
 
 
     const FeatureHandle = (e: any) => {
         setFeatures(e)
+        GetPrice(e)
     }
-
-
 
     const formsubmit = () => {
         const value = getValues();
@@ -67,12 +74,13 @@ const Booking = () => {
             if (i == 'from_region' || i == 'to_region') delete obj[i]
         }
         obj.passenger_phone = obj.passenger_phone.substring(1).replace(/\s+/g, '')
+        // priceService.getBookingPrice(obj)
         passengerService.bookingTrip(obj).then(() => {
             dispatch(
                 websiteActions.setAlertData({
                     title: "Qidiruv boshlandi!",
                     translation: "common",
-                }))
+            }))
             progmatic()
         }
         ).catch((err) => {
@@ -87,6 +95,22 @@ const Booking = () => {
         })
     }
 
+    useEffect(() => {
+        GetPrice()
+    }, [seating])
+
+    const GetPrice = (e?: any) => {
+        let info: any = {};
+        let value = getValues()
+        Object.entries(value).map(([key, value]) => {
+            if (key == 'start_location_id' || key == 'end_location_id') {
+                info[key] = value
+            }
+        })
+
+        priceService.getBookingPrice({ ...info, ...seating, ...e }).then(data => setGetPrice(data?.data))
+
+    }
 
     return (
         <>
@@ -107,7 +131,7 @@ const Booking = () => {
                     <form className="divide-y-[1px] divide-[#EAECF0]">
                         <Info control={control} />
                         <Seating seatingHandle={SeatingHandle} />
-                        <Features featureHandle={FeatureHandle} />
+                        <Features price={getPrice} featureHandle={FeatureHandle} />
 
                         <div className={`flex  justify-end py-4`}>
                             <div className="flex gap-4 ">

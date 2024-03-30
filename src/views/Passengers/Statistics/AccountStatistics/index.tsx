@@ -18,6 +18,9 @@ const AccountStatistics = () => {
         return statistics.getWidgets()
     })
 
+    console.log(data);
+    
+
     const staticsWidgets = useMemo(() => {
         if (!data) return []
         const staticsWidgets = data?.data;

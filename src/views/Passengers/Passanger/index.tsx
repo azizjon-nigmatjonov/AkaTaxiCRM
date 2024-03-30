@@ -31,7 +31,7 @@ const Passanger = () => {
         return [
             {
                 label: "Yo'lovchi",
-                // link: '/passengers/main'
+                link: '/passengers/main'
             },
             {
                 label: "Ro'yxat",
@@ -44,14 +44,13 @@ const Passanger = () => {
         ]
     }, [passenger]);
 
-
     return (
         <div className='relative'>
             <Header sticky={true}>
                 <CBreadcrumbs items={breadCrubmsItems} progmatic={true} type="link" />
             </Header>
 
-            <div className={`px-6 `}>
+            <div className={`px-6`}>
                 <div className={`${cls.box} sticky  top-[90px] z-10`}>
                     <CTabs tabList={tabList} />
                 </div>
