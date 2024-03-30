@@ -35,7 +35,6 @@ const Ticket = ({ data }: { data: any }) => {
     )
   }, [data])
 
-
   return (
     <div >
       {ticketData?.map(({ location, carInfo }: { location?: any, carInfo?: any }) => (
