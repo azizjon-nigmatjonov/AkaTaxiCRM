@@ -11,6 +11,7 @@ import { useQuery } from "react-query";
 import { websiteActions } from "../../../../store/website";
 import { useDispatch } from "react-redux";
 import { useMemo } from "react";
+
 // import CTabs from "../../../../components/CElements/CTab";
 
 
@@ -93,9 +94,9 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
     const createParams: any = {};
 
-    // console.log(updatedParams.name);
-    if (query.id === "create") {
+    // console.log(updatedParams);
 
+    if (query.id === "create") {
       createParams.car_class_ids = params.car_class_ids
       createParams.name = params.name;
       createParams.file_id = params.file_id
@@ -105,32 +106,25 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
       });
 
-
-
     }
-
-    if (query.id !== "create" && car?.data) {
-
-
-      if (params.car_class_ids && params.car_class_ids !== car.data.class_ids) {
-        updatedParams.car_class_ids = params.car_class_ids;
-      }
-      if (params.name && params.name !== car.data.name.uz) {
-        updatedParams.name = params.name;
-      }
-      if (params.file_id && params.file_id !== car.data.file_id) {
-        updatedParams.file_id = params.file_id;
-      }
-    }
-
-
-
-
-
-
 
     else {
+
+
+      if (params.car_class_ids && params.car_class_ids !== car?.data.class_ids) {
+        updatedParams.car_class_ids = params.car_class_ids;
+      }
+      if (params.name && params.name !== car?.data.name.uz) {
+        updatedParams.name = params.name;
+      }
+      if (params.file_id && params.file_id !== car?.data.file_id) {
+        updatedParams.file_id = params.file_id;
+      }
+
+
       carService.updateElement(query.id, updatedParams).then((res) => {
+
+
         if (res?.data) {
           HandleSuccess("Ma'lumot yangilandi!");
         }
@@ -140,8 +134,8 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
   console.log(classes);
   // console.log(car);
-  
-  
+
+
   const classList = useMemo(() => {
     return classes?.map((i: any) => {
       return {

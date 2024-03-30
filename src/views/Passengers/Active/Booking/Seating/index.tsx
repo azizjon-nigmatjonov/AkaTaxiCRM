@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 import Places from '../../../../../components/Places';
 import cls from '../style.module.scss';
 import { PassangerFemaleIcon, PassengerManIcon } from '../../../../../components/IconGenerator/Svg/index';
