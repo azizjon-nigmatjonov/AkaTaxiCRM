@@ -26,6 +26,9 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
   // console.log(classes);
 
+  console.log(id);
+
+
   const schema = Validation();
   const dispatch = useDispatch();
   const { navigateQuery, getQueries } = usePageRouter();
@@ -64,7 +67,7 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
   const SubmitForm = async () => {
 
-    console.log(id);
+    // console.log(id);
 
     const data: any = getValues();
     const params: any = {};
@@ -149,7 +152,13 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
   const clas = car?.data?.class_names.join('');
 
-  // console.log(clas);
+  // console.log(car?.data);
+  // console.log(classList);
+
+  console.log(car?.data?.class_ids);
+  const classIds = car?.data?.class_ids;
+  const lastValue = classIds?.[classIds.length - 1];
+  // console.log(lastValue);
 
 
   return (
@@ -199,6 +208,7 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
           defaultValue={car?.data?.class_ids}
           setValue={setValue}
           clas={clas}
+          lastValue={lastValue}
         />
       </div>
     </CModal>
