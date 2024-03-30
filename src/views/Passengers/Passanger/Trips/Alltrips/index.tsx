@@ -11,9 +11,7 @@ interface Props {
 
 const AllTrips = ({ data, pageCount, setPage, page }: Props) => {
 
-    const Prevhandler = ()=>{
-        
-    }
+
     // console.log(data);
 
     return (

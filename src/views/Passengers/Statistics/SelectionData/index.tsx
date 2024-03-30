@@ -50,8 +50,6 @@ const Selection = () => {
         }
     }
 
-
-
     const countHandler = (e: string) => {
         navigateQuery({ date: e })
         setCount(e)
@@ -128,7 +126,7 @@ const Selection = () => {
                                         }, marginTop: '3px', borderRadius: 5
                                     }} value={val?.value} />
                                 </div>
-                            ))}
+                        ))}
                         </div>}
                     </div>
                 </CCard>
