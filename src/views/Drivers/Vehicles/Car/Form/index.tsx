@@ -17,14 +17,16 @@ import { useMemo } from "react";
 interface Props {
     classes: any;
     tab?: any;
-    id: any
+    id?: any
     getCarList: (val: any) => void;
-    clas?: any;
+    clas?: any
 }
 
-const Form = ({clas, classes = [], getCarList, tab }: Props) => {
+const Form = ({id, clas, classes = [], getCarList, tab }: Props) => {
 
     // console.log(classes);
+    console.log(id);
+    
 
     const schema = Validation();
     const dispatch = useDispatch();
@@ -61,6 +63,9 @@ const Form = ({clas, classes = [], getCarList, tab }: Props) => {
     };
 
     const SubmitForm = async () => {
+        
+        // console.log(id);
+        
 
         const data: any = getValues();
         const params: any = {};
@@ -122,7 +127,7 @@ const Form = ({clas, classes = [], getCarList, tab }: Props) => {
         });
     }, [car, classes]);
 
-// console.log(car);
+    // console.log(car);
 
 
     return (
