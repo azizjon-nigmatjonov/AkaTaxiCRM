@@ -13,7 +13,6 @@ import passengerService from "../../../../services/passengers";
 import { useDispatch } from "react-redux";
 import { websiteActions } from "../../../../store/website";
 import { HFDatePicker } from "../../../../components/FormElements/HFDatePicker";
-import ImageUploadBtn from "../../../../components/Buttons/ImageUpload";
 
 interface Props {
   refetch: () => void;
@@ -127,12 +126,6 @@ const Form = ({ refetch }: Props) => {
           defaultValue={passengerInfo?.full_name}
         />
 
-        <ImageUploadBtn
-          text="Mashina rasmi"
-          name="image_id"
-          setValue={setValue}
-        // defaultValue={car?.data?.image}
-        />
         <HFSelect
           name="region_id"
           control={control}

@@ -50,8 +50,6 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
   );
 
 
-
-
   const HandleSuccess = (title: string) => {
     dispatch(
       websiteActions.setAlertData({
@@ -140,6 +138,10 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
     }
   };
 
+  console.log(classes);
+  // console.log(car);
+  
+  
   const classList = useMemo(() => {
     return classes?.map((i: any) => {
       return {

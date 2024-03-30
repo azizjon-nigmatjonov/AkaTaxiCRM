@@ -6,7 +6,7 @@ import CLabel from "../CLabel";
 
 const CSlider = ({ label = '', handleValue }: {label?: string, handleValue?: (evt:any) => void }) => {
   const minDistance = 5;
-  const [value1, setValue1] = useState<number[]>([1975, 2023]);
+  const [value1, setValue1] = useState<number[]>([1910, 2023]);
 
   const handleChange1 = (
     _: Event,
@@ -41,7 +41,7 @@ const CSlider = ({ label = '', handleValue }: {label?: string, handleValue?: (ev
             // getAriaValueText={valuetext}
             disableSwap
             max={2023}
-            min={1975}
+            min={1910}
           />
         </div>
         <div className="flex justify-between items-center">

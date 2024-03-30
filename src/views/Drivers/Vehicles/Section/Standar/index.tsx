@@ -1,6 +1,8 @@
 import Card from "../Card";
 
 const Standard = ({ data }: { data: any },) => {
+    // console.log(data);
+    
     return (
         <div className="p-2">
             {data?.map((element: any) => (

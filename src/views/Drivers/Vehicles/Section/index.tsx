@@ -17,9 +17,7 @@ interface Props {
 
 const Section = ({ list = [], loading = true, }: Props) => {
 
-
-
-  // console.log(list);
+  console.log(list);
 
 
   const { data: standart } = useQuery(['GET_STANDART'], () => {
@@ -37,7 +35,6 @@ const Section = ({ list = [], loading = true, }: Props) => {
   const comfortData = useMemo(() => {
     return comfort?.data ?? []
   }, [comfort])
-
 
   const { data: bussniss } = useQuery(['GET_BUSSNESS'], () => {
     return carService.getList(3)

@@ -5,10 +5,11 @@ import cls from '../style.module.scss';
 import { useMemo, useState } from "react";
 import HFInputMask from "../../../../../components/FormElements/HFInputMask";
 interface Props {
-    control?: any
+    control?: any,
+    getHandler?: () => void
 }
 
-const Info = ({ control }: Props) => {
+const Info = ({ control, }: Props) => {
     const regions = useSelector((state: any) => state.regions.regions);
     const [fromDistrics, setFromDistrics] = useState([])
     const [fromVillages, setFromVillages] = useState([])
