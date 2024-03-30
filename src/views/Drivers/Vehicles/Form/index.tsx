@@ -19,10 +19,10 @@ interface Props {
   tab?: any;
   getCarList: (val: any) => void;
   clas?: any
-
+  id?: any;
 }
 
-const Form = ({ classes = [], getCarList, tab }: Props) => {
+const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
   // console.log(classes);
 
@@ -64,6 +64,8 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
 
   const SubmitForm = async () => {
 
+    console.log(id);
+
     const data: any = getValues();
     const params: any = {};
 
@@ -88,10 +90,27 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
 
     const updatedParams: any = {};
 
-    // console.log(updatedParams.name);
+    const createParams: any = {};
 
+    // console.log(updatedParams.name);
+    if (query.id === "create") {
+
+      createParams.car_class_ids = params.car_class_ids
+      createParams.name = params.name;
+      createParams.file_id = params.file_id
+
+      carService.createElement(createParams).then(() => {
+        HandleSuccess("Ma'lumot yaratildi!");
+
+      });
+
+
+
+    }
 
     if (query.id !== "create" && car?.data) {
+
+
       if (params.car_class_ids && params.car_class_ids !== car.data.class_ids) {
         updatedParams.car_class_ids = params.car_class_ids;
       }
@@ -104,12 +123,12 @@ const Form = ({ classes = [], getCarList, tab }: Props) => {
     }
 
 
-    if (query.id === "create") {
-      carService.createElement(updatedParams).then(() => {
-        HandleSuccess("Ma'lumot yaratildi!");
-        
-      });
-    } else {
+
+
+
+
+
+    else {
       carService.updateElement(query.id, updatedParams).then((res) => {
         if (res?.data) {
           HandleSuccess("Ma'lumot yangilandi!");

@@ -63,6 +63,9 @@ const Form = ({id, clas, classes = [], getCarList, tab }: Props) => {
     };
 
     const SubmitForm = async () => {
+        
+        // console.log(id);
+        
 
         const data: any = getValues();
         const params: any = {};
