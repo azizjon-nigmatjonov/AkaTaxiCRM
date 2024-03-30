@@ -13,6 +13,8 @@ const DriverBallance = () => {
         return driverService.getDriverBallance({id, page:currentPage})
     })
 
+    console.log(data);
+    
 
     const ballanceData: any = useMemo(() => {
         if (data?.data.length) return []

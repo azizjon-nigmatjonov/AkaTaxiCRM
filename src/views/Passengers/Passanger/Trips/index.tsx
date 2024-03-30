@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from "react-query";
 import LTabs from "../../../../components/CElements/CTab/LineTab"
 import { useGetQueries } from "../../../../hooks/useGetQueries";
@@ -35,16 +35,36 @@ const tabList = [
 
 const Trips = () => {
   const { status, id } = useGetQueries()
+  const [page, setPage] = useState(1);
 
-  const { data: tickets, isLoading: loading } = useQuery(['GET_TICKETS', id, status], () => {
+  const { data: tickets, isLoading: loading } = useQuery(['GET_TICKETS', id, status, page], () => {
     return passengerService.getTicket({ id, status })
   })
 
+  const handleScroll = () => {
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    if (scrollTop + clientHeight >= scrollHeight - 20) {
+      setPage((prevPage) => prevPage + 1);
+    }
+    console.log('yes');
+  };
+
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+console.log(page);
 
   const ticketsData = useMemo(() => {
     if (!tickets?.data.length) return []
     return tickets?.data
-  }, [tickets])
+  }, [tickets]);
+
+
 
   return (
     <>

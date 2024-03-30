@@ -59,6 +59,7 @@ const SingleCar = () => {
   useEffect(() => {
     if (tab) getCarList(tab);
   }, [tab]);
+  
   const { data: carData } = useQuery(
     ["GET_BY_CAR"],
     () => {
@@ -159,8 +160,12 @@ const SingleCar = () => {
   const breadCrumbItems = useMemo(() => {
     return [
       {
-        label: "Haydovchilar ro‘yxati ",
-        link: "/drivers/cars",
+        label: "Haydovchi ",
+        link: "/drivers/main",
+      },
+      {
+        label: 'Mashinalar',
+        link: '/drivers/cars'
       },
       {
         label: drivers?.list?.[0]?.car_name ?? "Mashina",

@@ -13,18 +13,23 @@ import CSlider from "../../../components/CElements/CSlider";
 import { Header } from "../../../components/Header";
 import ImageFrame from "../../../components/ImageFrame";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
+import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 
 const Drivers = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
-  const { currentPage, q } = useGetQueries();
+  const { currentPage, q, birthday } = useGetQueries();
   // const { getQueries } = usePageRouter();
+  const setSearchParams = useSearchParams()[1]
+
+  const { t } = useTranslation()
 
 
   const { data, isLoading, refetch } = useQuery(
-    ["GER_DRIVERS_LIST", currentPage, q],
+    ["GER_DRIVERS_LIST", currentPage, q, birthday],
     () => {
-      return driverService.getList({ page: currentPage, perPage: 10, q });
+      return driverService.getList({ page: currentPage, perPage: 10, q, birthday });
     }
   );
 
@@ -79,7 +84,7 @@ const Drivers = () => {
       },
       {
         title: 'Hamkor statusi',
-        
+
       },
       {
         title: "",
@@ -130,6 +135,10 @@ const Drivers = () => {
     navigateQuery({ q: evt })
   };
 
+  const handleAge = (evt: any) => {
+    navigateQuery({ birthday: evt })
+  }
+
   const breadCrubmsItems = useMemo(() => {
     return [
       { label: "Haydovchi" },
@@ -148,7 +157,8 @@ const Drivers = () => {
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <FilterButton text="filter">
-              <CSlider />
+              <CSlider handleValue={handleAge} />
+              <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer mt-3">{t('ignore_text')}</span>
             </FilterButton>
             <AddButton
               text="new_driver"

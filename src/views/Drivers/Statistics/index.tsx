@@ -4,7 +4,6 @@ import { ArrowUp, ArrowDown } from '../../../components/IconGenerator/Svg'
 import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
 import { Skeleton } from "@mui/material";
-// import FilterButton from "../../../components/Filters";
 import StatisticsLineChart from "./Bar";
 import Progress from '../../../components/Progress'
 import { Header } from "../../../components/Header";
@@ -90,7 +89,6 @@ const DriverStatistics = () => {
           <CCard style={{ minHeight: 0 }}>
             <div className="flex items-center justify-between mb-5">
               <p>Viloyatlararo yangi haydovchilar</p>
-              {/* <FilterButton text='Calendar' /> */}
             </div>
 
             <div>

@@ -19,8 +19,6 @@ const Vehicles = () => {
   const [loading, setLoading] = useState(false);
 
 
-
-
   const { data: classes, isLoading } = useQuery(["GET_TAB_LIST"], () => {
     return carService.getCarClasses();
   });
@@ -47,7 +45,7 @@ const Vehicles = () => {
 
   const tabList = useMemo(() => {
     if (!classes?.data) return [];
-    const list: any = classes.data;
+    const list: any = classes.data;    
 
     return list.map((item: any) => {
       return {
@@ -57,8 +55,7 @@ const Vehicles = () => {
     });
   }, [classes]);
 
-
-  // console.log(classes);
+  
 
 
   useEffect(() => {
@@ -67,20 +64,20 @@ const Vehicles = () => {
 
   const breadCrumbs = useMemo(() => {
     return [
-      { label: "Haydovchi" },
-      { label: 'Mashinalar', link: '/drivers/cars' }
+      { label: "Haydovchi", link:'/drivers/main' },
+      { label: 'Mashinalar' }
     ]
   }, [])
 
   const handleSearch = (value: any) => {
     navigateQuery({ q: value });
-  };
+  };  
 
   
   return (
     <>
       <Header sticky={true} >
-        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+        <CBreadcrumbs items={breadCrumbs} progmatic={true} type="link" />
       </Header>
       <div className="px-6">
         {tabList && !isLoading ? (

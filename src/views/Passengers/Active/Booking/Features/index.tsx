@@ -3,13 +3,9 @@ import SwitchBtn from '../../../../../components/Buttons/Switch';
 import cls from '../style.module.scss';
 import { StandarCarImgIcon, ConfortCarImgIcon, BusnissCarImgIcon, CheckLine } from '../../../../../components/IconGenerator/Svg/index';
 
-const CARCLASS = [
-    { id: 1, name: 'Standart', price: 160000, Images: StandarCarImgIcon },
-    { id: 2, name: 'Komfort', price: 180000, Images: ConfortCarImgIcon },
-    { id: 3, name: 'Biznes', price: 220000, Images: BusnissCarImgIcon },
-]
 
-const Features = ({ featureHandle = () => { } }: { featureHandle: (val: any) => void }) => {
+
+const Features = ({ featureHandle = () => { }, price }: { featureHandle: (val: any) => void, price: any }) => {
     const [features, setFeatures] = useState<any>({
         air_conditioner: false,
         additional_trunk: false,
@@ -40,6 +36,13 @@ const Features = ({ featureHandle = () => { } }: { featureHandle: (val: any) => 
         }
         featureHandle(obj)
     }
+
+
+    const CARCLASS = [
+        { id: 1, name: 'Standart', price: price.standard ?? 0, Images: StandarCarImgIcon },
+        { id: 2, name: 'Komfort', price: price.comfort ?? 0, Images: ConfortCarImgIcon },
+        { id: 3, name: 'Business', price: price.business ?? 0, Images: BusnissCarImgIcon },
+    ]
 
 
     return (
@@ -108,7 +111,7 @@ const Features = ({ featureHandle = () => { } }: { featureHandle: (val: any) => 
                     </div>
                 </div>
             </div>
-            
+
             <div className={cls.flex}>
                 <p className={cls.title}>Haydovchi jinsi</p>
                 <div className={`${cls.parent} grid grid-cols-2 gap-6`}>
@@ -158,7 +161,7 @@ const Features = ({ featureHandle = () => { } }: { featureHandle: (val: any) => 
                                 <Images />
                                 <div className='mt-4'>
                                     <p className='text-xs text-[var(--gray)] font-medium'>{name}</p>
-                                    <p className='text-base font-semibold text-[var(--black)]'>{price}</p>
+                                    <p className='text-base font-semibold text-[var(--black)]'>{price} so'm</p>
                                 </div>
                             </div>
                         ))}
