@@ -1,5 +1,3 @@
-
-
 import { useEffect, useMemo, useState } from "react";
 import AddButton from "../../../components/Buttons/AddButton";
 import usePageRouter from "../../../hooks/useObjectRouter";
@@ -13,6 +11,9 @@ import { Skeleton } from "@mui/material";
 import { Header } from "../../../components/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import SectionHeader from "../../../components/Sections/Header";
+import { useParams } from "react-router-dom";
+
+
 
 
 const Vehicles = () => {
@@ -20,9 +21,10 @@ const Vehicles = () => {
   const { currentTab } = useGetQueries();
   const [carList, setCarList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { id } = useParams()
 
-
-
+  console.log(id);
+  
 
   const { data: classes, isLoading } = useQuery(["GET_TAB_LIST"], () => {
     return carService.getCarClasses();
@@ -108,7 +110,7 @@ const Vehicles = () => {
           ""
         )}
       
-        <Form classes={tabList} tab={tab} getCarList={getCarList} />
+        <Form id={'create'} classes={tabList} tab={tab} getCarList={getCarList} />
       
       </div>
     </>
