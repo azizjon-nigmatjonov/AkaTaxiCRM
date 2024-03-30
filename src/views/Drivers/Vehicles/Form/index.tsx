@@ -11,6 +11,7 @@ import { useQuery } from "react-query";
 import { websiteActions } from "../../../../store/website";
 import { useDispatch } from "react-redux";
 import { useMemo } from "react";
+
 // import CTabs from "../../../../components/CElements/CTab";
 
 
@@ -25,6 +26,9 @@ interface Props {
 const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
   // console.log(classes);
+
+  console.log(id);
+
 
   const schema = Validation();
   const dispatch = useDispatch();
@@ -62,7 +66,7 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
   const SubmitForm = async () => {
 
-    console.log(id);
+    // console.log(id);
 
     const data: any = getValues();
     const params: any = {};
@@ -90,9 +94,9 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
     const createParams: any = {};
 
-    // console.log(updatedParams.name);
-    if (query.id === "create") {
+    // console.log(updatedParams);
 
+    if (query.id === "create") {
       createParams.car_class_ids = params.car_class_ids
       createParams.name = params.name;
       createParams.file_id = params.file_id
@@ -102,32 +106,25 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
       });
 
-
-
     }
-
-    if (query.id !== "create" && car?.data) {
-
-
-      if (params.car_class_ids && params.car_class_ids !== car.data.class_ids) {
-        updatedParams.car_class_ids = params.car_class_ids;
-      }
-      if (params.name && params.name !== car.data.name.uz) {
-        updatedParams.name = params.name;
-      }
-      if (params.file_id && params.file_id !== car.data.file_id) {
-        updatedParams.file_id = params.file_id;
-      }
-    }
-
-
-
-
-
-
 
     else {
+
+
+      if (params.car_class_ids && params.car_class_ids !== car?.data.class_ids) {
+        updatedParams.car_class_ids = params.car_class_ids;
+      }
+      if (params.name && params.name !== car?.data.name.uz) {
+        updatedParams.name = params.name;
+      }
+      if (params.file_id && params.file_id !== car?.data.file_id) {
+        updatedParams.file_id = params.file_id;
+      }
+
+
       carService.updateElement(query.id, updatedParams).then((res) => {
+
+
         if (res?.data) {
           HandleSuccess("Ma'lumot yangilandi!");
         }
@@ -137,8 +134,8 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
   console.log(classes);
   // console.log(car);
-  
-  
+
+
   const classList = useMemo(() => {
     return classes?.map((i: any) => {
       return {
@@ -151,7 +148,13 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
   const clas = car?.data?.class_names.join('');
 
-  // console.log(clas);
+  // console.log(car?.data);
+  // console.log(classList);
+
+  console.log(car?.data?.class_ids);
+  const classIds = car?.data?.class_ids;
+  const lastValue = classIds?.[classIds.length - 1];
+  // console.log(lastValue);
 
 
   return (
@@ -201,6 +204,7 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
           defaultValue={car?.data?.class_ids}
           setValue={setValue}
           clas={clas}
+          lastValue={lastValue}
         />
       </div>
     </CModal>
