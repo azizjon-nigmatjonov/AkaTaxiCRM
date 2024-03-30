@@ -25,7 +25,7 @@ const Statistics = () => {
             return {
                 ...val,
                 status: val?.current_month - val?.last_month,
-                percentage: val?.current_month && val?.last_month ? (val?.current_month / val?.last_month).toFixed(2) : 0
+                percentage: val?.current_month && val?.last_month ? (((val?.current_month - val?.last_month) / val.last_month) * 100).toFixed(2) : 0
             }
         })
     }, [data])

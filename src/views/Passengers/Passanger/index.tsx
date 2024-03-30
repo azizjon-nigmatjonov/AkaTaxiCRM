@@ -30,7 +30,7 @@ const Passanger = () => {
     const breadCrubmsItems = useMemo(() => {
         return [
             {
-                label: "Yo'lovchi",
+                label: "Yo'lovchilar",
                 link: '/passengers/main'
             },
             {
