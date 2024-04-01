@@ -100,9 +100,10 @@ const PassengerProfile = () => {
       navigateQuery({ passenger: '' })
     }
   }
+
+  console.log(passenger);
   
-  
-  
+
   return (
     <div>
       <CCard style={{ minHeight: 0 }}>
@@ -116,7 +117,7 @@ const PassengerProfile = () => {
             <div className='w-full  flex items-center gap-6'>
               <HFTextField control={control} name='full_name' setValue={setValue} required={true} placeholder='Ism familiya' label='Ism familiya' defaultValue={passenger?.full_name} />
 
-              <HFDatePicker name="birthday" label="Tug'ilgan sana" control={control} required={true} placeholder="Tug'ilgan sana"  />
+              <HFDatePicker name="birthday" label="Tug'ilgan sana" control={control} required={true} placeholder="Tug'ilgan sana" defaultValue={passenger.birthday ? new Date(passenger?.birthday) : ''} />
 
               <HFSelect
                 name="gender"
@@ -166,7 +167,7 @@ const PassengerProfile = () => {
         <div className='grid place-items-center h-full'>
           <div className='bg-white px-6 py-8  max-w-[400px] mx-auto rounded-[20px]'>
             <div className='flex items-center gap-2'>
-              <InfoIcon fill={'#FFC542'}/>
+              <InfoIcon fill={'#FFC542'} />
               <p className='text-base font-medium text-[var(--black)]'>{alert}</p>
             </div>
             <div className='flex items-center gap-2 mt-6'>

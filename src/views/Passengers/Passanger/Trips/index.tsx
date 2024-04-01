@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useQuery } from "react-query";
 import LTabs from "../../../../components/CElements/CTab/LineTab"
 import { useGetQueries } from "../../../../hooks/useGetQueries";
@@ -37,32 +37,22 @@ const Trips = () => {
   const { status, id } = useGetQueries()
   const [page, setPage] = useState(1);
 
-  const { data: tickets, isLoading: loading } = useQuery(['GET_TICKETS', id, status, page], () => {
-    return passengerService.getTicket({ id, status })
+  const { data, isLoading: loading } = useQuery(['GET_TICKETS', id, status, page], () => {
+    return passengerService.getTicket({ id, status, page, perPage: 10 })
   })
 
-  const handleScroll = () => {
-    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-    if (scrollTop + clientHeight >= scrollHeight - 20) {
-      setPage((prevPage) => prevPage + 1);
+
+  const ticketsData: any = useMemo(() => {
+    if (!data?.data.length) return {
+      data: [],
+      pageCount: 1
     }
-    console.log('yes');
-  };
-
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-console.log(page);
-
-  const ticketsData = useMemo(() => {
-    if (!tickets?.data.length) return []
-    return tickets?.data
-  }, [tickets]);
+    const tickets: any = data
+    return {
+      data: tickets?.data,
+      pageCount: tickets.meta.pageCount,
+    }
+  }, [data]);
 
 
 
@@ -72,9 +62,9 @@ console.log(page);
       {
         loading ? Array.from(new Array(2)).map(() => <Skeleton variant="rounded" width={'70%'} height={150} style={{ marginBottom: 20 }} />) : <div>
           <div className='h-[580px] sticky bottom-0  overflow-y-scroll'>
-            <AllTrips data={ticketsData} />
-            {/* {status == 'canceled_by_driver' ? <Rejected data={ticketsData} /> : status == 'done' ? <Successfully data={ticketsData} /> : status == 'canceled_by_client' ? <Canceled data={ticketsData} /> : <CurrentlyTrip data={ticketsData} /> : <AllTrips data={ticketsData} />} */}
+            <AllTrips page={page} setPage={setPage} pageCount={ticketsData.pageCount} data={ticketsData?.data} />
           </div>
+
         </div>
       }
     </>
