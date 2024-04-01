@@ -12,10 +12,10 @@ interface Props {
   list: any;
   isLoading?: boolean;
   loading: boolean
-
+  setInputValue?: any
 }
 
-const Section = ({ list = [], loading = true, }: Props) => {
+const Section = ({setInputValue, list = [], loading = true, }: Props) => {
 
   console.log(list);
 
@@ -57,9 +57,9 @@ const Section = ({ list = [], loading = true, }: Props) => {
                 <Card element={element} />
               </div>
             ))} */}
-            <Standard data={standartData} />
-            <Comfort data={comfortData} />
-            <Bussness data={bussnissData} />
+            <Standard data={standartData} setInputValue={setInputValue}/>
+            <Comfort data={comfortData} setInputValue={setInputValue}/>
+            <Bussness data={bussnissData} setInputValue={setInputValue}/>
           </div>
         ) : (
           loading ? "Yuklanmoqda..." : <NullData />

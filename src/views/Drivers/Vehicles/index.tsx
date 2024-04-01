@@ -21,7 +21,13 @@ const Vehicles = () => {
   const { currentTab } = useGetQueries();
   const [carList, setCarList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [inputValue, setInputValue] = useState('mashina nomi');
+
   // const { id } = useParams()
+  // console.log(inputValue);
+
+
+  // console.log(carList);
 
 
   const { data: classes, isLoading } = useQuery(["GET_TAB_LIST"], () => {
@@ -50,7 +56,7 @@ const Vehicles = () => {
 
   const tabList = useMemo(() => {
     if (!classes?.data) return [];
-    const list: any = classes.data;    
+    const list: any = classes.data;
 
     return list.map((item: any) => {
       return {
@@ -60,7 +66,7 @@ const Vehicles = () => {
     });
   }, [classes]);
 
-  
+
 
 
   useEffect(() => {
@@ -69,16 +75,16 @@ const Vehicles = () => {
 
   const breadCrumbs = useMemo(() => {
     return [
-      { label: "Haydovchi", link:'/drivers/main' },
+      { label: "Haydovchi", link: '/drivers/main' },
       { label: 'Mashinalar' }
     ]
   }, [])
 
   const handleSearch = (value: any) => {
     navigateQuery({ q: value });
-  };  
+  };
 
-  
+
   return (
     <>
       <Header sticky={true} >
@@ -93,20 +99,23 @@ const Vehicles = () => {
               <AddButton
                 text="new_mark"
                 style={{ width: "auto" }}
-                onClick={() => navigateQuery({ id: "create" })}
+                onClick={() => {
+                  setInputValue('Marka nomi');
+                  navigateQuery({ id: "create" });
+                }}
               />
             </div>
 
-            <Section list={carList} loading={loading} />
+            <Section setInputValue={setInputValue} list={carList} loading={loading} />
           </>
         ) : isLoading ? (
           <Skeleton style={{ height: "80px" }} />
         ) : (
           ""
         )}
-      
-        <Form id={'create'} classes={tabList} tab={tab} getCarList={getCarList} />
-      
+
+        <Form inputValue={inputValue} id={'create'} classes={tabList} tab={tab} getCarList={getCarList} />
+
       </div>
     </>
   );

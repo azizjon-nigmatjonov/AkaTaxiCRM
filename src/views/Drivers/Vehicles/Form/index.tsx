@@ -21,9 +21,10 @@ interface Props {
   getCarList: (val: any) => void;
   clas?: any
   id?: any;
+  inputValue?: any
 }
 
-const Form = ({ id, classes = [], getCarList, tab }: Props) => {
+const Form = ({ inputValue, id, classes = [], getCarList, tab }: Props) => {
 
   // console.log(classes);
 
@@ -132,7 +133,7 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
     }
   };
 
-  console.log(classes);
+  // console.log(classes);
   // console.log(car);
 
 
@@ -148,13 +149,20 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
 
   const clas = car?.data?.class_names.join('');
 
+
+
+
   // console.log(car?.data);
   // console.log(classList);
 
-  console.log(car?.data?.class_ids);
+  // console.log(car?.data?.class_ids);
   const classIds = car?.data?.class_ids;
-  const lastValue = classIds?.[classIds.length - 1];
+  // const lastValue = classIds?.[classIds.length - 1];
   // console.log(lastValue);
+
+  // console.log(classIds);
+
+
 
 
   return (
@@ -185,7 +193,7 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
         <HFTextField
           name={`name_${query?.lang || "uz"}`}
           control={control}
-          placeholder={`Marka nomi`}
+          placeholder={`${inputValue}`}
           // label="Marka nomi"
           // label={undefined}
           setValue={setValue}
@@ -204,7 +212,8 @@ const Form = ({ id, classes = [], getCarList, tab }: Props) => {
           defaultValue={car?.data?.class_ids}
           setValue={setValue}
           clas={clas}
-          lastValue={lastValue}
+          
+          classIds={classIds}
         />
       </div>
     </CModal>

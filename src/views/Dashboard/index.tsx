@@ -1,6 +1,6 @@
 import { Header } from "../../components/Header"
-import Drivers from "./Drivers"
-import Passenger from "./Passenger"
+// import Drivers from "./Drivers"
+// import Passenger from "./Passenger"
 import ContentTable from "./Contenttable"
 import dashboardService from "../../services/dashboard";
 import { useQuery } from "react-query";
@@ -15,7 +15,9 @@ function Dashboard() {
 
     // console.log(data?.data[0]);
     // console.log(passengersData?.data);
+    console.log(data);
     console.log(driverTripsData);
+    
 
 
 
@@ -23,9 +25,8 @@ function Dashboard() {
         <>
             <Header title={'Dashboard'} />
             <div className="flex gap-6 px-6">
-                <Passenger data={data?.data[1]} />
-                <Drivers data={data?.data[0]} />
-
+                {/* <Passenger data={data?.data[1]} /> */}
+                {/* <Drivers data={data?.data[0]} /> */}
             </div>
             <ContentTable dataList={passengersData?.data} />
 
