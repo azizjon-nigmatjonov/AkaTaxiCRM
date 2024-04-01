@@ -6,15 +6,15 @@ interface Props {
   classes: any;
   defaultValue?: any;
   setValue?: (val1?: any, val2?: any) => void;
-  clas?: any
-  lastValue?: any
+  clas?: any;
+  classIds?: number[];
 }
 
-const Classes = ({ lastValue, clas, classes = [], setValue = () => { } }: Props) => {
+const Classes = ({ classIds, clas, classes = [], setValue = () => { } }: Props) => {
   const [groupA, setGroupA] = useState([]);
   const [groupB, setGroupB] = useState([]);
 
-  console.log(lastValue);
+  console.log(classIds);
 
 
   useEffect(() => {
@@ -22,13 +22,11 @@ const Classes = ({ lastValue, clas, classes = [], setValue = () => { } }: Props)
 
     const a = classes.slice(0, 3)?.map((i: any) => {
 
-      console.log(i);
-
-
+      console.log(classIds?.includes(parseInt(i.slug)));
 
       return {
         ...i,
-        checked: i.slug == lastValue,
+        checked: classIds?.includes(parseInt(i.slug)),
       };
     });
 
@@ -95,15 +93,14 @@ const Classes = ({ lastValue, clas, classes = [], setValue = () => { } }: Props)
     setValue("ids", ids);
   };
 
-  // console.log(groupA);
+  console.log(groupA);
 
   return (
     <>
-
+    
 
       {groupA?.map((item: any) => (
         <SwitchBtn
-
           text={item.name}
           name={item.name}
           checked={item.checked}

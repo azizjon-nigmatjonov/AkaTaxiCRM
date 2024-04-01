@@ -3,7 +3,7 @@
 // import { useMemo } from "react"
 import Card from "../Card"
 
-const Comfort = ({ data = [] }: { data: any }) => {
+const Comfort = ({ setInputValue, data = [] }: { data: any, setInputValue: any }) => {
     // const { data } = useQuery(['GET_COMFORT'], () => {
     //     return carService.getList(2)
     // })
@@ -16,7 +16,7 @@ const Comfort = ({ data = [] }: { data: any }) => {
         <div className="p-2 bg-[#FFDECC]">
             {data?.map((element: any) => (
                 <div className="mb-2">
-                    <Card element={element} />
+                    <Card element={element} setInputValue={setInputValue} />
                 </div>
             ))}
         </div>

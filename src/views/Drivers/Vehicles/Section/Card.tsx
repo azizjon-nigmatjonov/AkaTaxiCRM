@@ -13,16 +13,19 @@ import usePageRouter from "../../../../hooks/useObjectRouter";
 
 interface Props {
   element: any;
+  setInputValue: any;
 }
 
-const Card: FC<Props> = ({ element, }) => {
+const Card: FC<Props> = ({setInputValue, element}) => {
   const { navigateTo, navigateQuery } = usePageRouter();
 
   // console.log(element.name);
 
   const handleClick = (element: any) => {
-    navigateQuery({ id: element })
+    navigateQuery({ id: element.id })
     // setInputValue(element2);
+    console.log('tah', element);
+    setInputValue(element.name)
   }
   return (
 
@@ -74,7 +77,7 @@ const Card: FC<Props> = ({ element, }) => {
           <p className="text-[13px]">Batafsil ma‘lumot</p>
         </div>
         <div
-          onClick={() => handleClick(element.id)}
+          onClick={() => handleClick(element)}
           className="px-6  h-[50px] flex items-center w-full font-medium cursor-pointer"
         >
           <div className="border border-[var(--lineGray)] h-[30px] w-[30px] flex items-center justify-center rounded-full mr-2">

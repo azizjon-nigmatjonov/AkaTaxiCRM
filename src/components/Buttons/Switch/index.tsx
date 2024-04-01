@@ -20,7 +20,7 @@ const SwitchBtn = ({ text, handleCheck, name, group, checked }: Props) => {
       }`}
     >
       <span>{text}</span>
-      <Switch {...label} checked={checked} defaultChecked />
+      <Switch {...label} checked={checked}  />
     </div>
   );
 };
