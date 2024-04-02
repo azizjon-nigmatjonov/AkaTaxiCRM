@@ -6,6 +6,8 @@ import Result from "./Result";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { useMemo } from "react";
 
+
+
 const RegionRoute = () => {
   const handleChange = (list: any) => {
     console.log(list);

@@ -3,6 +3,8 @@ import { Collapse } from "@mui/material";
 import { CheckLine } from "../../../../components/IconGenerator/Svg";
 import { Closer } from "../../../../components/Closer";
 import { ColorConstants } from "../../../../constants/website";
+// import AddButton from "../../../../components/Buttons/AddButton";
+import usePageRouter from "../../../../hooks/useObjectRouter";
 
 const PointSelector = ({
   step = 0,
@@ -10,17 +12,19 @@ const PointSelector = ({
   color = "",
   selected = [],
   setSelected = () => { },
+  // selectedHandler = () => { }
 }: {
   step: number;
   regions?: any;
   color: string;
   selected: any;
   setSelected: (val: any) => void;
+  selectedHandler?: () => void
 }) => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(false);
   const [checkedList, setCheckedList] = useState([]);
-console.log(active);
+  const { navigateQuery } = usePageRouter()
 
 
   const handleList = (element: any) => {
@@ -33,14 +37,17 @@ console.log(active);
     setActive((prev) => !prev);
     setSelected(selectList);
   };
-  
+
+  console.log(active);
 
 
-  const handleCheck = (parent: any, child: any) => {    
+  const handleCheck = (parent: any, child: any) => {
+
     const obj: any = {
       ...child,
       checked: !child.checked,
     };
+
     const checked: any = [];
     const list: any = [];
 
@@ -54,6 +61,13 @@ console.log(active);
     setCheckedList(checked);
     handleList({ ...parent, list });
   };
+
+  const seledHandler = () => {
+    const list: any = selected;
+    list.length == 2 && navigateQuery({ start: list[0].list.filter((li: any) => li.checked == true)[0].id, end: list[1].list.filter((li: any) => li.checked == true)[0].id }, true);
+  }
+
+
 
 
 
@@ -100,20 +114,22 @@ console.log(active);
 
       <Collapse in={open} timeout="auto" unmountOnExit>
         <div className="absolute w-full z-[99] flex space-x-2">
+
           <ul className="w-full bg-white border border-[var(--lightGray)] rounded-[18px] mt-2 overflow-hidden px-4 shadow-xl">
             {regions?.map((el: any, index: number, row: any) => (
               <li
                 key={index}
                 onClick={() => handleList(el)}
                 className={`py-2 cursor-pointer border-[var(--lineGray)] font-medium ${el.id === selected[step]?.id
-                    ? "text-[var(--black)]"
-                    : "text-[var(--gray)]"
+                  ? "text-[var(--black)]"
+                  : "text-[var(--gray)]"
                   } ${index === row.length - 1 ? "" : "border-b"}`}
               >
                 {el.name.uz}
               </li>
             ))}
           </ul>
+
           <ul className="w-full bg-white border border-[var(--lightGray)] rounded-[18px] mt-2 overflow-hidden px-4 shadow-xl">
             {selected[step]?.list?.map((item: any, index: number) => (
               <li
@@ -124,22 +140,28 @@ console.log(active);
                 <span>{item?.name?.uz}</span>
                 <div
                   className={`w-[18px] h-[18px] rounded-[4px] border-2 ${item.checked
-                      ? "border-[var(--mainLight)] bg-[var(--mainLight)]"
-                      : "border-[var(--lineGray)]"
+                    ? "border-[var(--mainLight)] bg-[var(--mainLight)]"
+                    : "border-[var(--lineGray)]"
                     }`}
                 >
                   {item.checked ? <CheckLine /> : ""}
                 </div>
               </li>
             ))}
+            {/* {selected[step]?.list.length ? <div onClick={selecteHandler} className="my-2">
+              <AddButton iconLeft={false} text='Tasdiqlash' />
+            </div> : null} */}
           </ul>
+
         </div>
       </Collapse>
 
       {open && (
         <Closer
           handleClose={() => {
+            seledHandler()
             // handleSelect(selected, step);
+
             setOpen(false);
           }}
         />

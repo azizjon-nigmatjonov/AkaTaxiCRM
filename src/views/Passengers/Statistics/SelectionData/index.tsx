@@ -9,6 +9,22 @@ import { useQuery } from "react-query";
 import statistics from "../../../../services/statistics";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
 import { createSearchParams, useSearchParams, useNavigate } from "react-router-dom";
+import CTabs from "../../../../components/CElements/CTab";
+
+const tabList = [
+    {
+        slug: '',
+        name: 'Ro’yhatdan o’tganlar'
+    },
+    {
+        slug: 'aktiv',
+        name: 'Aktiv'
+    },
+    {
+        slug: 'delete',
+        name: "O'chirganla"
+    }
+]
 
 const Selection = () => {
     const navigate = useNavigate()
@@ -91,6 +107,9 @@ const Selection = () => {
 
     return (
         <div className="px-6 mb-6  h-[600px]">
+            <div>
+                <CTabs tabList={tabList} />
+            </div>
             <div className="flex gap-6 h-full  ">
                 <div className="w-full">
                     <CCard classes="flex flex-col justify-between  h-[600px] w-full min-w-[690px]">
@@ -126,7 +145,7 @@ const Selection = () => {
                                         }, marginTop: '3px', borderRadius: 5
                                     }} value={val?.value} />
                                 </div>
-                        ))}
+                            ))}
                         </div>}
                     </div>
                 </CCard>

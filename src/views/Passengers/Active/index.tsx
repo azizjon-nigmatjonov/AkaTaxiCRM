@@ -72,6 +72,15 @@ const ActivePassengers = () => {
         )
       },
       {
+        title: 'status',
+        id: 'status',
+        render: (val: any) => val && (
+          <>
+            <p className={`px-2 py-1 rounded-2xl text-[var(--${val == 'created' ? 'error' : val == 'canceled_by_client' ? 'error' : val == 'canceled' ? 'error' : val == 'on-way' ? 'ink' : val == 'done' ? 'green' : 'gray'})] text-[var(--${val == 'created' ? 'error' : val == 'canceled_by_client' ? 'error' : val == 'canceled' ? 'error' : val == 'on-way' ? 'ink' : val == 'done' ? 'green' : 'gray'})]`}>{val == 'created' ? 'Qidiryapti' : val == 'canceled_by_client' ? 'Yo’lovchi bekor qildi' : val == 'canceled' ? 'Topilmadi' : val == 'canceled_by_client' ? 'Haydovchi bekor qildi' : 'Yetib bordi'}</p>
+          </>
+        )
+      },
+      {
         title: "qidiruv vaqti",
         id: "search_time",
         render: (val?: any) => {
