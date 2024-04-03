@@ -6,7 +6,7 @@ import { ColorConstants } from "../../../../constants/website";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 
 const Points = ({
-  handleChange = () => {},
+  handleChange = () => { },
 }: {
   handleChange: (val?: any) => void;
 }) => {
@@ -14,13 +14,16 @@ const Points = ({
   const regions = useSelector((state: any) => state.regions.regions);
   const [selected, setSelected] = useState<any>([]);
   const { navigateQuery } = usePageRouter();
-    
+  // console.log(selected);
+
+
   const handleExchange = () => {
     const list: any = selected;
     const prev = list[0];
     list[0] = list[1];
     list[1] = prev;
-    navigateQuery({ start: list[0].id, end: list[1].id }, true);
+
+    navigateQuery({start: list[0].list.filter((li: any) => li.checked == true)[0].id, end: list[1].list.filter((li: any) => li.checked == true)[0].id}, true);
 
     setSelected([]);
     handleChange(list);
@@ -29,16 +32,17 @@ const Points = ({
     }, 0);
   };
 
-  
+
   return (
     <div className="flex items-center justify-between space-x-2">
-      
+
       <PointSelector
         step={0}
         regions={regions}
         selected={selected}
         setSelected={setSelected}
         color={current === 0 ? ColorConstants.darkerGreen : ColorConstants.ink}
+        selectedHandler={handleExchange}
       />
 
       <div className="w-[60px]">
@@ -59,6 +63,7 @@ const Points = ({
         selected={selected}
         setSelected={setSelected}
         color={current === 1 ? ColorConstants.darkerGreen : ColorConstants.ink}
+        selectedHandler={handleExchange}
       />
     </div>
   );

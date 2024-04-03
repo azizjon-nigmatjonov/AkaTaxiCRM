@@ -72,11 +72,16 @@ const ActivePassengers = () => {
         )
       },
       {
-        title: "qidiruv vaqti",
-        id: "search_time",
-        render: (val?: any) => {
-          return FormatTime(val, "time")
-        },
+        title: 'status',
+        id: 'status',
+        render: (val: any) => val && (
+          <>
+            <p className={`px-2 py-1 rounded-2xl 
+            text-[${val == 'searching_driver' ? '#993701' : val == 'driver_accepted' ? '#B54708' : val == 'on-way' ? '#287EFF' : val == 'done' ? '#027A48' : val == 'canceled' ? '#344054' : '#B42318'}] bg-[${val == 'searching_driver' ? '#993701' : val == 'driver_accepted' ? '#B54708' : val == 'on-way' ? '#287EFF' : val == 'done' ? '#027A48' : val == 'canceled' ? '#344054' : '#B42318'}]`}>
+              {val == 'searching_driver' ? 'Qidiryapti' : val == 'driver_accepted' ? 'Topildi' : val == 'on-way' ? 'Safarda' : val == 'done' ? 'Yetib bordi' : val == 'canceled' ? 'Topilmadi' : val == 'canceled_by_driver' ? 'Haydovchi bekor qildi' : 'Yo’lovchi bekor qildi'}
+            </p>
+          </>
+        )
       },
       {
         title: 'Mavjud taksilar',
@@ -84,7 +89,17 @@ const ActivePassengers = () => {
         render: (val?: any, item?: any) => val && (
           <DriversAvater data={val} item={item} driversHandle={driversHandle} />
         )
-      }
+      },
+      {
+        title: 'sabablar'
+      },
+      {
+        title: "qidiruv vaqti",
+        id: "search_time",
+        render: (val?: any) => {
+          return FormatTime(val, "time")
+        },
+      },
     ];
   }, []);
 

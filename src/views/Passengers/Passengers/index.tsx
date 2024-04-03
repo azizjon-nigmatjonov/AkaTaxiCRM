@@ -77,6 +77,10 @@ const Passengers = () => {
       //   },
       // },
       {
+        title: "Keshbek (so'm)",
+        
+      },
+      {
         title: "Tug‘ilgan sana",
         id: "birthday",
         render: (val?: any) => {
@@ -169,7 +173,8 @@ const Passengers = () => {
         <CBreadcrumbs items={breadCrumbItems} progmatic={true} />
       </Header>
       <div className="px-6 ">
-        <SectionHeader handleSearch={handleSearch}>
+
+        <SectionHeader  handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <FilterButton text="filter">
               <div>
