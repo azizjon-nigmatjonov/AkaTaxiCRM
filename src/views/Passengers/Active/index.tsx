@@ -76,9 +76,22 @@ const ActivePassengers = () => {
         id: 'status',
         render: (val: any) => val && (
           <>
-            <p className={`px-2 py-1 rounded-2xl text-[var(--${val == 'created' ? 'error' : val == 'canceled_by_client' ? 'error' : val == 'canceled' ? 'error' : val == 'on-way' ? 'ink' : val == 'done' ? 'green' : 'gray'})] text-[var(--${val == 'created' ? 'error' : val == 'canceled_by_client' ? 'error' : val == 'canceled' ? 'error' : val == 'on-way' ? 'ink' : val == 'done' ? 'green' : 'gray'})]`}>{val == 'created' ? 'Qidiryapti' : val == 'canceled_by_client' ? 'Yo’lovchi bekor qildi' : val == 'canceled' ? 'Topilmadi' : val == 'canceled_by_client' ? 'Haydovchi bekor qildi' : 'Yetib bordi'}</p>
+            <p className={`px-2 py-1 rounded-2xl 
+            text-[${val == 'searching_driver' ? '#993701' : val == 'driver_accepted' ? '#B54708' : val == 'on-way' ? '#287EFF' : val == 'done' ? '#027A48' : val == 'canceled' ? '#344054' : '#B42318'}] bg-[${val == 'searching_driver' ? '#993701' : val == 'driver_accepted' ? '#B54708' : val == 'on-way' ? '#287EFF' : val == 'done' ? '#027A48' : val == 'canceled' ? '#344054' : '#B42318'}]`}>
+              {val == 'searching_driver' ? 'Qidiryapti' : val == 'driver_accepted' ? 'Topildi' : val == 'on-way' ? 'Safarda' : val == 'done' ? 'Yetib bordi' : val == 'canceled' ? 'Topilmadi' : val == 'canceled_by_driver' ? 'Haydovchi bekor qildi' : 'Yo’lovchi bekor qildi'}
+            </p>
           </>
         )
+      },
+      {
+        title: 'Mavjud taksilar',
+        id: 'bids',
+        render: (val?: any, item?: any) => val && (
+          <DriversAvater data={val} item={item} driversHandle={driversHandle} />
+        )
+      },
+      {
+        title: 'sabablar'
       },
       {
         title: "qidiruv vaqti",
@@ -87,13 +100,6 @@ const ActivePassengers = () => {
           return FormatTime(val, "time")
         },
       },
-      {
-        title: 'Mavjud taksilar',
-        id: 'bids',
-        render: (val?: any, item?: any) => val && (
-          <DriversAvater data={val} item={item} driversHandle={driversHandle} />
-        )
-      }
     ];
   }, []);
 
