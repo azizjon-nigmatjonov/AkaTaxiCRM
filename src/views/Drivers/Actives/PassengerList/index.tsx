@@ -27,14 +27,9 @@ const PassengerList = ({ data }: { data: any }) => {
         })
     }, [data]);
 
-    console.log(data);
-    console.log(pasengerList);
-
-
-
 
     return (
-        <CModal title={data.full_name} open={!!query?.id} handleClose={() => navigateQuery({ id: '' })} footerActive={false}>
+        <CModal title={data.full_name} open={!!query?.id && pasengerList.length} handleClose={() => navigateQuery({ id: '' })} footerActive={false}>
             <div className="flex items-center justify-between">
                 <p className="text-2xl font-semibold text-[var(--black)]">{data?.from_region_name}</p>
                 <IoIosArrowRoundForward size='20' color="#858592" />

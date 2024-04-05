@@ -81,8 +81,8 @@ const Admins = () => {
 
   const breadCrumbs = useMemo(()=>{
     return [
-      {label: 'Admin'},
-      {label:"Adminlar", link:"/admins/admin"}
+      {label: 'Admin', link:"/admins/admin"},
+      {label:"Adminlar", }
     ]
   }, [])
 

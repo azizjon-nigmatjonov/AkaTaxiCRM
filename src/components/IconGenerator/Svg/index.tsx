@@ -1534,3 +1534,12 @@ export const TabArrowIcon = () => (
     <path d="M5.13312 3.99328L3.81979 2.67995L1.67979 0.539951C1.22646 0.0932846 0.453125 0.413285 0.453125 1.05328V5.20662V8.94662C0.453125 9.58662 1.22646 9.90662 1.67979 9.45328L5.13312 5.99995C5.68646 5.45328 5.68646 4.54662 5.13312 3.99328Z" fill="#475467" />
   </svg>
 )
+
+
+export const LinearSortIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M2 4.66699H14" stroke="#101828" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M4 8H12" stroke="#101828" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M6.6665 11.333H9.33317" stroke="#101828" stroke-width="1.5" stroke-linecap="round" />
+  </svg>
+)

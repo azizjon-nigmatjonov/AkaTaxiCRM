@@ -16,6 +16,8 @@ const Statistics = () => {
 
     const { data, isLoading } = useQuery(['GET_ACTIVE_PASSANGER_WIDGET'], () => {
         return passengerService.activePassengerWidget()
+    }, {
+        refetchInterval: 4 * 60 * 1000
     })
 
     const widgets = useMemo(() => {

@@ -66,8 +66,8 @@ const Passengers = () => {
         )
       },
       {
-        title: 'telegram link',
-        id: 'telegram_link'
+        title: 'triplar',
+        // id: 'telegram_link'
       },
       // {
       //   title: "Yaratilgan sana",
@@ -86,6 +86,10 @@ const Passengers = () => {
         render: (val?: any) => {
           return <>{FormatTime(val)}</>;
         },
+      },
+      {
+        title: 'coin',
+        
       },
       {
         title: "",
@@ -110,6 +114,10 @@ const Passengers = () => {
       }) ?? []
     );
   }, [passengers]);
+
+
+
+  
 
   const handleActions = (status: string, el: any) => {
     if (status === "delete") {
@@ -157,11 +165,11 @@ const Passengers = () => {
     return [
       {
         label: "Yo'lovchilar",
-        // link: '/passengers/main'
+        link: '/passengers/main'
       },
       {
         label: "Ro‘yxat",
-        link: "/passengers/main",
+        // link: "/passengers/main",
       },
 
     ];
@@ -170,7 +178,7 @@ const Passengers = () => {
   return (
     <>
       <Header>
-        <CBreadcrumbs items={breadCrumbItems} progmatic={true} />
+        <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link"/>
       </Header>
       <div className="px-6 ">
 

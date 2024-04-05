@@ -1,6 +1,6 @@
 import { Header } from "../../../components/Header";
-import AddButton from "../../../components/Buttons/AddButton";
-import SectionHeader from "../../../components/Sections/Header";
+// import AddButton from "../../../components/Buttons/AddButton";
+// import SectionHeader from "../../../components/Sections/Header";
 import Points from "./Points";
 import Result from "./Result";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
@@ -13,23 +13,22 @@ const RegionRoute = () => {
     console.log(list);
   };
 
-
   const breadCrumbs = useMemo(() => {
     return [
-      { label: 'Haydovchi' },
-      { label: 'Viloyat qatnovi', link: 'drivers/route' }
+      { label: 'Haydovchi', link:'/drivers/main' },
+      { label: 'Viloyat qatnovi', }
     ]
   }, [])
 
   return (
     <>
       <Header sticky={true}>
-        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+        <CBreadcrumbs items={breadCrumbs} progmatic={true} type="link" />
       </Header>
       <div className="px-5">
-        <SectionHeader handleSearch={() => { }}>
+         {/* <SectionHeader handleSearch={() => { }}>
           <AddButton text="Marshrut tashkil qilish" onClick={() => { }} />
-        </SectionHeader>
+        </SectionHeader>  */}
 
         <Points handleChange={handleChange} />
         <Result />

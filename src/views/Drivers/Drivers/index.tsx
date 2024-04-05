@@ -141,8 +141,8 @@ const Drivers = () => {
 
   const breadCrubmsItems = useMemo(() => {
     return [
-      { label: "Haydovchi" },
-      { label: "Ro'yxat", link: '/drivers/main' }
+      { label: "Haydovchilar", link: '/drivers/main' },
+      { label: "Ro'yxat",  }
       // { label: }
     ]
   }, [])

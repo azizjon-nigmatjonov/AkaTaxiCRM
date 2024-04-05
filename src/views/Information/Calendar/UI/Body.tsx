@@ -30,7 +30,7 @@ const Body = ({ list = [], }: { list?: any, month?: any }) => {
 
 
   return (
-    <div className={cls.calendar}>
+    <div className={`${cls.calendar}`}>
       <div className={cls.header}>
         <div className="grid grid-cols-7">
           {DAYS.map((day, i: number) => (<div className={cls.cell}>

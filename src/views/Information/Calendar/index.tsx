@@ -31,10 +31,10 @@ const Calendar = () => {
     return [
       {
         label: "Ma'lumotlar",
+        link: 'infos/calendar'
       },
       {
         label: "Kalendar",
-        link: 'infos/calendar'
       }
     ]
   }, [])
@@ -44,7 +44,7 @@ const Calendar = () => {
       <Header sticky={true} >
         <CBreadcrumbs items={breadCrumbs} progmatic={true} />
       </Header>
-      <div className="px-5">
+      <div className="px-5 mb-5">
         {/* <SectionHeader>
           <FilterButton text="filter" >
             <MultiDatePicker />

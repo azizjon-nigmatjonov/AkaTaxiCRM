@@ -51,15 +51,15 @@ const Rolls = () => {
 
   const breadCrumbs = useMemo(()=>{
     return [
-      {label: 'Admin'},
-      {label:'Rollar', link:'admins/rolls'}
+      {label: 'Admin',  link:'/admins/admin'},
+      {label:'Rollar',}
     ]
   }, [])
 
   return (
     <>
       <Header sticky={true}>
-        <CBreadcrumbs items={breadCrumbs}  progmatic={true} />
+        <CBreadcrumbs items={breadCrumbs}  progmatic={true} type="link"/>
       </Header>
       <div className="px-5">
         <SectionHeader>

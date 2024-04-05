@@ -12,12 +12,12 @@ const Statistics = () => {
   const breadCrubmsItems = useMemo(() => {
     return [
       {
-        label: "Yo'lovchi",
-        // link: 'statistics'
+        label: "Yo'lovchilar",
+        link: '/passengers/main'
       },
       {
         label: 'Statistika',
-        link: '/statistics'
+        // link: '/statistics'
       }
     ]
   }, [])
@@ -25,7 +25,7 @@ const Statistics = () => {
   return (
     <section className="relative">
       <Header sticky={true}>
-        <CBreadcrumbs items={breadCrubmsItems} progmatic={true} />
+        <CBreadcrumbs items={breadCrubmsItems} progmatic={true} type="link"/>
       </Header>
       <AccountStatistics />
       <Selection />
