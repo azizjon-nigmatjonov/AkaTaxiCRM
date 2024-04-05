@@ -17,6 +17,7 @@ interface DriverData {
     end_location_coordinate: any | null,
     start_location_coordinate: any | null,
     driver_location: any,
+    car_image: any,
 }
 
 
@@ -24,17 +25,20 @@ interface DriverData {
 function ModalMap({ totalDistance, selectedDriverData, modalOpen, setisModal }: { totalDistance: any, selectedDriverData: DriverData; modalOpen: boolean; setisModal: React.Dispatch<React.SetStateAction<boolean>> }) {
 
 
-    console.log(totalDistance);
-    console.log(selectedDriverData?.driver_location);
+    // console.log(totalDistance);
+    // console.log(selectedDriverData?.driver_location);
 
-    console.log(selectedDriverData);
+    // console.log(selectedDriverData?.driver_image);
+
+    console.log(selectedDriverData?.car_image);
+    // console.log(selectedDriverData);
 
 
 
     const [driverProgressWidth, setDriverProgressWidth] = useState<number>(0);
     // const [progressIconPosition, setProgressIconPosition] = useState<number>(0);
     console.log(driverProgressWidth);
-    
+
     const [driverDistance, setDriverDistance] = useState<number | null>(null);
     const earthRadiusKm = 6371; // радиус Земли в километрах
 
@@ -95,7 +99,12 @@ function ModalMap({ totalDistance, selectedDriverData, modalOpen, setisModal }: 
                             </div>
                         </div>
                     </div>
-                    <img src={car} alt="car" className='w-[132px]' />
+
+                    {selectedDriverData?.car_image ?
+                        <img src={selectedDriverData?.car_image} alt="car" className='w-[132px]' /> : <img src={car} alt="car" className='w-[132px]' />
+                    }
+
+
 
                 </div>
                 <div className='flex gap-3 border-t border-[#F1F1F5] mt-8'>
