@@ -89,7 +89,6 @@ const Form = ({ inputValue, id, classes = [], getCarList, tab }: Props) => {
 
     const file_id = numberValue;
 
-    // console.log(file_id);
 
     params.car_class_ids = data.ids;
     params.name = data.name_uz;
@@ -225,7 +224,7 @@ const Form = ({ inputValue, id, classes = [], getCarList, tab }: Props) => {
           defaultValue={car?.data?.class_ids}
           setValue={setValue}
           clas={clas}
-          
+
           classIds={classIds}
         />
       </div>
