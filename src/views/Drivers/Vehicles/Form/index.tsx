@@ -90,14 +90,9 @@ const Form = ({ inputValue, id, classes = [], getCarList, tab }: Props) => {
     const file_id = numberValue;
 
 
-
     params.car_class_ids = data.ids;
     params.name = data.name_uz;
     params.file_id = file_id;
-
-
-
-    console.log(params);
 
 
     // params.name = {

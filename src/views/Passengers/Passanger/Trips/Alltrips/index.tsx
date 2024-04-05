@@ -19,6 +19,8 @@ const AllTrips = ({ data, pageCount, setPage = () => { }, page }: Props) => {
         1 != page ? setPage((prev: any) => prev - 1) : null
     }
 
+
+
     return (
         <div>
             <Ticket data={data} />
@@ -35,4 +37,4 @@ const AllTrips = ({ data, pageCount, setPage = () => { }, page }: Props) => {
     )
 }
 
-export default AllTrips
+export default AllTrips;
