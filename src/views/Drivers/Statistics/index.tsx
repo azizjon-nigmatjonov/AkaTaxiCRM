@@ -63,8 +63,7 @@ const DriverStatistics = () => {
           Statistika: haydovchi
         </h1>
         <div className="mr-[15px]">
-          p
-          lorem
+          
         </div>
       </div>
 

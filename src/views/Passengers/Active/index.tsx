@@ -91,7 +91,11 @@ const ActivePassengers = () => {
         )
       },
       {
-        title: 'sabablar'
+        title: 'Narx',
+        id: 'price',
+        render: (val: any) => val && (
+          <p>{val} so'm</p>
+        )
       },
       {
         title: "qidiruv vaqti",

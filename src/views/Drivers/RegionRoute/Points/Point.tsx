@@ -64,6 +64,8 @@ const PointSelector = ({
 
   const seledHandler = () => {
     const list: any = selected;
+    console.log(list[0].list.filter((li: any) => li.checked == true));
+    
     if (list.length == 2) {
       list.length == 2 && navigateQuery({ start: list[0].list.filter((li: any) => li.checked == true)[0].id, end: list[1].list.filter((li: any) => li.checked == true)[0].id }, true);
     }
