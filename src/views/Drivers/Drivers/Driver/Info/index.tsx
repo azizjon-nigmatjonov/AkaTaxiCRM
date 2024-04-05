@@ -17,6 +17,7 @@ import { websiteActions } from '../../../../../store/website';
 const DriverInfo = ({ driver = {} }: { driver?: any }) => {
   const [alert, setAlert] = useState("Ma'lumotlarni o'zgartishish!")
 
+  
   const dispatch = useDispatch()
   const { getQueries, navigateQuery, navigateTo } = usePageRouter();
   const query = getQueries();

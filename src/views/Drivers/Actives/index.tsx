@@ -73,6 +73,7 @@ const ActiveDrivers = () => {
     return carService.getCarModel();
   });
 
+  
   const carModalData: any = useMemo(() => {
     if (!carModals) return [];
     const list = carModals?.data;
@@ -183,8 +184,8 @@ const ActiveDrivers = () => {
 
   const breadCrumbs = useMemo(() => {
     return [
-      { label: "Haydovchi" },
-      { label: "Aktiv", link: '/drivers/active' }
+      { label: "Haydovchilar",  link: '/drivers/active' },
+      { label: "Aktiv", }
     ]
   }, [])
 

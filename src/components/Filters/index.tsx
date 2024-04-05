@@ -1,8 +1,10 @@
 import { Button } from "@mui/material";
-import { ArrowDownFilled } from "../IconGenerator/Svg";
+import { LinearSortIcon } from "../IconGenerator/Svg";
+import { BiX } from "react-icons/bi";
 import { t } from "i18next";
 import { ReactNode, useState } from "react";
 import Filters from "./Filter";
+// import usePageRouter from "../../hooks/useObjectRouter";
 
 interface Props {
   text?: string;
@@ -13,18 +15,24 @@ interface Props {
 }
 
 const FilterButton = ({ text = "", left, children, ...props }: Props) => {
+  // const { navigateQuery, getQueries } = usePageRouter()
+  // const query = getQueries();
+
   const [open, setOpen] = useState(false);
-  const toggle = () => setOpen((prev) => !prev);
+  const toggle = () => {
+    setOpen((prev) => !prev)
+  };
+
 
 
   return (
     <div className="relative">
-      <div id="filterButton" {...props}>
+      <div id={open ? 'activeFilterButton': 'filterButton'} {...props}>
         <Button onClick={() => toggle()}>
-          {left ? left : <span className="text-[var(--gray)]">{t(text)}</span>}
+          {left ? left : <span>{t(text)}</span>}
           <div className="icon">
-            <div className={!open ? "rotate-0" : "rotate-[180deg]"}>
-              <ArrowDownFilled />
+            <div>
+              {open ? <BiX color="#993701" size={16} /> : <LinearSortIcon />}
             </div>
           </div>
         </Button>

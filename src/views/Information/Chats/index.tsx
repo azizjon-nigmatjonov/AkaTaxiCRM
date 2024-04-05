@@ -31,8 +31,8 @@ const Chats = () => {
 
   const breadCrumbs = useMemo(() => {
     return [
-      { label: "Ma'lumotlar" },
-      { label: "Chat", link: "infos/chats" },
+      { label: "Ma'lumotlar" , link: "infos/chats"},
+      { label: "Chat",  },
     ];
   }, []);
 
