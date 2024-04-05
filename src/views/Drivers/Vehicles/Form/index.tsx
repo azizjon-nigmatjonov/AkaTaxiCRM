@@ -74,13 +74,26 @@ const Form = ({ inputValue, id, classes = [], getCarList, tab }: Props) => {
 
     // console.log(data.file_id);
 
-    const file_id = data.file_id.toString();
+    const parts = data.file_id.split('/');
+
+
+    const lastPart = parts[parts.length - 1];
+
+    // console.log(lastPart);
+
+    const numberValue: number = parseInt(lastPart);
+
+    console.log(numberValue);
+
+
+
+    const file_id = numberValue;
 
     // console.log(file_id);
 
     params.car_class_ids = data.ids;
     params.name = data.name_uz;
-    params.file_id = +file_id;
+    params.file_id = file_id;
 
 
     // params.name = {
