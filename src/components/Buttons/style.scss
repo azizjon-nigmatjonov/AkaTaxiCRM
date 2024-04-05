@@ -1,6 +1,14 @@
-#addBtn, #filterButton, #deleteButton, #saveButton, #disableButton, #successBtn, .btn {
+#addBtn,
+#filterButton,
+#deleteButton,
+#saveButton,
+#disableButton,
+#successBtn,
+#activeFilterButton,
+.btn {
     margin: 0;
     width: 100%;
+
     button {
         background-color: $main;
         color: white;
@@ -46,7 +54,9 @@
         span {
             width: 100px;
             text-align: left;
+            color: $gray;
         }
+
         .icon {
             width: 40px;
             height: 100%;
@@ -64,6 +74,31 @@
 
         span {
             color: $black;
+        }
+    }
+}
+
+#activeFilterButton {
+    button {
+        height: auto;
+        background-color: #FFEFE6;
+        padding: 0 0 0 12px;
+        display: flex;
+        justify-content: space-between;
+        height: 40px;
+
+        span {
+            width: 100px;
+            text-align: left;
+            color: #993701
+        }
+
+        .icon {
+            width: 40px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }

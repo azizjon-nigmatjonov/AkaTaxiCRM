@@ -20,7 +20,7 @@ import Statistics from "./Statistics";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AddButton from "../../../components/Buttons/AddButton";
-
+import cls from './style.module.scss';
 
 const ActivePassengers = () => {
   const { currentPage, q, region_id, birthday } = useGetQueries();
@@ -35,7 +35,8 @@ const ActivePassengers = () => {
     ["GET_ACTIVE_PASSENGERS", q, currentPage, region_id, birthday],
     () => {
       return passengerService.getActivePassengers({ q, page: currentPage, region_id, birthday });
-    }
+    },
+    { refetchInterval: 4 * 60 * 1000 }
   );
 
   const regions = useSelector((state: any) => state.regions.regions);
@@ -76,8 +77,7 @@ const ActivePassengers = () => {
         id: 'status',
         render: (val: any) => val && (
           <>
-            <p className={`px-2 py-1 rounded-2xl 
-            text-[${val == 'searching_driver' ? '#993701' : val == 'driver_accepted' ? '#B54708' : val == 'on-way' ? '#287EFF' : val == 'done' ? '#027A48' : val == 'canceled' ? '#344054' : '#B42318'}] bg-[${val == 'searching_driver' ? '#993701' : val == 'driver_accepted' ? '#B54708' : val == 'on-way' ? '#287EFF' : val == 'done' ? '#027A48' : val == 'canceled' ? '#344054' : '#B42318'}]`}>
+            <p className={`px-2 py-1 inline-block rounded-2xl ${val == 'searching_driver' ? cls.search : val == 'driver_accepted' ? cls.found : val == 'on-way' ? cls.onWay : val == 'done' ? cls.done : val == 'canceled' ? cls.notFound : cls.reject}`}>
               {val == 'searching_driver' ? 'Qidiryapti' : val == 'driver_accepted' ? 'Topildi' : val == 'on-way' ? 'Safarda' : val == 'done' ? 'Yetib bordi' : val == 'canceled' ? 'Topilmadi' : val == 'canceled_by_driver' ? 'Haydovchi bekor qildi' : 'Yo’lovchi bekor qildi'}
             </p>
           </>
@@ -164,17 +164,17 @@ const ActivePassengers = () => {
     return [
       {
         label: "Yo'lovchi",
+        link: "/passengers/active_passengers"
       },
       {
         label: "Aktiv",
-        link: "/passenger/active_passengers"
       },
     ]
   }, []);
 
   return (
     <div>
-      <Header>
+      <Header sticky={true}>
         <CBreadcrumbs items={breadCrubmsItems} type="link" progmatic={true} />
       </Header>
       <div className="px-6">
@@ -198,14 +198,16 @@ const ActivePassengers = () => {
 
         <Statistics />
 
-        <CTable
-          headColumns={headColumns}
-          bodyColumns={bodyColumns?.list}
-          count={bodyColumns?.meta?.pageCount}
-          isResizeble={true}
-          isLoading={isLoading}
-          currentPage={currentPage}
-        />
+        <div className="pb-5">
+          <CTable
+            headColumns={headColumns}
+            bodyColumns={bodyColumns?.list}
+            count={bodyColumns?.meta?.pageCount}
+            isResizeble={true}
+            isLoading={isLoading}
+            currentPage={currentPage}
+          />
+        </div>
       </div>
 
       <DriversList data={driverLists} />

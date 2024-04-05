@@ -16,13 +16,13 @@ const Places = ({ data, item, clickHandle = () => { } }: Props) => {
   const handleClick = () => {
     navigateQuery({ id: item.id })
     clickHandle(item)
-  }
+  }  
 
   return (
     <div className='max-w-[55px] w-full ' onClick={handleClick}>
       {front.map((val: any) => (
         <div className={cls.front}>
-          <div className={`${cls.seat} ${val.gender != 'false' ? val.reserved ? cls.user : cls.driver : cls.empty}`}>
+          <div className={`${cls.seat} ${val.gender != 'false' ? val.reserved ? cls.driver  : cls.user : cls.empty}`}>
             {val.gender != 'false' ? val.gender == 'm' ? <PassengerManIcon /> : <PassangerFemaleIcon /> : null}
           </div>
         </div>

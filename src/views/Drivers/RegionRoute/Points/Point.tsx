@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Collapse } from "@mui/material";
 import { CheckLine } from "../../../../components/IconGenerator/Svg";
-import { Closer } from "../../../../components/Closer";
+// import { Closer } from "../../../../components/Closer";
 import { ColorConstants } from "../../../../constants/website";
-// import AddButton from "../../../../components/Buttons/AddButton";
+import AddButton from "../../../../components/Buttons/AddButton";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 
 const PointSelector = ({
@@ -64,7 +64,10 @@ const PointSelector = ({
 
   const seledHandler = () => {
     const list: any = selected;
-    list.length == 2 && navigateQuery({ start: list[0].list.filter((li: any) => li.checked == true)[0].id, end: list[1].list.filter((li: any) => li.checked == true)[0].id }, true);
+    if (list.length == 2) {
+      list.length == 2 && navigateQuery({ start: list[0].list.filter((li: any) => li.checked == true)[0].id, end: list[1].list.filter((li: any) => li.checked == true)[0].id }, true);
+    }
+    setOpen(false)
   }
 
 
@@ -146,17 +149,18 @@ const PointSelector = ({
                 >
                   {item.checked ? <CheckLine /> : ""}
                 </div>
-              </li>
-            ))}
-            {/* {selected[step]?.list.length ? <div onClick={selecteHandler} className="my-2">
-              <AddButton iconLeft={false} text='Tasdiqlash' />
-            </div> : null} */}
-          </ul>
 
+              </li>
+
+            ))}
+            {selected[step]?.list.length ? <div onClick={seledHandler} className="my-2">
+              <AddButton iconLeft={false} text='Tasdiqlash' />
+            </div> : null}
+          </ul>
         </div>
       </Collapse>
 
-      {open && (
+      {/* {open && (
         <Closer
           handleClose={() => {
             seledHandler()
@@ -165,7 +169,7 @@ const PointSelector = ({
             setOpen(false);
           }}
         />
-      )}
+      )} */}
     </div>
   );
 };

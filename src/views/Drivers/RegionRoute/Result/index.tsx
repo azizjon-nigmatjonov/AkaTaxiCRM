@@ -6,11 +6,13 @@ import { useGetQueries } from "../../../../hooks/useGetQueries";
 import ImageFrame from "../../../../components/ImageFrame";
 
 const Result = () => {
-  const { start, end } = useGetQueries();
+  const { start, end, currentPage } = useGetQueries();
 
-  const { data } = useQuery(['GET_TRIPS', start, end], () => {
-    return fileService.getTrips({ page: 1, perPage: 10, from_location_id: start, to_location_id: end })
+  const { data, isLoading } = useQuery(['GET_TRIPS', start, end, currentPage], () => {
+    return fileService.getTrips({ page: currentPage, perPage: 10, from_location_id: start, to_location_id: end })
   })
+
+  console.log(currentPage);
 
   const headColumns = useMemo(() => {
     return [
@@ -63,13 +65,13 @@ const Result = () => {
   }, []);
 
 
-  const bodyColumns = useMemo(() => {
+  const bodyColumns: any = useMemo(() => {
     const list = data?.data ?? []
 
-    return list.map((li: any) => {
+    list.map((li: any) => {
       return {
         ...li,
-        userInfo:{
+        userInfo: {
           full_name: li.name,
           gender: li.gender,
           image: li.image
@@ -82,23 +84,30 @@ const Result = () => {
       }
     })
 
-
+    return {
+      list,
+      ...data
+    }
   }, [data])
+
 
   return (
     <div className="mt-8">
       <div className="flex justify-between mb-[6px]">
         <p className="text-[var(--gray)] text-base font-medium">Natijalar</p>
         <span className="text-[var(--main)] text-base font-medium">
-          {bodyColumns.length} ta haydovchi
+          {bodyColumns.list.length ?? 0} ta haydovchi
         </span>
       </div>
 
       <CTable
         headColumns={headColumns}
-        bodyColumns={bodyColumns}
-        disablePagination={true}
+        bodyColumns={bodyColumns.list}
+        count={bodyColumns?.meta?.pageCount}
+        disablePagination={false}
         isResizeble={false}
+        isLoading={isLoading}
+        currentPage={currentPage}
       />
     </div>
   );

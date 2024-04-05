@@ -48,21 +48,26 @@ const DriverStatistics = () => {
 
   const breadCrumbs = useMemo(() => {
     return [
-      { label: "Haydovchi" },
-      { label: 'Statistika', link: 'drivers/statistics' }
+      { label: "Haydovchilar", link: '/drivers/main' },
+      { label: 'Statistika', }
     ]
   }, [])
 
   return (
     <>
       <Header sticky={true}>
-        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+        <CBreadcrumbs items={breadCrumbs} progmatic={true} type="link" />
       </Header>
-      <div className="sticky top-20 z-[12] py-[24px] pl-[12px]  w-[100%] bg-[var(--softGray)] ">
+      <div className="sticky top-20 z-[12] py-[24px] pl-[12px]  w-[100%] bg-[var(--softGray)] flex items-center justify-between">
         <h1 className="text-2xl font-[600] text-[var(--black)] ml-[15px]">
           Statistika: haydovchi
         </h1>
+        <div className="mr-[15px]">
+          p
+          lorem
+        </div>
       </div>
+
       <div className="px-6 ">
         <div className="flex flex-wrap items-center gap-4">
           {isLoading ? Array.from(new Array(4)).map((num) => <Skeleton key={num} animation="wave" width={210} height={150} />) : widgetsData?.map(({ id, name, quantity, change }: { id?: number, name?: string, quantity?: number, change?: any }) => {
