@@ -67,7 +67,7 @@ const Passengers = () => {
       },
       {
         title: 'triplar',
-        // id: 'telegram_link'
+        id: 'bookings_count'
       },
       // {
       //   title: "Yaratilgan sana",
