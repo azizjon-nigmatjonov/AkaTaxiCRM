@@ -49,14 +49,14 @@ function Map() {
 
                 try {
 
-                    const firstResponse: CarResponse = await mapService.getCars({ lng: lang, lat: lat, radius: 100, page: 1, status: selectedStatus, car_class_id: carClass || undefined });
+                    const firstResponse: CarResponse = await mapService.getCars({ lng: lang, lat: lat, radius: 100, page: 1, status: selectedStatus, car_class_id: carClass || undefined, });
                     const firstData = firstResponse.data;
                     allData = allData.concat(firstData);
                     totalPages = firstResponse?.meta?.pageCount;
 
 
                     for (let currentPage = 2; currentPage <= totalPages; currentPage++) {
-                        const response = await mapService.getCars({ lng: lang, lat: lat, radius: 100, page: currentPage, status: selectedStatus, car_class_id: carClass || undefined });
+                        const response = await mapService.getCars({ lng: lang, lat: lat, radius: 100, page: currentPage, status: selectedStatus, car_class_id: carClass || undefined, });
                         const data = response.data;
                         allData = allData.concat(data);
                     }
