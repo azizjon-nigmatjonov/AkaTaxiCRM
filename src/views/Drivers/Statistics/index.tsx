@@ -10,7 +10,7 @@ import { Header } from "../../../components/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import StatisticsHeader from "./Header";
 import { useGetQueries } from "../../../hooks/useGetQueries";
-import RangeDate from "../../../components/RangeDate";
+// import RangeDate from "../../../components/RangeDate";
 
 const DriverStatistics = () => {
   const { year, month, week } = useGetQueries()
@@ -64,7 +64,7 @@ const DriverStatistics = () => {
           Statistika: haydovchi
         </h1>
         <div className="mr-[15px]">
-          <RangeDate />
+          {/* <RangeDate /> */}
         </div>
       </div>
 
