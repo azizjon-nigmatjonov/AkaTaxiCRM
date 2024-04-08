@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import CCard from "../../../components/CElements/CCard";
 import { ArrowUp, ArrowDown } from '../../../components/IconGenerator/Svg'
 import { useQuery } from "react-query";
@@ -11,11 +11,14 @@ import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import StatisticsHeader from "./Header";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import RangeDate from "../../../components/RangeDate";
+import { BiCaretDown } from "react-icons/bi";
 
 const DriverStatistics = () => {
-  const { year, month, week } = useGetQueries()
-  const { data: widgets, isLoading } = useQuery(['GET_GRAPH_LIST'], () => {
-    return driverService.getWidgets()
+  const { year, month, week, start, end } = useGetQueries();
+  const [value, setValue] = useState(false)
+
+  const { data: widgets, isLoading } = useQuery(['GET_GRAPH_LIST', start, end], () => {
+    return driverService.getWidgets({ start, end });
   })
 
   const { data: graph, isLoading: barLoading } = useQuery(['GET_GRAPH_DATA', year, week, month], () => {
@@ -54,6 +57,9 @@ const DriverStatistics = () => {
     ]
   }, [])
 
+  console.log(value);
+  
+
   return (
     <>
       <Header sticky={true}>
@@ -64,7 +70,15 @@ const DriverStatistics = () => {
           Statistika: haydovchi
         </h1>
         <div className="mr-[15px]">
-          <RangeDate />
+          <div className="flex items-center gap-2">
+            <p className="border py-1 px-2 rounded-md border-black">{start ? start : 'Start Date'}</p>
+            <p>-</p>
+            <p className="border py-1 px-2 rounded-md border-black">{end ? end : 'End Date'}</p>
+            <div onClick={() => setValue(!value)} className="border py-1 px-2 rounded-md border-black bg-slate-300 cursor-pointer">
+              <BiCaretDown />
+            </div>
+          </div>
+          {value && <RangeDate />}
         </div>
       </div>
 
