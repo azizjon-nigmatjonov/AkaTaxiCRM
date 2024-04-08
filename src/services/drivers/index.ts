@@ -19,7 +19,7 @@ const driverService = {
   getElement: (id: string | undefined) => request.get(`/drivers/${id}`),
   getDriverTripHistory: (data: any | undefined) =>
     request.get(`drivers/${data.id}/trips?${data.page ? `page=${data.page}` : ''}`),
-  getWidgets: () => request.get('statistics/drivers/widgets'),
+  getWidgets: (data: any) => request.get(`statistics/drivers/widgets${data.start ? `?start=${data.start}` : ''}${data.end ? `&end=${data.end}`:''}`),
   getDriversGraph: (data?: any) => request.get(`statistics/drivers/graph?${data?.year ? `year=${data.year}` : ''}${data?.month ? `&month=${data?.month}` : ''}${data.week ? `&week=${data.week}` : ''}`),
   getUserRegion: () => request.get('statistics/drivers/users-by-region'),
   getDriverBallance: (data?: any) => request.get(`drivers/${data.id}/balance?${data.page ? `page=${data.page}` : ''}`),

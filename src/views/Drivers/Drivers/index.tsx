@@ -136,6 +136,8 @@ const Drivers = () => {
   };
 
   const handleAge = (evt: any) => {
+    console.log(evt);
+    
     navigateQuery({ birthday: evt })
   }
 
