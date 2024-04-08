@@ -12,7 +12,7 @@ const Result = () => {
     return fileService.getTrips({ page: currentPage, perPage: 10, from_location_id: start, to_location_id: end })
   })
 
-  console.log(currentPage);
+  console.log(data);
 
   const headColumns = useMemo(() => {
     return [
@@ -28,6 +28,29 @@ const Result = () => {
           </>
         )
       },
+      {
+        title: "Ketish manzil",
+        id: "fromStart",
+        render: (val: any) => val && (
+          <div>
+            <p>{val.city}</p>
+            <span>{val.district}</span>
+          </div>
+        )
+      },
+      {
+        title: "Borish manzil",
+        id: "fromEnd",
+        render: (val: any) => val && (
+          <div>
+            <p>{val.city}</p>
+            <span>{val.district}</span>
+          </div>
+
+        )
+      },
+
+
       {
         title: "Mashina / raqam",
         id: "carInfo",
@@ -45,6 +68,7 @@ const Result = () => {
           <p>+{val}</p>
         )
       },
+
       {
         title: "Status",
         id: "status",
@@ -68,7 +92,7 @@ const Result = () => {
   const bodyColumns: any = useMemo(() => {
     const list = data?.data ?? []
 
-    list.map((li: any) => {
+    const modifiedList = list.map((li: any) => {
       return {
         ...li,
         userInfo: {
@@ -79,13 +103,20 @@ const Result = () => {
         carInfo: {
           name: li.car,
           number: li.car_number
+        },
+        fromStart: {
+          city: li.from_region_name,
+          district: li.from_district_name,
+        },
+        fromEnd: {
+          city: li.to_region_name,
+          district: li.to_district_name
         }
-
-      }
-    })
+      };
+    });
 
     return {
-      list,
+      list: modifiedList,
       ...data
     }
   }, [data])
