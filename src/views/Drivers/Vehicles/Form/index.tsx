@@ -51,6 +51,9 @@ const Form = ({ inputValue, id, classes = [], getCarList, tab }: Props) => {
     }
   );
 
+  // console.log(car);
+
+
 
   const HandleSuccess = (title: string) => {
     dispatch(
@@ -72,19 +75,17 @@ const Form = ({ inputValue, id, classes = [], getCarList, tab }: Props) => {
     const data: any = getValues();
     const params: any = {};
 
-    // console.log(data.file_id);
+    // console.log(data);
+
+
 
     const parts = data.file_id.split('/');
 
 
     const lastPart = parts[parts.length - 1];
 
-    // console.log(lastPart);
 
     const numberValue: number = parseInt(lastPart);
-
-    console.log(numberValue);
-
 
 
     const file_id = numberValue;
