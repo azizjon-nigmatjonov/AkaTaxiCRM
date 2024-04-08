@@ -1,4 +1,13 @@
-.MuiDateRangeCalendar-root:last-child {
+.rangeDate {
     display: none;
-    background-color: red;
+    .MuiStack-root {
+        padding: 15px;
+        background-color: red !important;
+
+        .MuiDateRangeCalendar-root {
+            .MuiDateRangeCalendar-monthContainer {
+                background-color: red !important;
+            }
+        }
+    }
 }
