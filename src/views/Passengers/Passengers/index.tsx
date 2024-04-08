@@ -114,9 +114,6 @@ const Passengers = () => {
       }) ?? []
     );
   }, [passengers]);
-
-
-
   
 
   const handleActions = (status: string, el: any) => {

@@ -77,8 +77,9 @@ const ActivePassengers = () => {
         id: 'status',
         render: (val: any) => val && (
           <>
-            <p className={`px-2 py-1 inline-block rounded-2xl ${val == 'searching_driver' ? cls.search : val == 'driver_accepted' ? cls.found : val == 'on-way' ? cls.onWay : val == 'done' ? cls.done : val == 'canceled' ? cls.notFound : cls.reject}`}>
-              {val == 'searching_driver' ? 'Qidiryapti' : val == 'driver_accepted' ? 'Topildi' : val == 'on-way' ? 'Safarda' : val == 'done' ? 'Yetib bordi' : val == 'canceled' ? 'Topilmadi' : val == 'canceled_by_driver' ? 'Haydovchi bekor qildi' : 'Yo’lovchi bekor qildi'}
+            <p className={`px-2 py-1 inline-block rounded-2xl ${val == 'created' ? cls.search : val == 'driver_accepted' ? cls.found : val == 'on-way' ? cls.onWay : val == 'done' ? cls.done : val == 'canceled' ? cls.notFound : cls.reject}`}>
+              
+              {val == 'created' ? 'Qidiryapti' : val == 'driver_accepted' ? 'Topildi' : val == 'on-way' ? 'Safarda' : val == 'done' ? 'Yetib bordi' : val == 'canceled' ? 'Topilmadi' : val == 'canceled_by_driver' ? 'Haydovchi bekor qildi' : 'Yo’lovchi bekor qildi'}
             </p>
           </>
         )
