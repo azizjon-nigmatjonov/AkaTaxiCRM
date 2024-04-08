@@ -1,6 +1,8 @@
 import { Box, Button, ButtonGroup, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useState } from "react";
+import { ArrowLeft, ArrowUpward, } from "@mui/icons-material";
+
 
 function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, yearDrivers, driverTripsDataFromCity }: { setCountDrivers: any, setSelectMonthDrivers: any, setYearDrivers: any, yearDrivers: any, driverTripsDataFromCity: any }) {
 
@@ -12,8 +14,29 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
     const [monthName, setMonthName] = useState('yanvar')
     const [selectedWeek, setSelectedWeek] = useState('Haftani tanlash')
 
+    const [isOpen, setIsOpen] = useState(true);
+    const [driverReason, setDriverReason] = useState(false);
 
 
+
+    const handleReason = () => {
+        setIsOpen(false)
+        setDriverReason(false);
+    }
+
+    const handleReasonClose = () => {
+        setIsOpen(true)
+
+        
+        
+    }
+    function handleDriverReason() {
+        setIsOpen(false)
+        setDriverReason(true);
+        
+        console.log('100');
+        
+    }
 
     const handleYearButtonClick = () => {
         setActiveButton('year')
@@ -229,9 +252,43 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
                     }}>
                         <TableCell sx={{ padding: '16px !important' }}>DAN</TableCell>
                         <TableCell sx={{ padding: '16px' }} align="left">Viloyatlarga</TableCell>
-                        <TableCell sx={{ padding: '16px' }} align="right">Topdi</TableCell>
-                        <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Yo’lovchini bekor qilish <ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
-                        <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Bekor qilindi <ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
+
+
+                        <>
+
+                            {isOpen ? (
+                                <>
+                                    <TableCell sx={{ padding: '16px' }} align="right">Topdi</TableCell>
+                                    <TableCell sx={{ padding: '16px',}} align="right" ><span className="inline-block cursor-pointer" onClick={handleDriverReason}>Yo’lovchini bekor qilish <ArrowRightIcon sx={{ fontSize: 24}} /></span></TableCell>
+                                    <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center" onClick={handleReason}>Bekor qilindi <ArrowRightIcon sx={{fontSize: 24 }} /></TableCell>
+                                </>
+                            ) : (
+
+                                <>
+                                    {driverReason ? (
+                                        <>
+                                            <TableCell sx={{ padding: '16px',cursor: 'pointer' }} align="right">Mazam yog'ide <ArrowLeft sx={{ fontSize: 24 }} onClick={handleReasonClose}/></TableCell>
+                                            <TableCell sx={{ padding: '16px',  }} align="right">Azgina ichgandim <ArrowUpward sx={{transform: 'rotate(180deg)', fontSize: 16 }}  /></TableCell>
+                                            <TableCell sx={{ padding: '16px !important'}} align="center">Ko’p kutib qoldim <ArrowUpward sx={{transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <TableCell sx={{ padding: '16px' }} align="right">Rejalarim o’zgarib qoldi <ArrowLeft sx={{ fontSize: 24 }} onClick={handleReasonClose}/></TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Yo’nalish noto’g’ri <ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Ko’p kutib qoldim <ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
+                                        </>
+
+                                    )}
+
+
+                                </>
+
+                            )}
+                        </>
+
+
+
+
                     </TableRow>
                 </TableHead>
 

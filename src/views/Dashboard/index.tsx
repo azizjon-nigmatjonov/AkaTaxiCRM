@@ -51,7 +51,6 @@ function Dashboard() {
 
 
 
-
     const { data: driverTripsDataFromCity } = useQuery(['driverTrips', yearDrivers, selectMonthDrivers, countWeekDrivers], () => dashboardService.getDriverTripsFromCity(yearDrivers, selectMonthDrivers, countWeekDrivers), { enabled: !!yearDrivers || !!selectMonthDrivers || !!countWeekDrivers });
 
 

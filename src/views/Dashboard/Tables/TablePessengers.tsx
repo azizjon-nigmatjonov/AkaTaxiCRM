@@ -1,6 +1,8 @@
 import { Box, Button, ButtonGroup, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useState } from "react";
+import { ArrowLeft, ArrowUpward, } from "@mui/icons-material";
+// import { ArrowDown } from "components/IconGenerator/Svg";
 
 function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek }: { setYear: any, year: any, setSelectMonth: any, dataList: any, setCountWeek: any }) {
 
@@ -13,6 +15,39 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
     const [selectedWeek, setSelectedWeek] = useState('Haftani tanlash')
     const [showWeek, setShoWeek] = useState(true)
     const [localYear, setLocalYear] = useState(null);
+
+    const [isOpen, setIsOpen] = useState(true);
+    const [driverReason, setDriverReason] = useState(false);
+
+
+    const reasonOne = [
+        { canceled: 'salom', canceled_by_client: 0, canceled_by_driver: 11, done: 9, region_id: 1, region_name: 'Navoiy viloyati' }
+    ]
+    const reasonTwo = [
+        { canceled: 'qalesan', canceled_by_client: 100, canceled_by_driver: 211, done: 2, region_id: 7, region_name: "Buxoro" }
+    ]
+
+    // console.log(dataList);
+
+
+
+    const handleReason = () => {
+        setIsOpen(false)
+        setDriverReason(false);
+    }
+
+    const handleReasonClose = () => {
+        setIsOpen(true)
+    }
+
+
+    function handleDriverReason() {
+        setIsOpen(false)
+        setDriverReason(true);
+        // console.log('salom');
+    }
+
+
 
     showWeek
 
@@ -242,57 +277,179 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
                     }}>
                         <TableCell sx={{ padding: '16px !important' }}>DAN</TableCell>
                         <TableCell sx={{ padding: '16px' }} align="left">Viloyatlarga</TableCell>
-                        <TableCell sx={{ padding: '16px' }} align="right">Yakunlandi</TableCell>
-                        <TableCell sx={{ padding: '16px' }} align="right">Topilmadi</TableCell>
-                        <TableCell sx={{ padding: '16px', alignItems: 'center', cursor: 'pointer' }} align="right">
-                            Yo’lovchi bekor qildi<ArrowRightIcon sx={{ fontSize: 24 }} />
-                        </TableCell>
-                        <TableCell sx={{ padding: '16px !important' }} align="center">Haydovchi bekor qildi <ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
+
+                        <>
+                            {isOpen ? (
+                                <>
+                                    <TableCell sx={{ padding: '16px' }} align="right">Yakunlandi</TableCell>
+                                    <TableCell sx={{ padding: '16px' }} align="right">Topilmadi</TableCell>
+                                    <TableCell onClick={handleReason} sx={{ padding: '16px', alignItems: 'center', cursor: 'pointer' }} align="right">
+                                        Yo’lovchi bekor qildi<ArrowRightIcon sx={{ fontSize: 24 }} />
+                                    </TableCell>
+                                    <TableCell onClick={handleDriverReason} sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Haydovchi bekor qildi <ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
+                                </>
+                            ) : (
+                                <>
+                                    {driverReason ? (
+                                        <>
+                                            <TableCell onClick={handleReasonClose} sx={{ padding: '16px', cursor: 'pointer' }} align="right">Haydovchi bekor qildi <ArrowLeft sx={{ fontSize: 24 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Mazam yog'ide <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /> </TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Azgina ichgandim <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Ko’p kutib qoldim <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <TableCell onClick={handleReasonClose} sx={{ padding: '16px', cursor: 'pointer' }} align="right">Yo’lovchi bekor qildi <ArrowLeft sx={{ fontSize: 24 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Rejalarim o’zgarib qoldi <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /> </TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Yo’nalish noto’g’ri <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Ko’p kutib qoldim <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                        </>
+                                    )}
+                                </>
+                            )}
+                        </>
+
                     </TableRow>
                 </TableHead>
 
-
                 <TableBody>
-                    {dataList?.map((item: any, index: number) => (
-                        <TableRow key={index} sx={{
-                            border: '0px solid #EAECF0'
-                        }}>
-                            {index === 0 && (
-                                <TableCell colSpan={0.5} rowSpan={dataList.length} align="center"><p className='text-[#101828] font-semibold text-sm'>Toshkent shahar</p></TableCell>
-                            )}
-                            <TableCell component="th" scope="row" sx={{
-                                borderLeft: '1px solid #EAECF0',
-                                color: '#101828',
-                                fontSize: '14px',
-                                fontWeight: '500',
-                            }}>
-                                {item?.region_name}
-                            </TableCell>
-                            <TableCell align="right" sx={{
-                                borderRight: '0px solid #EAECF0',
-                                color: '#039855',
-                                fontSize: '14px',
-                            }}>{item?.done}</TableCell>
-                            <TableCell align="right" sx={{
-                                borderRight: '0px solid #EAECF0',
-                                color: '#667085',
-                                fontSize: '14px',
-                            }}>{item?.canceled}</TableCell>
-                            <TableCell align="right" sx={{
-                                borderRight: '0px solid #EAECF0',
-                                color: '#F79009'
-                            }}>{item?.canceled_by_client}</TableCell>
-                            <TableCell align="center" sx={{
-                                borderRight: '0px solid #EAECF0',
-                                color: '#D92D20',
 
-                            }} >{item?.canceled_by_driver}</TableCell>
+                    <>
+                        {isOpen ? (
+                            <>  {dataList?.map((item: any, index: number) => (
+                                <TableRow key={index} sx={{
+                                    border: '0px solid #EAECF0'
+                                }}>
+                                    {index === 0 && (
+                                        <TableCell colSpan={0.5} rowSpan={dataList.length} align="center"><p className='text-[#101828] font-semibold text-sm'>Toshkent shahar</p></TableCell>
+                                    )}
+                                    <TableCell component="th" scope="row" sx={{
+                                        borderLeft: '1px solid #EAECF0',
+                                        color: '#101828',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                    }}>
+                                        {item?.region_name}
+                                    </TableCell>
+                                    <TableCell align="right" sx={{
+                                        borderRight: '0px solid #EAECF0',
+                                        color: '#039855',
+                                        fontSize: '14px',
+                                    }}>{item?.done}</TableCell>
+                                    <TableCell align="right" sx={{
+                                        borderRight: '0px solid #EAECF0',
+                                        color: '#667085',
+                                        fontSize: '14px',
+                                    }}>{item?.canceled}</TableCell>
+                                    <TableCell align="right" sx={{
+                                        borderRight: '0px solid #EAECF0',
+                                        color: '#F79009'
+                                    }}>{item?.canceled_by_client}</TableCell>
+                                    <TableCell align="center" sx={{
+                                        borderRight: '0px solid #EAECF0',
+                                        color: '#D92D20',
 
-                        </TableRow>
-                    ))}
+                                    }} >{item?.canceled_by_driver}</TableCell>
+
+                                </TableRow>
+                            ))}</>
+                        ) : (
+                            <>
+                                {driverReason ? (
+                                    <>
+                                        {
+                                            reasonOne.map((item: any, index: number) => (
+                                                <TableRow key={index}>
+                                                    {index === 0 && (
+                                                        <TableCell colSpan={0.5} rowSpan={item.length} align="center"><p className='text-[#101828] font-semibold text-sm'>Toshkent shahar</p></TableCell>
+                                                    )}
+                                                    <TableCell component="th" scope="row" sx={{
+                                                        borderLeft: '1px solid #EAECF0',
+                                                        color: '#101828',
+                                                        fontSize: '14px',
+                                                        fontWeight: '500',
+                                                    }}>
+                                                        {item?.region_name}
+                                                    </TableCell>
+                                                    <TableCell align="right" sx={{
+                                                        borderRight: '0px solid #EAECF0',
+                                                        color: '#039855',
+                                                        fontSize: '14px',
+                                                    }}>{item?.done}</TableCell>
+                                                    <TableCell align="right" sx={{
+                                                        borderRight: '0px solid #EAECF0',
+                                                        color: '#667085',
+                                                        fontSize: '14px',
+                                                    }}>{item?.canceled}</TableCell>
+                                                    <TableCell align="right" sx={{
+                                                        borderRight: '0px solid #EAECF0',
+                                                        color: '#F79009'
+                                                    }}>{item?.canceled_by_client}</TableCell>
+                                                    <TableCell align="center" sx={{
+                                                        borderRight: '0px solid #EAECF0',
+                                                        color: '#D92D20',
+
+                                                    }} >{item?.canceled_by_driver}</TableCell>
+                                                </TableRow>
+                                            ))
+                                        }
+                                    </>
+                                ) : (
+                                    <>
+                                        {
+                                            reasonTwo.map((item: any, index: number) => (
+                                                <TableRow key={index}>
+                                                    {index === 0 && (
+                                                        <TableCell colSpan={0.5} rowSpan={item.length} align="center"><p className='text-[#101828] font-semibold text-sm'>Toshkent shahar</p></TableCell>
+                                                    )}
+                                                    <TableCell component="th" scope="row" sx={{
+                                                        borderLeft: '1px solid #EAECF0',
+                                                        color: '#101828',
+                                                        fontSize: '14px',
+                                                        fontWeight: '500',
+                                                    }}>
+                                                        {item?.region_name}
+                                                    </TableCell>
+                                                    <TableCell align="right" sx={{
+                                                        borderRight: '0px solid #EAECF0',
+                                                        color: '#039855',
+                                                        fontSize: '14px',
+                                                    }}>{item?.done}</TableCell>
+                                                    <TableCell align="right" sx={{
+                                                        borderRight: '0px solid #EAECF0',
+                                                        color: '#667085',
+                                                        fontSize: '14px',
+                                                    }}>{item?.canceled}</TableCell>
+                                                    <TableCell align="right" sx={{
+                                                        borderRight: '0px solid #EAECF0',
+                                                        color: '#F79009'
+                                                    }}>{item?.canceled_by_client}</TableCell>
+                                                    <TableCell align="center" sx={{
+                                                        borderRight: '0px solid #EAECF0',
+                                                        color: '#D92D20',
+
+                                                    }} >{item?.canceled_by_driver}</TableCell>
+                                                </TableRow>
+                                            ))
+                                        }
+                                    </>
+
+
+                                )}
+
+                            </>
+
+                        )}
+                    </>
+
+
+
+
+
+
                 </TableBody>
             </Table>
-        </TableContainer>
+        </TableContainer >
     )
 }
 

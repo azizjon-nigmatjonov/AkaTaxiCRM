@@ -1,7 +1,7 @@
 import { Box, Button, ButtonGroup, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useState } from "react";
-
+import { ArrowLeft, ArrowUpward, } from "@mui/icons-material";
 function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPessengerVilage, setYearPessengerVilage, yearPessengerVilage, passengersDataVilage }: { setCountWeekPessengerVilage: any, setSelectMonthPessengerVilage: any, setYearPessengerVilage: any, yearPessengerVilage: any, passengersDataVilage: any }) {
 
     const [activeButton, setActiveButton] = useState('year');
@@ -13,6 +13,28 @@ function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPess
     const [selectedWeek, setSelectedWeek] = useState('Haftani tanlash')
     const [showWeek, setShoWeek] = useState(true)
     showWeek
+
+
+    const [isOpen, setIsOpen] = useState(true);
+    const [driverReason, setDriverReason] = useState(false);
+
+
+    const handleReason = () => {
+        setIsOpen(false)
+        setDriverReason(false);
+    }
+
+
+    const handleReasonClose = () => {
+        setIsOpen(true)
+    }
+
+    function handleDriverReason() {
+        setIsOpen(false)
+        setDriverReason(true);
+        // console.log('salom');
+    }
+
 
 
     function handleYearButtonClick() {
@@ -222,10 +244,42 @@ function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPess
                     }}>
                         <TableCell sx={{ padding: '16px !important' }}>Viloyatlardan</TableCell>
                         <TableCell sx={{ padding: '16px' }} align="left">Ga</TableCell>
-                        <TableCell sx={{ padding: '16px' }} align="right">Yakunlandi</TableCell>
-                        <TableCell sx={{ padding: '16px' }} align="right">Topilmadi</TableCell>
-                        <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Yo’lovchi bekor qildi <ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
-                        <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Haydovchi bekor qildi <ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
+
+
+                        <>
+                            {isOpen ? (
+                                <>
+                                    <TableCell sx={{ padding: '16px' }} align="right">Yakunlandi</TableCell>
+                                    <TableCell sx={{ padding: '16px' }} align="right">Topilmadi</TableCell>
+                                    <TableCell onClick={handleReason} sx={{ padding: '16px', alignItems: 'center', cursor: 'pointer' }} align="right">
+                                        Yo’lovchi bekor qildi<ArrowRightIcon sx={{ fontSize: 24 }} />
+                                    </TableCell>
+                                    <TableCell onClick={handleDriverReason} sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Haydovchi bekor qildi <ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
+                                </>
+                            ) : (
+                                <>
+                                    {driverReason ? (
+                                        <>
+                                            <TableCell onClick={handleReasonClose} sx={{ padding: '16px', cursor: 'pointer' }} align="right">Haydovchi bekor qildi <ArrowLeft sx={{ fontSize: 24 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Mazam yog'ide <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /> </TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Azgina ichgandim <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Ko’p kutib qoldim <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <TableCell onClick={handleReasonClose} sx={{ padding: '16px', cursor: 'pointer' }} align="right">Yo’lovchi bekor qildi <ArrowLeft sx={{ fontSize: 24 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Rejalarim o’zgarib qoldi <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /> </TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Yo’nalish noto’g’ri <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Ko’p kutib qoldim <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                        </>
+                                    )}
+                                </>
+                            )}
+                        </>
+
+
+
+
                     </TableRow>
                 </TableHead>
 
