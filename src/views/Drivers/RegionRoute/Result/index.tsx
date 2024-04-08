@@ -9,7 +9,11 @@ const Result = () => {
   const { start, end, currentPage } = useGetQueries();
 
   const { data, isLoading } = useQuery(['GET_TRIPS', start, end, currentPage], () => {
-    return fileService.getTrips({ page: currentPage, perPage: 10, from_location_id: start, to_location_id: end })
+    return fileService.getTrips({
+      page: currentPage, perPage: 10,
+      from_location_id: decodeURIComponent(start).split(',').map(li => parseInt(li)),
+      to_location_id: decodeURIComponent(end).split(',').map(li => parseInt(li))
+    })
   })
 
   console.log(data);

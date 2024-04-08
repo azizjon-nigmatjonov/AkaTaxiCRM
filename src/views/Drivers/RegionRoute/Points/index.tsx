@@ -22,9 +22,10 @@ const Points = ({
     const prev = list[0];
     list[0] = list[1];
     list[1] = prev;
-    
 
-    navigateQuery({start: list[0].list.filter((li: any) => li.checked == true)[0].id, end: list[1].list.filter((li: any) => li.checked == true)[0].id}, true);
+
+
+    navigateQuery({ start: encodeURIComponent(list[0].list.filter((li: any) => li.checked == true).map((li: any) => li.id).join(',')), end: encodeURIComponent(list[1].list.filter((li: any) => li.checked == true).map((li: any) => li.id)) }, true)
 
     setSelected([]);
     handleChange(list);

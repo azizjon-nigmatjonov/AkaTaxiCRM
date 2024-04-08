@@ -18,18 +18,10 @@ export default function usePageRouter() {
   };
 
   const navigateQuery = (obj?: any, check?: boolean) => {
-    // console.log(obj);
-    // console.log(query);
 
 
     Object.keys(obj).forEach((key) => {
       if (obj[key] === "" || !obj[key]?.length && key in query && !check) {
-        // Object.entries(query).map(([keys]) => {
-        //   if (keys != key) {
-        //     delete query[keys]
-        //   }
-        // })
-
         // delete query[keys]
         // delete obj[key]
       }
@@ -40,7 +32,7 @@ export default function usePageRouter() {
       ...obj,
     };
 
-    const queryParams = createSearchParams(newQuery);
+    const queryParams = createSearchParams(newQuery);    
     navigate({
       pathname: location.pathname,
       search: queryParams.toString(),
