@@ -19,17 +19,12 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
     const [isOpen, setIsOpen] = useState(true);
     const [driverReason, setDriverReason] = useState(false);
 
-
     const reasonOne = [
         { canceled: 'salom', canceled_by_client: 0, canceled_by_driver: 11, done: 9, region_id: 1, region_name: 'Navoiy viloyati' }
     ]
     const reasonTwo = [
         { canceled: 'qalesan', canceled_by_client: 100, canceled_by_driver: 211, done: 2, region_id: 7, region_name: "Buxoro" }
     ]
-
-    // console.log(dataList);
-
-
 
     const handleReason = () => {
         setIsOpen(false)
@@ -44,7 +39,6 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
     function handleDriverReason() {
         setIsOpen(false)
         setDriverReason(true);
-        // console.log('salom');
     }
 
 
@@ -130,7 +124,7 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
     }
 
     return (
-        <TableContainer component={Paper} sx={{ border: '1px solid #e0e0e0' }}>
+        <TableContainer component={Paper} sx={{ border: '1px solid #e0e0e0', backgroundColor: '#fff !important' }}>
             <div className='pl-[5px] mt-[10px] pr-[16px] flex items-center justify-between'>
                 <Box
                     sx={{
@@ -158,13 +152,20 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
 
                 <div className='flex gap-3'>
                     <Select
+
                         onChange={handleYearChange}
                         disabled={disabledYear}
                         value={year}
                         className='w-[183px] p-0 border'
                         sx={{
-                            borderRadius: '5px',
-                            padding: '9px 14px',
+                            border: '1px solid #D0D5DD',
+                            boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                            color: '#101828',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            padding: '0px 14px',
+                            height: '40px',
                             '& .MuiInputBase-input': {
                                 padding: 0,
                             },
@@ -196,8 +197,15 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
 
                         className='w-[183px] p-0 border'
                         sx={{
-                            borderRadius: '5px',
+
+                            border: '1px solid #D0D5DD',
+                            boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                            color: '#101828',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            borderRadius: '8px',
                             padding: '9px 14px',
+                            height: '40px',
                             '& .MuiInputBase-input': {
                                 padding: 0,
                             },
@@ -232,8 +240,14 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
                         label={'salom'}
                         className='w-[183px] p-0 border'
                         sx={{
-                            borderRadius: '5px',
-                            padding: '9px 14px',
+                            border: '1px solid #D0D5DD',
+                            boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                            color: '#101828',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            padding: '9px 12px',
+                            height: '40px',
                             '& .MuiInputBase-input': {
                                 padding: 0,
                             },
@@ -315,44 +329,65 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
                 <TableBody>
 
                     <>
-                        {isOpen ? (
-                            <>  {dataList?.map((item: any, index: number) => (
-                                <TableRow key={index} sx={{
-                                    border: '0px solid #EAECF0'
-                                }}>
-                                    {index === 0 && (
-                                        <TableCell colSpan={0.5} rowSpan={dataList.length} align="center"><p className='text-[#101828] font-semibold text-sm'>Toshkent shahar</p></TableCell>
-                                    )}
-                                    <TableCell component="th" scope="row" sx={{
-                                        borderLeft: '1px solid #EAECF0',
-                                        color: '#101828',
-                                        fontSize: '14px',
-                                        fontWeight: '500',
-                                    }}>
-                                        {item?.region_name}
-                                    </TableCell>
-                                    <TableCell align="right" sx={{
-                                        borderRight: '0px solid #EAECF0',
-                                        color: '#039855',
-                                        fontSize: '14px',
-                                    }}>{item?.done}</TableCell>
-                                    <TableCell align="right" sx={{
-                                        borderRight: '0px solid #EAECF0',
-                                        color: '#667085',
-                                        fontSize: '14px',
-                                    }}>{item?.canceled}</TableCell>
-                                    <TableCell align="right" sx={{
-                                        borderRight: '0px solid #EAECF0',
-                                        color: '#F79009'
-                                    }}>{item?.canceled_by_client}</TableCell>
-                                    <TableCell align="center" sx={{
-                                        borderRight: '0px solid #EAECF0',
-                                        color: '#D92D20',
 
-                                    }} >{item?.canceled_by_driver}</TableCell>
+
+                        {isOpen ? (
+                            <>
+                                {dataList?.map((item: any, index: number) => (
+                                    <TableRow key={index} sx={{
+                                        border: '0px solid #EAECF0'
+                                    }}>
+                                        {index === 0 && (
+                                            <TableCell colSpan={0.5} rowSpan={dataList.length + 1} align="center"><p className='text-[#101828] font-semibold text-sm'>Toshkent shahar</p></TableCell>
+                                        )}
+                                        <TableCell component="th" scope="row" sx={{
+                                            borderLeft: '1px solid #EAECF0',
+                                            color: '#101828',
+                                            fontSize: '14px',
+                                            fontWeight: '500',
+                                        }}>
+                                            {item?.region_name}
+                                        </TableCell>
+                                        <TableCell align="right" sx={{
+                                            borderRight: '0px solid #EAECF0',
+                                            color: '#039855',
+                                            fontSize: '14px',
+                                        }}>{item?.done}</TableCell>
+                                        <TableCell align="right" sx={{
+                                            borderRight: '0px solid #EAECF0',
+                                            color: '#667085',
+                                            fontSize: '14px',
+                                        }}>{item?.canceled}</TableCell>
+                                        <TableCell align="right" sx={{
+                                            borderRight: '0px solid #EAECF0',
+                                            color: '#F79009'
+                                        }}>{item?.canceled_by_client}</TableCell>
+                                        <TableCell align="center" sx={{
+                                            borderRight: '0px solid #EAECF0',
+                                            color: '#D92D20',
+
+                                        }} >{item?.canceled_by_driver} </TableCell>
+                                    </TableRow>
+                                ))}
+
+                                <TableRow>
+                                    <TableCell align="left" sx={{ fontSize: '14px', borderLeft: '1px solid #EAECF0', color: '#101828', fontWeight: 500 }}>Umumiy</TableCell>
+                                    <TableCell align="right" sx={{ borderRight: '0px solid #EAECF0', color: '#039855', fontSize: '14px' }}>
+                                        {dataList?.reduce((total: number, item: any) => total + (item?.done || 0), 0)}
+                                    </TableCell>
+                                    <TableCell align="right" sx={{ borderRight: '0px solid #EAECF0', color: '#667085', fontSize: '14px' }}>
+                                        {dataList?.reduce((total: number, item: any) => total + (item?.canceled || 0), 0)}
+                                    </TableCell>
+                                    <TableCell align="right" sx={{ borderRight: '0px solid #EAECF0', color: '#F79009' }}>
+                                        {dataList?.reduce((total: number, item: any) => total + (item?.canceled_by_client || 0), 0)}
+                                    </TableCell>
+                                    <TableCell align="center" sx={{ borderRight: '0px solid #EAECF0', color: '#D92D20' }}>
+                                        {dataList?.reduce((total: number, item: any) => total + (item?.canceled_by_driver || 0), 0)}
+                                    </TableCell>
 
                                 </TableRow>
-                            ))}</>
+                            </>
+
                         ) : (
                             <>
                                 {driverReason ? (
@@ -429,6 +464,9 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
                                                         color: '#D92D20',
 
                                                     }} >{item?.canceled_by_driver}</TableCell>
+
+
+
                                                 </TableRow>
                                             ))
                                         }
@@ -440,6 +478,7 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
                             </>
 
                         )}
+
                     </>
 
 
