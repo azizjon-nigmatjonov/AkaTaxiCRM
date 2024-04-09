@@ -1,7 +1,7 @@
 import { Box, Button, ButtonGroup, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useState } from "react";
-
+import { ArrowLeft, ArrowUpward, } from "@mui/icons-material";
 
 function TableDriversVilage({ setCountWeekDriversVilage, setSelectMonthDriversVilage, setYearDriversVilage, yearDriversVilage, driverTripsDataFromVilage }: { setCountWeekDriversVilage: any, setSelectMonthDriversVilage: any, setYearDriversVilage: any, yearDriversVilage: string, driverTripsDataFromVilage: any }) {
 
@@ -12,6 +12,29 @@ function TableDriversVilage({ setCountWeekDriversVilage, setSelectMonthDriversVi
     const [months] = useState(['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']);
     const [monthName, setMonthName] = useState('yanvar')
     const [selectedWeek, setSelectedWeek] = useState('Haftani tanlash')
+
+
+    const [isOpen, setIsOpen] = useState(true);
+    const [driverReason, setDriverReason] = useState(false)
+
+
+
+    const handleReason = () => {
+        setIsOpen(false)
+        setDriverReason(false);
+    }
+
+    const handleReasonClose = () => {
+        setIsOpen(true)
+    }
+
+    const handleDriverReason = () => {
+        setIsOpen(false)
+        setDriverReason(true);
+    }
+
+
+
 
 
     const handleYearButtonClick = () => {
@@ -86,7 +109,7 @@ function TableDriversVilage({ setCountWeekDriversVilage, setSelectMonthDriversVi
 
 
     return (
-        <TableContainer component={Paper} sx={{ marginTop: '24px', border: '1px solid #e0e0e0' }}>
+        <TableContainer component={Paper} sx={{ marginTop: '24px', border: '1px solid #e0e0e0', backgroundColor: '#fff !important' }}>
             <div className='pl-[5px] mt-[10px] pr-[16px] flex items-center justify-between'>
                 <Box
                     sx={{
@@ -116,8 +139,14 @@ function TableDriversVilage({ setCountWeekDriversVilage, setSelectMonthDriversVi
                         value={yearDriversVilage}
                         className='w-[183px] p-0 border'
                         sx={{
-                            borderRadius: '5px',
-                            padding: '9px 14px',
+                            border: '1px solid #D0D5DD',
+                            boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                            color: '#101828',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            padding: '9px 12px',
+                            height: '40px',
                             '& .MuiInputBase-input': {
                                 padding: 0,
                             },
@@ -148,8 +177,14 @@ function TableDriversVilage({ setCountWeekDriversVilage, setSelectMonthDriversVi
                         value={monthName}
                         className='w-[183px] p-0 border'
                         sx={{
-                            borderRadius: '5px',
-                            padding: '9px 14px',
+                            border: '1px solid #D0D5DD',
+                            boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                            color: '#101828',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            padding: '9px 12px',
+                            height: '40px',
                             '& .MuiInputBase-input': {
                                 padding: 0,
                             },
@@ -183,8 +218,14 @@ function TableDriversVilage({ setCountWeekDriversVilage, setSelectMonthDriversVi
                         value={selectedWeek}
                         className='w-[183px] p-0 border'
                         sx={{
-                            borderRadius: '5px',
-                            padding: '9px 14px',
+                            border: '1px solid #D0D5DD',
+                            boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                            color: '#101828',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            padding: '9px 12px',
+                            height: '40px',
                             '& .MuiInputBase-input': {
                                 padding: 0,
                             },
@@ -221,9 +262,44 @@ function TableDriversVilage({ setCountWeekDriversVilage, setSelectMonthDriversVi
                     }}>
                         <TableCell sx={{ padding: '16px !important' }}>Viloyatlardan</TableCell>
                         <TableCell sx={{ padding: '16px' }} align="left">GA</TableCell>
-                        <TableCell sx={{ padding: '16px' }} align="right">Topdi</TableCell>
-                        <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Yo’lovchini bekor qilish<ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
-                        <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Bekor qilindi<ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
+
+
+
+                        <>
+                            {isOpen ? (
+                                <>
+                                    <TableCell sx={{ padding: '16px' }} align="right">Topdi</TableCell>
+                                    <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right" ><span className="inline-block" onClick={handleDriverReason}>Yo’lovchini bekor qilish<ArrowRightIcon sx={{ fontSize: 24 }} /></span></TableCell>
+                                    <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center" onClick={handleReason}>Bekor qilindi<ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
+                                </>
+                            ) : (
+                                <>
+
+                                    {driverReason ? (
+                                        <>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Yo’lovchini bekor qilish <ArrowLeft sx={{ fontSize: 24 }} onClick={handleReasonClose} /></TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">rejam ozgardi <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Vaqtim yoq <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+
+                                        </>
+                                    ) : (
+                                        <>
+                                            <TableCell sx={{ padding: '16px' }} align="right">Bekor qilindi <ArrowLeft sx={{ fontSize: 24 }} onClick={handleReasonClose} /></TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Vaqt yoq<ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Maumolar kop<ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                        </>
+                                    )}
+
+
+
+
+                                </>
+                            )}
+                        </>
+
+
+
+
 
                     </TableRow>
                 </TableHead>
@@ -231,15 +307,11 @@ function TableDriversVilage({ setCountWeekDriversVilage, setSelectMonthDriversVi
 
                 <TableBody>
                     {driverTripsDataFromVilage?.data?.map((item: any, index: number) => {
-
                         // console.log(item);
-
-
                         return (
                             <TableRow key={index} sx={{
                                 border: '0px solid #EAECF0'
                             }}>
-
                                 <TableCell component="th" scope="row" sx={{
                                     borderLeft: '1px solid #EAECF0',
                                     color: '#101828',
@@ -252,7 +324,7 @@ function TableDriversVilage({ setCountWeekDriversVilage, setSelectMonthDriversVi
                                     <TableCell sx={{
                                         borderRight: '1px solid #EAECF0',
                                         borderLeft: '1px solid #EAECF0',
-                                    }} colSpan={1} rowSpan={driverTripsDataFromVilage?.data?.length} align="center">Toshkent shahar</TableCell>
+                                    }} colSpan={1} rowSpan={driverTripsDataFromVilage?.data?.length + 1} align="center">Toshkent shahar</TableCell>
                                 )}
                                 <TableCell align="right" sx={{
                                     borderRight: '0px solid #EAECF0',
@@ -274,9 +346,32 @@ function TableDriversVilage({ setCountWeekDriversVilage, setSelectMonthDriversVi
                                     fontWeight: '500',
                                 }}>{item?.canceled}</TableCell>
 
+
+
+
                             </TableRow>
                         );
                     })}
+
+                    <TableRow>
+
+                        <TableCell align="left" sx={{ fontSize: '14px', borderLeft: '1px solid #EAECF0', color: '#101828', fontWeight: 500 }}>Umumiy</TableCell>
+                        <TableCell align="right" sx={{ borderRight: '0px solid #EAECF0', color: '#039855', fontSize: '14px' }}>
+                            {driverTripsDataFromVilage?.data?.reduce((total: number, item: any) => total + (item?.done || 0), 0)}
+                        </TableCell>
+                        <TableCell align="right" sx={{ borderRight: '0px solid #EAECF0', color: '#F79009', fontSize: '14px' }}>
+                            {driverTripsDataFromVilage?.data?.reduce((total: number, item: any) => total + (item?.passenger_canceled || 0), 0)}
+                        </TableCell>
+                        <TableCell align="center" sx={{ borderRight: '0px solid #EAECF0', color: '#D92D20', fontSize: '14px' }}>
+                            {driverTripsDataFromVilage?.data?.reduce((total: number, item: any) => total + (item?.canceled || 0), 0)}
+                        </TableCell>
+
+
+
+
+                    </TableRow>
+
+
                 </TableBody>
             </Table>
         </TableContainer>

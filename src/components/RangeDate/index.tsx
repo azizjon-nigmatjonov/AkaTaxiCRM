@@ -17,7 +17,7 @@ const RangeDate = () => {
     return (
         <div className='rangeDate'>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateRangeCalendar onChange={e => clickhandler(e)} calendars={2} />
+                <DateRangeCalendar onChange={(e: any) => clickhandler(e)} calendars={2} />
             </LocalizationProvider>
         </div>
     )

@@ -73,9 +73,6 @@ const SidebarSection = () => {
         <div>
           {Object.entries(List)?.map(([key, value]: [string, any], index) => {
 
-
-
-
             const visibleSidebarItems: any = (value as any).filter((el: any) => el.sidebar)
 
             const isLastItem = index === Object.entries(List).length - 1;
