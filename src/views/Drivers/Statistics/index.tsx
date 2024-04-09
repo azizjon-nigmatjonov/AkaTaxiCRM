@@ -11,7 +11,7 @@ import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import StatisticsHeader from "./Header";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import RangeDate from "../../../components/RangeDate";
-import { BiCaretDown } from "react-icons/bi";
+import { BiCaretDown, BiX } from "react-icons/bi";
 
 const DriverStatistics = () => {
   const { year, month, week, start, end } = useGetQueries();
@@ -58,7 +58,7 @@ const DriverStatistics = () => {
   }, [])
 
   console.log(value);
-  
+
 
   return (
     <>
@@ -74,8 +74,8 @@ const DriverStatistics = () => {
             <p className="border py-1 px-2 rounded-md border-black">{start ? start : 'Start Date'}</p>
             <p>-</p>
             <p className="border py-1 px-2 rounded-md border-black">{end ? end : 'End Date'}</p>
-            <div onClick={() => setValue(!value)} className="border py-1 px-2 rounded-md border-black bg-slate-300 cursor-pointer">
-              <BiCaretDown />
+            <div onClick={() => setValue(!value)} className={`border py-1 px-2 rounded-md cursor-pointer ${value ? 'bg-red-100 border-red-400' : 'bg-slate-300 border-black'}  `}>
+              {value ? <BiX color="red" /> : <BiCaretDown />}
             </div>
           </div>
           {value && <RangeDate />}
