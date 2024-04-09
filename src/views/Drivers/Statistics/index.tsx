@@ -57,7 +57,6 @@ const DriverStatistics = () => {
     ]
   }, [])
 
-  console.log(value);
 
 
   return (

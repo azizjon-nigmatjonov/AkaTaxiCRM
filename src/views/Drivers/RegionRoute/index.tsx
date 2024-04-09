@@ -8,6 +8,7 @@ import { useMemo } from "react";
 
 
 
+
 const RegionRoute = () => {
   const handleChange = (list: any) => {
     console.log(list);
@@ -15,7 +16,7 @@ const RegionRoute = () => {
 
   const breadCrumbs = useMemo(() => {
     return [
-      { label: 'Haydovchi', link:'/drivers/main' },
+      { label: 'Haydovchi', link: '/drivers/main' },
       { label: 'Viloyat qatnovi', }
     ]
   }, [])
@@ -26,11 +27,11 @@ const RegionRoute = () => {
         <CBreadcrumbs items={breadCrumbs} progmatic={true} type="link" />
       </Header>
       <div className="px-5">
-         {/* <SectionHeader handleSearch={() => { }}>
+        {/* <SectionHeader handleSearch={() => { }}>
           <AddButton text="Marshrut tashkil qilish" onClick={() => { }} />
         </SectionHeader>  */}
-
         <Points handleChange={handleChange} />
+        
         <Result />
       </div>
     </>
