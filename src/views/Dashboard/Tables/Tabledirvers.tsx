@@ -27,15 +27,15 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
     const handleReasonClose = () => {
         setIsOpen(true)
 
-        
-        
+
+
     }
     function handleDriverReason() {
         setIsOpen(false)
         setDriverReason(true);
-        
+
         console.log('100');
-        
+
     }
 
     const handleYearButtonClick = () => {
@@ -115,7 +115,7 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
 
 
     return (
-        <TableContainer component={Paper} sx={{ border: '1px solid #e0e0e0' }}>
+        <TableContainer component={Paper} sx={{ border: '1px solid #e0e0e0', backgroundColor: '#fff !important' }}>
             <div className='pl-[5px] mt-[10px] pr-[16px] flex items-center justify-between'>
                 <Box
                     sx={{
@@ -143,8 +143,14 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
                         value={yearDrivers}
                         className='w-[183px] p-0 border'
                         sx={{
-                            borderRadius: '5px',
-                            padding: '9px 14px',
+                            border: '1px solid #D0D5DD',
+                            boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                            color: '#101828',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            padding: '9px 12px',
+                            height: '40px',
                             '& .MuiInputBase-input': {
                                 padding: 0,
                             },
@@ -175,8 +181,14 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
                         value={monthName}
                         className='w-[183px] p-0 border'
                         sx={{
-                            borderRadius: '5px',
-                            padding: '9px 14px',
+                            border: '1px solid #D0D5DD',
+                            boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                            color: '#101828',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            padding: '9px 12px',
+                            height: '40px',
                             '& .MuiInputBase-input': {
                                 padding: 0,
                             },
@@ -212,8 +224,14 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
                         value={selectedWeek}
                         className='w-[183px] p-0 border'
                         sx={{
-                            borderRadius: '5px',
-                            padding: '9px 14px',
+                            border: '1px solid #D0D5DD',
+                            boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                            color: '#101828',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            padding: '9px 12px',
+                            height: '40px',
                             '& .MuiInputBase-input': {
                                 padding: 0,
                             },
@@ -259,23 +277,23 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
                             {isOpen ? (
                                 <>
                                     <TableCell sx={{ padding: '16px' }} align="right">Topdi</TableCell>
-                                    <TableCell sx={{ padding: '16px',}} align="right" ><span className="inline-block cursor-pointer" onClick={handleDriverReason}>Yo’lovchini bekor qilish <ArrowRightIcon sx={{ fontSize: 24}} /></span></TableCell>
-                                    <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center" onClick={handleReason}>Bekor qilindi <ArrowRightIcon sx={{fontSize: 24 }} /></TableCell>
+                                    <TableCell sx={{ padding: '16px', }} align="right" ><span className="inline-block cursor-pointer" onClick={handleDriverReason}>Yo’lovchini bekor qilish <ArrowRightIcon sx={{ fontSize: 24 }} /></span></TableCell>
+                                    <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center" onClick={handleReason}>Bekor qilindi <ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
                                 </>
                             ) : (
 
                                 <>
                                     {driverReason ? (
                                         <>
-                                            <TableCell sx={{ padding: '16px',cursor: 'pointer' }} align="right">Mazam yog'ide <ArrowLeft sx={{ fontSize: 24 }} onClick={handleReasonClose}/></TableCell>
-                                            <TableCell sx={{ padding: '16px',  }} align="right">Azgina ichgandim <ArrowUpward sx={{transform: 'rotate(180deg)', fontSize: 16 }}  /></TableCell>
-                                            <TableCell sx={{ padding: '16px !important'}} align="center">Ko’p kutib qoldim <ArrowUpward sx={{transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Yo’lovchini bekor qilish <ArrowLeft sx={{ fontSize: 24 }} onClick={handleReasonClose} /></TableCell>
+                                            <TableCell sx={{ padding: '16px', }} align="right">Azgina ichgandim <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px !important' }} align="center">Ko’p kutib qoldim <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
                                         </>
                                     ) : (
                                         <>
-                                            <TableCell sx={{ padding: '16px' }} align="right">Rejalarim o’zgarib qoldi <ArrowLeft sx={{ fontSize: 24 }} onClick={handleReasonClose}/></TableCell>
-                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Yo’nalish noto’g’ri <ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
-                                            <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Ko’p kutib qoldim <ArrowRightIcon sx={{ fontSize: 24 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px' }} align="right">Bekor qilindi <ArrowLeft sx={{ fontSize: 24 }} onClick={handleReasonClose} /></TableCell>
+                                            <TableCell sx={{ padding: '16px', cursor: 'pointer' }} align="right">Yo’nalish noto’g’ri <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
+                                            <TableCell sx={{ padding: '16px !important', cursor: 'pointer' }} align="center">Ko’p kutib qoldim <ArrowUpward sx={{ transform: 'rotate(180deg)', fontSize: 16 }} /></TableCell>
                                         </>
 
                                     )}
@@ -291,15 +309,13 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
 
                     </TableRow>
                 </TableHead>
-
-
                 <TableBody>
                     {driverTripsDataFromCity?.data.map((item: any, index: number) => (
                         <TableRow key={index} sx={{
                             border: '0px solid #EAECF0'
                         }}>
                             {index === 0 && (
-                                <TableCell colSpan={1} rowSpan={driverTripsDataFromCity?.data?.length} align="center">Toshkent shahar</TableCell>
+                                <TableCell colSpan={1} rowSpan={driverTripsDataFromCity?.data?.length + 1} align="center">Toshkent shahar</TableCell>
                             )}
                             <TableCell component="th" scope="row" sx={{
                                 borderLeft: '1px solid #EAECF0',
@@ -317,7 +333,7 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
                             }}>{item?.done}</TableCell>
                             <TableCell align="right" sx={{
                                 borderRight: '0px solid #EAECF0',
-                                color: '#667085',
+                                color: '#F79009',
                                 fontSize: '14px',
                                 fontWeight: '500',
                             }}>{item?.passenger_canceled}</TableCell>
@@ -331,6 +347,21 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
 
                         </TableRow>
                     ))}
+                    <TableRow>
+                        <TableCell align="left" sx={{ fontSize: '14px', borderLeft: '1px solid #EAECF0', color: '#101828', fontWeight: 500 }}>Umumiy</TableCell>
+                        <TableCell align="right" sx={{ borderRight: '0px solid #EAECF0', color: '#039855', fontSize: '14px' }}>
+                            {driverTripsDataFromCity?.data?.reduce((total: number, item: any) => total + (item?.done || 0), 0)}
+                        </TableCell>
+                        <TableCell align="right" sx={{ borderRight: '0px solid #EAECF0', color: '#F79009', fontSize: '14px' }}>
+                            {driverTripsDataFromCity?.data?.reduce((total: number, item: any) => total + (item?.passenger_canceled || 0), 0)}
+                        </TableCell>
+                        <TableCell align="center" sx={{ borderRight: '0px solid #EAECF0', color: '#D92D20', fontSize: '14px' }}>
+                            {driverTripsDataFromCity?.data?.reduce((total: number, item: any) => total + (item?.canceled || 0), 0)}
+                        </TableCell>
+
+                    </TableRow>
+                    
+
                 </TableBody>
             </Table>
         </TableContainer>

@@ -111,7 +111,7 @@ function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPess
     }
 
     return (
-        <TableContainer component={Paper} sx={{ marginTop: '24px', border: '1px solid #e0e0e0' }}>
+        <TableContainer component={Paper} sx={{ marginTop: '24px', border: '1px solid #e0e0e0', backgroundColor: '#fff !important' }}>
             <div className='pl-[5px] mt-[10px] pr-[16px] flex items-center justify-between'>
                 <Box
                     sx={{
@@ -139,8 +139,14 @@ function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPess
                         value={yearPessengerVilage}
                         className='w-[183px] p-0 border'
                         sx={{
-                            borderRadius: '5px',
-                            padding: '9px 14px',
+                            border: '1px solid #D0D5DD',
+                            boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                            color: '#101828',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            padding: '9px 12px',
+                            height: '40px',
                             '& .MuiInputBase-input': {
                                 padding: 0,
                             },
@@ -171,8 +177,14 @@ function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPess
                         value={monthName}
                         className='w-[183px] p-0 border'
                         sx={{
-                            borderRadius: '5px',
-                            padding: '9px 14px',
+                            border: '1px solid #D0D5DD',
+                            boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                            color: '#101828',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            padding: '9px 12px',
+                            height: '40px',
                             '& .MuiInputBase-input': {
                                 padding: 0,
                             },
@@ -204,8 +216,14 @@ function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPess
                         value={selectedWeek}
                         className='w-[183px] p-0 border'
                         sx={{
-                            borderRadius: '5px',
-                            padding: '9px 14px',
+                            border: '1px solid #D0D5DD',
+                            boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                            color: '#101828',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            borderRadius: '8px',
+                            padding: '9px 12px',
+                            height: '40px',
                             '& .MuiInputBase-input': {
                                 padding: 0,
                             },
@@ -302,7 +320,7 @@ function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPess
                             </TableCell>
 
                             {index === 0 && (
-                                <TableCell colSpan={0.5} rowSpan={passengersDataVilage?.data?.length} align="center">Toshkent shahar</TableCell>
+                                <TableCell colSpan={0.5} rowSpan={passengersDataVilage?.data?.length + 1} align="center">Toshkent shahar</TableCell>
                             )}
 
                             <TableCell align="right" sx={{
@@ -333,6 +351,25 @@ function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPess
 
                         </TableRow>
                     ))}
+
+                    <TableRow>
+                        <TableCell align="left" sx={{ fontSize: '14px', borderRight: '1px solid #EAECF0', color: '#101828', fontWeight: 500 }}>Umumiy</TableCell>
+                        <TableCell align="right" sx={{ fontSize: '14px', borderLeft: '1px solid #EAECF0', color: '#039855', fontWeight: 500 }}>
+                            {passengersDataVilage?.data?.reduce((total: number, item: any) => total + (item?.done || 0), 0)}
+                        </TableCell>
+                        <TableCell align="right" sx={{ fontSize: '14px', color: '#667085', fontWeight: 500 }}>
+                            {passengersDataVilage?.data?.reduce((total: number, item: any) => total + (item?.canceled || 0), 0)}
+                        </TableCell>
+                        <TableCell align="right" sx={{fontSize: '14px', borderRight: '0px solid #EAECF0', color: '#F79009' }}>
+                            {passengersDataVilage?.data?.reduce((total: number, item: any) => total + (item?.canceled_by_client || 0), 0)}
+                        </TableCell>
+                        <TableCell align="center" sx={{fontSize: '14px', borderRight: '0px solid #EAECF0', color: '#D92D20' }}>
+                            {passengersDataVilage?.data?.reduce((total: number, item: any) => total + (item?.canceled_by_driver || 0), 0)}
+                        </TableCell>
+
+                    </TableRow>
+
+
                 </TableBody>
             </Table>
         </TableContainer>
