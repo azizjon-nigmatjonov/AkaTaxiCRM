@@ -4,15 +4,24 @@ import { useQuery } from "react-query";
 import fileService from "../../../../services/fileService";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
 import ImageFrame from "../../../../components/ImageFrame";
+import LTabs from "../../../../components/CElements/CTab/LineTab";
+
+const tabList = [
+  { slug: '', name: 'Aktiv' },
+  { slug: 'on-way', name: "Yo'lda" },
+  { slug: 'canceled', name: 'Bekor qilingan' },
+  { slug: 'done', name: 'Yetib borgan' }
+]
 
 const Result = () => {
-  const { start, end, currentPage } = useGetQueries();
+  const { start, end, currentPage, status } = useGetQueries();
 
-  const { data, isLoading } = useQuery(['GET_TRIPS', start, end, currentPage], () => {
+  const { data, isLoading } = useQuery(['GET_TRIPS', start, end, currentPage, status], () => {
     return fileService.getTrips({
       page: currentPage, perPage: 10,
       from_location_id: decodeURIComponent(start).split(',').map(li => parseInt(li)),
-      to_location_id: decodeURIComponent(end).split(',').map(li => parseInt(li))
+      to_location_id: decodeURIComponent(end).split(',').map(li => parseInt(li)),
+      status
     })
   })
 
@@ -134,7 +143,7 @@ const Result = () => {
           {bodyColumns.list.length ?? 0} ta haydovchi
         </span>
       </div>
-
+      <LTabs tabList={tabList} />
       <CTable
         headColumns={headColumns}
         bodyColumns={bodyColumns.list}
