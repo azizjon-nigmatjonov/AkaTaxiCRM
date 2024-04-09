@@ -25,7 +25,6 @@ const Result = () => {
     })
   })
 
-  console.log(data);
 
   const headColumns = useMemo(() => {
     return [
@@ -98,6 +97,10 @@ const Result = () => {
           </div>
         ),
       },
+      {
+        title: 'Trip yaratilgan voqti',
+        id: 'created_at'
+      }
     ];
   }, []);
 
