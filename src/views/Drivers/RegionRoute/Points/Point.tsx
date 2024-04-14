@@ -25,6 +25,9 @@ const PointSelector = ({
   const [active, setActive] = useState(false);
   const [checkedList, setCheckedList] = useState([]);
   const { navigateQuery } = usePageRouter()
+  console.log(active);
+
+  // console.log(checkedList);
 
 
   const handleList = (element: any) => {
@@ -38,10 +41,10 @@ const PointSelector = ({
     setSelected(selectList);
   };
 
-  console.log(active);
-
 
   const handleCheck = (parent: any, child: any) => {
+
+    console.log(child);
 
     const obj: any = {
       ...child,
@@ -68,7 +71,7 @@ const PointSelector = ({
     // console.log(encodeURIComponent(list[0].list.filter((li: any) => li.checked == true).map((li: any) => li.id).join(',')));
 
     // console.log(list[0].list.filter((li: any) => li.checked == true).map((li: any) => li.id));
-    
+
     if (list.length == 2) {
       list.length == 2 && navigateQuery({ start: encodeURIComponent(list[0].list.filter((li: any) => li.checked == true).map((li: any) => li.id).join(',')), end: encodeURIComponent(list[1].list.filter((li: any) => li.checked == true).map((li: any) => li.id)) }, true);
     }
@@ -96,21 +99,11 @@ const PointSelector = ({
         </div>
 
         <div className="font-medium">
-          {selected[step]?.name?.uz
-            ? selected[step]?.name?.uz
-            : "Manzilni tanlang"}
-          {checkedList?.length ? (
-            <p className="text-[var(--gray)]">
-              {checkedList?.length < 2 ? (
-                <>
-                  {checkedList?.map((i: any) => (
-                    <span>{i.name.uz}</span>
-                  ))}
-                </>
-              ) : (
-                <>Tumanlar soni {checkedList.length}</>
-              )}
-            </p>
+          {selected[step]?.name?.uz ? selected[step]?.name?.uz : "Manzilni tanlang"} {checkedList?.length ? (<p className="text-[var(--gray)]"> {checkedList?.length < 2 ? (<>{checkedList?.map((i: any) => (<span>{i.name.uz}</span>))}</>
+          ) : (
+            <>Tumanlar soni {checkedList.length}</>
+          )}
+          </p>
           ) : (
             ""
           )}
@@ -151,7 +144,6 @@ const PointSelector = ({
                 >
                   {item.checked ? <CheckLine /> : ""}
                 </div>
-
               </li>
 
             ))}

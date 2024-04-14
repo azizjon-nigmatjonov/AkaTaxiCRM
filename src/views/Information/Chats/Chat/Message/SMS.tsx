@@ -5,8 +5,10 @@ const SMS = ({
   element?: any;
   left?: boolean;
 }) => {
+  console.log(element);
+  
   return (
-    <div className={`relative inline-bloc`}>
+    <div className={`relative inline-block`}>
       {/* <div className="border border-[var(--lineGray)] w-[30px] h-[30px] rounded-full flex items-center justify-center absolute left-[-15px] top-[8px] bg-white">
         {curr == 2 ? (
           <img className="w-full h-full" src={""} alt={"img"} />

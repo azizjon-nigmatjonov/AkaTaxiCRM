@@ -9,6 +9,7 @@ interface Props {
   handlerValue?: (val: any) => void
   // classes?: string;
   disabled?: boolean
+  placeholder?: string
 }
 
 const CSelect = ({
@@ -16,7 +17,7 @@ const CSelect = ({
   options = [],
   label = "",
   handlerValue,
-  disabled
+  disabled,
 }: Props) => {
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -31,7 +32,6 @@ const CSelect = ({
           disabled={disabled}
           // sx={{ m: 1, width: 112, height: 3 }}
           defaultValue={options?.[0]?.value}
-          placeholder="Barchasi"
           inputProps={{
             "aria-label": "Without label",
           }}

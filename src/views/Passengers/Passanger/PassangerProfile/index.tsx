@@ -89,11 +89,12 @@ const PassengerProfile = () => {
       passengerService.updateElement(query?.id, data).then(() => {
         dispatch(
           websiteActions.setAlertData({
-            title: "Ma'lumotlar yangilandi!",
+            mainTitle: 'Muvaffaqiyatli yakunlandi',
+            title: "Successfully updated profile!",
             translation: "common",
           })
         );
-        navigateTo('/passengers/main')
+        // navigateTo('/passengers/main')
       })
       navigateQuery({ passenger: '' })
     } else {

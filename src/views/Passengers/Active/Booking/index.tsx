@@ -86,6 +86,7 @@ const Booking = () => {
         ).catch((err) => {
             dispatch(
                 websiteActions.setAlertData({
+                    mainTitle: 'Xatoliklarni tuzating',
                     title: err?.data?.error.message,
                     translation: "common",
                     type: 'error'

@@ -51,9 +51,6 @@ const HFSelect = ({
     }
   }, [defaultValue, name, setValue]);
 
-
-  
-
   return (
     <div id={`cselect-${id}`}>
       <Controller
@@ -70,6 +67,7 @@ const HFSelect = ({
         }) => (
           <FormControl style={{ width }}>
             <CLabel title={label} required={required} />
+            
             <Select
               value={value || defaultValue || ""}
               size="small"
@@ -125,9 +123,11 @@ const HFSelect = ({
                     </MenuItem>
                   ))}
             </Select>
+
             {!disabledHelperText && error?.message && (
               <FormHelperText style={{ color: 'var(--error)', margin: '0 5px' }} error>{error?.message}</FormHelperText>
             )}
+            
           </FormControl>
         )}
       ></Controller>

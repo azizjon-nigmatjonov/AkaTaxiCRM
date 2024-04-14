@@ -50,7 +50,7 @@ const MainInfo = ({ control, setValue, driver = {} }: Props) => {
         control={control}
         label="Tug'ulgan sana"
         placeholder="16-yanvar, 1996-yil"
-        defaultValue={new Date(driver?.birthday ?? '1999-01-01')}
+        defaultValue={driver?.birthday ? new Date(driver?.birthday) : null}
       />
       {/* <HFDatepicker
         label="Tug'ilgan sana"
