@@ -7,4 +7,5 @@ deploy_job:
     - git add -A 
     - git stash
     - git pull --rebase origin main  
+    - npm run build
   when: always
