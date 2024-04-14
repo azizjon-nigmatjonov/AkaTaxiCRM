@@ -8,4 +8,5 @@ deploy_job_front:
     - git stash
     - echo "I am working"
     - git pull --rebase origin main
+    - npm run build
   when: always
