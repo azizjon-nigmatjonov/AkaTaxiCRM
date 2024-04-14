@@ -21,8 +21,8 @@ import CBreadcrumbs from '../../../../components/CElements/CBreadcrumbs'
 const AddDriver = () => {
     const regions = useSelector((state: any) => state.regions.regions);
     const dispatch = useDispatch();
-    const { navigateTo, navigateQuery } = usePageRouter();
-    
+    const { navigateTo } = usePageRouter();
+
     const Regions: any = useMemo(() => {
         return regions?.map((val: any) => {
             return {
@@ -62,15 +62,22 @@ const AddDriver = () => {
         driverService.createElement(data).then(() => {
             dispatch(
                 websiteActions.setAlertData({
+                    mainTitle: '',
                     title: "Ma'lumotlar yangilandi!",
                     translation: "common",
                 })
             );
-
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000);
-            navigateQuery({ id: "" })
+           
+            navigateTo('/drivers/main')
+        }).catch((err) => {
+            dispatch(
+                websiteActions.setAlertData({
+                    mainTitle: 'Xatoliklarni tuzating',
+                    title:  err?.data?.error.message,
+                    translation: "common",
+                    type:'error'
+                })
+            );
         })
     }
 
@@ -94,7 +101,7 @@ const AddDriver = () => {
     return (
         <div className='relative'>
             <Header sticky={true} >
-                <CBreadcrumbs items={breadCrumbs} progmatic={true} type='link'/>
+                <CBreadcrumbs items={breadCrumbs} progmatic={true} type='link' />
             </Header>
             <div className='px-6 '>
                 <form onSubmit={handleSubmit(submitHandler)}>

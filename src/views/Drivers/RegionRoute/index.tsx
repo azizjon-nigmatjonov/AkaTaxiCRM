@@ -6,9 +6,6 @@ import Result from "./Result";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { useMemo } from "react";
 
-
-
-
 const RegionRoute = () => {
   const handleChange = (list: any) => {
     console.log(list);
@@ -31,7 +28,6 @@ const RegionRoute = () => {
           <AddButton text="Marshrut tashkil qilish" onClick={() => { }} />
         </SectionHeader>  */}
         <Points handleChange={handleChange} />
-        
         <Result />
       </div>
     </>

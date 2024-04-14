@@ -42,7 +42,8 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
       driverService.deleteElement(query?.id).then(() => {
         dispatch(
           websiteActions.setAlertData({
-            title: "Ma'lumotlar o'chirildi!",
+            mainTitle: "Ma'lumotlar o'chirildi!",
+            title: "Sizning akkountingiz o'chirib tashlandi!",
             translation: "common",
             type: 'error'
           })
@@ -78,6 +79,7 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
       driverService.updateElement(query?.id, data).then(() => {
         dispatch(
           websiteActions.setAlertData({
+            mainTitle: 'Muvaffaqiyatli amalga o`shirildi',
             title: "Ma'lumotlar yangilandi!",
             translation: "common",
           })

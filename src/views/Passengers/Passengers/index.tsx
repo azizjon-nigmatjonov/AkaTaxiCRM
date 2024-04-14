@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/Sections/Header";
 import AddButton from "../../../components/Buttons/AddButton";
@@ -10,21 +10,41 @@ import passengerService from "../../../services/passengers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
 import CSelect from "../../../components/CElements/CSelect";
-import CDriver from "../../../components/CElements/CDivider";
-import CSlider from "../../../components/CElements/CSlider";
+// import CDriver from "../../../components/CElements/CDivider";
+// import CSlider from "../../../components/CElements/CSlider";
 import { useSelector } from "react-redux";
 import { Header } from "../../../components/Header";
 import ImageFrame from "../../../components/ImageFrame";
-import { useSearchParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+// import { useSearchParams } from "react-router-dom";
+// import { useTranslation } from "react-i18next";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
+import Filters from "./Filters";
+// import { useForm } from "react-hook-form";
+// import HFSelect from "../../../components/FormElements/HFSelect";
+// import DropDown from "../../../components/FormElements/DropDown";
+
+const Divice = [
+  { value: '0', label: 'IOS' },
+  { value: '1', label: 'Android' }
+]
+
+const Version = [
+  { value: '0', label: 'v 1.1.04' },
+  { value: '1', label: 'v 1.1.03' },
+  { value: '2', label: 'v 1.1.02' },
+  { value: '3', label: 'v 1.1.01' },
+]
+
 
 const Passengers = () => {
-  const { navigateQuery, navigateTo } = usePageRouter();
-  const { t } = useTranslation()
-  const { currentPage, q, region_id, birthday } = useGetQueries();
+  const { navigateQuery, navigateTo, getQueries } = usePageRouter();
+  // const { t } = useTranslation()
+  const { currentPage, q, region_id, birthday, } = useGetQueries();
   const regions = useSelector((state: any) => state.regions.regions);
-  const setSearchParams = useSearchParams()[1]
+  // const setSearchParams = useSearchParams()[1];
+  const query = getQueries()
+
+
   const { data, isLoading, refetch } = useQuery(
     ["GET_PASSENGER_LIST", currentPage, q, region_id, birthday],
     () => {
@@ -78,7 +98,7 @@ const Passengers = () => {
       // },
       {
         title: "Keshbek (so'm)",
-        
+
       },
       {
         title: "Tug‘ilgan sana",
@@ -89,7 +109,7 @@ const Passengers = () => {
       },
       {
         title: 'coin',
-        
+
       },
       {
         title: "",
@@ -114,7 +134,7 @@ const Passengers = () => {
       }) ?? []
     );
   }, [passengers]);
-  
+
 
   const handleActions = (status: string, el: any) => {
     if (status === "delete") {
@@ -146,17 +166,19 @@ const Passengers = () => {
     });
   }, [regions]);
 
-  useEffect(() => {
-    Regions.unshift({ value: 0, label: 'Barchasi' })
-  }, [Regions])
 
   const handlerRegion = (evt: any) => {
     navigateQuery({ region_id: evt })
   }
 
-  const handlerAge = (evt: any) => {
-    navigateQuery({ birthday: evt })
-  }
+  // const handlerAge = (evt: any) => {
+  //   navigateQuery({ birthday: evt })
+  // }
+
+  // const handlerDate = (evt: any) => {
+  //   console.log(evt);
+
+  // }
 
   const breadCrumbItems = useMemo(() => {
     return [
@@ -175,13 +197,13 @@ const Passengers = () => {
   return (
     <>
       <Header>
-        <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link"/>
+        <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
       </Header>
       <div className="px-6 ">
 
-        <SectionHeader  handleSearch={handleSearch}>
+        <SectionHeader extra={<FilterButton text="Filter" />} handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
-            <FilterButton text="filter">
+            {/* <FilterButton text="filter">
               <div>
                 <CSelect handlerValue={handlerRegion} options={Regions} id="filter" label="Viloyat" />
               </div>
@@ -190,7 +212,7 @@ const Passengers = () => {
                 <CSlider handleValue={handlerAge} />
               </div>
               <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer mt-3">{t('ignore_text')}</span>
-            </FilterButton>
+            </FilterButton> */}
 
             <AddButton
               text="new_passenger"
@@ -199,6 +221,14 @@ const Passengers = () => {
           </div>
         </SectionHeader>
 
+        <Filters filter={!!query.filter}>
+          {/* <DropDown label="Vaqt" name="Vaqt" placeholder="Tanlang" /> */}
+          <CSelect handlerValue={handlerRegion} options={Divice} label="Operatsion sistema" placeholder="Tanglang" />
+          <CSelect handlerValue={handlerRegion} options={Version} label="Versiyalar" placeholder="Tanglang" />
+          <CSelect handlerValue={handlerRegion} options={[{ value: 'm', label: 'Erkak' }, { value: 'f', label: 'Ayol' }]} label="Jinsi" placeholder="Tanlang" />
+          <CSelect handlerValue={handlerRegion} options={Regions} label="Viloyat" placeholder="Tanlang" />
+        </Filters>
+
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns}
@@ -206,6 +236,7 @@ const Passengers = () => {
           isLoading={isLoading}
           handleActions={handleActions}
           currentPage={currentPage}
+          clickable={true}
         />
 
         <Form refetch={refetch} />

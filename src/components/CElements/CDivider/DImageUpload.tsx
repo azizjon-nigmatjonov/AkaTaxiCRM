@@ -61,8 +61,8 @@ const DImageUpload = ({
     }
   }, [defaultValue, name, setValue]);
 
-   
-  
+
+
 
   const updateImage = (e: any) => {
     e.stopPropagation();
@@ -79,8 +79,8 @@ const DImageUpload = ({
     defaultValue = ''
   };
 
-  
-  
+
+
   return (
     <>
       <Controller name={name} control={control} render={({ field: { onChange } }) => (
@@ -99,19 +99,21 @@ const DImageUpload = ({
               </div>
             </div> : ""}
           <div onClick={updateImage}
-            className={`cursor-pointer flex px-[14px] text-[var(--gray)] font-medium border border-[var(--lineGray)] rounded-[10px] h-[50px] bg-[var(--lightGray)] flex-col justify-center items-center max-w-[250px] min-w-[249px]`}
+            className={`cursor-pointer flex overflow-hidden text-[var(--gray)] font-medium border border-[var(--lineGray)] rounded-[10px] h-[50px] bg-[var(--lightGray)] flex-col justify-center items-center max-w-[250px]  min-w-[249px]`}
             style={style}
           >
             <span >{text}</span>
             {defaultValue || (image && !loading) ? (
-              <img
-                className={`h-full  w-full object-cover `}
-                src={image ? `https://cdn.akataxi.uz/media/get-image/${image}` : defaultValue}
-                alt={defaultValue || "image"}
-              /> 
+              <div className=" w-full h-full transition-all duration-300 hover:scale-[1.2]">
+                <img
+                  className={`h-full  w-full object-cover `}
+                  src={image ? `https://cdn.akataxi.uz/media/get-image/${image}` : defaultValue}
+                  alt={defaultValue || "image"}
+                />
+              </div>
             ) : loading ? (
               <CircularProgress />
-              ) : (
+            ) : (
               <ImageFrame />
             )}
             <input

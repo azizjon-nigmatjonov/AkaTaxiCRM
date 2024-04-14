@@ -19,12 +19,12 @@ const Result = () => {
   const { data, isLoading } = useQuery(['GET_TRIPS', start, end, currentPage, status], () => {
     return fileService.getTrips({
       page: currentPage, perPage: 10,
-      from_location_id: decodeURIComponent(start).split(',').map(li => parseInt(li)),
+      from_location_id:  decodeURIComponent(start).split(',').map(li => parseInt(li)),
       to_location_id: decodeURIComponent(end).split(',').map(li => parseInt(li)),
       status
     })
   })
-
+ 
 
   const headColumns = useMemo(() => {
     return [
@@ -61,8 +61,6 @@ const Result = () => {
 
         )
       },
-
-
       {
         title: "Mashina / raqam",
         id: "carInfo",
@@ -98,7 +96,7 @@ const Result = () => {
         ),
       },
       {
-        title: 'Trip yaratilgan voqti',
+        title: 'Trip yaratilgan vaqti',
         id: 'created_at'
       }
     ];
