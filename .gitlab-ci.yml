@@ -6,6 +6,7 @@ deploy_job_front:
   script:
     - git add -A 
     - git stash
-    - git pull --rebase origin main  
+    - cd /var/www/admin.akataxi.uz 
+    - git pull --rebase origin main
     - npm run build
   when: always
