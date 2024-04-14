@@ -1,7 +1,7 @@
 stages:
   - deploy
 
-deploy_job:
+deploy_job_front:
   stage: deploy
   script:
     - git add -A 
