@@ -12,5 +12,4 @@ deploy_job:
     - git stash
     - git pull --rebase origin main
     - cp .env.production .env
-    - npm run build
   when: always
