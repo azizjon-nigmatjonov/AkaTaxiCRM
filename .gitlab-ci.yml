@@ -7,7 +7,5 @@ deploy_job_front:
     - git add -A 
     - git stash
     - echo "I am working"
-    - cd /var/www/admin.akataxi.uz 
     - git pull --rebase origin main
-    - npm run build
   when: always
