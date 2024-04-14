@@ -1,12 +1,16 @@
+variables:
+  GIT_CLONE_PATH: "/var/www/admin.akataxi.uz"
+  GIT_CLEAN_FLAGS: none
+
 stages:
   - deploy
 
-deploy_job_front:
+deploy_job:
   stage: deploy
   script:
-    - git add -A 
+    - git add -A
     - git stash
-    - echo "I am working"
     - git pull --rebase origin main
+    - mv .env.production .env
     - npm run build
   when: always
