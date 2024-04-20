@@ -77,7 +77,6 @@ function Dashboard() {
                 <Drivers data={data?.data[0]} />
             </div>
             <ContentTable
-
                 setCountWeekDriversVilage={setCountWeekDriversVilage}
                 setSelectMonthDriversVilage={setSelectMonthDriversVilage}
                 setYearDriversVilage={setYearDriversVilage}

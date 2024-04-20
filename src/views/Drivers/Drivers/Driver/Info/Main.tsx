@@ -23,7 +23,6 @@ const genderList = [
 
 const MainInfo = ({ control, setValue, driver = {} }: Props) => {
 
-  console.log(driver);
 
 
   return (

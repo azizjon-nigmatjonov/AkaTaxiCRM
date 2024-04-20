@@ -3,7 +3,7 @@ import requestForm from '../../utils/requestFormdata'
 const passengerService = {
   getList: (data: any) =>
     request.get(
-      `/passengers?page=${data.page}&perPage=${data.perPage}${data.q ? `&q=${data.q}` : ""}${data.region_id ? `&region_id=${data.region_id}` : ""}`
+      `/passengers?page=${data.page}&perPage=${data.perPage}${data.q ? `&q=${data.q}` : ""}${data.region_id ? `&region_id=${data.region_id}` : ""}${data.device_type ? `&device_type=${data.device_type}` : ''}${data.version ? `&version=${data.version}` : ''}${data.created_at ? `&created_at=${data.created_at}` : ''}${data.gender? `&gender=${data.gender}`:''}`
     ),
   createElement: (data: any) => request.post("/passengers", { ...data }),
   deleteElement: (id: string) => requestForm.delete(`passengers/${id}`),
@@ -13,7 +13,7 @@ const passengerService = {
   getActivePassengers: (params: any) =>
     request.get(
       `/passengers-popular${params.page ? `?page=${params.page || 1}` : ""
-      }${params.q ? `&q=${params.q}` : ""}${params?.region_id ? `&region_id=${params.region_id}` : ''}${params.birthday ? `&birthday=${params.birthday}` : ''}`
+      }${params.q ? `&q=${params.q}` : ""}${params?.status ? `&status=${params.status}` : ''}${params.birthday ? `&birthday=${params.birthday}` : ''}`
     ),
   getTicket: (params: any) => request.get(`/passengers-tickets/${params.id}${params.page ? `?page=${params.page}` : '1'}${params.perPage ? `&perPage=${params.perPage}` : ''}${params?.status ? `&status=${params.status}` : ''}`),
   activePassengerWidget: () => request.get('/passenger-statistics/booking-widgets'),
