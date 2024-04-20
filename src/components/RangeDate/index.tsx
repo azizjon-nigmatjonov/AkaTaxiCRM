@@ -4,14 +4,20 @@ import { DateRangeCalendar } from '@mui/x-date-pickers-pro/DateRangeCalendar';
 import './style.scss'
 import { FormatCalendar } from '../../utils/formatTime';
 import usePageRouter from "../../hooks/useObjectRouter";
+import AddButton from '../../components/Buttons/AddButton';
 // import { Closer } from '../../components/Closer';
 
-const RangeDate = ({ handlerValue = () => { } }: { handlerValue?: (e: any) => void }) => {
+interface Props {
+    footerActive?: boolean,
+    handlerValue?: (e: any) => void
+}
+
+const RangeDate = ({ handlerValue = () => { }, footerActive = false }: Props) => {
     const { navigateQuery } = usePageRouter();
 
     const clickhandler = (e?: any) => {
-        navigateQuery({ start: FormatCalendar(e[0].$d) })
-        navigateQuery({ end: FormatCalendar(e[1].$d) })
+        navigateQuery({ start: FormatCalendar(e[0]?.$d) })
+        navigateQuery({ end: FormatCalendar(e[1]?.$d) })
         handlerValue(e)
     }
 
@@ -20,6 +26,11 @@ const RangeDate = ({ handlerValue = () => { } }: { handlerValue?: (e: any) => vo
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateRangeCalendar onChange={(e: any) => clickhandler(e)} calendars={2} />
             </LocalizationProvider>
+            {footerActive && <div className='p-5 flex justify-end'>
+                <div>
+                    <AddButton iconLeft={false} text='Tanlang' />
+                </div>
+            </div>}
             {/* <Closer handleClose={() => clickhandler()} /> */}
         </div>
     )

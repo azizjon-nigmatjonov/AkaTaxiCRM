@@ -18,37 +18,37 @@ import ImageFrame from "../../../components/ImageFrame";
 // import { useSearchParams } from "react-router-dom";
 // import { useTranslation } from "react-i18next";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
-import Filters from "./Filters";
+import Filters from "../../../components/Filter";
 // import { useForm } from "react-hook-form";
 // import HFSelect from "../../../components/FormElements/HFSelect";
-// import DropDown from "../../../components/FormElements/DropDown";
+import DropDown from "../../../components/FormElements/DropDown";
 
 const Divice = [
-  { value: '0', label: 'IOS' },
-  { value: '1', label: 'Android' }
+  { value: 'ios', label: 'IOS' },
+  { value: 'android', label: 'Android' }
 ]
 
 const Version = [
-  { value: '0', label: 'v 1.1.04' },
-  { value: '1', label: 'v 1.1.03' },
-  { value: '2', label: 'v 1.1.02' },
-  { value: '3', label: 'v 1.1.01' },
+  { value: 'v 1.1.04', label: 'v 1.1.04' },
+  { value: 'v 1.1.03', label: 'v 1.1.03' },
+  { value: 'v 1.1.02', label: 'v 1.1.02' },
+  { value: 'v 1.1.01', label: 'v 1.1.01' },
 ]
 
 
 const Passengers = () => {
   const { navigateQuery, navigateTo, getQueries } = usePageRouter();
   // const { t } = useTranslation()
-  const { currentPage, q, region_id, birthday, } = useGetQueries();
+  const { currentPage, q, region_id, birthday, start, end, device_type, version, gender } = useGetQueries();
   const regions = useSelector((state: any) => state.regions.regions);
   // const setSearchParams = useSearchParams()[1];
   const query = getQueries()
 
 
   const { data, isLoading, refetch } = useQuery(
-    ["GET_PASSENGER_LIST", currentPage, q, region_id, birthday],
+    ["GET_PASSENGER_LIST", currentPage, q, region_id, birthday, start, end, device_type, version, gender],
     () => {
-      return passengerService.getList({ page: currentPage, perPage: 10, q, region_id, birthday });
+      return passengerService.getList({ page: currentPage, perPage: 10, q, region_id, birthday, device_type, created_at: start && end && JSON.stringify([start, end]), version, gender });
     },
     {
       enabled: true,
@@ -171,14 +171,17 @@ const Passengers = () => {
     navigateQuery({ region_id: evt })
   }
 
-  // const handlerAge = (evt: any) => {
-  //   navigateQuery({ birthday: evt })
-  // }
+  const handlerDiviceModel = (evt: any) => {
+    navigateQuery({ device_type: evt })
+  }
 
-  // const handlerDate = (evt: any) => {
-  //   console.log(evt);
+  const handlerVersion = (evt: any) => {
+    navigateQuery({ version: evt })
+  }
 
-  // }
+  const handlerGender = (evt: any) => {
+    navigateQuery({ gender: evt })
+  }
 
   const breadCrumbItems = useMemo(() => {
     return [
@@ -222,10 +225,10 @@ const Passengers = () => {
         </SectionHeader>
 
         <Filters filter={!!query.filter}>
-          {/* <DropDown label="Vaqt" name="Vaqt" placeholder="Tanlang" /> */}
-          <CSelect handlerValue={handlerRegion} options={Divice} label="Operatsion sistema" placeholder="Tanglang" />
-          <CSelect handlerValue={handlerRegion} options={Version} label="Versiyalar" placeholder="Tanglang" />
-          <CSelect handlerValue={handlerRegion} options={[{ value: 'm', label: 'Erkak' }, { value: 'f', label: 'Ayol' }]} label="Jinsi" placeholder="Tanlang" />
+          <DropDown label="Vaqt" name="Vaqt" placeholder="Tanlang" defaultValue={'01.01-.01.01'} />
+          <CSelect handlerValue={handlerDiviceModel} options={Divice} label="Operatsion sistema" placeholder="Tanglang" />
+          <CSelect handlerValue={handlerVersion} options={Version} label="Versiyalar" placeholder="Tanglang" />
+          <CSelect handlerValue={handlerGender} options={[{ value: 'm', label: 'Erkak' }, { value: 'f', label: 'Ayol' }]} label="Jinsi" placeholder="Tanlang" />
           <CSelect handlerValue={handlerRegion} options={Regions} label="Viloyat" placeholder="Tanlang" />
         </Filters>
 

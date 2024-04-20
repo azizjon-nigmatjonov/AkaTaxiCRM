@@ -101,6 +101,7 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
             <p className="bg-[var(--softGray)] p-3 rounded-[10px] font-[600]">
               Asosiy ma’lumotlar
             </p>
+
             <MainInfo driver={driver} control={control} setValue={setValue} />
           </CCard>
 

@@ -5,8 +5,8 @@ import FilterButton from "../../../components/Filters";
 import { useQuery } from "react-query";
 import passengerService from "../../../services/passengers";
 import CSelect from "../../../components/CElements/CSelect";
-import CDriver from "../../../components/CElements/CDivider";
-import CSlider from "../../../components/CElements/CSlider";
+// import CDriver from "../../../components/CElements/CDivider";
+// import CSlider from "../../../components/CElements/CSlider";
 import { useSelector } from "react-redux";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
@@ -17,24 +17,39 @@ import DriversList from "./DriversList";
 import ImageFrame from "../../../components/ImageFrame";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import Statistics from "./Statistics";
-import { useSearchParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+// import { useSearchParams } from "react-router-dom";
+// import { useTranslation } from "react-i18next";
 import AddButton from "../../../components/Buttons/AddButton";
 import cls from './style.module.scss';
+import Filters from "../../../components/Filter";
+
+const Reasons = [
+  { value: 0, label: 'Sabablar' }
+]
+
+const Status = [
+  { value: 'created', label: 'Qidiryapti' },
+  { value: 'driver_accepted', label: 'Topildi' },
+  { value: 'on-way', label: 'Safarda' },
+  { value: 'done', label: 'Yetib bordi' },
+  { value: 'canceled_by_driver', label: 'Haydovchi bekor qildi' },
+  { value: 'canceled_by_client', label: "Yo'lovchi bekor qildi" },
+]
 
 const ActivePassengers = () => {
-  const { currentPage, q, region_id, birthday } = useGetQueries();
-  const { navigateQuery, navigateTo } = usePageRouter()
+  const { currentPage, q, region_id,  status} = useGetQueries();
+  const { navigateQuery, navigateTo, getQueries } = usePageRouter()
+  const query = getQueries()
   const [driverLists, setDriverLists] = useState()
-  const setSearchParams = useSearchParams()[1]
-  const { t } = useTranslation()
+  // const setSearchParams = useSearchParams()[1]
+  // const { t } = useTranslation()
 
 
 
   const { data: passengers, isLoading } = useQuery(
-    ["GET_ACTIVE_PASSENGERS", q, currentPage, region_id, birthday],
+    ["GET_ACTIVE_PASSENGERS", q, currentPage, region_id, status],
     () => {
-      return passengerService.getActivePassengers({ q, page: currentPage, region_id, birthday });
+      return passengerService.getActivePassengers({ q, page: currentPage, region_id, status });
     },
     { refetchInterval: 4 * 60 * 1000 }
   );
@@ -78,7 +93,7 @@ const ActivePassengers = () => {
         render: (val: any) => val && (
           <>
             <p className={`px-2 py-1 inline-block rounded-2xl ${val == 'created' ? cls.search : val == 'driver_accepted' ? cls.found : val == 'on-way' ? cls.onWay : val == 'done' ? cls.done : val == 'canceled' ? cls.notFound : cls.reject}`}>
-              
+
               {val == 'created' ? 'Qidiryapti' : val == 'driver_accepted' ? 'Topildi' : val == 'on-way' ? 'Safarda' : val == 'done' ? 'Yetib bordi' : val == 'canceled' ? 'Topilmadi' : val == 'canceled_by_driver' ? 'Haydovchi bekor qildi' : 'Yo’lovchi bekor qildi'}
             </p>
           </>
@@ -156,13 +171,13 @@ const ActivePassengers = () => {
     navigateQuery({ q: value })
   };
 
-  const handleRegion = (evt: any) => {
-    navigateQuery({ region_id: evt })
+  const handlerStatus = (evt: any) => {
+    navigateQuery({ status: evt })
   }
 
-  const handleBirthday = (evt: any) => {
-    navigateQuery({ birthday: evt })
-  }
+  // const handleBirthday = (evt: any) => {
+  //   navigateQuery({ birthday: evt })
+  // }
 
 
   const breadCrubmsItems = useMemo(() => {
@@ -177,16 +192,18 @@ const ActivePassengers = () => {
     ]
   }, []);
 
+
+
   return (
     <div>
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrubmsItems} type="link" progmatic={true} />
       </Header>
       <div className="px-6">
-        <SectionHeader handleSearch={handleSearch}>
+        <SectionHeader extra={<FilterButton text="filter" />} handleSearch={handleSearch}>
           <div className="flex items-center gap-[14px]">
 
-            <FilterButton text="filter">
+            {/* <FilterButton text="filter">
               <div >
                 <CSelect handlerValue={handleRegion} options={Regions} id="filter" label="Viloyat" />
               </div>
@@ -195,11 +212,19 @@ const ActivePassengers = () => {
                 <CSlider handleValue={handleBirthday} />
               </div>
               <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer mt-3">{t('ignore_text')}</span>
-            </FilterButton>
+            </FilterButton> */}
 
             <AddButton text="Buyurtma berish" onClick={() => navigateTo('/passengers/booking')} />
           </div>
         </SectionHeader>
+
+        <Filters filter={!!query?.filter}>
+          <div className="w-[500px] flex gap-2">
+            <CSelect label="Sabablar" options={Reasons} />
+            <CSelect handlerValue={handlerStatus} label="Status" options={Status} />
+          </div>
+        </Filters>
+
 
         <Statistics />
 

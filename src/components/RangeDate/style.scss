@@ -2,11 +2,12 @@
     position: absolute;
     top: 100%;
     right: 25px;
+    background-color: white;
+    box-shadow: 5px 5px 15px 5px #ddd;
+    border-radius: 8px;
+    
 
     .MuiDateRangeCalendar-root {
-        background-color: white;
-        box-shadow: 5px 5px 15px 5px #ddd;
-        border-radius: 8px;
 
         &>div:first-child {
             display: none !important;

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { TextareaAutosize } from '@mui/material';
-
+import './style.scss'
 interface Props {
   name: string;
   label?: string;
@@ -9,6 +9,8 @@ interface Props {
   rules?: Record<string, unknown>;
   disabled?: boolean;
   defaultValue?: string;
+  control?: any;
+  setValue?: any;
   placeholder?: string;
 }
 
@@ -20,9 +22,11 @@ export default function HFTextareaAutosize({
   disabled = false,
   defaultValue = '',
   placeholder,
+  control,
+  setValue
 }: Props) {
-  const { control, setValue, formState } = useFormContext();
-  const error: any = formState.errors[name];
+  // const { setValue, formState } = useForm();
+  // const error: any = formState.errors[name];
 
   useEffect(() => {
     if (defaultValue) {
@@ -44,17 +48,18 @@ export default function HFTextareaAutosize({
         rules={{
           required: required ? 'This is a required field' : false,
           ...rules,
+
         }}
         render={({ field }) => (
           <TextareaAutosize
             {...field}
             placeholder={placeholder}
             disabled={disabled}
-            minRows={3} // Adjust as needed
+            minRows={10} // Adjust as needed
           />
         )}
       />
-      {error && <p className="error">{error.message}</p>}
+      {/* {error && <p className="error">{error.message}</p>} */}
     </div>
   );
 }

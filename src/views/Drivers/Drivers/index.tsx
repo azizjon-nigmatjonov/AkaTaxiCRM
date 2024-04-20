@@ -9,27 +9,46 @@ import driverService from "../../../services/drivers";
 import { useQuery } from "react-query";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
-import CSlider from "../../../components/CElements/CSlider";
+// import CSlider from "../../../components/CElements/CSlider";
 import { Header } from "../../../components/Header";
 import ImageFrame from "../../../components/ImageFrame";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
-import { useSearchParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+// import { useSearchParams } from "react-router-dom";
+// import { useTranslation } from    "react-i18next";
+import Filters from "../../../components/Filter";
+import DropDown from "../../../components/FormElements/DropDown";
+import CSelect from "../../../components/CElements/CSelect";
+import { useSelector } from "react-redux";
+
+
+const Divice = [
+  { value: 'ios', label: 'IOS' },
+  { value: 'android', label: 'Android' }
+]
+
+const Version = [
+  { value: 'v 1.1.04', label: 'v 1.1.04' },
+  { value: 'v 1.1.03', label: 'v 1.1.03' },
+  { value: 'v 1.1.02', label: 'v 1.1.02' },
+  { value: 'v 1.1.01', label: 'v 1.1.01' },
+]
 
 
 const Drivers = () => {
-  const { navigateQuery, navigateTo } = usePageRouter();
-  const { currentPage, q, birthday } = useGetQueries();
+  const { navigateQuery, navigateTo, getQueries } = usePageRouter();
+  const { currentPage, q, gender, device_type, start, end, version, region } = useGetQueries();
+  const query = getQueries()
   // const { getQueries } = usePageRouter();
-  const setSearchParams = useSearchParams()[1]
+  // const setSearchParams = useSearchParams()[1]
+  const regions = useSelector((state: any) => state.regions.regions);
 
-  const { t } = useTranslation()
+  // const { t } = useTranslation()
 
 
   const { data, isLoading, refetch } = useQuery(
-    ["GER_DRIVERS_LIST", currentPage, q, birthday],
+    ["GER_DRIVERS_LIST", currentPage, q, gender, device_type, start, end, version, region],
     () => {
-      return driverService.getList({ page: currentPage, perPage: 10, q, birthday });
+      return driverService.getList({ page: currentPage, perPage: 10, q, gender, device_type, created_at: start && end && JSON.stringify([start, end]), version, region });
     }
   );
 
@@ -131,20 +150,40 @@ const Drivers = () => {
     );
   }, [drivers]);
 
+  const Regions = useMemo(() => {
+    return regions?.map((i: any) => {
+      return {
+        value: i.id,
+        label: i.name.uz,
+      };
+    });
+  }, [regions]);
+
   const handleSearch = (evt: any) => {
     navigateQuery({ q: evt })
   };
 
-  const handleAge = (evt: any) => {
-    console.log(evt);
-    
-    navigateQuery({ birthday: evt })
+  const handlerDiviceModel = (evt: any) => {
+    navigateQuery({ device_type: evt })
+  }
+
+
+  const handlerVersion = (evt: any) => {
+    navigateQuery({ version: evt })
+  }
+
+  const handlerGender = (evt: any) => {
+    navigateQuery({ gender: evt })
+  }
+
+  const handlerRegion = (evt: any) => {
+    navigateQuery({ region: evt })
   }
 
   const breadCrubmsItems = useMemo(() => {
     return [
       { label: "Haydovchilar", link: '/drivers/main' },
-      { label: "Ro'yxat",  }
+      { label: "Ro'yxat", }
       // { label: }
     ]
   }, [])
@@ -156,18 +195,26 @@ const Drivers = () => {
         <CBreadcrumbs items={breadCrubmsItems} progmatic={true} />
       </Header>
       <div className="px-6">
-        <SectionHeader handleSearch={handleSearch}>
+        <SectionHeader extra={<FilterButton text="filter" />} handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
-            <FilterButton text="filter">
-              <CSlider handleValue={handleAge} />
-              <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer mt-3">{t('ignore_text')}</span>
-            </FilterButton>
+            {/* <FilterButton text="filter"> */}
+            {/* <CSlider handleValue={handleAge} /> */}
+            {/* <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer mt-3">{t('ignore_text')}</span> */}
+            {/* </FilterButton> */}
             <AddButton
               text="new_driver"
               onClick={() => navigateTo('/drivers/add')}
             />
           </div>
         </SectionHeader>
+
+        <Filters filter={!!query.filter}>
+          <DropDown label="Vaqt" name="Vaqt" placeholder="Tanlang" defaultValue={'01.01-.01.01'} />
+          <CSelect handlerValue={handlerDiviceModel} options={Divice} label="Operatsion sistema" placeholder="Tanglang" />
+          <CSelect handlerValue={handlerVersion} options={Version} label="Versiyalar" placeholder="Tanglang" />
+          <CSelect handlerValue={handlerGender} options={[{ value: 'm', label: 'Erkak' }, { value: 'f', label: 'Ayol' }]} label="Jinsi" placeholder="Tanlang" />
+          <CSelect handlerValue={handlerRegion} options={Regions} label="Viloyat" placeholder="Tanlang" />
+        </Filters>
 
         <CTable
           headColumns={headColumns}

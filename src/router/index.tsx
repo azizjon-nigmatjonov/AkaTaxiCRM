@@ -31,11 +31,12 @@ import Map from "../views/Drivers/Map"
 import Dashboard from "../views/Dashboard";
 
 import Booking from "../views/Passengers/Active/Booking";
+import FotoControl from "../views/Drivers/FotoControl";
 
 const Passanger = lazy(() => import("../views/Passengers/Passanger"));
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
-
+const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"))
 interface Path {
   parent: string;
   link: string;
@@ -255,6 +256,23 @@ const Router = () => {
             })}
             element={<Vehicles />}
           />
+
+          <Route path={getPath({
+            parent: 'drivers',
+            link: 'fotocontrolusers',
+            sidebar: true,
+            title: 'Foto nazorat',
+            icon: 'FotoControl',
+          })} element={<FotoControl />} />
+
+          <Route path={getPath({
+            parent: 'drivers',
+            link: 'fotocontroluser',
+            sidebar: false,
+            title: 'Foto nazorat',
+            icon: ''
+          })} element={<FotoControlUser />} />
+
           <Route
             path={getPath({
               parent: "drivers",

@@ -13,7 +13,8 @@ import {
   StatisticsIcon,
   SmsIcon,
   MapIcon,
-  Dashboard
+  Dashboard,
+  FotoControl
 } from "./Svg/Sidebar";
 
 import { PassengerIcon, DriverIcon, PassengerVehicleIcon, DriverVehicleIcon, PartnersIcon } from "./Svg";
@@ -23,7 +24,7 @@ export const iconsList = [
     name: "admins",
     component: AdminsIcon,
   },
- 
+
   {
     name: "admin",
     component: AdminIcon,
@@ -105,5 +106,9 @@ export const iconsList = [
   {
     name: "Dashboard",
     component: Dashboard,
+  },
+  {
+    name: 'FotoControl',
+    component: FotoControl
   }
 ];

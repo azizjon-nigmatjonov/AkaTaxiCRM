@@ -15,12 +15,12 @@ interface Props {
 const CarInfo = ({ control, setValue, driver = {} }: Props) => {
   const regions = useSelector((state: any) => state.regions.regions);
 
-  
+
   const { data } = useQuery(['GET_CARS_LISTS'], () => {
     return carService.getList()
   })
 
-  
+
   const CarLists: any = useMemo(() => {
     if (!data) return []
     const list = data?.data
@@ -43,7 +43,7 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
       };
     });
   }, [regions]);
-  
+
 
   return (
     <div className="space-y-8">
@@ -65,8 +65,8 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
           readOnly={false}
           defaultValue={driver?.images?.[1]}
         /> */}
-        <DImageUpload control={control} style={{ height: 200 }} name='first_image' label='Oldi qismi rasmi' defaultValue={driver?.images?.[0]} />
-        <DImageUpload control={control} style={{ height: 200 }} name='second_image' label='Salon qismi rasmi' defaultValue={driver?.images?.[1]} />
+        <DImageUpload control={control} style={{ height: 200 }} name='first_image' zoomImg={true} label='Oldi qismi rasmi' defaultValue={driver?.images?.[0]} />
+        <DImageUpload control={control} style={{ height: 200 }} name='second_image' zoomImg={true} label='Salon qismi rasmi' defaultValue={driver?.images?.[1]} />
       </div>
       <div className="grid grid-cols-4 gap-4 mt-5">
         <HFSelect
