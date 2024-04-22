@@ -40,6 +40,7 @@ const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"))
 interface Path {
   parent: string;
   link: string;
+  childlink?: string;
   title: string;
   icon: string;
   sidebar: boolean;
@@ -65,13 +66,14 @@ const Router = () => {
   const getPath = ({
     parent = "",
     link,
+    childlink,
     title,
     icon,
     sidebar,
     card_info,
   }: Path) => {
 
-    const path = `${parent}/${link}`;
+    const path = `${parent}/${link}${childlink ? `/${childlink}` : ''}`;
 
     const obj = {
       path: path,
@@ -153,6 +155,7 @@ const Router = () => {
             path={getPath({
               parent: "passengers",
               link: "passenger",
+              // childlink: 'single',
               sidebar: false,
               title: "",
               icon: "",
