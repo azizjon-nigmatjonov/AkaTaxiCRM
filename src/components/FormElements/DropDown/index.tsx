@@ -40,7 +40,7 @@ const DropDown = ({ label, name, placeholder, defaultValue }: Props) => {
                     onClick={() => setShow(true)}
                 />
                 <div className="absolute right-[-380px] bg-yellow-500">
-                    {show && <RangeDate footerActive={false} handlerValue={clickHandler} />}
+                    {show && <RangeDate setShow={setShow} footerActive={false} handlerValue={clickHandler} />}
                 </div>
             </div>
         </div>

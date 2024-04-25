@@ -53,7 +53,9 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
       navigateQuery({ passenger: '' })
     }
     else if (e == 'update') {
-      const value = getValues();     
+      const value = getValues(); 
+      console.log(value);
+          
       let obj: any = {};
       Object.entries(driver).map(([keys, _]) => {
         Object.entries(value).map(([newkeys, _]) => {

@@ -5,14 +5,15 @@ import './style.scss'
 import { FormatCalendar } from '../../utils/formatTime';
 import usePageRouter from "../../hooks/useObjectRouter";
 import AddButton from '../../components/Buttons/AddButton';
-// import { Closer } from '../../components/Closer';
+import { Closer } from '../../components/Closer';
 
 interface Props {
     footerActive?: boolean,
+    setShow?:any,
     handlerValue?: (e: any) => void
 }
 
-const RangeDate = ({ handlerValue = () => { }, footerActive = false }: Props) => {
+const RangeDate = ({ handlerValue = () => { }, setShow, footerActive = false }: Props) => {
     const { navigateQuery } = usePageRouter();
 
     const clickhandler = (e?: any) => {
@@ -21,18 +22,21 @@ const RangeDate = ({ handlerValue = () => { }, footerActive = false }: Props) =>
         handlerValue(e)
     }
 
+
     return (
-        <div className='rangeDate'>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateRangeCalendar onChange={(e: any) => clickhandler(e)} calendars={2} />
-            </LocalizationProvider>
-            {footerActive && <div className='p-5 flex justify-end'>
-                <div>
-                    <AddButton iconLeft={false} text='Tanlang' />
-                </div>
-            </div>}
-            {/* <Closer handleClose={() => clickhandler()} /> */}
-        </div>
+        <>
+            <div className='rangeDate'>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateRangeCalendar onChange={(e: any) => clickhandler(e)} calendars={2} />
+                </LocalizationProvider>
+                {footerActive && <div className='p-5 flex justify-end'>
+                    <div>
+                        <AddButton iconLeft={false} text='Tanlang' />
+                    </div>
+                </div>}
+            </div>
+            <Closer handleClose={() => setShow(false)} />
+        </>
     )
 }
 

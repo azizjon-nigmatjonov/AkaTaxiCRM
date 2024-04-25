@@ -17,8 +17,6 @@ interface Props {
 
 const Section = ({setInputValue, list = [], loading = true, }: Props) => {
 
-  console.log(list);
-
 
   const { data: standart } = useQuery(['GET_STANDART'], () => {
     return carService.getList(1)

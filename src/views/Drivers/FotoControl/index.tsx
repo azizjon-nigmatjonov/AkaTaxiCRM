@@ -62,7 +62,7 @@ const FotoControl = () => {
         id: 'status',
         render: (val: any) => val && (
           <div className="flex items-center justify-center">
-            {val == 'created_at' ? <DangerNotification /> : 0}
+            {val == 'created_at' ? <DangerNotification /> : <p className="text-red-500">-</p>}
           </div>
         )
       },
