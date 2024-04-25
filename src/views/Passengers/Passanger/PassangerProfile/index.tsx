@@ -84,9 +84,29 @@ const PassengerProfile = () => {
       navigateQuery({ passenger: '' })
     } else if (e == 'update') {
       const data = getValues()
+      console.log(data);
+
+      let values: any = {}
+
       data.phone = data.phone.substring(1).replace(/\s+/g, '')
-      data.image_id = String(data?.image_id)
-      passengerService.updateElement(query?.id, data).then(() => {
+      data.image_id = data?.image_id ? String(data?.image_id) : null
+
+      Object.keys(passenger)?.map((key) => {
+        for (let i in data) {
+          if (key == i) {
+            if (data[i] != undefined && data[i] != '') {
+              if (passenger[key] != data[i]) {
+                values[i] = data[i]
+              }
+            }
+          }
+        }
+      })
+
+      // console.log(passenger);
+      // console.log(values);
+
+      passengerService.updateElement(query?.id, values).then(() => {
         dispatch(
           websiteActions.setAlertData({
             mainTitle: 'Muvaffaqiyatli yakunlandi',
@@ -94,6 +114,7 @@ const PassengerProfile = () => {
             translation: "common",
           })
         );
+        window.location.reload()
         // navigateTo('/passengers/main')
       })
       navigateQuery({ passenger: '' })
@@ -102,8 +123,7 @@ const PassengerProfile = () => {
     }
   }
 
-  console.log(passenger);
-  
+
 
   return (
     <div>

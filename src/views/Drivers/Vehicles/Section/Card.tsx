@@ -68,7 +68,7 @@ const Card: FC<Props> = ({setInputValue, element}) => {
 
       <div className="flex justify-end">
         <div
-          onClick={() => navigateTo(`/drivers/car/${element.id}`)}
+          onClick={() => navigateTo(`/drivers/cars/car/${element.id}`)}
           className="cursor-pointer px-6 border-r border-[var(--lineGray)] h-[50px] flex items-center w-full font-medium"
         >
           <div className="border border-[var(--lineGray)] h-[30px] w-[30px] flex items-center justify-center rounded-full mr-2">

@@ -66,9 +66,6 @@ const SidebarSection = () => {
 
   return (
     <div className={cls.section}>
-
-
-
       <div className="mt-[10px] flex flex-col justify-between side">
         <div>
           {Object.entries(List)?.map(([key, value]: [string, any], index) => {
@@ -80,6 +77,7 @@ const SidebarSection = () => {
             return visibleSidebarItems.length > 1 ? (
 
               <div className="ml-[15px]">
+
                 <button
                   className={`accordion  ${activeIndex === index ? 'active' : ''} flex justify-between items-center max-w-[280px]`}
                   onClick={() => toggleAccordion(index)}
@@ -92,12 +90,11 @@ const SidebarSection = () => {
                     <ArrowIcon isOpen={activeIndex === index} />
                   </div>
                 </button>
+
                 <div className={`panel  ${activeIndex === index ? 'show' : ''}`}>
                   {Object.values(value as keyof typeof value)?.map((el: any, i, arr) => {
                     const isLastItem = i === arr.length - 1;
-
                     // console.log(el.path);
-
 
                     if (el.title && el.title.trim() !== '') {
                       return (
@@ -121,7 +118,9 @@ const SidebarSection = () => {
                     }
                   })}
                 </div>
+
                 {!isLastItem && <div className="accordion-line"></div>}
+
               </div>
             ) : <div className="menus">
               <NavLink to={visibleSidebarItems[0].path} className={`menu_link3 mt-2 mb-2 py-[10px] ml-4 pl-[20px] w-[280px] flex items-center  gap-3  capitalize`}>

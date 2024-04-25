@@ -44,6 +44,9 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
         setDisabledWeek(true)
         setYearDrivers('2024')
 
+        setSelectMonthDrivers(null)
+        setCountDrivers(null)
+
 
     }
 
@@ -53,12 +56,16 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
         setDisabledYear(false)
         setDisabledMonth(false)
         setSelectMonthDrivers(2)
+        
+        setCountDrivers(null)
+
     }
 
     const handleWeekButtonClick = () => {
         setActiveButton('week')
         setCountDrivers(2)
         setSelectMonthDrivers(2)
+
         setDisabledWeek(false)
         setDisabledYear(false)
         setDisabledMonth(false)
@@ -360,7 +367,7 @@ function Tabledirvers({ setCountDrivers, setSelectMonthDrivers, setYearDrivers, 
                         </TableCell>
 
                     </TableRow>
-                    
+
 
                 </TableBody>
             </Table>

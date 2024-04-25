@@ -144,7 +144,7 @@ const SingleCar = () => {
     if (element === "edit") {
       navigateQuery({ id: status.id })
     } else if (status == 'learn_more') {
-      navigateTo(`/drivers/driver?id=${element.id}`)
+      navigateTo(`/drivers/main/driver?id=${element.id}`)
     }
     else {
       driverService.deleteElement(status?.id).then(() => {

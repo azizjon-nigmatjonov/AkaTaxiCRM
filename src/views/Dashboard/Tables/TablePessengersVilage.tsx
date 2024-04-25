@@ -2,6 +2,7 @@ import { Box, Button, ButtonGroup, MenuItem, Paper, Select, Table, TableBody, Ta
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useState } from "react";
 import { ArrowLeft, ArrowUpward, } from "@mui/icons-material";
+
 function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPessengerVilage, setYearPessengerVilage, yearPessengerVilage, passengersDataVilage }: { setCountWeekPessengerVilage: any, setSelectMonthPessengerVilage: any, setYearPessengerVilage: any, yearPessengerVilage: any, passengersDataVilage: any }) {
 
     const [activeButton, setActiveButton] = useState('year');
@@ -42,6 +43,9 @@ function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPess
         setDisabledMonth(true);
         setDisabledWeek(true)
         setYearPessengerVilage('2023')
+
+        setSelectMonthPessengerVilage(null)
+        setCountWeekPessengerVilage(null)
     }
 
     function handleMonthButtonClick() {
@@ -49,7 +53,9 @@ function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPess
         setDisabledWeek(true)
         setDisabledYear(false)
         setDisabledMonth(false)
+        
         setSelectMonthPessengerVilage(1)
+        setCountWeekPessengerVilage(null)
     }
 
     function handleWeekButtonClick() {
@@ -360,10 +366,10 @@ function TablePessengersVilage({ setCountWeekPessengerVilage, setSelectMonthPess
                         <TableCell align="right" sx={{ fontSize: '14px', color: '#667085', fontWeight: 500 }}>
                             {passengersDataVilage?.data?.reduce((total: number, item: any) => total + (item?.canceled || 0), 0)}
                         </TableCell>
-                        <TableCell align="right" sx={{fontSize: '14px', borderRight: '0px solid #EAECF0', color: '#F79009' }}>
+                        <TableCell align="right" sx={{ fontSize: '14px', borderRight: '0px solid #EAECF0', color: '#F79009' }}>
                             {passengersDataVilage?.data?.reduce((total: number, item: any) => total + (item?.canceled_by_client || 0), 0)}
                         </TableCell>
-                        <TableCell align="center" sx={{fontSize: '14px', borderRight: '0px solid #EAECF0', color: '#D92D20' }}>
+                        <TableCell align="center" sx={{ fontSize: '14px', borderRight: '0px solid #EAECF0', color: '#D92D20' }}>
                             {passengersDataVilage?.data?.reduce((total: number, item: any) => total + (item?.canceled_by_driver || 0), 0)}
                         </TableCell>
 

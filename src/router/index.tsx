@@ -40,6 +40,7 @@ const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"))
 interface Path {
   parent: string;
   link: string;
+  childlink?: string
   title: string;
   icon: string;
   sidebar: boolean;
@@ -59,19 +60,19 @@ const Router = () => {
     admins: [],
     partners: [],
     settings: [],
-
   });
 
   const getPath = ({
     parent = "",
     link,
+    childlink,
     title,
     icon,
     sidebar,
     card_info,
   }: Path) => {
 
-    const path = `${parent}/${link}`;
+    const path = `${parent}/${link}${childlink ? `/${childlink}` : ''}`;
 
     const obj = {
       path: path,
@@ -93,7 +94,6 @@ const Router = () => {
     }
     return path;
   };
-
 
   useEffect(() => {
     dispatch(websiteActions.setRoutes({ ...routes }));
@@ -128,6 +128,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/passengers/main" />} />
+
           <Route
             path={getPath({
               parent: "dashboard",
@@ -138,6 +139,7 @@ const Router = () => {
             })}
             element={<Dashboard />}
           />
+
           <Route
             path={getPath({
               parent: "passengers",
@@ -152,7 +154,8 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "passengers",
-              link: "passenger",
+              link: "main",
+              childlink: 'passenger',
               sidebar: false,
               title: "",
               icon: "",
@@ -207,7 +210,8 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "drivers",
-              link: "driver",
+              link: "main",
+              childlink: 'driver',
               sidebar: false,
               title: "",
               icon: "",
@@ -239,7 +243,8 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "drivers",
-              link: "car/:id",
+              link: "cars",
+              childlink:'car/:id',
               sidebar: false,
               title: "",
               icon: "",

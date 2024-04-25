@@ -35,6 +35,7 @@ function Dashboard() {
 
 
     // console.log(yearDriversVilage);
+    console.log(yearPessengerVilage, selectMonthPessengerVilage, countWeekPessengerVilage);
 
 
 
@@ -52,8 +53,6 @@ function Dashboard() {
 
 
     const { data: driverTripsDataFromCity } = useQuery(['driverTrips', yearDrivers, selectMonthDrivers, countWeekDrivers], () => dashboardService.getDriverTripsFromCity(yearDrivers, selectMonthDrivers, countWeekDrivers), { enabled: !!yearDrivers || !!selectMonthDrivers || !!countWeekDrivers });
-
-
 
 
 
@@ -76,6 +75,7 @@ function Dashboard() {
                 <Passenger data={data?.data[1]} />
                 <Drivers data={data?.data[0]} />
             </div>
+
             <ContentTable
                 setCountWeekDriversVilage={setCountWeekDriversVilage}
                 setSelectMonthDriversVilage={setSelectMonthDriversVilage}
@@ -85,7 +85,17 @@ function Dashboard() {
                 setSelectMonthDrivers={setSelectMonthDrivers}
                 setYearDrivers={setYearDrivers}
                 yearDrivers={yearDrivers}
-                setCountWeekPessengerVilage={setCountWeekPessengerVilage} setSelectMonthPessengerVilage={setSelectMonthPessengerVilage} setYearPessengerVilage={setYearPessengerVilage} yearPessengerVilage={yearPessengerVilage} setCountWeek={setCountWeek} setSelectMonth={setSelectMonth} year={year} setYear={setYear} driverTripsDataFromVilage={driverTripsDataFromVilage} passengersDataVilage={passengersDataVilage} driverTripsDataFromCity={driverTripsDataFromCity} dataList={passengersData?.data} />
+                setCountWeekPessengerVilage={setCountWeekPessengerVilage}
+                setSelectMonthPessengerVilage={setSelectMonthPessengerVilage}
+                setYearPessengerVilage={setYearPessengerVilage}
+                yearPessengerVilage={yearPessengerVilage}
+                setCountWeek={setCountWeek}
+                setSelectMonth={setSelectMonth}
+                year={year}
+                setYear={setYear}
+                driverTripsDataFromVilage={driverTripsDataFromVilage}
+                passengersDataVilage={passengersDataVilage}
+                driverTripsDataFromCity={driverTripsDataFromCity} dataList={passengersData?.data} />
 
         </>
     )

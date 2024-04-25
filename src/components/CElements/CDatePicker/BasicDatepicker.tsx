@@ -52,6 +52,7 @@ const BasicDatepicker = ({
   return (
     <div id="basicDatePicker" className="w-full relative">
       {label && <CLabel title={label} required={required} />}
+      
       <DatePicker
         disabled={disabled}
         ref={datePickerRef}
