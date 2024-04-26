@@ -27,21 +27,26 @@ const tabList = [
 const SingleCar = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const { currentPage } = useGetQueries();
+  const { currentPage, page } = useGetQueries();
   const { navigateQuery, navigateTo } = usePageRouter()
   const { currentTab } = useGetQueries();
   const setCarList = useState([])[1];
   const setLoading = useState(false)[1];
 
+  console.log(page);
+
+
   const { data: driversData } = useQuery(
-    ["GET_DRIVERS_BY_CAR"],
+    ["GET_DRIVERS_BY_CAR", id, page],
     () => {
-      return driverService.getList({ car_id: id });
+      return driverService.getList({ page: page ?? 1, car_id: id });
     },
     {
       enabled: !!id,
     }
   );
+
+
 
   const tab = useMemo(() => {
     return currentTab ? currentTab : "1";
@@ -61,7 +66,7 @@ const SingleCar = () => {
   useEffect(() => {
     if (tab) getCarList(tab);
   }, [tab]);
-  
+
   const { data: carData } = useQuery(
     ["GET_BY_CAR"],
     () => {
@@ -124,6 +129,7 @@ const SingleCar = () => {
   const drivers: any = useMemo(() => {
     const lists: any = driversData ?? [];
 
+
     return {
       list: lists.data?.map((val: any) => {
         return {
@@ -173,7 +179,12 @@ const SingleCar = () => {
         label: drivers?.list?.[0]?.car_name ?? "Mashina",
       },
     ];
-  }, [carData]);
+  }, [carData, driversData]);
+
+  
+  // console.log(drivers);
+  // console.log(driversData);
+
 
 
 
