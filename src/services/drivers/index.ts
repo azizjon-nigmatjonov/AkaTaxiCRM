@@ -6,7 +6,7 @@ const driverService = {
     request.get(
       `/drivers?${params.page ? `page=${params.page}` : ''}${params.q ? `&q=${params.q}` : ""
       }${params.perPage ? `&perPage=${params.perPage}` : ''}${params?.version ? `&version=${params.version}` : ""
-      }${params.gender ? `&gender=${params.gender}` : ''}${params.created_at ? `&created_at=${params.created_at}` : ''}${params.region ? `&region_id=${params.region}` : ''}${params.device_type ? `&device_type=${params.device_type}` : ''}`
+      }${params.gender ? `&gender=${params.gender}` : ''}${params.created_at ? `&created_at=${params.created_at}` : ''}${params.region ? `&region_id=${params.region}` : ''}${params.device_type ? `&device_type=${params.device_type}` : ''}${params.car_id ? `&car_id=${params.car_id}` : ''}`
     ),
   createElement: (data: any) => requestForm.post("/drivers", data),
   getActives: (params: any) =>
