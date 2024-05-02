@@ -34,7 +34,7 @@ const CPagination = ({
   const pathname = location.pathname;
   const [searchParams] = useSearchParams();
   const query = Object.fromEntries(searchParams.entries());
-  const count: any = usePaginationCount(props?.count, limit);
+  const count: any = usePaginationCount(props?.count);
   const navigate = useNavigate();
 
   

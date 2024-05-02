@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import CSearchInput from "../../CElements/CSearchInput";
+import CSearchInput from "../../../CElements/CSearchInput";
 
 interface Props {
   handleSearch?: (val: any) => void

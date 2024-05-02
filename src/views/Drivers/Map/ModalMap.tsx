@@ -1,5 +1,5 @@
 import { FlagIcon, CircleIcon, ProgressCarIcon, CheckIcon, WomenIconP, MenIconP, Empty, PassangerFemaleIcon, CloseModalIcon, NoteAvatar } from '../../../components/IconGenerator/Svg'
-import car from '../../../../public/images/car.png'
+import car from '/images/car.png'
 
 import './modal.css';
 import { useEffect, useState } from 'react';

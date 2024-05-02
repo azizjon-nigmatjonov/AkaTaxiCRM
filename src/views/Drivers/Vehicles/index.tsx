@@ -10,7 +10,7 @@ import carService from "../../../services/cars";
 import { Skeleton } from "@mui/material";
 import { Header } from "../../../components/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
-import SectionHeader from "../../../components/Sections/Header";
+import SectionHeader from "../../../components/UI/Sections/Header";
 
 
 

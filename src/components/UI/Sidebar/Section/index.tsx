@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import IconGenerator from "../../IconGenerator";
+import IconGenerator from "../../../IconGenerator";
 // import usePageRouter from "../../../hooks/useObjectRouter";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { ArrowIcon } from "../../IconGenerator/Svg";
-import UserInfo from "../../../components/Header/UserInfo";
+import { ArrowIcon } from "../../../IconGenerator/Svg";
+import UserInfo from "../../../Header/UserInfo";
 import cls from "./style.module.scss";
 
 
@@ -94,7 +94,7 @@ const SidebarSection = () => {
                 <div className={`panel  ${activeIndex === index ? 'show' : ''}`}>
                   {Object.values(value as keyof typeof value)?.map((el: any, i, arr) => {
                     const isLastItem = i === arr.length - 1;
-                    // console.log(el.path);
+
 
                     if (el.title && el.title.trim() !== '') {
                       return (

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
-import SectionHeader from "../../../components/Sections/Header";
+import SectionHeader from "../../../components/UI/Sections/Header";
 import FilterButton from "../../../components/Filters";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import { useQuery } from "react-query";

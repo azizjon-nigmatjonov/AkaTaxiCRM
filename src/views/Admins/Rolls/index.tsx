@@ -1,26 +1,18 @@
 import { useMemo } from "react";
 import CTable from "../../../components/CElements/CTable";
 import AddButton from "../../../components/Buttons/AddButton";
-import SectionHeader from "../../../components/Sections/Header";
+import SectionHeader from "../../../components/UI/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import Form from "./Form";
-import { useQuery } from "react-query";
-import roleService from "../../../services/rolls";
+import { RolesList } from './Function'
 import { Header } from "../../../components/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 const Rolls = () => {
   const { navigateQuery } = usePageRouter();
-
-  const { data: roles } = useQuery(
-    ["GET_ADMINS"],
-    () => {
-      return roleService.getList();
-    },
-    {
-      enabled: true,
-    }
-  );
+  const roles = RolesList()
+  console.log('roles', roles);
+  
 
   const bodyColumns = useMemo(() => {
     return roles?.data ?? [];

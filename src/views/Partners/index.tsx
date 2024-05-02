@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import AddButton from "../../components/Buttons/AddButton";
 import CTable from "../../components/CElements/CTable";
 import FilterButton from "../../components/Filters";
-import SectionHeader from "../../components/Sections/Header";
+import SectionHeader from "../../components/UI/Sections/Header";
 import usePageRouter from "../../hooks/useObjectRouter";
 import { useQuery } from "react-query";
 import partnerService from "../../services/partners";

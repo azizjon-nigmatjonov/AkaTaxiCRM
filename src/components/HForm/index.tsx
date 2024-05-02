@@ -1,8 +1,5 @@
-import { ReactNode, useImperativeHandle, FormEvent } from "react";
-import cls from "./style.module.scss";
-
+import { ReactNode, useImperativeHandle, FormEvent, useRef } from "react";
 interface Props {
-  footer?: boolean;
   formRef?: any;
   handleSubmit?: (val?: any) => void;
   submit?: (val: any) => void;
@@ -10,14 +7,14 @@ interface Props {
   children?: ReactNode;
 }
 
-const HForm = ({
-  footer = false,
+const HFormWrapper = ({
   formRef,
   handleSubmit = () => {},
   submit = () => {},
   styles = {},
   children,
 }: Props) => {
+  const internalFormRef = useRef<HTMLFormElement>(null); 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault(); // Prevent the default form submission behavior
     handleSubmit(); // Call handleSubmit when the form is submitted
@@ -25,20 +22,15 @@ const HForm = ({
 
   useImperativeHandle(formRef, () => ({
     submitForm() {
-      if (typeof handleSubmit === "function") {
-        handleSubmit(submit);
-      }
+      internalFormRef.current?.submit()
     },
   }));
 
   return (
     <form onSubmit={onSubmit} ref={formRef} style={{ ...styles }}>
       {children}
-      {footer && (
-        <div className={cls.btns}>{/* Include your buttons here */}</div>
-      )}
     </form>
   );
 };
 
-export default HForm;
+export default HFormWrapper;

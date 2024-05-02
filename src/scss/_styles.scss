@@ -153,3 +153,29 @@ input {
     border-radius: 10px;
   }
 }
+
+.custom-btn {
+  background-color: $main;
+  color: white;
+  text-transform: none;
+  border-radius: 10px;
+  border: 1px solid $lineGray;
+  height: 52px;
+  padding: 0 18px;
+  width: 100%;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.cancel-btn {
+  background-color: $lineGray;
+  color: $black;
+  text-transform: none;
+  border-radius: 10px;
+  border: 1px solid $lineGray;
+  height: 52px;
+  padding: 0 18px;
+  width: 100%;
+  white-space: nowrap;
+  font-weight: 500;
+}

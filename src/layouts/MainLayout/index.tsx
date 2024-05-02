@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Sidebar } from "../../components/Sidebar";
+import { Sidebar } from "../../components/UI/Sidebar";
 // import { Header } from "../../components/Header";
 import cls from "./style.module.scss";
 import { useEffect } from "react";

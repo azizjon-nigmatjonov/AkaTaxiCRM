@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react"
 import { useQuery } from "react-query"
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs"
 import { Header } from "../../../components/Header"
-import SectionHeader from "../../../components/Sections/Header"
+import SectionHeader from "../../../components/UI/Sections/Header"
 import usePageRouter from '../../../hooks/useObjectRouter'
 import CTable from "../../../components/CElements/CTable"
 import ImageFrame from "../../../components/ImageFrame"

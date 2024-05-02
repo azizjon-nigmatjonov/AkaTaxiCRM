@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import CTable from "../../../components/CElements/CTable";
-import SectionHeader from "../../../components/Sections/Header";
+import SectionHeader from "../../../components/UI/Sections/Header";
 import AddButton from "../../../components/Buttons/AddButton";
 import FilterButton from "../../../components/Filters";
 import Form from "./Form";
