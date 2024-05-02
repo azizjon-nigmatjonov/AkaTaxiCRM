@@ -43,14 +43,14 @@ const TabbleActions = ({
             text="learn_more"
             active={element?.is_learn_more}
             onClick={() => handleClick(element, "learn_more", element?.is_delete)}
-            icon={<CarIcon fill={element?.is_edit ? "white" : ColorConstants.gray} />}
+            icon={<CarIcon fill={element?.is_learn_more ? "white" : ColorConstants.gray} />}
             show={permissions.includes('learn_more')}
           />
           <Element
             text="freez"
-            active={element?.is_learn_more}
-            onClick={() => handleClick(element, "freez", element?.is_delete)}
-            icon={<LockIcon fill={element?.is_edit ? "white" : ColorConstants.gray} />}
+            active={element?.is_freeze}
+            onClick={() => handleClick(element, "freez", element?.is_freeze)}
+            icon={<LockIcon fill={element?.is_freeze ? "white" : ColorConstants.gray} />}
             show={permissions.includes('freez')}
           />
           <Element

@@ -92,8 +92,9 @@ const CTable = ({
     return (
       list.map((item: any, index?: any) => ({
         ...item,
-        is_delete: checks(item?.is_delete),
-        is_edit: checks(item?.is_edit),
+        is_freeze: checks(item?.freez),
+        is_delete: checks(item?.delete),
+        is_edit: checks(item?.edit),
         is_learn_more: checks(item?.learn_more),
         index:
           currentPage > 1
@@ -392,7 +393,7 @@ const CTable = ({
 
                       {column.id === "actions" && !item.empty && (
                         <div className="relative">
-                          {column.permission.length <= 3 ? (
+                          {column.permission.length <= 2 ? (
                             <div>
                               <TableDelete
                                 element={item}
