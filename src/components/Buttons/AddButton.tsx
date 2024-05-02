@@ -11,6 +11,7 @@ interface Props {
   children?: any;
   classes?: string;
   type?: any;
+
   onClick?: (val?: any) => void;
 }
 

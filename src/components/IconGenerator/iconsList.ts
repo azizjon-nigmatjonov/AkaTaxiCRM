@@ -14,7 +14,11 @@ import {
   SmsIcon,
   MapIcon,
   Dashboard,
-  FotoControl
+  FotoControl,
+  Notifications,
+  // MessagesIconIcon,
+  SMSIcon,
+  NewsIcon,
 } from "./Svg/Sidebar";
 
 import { PassengerIcon, DriverIcon, PassengerVehicleIcon, DriverVehicleIcon, PartnersIcon } from "./Svg";
@@ -93,6 +97,18 @@ export const iconsList = [
   {
     name: "sms",
     component: SmsIcon,
+  },
+  {
+    name: 'notifications',
+    component: Notifications
+  },
+  {
+    name: 'sms_notification',
+    component: SMSIcon
+  },
+  {
+    name: 'news_notification',
+    component: NewsIcon
   },
   {
     name: "amocrm",

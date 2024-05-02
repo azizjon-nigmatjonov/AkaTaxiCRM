@@ -7,6 +7,7 @@ import Bussness from "./Bussniss";
 import { useQuery } from "react-query";
 import carService from "../../../../services/cars";
 import { useMemo } from "react";
+import { useGetQueries } from "../../../../hooks/useGetQueries";
 
 interface Props {
   list: any;
@@ -15,27 +16,29 @@ interface Props {
   setInputValue?: any
 }
 
-const Section = ({setInputValue, list = [], loading = true, }: Props) => {
+const Section = ({ setInputValue, list = [], loading = true, }: Props) => {
+  const { q } = useGetQueries()
 
 
-  const { data: standart } = useQuery(['GET_STANDART'], () => {
-    return carService.getList(1)
+
+  const { data: standart } = useQuery(['GET_STANDART', q], () => {
+    return carService.getList(1, q)
   })
 
   const standartData = useMemo(() => {
     return standart?.data ?? []
   }, [standart])
 
-  const { data: comfort } = useQuery(['GET_COMFORT'], () => {
-    return carService.getList(2)
+  const { data: comfort } = useQuery(['GET_COMFORT', q], () => {
+    return carService.getList(2, q)
   })
 
   const comfortData = useMemo(() => {
     return comfort?.data ?? []
   }, [comfort])
 
-  const { data: bussniss } = useQuery(['GET_BUSSNESS'], () => {
-    return carService.getList(3)
+  const { data: bussniss } = useQuery(['GET_BUSSNESS', q], () => {
+    return carService.getList(3, q)
   })
 
   const bussnissData = useMemo(() => {
@@ -55,9 +58,9 @@ const Section = ({setInputValue, list = [], loading = true, }: Props) => {
                 <Card element={element} />
               </div>
             ))} */}
-            <Standard data={standartData} setInputValue={setInputValue}/>
-            <Comfort data={comfortData} setInputValue={setInputValue}/>
-            <Bussness data={bussnissData} setInputValue={setInputValue}/>
+            <Standard data={standartData} setInputValue={setInputValue} />
+            <Comfort data={comfortData} setInputValue={setInputValue} />
+            <Bussness data={bussnissData} setInputValue={setInputValue} />
           </div>
         ) : (
           loading ? "Yuklanmoqda..." : <NullData />

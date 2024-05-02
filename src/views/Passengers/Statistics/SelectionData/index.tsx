@@ -106,11 +106,11 @@ const Selection = () => {
 
 
     return (
-        <div className="px-6 mb-6  h-[600px]">
+        <div className="px-6 mb-6 ">
             <div>
                 <CTabs tabList={tabList} />
             </div>
-            <div className="flex gap-6 h-full  ">
+            <div className="flex gap-6 h-full">
                 <div className="w-full">
                     <CCard classes="flex flex-col justify-between  h-[600px] w-full min-w-[690px]">
                         <div>

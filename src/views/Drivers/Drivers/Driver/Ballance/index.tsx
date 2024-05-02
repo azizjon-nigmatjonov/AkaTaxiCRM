@@ -6,15 +6,25 @@ import CCard from "../../../../../components/CElements/CCard"
 import { BallanceIcon, TaxIcon, SallaryIcon } from "../../../../../components/IconGenerator/Svg"
 import CTable from "../../../../../components/CElements/CTable"
 import { FormatTime } from "../../../../../utils/formatTime"
+import CModal from "../../../../../components/CElements/CModal"
+import usePageRouter from "../../../../../hooks/useObjectRouter"
+import { useForm } from "react-hook-form"
+import HFTextField from "../../../../../components/FormElements/HFTextField"
+import AddButton from "../../../../../components/Buttons/AddButton"
+import CancelButton from "../../../../../components/Buttons/Cancel"
 
 const DriverBallance = () => {
     const { id, currentPage } = useGetQueries()
+    const { getQueries, navigateQuery } = usePageRouter()
+    const query = getQueries()
     const { data, isLoading } = useQuery(['GET_DRIVERS_BALLANCE', id, currentPage], () => {
-        return driverService.getDriverBallance({id, page:currentPage})
+        return driverService.getDriverBallance({ id, page: currentPage })
     })
 
+    const { control } = useForm()
+
     console.log(data);
-    
+
 
     const ballanceData: any = useMemo(() => {
         if (data?.data.length) return []
@@ -76,6 +86,17 @@ const DriverBallance = () => {
             ))}
         </div>
         <CTable headColumns={headColums} bodyColumns={bodyColumns.operations} isResizeble={true} isLoading={isLoading} currentPage={currentPage} count={bodyColumns?.meta?.totalCount} />
+
+        <CModal footerActive={false} open={!!query.amount} title={'Balansni to’ldirish'} handleClose={() => { navigateQuery({ amount: "" }); }}>
+            <p className="text-sm font-normal text-[#475467]">Admin tomonidan yo’lovchi hisobini to’ldirish</p>
+            <div className="mt-5 space-y-8">
+                <HFTextField name="amount" control={control} placeholder="50 000 so'm" />
+                <div className="flex items-center justify-end gap-3">
+                    <CancelButton text='Orqaga' onClick={() => navigateQuery({amount: ''})}/>
+                    <AddButton iconLeft={false} text='To’ldirish' />
+                </div>
+            </div>
+        </CModal>
     </>
 }
 

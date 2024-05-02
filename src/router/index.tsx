@@ -32,11 +32,19 @@ import Dashboard from "../views/Dashboard";
 
 import Booking from "../views/Passengers/Active/Booking";
 import FotoControl from "../views/Drivers/FotoControl";
+import Notification from "../views/Notifications/Notification";
+import SMSNotification from "../views/Notifications/SMS";
+import NewsNotification from "../views/Notifications/News";
+import AddNotification from "../views/Notifications/Notification/AddNotification";
+import AddNews from "../views/Notifications/News/Addnew";
 
 const Passanger = lazy(() => import("../views/Passengers/Passanger"));
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
-const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"))
+const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"));
+const AddSMS = lazy(() => import('../views/Notifications/SMS/AddSMS'));
+
+
 interface Path {
   parent: string;
   link: string;
@@ -58,6 +66,7 @@ const Router = () => {
     drivers: [],
     infos: [],
     admins: [],
+    notifications: [],
     partners: [],
     settings: [],
   });
@@ -222,7 +231,8 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "drivers",
-              link: "add",
+              link: "main",
+              childlink: 'add',
               sidebar: false,
               title: "",
               icon: "",
@@ -244,7 +254,7 @@ const Router = () => {
             path={getPath({
               parent: "drivers",
               link: "cars",
-              childlink:'car/:id',
+              childlink: 'car/:id',
               sidebar: false,
               title: "",
               icon: "",
@@ -368,6 +378,7 @@ const Router = () => {
             })}
             element={<SMS />}
           />
+
           <Route
             path={getPath({
               parent: "settings",
@@ -398,6 +409,74 @@ const Router = () => {
             })}
             element={<ProfilePage />}
           />
+
+          <Route
+            path={getPath({
+              parent: 'notifications',
+              link: 'notification',
+              sidebar: true,
+              title: 'Bildirishnomalar',
+              icon: 'notifications'
+            })}
+            element={<Notification />}
+          />
+
+          <Route
+            path={getPath({
+              parent: 'notifications',
+              link: 'notification',
+              childlink: 'add_notification',
+              sidebar: false,
+              title: '',
+              icon: ''
+            })}
+            element={<AddNotification />}
+          />
+
+          <Route
+            path={getPath({
+              parent: 'notifications',
+              link: 'smsnotification',
+              sidebar: true,
+              title: 'SMS xabarnoma',
+              icon: 'sms_notification'
+            })}
+            element={< SMSNotification />}
+          />
+          <Route
+            path={getPath({
+              parent: 'notifications',
+              link: 'smsnotification',
+              childlink: 'add_sms',
+              sidebar: false,
+              title: 'SMS xabarnoma',
+              icon: 'sms_notification'
+            })}
+            element={< AddSMS />}
+          />
+
+          <Route
+            path={getPath({
+              parent: 'notifications',
+              link: 'news_notification',
+              sidebar: true,
+              title: 'Yangiliklar',
+              icon: 'news_notification'
+            })}
+            element={<NewsNotification />}
+          />
+          <Route
+            path={getPath({
+              parent: 'notifications',
+              link: 'news_notification',
+              childlink: 'add_news',
+              sidebar: false,
+              title: 'Yangiliklar',
+              icon: 'news_notification'
+            })}
+            element={< AddNews />}
+          />
+
           <Route
             path={getPath({
               parent: "partners",

@@ -203,7 +203,7 @@ const Drivers = () => {
             {/* </FilterButton> */}
             <AddButton
               text="new_driver"
-              onClick={() => navigateTo('/drivers/add')}
+              onClick={() => navigateTo('/drivers/main/add')}
             />
           </div>
         </SectionHeader>

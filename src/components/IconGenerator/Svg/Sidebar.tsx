@@ -261,3 +261,37 @@ export const FotoControl = () => (
     <path d="M7.49984 10.4997C8.544 10.4997 9.39567 9.64801 9.39567 8.60384C9.39567 7.55967 8.544 6.70801 7.49984 6.70801C6.45567 6.70801 5.604 7.55967 5.604 8.60384C5.604 9.64801 6.45567 10.4997 7.49984 10.4997Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 )
+
+export const Notifications = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M5.66732 12.6468H5.33398C2.66732 12.6468 1.33398 11.9801 1.33398 8.64681V5.31348C1.33398 2.64681 2.66732 1.31348 5.33398 1.31348H10.6673C13.334 1.31348 14.6673 2.64681 14.6673 5.31348V8.64681C14.6673 11.3135 13.334 12.6468 10.6673 12.6468H10.334C10.1273 12.6468 9.92733 12.7468 9.80066 12.9135L8.80066 14.2468C8.36066 14.8335 7.64064 14.8335 7.20064 14.2468L6.20064 12.9135C6.09398 12.7668 5.85398 12.6468 5.66732 12.6468Z" stroke="#101828" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M5.33333 5.7998L4 7.13314L5.33333 8.46647" stroke="#101828" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M10.666 5.7998L11.9993 7.13314L10.666 8.46647" stroke="#101828" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M8.66732 5.58008L7.33398 8.68677" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+)
+
+export const MessagesIconIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
+    <path d="M11.584 4.66699C12.5505 4.66699 13.334 3.88349 13.334 2.91699C13.334 1.95049 12.5505 1.16699 11.584 1.16699C10.6175 1.16699 9.83398 1.95049 9.83398 2.91699C9.83398 3.88349 10.6175 4.66699 11.584 4.66699Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M4.58398 7.58301H7.50065" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M4.58398 9.91699H9.83398" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M8.66602 1.16699H5.74935C2.83268 1.16699 1.66602 2.33366 1.66602 5.25033V8.75033C1.66602 11.667 2.83268 12.8337 5.74935 12.8337H9.24935C12.166 12.8337 13.3327 11.667 13.3327 8.75033V5.83366" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+)
+
+export const SMSIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
+    <path d="M10.416 11.9587H4.58268C2.83268 11.9587 1.66602 11.0837 1.66602 9.04199V4.95866C1.66602 2.91699 2.83268 2.04199 4.58268 2.04199H10.416C12.166 2.04199 13.3327 2.91699 13.3327 4.95866V9.04199C13.3327 11.0837 12.166 11.9587 10.416 11.9587Z" stroke="#475467" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M10.4173 5.25L8.59148 6.70833C7.99065 7.18667 7.00482 7.18667 6.40398 6.70833L4.58398 5.25" stroke="#475467" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+)
+
+export const NewsIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
+    <path d="M13.1345 6.0898L12.5628 8.52813C12.0728 10.634 11.1045 11.4856 9.28445 11.3106C8.99279 11.2873 8.67779 11.2348 8.33945 11.1531L7.35945 10.9198C4.92695 10.3423 4.17445 9.14063 4.74612 6.7023L5.31779 4.25813C5.43445 3.7623 5.57445 3.33063 5.74945 2.9748C6.43195 1.56313 7.59279 1.18397 9.54112 1.6448L10.5153 1.8723C12.9595 2.44397 13.7061 3.65147 13.1345 6.0898Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9.28471 11.3104C8.92304 11.5554 8.46804 11.7596 7.91388 11.9404L6.99221 12.2438C4.67638 12.9904 3.45721 12.3663 2.70471 10.0504L1.95804 7.74628C1.21138 5.43044 1.82971 4.20544 4.14554 3.45878L5.06721 3.15544C5.30638 3.07961 5.53388 3.01544 5.74971 2.97461C5.57471 3.33044 5.43471 3.76211 5.31804 4.25794L4.74638 6.70211C4.17471 9.14044 4.92721 10.3421 7.35971 10.9196L8.33971 11.1529C8.67804 11.2346 8.99304 11.2871 9.28471 11.3104Z" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M7.87305 4.97559L10.7022 5.69309" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M7.30078 7.2334L8.99245 7.66507" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+)

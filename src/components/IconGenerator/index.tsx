@@ -8,9 +8,6 @@ interface Props {
 
 const IconGenerator: FC<Props> = ({ icon, fill, ...props }) => {
   
-  
-
-
   const findedIcon = iconsList.find((el) => el.name === icon);  
   if (!findedIcon) return null;
 

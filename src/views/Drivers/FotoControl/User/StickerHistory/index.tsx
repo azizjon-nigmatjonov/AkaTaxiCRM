@@ -26,7 +26,9 @@ const StickerHistory = ({ data }: { data?: any }) => {
                 title: 'status',
                 id: 'status',
                 render: (val: any) => val && (
-                    <p className={`${val == 'canceled' ? cls.reject : val == 'verified' ? cls.done : cls.onWay} inline rounded-2xl py-[2px] px-2`}>{val.canceled ? 'Rad etildi' : val == 'verified' ? 'Qabul qilindi' : "To'landi"}</p>
+                    <p className={`${val == 'canceled' ? cls.reject : val == 'verified' ? cls.done : cls.onWay} inline rounded-2xl py-[2px] px-2`}>
+                        {val == 'canceled' ? 'Rad etildi' : val == 'verified' ? 'Qabul qilindi' : "To'landi"}
+                    </p>
                 )
             },
             {

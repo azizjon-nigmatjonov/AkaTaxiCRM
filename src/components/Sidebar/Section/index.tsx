@@ -61,6 +61,7 @@ const SidebarSection = () => {
 
 
 
+console.log(List);
 
 
 
@@ -68,8 +69,7 @@ const SidebarSection = () => {
     <div className={cls.section}>
       <div className="mt-[10px] flex flex-col justify-between side">
         <div>
-          {Object.entries(List)?.map(([key, value]: [string, any], index) => {
-
+          {Object.entries(List)?.map(([key, value]: [string, any], index) => {            
             const visibleSidebarItems: any = (value as any).filter((el: any) => el.sidebar)
 
             const isLastItem = index === Object.entries(List).length - 1;

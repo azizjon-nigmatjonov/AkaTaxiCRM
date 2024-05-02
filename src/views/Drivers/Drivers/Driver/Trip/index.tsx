@@ -8,12 +8,12 @@ import { useGetQueries } from "../../../../../hooks/useGetQueries";
 
 const DriverTrip = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
-  const { id , currentPage} = useGetQueries();
+  const { id, currentPage } = useGetQueries();
 
   const { data: trip, isLoading } = useQuery(
-    ["GET_DRIVERS_TRIPS", id, currentPage ],
+    ["GET_DRIVERS_TRIPS", id, currentPage],
     () => {
-      return driverService.getDriverTripHistory({id, page: currentPage});
+      return driverService.getDriverTripHistory({ id, page: currentPage });
     },
     {
       enabled: !!id,

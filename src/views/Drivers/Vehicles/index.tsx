@@ -17,7 +17,7 @@ import SectionHeader from "../../../components/Sections/Header";
 
 
 const Vehicles = () => {
-  const { navigateQuery } = usePageRouter();
+  const { navigateQuery, } = usePageRouter();
   const { currentTab } = useGetQueries();
   const [carList, setCarList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,6 @@ const Vehicles = () => {
   const { data: classes, isLoading } = useQuery(["GET_TAB_LIST"], () => {
     return carService.getCarClasses();
   });
-
 
   const tab = useMemo(() => {
     return currentTab ? currentTab : "1";

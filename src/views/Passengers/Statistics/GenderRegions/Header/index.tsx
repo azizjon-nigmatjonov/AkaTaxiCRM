@@ -16,8 +16,10 @@ const StaticsHeader = memo(({ data, loading }: { data: any, loading: boolean }) 
 
     const percentage: any = useMemo(() => {
         let allUsers = gender.men + gender.female
-        let men = Math.trunc(gender.men ? (gender.men / allUsers) * 100 : 0)
-        let female = Math.trunc(gender.female ? (gender.female / allUsers) * 100 : 0)
+        let men = Math.round(gender.men ? (gender.men / allUsers) * 100 : 0)
+
+        let female = Math.round(gender.female ? (gender.female / allUsers) * 100 : 0)
+
         return { allUsers, men, female }
     }, [gender, data])
 

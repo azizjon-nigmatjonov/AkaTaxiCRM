@@ -6,7 +6,7 @@ import usePageRouter from "../../../hooks/useObjectRouter";
 import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
-import CSlider from "../../../components/CElements/CSlider";
+// import CSlider from "../../../components/CElements/CSlider";
 import { Header } from "../../../components/Header";
 import { FormatTime } from "../../../utils/formatTime";
 import CSelect from "../../../components/CElements/CSelect";
@@ -34,12 +34,12 @@ const ActiveDrivers = () => {
   const { t } = useTranslation()
   const { navigateQuery } = usePageRouter();
   const setSearchParams = useSearchParams()[1]
-  const { currentPage, q, gender, region_id, f, car_model_id, status } = useGetQueries();
+  const { currentPage, q, gender, region_id, f, car_model_id, status, birthday } = useGetQueries();
 
   const regions = useSelector((state: any) => state.regions.regions);
 
   const { data: drivers, isLoading } = useQuery(
-    ["GET_ACTIVE_DRIVERS", q, gender, region_id, f, car_model_id, currentPage, status],
+    ["GET_ACTIVE_DRIVERS", q, gender, region_id, f, car_model_id, currentPage, status, birthday],
     () => {
       return driverService.getActives({ q, gender, region_id, f, car_model_id, page: currentPage, status });
     }
@@ -178,9 +178,9 @@ const ActiveDrivers = () => {
     navigateQuery({ car_model_id: evt })
   }
 
-  const handleAge = (evt: any) => {
-    navigateQuery({ birthday: [...evt] })
-  }
+  // const handleAge = (evt: any) => {
+  //   navigateQuery({ birthday: [...evt] })
+  // }
 
   const breadCrumbs = useMemo(() => {
     return [
@@ -214,8 +214,8 @@ const ActiveDrivers = () => {
               <div >
                 <CSelect handlerValue={handleCarModel} options={carModalData.list} id='filter' label='Model' />
               </div>
-              <CDriver classes="my-4" />
-              <CSlider handleValue={handleAge} label="Tug'ilgan yili" />
+              {/* <CDriver classes="my-4" /> */}
+              {/* <CSlider handleValue={handleAge} label="Tug'ilgan yili" /> */}
               <CDriver classes="my-4" />
               <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer ">{t('ignore_text')}</span>
             </FilterButton>
