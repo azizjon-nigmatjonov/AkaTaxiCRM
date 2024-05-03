@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import CarInfo from './CarInfo';
 import Location from './Location';
-import { InfoErrorIcon } from '../../../../../components/IconGenerator/Svg';
+import { InfoErrorIcon } from '../../../../../components/UI/IconGenerator/Svg';
 
 
 const Ticket = ({ data }: { data: any }) => {

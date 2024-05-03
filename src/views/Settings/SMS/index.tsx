@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from "react";
-import AddButton from "../../../components/Buttons/AddButton";
+import AddButton from "../../../components/UI/Buttons/AddButton";
 import CTabs from "../../../components/CElements/CTab";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import CTable from "../../../components/CElements/CTable";
-import { Header } from "../../../components/Header";
+import { Header } from "../../../components/UI/Header";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { useQuery } from "react-query";
 import smsService from "../../../services/sms";

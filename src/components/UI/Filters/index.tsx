@@ -4,7 +4,7 @@ import { BiX } from "react-icons/bi";
 import { t } from "i18next";
 import { ReactNode, useState } from "react";
 import Filters from "./Filter";
-import usePageRouter from "../../hooks/useObjectRouter";
+import usePageRouter from "../../../hooks/useObjectRouter";
 import { useSearchParams } from "react-router-dom";
 
 interface Props {

@@ -1,6 +1,6 @@
 import Ticket from '../Ticket'
-import EmptyDataComponent from '../../../../../components/EmptyDataComponent'
-import AddButton from '../../../../../components/Buttons/AddButton'
+import EmptyDataComponent from '../../../../../components/UI/EmptyDataComponent'
+import AddButton from '../../../../../components/UI/Buttons/AddButton'
 
 interface Props {
     data: any,

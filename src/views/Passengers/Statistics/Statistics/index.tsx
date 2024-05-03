@@ -1,4 +1,4 @@
-import { ManIcon, WomenIcon } from "../../../../components/IconGenerator/Svg";
+import { ManIcon, WomenIcon } from "../../../../components/UI/IconGenerator/Svg";
 import { PercentCard } from "./PercentCard";
 import { useEffect, useState } from "react";
 

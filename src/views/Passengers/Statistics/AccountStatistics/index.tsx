@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useQuery } from 'react-query'
 import CCard from '../../../../components/CElements/CCard'
-import { ArrowUp, ArrowDown, IncreaseIcon, DecreaseIcon } from '../../../../components/IconGenerator/Svg'
+import { ArrowUp, ArrowDown, IncreaseIcon, DecreaseIcon } from '../../../../components/UI/IconGenerator/Svg'
 import statistics from '../../../../services/statistics'
 import { Skeleton } from '@mui/material'
 

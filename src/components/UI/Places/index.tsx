@@ -1,6 +1,6 @@
 import cls from './style.module.scss';
-import { PassengerManIcon, PassangerFemaleIcon } from '../../components/IconGenerator/Svg';
-import usePageRouter from '../../hooks/useObjectRouter';
+import { PassengerManIcon, PassangerFemaleIcon } from '../IconGenerator/Svg';
+import usePageRouter from '../../../hooks/useObjectRouter';
 
 interface Props {
   data: any,

@@ -15,24 +15,24 @@ const MainLayout = () => {
   const alertData = useSelector((state: any) => state.website.alert);
 
   const GetVillage = (val: any) => {
-    if (!val) return []
-    const arr = val
-    regionService.getVillage().then(response => {
-      const villages = response.data ?? []
+    if (!val) return [];
+    const arr = val;
+    regionService.getVillage().then((response) => {
+      const villages = response.data ?? [];
       for (let l = 0; l < arr.length; l++) {
         for (let i = 0; i < arr?.[l].list.length; i++) {
           for (let j = 0; j < villages.length; j++) {
             if (villages[j].district_id == arr?.[l].list[i].id) {
-              arr?.[l].list[i].village.push(villages[j])
+              arr?.[l].list[i].village.push(villages[j]);
             }
           }
         }
       }
       dispatch(regionActions.setRegions(arr ?? []));
-    })
-  }
+    });
+  };
 
-  const GetDisctricts = (array: any,) => {
+  const GetDisctricts = (array: any) => {
     if (!array) return;
     const arr = array;
 
@@ -47,9 +47,8 @@ const MainLayout = () => {
           }
         }
       }
-      GetVillage(arr)
+      GetVillage(arr);
       // dispatch(regionActions.setRegions(arr ?? []));
-
     });
   };
 
@@ -85,11 +84,7 @@ const MainLayout = () => {
     <div className={cls.layout}>
       <Sidebar />
       <div className={cls.content}>
-        {/* <Header /> */}
-
         <Outlet />
-
-        {/* <MainSkeleton /> */}
       </div>
 
       {alertData?.title && <CAlert data={alertData} />}

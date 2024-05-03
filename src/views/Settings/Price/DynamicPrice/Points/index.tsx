@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExchangeIcon } from "../../../../../components/IconGenerator/Svg";
+import { ExchangeIcon } from "../../../../../components/UI/IconGenerator/Svg";
 import PointSelector from "./Point";
 import { ColorConstants } from "../../../../../constants/website";
 import usePageRouter from "../../../../../hooks/useObjectRouter";

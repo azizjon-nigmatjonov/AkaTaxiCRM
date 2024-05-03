@@ -1,4 +1,4 @@
-import { Header } from "../../components/Header"
+import { Header } from "../../components/UI/Header"
 import Drivers from "./Drivers"
 import Passenger from "./Passenger"
 import ContentTable from "./Contenttable"

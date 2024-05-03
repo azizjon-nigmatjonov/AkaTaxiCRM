@@ -2,10 +2,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers-pro';
 import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
 import { DateRangeCalendar } from '@mui/x-date-pickers-pro/DateRangeCalendar';
 import './style.scss'
-import { FormatCalendar } from '../../utils/formatTime';
-import usePageRouter from "../../hooks/useObjectRouter";
-import AddButton from '../../components/Buttons/AddButton';
-import { Closer } from '../../components/Closer';
+import { FormatCalendar } from '../../../utils/formatTime';
+import usePageRouter from "../../../hooks/useObjectRouter";
+import AddButton from '../Buttons/AddButton';
+import { Closer } from '../Closer';
 
 interface Props {
     footerActive?: boolean,

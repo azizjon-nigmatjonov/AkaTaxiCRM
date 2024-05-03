@@ -1,4 +1,4 @@
-import { ColorConstants } from "../../../constants/website";
+import { ColorConstants } from "../../../../constants/website";
 
 interface ArrowIconProps {
   isOpen: boolean;

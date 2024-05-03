@@ -3,7 +3,7 @@ import { useQuery } from "react-query"
 import driverService from "../../../../../services/drivers"
 import { useGetQueries } from "../../../../../hooks/useGetQueries"
 import CCard from "../../../../../components/CElements/CCard"
-import { BallanceIcon, TaxIcon, SallaryIcon } from "../../../../../components/IconGenerator/Svg"
+import { BallanceIcon, TaxIcon, SallaryIcon } from "../../../../../components/UI/IconGenerator/Svg"
 import CTable from "../../../../../components/CElements/CTable"
 import { FormatTime } from "../../../../../utils/formatTime"
 

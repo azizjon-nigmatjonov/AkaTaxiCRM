@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { ImageFrame } from "../../IconGenerator/Svg";
-import fileService from "../../../services/fileService";
+import fileService from "../../../../services/fileService";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { CircularProgress } from "@mui/material";
-import CLabel from "../../CElements/CLabel";
+import CLabel from "../../../CElements/CLabel";
 
 interface Props {
   isDelete?: boolean;

@@ -1,4 +1,4 @@
-import { PassengerIcon, PassengerVehicleIcon, DriverIcon, DriverVehicleIcon } from '../../../../components/IconGenerator/Svg'
+import { PassengerIcon, PassengerVehicleIcon, DriverIcon, DriverVehicleIcon } from '../../../../components/UI/IconGenerator/Svg'
 import Tools from './Tools';
 
 

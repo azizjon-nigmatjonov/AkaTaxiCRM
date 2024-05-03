@@ -1,4 +1,4 @@
-import { UserIcon } from "../../../../components/IconGenerator/Svg";
+import { UserIcon } from "../../../../components/UI/IconGenerator/Svg";
 import cls from './style.module.scss'
 const Header = ({ current }: { current?: any }) => {
   return (

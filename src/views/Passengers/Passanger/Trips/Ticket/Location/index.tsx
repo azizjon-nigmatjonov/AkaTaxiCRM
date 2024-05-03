@@ -1,5 +1,5 @@
 import cls from './style.module.scss';
-import { HorizontalLineIcon, StartIcon, HomeIcon } from '../../../../../../components/IconGenerator/Svg';
+import { HorizontalLineIcon, StartIcon, HomeIcon } from '../../../../../../components/UI/IconGenerator/Svg';
 import { FormatTime } from '../../../../../../utils/formatTime';
 
 

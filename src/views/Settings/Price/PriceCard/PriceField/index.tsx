@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   EditIcon,
   SaveIcon,
-} from "../../../../../components/IconGenerator/Svg";
+} from "../../../../../components/UI/IconGenerator/Svg";
 import { ColorConstants } from "../../../../../constants/website";
 import { Controller } from "react-hook-form";
 

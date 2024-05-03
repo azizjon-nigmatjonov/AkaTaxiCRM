@@ -1,4 +1,4 @@
-import { FlagIcon, CircleIcon, ProgressCarIcon, CheckIcon, WomenIconP, MenIconP, Empty, PassangerFemaleIcon, CloseModalIcon, NoteAvatar } from '../../../components/IconGenerator/Svg'
+import { FlagIcon, CircleIcon, ProgressCarIcon, CheckIcon, WomenIconP, MenIconP, Empty, PassangerFemaleIcon, CloseModalIcon, NoteAvatar } from '../../../components/UI/IconGenerator/Svg'
 import car from '/images/car.png'
 
 import './modal.css';

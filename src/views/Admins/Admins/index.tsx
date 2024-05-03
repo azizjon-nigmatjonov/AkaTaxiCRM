@@ -1,13 +1,13 @@
 import { useCallback, useMemo } from "react";
 import CTable from "../../../components/CElements/CTable";
-import AddButton from "../../../components/Buttons/AddButton";
+import AddButton from "../../../components/UI/Buttons/AddButton";
 import SectionHeader from "../../../components/UI/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import Form from "./Form";
 import { useQuery } from "react-query";
 import adminService from "../../../services/admins";
 import { FormatTime } from "../../../utils/formatTime";
-import { Header } from "../../../components/Header";
+import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 

@@ -2,7 +2,7 @@
 import AccountStatistics from "./AccountStatistics";
 import Selection from "./SelectionData";
 import StatisticsGender from "./GenderRegions";
-import { Header } from "../../../components/Header";
+import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { useMemo } from "react";
 

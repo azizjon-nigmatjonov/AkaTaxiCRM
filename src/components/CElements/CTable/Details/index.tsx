@@ -1,7 +1,7 @@
 import { Paper } from "@mui/material";
 // import { forwardRef } from "react";
 import Pagination from "./Pagination";
-import EmptyDataComponent from "../../../EmptyDataComponent";
+import EmptyDataComponent from "../../../UI/EmptyDataComponent";
 // import TableLoader from "../../../TableLoader/index";
 // import { DeleteRounded, BorderColorRounded } from "@mui/icons-material";
 import "./style.scss";

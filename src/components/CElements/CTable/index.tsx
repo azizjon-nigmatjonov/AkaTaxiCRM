@@ -11,7 +11,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import TabbleActions from "./Details/Actions";
-import { DotsIcon } from "../../IconGenerator/Svg";
+import { DotsIcon } from "../../UI/IconGenerator/Svg";
 import { t } from "i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { tableSizeAction } from "../../../store/tableSize/tableSizeSlice";

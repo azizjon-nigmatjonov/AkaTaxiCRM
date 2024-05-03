@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs"
-import { Header } from "../../../components/Header"
+import { Header } from "../../../components/UI/Header"
 import { useQuery } from 'react-query';
 import { useGetQueries } from '../../../hooks/useGetQueries';
 import passengerService from '../../../services/passengers';

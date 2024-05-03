@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { TextField } from "@mui/material"
-import RangeDate from "../../../components/RangeDate";
+import RangeDate from "../../UI/RangeDate";
 import CLabel from "../../CElements/CLabel";
 import '../style.scss';
 import { IoMdArrowDropdown } from "react-icons/io";

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import SwitchBtn from '../../../../../components/Buttons/Switch';
+import SwitchBtn from '../../../../../components/UI/Buttons/Switch';
 import cls from '../style.module.scss';
-import { StandarCarImgIcon, ConfortCarImgIcon, BusnissCarImgIcon, CheckLine } from '../../../../../components/IconGenerator/Svg/index';
+import { StandarCarImgIcon, ConfortCarImgIcon, BusnissCarImgIcon, CheckLine } from '../../../../../components/UI/IconGenerator/Svg/index';
 
 
 

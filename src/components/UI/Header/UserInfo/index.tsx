@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
-import usePageRouter from "../../../hooks/useObjectRouter";
-import authService from "../../../services/auth/authService";
+import usePageRouter from "../../../../hooks/useObjectRouter";
+import authService from "../../../../services/auth/authService";
 import cls from "./style.module.scss";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { authActions } from "../../../store/auth/auth.slice";
+import { authActions } from "../../../../store/auth/auth.slice";
 import ImageFrame from "../../ImageFrame";
 const UserInfo = () => {
   const { navigateTo } = usePageRouter();

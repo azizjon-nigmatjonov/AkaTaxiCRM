@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Collapse } from "@mui/material";
-import { CheckLine } from "../../../../components/IconGenerator/Svg";
+import { CheckLine } from "../../../../components/UI/IconGenerator/Svg";
 // import { Closer } from "../../../../components/Closer";
 import { ColorConstants } from "../../../../constants/website";
-import AddButton from "../../../../components/Buttons/AddButton";
+import AddButton from "../../../../components/UI/Buttons/AddButton";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 
 const PointSelector = ({

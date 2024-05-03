@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/UI/Sections/Header";
-import FilterButton from "../../../components/Filters";
+import FilterButton from "../../../components/UI/Filters";
 import { useQuery } from "react-query";
 import passengerService from "../../../services/passengers";
 import CSelect from "../../../components/CElements/CSelect";
@@ -10,18 +10,18 @@ import CSelect from "../../../components/CElements/CSelect";
 import { useSelector } from "react-redux";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
-import { Header } from "../../../components/Header";
+import { Header } from "../../../components/UI/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import DriversAvater from './DriversAvatar';
 import DriversList from "./DriversList";
-import ImageFrame from "../../../components/ImageFrame";
+import ImageFrame from "../../../components/UI/ImageFrame";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import Statistics from "./Statistics";
 // import { useSearchParams } from "react-router-dom";
 // import { useTranslation } from "react-i18next";
-import AddButton from "../../../components/Buttons/AddButton";
+import AddButton from "../../../components/UI/Buttons/AddButton";
 import cls from './style.module.scss';
-import Filters from "../../../components/Filter";
+import Filters from "../../../components/UI/Filter";
 
 const Reasons = [
   { value: 0, label: 'Sabablar' }

@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/UI/Sections/Header";
-import FilterButton from "../../../components/Filters";
+import FilterButton from "../../../components/UI/Filters";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import CSlider from "../../../components/CElements/CSlider";
-import { Header } from "../../../components/Header";
+import { Header } from "../../../components/UI/Header";
 import { FormatTime } from "../../../utils/formatTime";
 import CSelect from "../../../components/CElements/CSelect";
 import { useSelector } from "react-redux";
@@ -16,9 +16,9 @@ import carService from '../../../services/cars'
 import { useSearchParams } from 'react-router-dom'
 import { useTranslation } from "react-i18next";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
-import Places from "../../../components/Places";
+import Places from "../../../components/UI/Places";
 import PassengerList from "./PassengerList";
-import ImageFrame from "../../../components/ImageFrame";
+import ImageFrame from "../../../components/UI/ImageFrame";
 import LTabs from "../../../components/CElements/CTab/LineTab";
 
 const tabList = [

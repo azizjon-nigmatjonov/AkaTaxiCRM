@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import AddButton from "../../../components/Buttons/AddButton";
+import AddButton from "../../../components/UI/Buttons/AddButton";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import Form from "./Form";
 // import CTabs from "../../../components/CElements/CTab";
@@ -8,7 +8,7 @@ import Section from "./Section";
 import { useQuery } from "react-query";
 import carService from "../../../services/cars";
 import { Skeleton } from "@mui/material";
-import { Header } from "../../../components/Header";
+import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import SectionHeader from "../../../components/UI/Sections/Header";
 

@@ -1,4 +1,4 @@
-import { UserTagIcon, ArrowDown, ArrowUp } from "../../../../components/IconGenerator/Svg"
+import { UserTagIcon, ArrowDown, ArrowUp } from "../../../../components/UI/IconGenerator/Svg"
 import CCard from "../../../../components/CElements/CCard"
 import { useQuery } from "react-query"
 import passengerService from "../../../../services/passengers"

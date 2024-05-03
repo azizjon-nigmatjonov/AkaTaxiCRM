@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import HFTextField from "../../../../../components/FormElements/HFTextField";
 import usePageRouter from "../../../../../hooks/useObjectRouter";
 import CModal from "../../../../../components/CElements/CModal";
-import ImageUploadBtn from "../../../../../components/Buttons/ImageUpload";
+import ImageUploadBtn from "../../../../../components/UI/Buttons/ImageUpload";
 import driverService from "../../../../../services/drivers";
 import Classes from "../../Form/Classes";
 import { useQuery } from "react-query";

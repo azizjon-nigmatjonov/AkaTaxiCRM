@@ -1,6 +1,6 @@
 import propTypes from "prop-types";
 // import CDropdown from "../../../CDropdown";
-import { CarIcon, DeleteIcon, EditIcon, LockIcon } from "../../../../IconGenerator/Svg";
+import { CarIcon, DeleteIcon, EditIcon, LockIcon } from "../../../../UI/IconGenerator/Svg";
 import cls from "./style.module.scss";
 import Element from './Element'
 import { ColorConstants } from "../../../../../constants/website";

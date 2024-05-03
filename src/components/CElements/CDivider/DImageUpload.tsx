@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { DeleteIcon, DotsIcon, ImageFrame, InfoIcon, EditIcon, } from "../../IconGenerator/Svg";
+import { DeleteIcon, DotsIcon, ImageFrame, InfoIcon, EditIcon, } from "../../UI/IconGenerator/Svg";
 import fileService from "../../../services/fileService";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { CircularProgress } from "@mui/material";

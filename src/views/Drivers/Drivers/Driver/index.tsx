@@ -7,7 +7,7 @@ import DriverBallance from "./Ballance";
 import DriverTrip from "./Trip";
 import DriverInfo from "./Info";
 import { useMemo } from "react";
-import { Header } from "../../../../components/Header";
+import { Header } from "../../../../components/UI/Header";
 
 const tabList = [
   {

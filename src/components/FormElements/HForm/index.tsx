@@ -10,7 +10,6 @@ interface Props {
 const HFormWrapper = ({
   formRef,
   handleSubmit = () => {},
-  submit = () => {},
   styles = {},
   children,
 }: Props) => {

@@ -1,5 +1,5 @@
 import useDebounce from "../../../hooks/useDebounce";
-import { SearchIcon } from "../../IconGenerator/Svg";
+import { SearchIcon } from "../../UI/IconGenerator/Svg";
 
 interface Props {
   handleChange: (val: any) => void;

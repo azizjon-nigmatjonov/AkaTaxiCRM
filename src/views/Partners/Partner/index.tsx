@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
-import InfoCard from "../../../components/InfoCard";
+import InfoCard from "../../../components/UI/InfoCard";
 import partnerService from "../../../services/partners";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { useMemo } from "react";
-import { Header } from "../../../components/Header";
+import { Header } from "../../../components/UI/Header";
 
 const Partner = () => {
   const { id } = useGetQueries();
