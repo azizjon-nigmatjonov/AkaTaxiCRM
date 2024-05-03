@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import IconGenerator from "../../IconGenerator";
+import IconGenerator from "../../../components/UI/IconGenerator";
 // import usePageRouter from "../../../hooks/useObjectRouter";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { ArrowIcon } from "../../IconGenerator/Svg";
-import UserInfo from "../../../components/Header/UserInfo";
+import { ArrowIcon } from "../../../components/UI/IconGenerator/Svg";
+import UserInfo from "../../../components/UI/Header/UserInfo";
 import cls from "./style.module.scss";
 
 
