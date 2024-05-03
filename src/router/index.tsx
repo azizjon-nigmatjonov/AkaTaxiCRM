@@ -27,20 +27,21 @@ import Partners from "../views/Partners";
 import Partner from "../views/Partners/Partner";
 import { SmsCreateForm } from "../views/Settings/SMS/Form";
 import AddDriver from "../views/Drivers/Drivers/AddDriver";
-import Map from "../views/Drivers/Map"
+import Map from "../views/Drivers/Map";
 import Dashboard from "../views/Dashboard";
 
 import Booking from "../views/Passengers/Active/Booking";
 import FotoControl from "../views/Drivers/FotoControl";
+import { RollForm } from "views/Admins/Rolls/Form";
 
 const Passanger = lazy(() => import("../views/Passengers/Passanger"));
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
-const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"))
+const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"));
 interface Path {
   parent: string;
   link: string;
-  childlink?: string
+  childlink?: string;
   title: string;
   icon: string;
   sidebar: boolean;
@@ -71,8 +72,7 @@ const Router = () => {
     sidebar,
     card_info,
   }: Path) => {
-
-    const path = `${parent}/${link}${childlink ? `/${childlink}` : ''}`;
+    const path = `${parent}/${link}${childlink ? `/${childlink}` : ""}`;
 
     const obj = {
       path: path,
@@ -83,7 +83,6 @@ const Router = () => {
       icon,
       card_info,
     };
-
 
     if (!list.includes(obj.id)) {
       setRoutes((prev: any) => ({
@@ -122,7 +121,6 @@ const Router = () => {
   //   }
   // }, [isAuth]);
 
-
   return (
     <Suspense fallback={"Loading..."}>
       <Routes>
@@ -155,7 +153,7 @@ const Router = () => {
             path={getPath({
               parent: "passengers",
               link: "main",
-              childlink: 'passenger',
+              childlink: "passenger",
               sidebar: false,
               title: "",
               icon: "",
@@ -176,11 +174,11 @@ const Router = () => {
 
           <Route
             path={getPath({
-              parent: 'passengers',
-              link: 'booking',
+              parent: "passengers",
+              link: "booking",
               sidebar: false,
-              title: 'Passengers booking',
-              icon: ''
+              title: "Passengers booking",
+              icon: "",
             })}
             element={<Booking />}
           />
@@ -211,7 +209,7 @@ const Router = () => {
             path={getPath({
               parent: "drivers",
               link: "main",
-              childlink: 'driver',
+              childlink: "driver",
               sidebar: false,
               title: "",
               icon: "",
@@ -244,7 +242,7 @@ const Router = () => {
             path={getPath({
               parent: "drivers",
               link: "cars",
-              childlink:'car/:id',
+              childlink: "car/:id",
               sidebar: false,
               title: "",
               icon: "",
@@ -262,21 +260,27 @@ const Router = () => {
             element={<Vehicles />}
           />
 
-          <Route path={getPath({
-            parent: 'drivers',
-            link: 'fotocontrolusers',
-            sidebar: true,
-            title: 'Foto nazorat',
-            icon: 'FotoControl',
-          })} element={<FotoControl />} />
+          <Route
+            path={getPath({
+              parent: "drivers",
+              link: "fotocontrolusers",
+              sidebar: true,
+              title: "Foto nazorat",
+              icon: "FotoControl",
+            })}
+            element={<FotoControl />}
+          />
 
-          <Route path={getPath({
-            parent: 'drivers',
-            link: 'fotocontroluser',
-            sidebar: false,
-            title: 'Foto nazorat',
-            icon: ''
-          })} element={<FotoControlUser />} />
+          <Route
+            path={getPath({
+              parent: "drivers",
+              link: "fotocontroluser",
+              sidebar: false,
+              title: "Foto nazorat",
+              icon: "",
+            })}
+            element={<FotoControlUser />}
+          />
 
           <Route
             path={getPath({
@@ -347,6 +351,26 @@ const Router = () => {
               icon: "rolls_icon",
             })}
             element={<Rolls />}
+          />
+          <Route
+            path={getPath({
+              parent: "admins",
+              link: "roll/create",
+              sidebar: false,
+              title: "",
+              icon: "",
+            })}
+            element={<RollForm />}
+          />
+          <Route
+            path={getPath({
+              parent: "admins",
+              link: "roll/:id",
+              sidebar: false,
+              title: "",
+              icon: "",
+            })}
+            element={<RollForm />}
           />
           <Route
             path={getPath({

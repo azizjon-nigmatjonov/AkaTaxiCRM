@@ -14,13 +14,12 @@ const Price = () => {
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} />
       </Header>
-      <div className="px-5">
-        <div className="flex">
-          <CTabs tabList={tabList} />
-        </div>
 
-        {GetCurrentPage(currentTab)}
+      <div className="flex px-5">
+        <CTabs tabList={tabList} />
       </div>
+
+      {GetCurrentPage(currentTab)}
     </>
   );
 };

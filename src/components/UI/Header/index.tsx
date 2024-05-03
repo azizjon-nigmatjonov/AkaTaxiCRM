@@ -17,7 +17,7 @@ export const Header = ({
   ...props
 }: Props) => {
   return (
-    <div className="h-[70px] relative">
+    <div className="h-[70px] relative mb-5 z-[99] bg-white">
       <div className={`${cls.header} ${sticky ? cls.sticky : ""}`} {...props}>
         {children ? (
           children
@@ -30,6 +30,7 @@ export const Header = ({
           </h3>
         )}
       </div>
+      <img className="absolute right-0 top-0" src="../../../../public/svg/headerLine.svg" alt="line" />
     </div>
   );
 };

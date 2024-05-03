@@ -5,5 +5,5 @@ interface Props {
 }
 
 export const WrapperCard = ({ children }: Props) => {
-  return <div className={`bg-white rounded-[12px] p-5 border border-[var(--border)] ${cls.card}`}>{children}</div>;
+  return <div className={`bg-white rounded-[12px] mx-5 p-5 border border-[var(--border)] ${cls.card}`}>{children}</div>;
 };

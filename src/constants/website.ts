@@ -1,5 +1,4 @@
 export const ColorConstants = {
-  primary: "#09B0E7",
   blue: "#0062FF",
   main: "#DD431F",
   mainLight: "#FF5B01",
@@ -19,9 +18,15 @@ export const ColorConstants = {
   ink: "#1C299B",
   danger: "#E82F0F",
 
+  primary: "#2E90FA",
+  primary50: "#EFF8FF",
+
   border: "#EAECF0",
+  gray20: "#EAECF0",
   gray25: "#FCFCFD",
   gray30: "#D0D5DD",
+  gray40: "#98A2B3",
+  gray50: "#F2F4F7",
   gray60: "#475467",
   gray70: "#344054"
 } as const;
