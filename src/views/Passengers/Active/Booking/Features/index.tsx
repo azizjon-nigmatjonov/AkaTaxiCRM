@@ -16,7 +16,7 @@ const Features = ({ featureHandle = () => { }, price }: { featureHandle: (val: a
         electric: true,
         driver_gender: [],
         can_stop: true,
-        car_class_id: 1,
+        car_class_id: null,
     })
 
     const handleCheck = (name: string, check: any) => {
@@ -126,6 +126,7 @@ const Features = ({ featureHandle = () => { }, price }: { featureHandle: (val: a
                         </div>
                         Erkak
                     </div>
+
                     <div onClick={() => handleCheck('driver_gender', 'f')} className={`cursor-pointer flex items-center gap-2 pl-[14px] font-medium border border-[var(--lineGray)] rounded-[10px] h-[48px]`}>
                         <div
                             className={`w-[18px] h-[18px] rounded-[4px] border-2 ${features.driver_gender.includes('f') ? "border-[var(--mainLight)] bg-[var(--mainLight)]"
@@ -136,6 +137,7 @@ const Features = ({ featureHandle = () => { }, price }: { featureHandle: (val: a
                         </div>
                         Ayol
                     </div>
+                    
                 </div>
             </div>
 

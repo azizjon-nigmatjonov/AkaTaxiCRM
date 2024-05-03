@@ -3,14 +3,14 @@ import CTable from "../../../components/CElements/CTable";
 import AddButton from "../../../components/Buttons/AddButton";
 import SectionHeader from "../../../components/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
-import Form from "./Form";
+// import Form from "./Form";
 import { useQuery } from "react-query";
 import roleService from "../../../services/rolls";
 import { Header } from "../../../components/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 const Rolls = () => {
-  const { navigateQuery } = usePageRouter();
+  const {  navigateTo } = usePageRouter();
 
   const { data: roles } = useQuery(
     ["GET_ADMINS"],
@@ -65,8 +65,8 @@ const Rolls = () => {
         <SectionHeader>
           <div className="flex items-center gap-3">
             <AddButton
-              text="new_roll"
-              onClick={() => navigateQuery({ id: "create" })}
+              text="Yangi rol qo'shish"
+              onClick={() => navigateTo('/admins/rolls/new_rolls')}
             />
           </div>
         </SectionHeader>
@@ -76,7 +76,7 @@ const Rolls = () => {
           isResizeble={true}
         />
 
-        <Form />
+        {/* <Form /> */}
       </div>
     </>
   );

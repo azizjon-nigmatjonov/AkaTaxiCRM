@@ -43,6 +43,7 @@ const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
 const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"));
 const AddSMS = lazy(() => import('../views/Notifications/SMS/AddSMS'));
+const NewRolls = lazy(()=> import('../views/Admins/Rolls/AddRolls'))
 
 
 interface Path {
@@ -358,6 +359,19 @@ const Router = () => {
             })}
             element={<Rolls />}
           />
+
+          <Route
+            path={getPath({
+              parent: "admins",
+              link: "rolls",
+              childlink: 'new_rolls',
+              sidebar: false,
+              title: "Rollar",
+              icon: "rolls_icon",
+            })}
+            element={<NewRolls />}
+          />
+
           <Route
             path={getPath({
               parent: "settings",
