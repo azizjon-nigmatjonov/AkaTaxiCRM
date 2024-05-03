@@ -1,5 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
+<<<<<<< HEAD
 import IconGenerator from "../../../components/UI/IconGenerator"
+=======
+import IconGenerator from "../../../components/UI/IconGenerator";
+>>>>>>> 2940ae1b4b4eaef7eb692ecda37649eca24bd8af
 // import usePageRouter from "../../../hooks/useObjectRouter";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";

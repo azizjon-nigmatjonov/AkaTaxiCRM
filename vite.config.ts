@@ -23,10 +23,11 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      '@': '/src',
       components: "/src/components",
       assets: "/src/assets",
       hooks: "/src/hooks",
-      layout: "/src/layout",
+      layouts: "/src/layouts",
       scss: "/src/scss",
       services: "/src/services",
       store: "/src/store",
