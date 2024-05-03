@@ -15,7 +15,7 @@ const SidebarSection = () => {
   const List = useMemo(() => {
     return routes ?? [];
   }, [routes]);
-
+  
   const [activeIndex, setActiveIndex] = useState(() => {
     const storedIndex = localStorage.getItem("activeAccordionIndex");
     return storedIndex !== null ? parseInt(storedIndex) : -1;

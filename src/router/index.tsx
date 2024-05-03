@@ -72,7 +72,7 @@ const Router = () => {
     partners: [],
     settings: [],
   });
-
+  
   const getPath = ({
     parent = "",
     link,

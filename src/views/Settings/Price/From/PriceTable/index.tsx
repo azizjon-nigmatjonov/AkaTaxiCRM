@@ -14,15 +14,15 @@ export const PriceTable = () => {
           <div className="cell">
             <p>Tumanlar</p>
           </div>
-          <div className="collapsed">
-            <div className="cell space-x-3">
+          <div className="cell collapsed">
+            <div className="cell__wrapper">
               <p>Yo'l yo'lakay</p>
-              <button className="flex space-x-1 bg-[var(--gray50)] px-6px py-2px rounded-full">
-                <span className="text-[var(--gray60)]">KM</span>{" "}
+              <button className="flex space-x-1 bg-[var(--gray50)] px-6px py-2px rounded-full group">
+                <span className="group-hover:text-[var(--gray90)] text-[var(--gray60)]">250</span>{" "}
                 <EditIcon fill="var(--gray60)" />
               </button>
             </div>
-            <div className="cell space-x-3">
+            <div className="cell__wrapper">
               <button className="flex space-x-1 bg-[var(--primary50)] px-6px py-2px rounded-full">
                 <span className="text-[var(--primary)]">KM</span>{" "}
                 <EditIcon fill="var(--primary)" />
@@ -30,9 +30,39 @@ export const PriceTable = () => {
               <p className="text-[var(--gray40)]">Summa</p>
             </div>
           </div>
+  
         </div>
       </div>
-      <div className="body"></div>
+      {/* <div className="body">
+        <div className="left">
+          <div className="cell">
+          <p>Andijon</p>
+          </div>
+        </div>
+        <div className="right">
+          <div className="row">
+            <div className="cell">
+                <p>Tuman nomi</p>
+            </div>
+            <div className="cell flex justify-between">
+                <p>420</p>
+                <p className="text-[var(--gray60)]">300</p>
+            </div>
+            <div className="cell flex justify-between">
+                <p>420</p>
+                <p className="text-[var(--gray60)]">300</p>
+            </div>
+            <div className="cell flex justify-between">
+                <p>420</p>
+                <p className="text-[var(--gray60)]">300</p>
+            </div>
+            <div className="cell flex justify-between">
+                <p>420</p>
+                <p className="text-[var(--gray60)]">300</p>
+            </div>
+          </div>
+        </div>
+      </div> */}
     </div>
   );
 };
