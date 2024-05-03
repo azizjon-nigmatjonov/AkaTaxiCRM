@@ -8,7 +8,6 @@ import { breadCrumbs, tabList, TabActions } from "./Logic";
 const Price = () => {
   const { currentTab } = useGetQueries();
   const { GetCurrentPage } = TabActions();
-  // const regions = useSelector((state: any) => state.regions.regions);
 
   return (
     <>

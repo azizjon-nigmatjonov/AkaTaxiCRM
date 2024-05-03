@@ -17,15 +17,19 @@ export const Header = ({
   ...props
 }: Props) => {
   return (
-    <div className={`${cls.header} ${sticky ? cls.sticky : ""}`} {...props}>
-      {children ? (
-        children
-      ) : (
-        <h3 className="text-2xl font-[600] text-[var(--black)]">
-          <span className={`${titleIn && "text-[var(--gray)]"}`}>{title}</span>
-          {"/" + titleIn}
-        </h3>
-      )}
+    <div className="h-[70px] relative">
+      <div className={`${cls.header} ${sticky ? cls.sticky : ""}`} {...props}>
+        {children ? (
+          children
+        ) : (
+          <h3 className="text-2xl font-[600] text-[var(--black)]">
+            <span className={`${titleIn && "text-[var(--gray)]"}`}>
+              {title}
+            </span>
+            {"/" + titleIn}
+          </h3>
+        )}
+      </div>
     </div>
   );
 };

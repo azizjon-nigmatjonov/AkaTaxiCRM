@@ -5,10 +5,12 @@
   justify-content: space-between;
   height: 70px;
   width: 100%;
-  border-bottom: 1px solid $lineGray;
+  border-bottom: 1px solid var(--gray30);
   background-color: white;
   margin-bottom: 20px;
-
+  position: fixed;
+  top: 0;
+  z-index: 99;
   &.sticky {
     position: sticky;
     top: 0;

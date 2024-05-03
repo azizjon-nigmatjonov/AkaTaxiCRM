@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ArrowIcon } from "../../IconGenerator/Svg";
-import UserInfo from "../../Header/UserInfo";
 import cls from "./style.module.scss";
 
 const SidebarSection = () => {
@@ -32,7 +31,7 @@ const SidebarSection = () => {
 
   return (
     <div className={cls.section}>
-      <div className="mt-[10px] flex flex-col justify-between side">
+      <div className="flex flex-col justify-between w-full">
         <div>
           {Object.entries(List)?.map(([key, value]: [string, any], index) => {
             const visibleSidebarItems: any = (value as any).filter(
@@ -42,14 +41,14 @@ const SidebarSection = () => {
             const isLastItem = index === Object.entries(List).length - 1;
 
             return visibleSidebarItems.length > 1 ? (
-              <div className="ml-[15px]">
+              <div>
                 <button
-                  className={`accordion  ${
+                  className={`accordion ${
                     activeIndex === index ? "active" : ""
-                  } flex justify-between items-center max-w-[280px]`}
+                  } flex justify-between items-center w-full`}
                   onClick={() => toggleAccordion(index)}
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center space-x-3">
                     <IconGenerator icon={(value as any[])[0].icon} />
                     <span className="text-[var(--black)] font-medium">
                       {t(key)}
@@ -109,7 +108,7 @@ const SidebarSection = () => {
               <div className="menus">
                 <NavLink
                   to={visibleSidebarItems[0].path}
-                  className={`menu_link3 mt-2 mb-2 py-[10px] ml-4 pl-[20px] w-[280px] flex items-center  gap-3  capitalize`}
+                  className={`menu_link3 w-full h-[40px] flex items-center gap-x-3 pl-3 capitalize`}
                 >
                   <IconGenerator icon={visibleSidebarItems[0].icon} /> {t(key)}
                 </NavLink>
@@ -117,9 +116,6 @@ const SidebarSection = () => {
               </div>
             );
           })}
-        </div>
-        <div className="ml-8 mb-8 ">
-          <UserInfo />
         </div>
       </div>
     </div>

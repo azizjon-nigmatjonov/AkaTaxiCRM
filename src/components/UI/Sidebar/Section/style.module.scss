@@ -1,13 +1,15 @@
 :root {
-  --Light-Mode-Container-Divider: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
+  --Light-Mode-Container-Divider: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 .section {
+  width: 100%;
   height: 100%;
-  max-width: 312px;
   display: flex;
-
-  // position: relative;
   .section::before {
     content: "";
     display: block;
@@ -16,9 +18,7 @@
     position: absolute;
   }
 
-  overflow: scroll;
   .title {
-    padding: $paddingBlock $paddingBlock 20px $paddingBlock;
     font-weight: 600;
     text-transform: uppercase;
   }
