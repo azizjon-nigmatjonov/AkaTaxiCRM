@@ -1,4 +1,4 @@
-import { CheckLine } from "../../../components/IconGenerator/Svg"
+import { CheckLine } from "../../../components/UI/IconGenerator/Svg"
 import { useState } from "react"
 
 interface Props {

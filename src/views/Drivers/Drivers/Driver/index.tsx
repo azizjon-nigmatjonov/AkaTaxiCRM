@@ -11,7 +11,6 @@ import { Header } from "../../../../components/UI/Header";
 import AddButton from "../../../../components/UI/Buttons/AddButton";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 
-
 const tabList = [
   {
     slug: "",

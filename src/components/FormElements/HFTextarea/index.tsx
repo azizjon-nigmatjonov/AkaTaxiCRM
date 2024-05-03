@@ -2,7 +2,7 @@ import { Controller } from "react-hook-form";
 import { CgFormatBold } from "react-icons/cg";
 import { GoItalic } from "react-icons/go";
 import { FiUnderline } from "react-icons/fi";
-import { ImageFrameIcon } from "../../../components/IconGenerator/Svg";
+import { ImageFrameIcon } from "../../../components/UI/IconGenerator/Svg";
 import { TextareaAutosize } from "@mui/material";
 
 interface Props {

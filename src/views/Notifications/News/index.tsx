@@ -1,6 +1,6 @@
-import AddButton from "../../../components/Buttons/AddButton"
+import AddButton from "../../../components/UI/Buttons/AddButton"
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs"
-import { Header } from "../../../components/Header"
+import { Header } from "../../../components/UI/Header"
 import { useMemo } from "react"
 import CTable from "../../../components/CElements/CTable"
 import { useNavigate } from "react-router-dom"

@@ -5,7 +5,7 @@ import DropDown from "../../../components/FormElements/DropDown"
 import HFSelect from "../../../components/FormElements/HFSelect"
 import { useSelector } from "react-redux"
 import CText from "../../../components/CElements/CText"
-import AddButton from "../../../components/Buttons/AddButton"
+import AddButton from "../../../components/UI/Buttons/AddButton"
 
 interface Props {
     control?: any,
