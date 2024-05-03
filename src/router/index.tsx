@@ -44,7 +44,7 @@ const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
 const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"));
 const AddSMS = lazy(() => import('../views/Notifications/SMS/AddSMS'));
-const NewRolls = lazy(()=> import('../views/Admins/Rolls/AddRolls'))
+const NewRolls = lazy(() => import('../views/Admins/Rolls/AddRolls'))
 
 
 interface Path {
@@ -87,11 +87,11 @@ const Router = () => {
     const obj = {
       path: path,
       sidebar,
-      permission: path,
       id: path,
       title,
       icon,
       card_info,
+      permissions: []
     };
 
     if (!list.includes(obj.id)) {
@@ -123,6 +123,8 @@ const Router = () => {
       </Suspense>
     );
   }
+
+  
 
   // useEffect(() => {
   //   if (isAuth && location.pathname === "/") {
@@ -384,7 +386,7 @@ const Router = () => {
               title: "",
               icon: "",
             })}
-            element={<RollForm />}
+            element={<NewRolls />}
           />
           <Route
             path={getPath({

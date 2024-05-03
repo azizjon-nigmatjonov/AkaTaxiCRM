@@ -6,36 +6,46 @@ import Rolls from "./Rolls"
 import CCheckbox from "../../../../components/CElements/CCheckbox"
 import HFTextField from "../../../../components/FormElements/HFTextField"
 import { useForm } from "react-hook-form"
+import { useSelector } from "react-redux"
+import { GetRoutes } from "./Logic"
 
 
-const passenger = [
+const permissions = [
     {
-        name: "Ro'yxat",
-        status: false,
+        label: "Ro'yxat",
+        value: 'list',
     },
     {
-        name: 'Aktiv',
-        status: false
+        label: 'Aktiv',
+        value: 'active'
     },
     {
-        name: 'Statistic',
-        status: false
+        label: 'Statistic',
+        value: 'static'
     },
     {
-        name: "Ma'lumotnome",
-        status: false
+        label: "Ma'lumotnome",
+        value: 'info'
     },
     {
-        name: "O'zgaruvchi",
-        status: false
+        label: "O'zgaruvchi",
+        value: 'variable'
     },
     {
-        name: "O’chirish",
-        status: false
+        label: "O’chirish",
+        value: 'delete'
     }
 ]
 
+const dashboard = {
+    label: 'Dashboard ma’lumotlari',
+    value: false
+}
+
 const NewRolls = () => {
+    const routes = useSelector((state: any) => state.website.routes)
+    const { allRoutes } = GetRoutes()
+    const newRoutes = allRoutes(routes)
 
     const breadCrumbsItems = useMemo(() => {
         return [
@@ -55,6 +65,14 @@ const NewRolls = () => {
 
     const { control } = useForm()
 
+    const handleCheck = (permission: any, route: any) => {
+        console.log(permission);
+        console.log('route', route);
+        
+        route.permissions.push(permission)
+    }
+    // console.log('newRoutes', newRoutes);
+    
     return (
         <>
             <Header sticky={true}>
@@ -75,13 +93,16 @@ const NewRolls = () => {
                     <HFTextField name="new_roll" control={control} placeholder="e.g.Admin 1" />
                 </Rolls>
                 <Rolls text='Dashboard '>
-                    <CCheckbox text='Dashboard ma’lumotlari' />
+                    <CCheckbox element={dashboard} />
                 </Rolls>
-                <Rolls text='Yo’lovchi'>
-                    <div className="grid grid-cols-3 gap-4">
-                        {passenger.map((val) => <CCheckbox text={val?.name} />)}
-                    </div>
-                </Rolls>
+                {newRoutes?.map((route) => (
+                    <Rolls key={route.path} text={route.title}>
+                        <div className="grid grid-cols-3 gap-4">
+                            {permissions.map((element) => <CCheckbox handleCheck={(obj: any) => handleCheck(obj, route)} element={element} />)}
+                        </div>
+                    </Rolls>
+                ))}
+
             </div>
         </>
     )
