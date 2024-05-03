@@ -71,7 +71,6 @@ export default function CTabs({
 
   return (
     <div className={`${cls.wrapper} border-[var(--gray20)] common-shadow rounded-[8px]`}>
-
       <CTab
         value={value}
         tabList={optimizedTabList}
