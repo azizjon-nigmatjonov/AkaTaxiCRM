@@ -164,13 +164,8 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "passengers",
-<<<<<<< HEAD
               link: "passenger",
               // childlink: 'single',
-=======
-              link: "main",
-              childlink: "passenger",
->>>>>>> mukhammadaziz
               sidebar: false,
               title: "",
               icon: "",
