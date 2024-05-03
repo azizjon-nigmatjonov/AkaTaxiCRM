@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import {} from "../../../../../IconGenerator/Svg";
+import {} from "../../../../../UI/IconGenerator/Svg";
 import { ReactNode } from "react";
 
 interface Props {

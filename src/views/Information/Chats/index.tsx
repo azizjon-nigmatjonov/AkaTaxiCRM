@@ -2,8 +2,8 @@ import { useEffect, useMemo, useCallback, useState} from "react";
 import ChatSinglePage from "./Chat";
 import ChatList from "./List";
 import chatService from "../../../services/chats";
-import { Header } from "../../../components/Header";
-import NullData from "../../../components/NullData";
+import { Header } from "../../../components/UI/Header";
+import NullData from "../../../components/UI/NullData";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { useInfiniteQuery } from "react-query";
 

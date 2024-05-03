@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { AppleIcon } from "../../components/IconGenerator/Svg"
-import { AndroidIcon } from "../../components/IconGenerator/Svg"
-import { WomenGenderIcon } from "../../components/IconGenerator/Svg"
-import { ManGenderIcon } from "../../components/IconGenerator/Svg"
+import { AppleIcon } from "../../components/UI/IconGenerator/Svg"
+import { AndroidIcon } from "../../components/UI/IconGenerator/Svg"
+import { WomenGenderIcon } from "../../components/UI/IconGenerator/Svg"
+import { ManGenderIcon } from "../../components/UI/IconGenerator/Svg"
 
 
 

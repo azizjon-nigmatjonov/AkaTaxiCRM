@@ -3,7 +3,7 @@ import CTable from "../../../../components/CElements/CTable";
 import { useQuery } from "react-query";
 import fileService from "../../../../services/fileService";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
-import ImageFrame from "../../../../components/ImageFrame";
+import ImageFrame from "../../../../components/UI/ImageFrame";
 import LTabs from "../../../../components/CElements/CTab/LineTab";
 
 const tabList = [

@@ -8,9 +8,9 @@ import { useGetQueries } from "../../../../hooks/useGetQueries";
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs";
 import carService from "../../../../services/cars";
 import { FormatTime } from "../../../../utils/formatTime";
-import { Header } from "../../../../components/Header";
+import { Header } from "../../../../components/UI/Header";
 import { useParams } from "react-router-dom";
-import ImageFrame from "../../../../components/ImageFrame";
+import ImageFrame from "../../../../components/UI/ImageFrame";
 import { useDispatch } from "react-redux";
 import { websiteActions } from "../../../../store/website";
 import usePageRouter from "../../../../hooks/useObjectRouter";
@@ -27,21 +27,26 @@ const tabList = [
 const SingleCar = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const { currentPage } = useGetQueries();
+  const { currentPage, page } = useGetQueries();
   const { navigateQuery, navigateTo } = usePageRouter()
   const { currentTab } = useGetQueries();
   const setCarList = useState([])[1];
   const setLoading = useState(false)[1];
 
+  console.log(page);
+
+
   const { data: driversData } = useQuery(
-    ["GET_DRIVERS_BY_CAR"],
+    ["GET_DRIVERS_BY_CAR", id, page],
     () => {
-      return driverService.getList({ car_id: id });
+      return driverService.getList({ page: page ?? 1, car_id: id });
     },
     {
       enabled: !!id,
     }
   );
+
+
 
   const tab = useMemo(() => {
     return currentTab ? currentTab : "1";
@@ -61,7 +66,7 @@ const SingleCar = () => {
   useEffect(() => {
     if (tab) getCarList(tab);
   }, [tab]);
-  
+
   const { data: carData } = useQuery(
     ["GET_BY_CAR"],
     () => {
@@ -124,6 +129,7 @@ const SingleCar = () => {
   const drivers: any = useMemo(() => {
     const lists: any = driversData ?? [];
 
+
     return {
       list: lists.data?.map((val: any) => {
         return {
@@ -144,7 +150,7 @@ const SingleCar = () => {
     if (element === "edit") {
       navigateQuery({ id: status.id })
     } else if (status == 'learn_more') {
-      navigateTo(`/drivers/driver?id=${element.id}`)
+      navigateTo(`/drivers/main/driver?id=${element.id}`)
     }
     else {
       driverService.deleteElement(status?.id).then(() => {
@@ -173,7 +179,12 @@ const SingleCar = () => {
         label: drivers?.list?.[0]?.car_name ?? "Mashina",
       },
     ];
-  }, [carData]);
+  }, [carData, driversData]);
+
+  
+  // console.log(drivers);
+  // console.log(driversData);
+
 
 
 

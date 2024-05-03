@@ -3,10 +3,10 @@ import CCard from "../../../../../components/CElements/CCard";
 import MainInfo from "./Main";
 import CarInfo from "./CarInfo";
 import DriverImages from "./Images";
-import AddButton from "../../../../../components/Buttons/AddButton";
-import CancelButton from "../../../../../components/Buttons/Cancel";
+import AddButton from "../../../../../components/UI/Buttons/AddButton";
+import CancelButton from "../../../../../components/UI/Buttons/Cancel";
 import { Modal } from "@mui/material";
-import { InfoIcon } from "../../../../../components/IconGenerator/Svg";
+import { InfoIcon } from "../../../../../components/UI/IconGenerator/Svg";
 import usePageRouter from "../../../../../hooks/useObjectRouter";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -53,7 +53,9 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
       navigateQuery({ passenger: '' })
     }
     else if (e == 'update') {
-      const value = getValues();     
+      const value = getValues(); 
+      console.log(value);
+          
       let obj: any = {};
       Object.entries(driver).map(([keys, _]) => {
         Object.entries(value).map(([newkeys, _]) => {

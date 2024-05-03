@@ -1,4 +1,4 @@
-import NullData from "../../../../components/NullData";
+import NullData from "../../../../components/UI/NullData";
 import Points from "./Points";
 import PriceTable from "./Table";
 

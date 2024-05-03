@@ -1,19 +1,22 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import CTable from "../../../components/CElements/CTable";
-import AddButton from "../../../components/Buttons/AddButton";
-import SectionHeader from "../../../components/Sections/Header";
+import AddButton from "../../../components/UI/Buttons/AddButton";
+import SectionHeader from "../../../components/UI/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import Form from "./Form";
 import { useQuery } from "react-query";
 import adminService from "../../../services/admins";
 import { FormatTime } from "../../../utils/formatTime";
-import { Header } from "../../../components/Header";
+import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
+
 
 const Admins = () => {
   const { navigateQuery } = usePageRouter();
-
-  const { data: admins, isLoading } = useQuery(
+  const { getQueries } = usePageRouter()
+  const query = getQueries();
+  
+  const { data: admins, isLoading, refetch } = useQuery(
     ["GET_ADMINS"],
     () => {
       return adminService.getList();
@@ -22,6 +25,8 @@ const Admins = () => {
       enabled: true,
     }
   );
+
+  const handleSearch = () => {};
 
   const bodyColumns = useMemo(() => {
     return admins?.data ?? [];
@@ -61,8 +66,8 @@ const Admins = () => {
               val === "inactive"
                 ? "text-[var(--error)]"
                 : val === "active"
-                  ? "text-[var(--green)]"
-                  : ""
+                ? "text-[var(--green)]"
+                : ""
             }
           >
             {val === "inactive" ? "Noaktiv" : val === "active" ? "Aktiv" : ""}
@@ -72,19 +77,30 @@ const Admins = () => {
       {
         title: "",
         id: "actions",
-        width: 90,
         permission: ["edit", "delete", "freez"],
       },
     ];
   }, []);
 
+  const breadCrumbs = useMemo(() => {
+    return [{ label: "Admin", link: "/admins/admin" }, { label: "Adminlar" }];
+  }, []);
 
-  const breadCrumbs = useMemo(()=>{
-    return [
-      {label: 'Admin', link:"/admins/admin"},
-      {label:"Adminlar", }
-    ]
-  }, [])
+  const handleActions = useCallback((status: string, element: any) => {
+    console.log(status, element);
+    
+    if (status === "freeze") {
+      // navigateTo(`/partners/partner?id=${element.id}`);
+    }
+
+    if (status === "edit") navigateQuery({ id: element.id });
+
+    if (status === "delete") {
+      adminService.deleteAdmin(element.id)
+      refetch()
+    }
+  }, []);
+
 
   return (
     <>
@@ -92,7 +108,7 @@ const Admins = () => {
         <CBreadcrumbs items={breadCrumbs} progmatic={true} />
       </Header>
       <div className="px-5">
-        <SectionHeader>
+        <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <AddButton
               text="new_admin"
@@ -106,9 +122,10 @@ const Admins = () => {
           bodyColumns={bodyColumns}
           isResizeble={true}
           isLoading={isLoading}
+          handleActions={handleActions}
         />
 
-        <Form />
+        {query?.id && <Form refetch={refetch} id={query.id} />}
       </div>
     </>
   );

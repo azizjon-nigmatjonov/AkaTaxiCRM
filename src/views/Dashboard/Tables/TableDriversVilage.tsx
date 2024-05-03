@@ -42,6 +42,9 @@ function TableDriversVilage({ setCountWeekDriversVilage, setSelectMonthDriversVi
         setDisabledMonth(true);
         setDisabledWeek(true)
         setYearDriversVilage('2024')
+
+        setSelectMonthDriversVilage(null)
+        setCountWeekDriversVilage(null)
     }
 
     const handleMonthButtonClick = () => {
@@ -50,6 +53,8 @@ function TableDriversVilage({ setCountWeekDriversVilage, setSelectMonthDriversVi
         setDisabledYear(false)
         setDisabledMonth(false)
         setSelectMonthDriversVilage(2)
+
+        setCountWeekDriversVilage(null)
     }
 
     const handleWeekButtonClick = () => {

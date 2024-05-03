@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SwitchBtn from "../../../../components/Buttons/Switch";
+import SwitchBtn from "../../../../components/UI/Buttons/Switch";
 import { Divider } from "@mui/material";
 
 interface Props {

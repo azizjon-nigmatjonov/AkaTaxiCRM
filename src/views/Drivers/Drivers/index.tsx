@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from "react";
-import AddButton from "../../../components/Buttons/AddButton";
-import FilterButton from "../../../components/Filters";
+import AddButton from "../../../components/UI/Buttons/AddButton";
+import FilterButton from "../../../components/UI/Filters";
 import CTable from "../../../components/CElements/CTable";
-import SectionHeader from "../../../components/Sections/Header";
+import SectionHeader from "../../../components/UI/Sections/Header";
 import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import driverService from "../../../services/drivers";
@@ -10,12 +10,12 @@ import { useQuery } from "react-query";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
 // import CSlider from "../../../components/CElements/CSlider";
-import { Header } from "../../../components/Header";
-import ImageFrame from "../../../components/ImageFrame";
+import { Header } from "../../../components/UI/Header";
+import ImageFrame from "../../../components/UI/ImageFrame";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 // import { useSearchParams } from "react-router-dom";
 // import { useTranslation } from    "react-i18next";
-import Filters from "../../../components/Filter";
+import Filters from "../../../components/UI/Filter";
 import DropDown from "../../../components/FormElements/DropDown";
 import CSelect from "../../../components/CElements/CSelect";
 import { useSelector } from "react-redux";
@@ -115,7 +115,7 @@ const Drivers = () => {
 
   const handleActions = useCallback((status: string, element: any) => {
     if (status === "learn_more") {
-      navigateTo(`/drivers/driver?id=${element.id}`);
+      navigateTo(`/drivers/main/driver?id=${element.id}`);
     }
 
     if (status === "edit") navigateQuery({ id: element.id });
@@ -203,7 +203,7 @@ const Drivers = () => {
             {/* </FilterButton> */}
             <AddButton
               text="new_driver"
-              onClick={() => navigateTo('/drivers/add')}
+              onClick={() => navigateTo('/drivers/main/add')}
             />
           </div>
         </SectionHeader>

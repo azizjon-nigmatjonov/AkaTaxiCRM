@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import IconGenerator from "../../IconGenerator";
+import IconGenerator from "../../../components/UI/IconGenerator";
 // import usePageRouter from "../../../hooks/useObjectRouter";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { ArrowIcon } from "../../IconGenerator/Svg";
-import UserInfo from "../../../components/Header/UserInfo";
+import { ArrowIcon } from "../../../components/UI/IconGenerator/Svg";
+import UserInfo from "../../../components/UI/Header/UserInfo";
 import cls from "./style.module.scss";
 
 
@@ -58,6 +58,7 @@ const SidebarSection = () => {
 
 console.log(List);
 
+console.log(List);
 
 
 
@@ -65,8 +66,7 @@ console.log(List);
     <div className={cls.section}>
       <div className="mt-[10px] flex flex-col justify-between side">
         <div>
-          {Object.entries(List)?.map(([key, value]: [string, any], index) => {
-
+          {Object.entries(List)?.map(([key, value]: [string, any], index) => {            
             const visibleSidebarItems: any = (value as any).filter((el: any) => el.sidebar)
 
             const isLastItem = index === Object.entries(List).length - 1;
@@ -74,6 +74,7 @@ console.log(List);
             return visibleSidebarItems.length > 1 ? (
 
               <div className="ml-[15px]">
+
                 <button
                   className={`accordion  ${activeIndex === index ? 'active' : ''} flex justify-between items-center max-w-[280px]`}
                   onClick={() => toggleAccordion(index)}
@@ -86,12 +87,11 @@ console.log(List);
                     <ArrowIcon isOpen={activeIndex === index} />
                   </div>
                 </button>
+
                 <div className={`panel  ${activeIndex === index ? 'show' : ''}`}>
                   {Object.values(value as keyof typeof value)?.map((el: any, i, arr) => {
                     const isLastItem = i === arr.length - 1;
-
                     // console.log(el.path);
-
 
                     if (el.title && el.title.trim() !== '') {
                       return (
@@ -115,7 +115,9 @@ console.log(List);
                     }
                   })}
                 </div>
+
                 {!isLastItem && <div className="accordion-line"></div>}
+
               </div>
             ) : <div className="menus">
               <NavLink to={visibleSidebarItems[0].path} className={`menu_link3 mt-2 mb-2 py-[10px] ml-4 pl-[20px] w-[280px] flex items-center  gap-3  capitalize`}>

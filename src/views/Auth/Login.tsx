@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import HFInput from "../../components/FormElements/HFInput";
-import { PasswordIcon, UserIcon } from "../../components/IconGenerator/Svg";
+import { PasswordIcon, UserIcon } from "../../components/UI/IconGenerator/Svg";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { useState } from "react";
 import useAuth from "../../services/auth/useAuth";

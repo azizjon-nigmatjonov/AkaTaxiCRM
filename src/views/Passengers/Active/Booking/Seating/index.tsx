@@ -1,7 +1,7 @@
 import {useState } from 'react';
-import Places from '../../../../../components/Places';
+import Places from '../../../../../components/UI/Places';
 import cls from '../style.module.scss';
-import { PassangerFemaleIcon, PassengerManIcon } from '../../../../../components/IconGenerator/Svg/index';
+import { PassangerFemaleIcon, PassengerManIcon } from '../../../../../components/UI/IconGenerator/Svg/index';
 import { IoMdArrowDropright } from "react-icons/io";
 interface Props {
     id: number,

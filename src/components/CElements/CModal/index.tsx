@@ -1,11 +1,11 @@
-import { CloseIcon } from "../../IconGenerator/Svg";
+import { CloseIcon } from "../../UI/IconGenerator/Svg";
 import { Card, IconButton, Modal } from "@mui/material";
 
 import cls from "./style.module.scss";
 import { FC, ReactNode } from "react";
-import AddButton from "../../Buttons/AddButton";
+import AddButton from "../../UI/Buttons/AddButton";
 import { t } from "i18next";
-import CancelButton from "../../Buttons/Cancel";
+import CancelButton from "../../UI/Buttons/Cancel";
 
 interface Props {
   title?: string;

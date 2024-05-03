@@ -1,5 +1,5 @@
 import CCard from "../../../../../components/CElements/CCard";
-import { UserIcon } from "../../../../../components/IconGenerator/Svg";
+import { UserIcon } from "../../../../../components/UI/IconGenerator/Svg";
 import { ColorConstants } from "../../../../../constants/website";
 
 

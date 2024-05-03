@@ -3,7 +3,7 @@ import usePageRouter from '../../../../hooks/useObjectRouter';
 import { useMemo } from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { Avatar } from "@mui/material";
-import Places from "../../../../components/Places";
+import Places from "../../../../components/UI/Places";
 
 
 const PassengerList = ({ data }: { data: any }) => {

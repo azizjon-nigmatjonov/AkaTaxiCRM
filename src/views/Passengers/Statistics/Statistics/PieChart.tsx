@@ -1,5 +1,5 @@
 import CCard from "../../../../components/CElements/CCard";
-import PieChart from "../../../../components/PieChart/index";
+import PieChart from "../../../../components/UI/PieChart/index";
 // import CSelect from "../../../../components/CElements/CSelect";
 import { useMemo, useState } from "react";
 import {

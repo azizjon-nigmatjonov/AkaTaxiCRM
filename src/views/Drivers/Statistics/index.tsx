@@ -1,16 +1,16 @@
 import { useMemo, useState } from "react";
 import CCard from "../../../components/CElements/CCard";
-import { ArrowUp, ArrowDown } from '../../../components/IconGenerator/Svg'
+import { ArrowUp, ArrowDown } from '../../../components/UI/IconGenerator/Svg'
 import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
 import { Skeleton } from "@mui/material";
 import StatisticsLineChart from "./Bar";
-import Progress from '../../../components/Progress'
-import { Header } from "../../../components/Header";
+import Progress from '../../../components/UI/Progress'
+import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import StatisticsHeader from "./Header";
 import { useGetQueries } from "../../../hooks/useGetQueries";
-import RangeDate from "../../../components/RangeDate";
+import RangeDate from "../../../components/UI/RangeDate";
 import { BiCaretDown, BiX } from "react-icons/bi";
 
 const DriverStatistics = () => {
@@ -65,7 +65,7 @@ const DriverStatistics = () => {
         <CBreadcrumbs items={breadCrumbs} progmatic={true} type="link" />
       </Header>
       <div className="sticky top-20 z-[12] py-[24px] pl-[12px]  w-[100%] bg-[var(--softGray)] flex items-center justify-between">
-        <h1 className="text-2xl font-[600] text-[var(--black)] ml-[15px]">
+        <h1 className="text-2xl font-[600] text-[var(--black)]">
           Statistika: haydovchi
         </h1>
         <div className="mr-[15px]">

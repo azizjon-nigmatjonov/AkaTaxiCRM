@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { TextField } from "@mui/material"
-import RangeDate from "../../../components/RangeDate";
+import RangeDate from "../../UI/RangeDate";
 import CLabel from "../../CElements/CLabel";
 import '../style.scss';
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -40,7 +40,7 @@ const DropDown = ({ label, name, placeholder, defaultValue }: Props) => {
                     onClick={() => setShow(true)}
                 />
                 <div className="absolute right-[-380px] bg-yellow-500">
-                    {show && <RangeDate footerActive={false} handlerValue={clickHandler} />}
+                    {show && <RangeDate setShow={setShow} footerActive={false} handlerValue={clickHandler} />}
                 </div>
             </div>
         </div>

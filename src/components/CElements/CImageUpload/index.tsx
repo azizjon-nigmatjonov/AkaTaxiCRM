@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { PhotoIcon } from "../../IconGenerator/Svg";
+import { PhotoIcon } from "../../UI/IconGenerator/Svg";
 import fileService from "../../../services/fileService";
 import { CircularProgress } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";

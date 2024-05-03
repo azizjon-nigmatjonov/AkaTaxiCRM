@@ -7,9 +7,9 @@ import { themeMui } from "./theme";
 import queryClient from "./services/queryClient";
 import { BrowserRouter } from "react-router-dom";
 import Router from "./router";
-import PageFallback from "./components/PageFallback";
 import { persistor, store } from "./store";
 import "./i18next";
+import PageFallback from "./components/UI/PageFallback";
 
 function App() {
   return (

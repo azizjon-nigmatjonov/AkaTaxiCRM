@@ -1,15 +1,15 @@
 import { useCallback, useMemo } from "react"
 import { useQuery } from "react-query"
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs"
-import { Header } from "../../../components/Header"
-import SectionHeader from "../../../components/Sections/Header"
+import { Header } from "../../../components/UI/Header"
+import SectionHeader from "../../../components/UI/Sections/Header"
 import usePageRouter from '../../../hooks/useObjectRouter'
 import CTable from "../../../components/CElements/CTable"
-import ImageFrame from "../../../components/ImageFrame"
+import ImageFrame from "../../../components/UI/ImageFrame"
 // import Date from "./Date"
 import driverService from "../../../services/drivers";
 import { useGetQueries } from "../../../hooks/useGetQueries"
-import { DangerNotification } from "../../../components/IconGenerator/Svg"
+import { DangerNotification } from "../../../components/UI/IconGenerator/Svg"
 
 const FotoControl = () => {
   const { currentPage, page, q, start, end } = useGetQueries()
@@ -62,7 +62,7 @@ const FotoControl = () => {
         id: 'status',
         render: (val: any) => val && (
           <div className="flex items-center justify-center">
-            {val == 'created_at' ? <DangerNotification /> : 0}
+            {val == 'created' ? <DangerNotification /> : <p className="text-red-500">-</p>}
           </div>
         )
       },

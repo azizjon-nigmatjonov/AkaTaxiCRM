@@ -4,7 +4,7 @@ import calendarService from "../../../services/calendar";
 // import SectionHeader from "../../../components/Sections/Header";
 // import FilterButton from "../../../components/Filters";
 import CalendarUI from "./UI";
-import { Header } from "../../../components/Header";
+import { Header } from "../../../components/UI/Header";
 import { GetMonth } from "../../../utils/getMonth";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";

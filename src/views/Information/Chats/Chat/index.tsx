@@ -3,7 +3,7 @@ import chatService from "../../../../services/chats";
 import Header from "./Header";
 import MessageUI from "./Message";
 import CDriver from "../../../../components/CElements/CDivider";
-import NullData from "../../../../components/NullData";
+import NullData from "../../../../components/UI/NullData";
 
 const ChatSinglePage = ({ current }: { current?: any }) => {
   const { data: chat } = useQuery(

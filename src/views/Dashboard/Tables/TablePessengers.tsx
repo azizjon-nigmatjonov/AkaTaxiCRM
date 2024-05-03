@@ -16,6 +16,8 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
     const [showWeek, setShoWeek] = useState(true)
     const [localYear, setLocalYear] = useState(null);
 
+    console.log(showWeek);
+
     const [isOpen, setIsOpen] = useState(true);
     const [driverReason, setDriverReason] = useState(false);
 
@@ -41,10 +43,6 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
         setDriverReason(true);
     }
 
-
-
-    showWeek
-
     const handleYearButtonClick = () => {
         setActiveButton('year');
         // setYear();
@@ -52,16 +50,22 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
         setDisabledWeek(true)
         setYear(localYear)
         setYear('2024')
+
+        setSelectMonth(null)
+        setCountWeek(null)
         // navigateQuery({year: year })
         // console.log(localYear);
         // console.log('sa');
     }
+
     const handleMonthButtonClick = () => {
         setDisabledWeek(true)
         setDisabledYear(false)
         setDisabledMonth(false)
         setActiveButton('month');
         setSelectMonth(1)
+        setCountWeek(null)
+
     }
 
     const handleWeekButtonClick = () => {
@@ -87,8 +91,6 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
         setMonthName(monthName)
     }
 
-
-
     const getWeeks: any = () => {
         const today = new Date();
         const currentMonth = today.getMonth();
@@ -112,6 +114,7 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
         return weeks;
 
     }
+
     const weeks = getWeeks();
     const formatWeek = (week: any) => `${week.start} - ${week.end}`;
     const handleWeekChange = (event: any) => {
@@ -123,8 +126,10 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
         setCountWeek(selectedWeekNumber);
     }
 
+
     return (
         <TableContainer component={Paper} sx={{ border: '1px solid #e0e0e0', backgroundColor: '#fff !important' }}>
+
             <div className='pl-[5px] mt-[10px] pr-[16px] flex items-center justify-between'>
                 <Box
                     sx={{
@@ -190,6 +195,7 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
                         <MenuItem value={'2024'}>2024</MenuItem>
 
                     </Select>
+
                     <Select
                         onChange={handleMonthChange}
                         disabled={disabledMonth}
@@ -233,6 +239,7 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
                         {/* <MenuItem value={'may'}>may</MenuItem> */}
 
                     </Select>
+
                     <Select
                         onChange={handleWeekChange}
                         disabled={disabledWeek}
@@ -284,6 +291,7 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
                 </div>
 
             </div>
+
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow sx={{
@@ -327,10 +335,7 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
                 </TableHead>
 
                 <TableBody>
-
                     <>
-
-
                         {isOpen ? (
                             <>
                                 {dataList?.map((item: any, index: number) => (
@@ -465,8 +470,6 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
 
                                                     }} >{item?.canceled_by_driver}</TableCell>
 
-
-
                                                 </TableRow>
                                             ))
                                         }
@@ -488,6 +491,7 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
 
                 </TableBody>
             </Table>
+
         </TableContainer >
     )
 }

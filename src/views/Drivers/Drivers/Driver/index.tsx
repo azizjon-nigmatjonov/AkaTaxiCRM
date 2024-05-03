@@ -7,7 +7,9 @@ import DriverBallance from "./Ballance";
 import DriverTrip from "./Trip";
 import DriverInfo from "./Info";
 import { useMemo } from "react";
-import { Header } from "../../../../components/Header";
+import { Header } from "../../../../components/UI/Header";
+import AddButton from "../../../../components/UI/Buttons/AddButton";
+import usePageRouter from "../../../../hooks/useObjectRouter";
 
 const tabList = [
   {
@@ -26,6 +28,8 @@ const tabList = [
 
 const Driver = () => {
   const { tab, id } = useGetQueries();
+  const { getQueries, navigateQuery } = usePageRouter()
+  const query = getQueries()
 
   const { data: driver } = useQuery(
     ["GET_DRIVER", id],
@@ -37,13 +41,11 @@ const Driver = () => {
     }
   );
 
-  
-
   const breadCrumbItems = useMemo(() => {
     return [
       {
         label: "Haydovchi",
-        link:'/drivers/main'
+        link: '/drivers/main'
       },
       {
         label: "Ro‘yxat",
@@ -62,7 +64,13 @@ const Driver = () => {
       </Header>
 
       <div className="p-5">
-        <CTabs tabList={tabList} />
+        <div className="flex justify-between">
+          <CTabs tabList={tabList} />
+          <div>
+            {query.tab == 'ballance' && <AddButton id="successBtn" text="Balansni to’ldirish" onClick={() => navigateQuery({ amount: true })} />}
+          </div>
+        </div>
+
 
         {tab === "ballance" ? (<DriverBallance />) : tab === "trip_hostory" ? (<DriverTrip />) : (<DriverInfo driver={driver?.data} />)}
       </div>

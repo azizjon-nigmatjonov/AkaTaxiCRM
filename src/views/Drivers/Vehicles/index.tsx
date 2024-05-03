@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import AddButton from "../../../components/Buttons/AddButton";
+import AddButton from "../../../components/UI/Buttons/AddButton";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import Form from "./Form";
 // import CTabs from "../../../components/CElements/CTab";
@@ -8,16 +8,16 @@ import Section from "./Section";
 import { useQuery } from "react-query";
 import carService from "../../../services/cars";
 import { Skeleton } from "@mui/material";
-import { Header } from "../../../components/Header";
+import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
-import SectionHeader from "../../../components/Sections/Header";
+import SectionHeader from "../../../components/UI/Sections/Header";
 
 
 
 
 
 const Vehicles = () => {
-  const { navigateQuery } = usePageRouter();
+  const { navigateQuery, } = usePageRouter();
   const { currentTab } = useGetQueries();
   const [carList, setCarList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,6 @@ const Vehicles = () => {
   const { data: classes, isLoading } = useQuery(["GET_TAB_LIST"], () => {
     return carService.getCarClasses();
   });
-
 
   const tab = useMemo(() => {
     return currentTab ? currentTab : "1";
@@ -65,8 +64,6 @@ const Vehicles = () => {
       };
     });
   }, [classes]);
-
-
 
 
   useEffect(() => {

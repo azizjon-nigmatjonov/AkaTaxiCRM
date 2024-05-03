@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import HFTextField from "../../../../components/FormElements/HFTextField";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 import CModal from "../../../../components/CElements/CModal";
-import ImageUploadBtn from "../../../../components/Buttons/ImageUpload";
+import ImageUploadBtn from "../../../../components/UI/Buttons/ImageUpload";
 import carService from "../../../../services/cars";
 import Classes from "./Classes";
 import { useQuery } from "react-query";
@@ -176,6 +176,7 @@ const Form = ({ inputValue, id, classes = [], getCarList, tab }: Props) => {
   // console.log(classIds);
 
 
+console.log(car);
 
 
   return (
@@ -202,16 +203,17 @@ const Form = ({ inputValue, id, classes = [], getCarList, tab }: Props) => {
         }}
       /> */}
 
+
       <div className="grid space-y-3">
         <HFTextField
           name={`name_${query?.lang || "uz"}`}
           control={control}
           placeholder={`${inputValue}`}
-          // label="Marka nomi"
+          // label=""
           // label={undefined}
           setValue={setValue}
           required={true}
-          defaultValue={car?.data?.name?.[query?.lang || "uz"]}
+          defaultValue={car?.data?.name}
         />
 
         <ImageUploadBtn
