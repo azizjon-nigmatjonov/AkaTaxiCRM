@@ -14,22 +14,6 @@
     width: 400px;
     height: 1000px;
     position: absolute;
-    // z-index: 99;
-
-    background-color: red;
-    // bottom: 100px;
-    // opacity: 0.6;
-    // background: conic-gradient(
-    //   from -41deg at 40.63% 50.41%,
-    //   rgba(255, 189, 153, 0) 156.3228964805603deg,
-    //   rgba(255, 223, 52, 0.46) 203.70686531066895deg,
-    //   rgba(255, 172, 137, 0.7) 216.0206937789917deg,
-    //   rgba(255, 124, 52, 0.41) 236.0708713531494deg,
-    //   rgba(162, 171, 255, 0.2) 253.93728017807007deg,
-    //   rgba(255, 91, 1, 0) 293.38289737701416deg
-    // );
-
-    // filter: blur(50px);
   }
 
   overflow: scroll;
@@ -37,7 +21,6 @@
     padding: $paddingBlock $paddingBlock 20px $paddingBlock;
     font-weight: 600;
     text-transform: uppercase;
-    // background-color: #e10b0b;
   }
 
   .menu {
