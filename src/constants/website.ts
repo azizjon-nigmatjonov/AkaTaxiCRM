@@ -28,5 +28,6 @@ export const ColorConstants = {
   gray40: "#98A2B3",
   gray50: "#F2F4F7",
   gray60: "#475467",
-  gray70: "#344054"
+  gray70: "#344054",
+  gray90: "#101828"
 } as const;

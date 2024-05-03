@@ -14,7 +14,6 @@ const Rolls = () => {
   const bodyColumns = useMemo(() => {
     return roles?.data ?? [];
   }, [roles]);
-  console.log("roles", bodyColumns);
 
   const breadCrumbs = useMemo(() => {
     return [{ label: "Admin", link: "/admins/admin" }, { label: "Rollar" }];
