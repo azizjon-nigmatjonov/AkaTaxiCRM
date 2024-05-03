@@ -10,8 +10,8 @@ import HFInputMask from "../../../components/FormElements/HFInputMask";
 import { useDispatch, useSelector } from "react-redux";
 import { websiteActions } from "../../../store/website";
 import partnerService from "../../../services/partners";
-import ImageUploadBtn from "../../../components/Buttons/ImageUpload";
-import CancelButton from "../../../components/Buttons/Cancel";
+import ImageUploadBtn from "../../../components/UI/Buttons/ImageUpload";
+import CancelButton from "../../../components/UI/Buttons/Cancel";
 import * as yup from "yup";
 
 interface Props {

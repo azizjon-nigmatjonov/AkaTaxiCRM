@@ -1,4 +1,4 @@
-import AddButton from "../../../components/Buttons/AddButton";
+import AddButton from "../../../components/UI/Buttons/AddButton";
 import CCard from "../../../components/CElements/CCard";
 
 const AmoCrm = () => {

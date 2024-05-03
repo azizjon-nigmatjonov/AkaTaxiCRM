@@ -1,0 +1,104 @@
+#addBtn,
+#filterButton,
+#deleteButton,
+#saveButton,
+#disableButton,
+#successBtn,
+#activeFilterButton,
+.btn {
+    margin: 0;
+    width: 100%;
+
+    button {
+        background-color: $main;
+        color: white;
+        text-transform: none;
+        border-radius: 8px;
+        border: 1px solid $lineGray;
+        height: 40px;
+        padding: 0 18px;
+        width: 100%;
+        white-space: nowrap;
+        font-weight: 500;
+    }
+}
+
+#successBtn {
+    button {
+        background-color: $green;
+    }
+}
+
+#saveButton {
+    button {
+        background-color: $green;
+    }
+}
+
+#disableButton {
+    button {
+        background-color: $darkGray;
+        color: $black;
+    }
+}
+
+#filterButton {
+    button {
+        height: auto;
+        background-color: white;
+        padding: 0 0 0 12px;
+        display: flex;
+        justify-content: space-between;
+        height: 40px;
+
+        span {
+            width: 100px;
+            text-align: left;
+            color: $gray;
+        }
+
+        .icon {
+            width: 40px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-left: 1px solid $lightGray;
+        }
+    }
+}
+
+#deleteButton {
+    button {
+        background-color: $lineGray;
+
+        span {
+            color: $black;
+        }
+    }
+}
+
+#activeFilterButton {
+    button {
+        height: auto;
+        background-color: #FFEFE6;
+        padding: 0 0 0 12px;
+        display: flex;
+        justify-content: space-between;
+        height: 40px;
+
+        span {
+            width: 100px;
+            text-align: left;
+            color: #993701
+        }
+
+        .icon {
+            width: 40px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

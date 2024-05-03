@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import usePageRouter from '../../../../../../hooks/useObjectRouter'
-import AddButton from '../../../../../../components/Buttons/AddButton';
-import CancelButton from '../../../../../../components/Buttons/Cancel';
+import AddButton from '../../../../../../components/UI/Buttons/AddButton';
+import CancelButton from '../../../../../../components/UI/Buttons/Cancel';
 import { RxCross2 } from "react-icons/rx";
 import { CgArrowLongRight } from "react-icons/cg";
 import driverService from '../../../../../../services/drivers';

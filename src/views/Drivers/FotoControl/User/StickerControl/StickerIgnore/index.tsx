@@ -1,7 +1,7 @@
 import usePageRouter from '../../../../../../hooks/useObjectRouter';
 import { RxCross2 } from "react-icons/rx";
-import CancelButton from '../../../../../../components/Buttons/Cancel';
-import AddButton from '../../../../../../components/Buttons/AddButton';
+import CancelButton from '../../../../../../components/UI/Buttons/Cancel';
+import AddButton from '../../../../../../components/UI/Buttons/AddButton';
 import HFTextareaAutosize from '../../../../../../components/FormElements/HFTextareaAutosize';
 import { useForm } from 'react-hook-form';
 import driverService from '../../../../../../services/drivers'

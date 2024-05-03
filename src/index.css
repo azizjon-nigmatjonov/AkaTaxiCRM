@@ -17,113 +17,94 @@
   -webkit-text-size-adjust: 100%;
 }
 
-
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter/Inter-ExtraBold.woff2') format('woff2'),
-    url('/fonts/Inter/Inter-ExtraBold.woff') format('woff');
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-ExtraBold.woff2") format("woff2"),
+    url("/fonts/Inter/Inter-ExtraBold.woff") format("woff");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter/Inter-Light.woff2') format('woff2'),
-    url('/fonts/Inter/Inter-Light.woff') format('woff');
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-Light.woff2") format("woff2"),
+    url("/fonts/Inter/Inter-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter/Inter-ExtraLight.woff2') format('woff2'),
-    url('/fonts/Inter/Inter-ExtraLight.woff') format('woff');
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-ExtraLight.woff2") format("woff2"),
+    url("/fonts/Inter/Inter-ExtraLight.woff") format("woff");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter/Inter-Medium.woff2') format('woff2'),
-    url('/fonts/Inter/Inter-Medium.woff') format('woff');
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-Medium.woff2") format("woff2"),
+    url("/fonts/Inter/Inter-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter/Inter-Regular.woff2') format('woff2'),
-    url('/fonts/Inter/Inter-Regular.woff') format('woff');
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-Regular.woff2") format("woff2"),
+    url("/fonts/Inter/Inter-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter/Inter-Thin.woff2') format('woff2'),
-    url('/fonts/Inter/Inter-Thin.woff') format('woff');
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-Thin.woff2") format("woff2"),
+    url("/fonts/Inter/Inter-Thin.woff") format("woff");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter/Inter-Bold.woff2') format('woff2'),
-    url('/fonts/Inter/Inter-Bold.woff') format('woff');
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-Bold.woff2") format("woff2"),
+    url("/fonts/Inter/Inter-Bold.woff") format("woff");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter/Inter-SemiBold.woff2') format('woff2'),
-    url('/fonts/Inter/Inter-SemiBold.woff') format('woff');
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-SemiBold.woff2") format("woff2"),
+    url("/fonts/Inter/Inter-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter/Inter-Black.woff2') format('woff2'),
-    url('/fonts/Inter/Inter-Black.woff') format('woff');
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-Black.woff2") format("woff2"),
+    url("/fonts/Inter/Inter-Black.woff") format("woff");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background: #FAFAFB;
+  font-family: "Inter", sans-serif;
+  background: #fafafb;
 }
-
-.accordion {
-  /* background-color: #eee; */
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  transition: background-color 0.6s ease;
-}
-
-/* .active,
-.accordion:hover {
-  background-color: #ccc;
-} */
-
 .panel {
   padding: 0 18px;
-  background-color: white;
+  background-color: transparent;
   max-height: 0;
   overflow: hidden;
   opacity: 0;
@@ -135,24 +116,12 @@ body {
   opacity: 1;
 }
 
-
-.accordion-line {
-  height: 1px;
-  width: 280px;
-  background: var(--Light-Mode-Container-Divider, radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.00) 100%));
-  transition: height 0.3s ease;
-  margin: 0 auto;
-}
-
-
 .panel.show .accordion-line {
   height: 1px;
 }
 
-
 .menu_link {
   display: flex;
-
 }
 
 .menu_link {
@@ -165,10 +134,6 @@ body {
   /* margin-left: 3px; */
 }
 
-
-
-
-
 .menu_link.active:hover::before {
   content: none;
 }
@@ -179,60 +144,43 @@ body {
 }
 
 .menu_link.active {
-
-
-  border-left-color: #FF5B01;
-  background: linear-gradient(90deg, rgba(255, 195, 162, 0.30) 0%, rgba(255, 91, 1, 0.00) 100%);
+  border-left-color: #ff5b01;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 195, 162, 0.3) 0%,
+    rgba(255, 91, 1, 0) 100%
+  );
 }
 
 .menu_link2.active {
-  border-left-color: #FF5B01;
-  background: linear-gradient(90deg, rgba(255, 195, 162, 0.30) 0%, rgba(255, 91, 1, 0.00) 100%);
-
+  border-left-color: #ff5b01;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 195, 162, 0.3) 0%,
+    rgba(255, 91, 1, 0) 100%
+  );
 }
 
 .menu_link2 {
   border-left: 2px solid #fff;
-
 }
 
 .menu_link2:hover {
-  border-left: 2px solid #FF5B01;
+  border-left: 2px solid #ff5b01;
 }
 
 .menu_link3.active {
   display: flex;
-
-
-}
-
-/* .menus {
-  border-left: 2px solid #bd1717;
-
-} */
-
-.menu_link3 {
-  border-left: 2px solid #FFF;
 }
 
 .menus .active {
-  background: linear-gradient(90deg, rgba(255, 195, 162, 0.30) 0%, rgba(255, 91, 1, 0.00) 100%);
-  border-left: 2px solid #FF5B01;
-
+  background: linear-gradient(
+    90deg,
+    rgba(255, 195, 162, 0.3) 0%,
+    rgba(255, 91, 1, 0) 100%
+  );
+  border-left: 2px solid #ff5b01;
 }
-
-/* .menu_link3 {} */
-
-
-
-/* .menu_link:hover::before {
-  position: absolute;
-  content: "";
-  border-left: 2px solid #FF5B01;
-  height: 36px;
-  left: -4px;
-} */
-
 
 .panel {
   position: relative;
@@ -245,11 +193,9 @@ body {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background-color: #D0D5DD;
+  background-color: #d0d5dd;
   left: -10px;
 }
-
-
 
 :root {
   --violet: #8f00ff;
@@ -272,12 +218,11 @@ body {
   /* padding-left: 30px;
   padding-bottom: 25px; */
   position: relative;
-
 }
 
 .steps__item::before,
 .steps__item::after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
 }
@@ -300,22 +245,12 @@ body {
   top: -18px;
   bottom: calc(100% - 8px);
   transform: translateX(-50%);
-
 }
 
 .steps__item:first-child::after {
   display: none;
 }
 
-.steps__item>span::before {
-  content: counter(steps, decimal-leading-zero)'. ';
+.steps__item > span::before {
+  content: counter(steps, decimal-leading-zero) ". ";
 }
-
-/* .steps__item--active {
-  color: var(--violet);
-}
-
-.steps__item--active::before,
-.steps__item--active::after {
-  background-color: var(--violet);
-} */

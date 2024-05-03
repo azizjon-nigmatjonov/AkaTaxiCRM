@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AndroidIcon, AppleIcon, ManGenderIcon, WomenGenderIcon } from "../../components/IconGenerator/Svg"
+import { AndroidIcon, AppleIcon, ManGenderIcon, WomenGenderIcon } from "../../components/UI/IconGenerator/Svg"
 
 
 interface PassengerProps {

@@ -4,7 +4,7 @@ import {
   CarIcon,
   EditIcon,
   EyeIcon,
-} from "../../../../components/IconGenerator/Svg";
+} from "../../../../components/UI/IconGenerator/Svg";
 // import { RoutingIcon } from "../../../../components/IconGenerator/Svg/Sidebar";
 import { ColorConstants } from "../../../../constants/website";
 // import Progress from "./Progress";

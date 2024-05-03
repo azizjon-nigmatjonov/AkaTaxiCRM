@@ -1,6 +1,6 @@
 import { GoogleMap, Marker, useLoadScript, Circle, DirectionsRenderer } from "@react-google-maps/api";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Header } from "../../../components/Header";
+import { Header } from "../../../components/UI/Header";
 import MapOption from "./Select";
 import ModalMap from "./ModalMap";
 import mapService from "../../../services/map";

@@ -4,8 +4,8 @@ import "./style.scss";
 import FolderIcon from "@mui/icons-material/Folder";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
-import BackButton from "../../Buttons/BackButton";
-import { NotificationIcon } from "../../../components/IconGenerator/Svg";
+import BackButton from "../../UI/Buttons/BackButton";
+import { NotificationIcon } from "../../UI/IconGenerator/Svg";
 
 interface Props {
   icon?: any;

@@ -1,5 +1,5 @@
 // import Card from "./Card";
-import NullData from "../../../../components/NullData";
+import NullData from "../../../../components/UI/NullData";
 import Header from "./Header";
 import Standard from "./Standar";
 import Comfort from "./Comfort";

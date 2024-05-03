@@ -1,5 +1,5 @@
-import { Closer } from "../../../../../Closer";
-import { WarningIcon } from "../../../../../IconGenerator/Svg";
+import { Closer } from "../../../../../UI/Closer";
+import { WarningIcon } from "../../../../../UI/IconGenerator/Svg";
 
 export const PopoverDelete = ({
   closePopover = () => {},

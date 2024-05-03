@@ -7,8 +7,8 @@ import DriverBallance from "./Ballance";
 import DriverTrip from "./Trip";
 import DriverInfo from "./Info";
 import { useMemo } from "react";
-import { Header } from "../../../../components/Header";
-import AddButton from "../../../../components/Buttons/AddButton";
+import { Header } from "../../../../components/UI/Header";
+import AddButton from "../../../../components/UI/Buttons/AddButton";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 
 

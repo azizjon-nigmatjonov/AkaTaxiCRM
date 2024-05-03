@@ -1,4 +1,4 @@
-import IconGenerator from "../../../../components/IconGenerator";
+import IconGenerator from "../../../../components/UI/IconGenerator";
 
 const Lighter = ({ text = '', color = '', icon }: { color?: string, text: string, icon?: any }) => {
   return (
