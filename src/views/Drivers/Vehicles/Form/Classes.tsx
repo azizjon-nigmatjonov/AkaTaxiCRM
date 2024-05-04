@@ -14,9 +14,6 @@ const Classes = ({ classIds, clas, classes = [], setValue = () => { } }: Props) 
   const [groupA, setGroupA] = useState([]);
   const [groupB, setGroupB] = useState([]);
 
-  console.log(classIds);
-
-
   useEffect(() => {
     if (!classes?.length) return;
 
@@ -44,13 +41,7 @@ const Classes = ({ classIds, clas, classes = [], setValue = () => { } }: Props) 
 
   }, [classes, clas, setValue]);
 
-
-
-
   const handleCheck = (name: string, check: boolean, group: string) => {
-
-    // console.log(name);
-
     if (group === "a") {
       const b: any = groupB.map((i: any) => {
         return {
@@ -68,6 +59,7 @@ const Classes = ({ classIds, clas, classes = [], setValue = () => { } }: Props) 
       });
 
       setGroupA(a);
+      
     } else {
       const a: any = groupA.map((i: any) => {
         return {
@@ -90,15 +82,12 @@ const Classes = ({ classIds, clas, classes = [], setValue = () => { } }: Props) 
       .concat(groupB)
       .filter((item: any) => item.checked)
       .map((item: any) => item.slug);
+
     setValue("ids", ids);
   };
 
-  console.log(groupA);
-
   return (
     <>
-    
-
       {groupA?.map((item: any) => (
         <SwitchBtn
           text={item.name}
