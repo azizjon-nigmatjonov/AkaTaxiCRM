@@ -30,7 +30,7 @@ export const Header = ({
           </h3>
         )}
       </div>
-      <img className="absolute right-0 top-0" src="../../../../public/svg/headerLine.svg" alt="line" />
+      <img className="absolute right-0 top-0" src="./svg/headerLine.svg" alt="line" />
     </div>
   );
 };
