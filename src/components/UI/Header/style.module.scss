@@ -4,16 +4,16 @@
   align-items: center;
   justify-content: space-between;
   height: 70px;
-  width: 100%;
+  width: calc(100vw - 312px);
   border-bottom: 1px solid var(--gray30);
   position: fixed;
   top: 0;
   z-index: 99;
-  &.sticky {
-    position: sticky;
-    top: 0;
-    z-index: 3;
-  }
+  // &.sticky {
+  //   position: sticky;
+  //   top: 0;
+  //   z-index: 3;
+  // }
 
   .title {
     font-size: 24px;
