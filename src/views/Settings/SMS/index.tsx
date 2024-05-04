@@ -84,7 +84,7 @@ const SMS = () => {
   }, []);
 
   const handleActions = useCallback((status: string, element: any) => {
-    if (status === "learn_more") {
+    if (status === "view") {
       navigateTo(`/drivers/driver/${element.id}`);
     }
 
@@ -93,10 +93,6 @@ const SMS = () => {
     if (status === "delete") {
     }
   }, []);
-
-  const handleRowClick = (item: any) => {
-    navigateTo(`/drivers/driver/${item.id}`);
-  };
 
   const breadCrumbs = useMemo(() => {
     return [
@@ -129,7 +125,6 @@ const SMS = () => {
           bodyColumns={bodyColumns?.data}
           count={bodyColumns?.meta?.totalCount}
           handleActions={handleActions}
-          handleRowClick={handleRowClick}
           isLoading={false}
           currentPage={currentPage}
         />}

@@ -81,13 +81,13 @@ const Partners = () => {
       {
         title: "",
         id: "actions",
-        permission: ["learn_more", "edit", "delete", 'more'],
+        permission: ["view", "edit", "delete", 'more'],
       },
     ];
   }, []);
 
   const handleActions = useCallback((status: string, element: any) => {
-    if (status === "learn_more") {
+    if (status === "view") {
       navigateTo(`/partners/partner?id=${element.id}`);
     }
 
@@ -98,10 +98,6 @@ const Partners = () => {
       refetch()
     }
   }, []);
-
-  const handleRowClick = (item: any) => {
-    navigateTo(`/partners/partner?id=${item.id}`);
-  };
 
   const Regions = useMemo(() => {
     return regions?.map((i: any) => {
@@ -145,7 +141,6 @@ const Partners = () => {
           bodyColumns={partnersInfo?.list}
           count={partnersInfo?.meta?.pageCount}
           handleActions={handleActions}
-          handleRowClick={handleRowClick}
           isLoading={isLoading}
           currentPage={currentPage}
           clickable={true}

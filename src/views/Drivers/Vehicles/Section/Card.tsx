@@ -16,24 +16,19 @@ interface Props {
   setInputValue: any;
 }
 
-const Card: FC<Props> = ({setInputValue, element}) => {
+const Card: FC<Props> = ({ setInputValue, element }) => {
   const { navigateTo, navigateQuery } = usePageRouter();
 
   // console.log(element.name);
 
   const handleClick = (element: any) => {
-    navigateQuery({ id: element.id })
+    navigateQuery({ id: element.id });
     // setInputValue(element2);
-    console.log('tah', element);
-    setInputValue(element.name)
-  }
+    console.log("tah", element);
+    setInputValue(element.name);
+  };
   return (
-
-
-    <CCard
-      classes="min-h-0 rounded-xl"
-      style={{ minHeight: "0", padding: 0 }}
-    >
+    <CCard classes="min-h-0 rounded-xl" style={{ minHeight: "0", padding: 0 }}>
       <div className="flex items-center justify-between p-6">
         <div>
           <h5 className="text-base text-black font-semibold">{element.name}</h5>
@@ -49,7 +44,7 @@ const Card: FC<Props> = ({setInputValue, element}) => {
             </div>
           </div>
         </div>
-        <div className="h-[80px] max-w-[140px]">
+        <div className="h-[80px] max-w-[110px]">
           <img
             className="w-full h-full object-cover"
             src={element.image}
@@ -74,7 +69,7 @@ const Card: FC<Props> = ({setInputValue, element}) => {
           <div className="border border-[var(--lineGray)] h-[30px] w-[30px] flex items-center justify-center rounded-full mr-2">
             <EyeIcon />
           </div>
-          <p className="text-[13px]">Batafsil ma‘lumot</p>
+          <p className="text-[13px] whitespace-nowrap">Batafsil</p>
         </div>
         <div
           onClick={() => handleClick(element)}
@@ -86,7 +81,7 @@ const Card: FC<Props> = ({setInputValue, element}) => {
           <p className="text-[13px]">Tahrirlash</p>
         </div>
       </div>
-    </CCard >
+    </CCard>
   );
 };
 

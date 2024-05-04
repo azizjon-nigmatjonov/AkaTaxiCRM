@@ -1,9 +1,7 @@
 // import Card from "./Card";
 import NullData from "../../../../components/UI/NullData";
 import Header from "./Header";
-import Standard from "./Standar";
-import Comfort from "./Comfort";
-import Bussness from "./Bussniss";
+import ClassWrapper from "./ClassWrapper";
 import { useQuery } from "react-query";
 import carService from "../../../../services/cars";
 import { useMemo } from "react";
@@ -14,13 +12,19 @@ interface Props {
   isLoading?: boolean;
   loading: boolean;
   setInputValue?: any;
+  tabList: any;
 }
 
-const Section = ({ setInputValue, list = [], loading = true }: Props) => {
+const Section = ({
+  setInputValue,
+  list = [],
+  loading = true,
+  tabList = [],
+}: Props) => {
   const { q } = useGetQueries();
 
   const { data: econom } = useQuery(["GET_ECONOM", q], () => {
-    return carService.getList(3, q);
+    return carService.getList(4, q);
   });
 
   const { data: standart } = useQuery(["GET_STANDART", q], () => {
@@ -35,36 +39,44 @@ const Section = ({ setInputValue, list = [], loading = true }: Props) => {
     return carService.getList(3, q);
   });
 
-  const economData = useMemo(() => {
-    return econom?.data ?? [];
-  }, [standart]);
+  const allData = useMemo(() => {
+    if (!tabList?.length) return [];
+    const arr = tabList.map((item: any) => {
+      if (item.slug == 1) {
+        item.data = standart?.data;
+      }
+      if (item.slug == 2) {
+        item.data = comfort?.data;
+      }
+      if (item.slug == 3) {
+        item.data = bussniss?.data;
+      }
+      if (item.slug == 4) {
+        item.data = econom?.data;
+      }
 
-  const standartData = useMemo(() => {
-    return standart?.data ?? [];
-  }, [standart]);
+      return item;
+    });
 
-  const comfortData = useMemo(() => {
-    return comfort?.data ?? [];
-  }, [comfort]);
-
-  const bussnissData = useMemo(() => {
-    return bussniss?.data ?? [];
-  }, [bussniss]);
+    return arr;
+  }, [econom, standart, comfort, bussniss, tabList]);
 
   return (
     <>
       <div className="bg-white p-2 border border-[var(--lightGray)] rounded-xl">
-        <Header
-          standart={standartData.length}
-          comfort={comfortData.length}
-          bussniss={bussnissData.length}
-        />
+        {Object.keys(allData).length ? <Header arr={allData} /> : ""}
         {list?.length && !loading ? (
           <div className="grid grid-cols-4">
-            <Standard data={economData} setInputValue={setInputValue} />
-            <Standard data={standartData} setInputValue={setInputValue} />
-            <Comfort data={comfortData} setInputValue={setInputValue} />
-            <Bussness data={bussnissData} setInputValue={setInputValue} />
+            {Object.values(allData)?.map((item: any, index: number) => (
+              <ClassWrapper
+                key={index}
+                color={`${
+                  index % 2 !== 1 ? "bg-white" : "bg-[var(--brown10)]"
+                }`}
+                data={item?.data}
+                setInputValue={setInputValue}
+              />
+            ))}
           </div>
         ) : loading ? (
           "Yuklanmoqda..."
