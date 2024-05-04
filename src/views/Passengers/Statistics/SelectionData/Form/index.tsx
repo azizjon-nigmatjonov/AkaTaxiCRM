@@ -1,5 +1,7 @@
+import { getWeekDays } from '../../../../../utils/getMonth'
 import usePageRouter from '../../../../../hooks/useObjectRouter'
 import Detail from './Detail'
+import { useEffect } from 'react'
 
 
 const YEARS = [
@@ -45,6 +47,12 @@ const Form = ({ value }: { value: string }) => {
     const handleWeek = (evt: string) => {
         navigateQuery({ week: evt })
     }
+
+    useEffect(() => {
+        console.log('111', getWeekDays());
+        
+    }, [])
+   
 
     return (
         <div className='bg-[var(--softGray)] mt-4 p-4 rounded-lg flex gap-3'>

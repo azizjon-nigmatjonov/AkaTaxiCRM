@@ -37,3 +37,29 @@ const firstDay = daysOfWeek[firstDayOfWeek];
 export const GetMonth = () => {
   return { firstDay, days, currentMonth };
 };
+
+export const getWeekDays = () => {
+  const first = 7 - firstDayOfWeek + 1;
+  const second = first + 1 + 6;
+  const third = second + 1 + 6;
+  const fourth = third + 1 + 6;
+  const end = (days - fourth)
+  const arr = [
+    {
+      label: `1 - ${first}`,
+    },
+    {
+      label: `${first + 1} - ${first + 1 + 6}`,
+    },
+    {
+      label: `${second + 1} - ${second + 1 + 6}`,
+    },
+    {
+      label: `${third + 1} - ${third + 1 + 6}`,
+    },
+    {
+      label: `${fourth + 1} - ${fourth + end}`,
+    },
+  ];
+  return arr
+};
