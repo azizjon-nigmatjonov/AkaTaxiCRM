@@ -402,7 +402,7 @@ const CTable = ({
                                 <PopoverDelete
                                   closePopover={(status) => {
                                     setCurrDelete({});
-                                    handleActions(status, item);
+                                    handleActions(item, status);
                                   }}
                                 />
                               ) : (
