@@ -144,6 +144,9 @@ const Passengers = () => {
   }, [passengers]);
 
   const handleActions = (status: string, el: any) => {
+    console.log(status);
+    console.log(el);
+    
     if (status === "delete") {
       passengerService.deleteElement(el.id).then(() => {
         refetch();
@@ -153,7 +156,7 @@ const Passengers = () => {
       navigateQuery({ id: el.id });
     }
     if (status === "learn_more") {
-      navigateTo(`/passengers/main/passenger?id=${el.id}`);
+      navigateTo(`/passengers/passenger/?id=${el.id}`);
       // navigateQuery({ passengers: el.id });
     }
   };
