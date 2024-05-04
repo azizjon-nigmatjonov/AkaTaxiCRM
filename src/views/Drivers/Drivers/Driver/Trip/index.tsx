@@ -91,15 +91,11 @@ const DriverTrip = () => {
   }, []);
 
   const handleActions = useCallback((status: string, element: any) => {
-    if (status === "learn_more") {
+    if (status === "view") {
       navigateTo(`/drivers/driver/${element.id}`);
     }
     if (status === "edit") navigateQuery({ id: element.id });
   }, []);
-
-  const handleRowClick = (item: any) => {
-    navigateTo(`/partners/partner/${item.id}`);
-  };
 
   return (
     <>
@@ -108,7 +104,6 @@ const DriverTrip = () => {
         bodyColumns={TripData?.list}
         count={TripData?.meta?.pageCount}
         handleActions={handleActions}
-        handleRowClick={handleRowClick}
         isLoading={isLoading}
         currentPage={currentPage}
       />

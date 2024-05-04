@@ -31,7 +31,6 @@ interface Props {
   autoHeight?: boolean;
   limitCount?: number[];
   setCurrentPage?: (val: number) => void;
-  handleRowClick?: (val: any) => void;
   handleActions?: (val: any, val2?: any) => void;
   idForTable?: string;
 }
@@ -51,7 +50,6 @@ const CTable = ({
   limitCount = [10, 30, 50],
   //   actionList = [{ edit: {}, delete: {} }],
   setCurrentPage = () => { },
-  handleRowClick = () => { },
   handleActions = () => { },
 }: Props) => {
   const tableSize = useSelector((state: any) => state.tableSize.tableSize);
@@ -95,7 +93,7 @@ const CTable = ({
         is_freeze: checks(item?.freez),
         is_delete: checks(item?.delete),
         is_edit: checks(item?.edit),
-        is_learn_more: checks(item?.learn_more),
+        is_view: checks(item?.view),
         index:
           currentPage > 1
             ? currentPage * currentLimit - currentLimit + (index + 1)
@@ -255,7 +253,7 @@ const CTable = ({
     if (status === "delete") {
       setCurrDelete(el);
     } else {
-      handleActions(status, el);
+      handleActions(el, status);
     }
   };
 
@@ -356,7 +354,7 @@ const CTable = ({
                     className={`overflow-ellipsis ${tableHeight}`}
                     onClick={() => {
                       if (clickable && column?.click !== "custom" && column?.id !== "actions")
-                        handleRowClick(item);
+                        handleActions(item, 'view');
                     }}
                     style={{
                       minWidth: "max-content",
@@ -404,7 +402,7 @@ const CTable = ({
                                 <PopoverDelete
                                   closePopover={(status) => {
                                     setCurrDelete({});
-                                    handleActions(status, item);
+                                    handleActions(item, status);
                                   }}
                                 />
                               ) : (

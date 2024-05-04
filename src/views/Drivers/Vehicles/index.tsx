@@ -63,8 +63,7 @@ const Vehicles = () => {
   const handleSearch = (value: any) => {
     navigateQuery({ q: value });
   };
-  console.log("tabList", tabList);
-
+  
   return (
     <>
       <Header sticky={true}>
@@ -88,6 +87,7 @@ const Vehicles = () => {
           <Section
             setInputValue={setInputValue}
             list={carList}
+            tabList={tabList}
             loading={loading}
           />
         ) : (

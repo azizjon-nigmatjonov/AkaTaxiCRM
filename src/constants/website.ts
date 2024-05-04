@@ -21,6 +21,9 @@ export const ColorConstants = {
   primary: "#2E90FA",
   primary50: "#EFF8FF",
 
+
+  brown10: "#FFDECC",
+
   border: "#EAECF0",
   gray20: "#EAECF0",
   gray25: "#FCFCFD",

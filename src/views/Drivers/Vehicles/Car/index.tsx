@@ -121,7 +121,7 @@ const SingleCar = () => {
       {
         title: "",
         id: "actions",
-        permission: ["edit", "delete", "learn_more", 'd'],
+        permission: ["edit", "delete", "view", 'd'],
       },
     ];
   }, []);
@@ -149,7 +149,7 @@ const SingleCar = () => {
   const handleActions = useCallback((element: any, status: any) => {
     if (element === "edit") {
       navigateQuery({ id: status.id })
-    } else if (status == 'learn_more') {
+    } else if (status == 'view') {
       navigateTo(`/drivers/main/driver?id=${element.id}`)
     }
     else {
