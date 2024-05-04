@@ -1,7 +1,6 @@
 import Card from "../Card";
 
 const Standard = ({ setInputValue, data }: { data: any, setInputValue: any },) => {
-    // console.log(data);
 
     return (
         <div className="p-2">
