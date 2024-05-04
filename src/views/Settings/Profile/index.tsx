@@ -6,7 +6,7 @@ import HFInputMask from "../../../components/FormElements/HFInputMask";
 import HFTextField from "../../../components/FormElements/HFTextField";
 import { useForm } from "react-hook-form";
 import { LogoutIcon } from "../../../components/UI/IconGenerator/Svg";
-import CustomBtn from "../../../components/UI/Buttons/CustomBtn";
+import CustomBtn from "../../../components/CElements/CustomBtn";
 import { useState } from "react";
 import CModal from "../../../components/CElements/CModal";
 import authService from "../../../services/auth/authService";

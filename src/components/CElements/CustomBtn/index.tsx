@@ -7,6 +7,7 @@ const CustomBtn = ({
   text: string;
   handleClick?: () => void;
   type?: string;
+  
 }) => {
   return (
     <button

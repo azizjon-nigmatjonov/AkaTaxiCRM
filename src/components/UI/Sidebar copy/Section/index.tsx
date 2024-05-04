@@ -1,15 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-<<<<<<< HEAD
-import IconGenerator from "../../../components/UI/IconGenerator"
-=======
-import IconGenerator from "../../../components/UI/IconGenerator";
->>>>>>> 2940ae1b4b4eaef7eb692ecda37649eca24bd8af
+import IconGenerator from "../../IconGenerator";
 // import usePageRouter from "../../../hooks/useObjectRouter";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { ArrowIcon } from "../../../components/UI/IconGenerator/Svg";
-import UserInfo from "../../../components/UI/Header/UserInfo";
+import { ArrowIcon } from "../../IconGenerator/Svg";
+import UserInfo from "../../../components/Header/UserInfo";
 import cls from "./style.module.scss";
 
 
@@ -32,6 +28,9 @@ const SidebarSection = () => {
 
 
 
+
+
+
   const [activeIndex, setActiveIndex] = useState(() => {
     const storedIndex = localStorage.getItem('activeAccordionIndex');
     return storedIndex !== null ? parseInt(storedIndex) : -1;
@@ -41,6 +40,7 @@ const SidebarSection = () => {
 
   useEffect(() => {
     localStorage.setItem('activeAccordionIndex', String(activeIndex))
+
   }, [activeIndex]);
 
 
@@ -60,7 +60,6 @@ const SidebarSection = () => {
 
 
 
-console.log(List);
 
 console.log(List);
 
@@ -138,7 +137,6 @@ console.log(List);
           <NavLink to="/views/Drivers/Map">map</NavLink>
           </div> */}
         </div>
-        
         <div className="ml-8 mb-8 ">
           <UserInfo />
         </div>

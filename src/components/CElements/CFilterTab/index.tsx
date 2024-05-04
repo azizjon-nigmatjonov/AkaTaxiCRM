@@ -19,7 +19,7 @@ interface Props {
   slug?: string
 }
 
-export default function CTabs({
+export default function CFilterTab({
   passRouter = true,
   currentTab = {},
   setCurrentTab = () => { },

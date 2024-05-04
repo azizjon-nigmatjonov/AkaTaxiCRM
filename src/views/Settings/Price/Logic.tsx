@@ -55,5 +55,5 @@ export const getCities = (arr: any, direction: string) => {
     }, []);
   
     return result;
-  };
+};
   
