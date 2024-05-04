@@ -9,6 +9,7 @@ import { useGetQueries } from "../../../../../hooks/useGetQueries";
 import passengerService from "../../../../../services/passengers";
 import { Skeleton } from '@mui/material';
 import AllTrips from './Alltrips';
+import { useParams } from 'react-router-dom';
 
 const tabList = [
   {
@@ -34,7 +35,8 @@ const tabList = [
 ];
 
 const Trips = () => {
-  const { status, id } = useGetQueries()
+  const { status } = useGetQueries()
+  const { id } = useParams()
   const [page, setPage] = useState(1);
 
   const { data, isLoading: loading } = useQuery(['GET_TICKETS', id, status, page], () => {

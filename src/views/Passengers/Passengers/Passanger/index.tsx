@@ -8,6 +8,7 @@ import CTabs from "../../../../components/CElements/CTab";
 import Trips from "./Trips";
 import PassengerProfile from "./PassangerProfile";
 import cls from "./style.module.scss";
+import { useParams } from "react-router-dom";
 
 const tabList = [
   {
@@ -21,7 +22,8 @@ const tabList = [
 ];
 
 const Passanger = () => {
-  const { tab, id } = useGetQueries();
+  const { tab } = useGetQueries();
+  const { id } = useParams();
   
   const { data: passenger } = useQuery(["GET_PASSENGER", id], () => {
     return passengerService.getElement(id);

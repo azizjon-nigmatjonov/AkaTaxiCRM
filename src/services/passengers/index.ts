@@ -9,7 +9,7 @@ const passengerService = {
   deleteElement: (id: string) => requestForm.delete(`passengers/${id}`),
   updateElement: (id: string, data: any) =>
     request.put(`passengers/${id}`, { ...data }),
-  getElement: (id: string) => request.get(`passengers/${id}`),
+  getElement: (id: any) => request.get(`passengers/${id}`),
   getActivePassengers: (params: any) =>
     request.get(
       `/passengers-popular${params.page ? `?page=${params.page || 1}` : ""
