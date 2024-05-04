@@ -253,7 +253,7 @@ const CTable = ({
     if (status === "delete") {
       setCurrDelete(el);
     } else {
-      handleActions(status, el);
+      handleActions(el, status);
     }
   };
 

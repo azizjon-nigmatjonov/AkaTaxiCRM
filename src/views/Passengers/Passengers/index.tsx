@@ -144,7 +144,7 @@ const Passengers = () => {
   }, [passengers]);
 
   const handleActions = (el: any, status: string) => {
-    console.log('aaa', el, status);
+    console.log('aaa', el);
     
     if (status === "delete") {
       passengerService.deleteElement(el.id).then(() => {
