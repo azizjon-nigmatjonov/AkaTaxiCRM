@@ -155,8 +155,8 @@ const Router = () => {
               parent: "passengers",
               link: "main",
               sidebar: true,
-              title: "Yo'lovchilar",
-              icon: "admins",
+              title: "Ro'yxat",
+              icon: "list",
             })}
             element={<Passengers />}
           />

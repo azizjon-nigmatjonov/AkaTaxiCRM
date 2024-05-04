@@ -80,7 +80,6 @@ const Form = ({ refetch }: Props) => {
 
   const handleSubmit = () => {
     const data = getValues();
-console.log(data);
 
     data.phone = data.phone?.substring(1)?.replace(/\s+/g, "");
 
