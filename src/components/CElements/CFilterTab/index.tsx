@@ -1,10 +1,9 @@
-import React from 'react'
 
 const CFilterTab = () => {
   return (
-    <div>
-        
-    </div>
+    <>
+    <p>CFilterTab</p>
+    </>
   )
 }
 

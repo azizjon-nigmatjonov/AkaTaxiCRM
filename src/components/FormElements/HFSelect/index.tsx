@@ -16,7 +16,7 @@ interface Props {
   width?: string;
   options?: object[];
   disabledHelperText?: any;
-  placeholder?: string;
+  placeholder?: any;
   required?: boolean;
   onChange?: (val?: any) => void;
   optionType?: any;
