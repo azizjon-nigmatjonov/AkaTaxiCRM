@@ -10,7 +10,9 @@ const ClassWrapper = ({
   color: string;
 }) => {
   if (!data?.length) {
-    return <div className={`p-2 w-full h-full ${color}`}></div>;
+    return <div className={`p-2 w-full h-full ${color}`}>
+      <img src="/images/no-data.png" alt="empty" />
+    </div>;
   }
 
   return (

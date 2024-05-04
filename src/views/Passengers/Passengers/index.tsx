@@ -123,7 +123,7 @@ const Passengers = () => {
       {
         title: "",
         id: "actions",
-        permission: ["learn_more"],
+        permission: ["view"],
       },
     ];
   }, []);
@@ -143,7 +143,9 @@ const Passengers = () => {
     );
   }, [passengers]);
 
-  const handleActions = (status: string, el: any) => {
+  const handleActions = (el: any, status: string) => {
+    console.log('aaa', el, status);
+    
     if (status === "delete") {
       passengerService.deleteElement(el.id).then(() => {
         refetch();
@@ -152,7 +154,7 @@ const Passengers = () => {
     if (status === "edit") {
       navigateQuery({ id: el.id });
     }
-    if (status === "learn_more") {
+    if (status === "view") {
       navigateTo(`/passengers/main/passenger?id=${el.id}`);
       // navigateQuery({ passengers: el.id });
     }

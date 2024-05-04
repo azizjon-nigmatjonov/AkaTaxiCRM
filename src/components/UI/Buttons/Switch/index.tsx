@@ -10,7 +10,8 @@ interface Props {
 
 const SwitchBtn = ({ text, handleCheck, name, group, checked }: Props) => {
   const label = { inputProps: { "aria-label": "Switch demo" } };
-
+  console.log('name', name, checked);
+  
   return (
     <div
       onClick={() => handleCheck(name, !checked, group)}

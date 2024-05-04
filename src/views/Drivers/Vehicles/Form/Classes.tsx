@@ -42,6 +42,8 @@ const Classes = ({ classIds, clas, classes = [], setValue = () => { } }: Props) 
   }, [classes, clas, setValue]);
 
   const handleCheck = (name: string, check: boolean, group: string) => {
+    console.log('check', check);
+    
     if (group === "a") {
       const b: any = groupB.map((i: any) => {
         return {
@@ -49,17 +51,17 @@ const Classes = ({ classIds, clas, classes = [], setValue = () => { } }: Props) 
           checked: false,
         };
       });
-      setGroupB(b);
+
 
       const a: any = groupA.map((i: any) => {
-        if (i.name === name) i.checked = check;
+        if (i.name === name) i.checked = true;
         return {
           ...i,
         };
       });
 
       setGroupA(a);
-      
+      setGroupB(b);
     } else {
       const a: any = groupA.map((i: any) => {
         return {
@@ -67,15 +69,16 @@ const Classes = ({ classIds, clas, classes = [], setValue = () => { } }: Props) 
           checked: false,
         };
       });
-      setGroupA(a);
+
 
       const b: any = groupB.map((i: any) => {
-        if (i.name === name) i.checked = check;
+        if (i.name === name) i.checked = true;
         return {
           ...i,
         };
       });
 
+      setGroupA(a);
       setGroupB(b);
     }
     const ids = groupA

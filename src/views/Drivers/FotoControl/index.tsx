@@ -88,7 +88,7 @@ const FotoControl = () => {
       {
         title: "",
         id: "actions",
-        permission: ["learn_more", "edit", "delete"],
+        permission: ["view"],
       },
     ];
   }, []);
@@ -117,10 +117,8 @@ const FotoControl = () => {
     };
   }, [fotoControl]);
 
-  const handlerActions = useCallback((element: any, status: string) => {
-    if (status === "learn_more") {
-      navigateTo(`/drivers/fotocontroluser?id=${element.id}`);
-    }
+  const handlerActions = useCallback((element: any) => {
+    navigateTo(`/drivers/fotocontroluser?id=${element.id}`);
   }, []);
 
   const handleSearch = (evt: string) => {
@@ -143,6 +141,7 @@ const FotoControl = () => {
           bodyColumns={bodyColumns?.list}
           count={bodyColumns?.meta?.pageCount}
           handleActions={handlerActions}
+          clickable={true}
           isLoading={isLoading}
           currentPage={currentPage}
         />

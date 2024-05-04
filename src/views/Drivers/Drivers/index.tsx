@@ -108,13 +108,13 @@ const Drivers = () => {
       {
         title: "",
         id: "actions",
-        permission: ["learn_more", "edit", "delete"],
+        permission: ["view", "edit", "delete"],
       },
     ];
   }, []);
 
-  const handleActions = useCallback((status: string, element: any) => {
-    if (status === "learn_more") {
+  const handleActions = useCallback((element: any, status: string) => {
+    if (status === "view") {
       navigateTo(`/drivers/main/driver?id=${element.id}`);
     }
 
