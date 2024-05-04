@@ -2,8 +2,8 @@ import { useRef, useState } from "react";
 import { CircularProgress } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Controller } from 'react-hook-form'
-import { PhotoIcon, CameraIcon, EditIcon, DeleteIcon } from "../../../../../components/UI/IconGenerator/Svg";
-import fileService from "../../../../../services/fileService";
+import { PhotoIcon, CameraIcon, EditIcon, DeleteIcon } from "../../../../../../components/UI/IconGenerator/Svg";
+import fileService from "../../../../../../services/fileService";
 
 interface Props {
     isDelete?: boolean;

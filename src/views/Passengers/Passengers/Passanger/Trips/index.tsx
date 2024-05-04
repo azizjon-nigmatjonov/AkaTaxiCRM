@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react'
 import { useQuery } from "react-query";
-import LTabs from "../../../../components/CElements/CTab/LineTab"
-import { useGetQueries } from "../../../../hooks/useGetQueries";
+import LTabs from "../../../../../components/CElements/CTab/LineTab"
+import { useGetQueries } from "../../../../../hooks/useGetQueries";
 // import Canceled from "./Canceled";
 // import CurrentlyTrip from "./Currently";
 // import Rejected from "./Rejected";
 // import Successfully from "./Successfully";
-import passengerService from "../../../../services/passengers";
+import passengerService from "../../../../../services/passengers";
 import { Skeleton } from '@mui/material';
 import AllTrips from './Alltrips';
 

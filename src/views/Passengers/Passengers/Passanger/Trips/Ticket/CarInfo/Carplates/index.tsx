@@ -1,4 +1,4 @@
-import { FlagIcon } from '../../../../../../../components/UI/IconGenerator/Svg'
+import { FlagIcon } from '../../../../../../../../components/UI/IconGenerator/Svg'
 
 const CarPlates = ({regionNum, carNum}:{regionNum:string, carNum:string}) => {
     return (

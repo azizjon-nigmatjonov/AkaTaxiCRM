@@ -39,7 +39,7 @@ import AddNotification from "../views/Notifications/Notification/AddNotification
 import AddNews from "../views/Notifications/News/Addnew";
 import { RollForm } from "../views/Admins/Rolls/Form";
 
-const Passanger = lazy(() => import("../views/Passengers/Passanger"));
+const Passanger = lazy(() => import("../views/Passengers/Passengers/Passanger"));
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
 const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"));
@@ -164,7 +164,7 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "passengers",
-              link: "passenger",
+              link: "passenger/:id",
               // childlink: 'single',
               sidebar: false,
               title: "",

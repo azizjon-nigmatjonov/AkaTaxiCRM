@@ -1,4 +1,4 @@
-import EmptyDataComponent from "../../../../../components/UI/EmptyDataComponent"
+import EmptyDataComponent from "../../../../../../components/UI/EmptyDataComponent"
 import Ticket from "../Ticket"
 
 const Rejected = ({ data }: { data?: any }) => {

@@ -1,4 +1,4 @@
-import { FlashIcon, PassengerManIcon, PassangerFemaleIcon, } from '../../../../../../components/UI/IconGenerator/Svg'
+import { FlashIcon, PassengerManIcon, PassangerFemaleIcon, } from '../../../../../../../components/UI/IconGenerator/Svg'
 import Result from '../Result'
 import CarPlates from './Carplates'
 import cls from './style.module.scss'

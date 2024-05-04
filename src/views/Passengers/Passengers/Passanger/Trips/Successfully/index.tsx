@@ -1,4 +1,4 @@
-import EmptyDataComponent from "../../../../../components/UI/EmptyDataComponent";
+import EmptyDataComponent from "../../../../../../components/UI/EmptyDataComponent";
 import Ticket from "../Ticket"
 
 const Success = ({ data }: { data?: any }) => {

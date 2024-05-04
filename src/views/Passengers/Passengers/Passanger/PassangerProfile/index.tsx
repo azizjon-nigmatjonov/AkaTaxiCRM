@@ -2,21 +2,21 @@ import { useMemo, useState } from 'react';
 import { useQuery } from "react-query";
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useGetQueries } from "../../../../hooks/useGetQueries"
-import passengerService from "../../../../services/passengers";
-import CCard from "../../../../components/CElements/CCard";
-import { InfoIcon } from '../../../../components/UI/IconGenerator/Svg';
-import HFTextField from '../../../../components/FormElements/HFTextField';
-import { HFDatePicker } from '../../../../components/FormElements/HFDatePicker';
-import HFSelect from '../../../../components/FormElements/HFSelect';
-import regionService from '../../../../services/regions';
-import AddButton from '../../../../components/UI/Buttons/AddButton';
-import CancelButton from '../../../../components/UI/Buttons/Cancel';
-import HFInputMask from '../../../../components/FormElements/HFInputMask';
-import usePageRouter from '../../../../hooks/useObjectRouter';
+import { useGetQueries } from "../../../../../hooks/useGetQueries"
+import passengerService from "../../../../../services/passengers";
+import CCard from "../../../../../components/CElements/CCard";
+import { InfoIcon } from '../../../../../components/UI/IconGenerator/Svg';
+import HFTextField from '../../../../../components/FormElements/HFTextField';
+import { HFDatePicker } from '../../../../../components/FormElements/HFDatePicker';
+import HFSelect from '../../../../../components/FormElements/HFSelect';
+import regionService from '../../../../../services/regions';
+import AddButton from '../../../../../components/UI/Buttons/AddButton';
+import CancelButton from '../../../../../components/UI/Buttons/Cancel';
+import HFInputMask from '../../../../../components/FormElements/HFInputMask';
+import usePageRouter from '../../../../../hooks/useObjectRouter';
 import { Modal } from '@mui/material'
 import PImageUpdate from './ImageUpdate';
-import { websiteActions } from '../../../../store/website';
+import { websiteActions } from '../../../../../store/website';
 
 
 const SelectGender = [
