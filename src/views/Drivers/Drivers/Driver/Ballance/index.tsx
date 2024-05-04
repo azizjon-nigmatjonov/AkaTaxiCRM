@@ -10,8 +10,8 @@ import CModal from "../../../../../components/CElements/CModal"
 import usePageRouter from "../../../../../hooks/useObjectRouter"
 import { useForm } from "react-hook-form"
 import HFTextField from "../../../../../components/FormElements/HFTextField"
-import AddButton from "../../../../../components/Buttons/AddButton"
-import CancelButton from "../../../../../components/Buttons/Cancel"
+import AddButton from "../../../../../components/UI/Buttons/AddButton"
+import CancelButton from "../../../../../components/UI/Buttons/Cancel"
 
 
 

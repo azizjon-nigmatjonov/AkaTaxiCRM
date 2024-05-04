@@ -1,7 +1,7 @@
 .front {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     padding-right: 2px;
     border-right: 2px solid $lineGray;
 }
@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     gap: 1px;
-    justify-content: end;
+    justify-content: flex-end;
     padding: 2px;
     border: 2px solid $lineGray;
     border-top: none;
