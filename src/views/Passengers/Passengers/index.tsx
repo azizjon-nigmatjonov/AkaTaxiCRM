@@ -155,7 +155,7 @@ const Passengers = () => {
       navigateQuery({ id: el.id });
     }
     if (status === "view") {
-      navigateTo(`/passengers/main/passenger?id=${el.id}`);
+      navigateTo(`/passengers/passenger?id=${el.id}`);
       // navigateQuery({ passengers: el.id });
     }
   };
