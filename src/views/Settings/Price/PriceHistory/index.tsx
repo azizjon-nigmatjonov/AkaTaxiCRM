@@ -1,3 +1,5 @@
+import { WrapperCard } from "../../../../components/UI/WrapperCard"
+
 export const PriceHistory = () => {
-    return <>price</>
+    return <WrapperCard>""</WrapperCard>
 }
