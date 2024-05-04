@@ -1,9 +1,5 @@
-import CCard from "../../../../components/CElements/CCard"
+import { WrapperCard } from "../../../../components/UI/WrapperCard"
 
 export const PriceHistory = () => {
-    return <div className="px-6">
-        <CCard style={{ minHeight: 0 }}>
-
-        </CCard>
-    </div>
+    return <WrapperCard>""</WrapperCard>
 }

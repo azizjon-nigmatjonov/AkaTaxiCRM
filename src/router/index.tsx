@@ -155,8 +155,8 @@ const Router = () => {
               parent: "passengers",
               link: "main",
               sidebar: true,
-              title: "Yo'lovchilar",
-              icon: "admins",
+              title: "Ro'yxat",
+              icon: "list",
             })}
             element={<Passengers />}
           />
@@ -164,8 +164,8 @@ const Router = () => {
           <Route
             path={getPath({
               parent: "passengers",
-              link: "main",
-              childlink: "passenger",
+              link: "passenger",
+              // childlink: 'single',
               sidebar: false,
               title: "",
               icon: "",

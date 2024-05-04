@@ -203,17 +203,6 @@ const ActivePassengers = () => {
         <SectionHeader extra={<FilterButton text="filter" />} handleSearch={handleSearch}>
           <div className="flex items-center gap-[14px]">
 
-            {/* <FilterButton text="filter">
-              <div >
-                <CSelect handlerValue={handleRegion} options={Regions} id="filter" label="Viloyat" />
-              </div>
-              <CDriver classes="my-4" />
-              <div>
-                <CSlider handleValue={handleBirthday} />
-              </div>
-              <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer mt-3">{t('ignore_text')}</span>
-            </FilterButton> */}
-
             <AddButton text="Buyurtma berish" onClick={() => navigateTo('/passengers/booking')} />
           </div>
         </SectionHeader>

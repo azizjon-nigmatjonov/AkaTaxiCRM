@@ -81,7 +81,7 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
       driverService.updateElement(query?.id, data).then(() => {
         dispatch(
           websiteActions.setAlertData({
-            mainTitle: 'Muvaffaqiyatli amalga o`shirildi',
+            mainTitle: 'Muvaffaqiyatli amalga oshirildi',
             title: "Ma'lumotlar yangilandi!",
             translation: "common",
           })

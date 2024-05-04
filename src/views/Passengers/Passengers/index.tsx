@@ -10,56 +10,76 @@ import passengerService from "../../../services/passengers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
 import CSelect from "../../../components/CElements/CSelect";
-// import CDriver from "../../../components/CElements/CDivider";
-// import CSlider from "../../../components/CElements/CSlider";
 import { useSelector } from "react-redux";
 import { Header } from "../../../components/UI/Header";
 import ImageFrame from "../../../components/UI/ImageFrame";
-// import { useSearchParams } from "react-router-dom";
-// import { useTranslation } from "react-i18next";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import Filters from "../../../components/UI/Filter";
-// import { useForm } from "react-hook-form";
-// import HFSelect from "../../../components/FormElements/HFSelect";
 import DropDown from "../../../components/FormElements/DropDown";
+import { breadCrumbItems } from "./Logic";
 
 const Divice = [
-  { value: 'ios', label: 'IOS' },
-  { value: 'android', label: 'Android' }
-]
+  { value: "ios", label: "IOS" },
+  { value: "android", label: "Android" },
+];
 
 const Version = [
-  { value: 'v 1.1.04', label: 'v 1.1.04' },
-  { value: 'v 1.1.03', label: 'v 1.1.03' },
-  { value: 'v 1.1.02', label: 'v 1.1.02' },
-  { value: 'v 1.1.01', label: 'v 1.1.01' },
-]
-
+  { value: "v 1.1.04", label: "v 1.1.04" },
+  { value: "v 1.1.03", label: "v 1.1.03" },
+  { value: "v 1.1.02", label: "v 1.1.02" },
+  { value: "v 1.1.01", label: "v 1.1.01" },
+];
 
 const Passengers = () => {
   const { navigateQuery, navigateTo, getQueries } = usePageRouter();
-  // const { t } = useTranslation()
-  const { currentPage, q, region_id, birthday, start, end, device_type, version, gender } = useGetQueries();
+  const {
+    currentPage,
+    q,
+    region_id,
+    birthday,
+    start,
+    end,
+    device_type,
+    version,
+    gender,
+  } = useGetQueries();
   const regions = useSelector((state: any) => state.regions.regions);
-  // const setSearchParams = useSearchParams()[1];
-  const query = getQueries()
-
+  const query = getQueries();
 
   const { data, isLoading, refetch } = useQuery(
-    ["GET_PASSENGER_LIST", currentPage, q, region_id, birthday, start, end, device_type, version, gender],
+    [
+      "GET_PASSENGER_LIST",
+      currentPage,
+      q,
+      region_id,
+      birthday,
+      start,
+      end,
+      device_type,
+      version,
+      gender,
+    ],
     () => {
-      return passengerService.getList({ page: currentPage, perPage: 10, q, region_id, birthday, device_type, created_at: start && end && JSON.stringify([start, end]), version, gender });
+      return passengerService.getList({
+        page: currentPage,
+        perPage: 10,
+        q,
+        region_id,
+        birthday,
+        device_type,
+        created_at: start && end && JSON.stringify([start, end]),
+        version,
+        gender,
+      });
     },
     {
       enabled: true,
     }
   );
 
-
   const passengers: any = useMemo(() => {
     return data ?? {};
   }, [data]);
-
 
   const headColumns = useMemo(() => {
     return [
@@ -81,24 +101,14 @@ const Passengers = () => {
       {
         title: "Tel.raqam",
         id: "username",
-        render: (val: any) => val && (
-          <p>+{val}</p>
-        )
+        render: (val: any) => val && <p>+{val}</p>,
       },
       {
-        title: 'triplar',
-        id: 'bookings_count'
+        title: "triplar",
+        id: "bookings_count",
       },
-      // {
-      //   title: "Yaratilgan sana",
-      //   id: "created_at",
-      //   render: (val?: any) => {
-      //     return <>{FormatTime(val)}</>;
-      //   },
-      // },
       {
         title: "Keshbek (so'm)",
-
       },
       {
         title: "Tug‘ilgan sana",
@@ -108,17 +118,15 @@ const Passengers = () => {
         },
       },
       {
-        title: 'coin',
-
+        title: "coin",
       },
       {
         title: "",
         id: "actions",
-        permission: ["learn_more",],
+        permission: ["learn_more"],
       },
     ];
   }, []);
-
 
   const bodyColumns = useMemo(() => {
     return (
@@ -128,13 +136,12 @@ const Passengers = () => {
           info: {
             full_name: el.full_name,
             image: el?.image,
-            gender: el.gender
+            gender: el.gender,
           },
         };
       }) ?? []
     );
   }, [passengers]);
-
 
   const handleActions = (status: string, el: any) => {
     if (status === "delete") {
@@ -144,13 +151,11 @@ const Passengers = () => {
     }
     if (status === "edit") {
       navigateQuery({ id: el.id });
-
     }
     if (status === "learn_more") {
-      navigateTo(`/passengers/main/passenger?id=${el.id}`)
+      navigateTo(`/passengers/main/passenger?id=${el.id}`);
       // navigateQuery({ passengers: el.id });
     }
-
   };
 
   const handleSearch = (value: any) => {
@@ -166,36 +171,21 @@ const Passengers = () => {
     });
   }, [regions]);
 
-
   const handlerRegion = (evt: any) => {
-    navigateQuery({ region_id: evt })
-  }
+    navigateQuery({ region_id: evt });
+  };
 
   const handlerDiviceModel = (evt: any) => {
-    navigateQuery({ device_type: evt })
-  }
+    navigateQuery({ device_type: evt });
+  };
 
   const handlerVersion = (evt: any) => {
-    navigateQuery({ version: evt })
-  }
+    navigateQuery({ version: evt });
+  };
 
   const handlerGender = (evt: any) => {
-    navigateQuery({ gender: evt })
-  }
-
-  const breadCrumbItems = useMemo(() => {
-    return [
-      {
-        label: "Yo'lovchilar",
-        link: '/passengers/main'
-      },
-      {
-        label: "Ro‘yxat",
-        // link: "/passengers/main",
-      },
-
-    ];
-  }, []);
+    navigateQuery({ gender: evt });
+  };
 
   return (
     <>
@@ -203,20 +193,11 @@ const Passengers = () => {
         <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
       </Header>
       <div className="px-6 ">
-
-        <SectionHeader extra={<FilterButton text="Filter" />} handleSearch={handleSearch}>
+        <SectionHeader
+          extra={<FilterButton text="Filter" />}
+          handleSearch={handleSearch}
+        >
           <div className="flex items-center gap-3">
-            {/* <FilterButton text="filter">
-              <div>
-                <CSelect handlerValue={handlerRegion} options={Regions} id="filter" label="Viloyat" />
-              </div>
-              <CDriver classes="my-4" />
-              <div>
-                <CSlider handleValue={handlerAge} />
-              </div>
-              <span onClick={() => setSearchParams({})} className="text-[var(--main)]  text-end block cursor-pointer mt-3">{t('ignore_text')}</span>
-            </FilterButton> */}
-
             <AddButton
               text="new_passenger"
               onClick={() => navigateQuery({ id: "create" })}
@@ -225,11 +206,39 @@ const Passengers = () => {
         </SectionHeader>
 
         <Filters filter={!!query.filter}>
-          <DropDown label="Vaqt" name="Vaqt" placeholder="Tanlang" defaultValue={'01.01-.01.01'} />
-          <CSelect handlerValue={handlerDiviceModel} options={Divice} label="Operatsion sistema" placeholder="Tanglang" />
-          <CSelect handlerValue={handlerVersion} options={Version} label="Versiyalar" placeholder="Tanglang" />
-          <CSelect handlerValue={handlerGender} options={[{ value: 'm', label: 'Erkak' }, { value: 'f', label: 'Ayol' }]} label="Jinsi" placeholder="Tanlang" />
-          <CSelect handlerValue={handlerRegion} options={Regions} label="Viloyat" placeholder="Tanlang" />
+          <DropDown
+            label="Vaqt"
+            name="Vaqt"
+            placeholder="Tanlang"
+            defaultValue={"01.01-.01.01"}
+          />
+          <CSelect
+            handlerValue={handlerDiviceModel}
+            options={Divice}
+            label="Operatsion sistema"
+            placeholder="Tanglang"
+          />
+          <CSelect
+            handlerValue={handlerVersion}
+            options={Version}
+            label="Versiyalar"
+            placeholder="Tanglang"
+          />
+          <CSelect
+            handlerValue={handlerGender}
+            options={[
+              { value: "m", label: "Erkak" },
+              { value: "f", label: "Ayol" },
+            ]}
+            label="Jinsi"
+            placeholder="Tanlang"
+          />
+          <CSelect
+            handlerValue={handlerRegion}
+            options={Regions}
+            label="Viloyat"
+            placeholder="Tanlang"
+          />
         </Filters>
 
         <CTable

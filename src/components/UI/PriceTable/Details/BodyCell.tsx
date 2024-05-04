@@ -1,7 +1,6 @@
 export const BodyCell = ({
   edit = false,
   type = "",
-  element = {},
 }: {
   edit?: boolean;
   type: string;

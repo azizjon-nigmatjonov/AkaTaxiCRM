@@ -32,9 +32,6 @@ const SidebarSection = () => {
 
 
 
-
-
-
   const [activeIndex, setActiveIndex] = useState(() => {
     const storedIndex = localStorage.getItem('activeAccordionIndex');
     return storedIndex !== null ? parseInt(storedIndex) : -1;
@@ -44,7 +41,6 @@ const SidebarSection = () => {
 
   useEffect(() => {
     localStorage.setItem('activeAccordionIndex', String(activeIndex))
-
   }, [activeIndex]);
 
 
@@ -64,6 +60,7 @@ const SidebarSection = () => {
 
 
 
+console.log(List);
 
 console.log(List);
 
@@ -141,6 +138,7 @@ console.log(List);
           <NavLink to="/views/Drivers/Map">map</NavLink>
           </div> */}
         </div>
+        
         <div className="ml-8 mb-8 ">
           <UserInfo />
         </div>
