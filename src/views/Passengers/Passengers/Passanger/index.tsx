@@ -5,26 +5,14 @@ import { useQuery } from "react-query";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
 import passengerService from "../../../../services/passengers";
 import CTabs from "../../../../components/CElements/CTab";
-import Trips from "./Trips";
-import PassengerProfile from "./PassangerProfile";
 import cls from "./style.module.scss";
 import { useParams } from "react-router-dom";
-
-const tabList = [
-  {
-    slug: "",
-    name: "Triplar",
-  },
-  {
-    slug: "data",
-    name: "Ma'lumotlar",
-  },
-];
-
+import { tabList, TabActions } from "./Logic";
 const Passanger = () => {
   const { tab } = useGetQueries();
   const { id } = useParams();
-  
+  const { GetCurrentPage } = TabActions();
+
   const { data: passenger } = useQuery(["GET_PASSENGER", id], () => {
     return passengerService.getElement(id);
   });
@@ -47,15 +35,15 @@ const Passanger = () => {
 
   return (
     <div className="relative">
-      <Header sticky={true}>
+      <Header>
         <CBreadcrumbs items={breadCrubmsItems} progmatic={true} type="link" />
       </Header>
 
-      <div className={`px-6`}>
-        <div className={`${cls.box} sticky  top-[90px] z-10`}>
+      <div className={`px-5`}>
+        <div className={cls.box}>
           <CTabs tabList={tabList} />
         </div>
-        {tab === "data" ? <PassengerProfile /> : <Trips />}
+        {GetCurrentPage(tab)}
       </div>
     </div>
   );

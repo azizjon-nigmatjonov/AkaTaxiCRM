@@ -1,6 +1,6 @@
 export const ColorConstants = {
   blue: "#0062FF",
-  main: "#DD431F",
+
   mainLight: "#FF5B01",
   black: "#151515",
   lineGray: "#E2E2EA",
@@ -9,10 +9,9 @@ export const ColorConstants = {
   darkerGray: "#3C4254",
   gray: "#858592",
 
-  error: "#E82F0F",
   darkGray: "#92929D",
   darkestGray: "#696974",
-  green: "#0BD976",
+
   softGray: "#FAFAFB",
   darkerGreen: "#0F855B",
   ink: "#1C299B",
@@ -21,7 +20,13 @@ export const ColorConstants = {
   primary: "#2E90FA",
   primary50: "#EFF8FF",
 
+  error: "#E82F0F",
+  error50: "#FEF3F2",
 
+  main: "#DD431F",
+  main50: "#FFEFE6",
+  green: "#0BD976",
+  green50: "#ECFDF3",
   brown10: "#FFDECC",
 
   border: "#EAECF0",
@@ -32,5 +37,5 @@ export const ColorConstants = {
   gray50: "#F2F4F7",
   gray60: "#475467",
   gray70: "#344054",
-  gray90: "#101828"
+  gray90: "#101828",
 } as const;

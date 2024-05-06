@@ -38,14 +38,16 @@ import NewsNotification from "../views/Notifications/News";
 import AddNotification from "../views/Notifications/Notification/AddNotification";
 import AddNews from "../views/Notifications/News/Addnew";
 import { RollForm } from "../views/Admins/Rolls/Form";
+import CallCenter from "../views/CallCenter";
 
-const Passanger = lazy(() => import("../views/Passengers/Passengers/Passanger"));
+const Passanger = lazy(
+  () => import("../views/Passengers/Passengers/Passanger")
+);
 const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
 const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"));
-const AddSMS = lazy(() => import('../views/Notifications/SMS/AddSMS'));
-const NewRolls = lazy(() => import('../views/Admins/Rolls/AddRolls'))
-
+const AddSMS = lazy(() => import("../views/Notifications/SMS/AddSMS"));
+const NewRolls = lazy(() => import("../views/Admins/Rolls/AddRolls"));
 
 interface Path {
   parent: string;
@@ -71,8 +73,9 @@ const Router = () => {
     notifications: [],
     partners: [],
     settings: [],
+    call_center: [],
   });
-  
+
   const getPath = ({
     parent = "",
     link,
@@ -91,7 +94,7 @@ const Router = () => {
       title,
       icon,
       card_info,
-      permissions: []
+      permissions: [],
     };
 
     if (!list.includes(obj.id)) {
@@ -123,8 +126,6 @@ const Router = () => {
       </Suspense>
     );
   }
-
-  
 
   // useEffect(() => {
   //   if (isAuth && location.pathname === "/") {
@@ -233,7 +234,7 @@ const Router = () => {
             path={getPath({
               parent: "drivers",
               link: "main",
-              childlink: 'add',
+              childlink: "add",
               sidebar: false,
               title: "",
               icon: "",
@@ -255,7 +256,7 @@ const Router = () => {
             path={getPath({
               parent: "drivers",
               link: "cars",
-              childlink: 'car/:id',
+              childlink: "car/:id",
               sidebar: false,
               title: "",
               icon: "",
@@ -370,7 +371,7 @@ const Router = () => {
             path={getPath({
               parent: "admins",
               link: "rolls",
-              childlink: 'new_rolls',
+              childlink: "new_rolls",
               sidebar: false,
               title: "Rollar",
               icon: "rolls_icon",
@@ -452,69 +453,69 @@ const Router = () => {
 
           <Route
             path={getPath({
-              parent: 'notifications',
-              link: 'notification',
+              parent: "notifications",
+              link: "notification",
               sidebar: true,
-              title: 'Bildirishnomalar',
-              icon: 'notifications'
+              title: "Bildirishnomalar",
+              icon: "notifications",
             })}
             element={<Notification />}
           />
 
           <Route
             path={getPath({
-              parent: 'notifications',
-              link: 'notification',
-              childlink: 'add_notification',
+              parent: "notifications",
+              link: "notification",
+              childlink: "add_notification",
               sidebar: false,
-              title: '',
-              icon: ''
+              title: "",
+              icon: "",
             })}
             element={<AddNotification />}
           />
 
           <Route
             path={getPath({
-              parent: 'notifications',
-              link: 'smsnotification',
+              parent: "notifications",
+              link: "smsnotification",
               sidebar: true,
-              title: 'SMS xabarnoma',
-              icon: 'sms_notification'
+              title: "SMS xabarnoma",
+              icon: "sms_notification",
             })}
-            element={< SMSNotification />}
+            element={<SMSNotification />}
           />
           <Route
             path={getPath({
-              parent: 'notifications',
-              link: 'smsnotification',
-              childlink: 'add_sms',
+              parent: "notifications",
+              link: "smsnotification",
+              childlink: "add_sms",
               sidebar: false,
-              title: 'SMS xabarnoma',
-              icon: 'sms_notification'
+              title: "SMS xabarnoma",
+              icon: "sms_notification",
             })}
-            element={< AddSMS />}
+            element={<AddSMS />}
           />
 
           <Route
             path={getPath({
-              parent: 'notifications',
-              link: 'news_notification',
+              parent: "notifications",
+              link: "news_notification",
               sidebar: true,
-              title: 'Yangiliklar',
-              icon: 'news_notification'
+              title: "Yangiliklar",
+              icon: "news_notification",
             })}
             element={<NewsNotification />}
           />
           <Route
             path={getPath({
-              parent: 'notifications',
-              link: 'news_notification',
-              childlink: 'add_news',
+              parent: "notifications",
+              link: "news_notification",
+              childlink: "add_news",
               sidebar: false,
-              title: 'Yangiliklar',
-              icon: 'news_notification'
+              title: "Yangiliklar",
+              icon: "news_notification",
             })}
-            element={< AddNews />}
+            element={<AddNews />}
           />
 
           <Route
@@ -536,6 +537,17 @@ const Router = () => {
               icon: "",
             })}
             element={<Partner />}
+          />
+
+          <Route
+            path={getPath({
+              title: "Call markazi",
+              parent: "call_center",
+              link: "call_center",
+              sidebar: true,
+              icon: "headPhones",
+            })}
+            element={<CallCenter />}
           />
         </Route>
 

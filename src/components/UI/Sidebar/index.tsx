@@ -19,7 +19,7 @@ export const Sidebar = () => {
       </div>
 
       <img
-        className="absolute w-full left-0 bottom-[-400px] z-[1]"
+        className="absolute w-full left-0 bottom-[-300px] z-[1]"
         src="/svg/shadow.svg"
         alt="shdow"
       />

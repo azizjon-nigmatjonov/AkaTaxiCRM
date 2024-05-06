@@ -3787,6 +3787,11 @@ warning@^4.0.2:
   dependencies:
     loose-envify "^1.0.0"
 
+wavesurfer.js@^7.7.13:
+  version "7.7.13"
+  resolved "https://registry.npmjs.org/wavesurfer.js/-/wavesurfer.js-7.7.13.tgz"
+  integrity sha512-lQ5QkLa0Kzt5jkt4vP+K1RvsopaH5LssxZ3OArxaeetGYvQfot4Xq5UB8CRsJLXF0+hFWOmqc23WGhP64v2byQ==
+
 webidl-conversions@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz"
