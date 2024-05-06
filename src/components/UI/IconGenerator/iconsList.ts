@@ -1,6 +1,5 @@
 import {
   AdminsIcon,
-  AdminIcon,
   DrivingIcon,
   SmartCarIcon,
   CarIcon,

@@ -5,16 +5,16 @@ import { Months } from "../../../../../mixins/month"
 import { getWeekDays, getYears, } from "../../../../../utils/getMonth"
 import CFilterTab from "../../../../../components/CElements/CFilterTab"
 
-const CTabList = [
-  {
-    label:'Oylik',
-    value: 'month'
-  },
-  {
-    label:'Haftalik',
-    value: 'week'
-  }
-] 
+// const CTabList = [
+//   {
+//     label:'Oylik',
+//     value: 'month'
+//   },
+//   {
+//     label:'Haftalik',
+//     value: 'week'
+//   }
+// ] 
 
 const Filters = () => {
 
