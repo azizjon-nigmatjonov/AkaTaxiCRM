@@ -108,7 +108,7 @@ const SidebarSection = () => {
               <div className="menus">
                 <NavLink
                   to={visibleSidebarItems[0].path}
-                  className={`menu_link3 w-full h-[40px] flex items-center gap-x-3 pl-3 capitalize`}
+                  className={`menu_link3 w-full h-[40px] flex items-center gap-x-3 pl-3 ml-[-11px] capitalize`}
                 >
                   <IconGenerator icon={visibleSidebarItems[0].icon} /> {t(key)}
                 </NavLink>

@@ -10,7 +10,7 @@ export const Sidebar = () => {
           <img src="/logo-full.svg" alt="logo" />
         </div>
 
-        <div className="px-[16px]">
+        <div className="pr-[24px] pl-[26px]">
           <SidebarSection />
         </div>
       </div>

@@ -76,7 +76,7 @@ console.log(List);
               <div className="ml-[15px]">
 
                 <button
-                  className={`accordion  ${activeIndex === index ? 'active' : ''} flex justify-between items-center max-w-[280px]`}
+                  className={`accordion  ${activeIndex === index ? 'active' : ''} flex justify-between items-center]`}
                   onClick={() => toggleAccordion(index)}
                 >
                   <div className="flex items-center gap-3">
@@ -120,7 +120,7 @@ console.log(List);
 
               </div>
             ) : <div className="menus">
-              <NavLink to={visibleSidebarItems[0].path} className={`menu_link3 mt-2 mb-2 py-[10px] ml-4 pl-[20px] w-[280px] flex items-center  gap-3  capitalize`}>
+              <NavLink to={visibleSidebarItems[0].path} className={`menu_link3 mt-2 mb-2 py-[10px] flex items-center gap-3 capitalize`}>
 
                 {/* {(console.log(location.pathname))} */}
 
