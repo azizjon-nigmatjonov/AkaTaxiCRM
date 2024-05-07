@@ -7,7 +7,7 @@ export const PriceTable = () => {
   const headColumns = useMemo(() => {
     return [
       {
-        title: "Voloyat",
+        title: "Viloyat",
         id: "region",
         type: "cell",
       },
