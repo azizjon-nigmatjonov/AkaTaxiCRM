@@ -13,6 +13,7 @@ export default {
         "12px": "12px",
         "16px": "16px",
         "20px": "20px",
+        "24px": "24px",
         "32px": "32px",
       },
     },

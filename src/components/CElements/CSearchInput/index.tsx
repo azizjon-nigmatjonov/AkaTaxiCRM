@@ -5,9 +5,10 @@ interface Props {
   handleChange: (val: any) => void;
   delay?: number;
   classes?: string
+  defaultValue?: string | number
 }
 
-const CSearchInput = ({ handleChange = () => {}, delay = 500, classes = "" }: Props) => {
+const CSearchInput = ({ handleChange = () => {}, delay = 500, classes = "", defaultValue = "" }: Props) => {
   const debounce = useDebounce((search: any) => {    
     handleChange(search);
   }, delay);
@@ -20,6 +21,7 @@ const CSearchInput = ({ handleChange = () => {}, delay = 500, classes = "" }: Pr
       </div>
       <input
         onChange={(e) => debounce(e.target.value)}
+        defaultValue={defaultValue}
         type="text"
         placeholder="Izlash..."
         className={`w-[250px] bg-transparent h-[40px] outline-none pl-10 pr-5 text=[var(--black)] placeholder-gray border border-[var(--lineGray)] focus:border-[var(--main)] rounded-[10px] ${classes}`}

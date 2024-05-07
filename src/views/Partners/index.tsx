@@ -117,7 +117,7 @@ const Partners = () => {
 
   return (
     <>
-      <Header sticky={true}>
+      <Header>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} />
       </Header>
       <div className="px-6">
