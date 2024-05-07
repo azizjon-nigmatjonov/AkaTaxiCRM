@@ -15,7 +15,7 @@ const SidebarSection = () => {
   const List = useMemo(() => {
     return routes ?? [];
   }, [routes]);
-  
+
   const [activeIndex, setActiveIndex] = useState(() => {
     const storedIndex = localStorage.getItem("activeAccordionIndex");
     return storedIndex !== null ? parseInt(storedIndex) : -1;
@@ -43,9 +43,8 @@ const SidebarSection = () => {
             return visibleSidebarItems.length > 1 ? (
               <div>
                 <button
-                  className={`accordion ${
-                    activeIndex === index ? "active" : ""
-                  } flex justify-between items-center w-full`}
+                  className={`accordion ${activeIndex === index ? "active" : ""
+                    } flex justify-between items-center w-full`}
                   onClick={() => toggleAccordion(index)}
                 >
                   <div className="flex items-center space-x-3">
@@ -73,20 +72,17 @@ const SidebarSection = () => {
                               <NavLink
                                 key={el.id}
                                 to={el.path}
-                                className={`${
-                                  i < 100
+                                className={`${i < 100
                                     ? "steps__item steps__item--active"
                                     : "steps__item"
-                                } menu_link2 flex items-center steps ${
-                                  location.pathname.startsWith(el.path)
+                                  } menu_link2 flex items-center steps ${location.pathname.startsWith(el.path)
                                     ? "active"
                                     : ""
-                                }`}
+                                  }`}
                               >
                                 <p
-                                  className={`${
-                                    isLastItem ? "mb-2" : ""
-                                  } flex gap-2 capitalize menu_link cursor-pointer text-sm font-medium text-[#151515] `}
+                                  className={`${isLastItem ? "mb-2" : ""
+                                    } flex gap-2 capitalize menu_link cursor-pointer text-sm font-medium text-[#151515] `}
                                 >
                                   <IconGenerator icon={el.icon} />
                                   <span>{el.title}</span>
@@ -108,9 +104,10 @@ const SidebarSection = () => {
               <div className="menus">
                 <NavLink
                   to={visibleSidebarItems[0].path}
-                  className={`menu_link3 w-full h-[40px] flex items-center gap-x-3 pl-3 capitalize`}
+                  className={`menu_link3 w-full h-[40px] translate-x-[-12px]  flex items-center gap-x-3 pl-3 capitalize`}
                 >
-                  <IconGenerator icon={visibleSidebarItems[0].icon} /> {t(key)}
+                    <IconGenerator icon={visibleSidebarItems[0].icon} />
+                   {t(key)}
                 </NavLink>
                 <div className="accordion-line"></div>
               </div>

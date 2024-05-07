@@ -6,7 +6,7 @@ interface Props {
   styles?: any
 }
 
-const CLabel = ({ title = "label", required, styles = {} }: Props) => {
+const CLabel = ({ title = "", required, styles = {} }: Props) => {
   return (
     <p className={cls.label} style={{ ...styles }}>
       {required ? <span className={cls.required}>*</span> : ""}

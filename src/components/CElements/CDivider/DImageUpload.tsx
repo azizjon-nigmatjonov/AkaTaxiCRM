@@ -153,7 +153,7 @@ const DImageUpload = ({
             <span className="text-xs font-normal leading-[18px] text-[var(--gray)]">Rasm formati png, jpg bo’lishi kerak. <br />O’lchami maksimum 12 MB. </span>
           </div>}
 
-          {zoomImg && !!query.show && <div className="py-20  w-full h-full fixed top-0 left-0 z-40">
+          {zoomImg && !!query.show && <div className="py-20  w-full h-full fixed top-0 left-0 z-[99]">
             <div className='absolute z-10  mb-24 left-[50%] translate-x-[-50%]  max-w-[700px] w-full h-full max-h-[700px] '>
               <img src={`${decodeURIComponent(query?.img)}`} alt="img" className="h-full w-full z-50" />
               <div onClick={() => { navigateQuery({ show: '', img: '' }) }} className="bg-white rounded-lg inline-block p-[10px] absolute top-[18px] right-[18px]">

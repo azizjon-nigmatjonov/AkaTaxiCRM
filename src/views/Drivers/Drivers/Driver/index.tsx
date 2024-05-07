@@ -8,8 +8,8 @@ import DriverTrip from "./Trip";
 import DriverInfo from "./Info";
 import { useMemo } from "react";
 import { Header } from "../../../../components/UI/Header";
-import AddButton from "../../../../components/UI/Buttons/AddButton";
 import usePageRouter from "../../../../hooks/useObjectRouter";
+import { PostBallance } from "./Logic";
 
 const tabList = [
   {
@@ -28,7 +28,8 @@ const tabList = [
 
 const Driver = () => {
   const { tab, id } = useGetQueries();
-  const { getQueries, navigateQuery } = usePageRouter()
+  const { getQueries } = usePageRouter()
+  const {BalanceFeatures}= PostBallance()
   const query = getQueries()
 
   const { data: driver } = useQuery(
@@ -57,9 +58,11 @@ const Driver = () => {
     ];
   }, [driver]);
 
+
+
   return (
     <>
-      <Header sticky={true}>
+      <Header >
         <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
       </Header>
 
@@ -67,7 +70,7 @@ const Driver = () => {
         <div className="flex justify-between">
           <CTabs tabList={tabList} />
           <div>
-            {query.tab == 'ballance' && <AddButton id="successBtn" text="Balansni to’ldirish" onClick={() => navigateQuery({ amount: true })} />}
+            {query.tab == 'ballance' && BalanceFeatures()}
           </div>
         </div>
 

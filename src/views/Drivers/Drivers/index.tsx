@@ -131,6 +131,8 @@ const Drivers = () => {
     return data ?? {};
   }, [data]);
 
+  
+
   const bodyColumns = useMemo(() => {
     return (
       drivers?.data?.map((el: any) => {
