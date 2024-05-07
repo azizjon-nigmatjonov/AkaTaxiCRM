@@ -138,10 +138,6 @@ const ActiveDrivers = () => {
     navigateQuery({ car_model_id: evt });
   };
 
-  // const handleAge = (evt: any) => {
-  //   navigateQuery({ birthday: [...evt] })
-  // }
-
   const breadCrumbs = useMemo(() => {
     return [
       { label: "Haydovchilar", link: "/drivers/active" },

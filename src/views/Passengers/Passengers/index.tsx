@@ -107,9 +107,9 @@ const Passengers = () => {
         title: "triplar",
         id: "bookings_count",
       },
-      {
-        title: "Keshbek (so'm)",
-      },
+      // {
+      //   title: "Keshbek (so'm)",
+      // },
       {
         title: "Tug‘ilgan sana",
         id: "birthday",

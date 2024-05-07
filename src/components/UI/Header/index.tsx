@@ -31,7 +31,7 @@ export const Header = ({
         )}
 
         <img
-          className="absolute right-0 top-0"
+          className="absolute right-0 top-0 z-[1]"
           src="/svg/headerLine.svg"
           alt="line"
         />

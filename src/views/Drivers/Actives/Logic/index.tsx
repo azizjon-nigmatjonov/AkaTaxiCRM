@@ -64,6 +64,10 @@ export const ActiveDriversTable = ({
           ),
       },
       {
+        title: "Takliflar",
+        id: "as",
+      },
+      {
         id: "places",
         render: (val: any, items: any) =>
           val && <Places data={val} item={items} clickHandle={passengerList} />,
