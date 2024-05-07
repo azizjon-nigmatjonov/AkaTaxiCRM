@@ -1,74 +1,87 @@
-import { Select, MenuItem, OutlinedInput, } from '@mui/material';
-import './modal.css'
-import { useState } from 'react';
+import "./modal.css";
+import { useMemo, useState } from "react";
+import CSelect from "../../../components/CElements/CSelect";
+import { Regions } from "../../../mixins/regions";
 
+const optionsStatus = [
+  {
+    value: "pending",
+    label: "Aktiv",
+  },
+  {
+    value: "on-way",
+    label: "Safardagilar",
+  },
+];
 
-const optionsStatus = [{
-    value: 'pending', label: 'Aktiv'
-},
-{
-    value: 'on-way', label: 'Safardagilar'
-},
-
-]
+const classStatus = [
+  {
+    label: "Standart (45)",
+    value: "standart",
+  },
+  {
+    label: "Hammasi",
+    value: "all",
+  },
+  {
+    label: "Komfort",
+    value: "comfort",
+  },
+  {
+    label: "Biznes",
+    value: "business",
+  },
+];
 
 interface MapOptionProps {
-    setSelectData: (data: any) => void;
-    setSelectedStatus: (status: any) => void;
-    lang: any;
-    lat: any;
-    setCarClass: (carClass: number) => void;
-    selectedStatus: any
-
+  setSelectData: (data: any) => void;
+  setSelectedStatus: (status: any) => void;
+  lang: any;
+  lat: any;
+  setCarClass: (carClass: number) => void;
+  selectedStatus: any;
 }
 
+function MapOption({
+  selectedStatus,
+  setSelectedStatus,
+  setCarClass,
+}: MapOptionProps) {
+  const [regionValue, setRegionValue] = useState(22);
+  const [typeCar, setTypeCar] = useState<any>("all");
 
-function MapOption({ selectedStatus, setSelectedStatus, setCarClass }: MapOptionProps) {
+  const RegionList = useMemo(() => {
+    return Regions.map((item) => {
+      return { label: item.uz, value: item.id };
+    });
+  }, []);
 
-
-
-
-    const [typeCar, setTypeCar] = useState<any>('Hammasi');
-
-
-    const handleStatusChange = async (event: any) => {
-
-        setSelectedStatus(event.target.value);
-
+  const handleCarTypeStatus = (value: any) => {
+    setTypeCar(value);
+    if (value === "standart") {
+      setCarClass(1);
+    } else if (value === "comfort") {
+      setCarClass(2);
+    } else if (value === "business") {
+      setCarClass(3);
     }
+  };
 
-    const handleCarTypeStatus = async (event: any) => {
-
-        if (event.target.value === 'Standart') {
-            setTypeCar('Standart')
-
-            setCarClass(1)
-
-        } else if (event.target.value === 'Komfort') {
-
-            setCarClass(2)
-
-        } else if (event.target.value === 'Biznes') {
-
-            setTypeCar('Biznes')
-            setCarClass(3)
-
-
-        } else {
-            setTypeCar('Hammasi')
-        }
-
-
-
+  const handleSelect = (val: number, type: string) => {
+    if (type === "region") {
+      setRegionValue(val);
     }
+    if (type === "position") {
+      setSelectedStatus(val);
+    }
+    if (type === "class") {
+      handleCarTypeStatus(val);
+    }
+  };
 
-
-
-
-
-    return (
-        <div className='flex gap-3 absolute  left-6'>
-            <div>
+  return (
+    <div className="flex gap-3 absolute  left-6">
+      {/* <div>
                 <h3 className='text-[#151515] font-medium'>Holat</h3>
                 <Select
                     value={selectedStatus}
@@ -158,8 +171,38 @@ function MapOption({ selectedStatus, setSelectedStatus, setCarClass }: MapOption
 
                 </Select>
             </div>
-        </div>
-    )
+             */}
+
+      <div className="w-[240px]">
+        <CSelect
+          value={selectedStatus}
+          label="Holat"
+          handlerValue={(val: any) => handleSelect(val, "position")}
+          options={optionsStatus}
+          id="filter"
+        />
+      </div>
+
+      <div className="w-[240px]">
+        <CSelect
+          label="Viloyat"
+          handlerValue={(val: any) => handleSelect(val, "region")}
+          value={regionValue}
+          options={RegionList}
+          id="filter"
+        />
+      </div>
+      <div className="w-[240px]">
+        <CSelect
+          label="Klass"
+          handlerValue={(val: any) => handleSelect(val, "class")}
+          value={typeCar}
+          options={classStatus}
+          id="filter"
+        />
+      </div>
+    </div>
+  );
 }
 
 export default MapOption;

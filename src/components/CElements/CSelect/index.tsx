@@ -6,31 +6,36 @@ interface Props {
   id?: string;
   options: any;
   label?: string;
-  handlerValue?: (val: any) => void
-  // classes?: string;
-  disabled?: boolean
-  placeholder?: string
+  handlerValue?: (val: any) => void;
+  disabled?: boolean;
+  placeholder?: string;
+  value?: any;
+  classes?: string;
 }
 
 const CSelect = ({
   id = "cselect",
+  value,
   options = [],
   label = "",
   handlerValue,
   disabled,
+  classes = "bg-white",
 }: Props) => {
-
   const handleChange = (event: SelectChangeEvent) => {
-    handlerValue!(event.target?.value)
-  }
+    handlerValue!(event.target?.value);
+  };
 
   return (
     <>
-      <div id={`cselect-${id}`}>
-        {label && <CLabel title={label} />}
+      {label && <CLabel title={label} />}
+      <div
+        id={`cselect-${id}`}
+        className={`${classes} rounded-[8px] overflow-hidden`}
+      >
         <Select
+          value={value}
           disabled={disabled}
-          // sx={{ m: 1, width: 112, height: 3 }}
           defaultValue={options?.[0]?.value}
           inputProps={{
             "aria-label": "Without label",
@@ -38,7 +43,10 @@ const CSelect = ({
           onChange={handleChange}
         >
           {options.map(({ value, label }: { value: any; label: string }) => (
-            <MenuItem key={value} value={value}> {label}</MenuItem>
+            <MenuItem key={value} value={value}>
+              {" "}
+              {label}
+            </MenuItem>
           ))}
         </Select>
       </div>
