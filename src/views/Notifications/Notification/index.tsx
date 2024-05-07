@@ -13,7 +13,7 @@ const tabList = [
   },
   {
     slug: 'driver',
-    name: 'Yo’lovchi'
+    name: 'Haydovchi'
   }
 ]
 
