@@ -1,6 +1,5 @@
 import {
   AdminsIcon,
-  AdminIcon,
   DrivingIcon,
   SmartCarIcon,
   CarIcon,
@@ -20,6 +19,7 @@ import {
   SMSIcon,
   NewsIcon,
   ListIcon,
+  HeadPhones,
 } from "./Svg/Sidebar";
 
 import { PassengerIcon, DriverIcon, PassengerVehicleIcon, DriverVehicleIcon, PartnersIcon } from "./Svg";
@@ -28,10 +28,6 @@ export const iconsList = [
   {
     name: "admins",
     component: AdminsIcon,
-  },
-  {
-    name: "admin",
-    component: AdminIcon,
   },
   {
     name: "driving",
@@ -130,5 +126,9 @@ export const iconsList = [
   {
     name: 'list',
     component: ListIcon
+  },
+  {
+    name: 'headPhones',
+    component: HeadPhones
   }
 ];

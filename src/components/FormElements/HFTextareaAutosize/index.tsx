@@ -25,9 +25,6 @@ export default function HFTextareaAutosize({
   control,
   setValue
 }: Props) {
-  // const { setValue, formState } = useForm();
-  // const error: any = formState.errors[name];
-
   useEffect(() => {
     if (defaultValue) {
       setValue(name, defaultValue);
