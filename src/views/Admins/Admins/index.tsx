@@ -28,9 +28,16 @@ const Admins = () => {
 
   const handleSearch = () => {};
 
-  const bodyColumns = useMemo(() => {
-    return admins?.data ?? [];
+  const bodyColumns:any = useMemo(() => {
+    const list =  admins?.data ?? []
+    return {
+     list, 
+     ...admins
+    };
   }, [admins]);
+
+  console.log(bodyColumns);
+  
 
   const headColumns = useMemo(() => {
     return [
@@ -119,7 +126,8 @@ const Admins = () => {
 
         <CTable
           headColumns={headColumns}
-          bodyColumns={bodyColumns}
+          bodyColumns={bodyColumns.list}
+          totalCount={bodyColumns?.meta?.totalCount ?? bodyColumns.list.length}
           isResizeble={true}
           isLoading={isLoading}
           handleActions={handleActions}

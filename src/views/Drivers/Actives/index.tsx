@@ -116,6 +116,7 @@ const ActiveDrivers = () => {
           headColumns={headColumns}
           bodyColumns={driversData?.list}
           count={driversData?.meta?.pageCount}
+          totalCount={driversData?.meta?.totalCount}
           isLoading={isLoading}
           currentPage={currentPage}
         />

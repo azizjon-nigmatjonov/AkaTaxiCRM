@@ -15,6 +15,7 @@ interface Props {
   passRouter: boolean;
   currentPage: number;
   count: number;
+  totalCount?: number
   dataLength: number;
   setCurrentPage: (newPage: number) => void;
   setCurrentLimit: (newLimit: number) => void;
@@ -24,6 +25,7 @@ const CPagination = ({
   limit,
   limitCount,
   passRouter,
+  totalCount,
   currentPage,
   setCurrentPage,
   setCurrentLimit,
@@ -37,7 +39,7 @@ const CPagination = ({
   const count: any = usePaginationCount(props?.count);
   const navigate = useNavigate();
 
-  
+
 
   function handleRouteActions(queryObj: {
     limit?: any;
@@ -72,7 +74,7 @@ const CPagination = ({
         limitCount={limitCount}
         handleRouteActions={handleRouteActions}
       /> */}
-      <p className="text-[var(--gray)]">{count.count} tadan 1-{dataLength} tasi</p>
+      <p className="text-[var(--gray)]">{totalCount} tadan 1-{dataLength} tasi</p>
       <Pagination
         onChange={(e, val) =>
           handleRouteActions({ page: val, queryLimit: query?.limit, something: e })

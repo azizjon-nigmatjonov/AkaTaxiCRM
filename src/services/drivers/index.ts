@@ -25,7 +25,8 @@ const driverService = {
   getDriverBallance: (data?: any) => request.get(`drivers/${data.id}/balance?${data.page ? `page=${data.page}` : ''}`),
   getFotoContols: (data?: any) => request.get(`stickers?${data.page ? `page=${data.page}` : ''}${data.perPage ? `&perPage=${data.perPage}` : ''}${data.q ? `&q=${data.q}` : ''}`),
   getFotoControlUser: (id?: string) => request.get(`stickers/${id}`),
-  updateFotoControl: (id: any, data: any) => request.put(`stickers/${id}`, data)
+  updateFotoControl: (id: any, data: any) => request.put(`stickers/${id}`, data),
+  topUpBallance:(data:any)=> request.post(`drivers/${data.id}/top-up-balance`, data.balance)
 };
 
 export default driverService;

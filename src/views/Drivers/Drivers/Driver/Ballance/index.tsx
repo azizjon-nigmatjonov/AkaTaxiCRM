@@ -12,6 +12,8 @@ import { useForm } from "react-hook-form"
 import HFTextField from "../../../../../components/FormElements/HFTextField"
 import AddButton from "../../../../../components/UI/Buttons/AddButton"
 import CancelButton from "../../../../../components/UI/Buttons/Cancel"
+import { useDispatch } from "react-redux"
+import { websiteActions } from "../../../../../store/website"
 
 
 
@@ -19,13 +21,44 @@ const DriverBallance = () => {
     const { id, currentPage } = useGetQueries()
     const { getQueries, navigateQuery } = usePageRouter()
     const query = getQueries()
-    const { data, isLoading } = useQuery(['GET_DRIVERS_BALLANCE', id, currentPage], () => {
+    const dispatch = useDispatch()
+
+    const { data, isLoading, refetch } = useQuery(['GET_DRIVERS_BALLANCE', id, currentPage], () => {
         return driverService.getDriverBallance({ id, page: currentPage })
     })
 
-    const { control } = useForm()
+    const { control, getValues } = useForm();
 
-    console.log(data);
+    const successSubmit = () => {
+        dispatch(
+            websiteActions.setAlertData({
+                mainTitle: "Amalga oshirildi!",
+                title: "To'lov mufaqiyatli amalga oshirildi",
+                translation: "common",
+            }))
+        refetch()
+
+        navigateQuery({ amount: '' })
+    }
+
+    const failSubmited = () => {
+        websiteActions.setAlertData({
+            mainTitle: "Amalga oshirilmadi",
+            title: "To'lov  amalga oshirilmadi",
+            translation: "common",
+            type: 'error'
+        })
+
+        navigateQuery({ amount: '' })
+    }
+
+    const topUpBalance = () => {
+        const balance = getValues()
+        driverService.topUpBallance({ id, balance }).then((data: any) => {
+            data?.success ? successSubmit() : failSubmited()
+        }
+        )
+    }
 
 
     const ballanceData: any = useMemo(() => {
@@ -94,8 +127,8 @@ const DriverBallance = () => {
             <div className="mt-5 space-y-8">
                 <HFTextField name="amount" control={control} placeholder="50 000 so'm" />
                 <div className="flex items-center justify-end gap-3">
-                    <CancelButton text='Orqaga' onClick={() => navigateQuery({amount: ''})}/>
-                    <AddButton iconLeft={false} text='To’ldirish' />
+                    <CancelButton text='Orqaga' onClick={() => navigateQuery({ amount: '' })} />
+                    <AddButton iconLeft={false} text='To’ldirish' onClick={topUpBalance} />
                 </div>
             </div>
         </CModal>

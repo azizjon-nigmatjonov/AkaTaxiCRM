@@ -12,9 +12,10 @@ interface Props {
     name: string,
     placeholder?: string,
     defaultValue?: any
+    position?:string;
 }
 
-const DropDown = ({ label, name, placeholder, defaultValue }: Props) => {
+const DropDown = ({ label, name, placeholder, defaultValue, position='380' }: Props) => {
     const [show, setShow] = useState(false);
     const { getQueries } = usePageRouter();
     const query = getQueries();
@@ -27,7 +28,7 @@ const DropDown = ({ label, name, placeholder, defaultValue }: Props) => {
 
 
     return (
-        <div className='HFInput z-20'>
+        <div className='HFInput z-20 relative'>
             <CLabel title={label} />
             <div className="relative bg-white">
                 <TextField
@@ -39,7 +40,7 @@ const DropDown = ({ label, name, placeholder, defaultValue }: Props) => {
                     InputProps={{ readOnly: true, endAdornment: <IoMdArrowDropdown size={18} /> }}
                     onClick={() => setShow(true)}
                 />
-                <div className="absolute right-[-380px] bg-yellow-500">
+                <div className={`absolute  right-[-${position}px] bg-yellow-500`}>
                     {show && <RangeDate setShow={setShow} footerActive={false} handlerValue={clickHandler} />}
                 </div>
             </div>

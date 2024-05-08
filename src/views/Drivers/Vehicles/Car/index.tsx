@@ -198,7 +198,8 @@ const SingleCar = () => {
         <CTable
           headColumns={headColumns}
           bodyColumns={drivers?.list}
-          count={drivers?.meta?.totalCount}
+          totalCount={drivers?.meta?.totalCount}
+          count={drivers?.meta?.pageCount}
           handleActions={handleActions}
           currentPage={currentPage}
         />

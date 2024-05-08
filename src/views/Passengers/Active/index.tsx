@@ -234,6 +234,7 @@ const ActivePassengers = () => {
             headColumns={headColumns}
             bodyColumns={bodyColumns?.list}
             count={bodyColumns?.meta?.pageCount}
+            totalCount={bodyColumns?.meta?.totalCount}
             isResizeble={true}
             isLoading={isLoading}
             currentPage={currentPage}

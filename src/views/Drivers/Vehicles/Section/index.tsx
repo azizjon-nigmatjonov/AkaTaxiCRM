@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import carService from "../../../../services/cars";
 import { useMemo } from "react";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
+import CarSkeleton from "../Skeleton";
 
 interface Props {
   list: any;
@@ -27,7 +28,7 @@ const Section = ({
     return carService.getList(4, q);
   });
 
-  const { data: standart } = useQuery(["GET_STANDART", q], () => {
+  const { data: standart, isLoading } = useQuery(["GET_STANDART", q], () => {
     return carService.getList(1, q);
   });
 
@@ -66,18 +67,24 @@ const Section = ({
       <div className="bg-white p-2 border border-[var(--lightGray)] rounded-xl">
         {Object.keys(allData).length ? <Header arr={allData} /> : ""}
         {list?.length && !loading ? (
-          <div className="grid grid-cols-4">
-            {Object.values(allData)?.map((item: any, index: number) => (
-              <ClassWrapper
-                key={index}
-                color={`${
-                  index % 2 !== 1 ? "bg-white" : "bg-[var(--brown10)]"
-                }`}
-                data={item?.data}
-                setInputValue={setInputValue}
-              />
-            ))}
+          <div>
+            {!isLoading ?
+              <div className="grid grid-cols-4">
+                {Object.values(allData)?.map((item: any, index: number) => (
+                  <ClassWrapper
+                    key={index}
+                    color={`${index % 2 !== 1 ? "bg-white" : "bg-[var(--brown10)]"
+                      }`}
+                    data={item?.data}
+                    setInputValue={setInputValue}
+                  />
+                ))
+                }
+              </div> :
+              <CarSkeleton />
+            }
           </div>
+
         ) : loading ? (
           "Yuklanmoqda..."
         ) : (

@@ -140,18 +140,17 @@ const Router = () => {
             />
           ))}
 
-          <Route
+          {/* <Route
             path={getPath({
               parent: "drivers",
-              link: "main",
-              childlink: "add",
+              link: "main/add",
               sidebar: false,
               title: "",
               icon: "",
             })}
             element={<AddDriver />}
-          />
-
+          /> */}
+          {/* 
           <Route
             path={getPath({
               parent: "drivers",
@@ -161,8 +160,9 @@ const Router = () => {
               icon: "smart_car",
             })}
             element={<ActiveDrivers />}
-          />
-          <Route
+          /> */}
+
+          {/* <Route
             path={getPath({
               parent: "drivers",
               link: "cars",
@@ -172,8 +172,8 @@ const Router = () => {
               icon: "",
             })}
             element={<SingleCar />}
-          />
-          <Route
+          /> */}
+          {/* <Route
             path={getPath({
               parent: "drivers",
               link: "cars",
@@ -182,9 +182,9 @@ const Router = () => {
               icon: "car",
             })}
             element={<Vehicles />}
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path={getPath({
               parent: "drivers",
               link: "maps",
@@ -193,8 +193,9 @@ const Router = () => {
               icon: "map",
             })}
             element={<Map />}
-          />
-          <Route
+          /> */}
+          
+          {/* <Route
             path={getPath({
               parent: "drivers",
               link: "route",
@@ -203,8 +204,8 @@ const Router = () => {
               icon: "routing",
             })}
             element={<RegionRoute />}
-          />
-          <Route
+          /> */}
+          {/* <Route
             path={getPath({
               parent: "drivers",
               link: "statistics",
@@ -213,8 +214,9 @@ const Router = () => {
               icon: "graph",
             })}
             element={<DriverStatistics />}
-          />
-          <Route
+          /> */}
+
+          {/* <Route
             path={getPath({
               parent: "infos",
               link: "calendar",
@@ -224,6 +226,7 @@ const Router = () => {
             })}
             element={<Calendar />}
           />
+
           <Route
             path={getPath({
               parent: "infos",
@@ -233,8 +236,9 @@ const Router = () => {
               icon: "chat",
             })}
             element={<Chats />}
-          />
-          <Route
+          /> */}
+
+          {/* <Route
             path={getPath({
               parent: "admins",
               link: "admin",
@@ -243,8 +247,9 @@ const Router = () => {
               icon: "admin",
             })}
             element={<Admins />}
-          />
-          <Route
+          /> */}
+
+          {/* <Route
             path={getPath({
               parent: "admins",
               link: "rolls",
@@ -253,9 +258,9 @@ const Router = () => {
               icon: "rolls_icon",
             })}
             element={<Rolls />}
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path={getPath({
               parent: "admins",
               link: "rolls",
@@ -265,9 +270,9 @@ const Router = () => {
               icon: "rolls_icon",
             })}
             element={<NewRolls />}
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path={getPath({
               parent: "admins",
               link: "roll/create",
@@ -276,18 +281,18 @@ const Router = () => {
               icon: "",
             })}
             element={<NewRolls />}
-          />
-          <Route
+          /> */}
+          {/* <Route
             path={getPath({
               parent: "admins",
-              link: "roll/:id",
+              link: "rolls/:id",
               sidebar: false,
               title: "",
               icon: "",
             })}
             element={<RollForm />}
-          />
-          <Route
+          /> */}
+          {/* <Route
             path={getPath({
               parent: "settings",
               link: "price_control",
@@ -296,8 +301,9 @@ const Router = () => {
               icon: "price_control",
             })}
             element={<Price />}
-          />
-          <Route
+          /> */}
+          
+          {/* <Route
             path={getPath({
               parent: "settings",
               link: "sms",
@@ -306,9 +312,9 @@ const Router = () => {
               icon: "sms",
             })}
             element={<SMS />}
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path={getPath({
               parent: "settings",
               link: "sms/create/:type",
@@ -317,8 +323,9 @@ const Router = () => {
               icon: "",
             })}
             element={<SmsCreateForm />}
-          />
-          <Route
+          /> */}
+
+          {/* <Route
             path={getPath({
               parent: "settings",
               link: "amocrm",
@@ -327,8 +334,9 @@ const Router = () => {
               icon: "amocrm",
             })}
             element={<AmoCrm />}
-          />
-          <Route
+          /> */}
+
+          {/* <Route
             path={getPath({
               parent: "settings",
               link: "profile",
@@ -337,9 +345,9 @@ const Router = () => {
               icon: "",
             })}
             element={<ProfilePage />}
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path={getPath({
               parent: "notifications",
               link: "notification",
@@ -348,9 +356,9 @@ const Router = () => {
               icon: "notifications",
             })}
             element={<Notification />}
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path={getPath({
               parent: "notifications",
               link: "notification",
@@ -360,9 +368,9 @@ const Router = () => {
               icon: "",
             })}
             element={<AddNotification />}
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path={getPath({
               parent: "notifications",
               link: "smsnotification",
@@ -371,8 +379,9 @@ const Router = () => {
               icon: "sms_notification",
             })}
             element={<SMSNotification />}
-          />
-          <Route
+          /> */}
+
+          {/* <Route
             path={getPath({
               parent: "notifications",
               link: "smsnotification",
@@ -382,9 +391,9 @@ const Router = () => {
               icon: "sms_notification",
             })}
             element={<AddSMS />}
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path={getPath({
               parent: "notifications",
               link: "news_notification",
@@ -393,8 +402,9 @@ const Router = () => {
               icon: "news_notification",
             })}
             element={<NewsNotification />}
-          />
-          <Route
+          /> */}
+
+          {/* <Route
             path={getPath({
               parent: "notifications",
               link: "news_notification",
@@ -404,7 +414,7 @@ const Router = () => {
               icon: "news_notification",
             })}
             element={<AddNews />}
-          />
+          /> */}
 
           <Route
             path={getPath({

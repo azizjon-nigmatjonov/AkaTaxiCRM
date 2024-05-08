@@ -51,7 +51,7 @@ const Rolls = () => {
             <div className="flex items-center gap-3">
               <AddButton
                 text="Yangi rol qo'shish"
-                onClick={() => navigateTo("/admins/roll/create")}
+                onClick={() => navigateTo("/admins/rolls/create")}
               />
             </div>
           </SectionHeader>
