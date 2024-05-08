@@ -1,3 +1,4 @@
+import usePageRouter from "../../../../../../hooks/useObjectRouter";
 import {
   DownloadIcon,
   PlayIcon,
@@ -8,6 +9,7 @@ import { AudioModal } from "../AudioModal";
 import { NoteModal } from "../NoteModal";
 
 export const TableActions = () => {
+  const { navigateQuery } = usePageRouter()
   const headColumns = [
     {
       title: "Vaqti",
@@ -35,7 +37,7 @@ export const TableActions = () => {
       render: (id: any) => {
         return id ? (
           <div className="space-x-4">
-            <button>
+            <button onClick={() => navigateQuery({ modal: "call_audio", user_id: id })}>
               <PlayIcon />
             </button>
             <button>

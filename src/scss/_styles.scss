@@ -17,10 +17,11 @@ input {
   width: 100%;
   .MuiInputBase-root {
     height: 48px;
-    border-radius: 12px;
-    border-color: $lineGray !important;
+    border-color: var(--lightGray) !important;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
     outline: none;
     width: 100%;
+    border-radius: 8px;
     &.Mui-focused {
       .MuiOutlinedInput-notchedOutline {
         border-color: $main;
@@ -34,9 +35,8 @@ input {
 }
 #cselect-filter {
   .MuiInputBase-root {
-    height: 33px;
+    height: 42px;
     width: 100%;
-    border-radius: 8px;
   }
 }
 .MuiPaper-root {

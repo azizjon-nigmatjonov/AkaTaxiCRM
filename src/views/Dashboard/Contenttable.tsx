@@ -22,8 +22,8 @@ function ContentTable({ setCountWeekDriversVilage, setSelectMonthDriversVilage, 
 
     return (
         <>
-            <div className="px-6 w-full mb-6">
-                <h2 className=" text-[30px] mt-6 text-[#101828] font-semibold mb-6">Yo’lovchilar</h2>
+            <div className="px-5 w-full mb-6">
+                <h2 className=" text-[30px] my-5 text-[#101828] font-semibold">Yo’lovchilar qatnovi</h2>
                 <div className="rounded-[10px] shadow-sm  pt-3">
                     <TablePessengers setYear={setYear} year={year} dataList={dataList} setCountWeek={setCountWeek} setSelectMonth={setSelectMonth} />
                     <TablePessengersVilage setCountWeekPessengerVilage={setCountWeekPessengerVilage} setSelectMonthPessengerVilage={setSelectMonthPessengerVilage} setYearPessengerVilage={setYearPessengerVilage} yearPessengerVilage={yearPessengerVilage} passengersDataVilage={passengersDataVilage} />

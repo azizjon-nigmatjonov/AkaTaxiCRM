@@ -5,6 +5,9 @@ import ContentTable from "./Contenttable";
 import dashboardService from "../../services/dashboard";
 import { useQuery } from "react-query";
 import { useState } from "react";
+import CBreadcrumbs from "../../components/CElements/CBreadcrumbs";
+import { breadCrumbsItems } from "./Logic";
+import { FindoutStatistics } from "./FindoutStatistics";
 
 // import { useHistory, useLocation } from "react-router-dom";
 
@@ -87,10 +90,16 @@ function Dashboard() {
 
   return (
     <>
-      <Header title={"Dashboard"} />
-      <div className="flex gap-6 px-6">
+      <Header >
+      <CBreadcrumbs items={breadCrumbsItems} />
+      </Header>
+      <div className="flex gap-6 px-5">
         <Passenger data={data?.data[1]} />
         <Drivers data={data?.data[0]} />
+      </div>
+
+      <div className="px-5 mt-5">
+        <FindoutStatistics />
       </div>
 
       <ContentTable

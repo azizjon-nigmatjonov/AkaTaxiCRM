@@ -3,14 +3,16 @@ import { useQuery } from "react-query"
 import { Header } from "../../../../components/UI/Header"
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs"
 import driverService from "../../../../services/drivers"
-import { useGetQueries } from '../../../../hooks/useGetQueries';
 import DriverInfo from "./Info"
 import StickerControl from "./StickerControl"
 import StickerHistory from "./StickerHistory"
+import { useParams } from "react-router-dom"
+import { useGetQueries } from "../../../../hooks/useGetQueries"
 
 
 const FotoControlUser = () => {
-    const { id, action } = useGetQueries()
+    const { action } = useGetQueries()
+    const { id } = useParams();
 
     const { data: fotoControl, refetch } = useQuery(['GET_FOTOCONTROL_USER', id], () => {
         return driverService.getFotoControlUser(id)

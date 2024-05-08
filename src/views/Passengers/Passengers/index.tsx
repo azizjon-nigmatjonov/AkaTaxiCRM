@@ -107,9 +107,9 @@ const Passengers = () => {
         title: "triplar",
         id: "bookings_count",
       },
-      {
-        title: "Keshbek (so'm)",
-      },
+      // {
+      //   title: "Keshbek (so'm)",
+      // },
       {
         title: "Tug‘ilgan sana",
         id: "birthday",
@@ -153,7 +153,7 @@ const Passengers = () => {
       navigateQuery({ id: el.id });
     }
     if (status === "view") {
-      navigateTo(`/passengers/passenger/${el.id}`);
+      navigateTo(`/passengers/passenger-list/${el.id}`);
       // navigateQuery({ passengers: el.id });
     }
   };

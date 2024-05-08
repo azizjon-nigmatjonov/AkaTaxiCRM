@@ -118,7 +118,7 @@ const FotoControl = () => {
   }, [fotoControl]);
 
   const handlerActions = useCallback((element: any) => {
-    navigateTo(`/drivers/fotocontroluser?id=${element.id}`);
+    navigateTo(`/drivers/fotocontroluser/${element.id}`);
   }, []);
 
   const handleSearch = (evt: string) => {

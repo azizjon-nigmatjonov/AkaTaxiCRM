@@ -179,17 +179,17 @@ body {
     rgba(255, 195, 162, 0.3) 0%,
     rgba(255, 91, 1, 0) 100%
   );
-  & {
-    position: relative;
-  }
-  &::after {
-    content: '';
-    width: 2px;
-    height: 100%;
-    background-color: #ff5b01;
-    position: absolute;
-    left: 0;
-  }
+}
+.menus .active {
+  position: relative;
+}
+.menus .active::after {
+  content: '';
+  width: 2px;
+  height: 100%;
+  background-color: #ff5b01;
+  position: absolute;
+  left: 0;
 }
 
 .panel {
@@ -242,8 +242,8 @@ body {
   height: 5px;
   border-radius: 50%;
   background-color: #ddd;
-  left: -9.6px;
-  top: 18px;
+  left: -16px;
+  top: 14px;
   z-index: 1;
 }
 
@@ -251,8 +251,8 @@ body {
   width: 1px;
   height: 100%;
   background-color: #ddd;
-  left: -7px;
-  top: -18px;
+  left: -13.5px;
+  top: -22px;
   bottom: calc(100% - 8px);
   transform: translateX(-50%);
 }

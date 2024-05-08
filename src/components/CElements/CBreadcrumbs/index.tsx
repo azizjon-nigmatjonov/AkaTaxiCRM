@@ -40,7 +40,7 @@ const CBreadcrumbs = ({
   };
 
   return (
-    <div className="flex items-center justify-between  w-full">
+    <div className="flex items-center justify-between w-full z-[99] relative">
       <div className="CBreadcrumbs-wrapper">
         {navigateLink && <BackButton link={navigateLink} />}
         <Breadcrumbs

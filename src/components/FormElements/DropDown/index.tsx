@@ -30,7 +30,7 @@ const DropDown = ({ label, name, placeholder, defaultValue, position='380' }: Pr
     return (
         <div className='HFInput z-20 relative'>
             <CLabel title={label} />
-            <div className="" >
+            <div className="relative bg-white">
                 <TextField
                     size="small"
                     name={name}

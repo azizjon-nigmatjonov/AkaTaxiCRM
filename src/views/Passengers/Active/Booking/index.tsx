@@ -18,7 +18,7 @@ const Booking = () => {
     const [features, setFeatures] = useState({})
     const [getPrice, setGetPrice] = useState<any>({});
     const dispatch = useDispatch()
-    const { progmatic } = usePageRouter();
+    const { progmatic, navigateTo } = usePageRouter();
 
     const { control, getValues  } = useForm({
         mode: 'onSubmit'
@@ -136,7 +136,7 @@ const Booking = () => {
 
                         <div className={`flex  justify-end py-4`}>
                             <div className="flex gap-4 ">
-                                <CancelButton text='Bekor qilish' />
+                                <CancelButton text='Bekor qilish' onClick={() => navigateTo('/passengers/active_passengers')} />
                                 <AddButton onClick={formsubmit} iconLeft={false} text='Haydovchi qidirish' />
                             </div>
                         </div>

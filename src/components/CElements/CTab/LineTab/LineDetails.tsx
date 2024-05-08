@@ -76,7 +76,6 @@ export default function LTab({
       color: `${ColorConstants.main} !important`,
     },
     "& .MuiTabs-indicator": {
-      // borderRadius: "10px",
       backgroundColor: 'transparent',
       borderBottom: `2px solid ${ColorConstants.main}`,
       color: 'black',

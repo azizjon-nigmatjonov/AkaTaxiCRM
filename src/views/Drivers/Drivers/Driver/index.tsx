@@ -9,6 +9,7 @@ import DriverInfo from "./Info";
 import { useMemo } from "react";
 import { Header } from "../../../../components/UI/Header";
 import usePageRouter from "../../../../hooks/useObjectRouter";
+import { useParams } from "react-router-dom";
 import { PostBallance } from "./Logic";
 
 const tabList = [
@@ -27,7 +28,8 @@ const tabList = [
 ];
 
 const Driver = () => {
-  const { tab, id } = useGetQueries();
+  const { tab} = useGetQueries();
+  const { id } = useParams();
   const { getQueries } = usePageRouter()
   const {BalanceFeatures}= PostBallance()
   const query = getQueries()

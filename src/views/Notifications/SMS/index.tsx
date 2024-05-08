@@ -46,6 +46,9 @@ const SMSNotification = () => {
       },
       {
         title: 'Sana'
+      },
+      {
+        title: 'Status'
       }
     ]
   }, [])

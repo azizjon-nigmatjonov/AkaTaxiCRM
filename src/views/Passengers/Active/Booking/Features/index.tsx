@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import SwitchBtn from '../../../../../components/UI/Buttons/Switch';
 import cls from '../style.module.scss';
-import { StandarCarImgIcon, ConfortCarImgIcon, BusnissCarImgIcon, CheckLine } from '../../../../../components/UI/IconGenerator/Svg/index';
+import { StandarCarImgIcon, ConfortCarImgIcon, BusnissCarImgIcon, CheckLine, ByWayCarImage } from '../../../../../components/UI/IconGenerator/Svg/index';
 
 
 
@@ -39,9 +39,11 @@ const Features = ({ featureHandle = () => { }, price }: { featureHandle: (val: a
 
 
     const CARCLASS = [
+        { id: 0, name: 'Yo’l-yo’lakay', price: price.business ?? 0, Images: ByWayCarImage },
         { id: 1, name: 'Standart', price: price.standard ?? 0, Images: StandarCarImgIcon },
         { id: 2, name: 'Komfort', price: price.comfort ?? 0, Images: ConfortCarImgIcon },
         { id: 3, name: 'Business', price: price.business ?? 0, Images: BusnissCarImgIcon },
+     
     ]
 
 

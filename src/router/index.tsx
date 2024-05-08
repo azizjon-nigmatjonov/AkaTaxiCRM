@@ -7,10 +7,6 @@ import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../views/Auth/Login";
 import Registration from "../views/Auth/Registration";
-import Passengers from "../views/Passengers/Passengers";
-import ActivePassengers from "../views/Passengers/Active";
-import Statistics from "../views/Passengers/Statistics";
-import Drivers from "../views/Drivers/Drivers";
 import ActiveDrivers from "../views/Drivers/Actives";
 import Vehicles from "../views/Drivers/Vehicles";
 import RegionRoute from "../views/Drivers/RegionRoute";
@@ -28,10 +24,6 @@ import Partner from "../views/Partners/Partner";
 import { SmsCreateForm } from "../views/Settings/SMS/Form";
 import AddDriver from "../views/Drivers/Drivers/AddDriver";
 import Map from "../views/Drivers/Map";
-import Dashboard from "../views/Dashboard";
-
-import Booking from "../views/Passengers/Active/Booking";
-import FotoControl from "../views/Drivers/FotoControl";
 import Notification from "../views/Notifications/Notification";
 import SMSNotification from "../views/Notifications/SMS";
 import NewsNotification from "../views/Notifications/News";
@@ -39,13 +31,8 @@ import AddNotification from "../views/Notifications/Notification/AddNotification
 import AddNews from "../views/Notifications/News/Addnew";
 import { RollForm } from "../views/Admins/Rolls/Form";
 import CallCenter from "../views/CallCenter";
-
-const Passanger = lazy(
-  () => import("../views/Passengers/Passengers/Passanger")
-);
-const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
+import { routeList } from "./List";
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
-const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"));
 const AddSMS = lazy(() => import("../views/Notifications/SMS/AddSMS"));
 const NewRolls = lazy(() => import("../views/Admins/Rolls/AddRolls"));
 
@@ -140,95 +127,18 @@ const Router = () => {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/passengers/main" />} />
 
-          <Route
-            path={getPath({
-              parent: "dashboard",
-              link: "dashboard",
-              sidebar: true,
-              title: "Dashboard",
-              icon: "Dashboard",
-            })}
-            element={<Dashboard />}
-          />
-
-          <Route
-            path={getPath({
-              parent: "passengers",
-              link: "main",
-              sidebar: true,
-              title: "Ro'yxat",
-              icon: "list",
-            })}
-            element={<Passengers />}
-          />
-
-          <Route
-            path={getPath({
-              parent: "passengers",
-              link: "passenger/:id",
-              // childlink: 'single',
-              sidebar: false,
-              title: "",
-              icon: "",
-            })}
-            element={<Passanger />}
-          />
-
-          <Route
-            path={getPath({
-              parent: "passengers",
-              link: "active_passengers",
-              sidebar: true,
-              title: "Aktiv yo‘lovchilar",
-              icon: "admin",
-            })}
-            element={<ActivePassengers />}
-          />
-
-          <Route
-            path={getPath({
-              parent: "passengers",
-              link: "booking",
-              sidebar: false,
-              title: "Passengers booking",
-              icon: "",
-            })}
-            element={<Booking />}
-          />
-
-          <Route
-            path={getPath({
-              parent: "passengers",
-              link: "statistics",
-              sidebar: true,
-              title: "Statistika: yo‘lovchi",
-              icon: "statistics",
-            })}
-            element={<Statistics />}
-          />
-
-          <Route
-            path={getPath({
-              parent: "drivers",
-              link: "main",
-              sidebar: true,
-              title: "Haydovchilar",
-              icon: "driving",
-            })}
-            element={<Drivers />}
-          />
-
-          <Route
-            path={getPath({
-              parent: "drivers",
-              link: "main",
-              childlink: "driver",
-              sidebar: false,
-              title: "",
-              icon: "",
-            })}
-            element={<Driver />}
-          />
+          {routeList?.map((route) => (
+            <Route
+              path={getPath({
+                parent: route.parent,
+                link: route.link,
+                sidebar: route.sidebar,
+                title: route.title,
+                icon: route.icon,
+              })}
+              element={route.element}
+            />
+          ))}
 
           <Route
             path={getPath({
@@ -247,7 +157,7 @@ const Router = () => {
               parent: "drivers",
               link: "active",
               sidebar: true,
-              title: "Aktiv haydovchilar",
+              title: "Aktiv",
               icon: "smart_car",
             })}
             element={<ActiveDrivers />}
@@ -272,28 +182,6 @@ const Router = () => {
               icon: "car",
             })}
             element={<Vehicles />}
-          />
-
-          <Route
-            path={getPath({
-              parent: "drivers",
-              link: "fotocontrolusers",
-              sidebar: true,
-              title: "Foto nazorat",
-              icon: "FotoControl",
-            })}
-            element={<FotoControl />}
-          />
-
-          <Route
-            path={getPath({
-              parent: "drivers",
-              link: "fotocontroluser",
-              sidebar: false,
-              title: "Foto nazorat",
-              icon: "",
-            })}
-            element={<FotoControlUser />}
           />
 
           <Route

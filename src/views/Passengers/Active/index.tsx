@@ -211,7 +211,7 @@ const ActivePassengers = () => {
           <div className="flex items-center gap-[14px]">
             <AddButton
               text="Buyurtma berish"
-              onClick={() => navigateTo("/passengers/booking")}
+              onClick={() => navigateTo("/passengers/active-passengers/booking")}
             />
           </div>
         </SectionHeader>
