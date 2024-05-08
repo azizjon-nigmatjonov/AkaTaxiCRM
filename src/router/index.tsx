@@ -7,10 +7,6 @@ import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../views/Auth/Login";
 import Registration from "../views/Auth/Registration";
-import Passengers from "../views/Passengers/Passengers";
-import ActivePassengers from "../views/Passengers/Active";
-import Statistics from "../views/Passengers/Statistics";
-import Drivers from "../views/Drivers/Drivers";
 import ActiveDrivers from "../views/Drivers/Actives";
 import Vehicles from "../views/Drivers/Vehicles";
 import RegionRoute from "../views/Drivers/RegionRoute";
@@ -28,9 +24,6 @@ import Partner from "../views/Partners/Partner";
 import { SmsCreateForm } from "../views/Settings/SMS/Form";
 import AddDriver from "../views/Drivers/Drivers/AddDriver";
 import Map from "../views/Drivers/Map";
-import Dashboard from "../views/Dashboard";
-
-import Booking from "../views/Passengers/Active/Booking";
 import FotoControl from "../views/Drivers/FotoControl";
 import Notification from "../views/Notifications/Notification";
 import SMSNotification from "../views/Notifications/SMS";
@@ -41,10 +34,10 @@ import { RollForm } from "../views/Admins/Rolls/Form";
 import CallCenter from "../views/CallCenter";
 import { routeList } from "./List";
 
-const Passanger = lazy(
-  () => import("../views/Passengers/Passengers/Passanger")
-);
-const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
+// const Passanger = lazy(
+//   () => import("../views/Passengers/Passengers/Passanger")
+// );
+// const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
 const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"));
 const AddSMS = lazy(() => import("../views/Notifications/SMS/AddSMS"));

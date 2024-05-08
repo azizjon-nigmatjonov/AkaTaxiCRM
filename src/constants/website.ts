@@ -1,7 +1,7 @@
 export const ColorConstants = {
   blue: "#0062FF",
 
-  mainLight: "#FF5B01",
+
   black: "#151515",
   lineGray: "#E2E2EA",
   lightGray: "#F1F1F5",
@@ -25,6 +25,7 @@ export const ColorConstants = {
 
   main: "#DD431F",
   main50: "#FFEFE6",
+  main500: "#FF5B01",
   green: "#0BD976",
   green50: "#ECFDF3",
   brown10: "#FFDECC",

@@ -11,8 +11,8 @@ const options = [
 
 const ListItem = ({ classes }: { classes?: string }) => {
   return (
-    <li className={`border-t py-16px ${classes}`}>
-      <div className="flex justify-between">
+    <li className={`border-t py-16px px-24px ${classes}`}>
+      <div className="flex justify-between items-center">
         <span>Operator 1</span>
         <div className="flex items-center space-x-1">
           <div className="bg-[var(--primary50)] flex items-center space-x-1 p-6px rounded-full">
@@ -35,11 +35,11 @@ const ListItem = ({ classes }: { classes?: string }) => {
 
 export const CallCenterStatistics = () => {
   return (
-    <div className="p-[24px] border border-[var(--gray20)] rounded-[12px] bg-white card-shadow">
-      <div className="flex items-center justify-between mb-24px">
+    <div className="border border-[var(--gray20)] rounded-[12px] bg-white card-shadow">
+      <div className="flex items-center justify-between mb-24px p-24px">
         <div>
           <h2 className="text-[18px] font-[600] mb-2px">Statistika</h2>
-          <p>Operatorlarning mijoslar bilan qilgan suhbatlari</p>
+          <p className="text-[var(--gray60)]">Operatorlarning mijoslar bilan qilgan suhbatlari</p>
         </div>
         <div className="w-[200px]">
           <CSelect handlerValue={() => {}} options={options} id="filter" />

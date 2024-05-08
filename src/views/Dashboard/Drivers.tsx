@@ -43,7 +43,7 @@ function Drivers({ data }: DriversProps) {
 
 
     return (
-        <div className={`max-w-[50%] p-6 w-full rounded-[12px] bg-white shadow-sm`
+        <div className={`max-w-[50%] p-6 w-full rounded-[12px] bg-white border border-[var(--gray20)] card-shadow`
         }>
             <h3 className="text-[#101828] font-semibold">{data?.name}</h3>
             <div className="flex gap-[49px]">
