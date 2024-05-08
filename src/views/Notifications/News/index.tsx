@@ -39,7 +39,7 @@ const NewsNotification = () => {
       </Header>
       <div className="px-6 flex justify-end">
         <div>
-          <AddButton text='Yangi bildirishnoma' onClick={()=> navigate('/notifications/news_notification/add_news')} />
+          <AddButton text='Yangi bildirishnoma' onClick={()=> navigate('/notifications/new_notification/add_news')} />
         </div>
 
       </div>

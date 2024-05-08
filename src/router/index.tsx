@@ -109,37 +109,7 @@ const Router = () => {
             />
           ))}
 
-          <Route
-            path={getPath({
-              parent: "partners",
-              link: "list",
-              sidebar: true,
-              title: "partners",
-              icon: "partners",
-            })}
-            element={<Partners />}
-          />
-          <Route
-            path={getPath({
-              parent: "partners",
-              link: "partner",
-              sidebar: false,
-              title: "",
-              icon: "",
-            })}
-            element={<Partner />}
-          />
-
-          <Route
-            path={getPath({
-              title: "Call markazi",
-              parent: "call_center",
-              link: "call_center",
-              sidebar: true,
-              icon: "headPhones",
-            })}
-            element={<CallCenter />}
-          />
+   
         </Route>
 
         <Route path="*" element={<Navigate to="/" />} />

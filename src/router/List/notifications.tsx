@@ -48,8 +48,7 @@ export const notificationsList = [
     },
     {
         parent: "notifications",
-        link: "news_notification",
-        childlink: "add_news",
+        link: "new_notification/add_news",
         sidebar: false,
         title: "Yangiliklar",
         icon: "news_notification",
