@@ -31,7 +31,6 @@ const StickerControl = ({ data }: { data?: any }) => {
 
             <Modal open={!!query?.action}>
                 <CCard style={{ minHeight: 0 }} classes='max-w-[400px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]'>
-
                     {query.action == 'ignore' ? <Ignored /> : <Accepted date={data?.created_at} />}
                 </CCard>
             </Modal>

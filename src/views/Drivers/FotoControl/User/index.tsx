@@ -14,7 +14,7 @@ const FotoControlUser = () => {
     const { action } = useGetQueries()
     const { id } = useParams();
 
-    const { data: fotoControl, refetch } = useQuery(['GET_FOTOCONTROL_USER', id], () => {
+    const { data: fotoControl } = useQuery(['GET_FOTOCONTROL_USER', id], () => {
         return driverService.getFotoControlUser(id)
     }, {enabled: !!action})
     

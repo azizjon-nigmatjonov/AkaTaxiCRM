@@ -34,9 +34,9 @@ const Accepted = ({ date }: { date?: string }) => {
                 title: "Sizning so'rovingiz qabul qilindi!"
             }))
 
-            // setTimeout(() => {
-            //     window.location.reload()
-            // }, 2000)
+            setTimeout(() => {
+                window.location.reload()
+            }, 2000)
         })
 
     }

@@ -2,7 +2,15 @@ import { lazy } from "react";
 import Driver from "../../views/Drivers/Drivers/Driver";
 import Drivers from "../../views/Drivers/Drivers";
 import FotoControl from "../../views/Drivers/FotoControl";
+import ActiveDrivers from "../../views/Drivers/Actives";
+import Vehicles from "../../views/Drivers/Vehicles";
+import Map from "../../views/Drivers/Map";
+import RegionRoute from "../../views/Drivers/RegionRoute";
+import DriverStatistics from "../../views/Drivers/Statistics";
+const AddDriver = lazy(() => import("../../views/Drivers/Drivers/AddDriver"));
 const FotoControlUser = lazy(() => import("../../views/Drivers/FotoControl/User"));
+const SingleCar = lazy(() => import('../../views/Drivers/Vehicles/Car'))
+
 
 export const driverList = [
   {
@@ -44,5 +52,62 @@ export const driverList = [
     title: "Foto nazorat",
     icon: "",
     element: <FotoControlUser />
-  }
+  },
+  {
+    parent: 'drivers',
+    link: 'main/add',
+    sidebar: false,
+    title: '',
+    icon: '',
+    element: <AddDriver />
+  },
+  {
+    parent: 'drivers',
+    link: 'active',
+    sidebar: true,
+    title: 'Aktiv',
+    icon: 'smart_car',
+    element: <ActiveDrivers />
+  },
+  {
+    parent: 'drivers',
+    link: 'cars/:id',
+    sidebar: false,
+    icon: '',
+    title: '',
+    element: <SingleCar />
+  },
+  {
+    parent: 'drivers',
+    link: 'cars',
+    sidebar: true,
+    icon: 'car',
+    title: 'Mashinalar',
+    element: <Vehicles />
+  },
+  {
+    parent: 'drivers',
+    link: 'maps',
+    sidebar: true,
+    title: 'Map',
+    icon: 'map',
+    element: <Map />
+  },
+  {
+    parent: 'drivers',
+    link: 'route',
+    sidebar: true,
+    title: 'Viloyat qatnovi',
+    icon: 'routing',
+    element: <RegionRoute />
+  },
+  {
+    parent: 'drivers',
+    link:'statisctics',
+    sidebar: true,
+    title: 'Statistika: haydovchi',
+    icon: 'graph',
+    element: <DriverStatistics/>
+  },
+ 
 ];

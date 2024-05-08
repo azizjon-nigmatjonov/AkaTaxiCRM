@@ -140,6 +140,7 @@ const Partners = () => {
           headColumns={headColumns}
           bodyColumns={partnersInfo?.list}
           count={partnersInfo?.meta?.pageCount}
+          totalCount={partnersInfo?.meta?.totalCount ?? 0}
           handleActions={handleActions}
           isLoading={isLoading}
           currentPage={currentPage}
