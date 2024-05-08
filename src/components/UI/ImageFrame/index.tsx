@@ -12,7 +12,7 @@ const ImageFrame = ({
     <div className=" relative">
       <div className={` flex items-center justify-center`}>
         {image ? (
-          <div>
+          <div className="w-[40px] h-[40px]">
             <img
               className="rounded-full block object-cover w-[40px] h-[40px]"
               src={image}
