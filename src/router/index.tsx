@@ -125,7 +125,7 @@ const Router = () => {
     <Suspense fallback={"Loading..."}>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Navigate to="/passengers/main" />} />
+          <Route index element={<Navigate to="/passengers/passenger-list" />} />
 
           {routeList?.map((route) => (
             <Route
@@ -416,7 +416,7 @@ const Router = () => {
             element={<AddNews />}
           /> */}
 
-          <Route
+          {/* <Route
             path={getPath({
               parent: "partners",
               link: "list",
@@ -425,8 +425,9 @@ const Router = () => {
               icon: "partners",
             })}
             element={<Partners />}
-          />
-          <Route
+          /> */}
+
+          {/* <Route
             path={getPath({
               parent: "partners",
               link: "partner",
@@ -435,9 +436,9 @@ const Router = () => {
               icon: "",
             })}
             element={<Partner />}
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path={getPath({
               title: "Call markazi",
               parent: "call_center",
@@ -446,7 +447,7 @@ const Router = () => {
               icon: "headPhones",
             })}
             element={<CallCenter />}
-          />
+          /> */}
         </Route>
 
         <Route path="*" element={<Navigate to="/" />} />
