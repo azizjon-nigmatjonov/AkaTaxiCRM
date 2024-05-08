@@ -11,7 +11,8 @@ interface Props {
   title?: string;
   textSaveBtn?: string;
   textDeleteBtn?: string;
-  minWidth?: string;
+  minWidth?: string | number;
+  maxWidth?: string | number;
   minHeight?: string;
   padding?: string;
   children?: ReactNode;
@@ -28,6 +29,7 @@ const CModal: FC<Props> = ({
   textSaveBtn = "confirm",
   textDeleteBtn = "",
   minWidth = "350px",
+  maxWidth = 700,
   minHeight = "",
   padding = "20px",
   children,
@@ -59,7 +61,7 @@ const CModal: FC<Props> = ({
               </IconButton>
             </div>
 
-            <div className={cls.body} style={{ minHeight, minWidth }}>
+            <div className={cls.body} style={{ minHeight, minWidth, maxWidth }}>
               {children}
             </div>
 

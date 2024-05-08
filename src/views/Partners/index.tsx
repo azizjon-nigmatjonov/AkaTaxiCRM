@@ -86,7 +86,8 @@ const Partners = () => {
     ];
   }, []);
 
-  const handleActions = useCallback((status: string, element: any) => {
+  const handleActions = useCallback((element: any, status: string) => {
+    
     if (status === "view") {
       navigateTo(`/partners/partner?id=${element.id}`);
     }

@@ -10,7 +10,6 @@ interface Props {
 }
 
 const Classes = ({
-  classIds,
   clas,
   classes = [],
   setValue = () => {},
@@ -35,7 +34,7 @@ const Classes = ({
     setValue("ids", ids);
   }, [classes, clas, setValue]);
 
-  const handleCheck = (name: string, check: boolean, group: string) => {
+  const handleCheck = (name: string, check: boolean,) => {
     const a: any = groupA.map((i: any) => {
       if (i.name === name) i.checked = check;
       return {

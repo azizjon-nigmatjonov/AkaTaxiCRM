@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/UI/Sections/Header";
 import FilterButton from "../../../components/UI/Filters";
@@ -7,7 +7,6 @@ import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { Header } from "../../../components/UI/Header";
-import carService from "../../../services/cars";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import PassengerList from "./PassengerList";
 import LTabs from "../../../components/CElements/CTab/LineTab";

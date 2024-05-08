@@ -114,7 +114,8 @@ const Form = ({ refetch }: Props) => {
         reset();
       }}
       footerActive={false}
-      // textDeleteBtn="cancel"
+      minWidth={360}
+      maxWidth={360}
     >
       <form onSubmit={handleSubmit(onSubmit)} className="grid space-y-4">
         <HFTextField
