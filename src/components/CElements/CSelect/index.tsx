@@ -27,7 +27,7 @@ const CSelect = ({
   };
 
   return (
-    <>
+    <div className="flex flex-col">
       {label && <CLabel title={label} />}
       <div
         id={`cselect-${id}`}
@@ -50,7 +50,7 @@ const CSelect = ({
           ))}
         </Select>
       </div>
-    </>
+    </div>
   );
 };
 

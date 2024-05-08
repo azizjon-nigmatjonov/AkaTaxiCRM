@@ -29,7 +29,7 @@ const DropDown = ({ label, name, placeholder, defaultValue }: Props) => {
     return (
         <div className='HFInput z-20'>
             <CLabel title={label} />
-            <div className="relative" >
+            <div className="relative bg-white">
                 <TextField
                     size="small"
                     name={name}

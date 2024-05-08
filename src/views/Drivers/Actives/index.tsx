@@ -7,17 +7,15 @@ import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { Header } from "../../../components/UI/Header";
-import CSelect from "../../../components/CElements/CSelect";
 import { useSelector } from "react-redux";
-import CDriver from "../../../components/CElements/CDivider";
 import carService from "../../../services/cars";
-import { useSearchParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 
 import PassengerList from "./PassengerList";
 import LTabs from "../../../components/CElements/CTab/LineTab";
 import { ActiveDriversTable } from "./Logic";
+import Filters from "../../../components/UI/Filter";
+import CSelect from "../../../components/CElements/CSelect";
 
 const tabList = [
   { slug: "", name: "Aktiv" },
@@ -28,9 +26,8 @@ const tabList = [
 
 const ActiveDrivers = () => {
   const [passenger, setPassenger] = useState([]);
-  const { t } = useTranslation();
-  const { navigateQuery } = usePageRouter();
-  const setSearchParams = useSearchParams()[1];
+  const { navigateQuery, getQueries } = usePageRouter();
+  const { filter } = getQueries();
   const {
     currentPage,
     q,
@@ -74,7 +71,7 @@ const ActiveDrivers = () => {
   const driversData: any = useMemo(() => {
     if (!drivers) return [];
     const list: any = drivers?.data;
-    
+
     return {
       list: list.map((item: any) => {
         return {
@@ -157,9 +154,8 @@ const ActiveDrivers = () => {
       </Header>
       <div className="px-5">
         <SectionHeader handleSearch={handleSearch}>
-          <div className="flex items-center gap-3">
-            <FilterButton text="filter">
-              <div>
+          <FilterButton text="filter">
+            {/* <div>
                 <CSelect
                   handlerValue={handleRegion}
                   options={Regions}
@@ -196,10 +192,35 @@ const ActiveDrivers = () => {
                 className="text-[var(--main)]  text-end block cursor-pointer "
               >
                 {t("ignore_text")}
-              </span>
-            </FilterButton>
-          </div>
+              </span> */}
+          </FilterButton>
         </SectionHeader>
+        <Filters filter={!!filter}>
+          <div className="grid grid-cols-4">
+            <CSelect
+              handlerValue={handleRegion}
+              options={Regions}
+              id="filter"
+              label="Viloyat"
+            />
+            <CSelect
+              handlerValue={handleGender}
+              options={[
+                { value: "barchasi", label: "Barchasi" },
+                { value: "m", label: "Male" },
+                { value: "f", label: "Female" },
+              ]}
+              id="filter"
+              label="Jins"
+            />
+            <CSelect
+              handlerValue={handleCarModel}
+              options={carModalData.list}
+              id="filter"
+              label="Model"
+            />
+          </div>
+        </Filters>
 
         <LTabs tabList={tabList} />
 
