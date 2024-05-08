@@ -63,7 +63,7 @@ const Vehicles = () => {
   const handleSearch = (value: any) => {
     navigateQuery({ q: value });
   };
-  
+
   return (
     <>
       <Header sticky={true}>
@@ -91,7 +91,7 @@ const Vehicles = () => {
             loading={loading}
           />
         ) : (
-          ""
+          ''
         )}
 
         {query?.id && (

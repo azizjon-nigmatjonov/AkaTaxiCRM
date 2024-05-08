@@ -222,6 +222,7 @@ const Drivers = () => {
           headColumns={headColumns}
           bodyColumns={bodyColumns ?? []}
           count={drivers?.meta?.pageCount}
+          totalCount={drivers?.meta?.totalCount}
           handleActions={handleActions}
           isLoading={isLoading}
           currentPage={currentPage}

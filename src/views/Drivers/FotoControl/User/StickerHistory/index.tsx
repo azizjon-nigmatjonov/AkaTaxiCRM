@@ -51,11 +51,13 @@ const StickerHistory = ({ data }: { data?: any }) => {
             }
         })
     }, [data])
+    // console.log(bodyColumns);
+    
 
     return (
         <>
             <p className="text-lg font-semibold">Nakleykalar tarixi</p>
-            <CTable headColumns={headColumns} bodyColumns={bodyColumns} />
+            <CTable headColumns={headColumns} bodyColumns={bodyColumns} totalCount={bodyColumns.length} />
         </>
     )
 }

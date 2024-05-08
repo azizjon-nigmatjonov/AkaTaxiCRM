@@ -1,5 +1,6 @@
 import { ResponsiveLine } from '@nivo/line'
 import { LineChartBackground } from '../../../../../components/UI/IconGenerator/Svg'
+import LineChartTooltip from './LineChartTooltip'
 
 const LineChart = ({ data }: { data: any }) => {
   return (
@@ -20,6 +21,7 @@ const LineChart = ({ data }: { data: any }) => {
         }}
         yFormat=" >-.2f"
         axisTop={null}
+        tooltip={( {point} ) => <LineChartTooltip data={point}/>}
         axisRight={null}
         axisBottom={{
           tickSize: 5,

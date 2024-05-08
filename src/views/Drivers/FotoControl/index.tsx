@@ -140,6 +140,7 @@ const FotoControl = () => {
           headColumns={headColumns}
           bodyColumns={bodyColumns?.list}
           count={bodyColumns?.meta?.pageCount}
+          totalCount={bodyColumns?.meta?.totalCount}
           handleActions={handlerActions}
           clickable={true}
           isLoading={isLoading}

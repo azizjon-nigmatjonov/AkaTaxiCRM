@@ -10,11 +10,12 @@ import StickerHistory from "./StickerHistory"
 
 
 const FotoControlUser = () => {
-    const { id } = useGetQueries()
+    const { id, action } = useGetQueries()
 
-    const { data: fotoControl } = useQuery(['GET_FOTOCONTROL_USER', id], () => {
+    const { data: fotoControl, refetch } = useQuery(['GET_FOTOCONTROL_USER', id], () => {
         return driverService.getFotoControlUser(id)
-    })
+    }, {enabled: !!action})
+    
 
     const breadCrubmsItems = useMemo(() => {
         return [
@@ -30,9 +31,7 @@ const FotoControlUser = () => {
         ]
     }, [fotoControl])
 
-
-
-
+    
     return (
         <>
             <Header sticky={true}>

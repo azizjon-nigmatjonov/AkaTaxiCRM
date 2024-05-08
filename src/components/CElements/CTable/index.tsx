@@ -20,6 +20,7 @@ import { PopoverDelete } from "./Details/Actions/EditDelete/PopOver";
 
 interface Props {
   count?: number;
+  totalCount?:number;
   headColumns: any[];
   bodyColumns?: object[] | any;
   currentPage?: number;
@@ -37,6 +38,7 @@ interface Props {
 
 const CTable = ({
   count = 1,
+  totalCount,
   headColumns = [],
   bodyColumns = [],
   currentPage = 1,
@@ -262,6 +264,7 @@ const CTable = ({
     <div id="table">
       <CTableWrapper
         count={count}
+        totalCount={totalCount}
         currentLimit={currentLimit}
         loader={isLoading}
         height={tableHeight}

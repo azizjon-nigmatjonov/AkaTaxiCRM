@@ -12,6 +12,7 @@ interface Props {
   loader: boolean;
   height: any;
   count: number;
+  totalCount?:number;
   currentLimit: number;
   passRouter: boolean;
   limitCount: number[];
@@ -29,6 +30,7 @@ export const CTableWrapper = ({
   loader,
   height,
   count,
+  totalCount,
   currentLimit,
   passRouter,
   limitCount,
@@ -57,6 +59,7 @@ export const CTableWrapper = ({
           <Pagination
             currentPage={currentPage}
             count={count}
+            totalCount={totalCount}
             limit={currentLimit}
             limitCount={limitCount}
             passRouter={passRouter}

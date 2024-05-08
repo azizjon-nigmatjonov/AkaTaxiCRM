@@ -244,6 +244,7 @@ const Passengers = () => {
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns}
+          totalCount={passengers?.meta?.totalCount}
           count={passengers?.meta?.pageCount ?? 5}
           isLoading={isLoading}
           handleActions={handleActions}
