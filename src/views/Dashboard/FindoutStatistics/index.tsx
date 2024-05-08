@@ -26,7 +26,7 @@ export const FindoutStatistics = () => {
           <CSelect options={options} />
         </div>
       </div>
-      <CDriver />
+      <CDriver classes="mb-24px" />
 
       <StatisticsList />
     </WrapperCard>
