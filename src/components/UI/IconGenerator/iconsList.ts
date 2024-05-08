@@ -20,6 +20,7 @@ import {
   NewsIcon,
   ListIcon,
   HeadPhones,
+  AdminIcon,
 } from "./Svg/Sidebar";
 
 import { PassengerIcon, DriverIcon, PassengerVehicleIcon, DriverVehicleIcon, PartnersIcon } from "./Svg";
@@ -28,6 +29,10 @@ export const iconsList = [
   {
     name: "admins",
     component: AdminsIcon,
+  },
+  {
+    name: "admin",
+    component: AdminIcon,
   },
   {
     name: "driving",
