@@ -7,7 +7,7 @@ import Statistics from "../../views/Passengers/Statistics";
 export const passengerList = [
   {
     parent: "passengers",
-    link: "main",
+    link: "passenger-list",
     sidebar: true,
     title: "Ro'yxat",
     icon: "list",
@@ -15,8 +15,7 @@ export const passengerList = [
   },
   {
     parent: "passengers",
-    link: "passenger/:id",
-    // childlink: 'single',
+    link: "passenger-list/:id",
     sidebar: false,
     title: "",
     icon: "",
@@ -24,7 +23,7 @@ export const passengerList = [
   },
   {
     parent: "passengers",
-    link: "active_passengers",
+    link: "active-passengers",
     sidebar: true,
     title: "Aktiv yo‘lovchilar",
     icon: "admin",
@@ -32,7 +31,7 @@ export const passengerList = [
   },
   {
     parent: "passengers",
-    link: "booking",
+    link: "active-passengers/booking",
     sidebar: false,
     title: "Passengers booking",
     icon: "",

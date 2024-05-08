@@ -115,7 +115,7 @@ const Drivers = () => {
 
   const handleActions = useCallback((element: any, status: string) => {
     if (status === "view") {
-      navigateTo(`/drivers/main/driver?id=${element.id}`);
+      navigateTo(`/drivers/main/${element.id}`);
     }
 
     if (status === "edit") navigateQuery({ id: element.id });

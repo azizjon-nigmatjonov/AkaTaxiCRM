@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import SwitchBtn from "../../../../components/UI/Buttons/Switch";
-import { Divider } from "@mui/material";
 
 interface Props {
   classes: any;
@@ -10,79 +9,68 @@ interface Props {
   classIds?: number[];
 }
 
-const Classes = ({ classIds, clas, classes = [], setValue = () => { } }: Props) => {
+const Classes = ({
+  classIds,
+  clas,
+  classes = [],
+  setValue = () => {},
+}: Props) => {
   const [groupA, setGroupA] = useState([]);
-  const [groupB, setGroupB] = useState([]);
+  // const [groupB, setGroupB] = useState([]);
 
   useEffect(() => {
     if (!classes?.length) return;
-
-    const a = classes.slice(0, 3)?.map((i: any) => {
-
-      console.log(classIds?.includes(parseInt(i.slug)));
-
+    const a = classes?.map((i: any) => {
       return {
         ...i,
-        checked: classIds?.includes(parseInt(i.slug)),
+        checked: false,
       };
     });
 
-    const b = classes.slice(3);
-
     setGroupA(a);
-    setGroupB(b);
     const ids = a
-      .concat(b)
       .filter((item: any) => item.checked)
       .map((item: any) => item.slug);
 
     setValue("ids", ids);
-
-
   }, [classes, clas, setValue]);
 
   const handleCheck = (name: string, check: boolean, group: string) => {
-    console.log('check', check);
-    
-    if (group === "a") {
-      const b: any = groupB.map((i: any) => {
-        return {
-          ...i,
-          checked: false,
-        };
-      });
+    const a: any = groupA.map((i: any) => {
+      if (i.name === name) i.checked = check;
+      return {
+        ...i,
+      };
+    });
 
+    setGroupA(a);
 
-      const a: any = groupA.map((i: any) => {
-        if (i.name === name) i.checked = true;
-        return {
-          ...i,
-        };
-      });
-
-      setGroupA(a);
-      setGroupB(b);
-    } else {
-      const a: any = groupA.map((i: any) => {
-        return {
-          ...i,
-          checked: false,
-        };
-      });
-
-
-      const b: any = groupB.map((i: any) => {
-        if (i.name === name) i.checked = true;
-        return {
-          ...i,
-        };
-      });
-
-      setGroupA(a);
-      setGroupB(b);
-    }
+    // if (group === "a") {
+    //   // const b: any = groupB.map((i: any) => {
+    //   //   return {
+    //   //     ...i,
+    //   //     checked: false,
+    //   //   };
+    //   // });
+    //   // setGroupB(b);
+    // } else {
+    //   // const a: any = groupA.map((i: any) => {
+    //   //   return {
+    //   //     ...i,
+    //   //     checked: false,
+    //   //   };
+    //   // });
+    //   // const b: any = groupB.map((i: any) => {
+    //   //   if (i.name === name) i.checked = true;
+    //   //   return {
+    //   //     ...i,
+    //   //   };
+    //   // });
+    //   // setGroupA(a);
+    //   // setGroupB(b);
+    // }
     const ids = groupA
-      .concat(groupB)
+
       .filter((item: any) => item.checked)
       .map((item: any) => item.slug);
 
@@ -100,8 +88,8 @@ const Classes = ({ classIds, clas, classes = [], setValue = () => { } }: Props) 
           group="a"
         />
       ))}
-      <Divider />
-      {groupB?.map(
+      {/* <Divider /> */}
+      {/* {groupB?.map(
         (item: any) =>
           item.name !== "standart" && (
             <SwitchBtn
@@ -112,7 +100,7 @@ const Classes = ({ classIds, clas, classes = [], setValue = () => { } }: Props) 
               group="b"
             />
           )
-      )}
+      )} */}
     </>
   );
 };

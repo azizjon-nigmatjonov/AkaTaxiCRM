@@ -10,6 +10,7 @@ import { useMemo } from "react";
 import { Header } from "../../../../components/UI/Header";
 import AddButton from "../../../../components/UI/Buttons/AddButton";
 import usePageRouter from "../../../../hooks/useObjectRouter";
+import { useParams } from "react-router-dom";
 
 const tabList = [
   {
@@ -27,7 +28,8 @@ const tabList = [
 ];
 
 const Driver = () => {
-  const { tab, id } = useGetQueries();
+  const { tab} = useGetQueries();
+  const { id } = useParams();
   const { getQueries, navigateQuery } = usePageRouter()
   const query = getQueries()
 

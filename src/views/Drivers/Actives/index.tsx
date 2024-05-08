@@ -155,7 +155,7 @@ const ActiveDrivers = () => {
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} />
       </Header>
-      <div className="p-6">
+      <div className="px-5">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <FilterButton text="filter">
@@ -189,8 +189,7 @@ const ActiveDrivers = () => {
                   label="Model"
                 />
               </div>
-              {/* <CDriver classes="my-4" /> */}
-              {/* <CSlider handleValue={handleAge} label="Tug'ilgan yili" /> */}
+
               <CDriver classes="my-4" />
               <span
                 onClick={() => setSearchParams({})}

@@ -24,7 +24,6 @@ import Partner from "../views/Partners/Partner";
 import { SmsCreateForm } from "../views/Settings/SMS/Form";
 import AddDriver from "../views/Drivers/Drivers/AddDriver";
 import Map from "../views/Drivers/Map";
-import FotoControl from "../views/Drivers/FotoControl";
 import Notification from "../views/Notifications/Notification";
 import SMSNotification from "../views/Notifications/SMS";
 import NewsNotification from "../views/Notifications/News";
@@ -33,13 +32,7 @@ import AddNews from "../views/Notifications/News/Addnew";
 import { RollForm } from "../views/Admins/Rolls/Form";
 import CallCenter from "../views/CallCenter";
 import { routeList } from "./List";
-
-// const Passanger = lazy(
-//   () => import("../views/Passengers/Passengers/Passanger")
-// );
-// const Driver = lazy(() => import("../views/Drivers/Drivers/Driver"));
 const SingleCar = lazy(() => import("../views/Drivers/Vehicles/Car"));
-const FotoControlUser = lazy(() => import("../views/Drivers/FotoControl/User"));
 const AddSMS = lazy(() => import("../views/Notifications/SMS/AddSMS"));
 const NewRolls = lazy(() => import("../views/Admins/Rolls/AddRolls"));
 
@@ -164,7 +157,7 @@ const Router = () => {
               parent: "drivers",
               link: "active",
               sidebar: true,
-              title: "Aktiv haydovchilar",
+              title: "Aktiv",
               icon: "smart_car",
             })}
             element={<ActiveDrivers />}
@@ -189,28 +182,6 @@ const Router = () => {
               icon: "car",
             })}
             element={<Vehicles />}
-          />
-
-          <Route
-            path={getPath({
-              parent: "drivers",
-              link: "fotocontrolusers",
-              sidebar: true,
-              title: "Foto nazorat",
-              icon: "FotoControl",
-            })}
-            element={<FotoControl />}
-          />
-
-          <Route
-            path={getPath({
-              parent: "drivers",
-              link: "fotocontroluser",
-              sidebar: false,
-              title: "Foto nazorat",
-              icon: "",
-            })}
-            element={<FotoControlUser />}
           />
 
           <Route

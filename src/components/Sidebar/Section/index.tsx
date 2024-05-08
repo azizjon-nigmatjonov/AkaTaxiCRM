@@ -67,7 +67,6 @@ const SidebarSection = () => {
                   {Object.values(value as keyof typeof value)?.map(
                     (el: any, i, arr) => {
                       const isLastItem = i === arr.length - 1;
-                      // console.log(el.path);
 
                       if (el.title && el.title.trim() !== "") {
                         return (
@@ -113,16 +112,12 @@ const SidebarSection = () => {
                   to={visibleSidebarItems[0].path}
                   className={`menu_link3 mt-2 mb-2 py-[10px] flex items-center gap-3 capitalize`}
                 >
-                  {/* {(console.log(location.pathname))} */}
                   <IconGenerator icon={visibleSidebarItems[0].icon} /> {t(key)}
                 </NavLink>
                 <div className="accordion-line"></div>
               </div>
             );
           })}
-          {/* <div className="mt-5">
-          <NavLink to="/views/Drivers/Map">map</NavLink>
-          </div> */}
         </div>
 
         <div>
