@@ -65,7 +65,11 @@ export const ActiveDriversTable = ({
       },
       {
         title: "Takliflar",
-        id: "as",
+        id: "bids",
+        render: (arr: any) => {
+          console.log(arr);
+          
+        }
       },
       {
         id: "places",
