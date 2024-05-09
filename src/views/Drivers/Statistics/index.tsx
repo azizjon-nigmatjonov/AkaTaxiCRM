@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import CCard from "../../../components/CElements/CCard";
-import { ArrowUp, ArrowDown } from '../../../components/UI/IconGenerator/Svg'
 import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
 import { Skeleton } from "@mui/material";
@@ -12,6 +11,7 @@ import StatisticsHeader from "./Header";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import RangeDate from "../../../components/UI/RangeDate";
 import { BiCaretDown, BiX } from "react-icons/bi";
+import { StatisticsCard } from "./Cards";
 
 const DriverStatistics = () => {
   const { year, month, week, start, end } = useGetQueries();
@@ -57,14 +57,13 @@ const DriverStatistics = () => {
     ]
   }, [])
 
-
-
+  
   return (
     <>
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} type="link" />
       </Header>
-      <div className="sticky top-20 z-[12] py-[24px] pl-[12px]  w-[100%] bg-[var(--softGray)] flex items-center justify-between">
+      <div className="container sticky top-20 z-[12] py-[24px] w-[100%] bg-[var(--softGray)] flex items-center justify-between">
         <h1 className="text-2xl font-[600] text-[var(--black)]">
           Statistika: haydovchi
         </h1>
@@ -82,9 +81,10 @@ const DriverStatistics = () => {
       </div>
 
       <div className="px-6 ">
-        <div className="flex flex-wrap items-center gap-4">
-          {isLoading ? Array.from(new Array(4)).map((num) => <Skeleton key={num} animation="wave" width={210} height={150} />) : widgetsData?.map(({ id, name, quantity, change }: { id?: number, name?: string, quantity?: number, change?: any }) => {
-            return <CCard key={id} style={{ minHeight: 0 }}>
+{/* 
+        <div className="flex items-center gap-5 w-full overflow-scroll ">
+          {widgetsData?.map(({ id, name, quantity, change }: { id?: number, name?: string, quantity?: number, change?: any }) => {
+            return <CCard key={id} style={{ minHeight: 0, minWidth: '25%' }}>
               <div className="flex items-center gap-[18px]">
                 {change > 0 ? <ArrowUp fill={true} /> : <ArrowDown fill={true} />}
                 <div>
@@ -94,7 +94,9 @@ const DriverStatistics = () => {
               </div>
             </CCard>
           })}
-        </div>
+        </div> */}
+
+        <StatisticsCard data={widgetsData} loading={isLoading}/>
 
         <div className="pt-[18px]">
           <CCard style={{ minHeight: 0 }}>

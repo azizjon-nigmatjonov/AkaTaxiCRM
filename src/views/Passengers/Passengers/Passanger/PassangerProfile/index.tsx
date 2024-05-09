@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import { useQuery } from "react-query";
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useGetQueries } from "../../../../../hooks/useGetQueries"
 import passengerService from "../../../../../services/passengers";
 import CCard from "../../../../../components/CElements/CCard";
 import { InfoIcon } from '../../../../../components/UI/IconGenerator/Svg';
@@ -17,6 +16,7 @@ import usePageRouter from '../../../../../hooks/useObjectRouter';
 import { Modal } from '@mui/material'
 import PImageUpdate from './ImageUpdate';
 import { websiteActions } from '../../../../../store/website';
+import { useParams } from 'react-router-dom';
 
 
 const SelectGender = [
@@ -27,7 +27,7 @@ const SelectGender = [
 const PassengerProfile = () => {
   const dispatch = useDispatch()
   const [alert, setAlert] = useState('')
-  const { id, } = useGetQueries();
+  const { id} = useParams();
   const { getQueries } = usePageRouter();
   const query = getQueries();
   const { navigateQuery, navigateTo } = usePageRouter()
@@ -35,6 +35,9 @@ const PassengerProfile = () => {
   const { data } = useQuery(['GET_PASSANGER', id], () => {
     return passengerService.getElement(id)
   })
+
+  console.log(data);
+  
 
   const { data: regions } = useQuery(["GET_REGIONS_LIST"], () => {
     return regionService.getList();
