@@ -74,7 +74,7 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
           name="car_id"
           control={control}
           placeholder="Mashina rusumu"
-          label="Mashina rusumu"
+          label="Mashina rusumi"
           setValue={setValue}
           defaultValue={driver?.car_id}
         />

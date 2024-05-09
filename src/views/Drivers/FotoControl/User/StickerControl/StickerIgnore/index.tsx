@@ -7,17 +7,18 @@ import { useForm } from 'react-hook-form';
 import driverService from '../../../../../../services/drivers'
 import { websiteActions } from '../../../../../../store/website';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const Ignored = () => {
-    const { navigateQuery, getQueries } = usePageRouter();
-    const query = getQueries();
+    const { navigateQuery, } = usePageRouter();
+    const { id } = useParams()
     const dispatch = useDispatch()
 
     const { control, getValues } = useForm()
 
     const ignoreHandler = () => {
         let value = getValues();
-        driverService.updateFotoControl(query.id, { status_reason: value.ignore, status: 'canceled' }).then(() => {
+        driverService.updateFotoControl(id, { status_reason: value.ignore, status: 'canceled' }).then(() => {
             navigateQuery({ action: '' })
             dispatch(websiteActions.setAlertData({
                 mainTitle: "Yuborildi!",

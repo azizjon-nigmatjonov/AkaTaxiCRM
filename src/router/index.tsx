@@ -108,7 +108,6 @@ const Router = () => {
             />
           ))}
         </Route>
-
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Suspense>
