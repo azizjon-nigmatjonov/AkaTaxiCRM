@@ -3,7 +3,7 @@
     max-width: 640px;
     min-width: 540px;
     background-color: white;
-    border: 1px solid $lineGray;
+    border: 1px solid var(--lineGray);
     padding-left: 28px;
     padding-right: 40px;
     padding-block: 28px;
@@ -23,9 +23,9 @@
         right: 0;
         height: 27px;
         width: 27px;
-        background-color: $softGray;
-        border-left:1px solid $lineGray;
-        border-bottom:1px solid $lineGray;
+        background-color: var(--softGray);
+        border-left:1px solid var(--lineGray);
+        border-bottom:1px solid var(--lineGray);
         border-bottom-left-radius: 32px;
     }
 
@@ -36,21 +36,21 @@
         right: 0;
         height: 27px;
         width: 27px;
-        background-color: $softGray;
-        border-top:1px solid $lineGray;
-        border-left:1px solid $lineGray;
+        background-color: var(--softGray);
+        border-top:1px solid var(--lineGray);
+        border-left:1px solid var(--lineGray);
         border-top-left-radius: 32px;
     }
     
     span{
-        color: $gray;
+        color: var(--gray);
     }
     p{
-        color: $black;
+        color: var(--black);
         font-weight: 600;
     }
     p.price{
-        color: $main
+        color: var(--main)
     }
     .regionName {
         font-size: 28px;

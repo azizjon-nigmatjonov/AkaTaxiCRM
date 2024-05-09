@@ -3,7 +3,7 @@
   font-weight: 500;
 
   .required {
-    color: $error;
+    color: var(--error);
     margin-right: 2px;
   }
 }

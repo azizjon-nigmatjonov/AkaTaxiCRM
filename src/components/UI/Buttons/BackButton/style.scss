@@ -9,8 +9,8 @@
   cursor: pointer;
   background-color: transparent;
   transition-duration: 0.3s;
-  color: $gray;
-  // border: 1px solid $main;
+  color: var(--gray);
+  // border: 1px solid var(--main);
   
   .icon {
     font-size: 19px;
@@ -23,7 +23,7 @@
   }
 
   // &:hover {
-  //   border-color: $main;
-  //   color: $main;
+  //   border-color: var(--main);
+  //   color: var(--main);
   // }
 }

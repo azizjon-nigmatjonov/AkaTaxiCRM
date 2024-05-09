@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: flex-end;
     padding-right: 2px;
-    border-right: 2px solid $lineGray;
+    border-right: 2px solid var(--lineGray);
 }
 
 .back {
@@ -12,7 +12,7 @@
     gap: 1px;
     justify-content: flex-end;
     padding: 2px;
-    border: 2px solid $lineGray;
+    border: 2px solid var(--lineGray);
     border-top: none;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -28,7 +28,7 @@
 }
 
 .empty {
-    background-color: $lineGray
+    background-color: var(--lineGray)
 }
 
 .driver {

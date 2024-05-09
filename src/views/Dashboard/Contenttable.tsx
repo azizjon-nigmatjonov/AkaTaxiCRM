@@ -2,6 +2,7 @@ import Tabledirvers from './Tables/Tabledirvers';
 import TableDriversVilage from './Tables/TableDriversVilage';
 import TablePessengersVilage from './Tables/TablePessengersVilage';
 import TablePessengers from './Tables/TablePessengers';
+import { OneSkeleton } from '../../components/CElements/CSkeleton/OneSkeleton';
 
 // function createData(name, calories, fat, carbs, protein) {
 //     return { name, calories, fat, carbs, protein };
@@ -14,11 +15,17 @@ interface DataListType {
     done: number,
     region_id: number,
     region_name: string,
+    isLoading: boolean
 }
 
 
-
-function ContentTable({ setCountWeekDriversVilage, setSelectMonthDriversVilage, setYearDriversVilage, yearDriversVilage, setCountDrivers, setSelectMonthDrivers, setYearDrivers, yearDrivers, setCountWeekPessengerVilage, setSelectMonthPessengerVilage, setYearPessengerVilage, yearPessengerVilage, setCountWeek, setSelectMonth, year, setYear, driverTripsDataFromVilage, passengersDataVilage, driverTripsDataFromCity, dataList }: { setCountWeekDriversVilage: any, setSelectMonthDriversVilage: any, setYearDriversVilage: any, yearDriversVilage: string, setCountDrivers: any, setSelectMonthDrivers: any, setYearDrivers: any, yearDrivers: any, setCountWeekPessengerVilage: any, setSelectMonthPessengerVilage: any, setYearPessengerVilage: any, yearPessengerVilage: any, setCountWeek: any, setSelectMonth: any, year: any, setYear: any, dataList: DataListType[], driverTripsDataFromCity: any, passengersDataVilage: any, driverTripsDataFromVilage: any }) {
+function ContentTable({ isLoading, setCountWeekDriversVilage, setSelectMonthDriversVilage, setYearDriversVilage, yearDriversVilage, setCountDrivers, setSelectMonthDrivers, setYearDrivers, yearDrivers, setCountWeekPessengerVilage, setSelectMonthPessengerVilage, setYearPessengerVilage, yearPessengerVilage, setCountWeek, setSelectMonth, year, setYear, driverTripsDataFromVilage, passengersDataVilage, driverTripsDataFromCity, dataList }: { setCountWeekDriversVilage: any, setSelectMonthDriversVilage: any, setYearDriversVilage: any, yearDriversVilage: string, setCountDrivers: any, setSelectMonthDrivers: any, setYearDrivers: any, yearDrivers: any, setCountWeekPessengerVilage: any, setSelectMonthPessengerVilage: any, setYearPessengerVilage: any, yearPessengerVilage: any, setCountWeek: any, setSelectMonth: any, year: any, setYear: any, dataList: DataListType[], driverTripsDataFromCity: any, passengersDataVilage: any, driverTripsDataFromVilage: any; isLoading: boolean }) {
+    if (isLoading) {
+       return <div className='mt-5 mx-5'>
+        <h2 className=" text-[30px] my-5 text-[#101828] font-semibold">Yo’lovchilar qatnovi</h2>
+        <OneSkeleton height={500} />
+       </div>
+    }
 
     return (
         <>

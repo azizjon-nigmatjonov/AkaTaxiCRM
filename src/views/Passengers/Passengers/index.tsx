@@ -153,7 +153,7 @@ const Passengers = () => {
       <Header>
         <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
       </Header>
-      <div className="px-6 ">
+      <div className="container">
         <SectionHeader
           extra={<FilterButton text="Filter" />}
           handleSearch={handleSearch}
