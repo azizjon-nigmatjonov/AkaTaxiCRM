@@ -13,6 +13,6 @@ export const headColumns = [
   },
   {
     title: "sana",
-    id: "date",
+    id: "created_at",
   },
 ];

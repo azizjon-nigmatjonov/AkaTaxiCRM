@@ -62,7 +62,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="p-5">
       <CCard style={{ minHeight: "auto" }}>
         <div className="flex justify-between">
           <div className="flex items-center space-x-8">
