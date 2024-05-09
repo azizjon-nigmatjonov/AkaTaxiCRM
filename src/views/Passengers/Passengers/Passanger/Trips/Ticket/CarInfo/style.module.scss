@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 450px;
     background-color: white;
-    border: 1px solid $lineGray;
+    border: 1px solid var(--lineGray);
     padding: 28px;
     height: 203px;
     border-top-left-radius: 32px;
@@ -18,9 +18,9 @@
         left: 0px;
         height: 27px;
         width: 27px;
-        background-color: $softGray;
-        border-right: 1px solid $lineGray;
-        border-bottom: 1px solid $lineGray;
+        background-color: var(--softGray);
+        border-right: 1px solid var(--lineGray);
+        border-bottom: 1px solid var(--lineGray);
         border-bottom-right-radius: 32px;
     }
 
@@ -31,9 +31,9 @@
         left: 0;
         height: 27px;
         width: 27px;
-        background-color: $softGray;
-        border-top: 1px solid $lineGray;
-        border-right: 1px solid $lineGray;
+        background-color: var(--softGray);
+        border-top: 1px solid var(--lineGray);
+        border-right: 1px solid var(--lineGray);
         border-top-right-radius: 32px;
     }
 
@@ -43,10 +43,10 @@
         right: 0;
         height: 27px;
         width: 27px;
-        background-color: $softGray;
+        background-color: var(--softGray);
         border: 1px solid transparent;
-        border-bottom-color: $lineGray;
-        border-left-color:  $lineGray;
+        border-bottom-color: var(--lineGray);
+        border-left-color:  var(--lineGray);
         border-bottom-left-radius: 32px;
     }
 
@@ -56,10 +56,10 @@
         right: 0;
         height: 27px;
         width: 27px;
-        background-color: $softGray;
+        background-color: var(--softGray);
         border: 1px solid transparent;
-        border-top-color: $lineGray;
-        border-left-color:  $lineGray;
+        border-top-color: var(--lineGray);
+        border-left-color:  var(--lineGray);
         border-top-left-radius: 32px;
     }
 

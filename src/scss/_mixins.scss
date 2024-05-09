@@ -66,13 +66,22 @@ $xl2: 24px;
   }
 }
 
-@mixin commonShadow () {
-  box-shadow: -1px 0px 0px 0px #E2E2EA inset
+@mixin common-btn() {
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--gray30);
+  box-shadow: 0px 1px 3px 0px rgba(16, 24, 40, 0.1),
+    0px 1px 2px 0px rgba(16, 24, 40, 0.06);
+  &:focus {
+    border-color: var(--main);
+  }
 }
 
-.commonShadow {
-  box-shadow: -1px 0px 0px 0px #E2E2EA inset
+@mixin common-shadow() {
+  box-shadow: 0px 1px 3px 0px rgba(16, 24, 40, 0.1),
+  0px 1px 2px 0px rgba(16, 24, 40, 0.06);
 }
+
 * {
   @include remove-scroll;
 }

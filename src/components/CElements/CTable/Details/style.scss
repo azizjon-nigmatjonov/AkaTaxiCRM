@@ -1,3 +1,7 @@
+#table {
+  @include common-shadow;
+  border-radius: 18px;
+}
 .CTableContainer {
   width: 100%;
   .table {
@@ -5,7 +9,7 @@
     overflow: auto;
     border-radius: $lg;
     position: relative;
-    color: $black;
+    color: var(--black);
     background-color: white;
 
     table {
@@ -44,26 +48,26 @@
           @include center-center;
 
           button {
-            color: $gray;
+            color: var(--gray);
           }
 
           .Mui-selected {
-            color: $main;
+            color: var(--main);
             font-weight: 700;
           }
         }
         li:first-child {
-          border: 1px solid $lightGray;
+          border: 1px solid var(--gray20);
           button {
-            background-image: url('/svg/arrow-left.svg');
+            background-image: url("/svg/arrow-left.svg");
             background-repeat: no-repeat;
             background-position: center;
           }
         }
         li:last-child {
-          border: 1px solid $lightGray;
+          border: 1px solid var(--gray20);
           button {
-            background-image: url('/svg/arrow-right.svg');
+            background-image: url("/svg/arrow-right.svg");
             background-repeat: no-repeat;
             background-position: center;
           }
@@ -83,11 +87,9 @@
 .CTableCell {
   padding: 0 24px !important;
   background-color: transparent !important;
-  color: $black;
-  border-right: 1px solid $lightGray;
-  border-bottom: 1px solid $lightGray;
-  // border-top: 1px solid $lightGray;
-  // border-bottom: 1px solid $lightGray;
+  color: var(--black);
+  border-right: 1px solid var(--gray20);
+  border-bottom: 1px solid var(--gray20);
 
   &:first-child {
     margin-top: 30px;
@@ -101,7 +103,7 @@
 .MuiTableRow-root {
   height: 45px !important;
   // &:nth-child(2n) {
-  //   background-color: $softGray;
+  //   background-color: var(--softGray);
   // }
 
   &:last-child {
@@ -114,7 +116,7 @@
     cursor: pointer;
     transition-duration: 0.2s;
     &:hover {
-      background-color: $lightGray;
+      background-color: var(--gray20);
     }
   }
 }
@@ -126,7 +128,7 @@
 #table {
   .CTableContainer {
     border-radius: 18px !important;
-    border: 1px solid $lightGray;
+    border: 1px solid var(--gray20);
     box-shadow: none;
     overflow: scroll;
   }
@@ -140,17 +142,17 @@ thead {
     div {
       height: 40px;
       padding: 24px !important;
-      // background-color: $softGray !important;
-      color: $black;
+      // background-color: var(--softGray) !important;
+      color: var(--black);
       font-weight: 600;
       text-transform: uppercase;
       width: 100%;
       @include center;
-      border-right: 1px solid $lightGray;
-      border-bottom: 1px solid $lightGray;
+      border-right: 1px solid var(--gray20);
+      border-bottom: 1px solid var(--gray20);
       position: relative;
     }
-    
+
     &:first-child {
       border-top-left-radius: 10px;
       border-bottom-left-radius: 10px;
@@ -174,8 +176,8 @@ thead {
 }
 .resizer:hover,
 .resizing {
-  // border-right: 2px solid $main;
-  background-image: url('/svg/expandSide.svg');
+  // border-right: 2px solid var(--main);
+  background-image: url("/svg/expandSide.svg");
   background-repeat: no-repeat;
 }
 

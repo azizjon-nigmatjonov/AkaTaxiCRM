@@ -14,7 +14,7 @@ const CCard = ({ classes = "", style, children, title = "" }: Props) => {
       {title ? <h2 className="mb-2">{title}</h2> : ""}
       <div
         style={style}
-        className={`p-6 bg-white rounded-[10px] min-h-[500px] border border-[var(--lightGray)] ${classes}`}
+        className={`p-6 bg-white rounded-[18px] min-h-[500px] border border-[var(--gray20)] common-shadow ${classes}`}
       >
         {children}
       </div>

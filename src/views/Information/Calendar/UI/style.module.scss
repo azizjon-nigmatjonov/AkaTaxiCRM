@@ -3,9 +3,9 @@
   .body {
     .cell {
       height: 40px;
-      border-right: 1px solid $lineGray;
-      border-top: 1px solid $lineGray;
-      border-bottom: 1px solid $lineGray;
+      border-right: 1px solid var(--lineGray);
+      border-top: 1px solid var(--lineGray);
+      border-bottom: 1px solid var(--lineGray);
       @include center-center;
 
       &:nth-child(7n) {
@@ -15,13 +15,13 @@
   }
   .header {
     .cell{
-      color: $gray;
+      color: var(--gray);
     }
   }
   .body {
     .cell {
       border-top: 0;
-      border-bottom: 1px solid $lineGray;
+      border-bottom: 1px solid var(--lineGray);
       height: 142px;
       @include end-between;
       flex-direction: column;

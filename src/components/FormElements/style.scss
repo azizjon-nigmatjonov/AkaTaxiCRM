@@ -16,7 +16,7 @@
 
       &.Mui-focused {
         .MuiOutlinedInput-notchedOutline {
-          border-color: $main;
+          border-color: var(--main);
         }
       }
 
@@ -27,17 +27,17 @@
       }
 
       .Mui-disabled {
-        background-color: $gray;
+        background-color: var(--gray);
       }
 
       .MuiOutlinedInput-notchedOutline {
-        border-color: $lineGray;
+        border-color: var(--lineGray);
         font-size: 16px;
       }
     }
 
     .MuiFormHelperText-root {
-      color: $error;
+      color: var(--error);
       // font-size: 12px !important;
       position: absolute;
       bottom: -18px;
