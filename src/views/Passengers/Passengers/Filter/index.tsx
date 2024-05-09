@@ -49,7 +49,7 @@ export const FilterPassenger = () => {
 
   return (
     <Filters filter={!!filter}>
-      <div className="grid grid-cols-5 gap-x-4">
+      <div className="grid grid-cols-5 gap-x-4 w-full">
         <DropDown
           label="Vaqt"
           name="Vaqt"
