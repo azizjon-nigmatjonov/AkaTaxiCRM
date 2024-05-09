@@ -206,6 +206,7 @@ const Passengers = () => {
         </SectionHeader>
 
         <Filters filter={!!query.filter}>
+          <div className="grid grid-cols-5 gap-x-4">
           <DropDown
             label="Vaqt"
             name="Vaqt"
@@ -239,6 +240,7 @@ const Passengers = () => {
             label="Viloyat"
             placeholder="Tanlang"
           />
+          </div>
         </Filters>
 
         <CTable
