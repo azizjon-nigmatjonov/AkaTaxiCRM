@@ -9,7 +9,7 @@ export const PassengerCalls = () => {
       who: "operator 1",
       status: "outgoing",
       phone: "30:00:00",
-      lead: "not_hangup",
+      lead: "Telni ko'tarmadi",
       id: 1,
     },
   ];

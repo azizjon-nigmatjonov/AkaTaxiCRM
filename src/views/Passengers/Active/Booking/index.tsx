@@ -136,7 +136,7 @@ const Booking = () => {
 
                         <div className={`flex  justify-end py-4`}>
                             <div className="flex gap-4 ">
-                                <CancelButton text='Bekor qilish' onClick={() => navigateTo('/passengers/active_passengers')} />
+                                <CancelButton text='Bekor qilish' onClick={() => navigateTo('/passengers/active-passengers')} />
                                 <AddButton onClick={formsubmit} iconLeft={false} text='Haydovchi qidirish' />
                             </div>
                         </div>

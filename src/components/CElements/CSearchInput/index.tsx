@@ -15,7 +15,7 @@ const CSearchInput = ({ handleChange = () => {}, delay = 500, classes = "", defa
 
 
   return (
-    <div className="relative">
+    <div className="relative bg-white rounded-[8px] common-shadow">
       <div className="absolute top-1/2 -translate-y-1/2 left-3">
         <SearchIcon />
       </div>
@@ -24,7 +24,7 @@ const CSearchInput = ({ handleChange = () => {}, delay = 500, classes = "", defa
         defaultValue={defaultValue}
         type="text"
         placeholder="Izlash..."
-        className={`w-[250px] bg-transparent h-[40px] outline-none pl-10 pr-5 text=[var(--black)] placeholder-gray border border-[var(--lineGray)] focus:border-[var(--main)] rounded-[10px] ${classes}`}
+        className={`w-[250px] bg-transparent h-[40px] outline-none pl-10 pr-5 text=[var(--black)] placeholder-gray border border-[var(--gray30)] focus:border-[var(--main)] rounded-[8px] ${classes}`}
       />
     </div>
   );
