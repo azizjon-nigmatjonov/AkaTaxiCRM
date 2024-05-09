@@ -12,11 +12,16 @@
     width: 100%;
 
     .MuiInputBase-root {
-      border-radius: 10px;
-
+      border-radius: 8px;
+      height: 40px;
+      border-radius: 8px;
+      border: 1px solid var(--gray30);
+      box-shadow: 0px 1px 3px 0px rgba(16, 24, 40, 0.1),
+        0px 1px 2px 0px rgba(16, 24, 40, 0.06);
+  
       &.Mui-focused {
         .MuiOutlinedInput-notchedOutline {
-          border-color: var(--main);
+          border: none;
         }
       }
 
@@ -30,10 +35,9 @@
         background-color: var(--gray);
       }
 
-      .MuiOutlinedInput-notchedOutline {
-        border-color: var(--lineGray);
-        font-size: 16px;
-      }
+      // .MuiOutlinedInput-notchedOutline {
+       
+      // }
     }
 
     .MuiFormHelperText-root {
