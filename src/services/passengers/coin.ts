@@ -1,6 +1,6 @@
 import request from "../../utils/request";
 const coinService = {
-  getList: () => request.get(`/passengers/coin-history`),
+  getList: (id?: string) => request.get(`/passengers/${id}/coin-history`),
 };
 
 export default coinService;
