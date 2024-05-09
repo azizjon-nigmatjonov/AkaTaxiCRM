@@ -13,7 +13,7 @@ const MainLayout = () => {
   const dispatch = useDispatch();
   const regions = useSelector((state: any) => state.regions.regions);
   const alertData = useSelector((state: any) => state.website.alert);
-
+  
   const GetVillage = (val: any) => {
     if (!val) return [];
     const arr = val;
