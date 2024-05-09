@@ -98,7 +98,7 @@ function Dashboard() {
         <Drivers data={data?.data[0]} />
       </div>
 
-      <div className="px-5 mt-5">
+      <div className="mt-5">
         <FindoutStatistics />
       </div>
 

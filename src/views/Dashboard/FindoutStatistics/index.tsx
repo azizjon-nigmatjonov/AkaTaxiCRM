@@ -12,7 +12,7 @@ const options = [
 
 export const FindoutStatistics = () => {
   return (
-    <WrapperCard classes="p-[0] mx-0">
+    <WrapperCard classes="p-[0]">
       <div className="p-24px flex items-center justify-between">
         <div>
           <h3 className="text-lg font-[600] text-[var(--gray90)]">
