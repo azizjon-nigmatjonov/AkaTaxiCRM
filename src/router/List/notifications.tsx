@@ -18,7 +18,7 @@ export const notificationsList = [
         parent: 'notifications',
         link: 'notification/add_notification',
         sidebar: false,
-        title: '',
+        title: "Xabar qo'shish",
         icon: '',
         element: <AddNotification />
     },
@@ -34,7 +34,7 @@ export const notificationsList = [
         parent: 'notifications',
         link: 'smsnotification/add_sms',
         sidebar: false,
-        title: '',
+        title: "SMS qo'shish",
         icon: '',
         element: <AddSMS />
     },

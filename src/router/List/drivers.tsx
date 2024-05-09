@@ -25,7 +25,7 @@ export const driverList = [
     parent: "drivers",
     link: "main/create",
     sidebar: false,
-    title: "",
+    title: "Haydovchi qo'shish",
     icon: "",
     element: <Driver />
   },
@@ -33,7 +33,7 @@ export const driverList = [
     parent: "drivers",
     link: "main/:id",
     sidebar: false,
-    title: "",
+    title: "Haydovchini tahrirlash",
     icon: "",
     element: <Driver />
   },
@@ -41,7 +41,7 @@ export const driverList = [
     parent: 'drivers',
     link: 'active',
     sidebar: true,
-    title: 'Aktiv',
+    title: 'Aktiv haydovchilar',
     icon: 'smart_car',
     element: <ActiveDrivers />
   },
@@ -65,7 +65,7 @@ export const driverList = [
     parent: 'drivers',
     link: 'main/add',
     sidebar: false,
-    title: '',
+    title: "Haydovchi qo'shish",
     icon: '',
     element: <AddDriver />
   },
@@ -74,7 +74,7 @@ export const driverList = [
     link: 'cars/:id',
     sidebar: false,
     icon: '',
-    title: '',
+    title: "Mashina qo'shish",
     element: <SingleCar />
   },
   {
@@ -89,7 +89,7 @@ export const driverList = [
     parent: 'drivers',
     link: 'maps',
     sidebar: true,
-    title: 'Map',
+    title: 'Xarita',
     icon: 'map',
     element: <Map />
   },

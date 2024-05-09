@@ -15,12 +15,12 @@ import {
   Dashboard,
   FotoControl,
   Notifications,
-  // MessagesIconIcon,
   SMSIcon,
   NewsIcon,
   ListIcon,
   HeadPhones,
   AdminIcon,
+  ListSquaredIcon,
 } from "./Svg/Sidebar";
 
 import { PassengerIcon, DriverIcon, PassengerVehicleIcon, DriverVehicleIcon, PartnersIcon } from "./Svg";
@@ -131,6 +131,10 @@ export const iconsList = [
   {
     name: 'list',
     component: ListIcon
+  },
+  {
+    name: 'list-squared',
+    component: ListSquaredIcon
   },
   {
     name: 'headPhones',

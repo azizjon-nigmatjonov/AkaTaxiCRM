@@ -113,9 +113,9 @@ const TabbleActions = ({
 
       {deletePopover === rowIndex && (
         <PopoverDelete
-          closePopover={() => {
+          closePopover={(status) => {
             setDeletePopover(null);
-            handleActions(element, "delete");
+            if (status) handleActions(element, status);
           }}
         />
       )}

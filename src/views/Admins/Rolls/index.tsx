@@ -5,12 +5,14 @@ import SectionHeader from "../../../components/UI/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
-import { RolesList, TableData, breadCrumbs } from "./Logic";
+import { DeleteFunction, FetchFunction, TableData, breadCrumbs } from "./Logic";
 
 const Rolls = () => {
   const { navigateTo } = usePageRouter();
-  const { roles, isLoading } = RolesList();
-  const { headColumns } = TableData();
+  const { roles, isLoading, refetch } = FetchFunction();
+  const { deleteRoll } = DeleteFunction({ handleClose: refetch });
+  const { headColumns, handleActions } = TableData({ deleteRoll });
+
   const bodyColumns = useMemo(() => {
     return roles?.data ?? [];
   }, [roles]);
@@ -23,17 +25,16 @@ const Rolls = () => {
       <div className="px-5">
         <div>
           <SectionHeader handleSearch={() => {}}>
-            <div className="flex items-center gap-3">
-              <AddButton
-                text="Yangi rol qo'shish"
-                onClick={() => navigateTo("/admins/rolls/create")}
-              />
-            </div>
+            <AddButton
+              text="Yangi rol qo'shish"
+              onClick={() => navigateTo("/admins/rolls/create")}
+            />
           </SectionHeader>
           <CTable
             headColumns={headColumns}
             bodyColumns={bodyColumns}
             isResizeble={true}
+            handleActions={handleActions}
             isLoading={isLoading}
           />
         </div>

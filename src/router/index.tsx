@@ -58,6 +58,8 @@ const Router = () => {
       icon,
       card_info,
       permissions: [],
+      parent,
+      link
     };
 
     if (!list.includes(obj.id)) {

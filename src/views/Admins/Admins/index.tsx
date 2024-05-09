@@ -19,8 +19,6 @@ const Admins = () => {
   const handleSearch = () => {};
 
   const handleActions = useCallback((element: any, status: string) => {
-    console.log(status, element);
-
     if (status === "view") navigateQuery({ id: element.id });
 
     if (status === "edit") navigateQuery({ id: element.id });
@@ -36,7 +34,7 @@ const Admins = () => {
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} />
       </Header>
-      <div className="px-5">
+      <div className="container">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <AddButton

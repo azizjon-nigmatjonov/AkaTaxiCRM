@@ -1,9 +1,4 @@
-import {
-  FormControl,
-  FormHelperText,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
 import CLabel from "../../CElements/CLabel";
 import { useEffect } from "react";
@@ -19,6 +14,7 @@ interface Props {
   placeholder?: any;
   required?: boolean;
   onChange?: (val?: any) => void;
+  handleClick?: (val: any) => void;
   optionType?: any;
   defaultValue?: any;
   rules?: any;
@@ -40,11 +36,10 @@ const HFSelect = ({
   defaultValue = "",
   rules = {},
   id = "cselect",
+  handleClick = () => {},
   setValue = () => {},
   ...props
 }: Props) => {
-    
-
   useEffect(() => {
     if (defaultValue) {
       setValue(name, defaultValue);
@@ -52,7 +47,7 @@ const HFSelect = ({
   }, [defaultValue, name, setValue]);
 
   return (
-    <div id={`cselect-${id}`}>
+    <div id="cselect">
       <Controller
         control={control}
         name={name}
@@ -66,7 +61,7 @@ const HFSelect = ({
           fieldState: { error },
         }) => (
           <FormControl style={{ width }}>
-            <CLabel title={label} required={required} />
+            {label && <CLabel title={label} required={required} />}
             <Select
               value={value || defaultValue || ""}
               size="small"
@@ -117,16 +112,22 @@ const HFSelect = ({
                     )),
                   ])
                 : options?.map((option?: any) => (
-                    <MenuItem key={option.value} value={option.value}>
+                    <MenuItem
+                      key={option.value}
+                      onClick={() => handleClick(option)}
+                      value={option.value}
+                    >
                       {option.label}
                     </MenuItem>
                   ))}
             </Select>
 
-            {!disabledHelperText && error?.message && (
-              <FormHelperText style={{ color: 'var(--error)', margin: '0 5px' }} error>{error?.message}</FormHelperText>
-            )}
-            
+            <FormHelperText
+              style={{ color: "var(--error)", margin: "0 5px" }}
+              error
+            >
+              {!disabledHelperText && error?.message ? error.message : " "}
+            </FormHelperText>
           </FormControl>
         )}
       ></Controller>

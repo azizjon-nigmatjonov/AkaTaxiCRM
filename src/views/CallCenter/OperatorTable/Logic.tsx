@@ -63,7 +63,7 @@ export const TableActions = () => {
               <ListIcon />
             </button>
             <button onClick={() => navigateTo(`/passengers/passenger-list/748?tab=calls`)}>
-              <EyeIcon />
+              <EyeIcon fill="var(--black)" />
             </button>
           </div>
         ) : (

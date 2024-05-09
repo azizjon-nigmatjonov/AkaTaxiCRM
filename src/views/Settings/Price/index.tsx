@@ -11,7 +11,7 @@ const Price = () => {
   
 
   return (
-    <>
+    <div className="pb-10">
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} />
       </Header>
@@ -21,7 +21,7 @@ const Price = () => {
       </div>
 
       {GetCurrentPage(currentTab)}
-    </>
+    </div>
   );
 };
 export default Price;

@@ -20,10 +20,10 @@ import { useParams } from "react-router-dom"
 
 const DriverBallance = () => {
     const { currentPage } = useGetQueries()
+    const { id } = useParams()
     const { getQueries, navigateQuery } = usePageRouter()
     const query = getQueries()
     const dispatch = useDispatch()
-    const { id } = useParams()
 
     const { data, isLoading, refetch } = useQuery(['GET_DRIVERS_BALLANCE', id, currentPage], () => {
         return driverService.getDriverBallance({ id, page: currentPage })

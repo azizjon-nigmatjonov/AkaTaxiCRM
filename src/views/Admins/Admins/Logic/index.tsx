@@ -8,15 +8,9 @@ export const FetchFunction = () => {
     data: admins,
     isLoading,
     refetch,
-  } = useQuery(
-    ["GET_ADMINS"],
-    () => {
-      return adminService.getList();
-    },
-    {
-      enabled: true,
-    }
-  );
+  } = useQuery(["GET_ADMINS"], () => {
+    return adminService.getList();
+  });
 
   const bodyColumns: any = useMemo(() => {
     const list = admins?.data ?? [];
@@ -51,7 +45,19 @@ export const TableData = () => {
       },
       {
         title: "Rol",
-        id: "rol",
+        id: "roles",
+        render: (roles: any) => {
+          return (
+            <div>
+              {roles?.map((item: any, index: number, row: any) => (
+                <p key={index}>
+                  {item.name}
+                  {index > 0 && row.length - 1 !== index ? "," : ""}
+                </p>
+              ))}
+            </div>
+          );
+        },
       },
       {
         title: "Yaratilgan sana",
@@ -80,7 +86,7 @@ export const TableData = () => {
       {
         title: "",
         id: "actions",
-        permission: ["edit", "delete", "freez"],
+        permission: ["edit", "delete"],
       },
     ];
   }, []);

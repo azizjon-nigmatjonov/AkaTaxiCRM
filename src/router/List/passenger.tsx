@@ -17,7 +17,7 @@ export const passengerList = [
     parent: "passengers",
     link: "passenger-list/:id",
     sidebar: false,
-    title: "",
+    title: "Yo'lovchini tahrirlash",
     icon: "",
     element: <Passanger />
   },
@@ -33,7 +33,7 @@ export const passengerList = [
     parent: "passengers",
     link: "active-passengers/booking",
     sidebar: false,
-    title: "Passengers booking",
+    title: "Haydovchi buyurtma berish",
     icon: "",
     element: <Booking />
   },

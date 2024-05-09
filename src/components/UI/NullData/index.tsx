@@ -10,7 +10,7 @@ const NullData = ({
   width = 150,
 }: Props) => {
   return (
-    <div className={`flex items-center justify-center flex-col ${classes}`}>
+    <div className={`flex items-center justify-center flex-col h-[500px] ${classes}`}>
       <img
         className="mx-auto mt-10"
         src="/images/no-data.png"

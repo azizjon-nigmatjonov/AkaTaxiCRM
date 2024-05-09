@@ -88,7 +88,7 @@ const Section = ({
         ) : loading ? (
           "Yuklanmoqda..."
         ) : (
-          <NullData />
+          <NullData classes="h-[500px]" />
         )}
       </div>
     </>

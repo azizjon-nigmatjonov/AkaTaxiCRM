@@ -20,7 +20,7 @@ import { PopoverDelete } from "./Details/Actions/EditDelete/PopOver";
 
 interface Props {
   count?: number;
-  totalCount?:number;
+  totalCount?: number;
   headColumns: any[];
   bodyColumns?: object[] | any;
   currentPage?: number;
@@ -51,8 +51,8 @@ const CTable = ({
   autoHeight = false,
   limitCount = [10, 30, 50],
   //   actionList = [{ edit: {}, delete: {} }],
-  setCurrentPage = () => { },
-  handleActions = () => { },
+  setCurrentPage = () => {},
+  handleActions = () => {},
 }: Props) => {
   const tableSize = useSelector((state: any) => state.tableSize.tableSize);
   const location = useLocation();
@@ -64,8 +64,6 @@ const CTable = ({
   const [currentIndex, setCurrentIndex] = useState(null);
   const [currDelete, setCurrDelete] = useState<any>({});
   const dispatch = useDispatch();
-
-
 
   const bodySource = useMemo(() => {
     if (!bodyColumns?.length) return [];
@@ -88,7 +86,6 @@ const CTable = ({
       return status;
     };
 
-
     return (
       list.map((item: any, index?: any) => ({
         ...item,
@@ -103,7 +100,6 @@ const CTable = ({
       })) ?? []
     );
   }, [bodyColumns, currentLimit, currentPage, headColumns]);
-
 
   const pageName: any = useMemo(() => {
     const strLen =
@@ -186,8 +182,6 @@ const CTable = ({
   }, [bodySource]);
 
   const calculateWidth = (colId: any, index: number) => {
-
-
     const colIdx = tableSettings?.[pageName]
       ?.filter((item: any) => item?.isStiky === true)
       ?.findIndex((item: any) => item?.id === colId);
@@ -259,7 +253,6 @@ const CTable = ({
     }
   };
 
-
   return (
     <div id="table">
       <CTableWrapper
@@ -287,13 +280,13 @@ const CTable = ({
                   minWidth: tableSize?.[pageName]?.[column.id]
                     ? tableSize?.[pageName]?.[column.id]
                     : column?.width
-                      ? column.width
-                      : "auto",
+                    ? column.width
+                    : "auto",
                   width: tableSize?.[pageName]?.[column.id]
                     ? tableSize?.[pageName]?.[column.id]
                     : column?.width
-                      ? column.width
-                      : "auto",
+                    ? column.width
+                    : "auto",
                   position: tableSettings?.[pageName]?.find(
                     (item: any) => item?.id === column?.id
                   )?.isStiky
@@ -314,8 +307,14 @@ const CTable = ({
               >
                 <div style={{ textAlign: column?.textAlign || "left" }}>
                   {column.renderHead
-                    ? Array.isArray(column.renderHead) ? column.renderHead(column.renderHead.map((data: any) => column[data])) : column.renderHead() : column?.id === "index" ? "№" : t(column.title)
-                  }
+                    ? Array.isArray(column.renderHead)
+                      ? column.renderHead(
+                          column.renderHead.map((data: any) => column[data])
+                        )
+                      : column.renderHead()
+                    : column?.id === "index"
+                    ? "№"
+                    : t(column.title)}
                   {/* {column?.filter && (
                     <div
                       style={{
@@ -346,108 +345,117 @@ const CTable = ({
         >
           {bodySource?.length
             ? bodySource?.map((item: any, rowIndex: any) => (
-              <TableRow
-                key={rowIndex}
-                ref={(e) => handleBodycolRef(item, e)}
-                className={clickable ? "clickable" : ""}
-              >
-                {headColumns.map((column, colIndex) => (
-                  <CTableCell
-                    key={colIndex}
-                    className={`overflow-ellipsis ${tableHeight}`}
-                    onClick={() => {
-                      if (clickable && column?.click !== "custom" && column?.id !== "actions")
-                        handleActions(item, 'view');
-                    }}
-                    style={{
-                      minWidth: "max-content",
-                      padding: "0 4px",
-                      position: tableSettings?.[pageName]?.find(
-                        (item: any) => item?.id === column?.id
-                      )?.isStiky
-                        ? "sticky"
-                        : "relative",
-                      left: tableSettings?.[pageName]?.find(
-                        (item: any) => item?.id === column?.id
-                      )?.isStiky
-                        ? calculateWidth(column?.id, colIndex)
-                        : "0",
-                      backgroundColor: "#fff",
-                      zIndex: tableSettings?.[pageName]?.find(
-                        (item: any) => item?.id === column?.id
-                      )?.isStiky
-                        ? "1"
-                        : "",
-                    }}
-                  >
-                    <div
+                <TableRow
+                  key={rowIndex}
+                  ref={(e) => handleBodycolRef(item, e)}
+                  className={clickable ? "clickable" : ""}
+                >
+                  {headColumns.map((column, colIndex) => (
+                    <CTableCell
+                      key={colIndex}
+                      className={`overflow-ellipsis ${tableHeight}`}
+                      onClick={() => {
+                        if (
+                          clickable &&
+                          column?.click !== "custom" &&
+                          column?.id !== "actions"
+                        )
+                          handleActions(item, "view");
+                      }}
                       style={{
-                        textAlign: column?.textAlign || "left",
+                        minWidth: "max-content",
+                        padding: "0 4px",
+                        position: tableSettings?.[pageName]?.find(
+                          (item: any) => item?.id === column?.id
+                        )?.isStiky
+                          ? "sticky"
+                          : "relative",
+                        left: tableSettings?.[pageName]?.find(
+                          (item: any) => item?.id === column?.id
+                        )?.isStiky
+                          ? calculateWidth(column?.id, colIndex)
+                          : "0",
+                        backgroundColor: "#fff",
+                        zIndex: tableSettings?.[pageName]?.find(
+                          (item: any) => item?.id === column?.id
+                        )?.isStiky
+                          ? "1"
+                          : "",
                       }}
                     >
-                      {column.id !== "actions" && (
-                        <span>
+                      <div
+                        style={{
+                          textAlign: column?.textAlign || "left",
+                        }}
+                      >
+                        {column.id !== "actions" && (
+                          <span>
+                            {column.render
+                              ? Array.isArray(column.id)
+                                ? column.render(
+                                    column.id.map((data: any) => item[data])
+                                  )
+                                : column.render(item[column.id], item)
+                              : item[column.id]}
+                          </span>
+                        )}
 
-                          {column.render ? Array.isArray(column.id) ? column.render(column.id.map((data: any) => item[data])) : column.render(item[column.id], item) : item[column.id]}
-                        </span>
-                      )}
-
-                      {column.id === "actions" && !item.empty && (
-                        <div className="relative">
-                          {column.permission.length <= 2 ? (
-                            <div>
-                              <TableDelete
-                                element={item}
-                                tableActions={tableActions}
-                                permissions={column.permission}
-                              />
-                              {currDelete.index === item.index ? (
-                                <PopoverDelete
-                                  closePopover={(status) => {
-                                    setCurrDelete({});
-                                    handleActions(item, status);
-                                  }}
-                                />
+                        {
+                          column.id === "actions" && !item.empty && (
+                            <div className="relative">
+                              {column.permission.length <= 2 ? (
+                                <div>
+                                  <TableDelete
+                                    element={item}
+                                    tableActions={tableActions}
+                                    permissions={column.permission}
+                                  />
+                                  {currDelete.index === item.index ? (
+                                    <PopoverDelete
+                                      closePopover={(status) => {
+                                        setCurrDelete({});
+                                        if (status) handleActions(item, status);
+                                      }}
+                                    />
+                                  ) : (
+                                    ""
+                                  )}
+                                </div>
                               ) : (
-                                ""
+                                <>
+                                  <button
+                                    className="p-2"
+                                    onClick={() => setCurrentIndex(rowIndex)}
+                                  >
+                                    <DotsIcon />
+                                  </button>
+                                  <TabbleActions
+                                    element={item}
+                                    rowIndex={rowIndex}
+                                    currentIndex={currentIndex}
+                                    setCurrentIndex={setCurrentIndex}
+                                    handleActions={handleActions}
+                                    permissions={column.permission}
+                                  />
+                                </>
                               )}
                             </div>
-                          ) : (
-                            <>
-                              <button
-                                className="p-2"
-                                onClick={() => setCurrentIndex(rowIndex)}
-                              >
-                                <DotsIcon />
-
-                              </button>
-                              <TabbleActions
-                                element={item}
-                                rowIndex={rowIndex}
-                                currentIndex={currentIndex}
-                                setCurrentIndex={setCurrentIndex}
-                                handleActions={handleActions}
-                                permissions={column.permission}
-                              />
-                            </>
-                          )}
-                        </div>
-                      )
-                        // <TabbleActions
-                        //   element={item}
-                        //   rowIndex={rowIndex + 1}
-                        //   col={item[column.id]}
-                        //   handleActions={handleActions}
-                        //   actionList={actionList}
-                        //   anchorEl={anchorEl}
-                        //   setAnchorEl={setAnchorEl}
-                        // />
-                      }
-                    </div>
-                  </CTableCell>
-                ))}
-              </TableRow>
-            ))
+                          )
+                          // <TabbleActions
+                          //   element={item}
+                          //   rowIndex={rowIndex + 1}
+                          //   col={item[column.id]}
+                          //   handleActions={handleActions}
+                          //   actionList={actionList}
+                          //   anchorEl={anchorEl}
+                          //   setAnchorEl={setAnchorEl}
+                          // />
+                        }
+                      </div>
+                    </CTableCell>
+                  ))}
+                </TableRow>
+              ))
             : ""}
         </CTableBody>
       </CTableWrapper>
