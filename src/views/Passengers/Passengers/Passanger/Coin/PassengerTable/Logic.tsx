@@ -5,11 +5,11 @@ export const headColumns = [
   },
   {
     title: "Qayerdan",
-    id: "from_",
+    id: "start",
   },
   {
     title: "Qayerga",
-    id: "to_",
+    id: "end",
   },
   {
     title: "sana",

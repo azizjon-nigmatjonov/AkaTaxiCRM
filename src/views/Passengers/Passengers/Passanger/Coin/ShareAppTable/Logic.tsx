@@ -1,10 +1,10 @@
 export const headColumns = [
     {
       title: "Raqam",
-      id: "from_region_name",
+      id: "phone",
     },
     {
       title:'Sana',
-      id:'dates'
+      id:'created_at'
     }
   ];
