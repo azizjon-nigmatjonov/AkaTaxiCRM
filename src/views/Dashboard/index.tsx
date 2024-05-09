@@ -34,14 +34,14 @@ function Dashboard() {
     useState(null);
   const [countWeekDriversVilage, setCountWeekDriversVilage] = useState(null);
 
-  const { data } = useQuery("dashboardWidgets", dashboardService.getWidgets);
+  const { data, isLoading } = useQuery("dashboardWidgets", dashboardService.getWidgets);
   const { data: passengersData } = useQuery(
     ["passengersFromTashkent", year, selectMonth, countWeek],
     () => dashboardService.getPessengersFromCity(year, selectMonth, countWeek),
     { enabled: !!year || !!selectMonth || !!countWeek, cacheTime: 0 }
   );
 
-  const { data: passengersDataVilage } = useQuery(
+  const { data: passengersDataVilage, isLoading: isLoadingTable} = useQuery(
     [
       "passengersFromVilage",
       yearPessengerVilage,
@@ -93,9 +93,9 @@ function Dashboard() {
       <Header >
       <CBreadcrumbs items={breadCrumbsItems} />
       </Header>
-      <div className="flex gap-6 px-5">
-        <Passenger data={data?.data[1]} />
-        <Drivers data={data?.data[0]} />
+      <div className="flex gap-x-5 px-5">
+        <Passenger data={data?.data[1]} isLoading={isLoading} />
+        <Drivers data={data?.data[0]} isLoading={isLoading} />
       </div>
 
       <div className="mt-5">
@@ -118,6 +118,7 @@ function Dashboard() {
         setCountWeek={setCountWeek}
         setSelectMonth={setSelectMonth}
         year={year}
+        isLoading={isLoadingTable}
         setYear={setYear}
         driverTripsDataFromVilage={driverTripsDataFromVilage}
         passengersDataVilage={passengersDataVilage}

@@ -10,35 +10,36 @@
     width: 100%;
 
     button {
-        background-color: $main;
+        background-color: var(--main);
         color: white;
         text-transform: none;
         border-radius: 8px;
-        border: 1px solid $lineGray;
+        border: 1px solid var(--lineGray);
         height: 40px;
         padding: 0 18px;
         width: 100%;
         white-space: nowrap;
         font-weight: 500;
+        @include common-btn;
     }
 }
 
 #successBtn {
     button {
-        background-color: $green;
+        background-color: var(--green);
     }
 }
 
 #saveButton {
     button {
-        background-color: $green;
+        background-color: var(--green);
     }
 }
 
 #disableButton {
     button {
-        background-color: $darkGray;
-        color: $black;
+        background-color: var(--darkGray);
+        color: var(--black);
     }
 }
 
@@ -54,7 +55,7 @@
         span {
             width: 100px;
             text-align: left;
-            color: $gray;
+            color: var(--gray);
         }
 
         .icon {
@@ -63,17 +64,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border-left: 1px solid $lightGray;
+            border-left: 1px solid var(--lightGray);
         }
     }
 }
 
 #deleteButton {
     button {
-        background-color: $lineGray;
+        background-color: var(--lineGray);
 
         span {
-            color: $black;
+            color: var(--black);
         }
     }
 }

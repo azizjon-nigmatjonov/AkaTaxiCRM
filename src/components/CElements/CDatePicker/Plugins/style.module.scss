@@ -1,7 +1,7 @@
 @use "/src/scss/colors";
 
 .timePicker {
-  border-left: 1px solid colors.$main
+  border-left: 1px solid colors.var(--main)
 }
 
 .previewBlock {
@@ -14,7 +14,7 @@
   font-size: 24px;
   font-weight: 500;
   border-bottom: 5px solid #fff;
-  background-color: colors.$primary;
+  background-color: colors.var(--primary);
   color: #fff !important;
 
   .date {
@@ -46,7 +46,7 @@
       }
 
       &.active {
-        background-color: colors.$primary;
+        background-color: colors.var(--primary);
         color: #fff;
         font-weight: 500;
       }

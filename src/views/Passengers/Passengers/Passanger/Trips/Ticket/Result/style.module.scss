@@ -14,9 +14,9 @@
         left: 0px;
         height: 27px;
         width: 27px;
-        background-color: $softGray;
-        border-right: 1px solid $lineGray;
-        border-bottom: 1px solid $lineGray;
+        background-color: var(--softGray);
+        border-right: 1px solid var(--lineGray);
+        border-bottom: 1px solid var(--lineGray);
         border-bottom-right-radius: 32px;
     }
 
@@ -27,9 +27,9 @@
         left: 0;
         height: 27px;
         width: 27px;
-        background-color: $softGray;
-        border-top: 1px solid $lineGray;
-        border-right: 1px solid $lineGray;
+        background-color: var(--softGray);
+        border-top: 1px solid var(--lineGray);
+        border-right: 1px solid var(--lineGray);
         border-top-right-radius: 32px;
     }
 

@@ -1,5 +1,5 @@
 .outer {
-    background-color: $lineGray;
+    background-color: var(--lineGray);
     width: 100%;
     height: 4.5px;
     border-radius: 2.5px;
@@ -8,6 +8,6 @@
     .inner {
         height: 100%;
         border-radius: 2.5px;
-        background-color: $green;
+        background-color: var(--green);
     }
 }
