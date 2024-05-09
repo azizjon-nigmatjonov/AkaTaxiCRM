@@ -13,7 +13,7 @@ import { Header } from "../../../components/UI/Header";
 import ImageFrame from "../../../components/UI/ImageFrame";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { breadCrumbItems } from "./Logic";
-import { FilterPassenger } from "./Filter/idex";
+import { FilterPassenger } from "./Filter";
 
 
 

@@ -38,6 +38,14 @@ export const driverList = [
     element: <Driver />
   },
   {
+    parent: 'drivers',
+    link: 'active',
+    sidebar: true,
+    title: 'Aktiv',
+    icon: 'smart_car',
+    element: <ActiveDrivers />
+  },
+  {
     parent: "drivers",
     link: "fotocontrolusers",
     sidebar: true,
@@ -60,14 +68,6 @@ export const driverList = [
     title: '',
     icon: '',
     element: <AddDriver />
-  },
-  {
-    parent: 'drivers',
-    link: 'active',
-    sidebar: true,
-    title: 'Aktiv',
-    icon: 'smart_car',
-    element: <ActiveDrivers />
   },
   {
     parent: 'drivers',
