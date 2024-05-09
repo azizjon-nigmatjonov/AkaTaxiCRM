@@ -130,10 +130,6 @@
     box-shadow: none;
     overflow: scroll;
   }
-
-  // #resizeMe {
-  //   // padding: 12px;
-  // }
 }
 
 thead {
@@ -168,16 +164,19 @@ thead {
 
 .resizer {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 5px;
+  top: 14px;
+  right: -12px;
+  width: 28px;
   cursor: col-resize;
   user-select: none;
   height: 80px !important;
+  z-index: 2;
 }
 .resizer:hover,
 .resizing {
-  border-right: 2px solid $main;
+  // border-right: 2px solid $main;
+  background-image: url('/svg/expandSide.svg');
+  background-repeat: no-repeat;
 }
 
 .resizable {

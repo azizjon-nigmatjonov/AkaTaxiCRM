@@ -9,29 +9,16 @@ import { useQuery } from "react-query";
 import passengerService from "../../../services/passengers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
-import CSelect from "../../../components/CElements/CSelect";
-import { useSelector } from "react-redux";
 import { Header } from "../../../components/UI/Header";
 import ImageFrame from "../../../components/UI/ImageFrame";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
-import Filters from "../../../components/UI/Filter";
-import DropDown from "../../../components/FormElements/DropDown";
 import { breadCrumbItems } from "./Logic";
+import { FilterPassenger } from "./Filter/idex";
 
-const Divice = [
-  { value: "ios", label: "IOS" },
-  { value: "android", label: "Android" },
-];
 
-const Version = [
-  { value: "v 1.1.04", label: "v 1.1.04" },
-  { value: "v 1.1.03", label: "v 1.1.03" },
-  { value: "v 1.1.02", label: "v 1.1.02" },
-  { value: "v 1.1.01", label: "v 1.1.01" },
-];
 
 const Passengers = () => {
-  const { navigateQuery, navigateTo, getQueries } = usePageRouter();
+  const { navigateQuery, navigateTo } = usePageRouter();
   const {
     currentPage,
     q,
@@ -43,8 +30,7 @@ const Passengers = () => {
     version,
     gender,
   } = useGetQueries();
-  const regions = useSelector((state: any) => state.regions.regions);
-  const query = getQueries();
+  
 
   const { data, isLoading, refetch } = useQuery(
     [
@@ -162,31 +148,6 @@ const Passengers = () => {
     navigateQuery({ q: value });
   };
 
-  const Regions = useMemo(() => {
-    return regions?.map((i: any) => {
-      return {
-        value: i.id,
-        label: i.name.uz,
-      };
-    });
-  }, [regions]);
-
-  const handlerRegion = (evt: any) => {
-    navigateQuery({ region_id: evt });
-  };
-
-  const handlerDiviceModel = (evt: any) => {
-    navigateQuery({ device_type: evt });
-  };
-
-  const handlerVersion = (evt: any) => {
-    navigateQuery({ version: evt });
-  };
-
-  const handlerGender = (evt: any) => {
-    navigateQuery({ gender: evt });
-  };
-
   return (
     <>
       <Header>
@@ -205,43 +166,7 @@ const Passengers = () => {
           </div>
         </SectionHeader>
 
-        <Filters filter={!!query.filter}>
-          <div className="grid grid-cols-5 gap-x-4">
-          <DropDown
-            label="Vaqt"
-            name="Vaqt"
-            placeholder="Tanlang"
-            defaultValue={"01.01-.01.01"}
-          />
-          <CSelect
-            handlerValue={handlerDiviceModel}
-            options={Divice}
-            label="Operatsion sistema"
-            placeholder="Tanglang"
-          />
-          <CSelect
-            handlerValue={handlerVersion}
-            options={Version}
-            label="Versiyalar"
-            placeholder="Tanglang"
-          />
-          <CSelect
-            handlerValue={handlerGender}
-            options={[
-              { value: "m", label: "Erkak" },
-              { value: "f", label: "Ayol" },
-            ]}
-            label="Jinsi"
-            placeholder="Tanlang"
-          />
-          <CSelect
-            handlerValue={handlerRegion}
-            options={Regions}
-            label="Viloyat"
-            placeholder="Tanlang"
-          />
-          </div>
-        </Filters>
+       <FilterPassenger />
 
         <CTable
           headColumns={headColumns}

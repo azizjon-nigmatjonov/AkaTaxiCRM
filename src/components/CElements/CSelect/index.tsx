@@ -27,11 +27,11 @@ const CSelect = ({
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       {label && <CLabel title={label} />}
       <div
         id={`cselect-${id}`}
-        className={`${classes} rounded-[8px] overflow-hidden`}
+        className={`${classes} rounded-[8px] overflow-hidden common-shadow`}
       >
         <Select
           value={value}

@@ -49,7 +49,8 @@ export const CallList = () => {
         {cardList.map((item, index) => (
           <div
             key={index}
-            className={`rounded-[6px] py-16px px-2px text-center bg-[var(--${item.color}50)]`}
+            className={`rounded-[6px] py-16px px-2px text-center`}
+            style={{ backgroundColor: `var(--${item.color}50)` }}
           >
             <h3 className={`font-[600] mb-6px text-[var(--${item.color})]`}>
               {item.title}

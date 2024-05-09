@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import CModal from "../../../../../../components/CElements/CModal";
+import CModal from "../../../CElements/CModal";
 import {
   PauseCircleFilledRounded,
   PlayCircleFilledWhiteRounded,
   RestartAltRounded,
 } from "@mui/icons-material";
 import PlayButton from "./PlayButton";
-import usePageRouter from "../../../../../../hooks/useObjectRouter";
+import usePageRouter from "../../../../hooks/useObjectRouter";
 
 const formWaveSurferOptions = (ref: any) => ({
   container: ref,

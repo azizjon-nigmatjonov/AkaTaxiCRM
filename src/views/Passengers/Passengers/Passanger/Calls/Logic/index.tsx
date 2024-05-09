@@ -5,8 +5,8 @@ import {
   ListIcon,
 } from "../../../../../../components/UI/IconGenerator/Svg";
 import { useGetQueries } from "../../../../../../hooks/useGetQueries";
-import { AudioModal } from "../AudioModal";
-import { NoteModal } from "../NoteModal";
+import { AudioModal } from "../../../../../../components/UI/CallModals/AudioModal";
+import { NoteModal } from "../../../../../../components/UI/CallModals/NoteModal";
 
 export const TableActions = () => {
   const { navigateQuery } = usePageRouter()
@@ -30,6 +30,9 @@ export const TableActions = () => {
     {
       title: "lead - sabablari",
       id: "lead",
+      render: (val: string) => {
+        
+      }
     },
     {
       title: "",

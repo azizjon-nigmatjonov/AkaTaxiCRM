@@ -1,6 +1,6 @@
-import usePageRouter from "../../../../../../hooks/useObjectRouter";
-import CModal from "../../../../../../components/CElements/CModal";
-import HFTextareaAutosize from "../../../../../../components/FormElements/HFTextareaAutosize";
+import usePageRouter from "../../../../hooks/useObjectRouter";
+import CModal from "../../../CElements/CModal";
+import HFTextareaAutosize from "../../../FormElements/HFTextareaAutosize";
 import { useForm } from "react-hook-form";
 
 export const NoteModal = () => {
