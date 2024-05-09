@@ -31,7 +31,7 @@ export const TableActions = () => {
       title: "lead - sabablari",
       id: "lead",
       render: (val: string) => {
-        
+        return <>{val}</>
       }
     },
     {
