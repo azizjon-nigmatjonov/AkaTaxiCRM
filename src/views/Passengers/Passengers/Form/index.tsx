@@ -160,14 +160,7 @@ const Form = ({ refetch }: Props) => {
           required={true}
           defaultValue={passengerInfo?.phone}
         />
-        <HFTextField
-          name="telegram_link"
-          control={control}
-          placeholder="Telegram.link"
-          label="Telegram Link"
-          setValue={setValue}
-          required={true}
-        />
+        
       </div>
     </CModal>
   );

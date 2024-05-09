@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import { Months } from "../../../../../mixins/month"
 import { getWeekDays, getYears, } from "../../../../../utils/getMonth"
 import CFilterTab from "../../../../../components/CElements/CFilterTab"
-
+import {tabList} from '../Logic'
 // const CTabList = [
 //   {
 //     label:'Oylik',
@@ -16,6 +16,7 @@ import CFilterTab from "../../../../../components/CElements/CFilterTab"
 //   }
 // ] 
 
+
 const Filters = () => {
 
   const { control } = useForm()
@@ -25,7 +26,7 @@ const Filters = () => {
     <div>
       <div className="flex items-center justify-between">
         <p className="text-base font-semibold">Narxlar o’zgarishi</p>
-        <CFilterTab  />
+        <CFilterTab tabList={tabList} />
       </div>
       <div className="p-4 rounded-xl bg-[#F9FAFB] flex items-center gap-3 my-4">
         <HFSelect control={control} name={'year'} label="Yil" options={getYears()} defaultValue={new Date().getFullYear()} />
