@@ -5,6 +5,7 @@ import {
   ManGenderIcon,
   WomenGenderIcon,
 } from "../../components/UI/IconGenerator/Svg";
+import { OneSkeleton } from "../../components/CElements/CSkeleton/OneSkeleton";
 
 interface PassengerProps {
   data: {
@@ -15,9 +16,10 @@ interface PassengerProps {
     ios: number;
     android: number;
   };
+  isLoading: boolean
 }
 
-function Passenger({ data }: PassengerProps) {
+function Passenger({ data, isLoading }: PassengerProps) {
   const [totalCount, setTotalCount] = useState<number>(0);
 
   useEffect(() => {
@@ -27,8 +29,12 @@ function Passenger({ data }: PassengerProps) {
     }
   }, [data]);
 
+  if (isLoading) {
+    return <OneSkeleton height={191.5} />
+  }
+
   return (
-    <div className={`max-w-[50%] p-6 w-full rounded-[12px] bg-white border border-[var(--gray20)] card-shadow`}>
+    <div className={`max-w-[50%] p-6 w-full rounded-[12px] bg-white border border-[var(--gray20)] card-shadow min-g-[191px]`}>
       <h3 className="text-[#101828] font-semibold">{data?.name}</h3>
       <div className="flex gap-[49px]">
         <div className="mt-6 relative">
