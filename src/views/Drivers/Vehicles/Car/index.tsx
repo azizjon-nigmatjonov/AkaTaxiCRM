@@ -1,7 +1,5 @@
 import { useCallback, useMemo, useState, useEffect } from "react";
 import CTable from "../../../../components/CElements/CTable";
-// import SectionHeader from "../../../../components/Sections/Header";
-// import FilterButton from "../../../../components/Filters";
 import { useQuery } from "react-query";
 import driverService from "../../../../services/drivers";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
@@ -33,9 +31,6 @@ const SingleCar = () => {
   const setCarList = useState([])[1];
   const setLoading = useState(false)[1];
 
-  console.log(page);
-
-
   const { data: driversData } = useQuery(
     ["GET_DRIVERS_BY_CAR", id, page],
     () => {
@@ -45,8 +40,6 @@ const SingleCar = () => {
       enabled: !!id,
     }
   );
-
-
 
   const tab = useMemo(() => {
     return currentTab ? currentTab : "1";
