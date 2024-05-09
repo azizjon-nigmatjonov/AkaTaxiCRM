@@ -7,14 +7,10 @@ import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../views/Auth/Login";
 import Registration from "../views/Auth/Registration";
-<<<<<<< HEAD
-import CallCenter from "../views/CallCenter";
+
 import { routeList } from "./List";
-import Partners from "../views/Partners";
-import Partner from "../views/Partners/Partner";
-=======
-import { routeList } from "./List";
->>>>>>> dce45bf (added: filterTabs & fixed: passengers add form)
+
+
 
 interface Path {
   parent: string;
@@ -111,11 +107,6 @@ const Router = () => {
               element={route.element}
             />
           ))}
-<<<<<<< HEAD
-
-   
-=======
->>>>>>> dce45bf (added: filterTabs & fixed: passengers add form)
         </Route>
 
         <Route path="*" element={<Navigate to="/" />} />
