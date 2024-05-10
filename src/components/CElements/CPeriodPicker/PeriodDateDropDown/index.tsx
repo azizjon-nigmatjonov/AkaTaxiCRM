@@ -5,6 +5,8 @@ import "../style.scss";
 import { FormatCalendar } from "../../../../utils/formatTime";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 import { PeriodDateMenu } from "./Menu";
+// import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+// import dayjs from "dayjs";
 // import AddButton from '../Buttons/AddButton';
 // import { Closer } from "../../../../components/UI/Closer";
 
@@ -28,10 +30,15 @@ Props) => {
     handlerValue(e);
   };
 
+//   const today = dayjs();
+// const yesterday = dayjs().subtract(1, 'day');
+
   return (
     <div className="periodPicker flex">
       <PeriodDateMenu />
+      
       <LocalizationProvider dateAdapter={AdapterDayjs}>
+      {/* <DateRangePicker defaultValue={[yesterday, today]} maxDate={yesterday} /> */}
         <DateRangeCalendar
           onChange={(e: any) => clickhandler(e)}
           calendars={2}

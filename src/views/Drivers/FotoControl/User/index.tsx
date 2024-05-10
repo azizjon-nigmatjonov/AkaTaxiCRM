@@ -34,7 +34,8 @@ const FotoControlUser = () => {
       },
     ];
   }, [fotoControl]);
-
+  console.log('fotoControl', fotoControl);
+  
   return (
     <>
       <Header sticky={true}>
@@ -42,7 +43,7 @@ const FotoControlUser = () => {
       </Header>
       <div className="px-6 space-y-6">
         <DriverInfo data={fotoControl?.data} />
-        {fotoControl?.data?.status != "verified" && (
+        {fotoControl?.data?.status !== "verified" && fotoControl?.data?.status !== 'canceled' && (
           <StickerControl data={fotoControl?.data} />
         )}
         <StickerHistory data={fotoControl?.data} />
