@@ -6,21 +6,21 @@ import usePageRouter from "../../../../hooks/useObjectRouter";
 import CModal from "../../../../components/CElements/CModal";
 import HFInputMask from "../../../../components/FormElements/HFInputMask";
 import HFSelect from "../../../../components/FormElements/HFSelect";
-import { FetchFunctions } from "./Function";
-const Form = ({ refetch }: { refetch: () => void; id: string }) => {
+import { FetchFunction } from "./Logic";
+const Form = ({ refetch, id }: { refetch: () => void; id: string }) => {
   const schema = Validation();
   const { navigateQuery } = usePageRouter();
-  
+
   const { control, setValue, handleSubmit, reset } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
-  const { rolls, submitForm } = FetchFunctions({ reset, refetch });
+  const { rolls, submitForm, adminData } = FetchFunction({ reset, refetch, adminId: id });
 
   const onSubmit = (data: any) => {
     submitForm(data);
   };
-
+  
   return (
     <CModal
       title="add_new_admin"
@@ -37,6 +37,7 @@ const Form = ({ refetch }: { refetch: () => void; id: string }) => {
             label="Ism familya"
             setValue={setValue}
             required={true}
+            defaultValue={adminData?.name}
           />
           <HFInputMask
             name="phone"
@@ -45,6 +46,7 @@ const Form = ({ refetch }: { refetch: () => void; id: string }) => {
             placeholder={`Telefon raqam`}
             mask={"+\\9\\9\\8 99 999 99 99"}
             required={true}
+            defaultValue={adminData?.phone}
           />
           <HFTextField
             name="email"
@@ -53,6 +55,7 @@ const Form = ({ refetch }: { refetch: () => void; id: string }) => {
             label="Email"
             setValue={setValue}
             type="email"
+            defaultValue={adminData?.email}
           />
           <HFSelect
             name="roles"
@@ -62,7 +65,7 @@ const Form = ({ refetch }: { refetch: () => void; id: string }) => {
             placeholder="Rolni tanlang"
             required={true}
             setValue={setValue}
-            // defaultValue={partnerInfo?.region_id}
+            defaultValue={adminData?.roles}
           />
           <HFTextField
             name="password"
@@ -73,6 +76,7 @@ const Form = ({ refetch }: { refetch: () => void; id: string }) => {
             type="password"
             activatePassword={true}
             required={true}
+            defaultValue={adminData?.password}
           />
         </div>
         <div className="mt-5">
