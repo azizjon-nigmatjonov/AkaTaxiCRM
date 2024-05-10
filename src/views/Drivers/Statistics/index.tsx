@@ -1,7 +1,6 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import CCard from "../../../components/CElements/CCard";
-import { useQuery } from "react-query";
-import driverService from "../../../services/drivers";
+
 import { Skeleton } from "@mui/material";
 import StatisticsLineChart from "./Bar";
 import Progress from '../../../components/UI/Progress'
@@ -12,52 +11,15 @@ import { useGetQueries } from "../../../hooks/useGetQueries";
 import RangeDate from "../../../components/UI/RangeDate";
 import { BiCaretDown, BiX } from "react-icons/bi";
 import { StatisticsCard } from "./Cards";
+import { FetchFunction, breadCrumbs } from "./Logic";
 
 const DriverStatistics = () => {
-  const { year, month, week, start, end } = useGetQueries();
+  const { start, end } = useGetQueries();
   const [value, setValue] = useState(false)
-
-  const { data: widgets, isLoading } = useQuery(['GET_GRAPH_LIST', start, end], () => {
-    return driverService.getWidgets({ start, end });
-  })
-
-  const { data: graph, isLoading: barLoading } = useQuery(['GET_GRAPH_DATA', year, week, month], () => {
-    return driverService.getDriversGraph({ year, week, month })
-  })
-
-  const { data: userRegion } = useQuery(['GET_REGION_USER'], () => {
-    return driverService.getUserRegion()
-  })
-
-  const widgetsData = useMemo(() => {
-    return widgets?.data ?? []
-  }, [widgets])
-
-  const graphData: any = useMemo(() => {
-    if (!graph?.data) return []
-    let data = graph?.data;
-    let label: any = [];
-    let trip: any = [];
-    let founded: any = [];
-
-    data?.map((val: any) => (label.push(val?.time), trip.push(val?.count), founded.push(val?.bookings)))
-
-    return { label, trip, founded }
-  }, [graph])
+  const { data, barLoading, widgetsLoading, regionLoading } = FetchFunction()
 
 
-  const regionUser: any = useMemo(() => {
-    return userRegion?.data ?? []
-  }, [userRegion])
 
-  const breadCrumbs = useMemo(() => {
-    return [
-      { label: "Haydovchilar", link: '/drivers/main' },
-      { label: 'Statistika', }
-    ]
-  }, [])
-
-  
   return (
     <>
       <Header sticky={true}>
@@ -80,43 +42,22 @@ const DriverStatistics = () => {
         </div>
       </div>
 
-      <div className="px-6 ">
-{/* 
-        <div className="flex items-center gap-5 w-full overflow-scroll ">
-          {widgetsData?.map(({ id, name, quantity, change }: { id?: number, name?: string, quantity?: number, change?: any }) => {
-            return <CCard key={id} style={{ minHeight: 0, minWidth: '25%' }}>
-              <div className="flex items-center gap-[18px]">
-                {change > 0 ? <ArrowUp fill={true} /> : <ArrowDown fill={true} />}
-                <div>
-                  <p className="text-[28px] font-semibold flex items-center gap-4">{quantity}<span className={`text-base ${change > 0 ? 'text-[var(--green)]' : 'text-[var(--danger)]'}`}>{change > 0 ? '+' + change : change}%</span></p>
-                  <p className="text-[var-(--gray)] text-sm ">{name}</p>
-                </div>
-              </div>
-            </CCard>
-          })}
-        </div> */}
+      <div className="p-5 space-y-[20px]">
 
-        <StatisticsCard data={widgetsData} loading={isLoading}/>
+        <StatisticsCard data={data?.widgetsData} loading={widgetsLoading} />
 
-        <div className="pt-[18px]">
-          <CCard style={{ minHeight: 0 }}>
-            <StatisticsHeader />
-            <StatisticsLineChart grapData={graphData} loading={barLoading} />
-          </CCard>
-        </div>
+        <CCard style={{ minHeight: 0 }}>
+          <StatisticsHeader />
+          <StatisticsLineChart grapData={data?.graphData} loading={barLoading} />
+        </CCard>
 
-        <div className="py-[18px]">
-          <CCard style={{ minHeight: 0 }}>
-            <div className="flex items-center justify-between mb-5">
-              <p>Viloyatlararo yangi haydovchilar</p>
-            </div>
+        <CCard style={{ minHeight: 0 }}>
+          <p className="mb-5">Viloyatlararo yangi haydovchilar</p>
+          <div>
+            {regionLoading ? <Skeleton height={200} /> : <Progress size={70} color='var(--main)' data={data?.regionUser} />}
+          </div>
 
-            <div>
-              {isLoading ? <Skeleton height={200} /> : <Progress size={70} color='var(--main)' data={regionUser} />}
-            </div>
-
-          </CCard>
-        </div>
+        </CCard>
       </div>
     </>
   );
