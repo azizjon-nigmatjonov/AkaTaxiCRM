@@ -1,0 +1,37 @@
+
+
+.periodPicker {
+    position: absolute;
+    background-color: white;
+    box-shadow: 5px 5px 15px 5px #ddd;
+    border-radius: 8px;
+    z-index: 91;
+    top: 67px;
+}
+
+.PeriodTextField {
+    .MuiFormControl-root {
+        width: 100%;
+        background-color: #fff;
+        height: 40px;
+        border-radius: 8px;
+        border: 1px solid var(--gray20);
+        @include common-shadow;
+    }
+    .MuiInputBase-root {
+        width: 100%;
+        padding: 0;
+
+        svg {
+            display: none;
+        }
+    }
+    fieldset {
+        border: none;
+        width: 100%;
+        background-color: transparent;
+    }
+    input {
+        cursor: pointer;
+    }
+}

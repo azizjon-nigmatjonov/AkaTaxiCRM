@@ -29,7 +29,7 @@ const RangeDate = ({ handlerValue = () => { }, setShow, footerActive = false }: 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DateRangeCalendar onChange={(e: any) => clickhandler(e)} calendars={2} />
                 </LocalizationProvider>
-                {footerActive && <div className='p-5 flex justify-end'>
+                {!footerActive && <div className='p-5 flex justify-end'>
                     <div>
                         <AddButton iconLeft={false} text='Tanlang' />
                     </div>

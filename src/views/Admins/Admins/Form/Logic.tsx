@@ -6,24 +6,36 @@ import { useDispatch } from "react-redux";
 import { websiteActions } from "../../../../store/website";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 
-export const FetchFunctions = ({
+export const FetchFunction = ({
   reset,
   refetch,
+  adminId,
 }: {
   reset: any;
+  adminId: string;
   refetch: () => void;
 }) => {
   const { navigateQuery } = usePageRouter();
   const dispatch = useDispatch();
+
   const { data: rolls } = useQuery(
     ["GET_ROLLS"],
     () => {
       return roleService.getList();
     },
+  );
+
+
+  const { data: adminData } = useQuery(
+    ["GET_ROLLS", adminId],
+    () => {
+      return adminService.getAdmin(adminId);
+    },
     {
-      enabled: true,
+      enabled: !!adminId,
     }
   );
+  
 
   const HandleSuccess = (title: string) => {
     dispatch(
@@ -58,5 +70,5 @@ export const FetchFunctions = ({
     });
   }, [rolls]);
 
-  return { rolls: SelectOptions, submitForm };
+  return { rolls: SelectOptions, submitForm, adminData: adminData?.data };
 };

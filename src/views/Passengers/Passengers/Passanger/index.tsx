@@ -34,7 +34,7 @@ const Passanger = () => {
   }, [passenger]);
 
   return (
-    <div className="relative">
+    <div className="relative pb-10">
       <Header>
         <CBreadcrumbs items={breadCrubmsItems} progmatic={true} type="link" />
       </Header>

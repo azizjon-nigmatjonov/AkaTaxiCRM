@@ -7,10 +7,11 @@ import { CgArrowLongRight } from "react-icons/cg";
 import driverService from '../../../../../../services/drivers';
 import { useDispatch } from 'react-redux';
 import { websiteActions } from '../../../../../../store/website'
+import { useParams } from 'react-router-dom';
 
 const Accepted = ({ date }: { date?: string }) => {
-    const { navigateQuery, getQueries } = usePageRouter();
-    const query = getQueries()
+    const { navigateQuery } = usePageRouter();
+    const { id } = useParams()
     const dispatch = useDispatch()
 
     const showPeriodTime: any = useMemo(() => {
@@ -27,7 +28,7 @@ const Accepted = ({ date }: { date?: string }) => {
     }, [date])
 
     const acceptHandler = () => {
-        driverService.updateFotoControl(query?.id, { status: 'verified' }).then(() => {
+        driverService.updateFotoControl(id, { status: 'verified' }).then(() => {
             navigateQuery({ action: '' })
             dispatch(websiteActions.setAlertData({
                 mainTitle: 'Qabul qilindi!',
@@ -59,7 +60,7 @@ const Accepted = ({ date }: { date?: string }) => {
             </div>
             <div className='flex items-center justify-end gap-3'>
                 <CancelButton text='Orqaga' onClick={() => navigateQuery({ action: '' })} />
-                <AddButton iconLeft={false} text='Qabul qilsh' onClick={acceptHandler} />
+                <AddButton id='saveButton' iconLeft={false} text='Qabul qilsh' onClick={acceptHandler} />
             </div>
         </>
     )

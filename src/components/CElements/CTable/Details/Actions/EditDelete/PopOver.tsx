@@ -8,20 +8,20 @@ export const PopoverDelete = ({
 }) => {
   return (
     <>
-      <div className="absolute left-[-260px] top-0 bg-white p-2 border border-[var(--lightGray)] z-[91] rounded-[10px]">
+      <div className="absolute left-[-400px] top-[-40px] bg-white p-16px border border-[var(--gray20)] z-[91] rounded-[8px] common-shadow">
         <p className="whitespace-nowrap flex space-x-2">
-          <WarningIcon /> <span>Rostdanham o'chirmoqchimisiz?</span>
+          <WarningIcon /> <span className="font-[600] text-lg">Ma'lumotni aniq o'chirib tashlamoqchimisiz?</span>
         </p>
 
         <div className="flex items-center justify-end space-x-2 mt-4">
           <button
-            className="bg-[var(--lightestGray)] px-2 rounded-[4px]"
+            className="bg-[var(--lightestGray)] px-4 py-2 rounded-[8px]"
             onClick={() => closePopover("no")}
           >
             Yo'q
           </button>
           <button
-            className="bg-[var(--primary)] px-2 rounded-[4px] text-white"
+            className="bg-[var(--main)] px-4 py-2 rounded-[8px] text-white"
             onClick={() => closePopover("delete")}
           >
             Ha
