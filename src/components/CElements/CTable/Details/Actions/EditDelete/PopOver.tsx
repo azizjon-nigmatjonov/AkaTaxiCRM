@@ -16,7 +16,7 @@ export const PopoverDelete = ({
         <div className="flex items-center justify-end space-x-2 mt-4">
           <button
             className="bg-[var(--lightestGray)] px-4 py-2 rounded-[8px]"
-            onClick={() => closePopover("no")}
+            onClick={() => closePopover("")}
           >
             Yo'q
           </button>
