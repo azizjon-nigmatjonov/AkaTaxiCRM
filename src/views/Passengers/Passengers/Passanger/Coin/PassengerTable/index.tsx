@@ -10,6 +10,7 @@ export const PassengerTable = ({ list = [], isLoading = true }: { list: any, isL
         title="Boshqa yo’lovchi uchun"
         text="+1 coin beriladi"
       />
+      
       <div className="mt-4">
         <CTable
           headColumns={headColumns}

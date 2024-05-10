@@ -35,8 +35,6 @@ const Admins = () => {
      ...admins
     };
   }, [admins]);
-
-  console.log(bodyColumns);
   
 
   const headColumns = useMemo(() => {
@@ -51,7 +49,7 @@ const Admins = () => {
       },
       {
         title: "Tel.raqam",
-        id: "phone_number",
+        id: "phone",
       },
       {
         title: "Rol",
