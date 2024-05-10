@@ -40,6 +40,7 @@ const CSelect = ({
           inputProps={{
             "aria-label": "Without label",
           }}
+      
           onChange={handleChange}
           onClick={() => setOpen((prev) => !prev)}
         >
