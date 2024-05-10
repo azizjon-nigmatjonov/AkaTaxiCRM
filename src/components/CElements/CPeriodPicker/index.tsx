@@ -5,9 +5,10 @@ import { PeriodDateDropDown } from "./PeriodDateDropDown";
 
 interface Props {
   label?: string;
+  placeholder?: string;
 }
 
-export const CPeriodPicker = ({ label = "" }: Props) => {
+export const CPeriodPicker = ({ label = "", placeholder= "" }: Props) => {
   const [open, setOpen] = useState(false);
 
   const handleDropdown = useCallback(() => {
@@ -17,7 +18,7 @@ export const CPeriodPicker = ({ label = "" }: Props) => {
   return (
     <div className="flex flex-col relative">
       {label && <CLabel title={label} />}
-      <PeriodTextField name="time" handleDropdown={handleDropdown} />
+      <PeriodTextField name="time" open={open} placeholder={placeholder} handleDropdown={handleDropdown} />
       <PeriodDateDropDown open={open} handleDropdown={handleDropdown} />
     </div>
   );

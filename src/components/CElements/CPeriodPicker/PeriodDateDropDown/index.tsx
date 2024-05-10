@@ -17,8 +17,8 @@ interface Props {
 export const PeriodDateDropDown = ({
   open = false,
   handlerValue = () => {},
-//   handleDropdown,
-}: Props) => {
+}: //   handleDropdown,
+Props) => {
   if (!open) return <></>;
   const { navigateQuery } = usePageRouter();
 
@@ -29,8 +29,8 @@ export const PeriodDateDropDown = ({
   };
 
   return (
-    <div className="periodPicker">
-        <PeriodDateMenu />
+    <div className="periodPicker flex">
+      <PeriodDateMenu />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateRangeCalendar
           onChange={(e: any) => clickhandler(e)}

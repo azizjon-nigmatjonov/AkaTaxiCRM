@@ -1,3 +1,5 @@
+
+
 .periodPicker {
     position: absolute;
     background-color: white;
@@ -5,28 +7,28 @@
     border-radius: 8px;
     z-index: 91;
     top: 67px;
-    
+}
 
-    .MuiDateRangeCalendar-root {
+.PeriodTextField {
+    .MuiFormControl-root {
+        width: 100%;
+        background-color: #fff;
+        height: 40px;
+        border-radius: 8px;
+        border: 1px solid var(--gray20);
+        @include common-shadow;
+    }
+    .MuiInputBase-root {
+        width: 100%;
+        padding: 0;
 
-        &>div:first-child {
-            display: none !important;
+        svg {
+            display: none;
         }
-
-        .MuiTypography-subtitle1 {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .MuiDayCalendar-weekDayLabel {
-            font-size: 14px;
-            font-weight: 500;
-            color: #344054;
-        }
-
-        .Mui-selected {
-            background-color: var(--main) !important;
-        }
-
+    }
+    fieldset {
+        border: none;
+        width: 100%;
+        background-color: transparent;
     }
 }

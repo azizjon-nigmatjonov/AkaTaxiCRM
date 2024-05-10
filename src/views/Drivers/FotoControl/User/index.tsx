@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom";
 
 const FotoControlUser = () => {
   const { id } = useParams();
-  console.log(id);
 
   const { data: fotoControl } = useQuery(
     ["GET_FOTOCONTROL_USER", id],
