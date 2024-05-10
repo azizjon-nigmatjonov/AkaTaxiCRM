@@ -63,11 +63,7 @@ const DriverStatistics = () => {
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} type="link" />
       </Header>
-<<<<<<< HEAD
       <div className="container sticky top-20 z-[12] py-[24px] w-[100%] bg-[var(--softGray)] flex items-center justify-between">
-=======
-      <div className="sticky top-20 z-[12] py-[24px] pl-[12px] w-[100%] bg-[var(--softGray)] flex items-center justify-between">
->>>>>>> 5110a4a7a5fd40989221f104675d5e8f8a56394d
         <h1 className="text-2xl font-[600] text-[var(--black)]">
           Statistika: haydovchi
         </h1>

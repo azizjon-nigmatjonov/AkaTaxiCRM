@@ -7,18 +7,17 @@ import DriverInfo from "./Info"
 import StickerControl from "./StickerControl"
 import StickerHistory from "./StickerHistory"
 import { useParams } from "react-router-dom"
-import { useGetQueries } from "../../../../hooks/useGetQueries"
 
 
 const FotoControlUser = () => {
-    const { action } = useGetQueries()
     const { id } = useParams();
     console.log(id);
     
 
     const { data: fotoControl } = useQuery(['GET_FOTOCONTROL_USER', id], () => {
         return driverService.getFotoControlUser(id)
-    }, {enabled: !!action})
+    }, {enabled: !!id })
+    
     
 
     const breadCrubmsItems = useMemo(() => {
