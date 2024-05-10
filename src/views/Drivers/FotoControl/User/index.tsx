@@ -34,14 +34,13 @@ const FotoControlUser = () => {
       },
     ];
   }, [fotoControl]);
-  console.log('fotoControl', fotoControl);
   
   return (
     <>
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrubmsItems} type="link" />
       </Header>
-      <div className="px-6 space-y-6">
+      <div className="container space-y-5">
         <DriverInfo data={fotoControl?.data} />
         {fotoControl?.data?.status !== "verified" && fotoControl?.data?.status !== 'canceled' && (
           <StickerControl data={fotoControl?.data} />
