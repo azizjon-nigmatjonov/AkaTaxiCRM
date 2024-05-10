@@ -17,7 +17,7 @@ export const driverList = [
     parent: "drivers",
     link: "main",
     sidebar: true,
-    title: "Haydovchilar",
+    title: "Ro'yxat",
     icon: "driving",
     element: <Drivers />,
   },
