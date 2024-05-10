@@ -4,8 +4,8 @@ import usePageRouter from "../../../../hooks/useObjectRouter";
 import { VersionsList } from "../../../../constants/versions";
 import { DivicesList } from "../../../../constants/devices";
 import { GetRegion } from "./Logic";
-// import { CPeriodPicker } from "../../../../components/CElements/CPeriodPicker";
-import DropDown from "../../../../components/FormElements/DropDown";
+import { CPeriodPicker } from "../../../../components/CElements/CPeriodPicker";
+// import DropDown from "../../../../components/FormElements/DropDown";
 
 export const FilterPassenger = () => {
   const { getQueries, navigateQuery } = usePageRouter();
@@ -20,13 +20,13 @@ export const FilterPassenger = () => {
   return (
     <Filters filter={!!filter}>
       <div className="grid grid-cols-5 gap-x-4 w-full">
-        {/* <CPeriodPicker label="Vaqt" placeholder="Vaqtni tanlang" /> */}
-        <DropDown
+        <CPeriodPicker label="Vaqt" placeholder="Vaqtni tanlang" />
+        {/* <DropDown
           label="Vaqt"
           name="Vaqt"
           placeholder="Tanlang"
           defaultValue={"01.01-.01.01"}
-        />
+        /> */}
         <CSelect
           handlerValue={handlerDiviceModel}
           options={DivicesList}
