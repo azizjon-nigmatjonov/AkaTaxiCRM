@@ -29,12 +29,12 @@ export const TableDelete = ({
 
       {permissions.includes("edit") && (
         <div className={cls.edit} onClick={() => tableActions("edit", element)}>
-          <BorderColorRounded style={{ color: "var(--gray90)" }} />
+          <BorderColorRounded style={{ color: "var(--primary)" }} />
         </div>
       )}
       {permissions.includes("view") && (
         <div className={cls.edit} onClick={() => tableActions("view", element)}>
-          <Visibility style={{ color: "var(--gray)" }} />
+          <Visibility style={{ color: "var(--gray90)" }} />
         </div>
       )}
     </div>

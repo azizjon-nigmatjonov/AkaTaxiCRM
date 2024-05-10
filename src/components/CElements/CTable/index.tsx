@@ -394,7 +394,7 @@ const CTable = ({
 
                       {column.id === "actions" && !item.empty && (
                         <div className="relative">
-                          {column.permission.length <= 2 ? (
+                          {column.permission.length <= 3 ? (
                             <div>
                               <TableDelete
                                 element={item}

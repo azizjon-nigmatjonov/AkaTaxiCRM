@@ -16,18 +16,8 @@ import Filters from "../../../components/UI/Filter";
 import DropDown from "../../../components/FormElements/DropDown";
 import CSelect from "../../../components/CElements/CSelect";
 import { useSelector } from "react-redux";
-
-const Divice = [
-  { value: "ios", label: "IOS" },
-  { value: "android", label: "Android" },
-];
-
-const Version = [
-  { value: "v 1.1.04", label: "v 1.1.04" },
-  { value: "v 1.1.03", label: "v 1.1.03" },
-  { value: "v 1.1.02", label: "v 1.1.02" },
-  { value: "v 1.1.01", label: "v 1.1.01" },
-];
+import { VersionsList } from "../../../constants/versions";
+import { DivicesList } from "../../../constants/devices";
 
 const Drivers = () => {
   const { navigateQuery, navigateTo, getQueries } = usePageRouter();
@@ -225,13 +215,13 @@ const Drivers = () => {
             />
             <CSelect
               handlerValue={handlerDiviceModel}
-              options={Divice}
+              options={DivicesList}
               label="Operatsion sistema"
               placeholder="Tanglang"
             />
             <CSelect
               handlerValue={handlerVersion}
-              options={Version}
+              options={VersionsList}
               label="Versiyalar"
               placeholder="Tanglang"
             />
