@@ -52,7 +52,7 @@ const HFSelect = ({
   }, [defaultValue, name, setValue]);
 
   return (
-    <div id={`cselect-${id}`}>
+    <div id="cselect">
       <Controller
         control={control}
         name={name}

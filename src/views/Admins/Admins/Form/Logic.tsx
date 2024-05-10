@@ -6,25 +6,10 @@ import { useDispatch } from "react-redux";
 import { websiteActions } from "../../../../store/website";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 
-export const FetchFunction = ({
-  reset,
-  refetch,
-  adminId,
-}: {
-  reset: any;
-  adminId: string;
-  refetch: () => void;
-}) => {
-  const { navigateQuery } = usePageRouter();
-  const dispatch = useDispatch();
-
-  const { data: rolls } = useQuery(
-    ["GET_ROLLS"],
-    () => {
-      return roleService.getList();
-    },
-  );
-
+export const FetchFunction = ({ adminId }: { adminId: string }) => {
+  const { data: rolls } = useQuery(["GET_ROLLS"], () => {
+    return roleService.getList();
+  });
 
   const { data: adminData } = useQuery(
     ["GET_ROLLS", adminId],
@@ -35,7 +20,31 @@ export const FetchFunction = ({
       enabled: !!adminId,
     }
   );
-  
+
+  const SelectOptions = useMemo(() => {
+    if (!rolls) return [];
+    const arr = rolls?.data ?? [];
+    return (arr as any).map((item: any) => {
+      return {
+        ...item,
+        label: item.name,
+        value: item.id,
+      };
+    });
+  }, [rolls]);
+
+  return { rolls: SelectOptions, adminData: adminData?.data };
+};
+
+export const SubmitFunction = ({
+  refetch,
+  reset,
+}: {
+  reset: any;
+  refetch: () => void;
+}) => {
+  const { navigateQuery } = usePageRouter();
+  const dispatch = useDispatch();
 
   const HandleSuccess = (title: string) => {
     dispatch(
@@ -58,17 +67,14 @@ export const FetchFunction = ({
     });
   };
 
-  const SelectOptions = useMemo(() => {
-    if (!rolls) return [];
-    const arr = rolls?.data ?? [];
-    return (arr as any).map((item: any) => {
-      return {
-        ...item,
-        label: item.name,
-        value: item.id,
-      };
+  const updateForm = (data: any, id: string) => {
+    data.phone = data.phone.substring(1).replace(/\s+/g, "");
+    const params = data;
+    params.roles = [params.roles]
+    adminService.updateAdmin(params, id).then(() => {
+      HandleSuccess("Ma'lumot yangilandi!");
+      refetch();
     });
-  }, [rolls]);
-
-  return { rolls: SelectOptions, submitForm, adminData: adminData?.data };
+  };
+  return { submitForm, updateForm };
 };

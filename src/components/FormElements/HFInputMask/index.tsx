@@ -14,7 +14,46 @@ interface Props {
   setValue?: (val1?: any, val2?: any) => void;
   defaultValue?: any;
   errors?: any;
+  handleChange?: (val?: any) => void;
 }
+
+const InputUI = ({
+  handleChange,
+  onChange,
+  placeholder = "",
+  mask = "",
+  value = "",
+  required = false,
+  defaultValue,
+}: {
+  value: any;
+  mask?: string;
+  placeholder?: any;
+  defaultValue?: any;
+  onChange: (val?: any) => void;
+  handleChange: (val?: any) => void;
+  required?: boolean;
+}) => {
+  useEffect(() => {
+    if (defaultValue) {
+      onChange(defaultValue);
+    }
+  }, [defaultValue]);
+
+  return (
+    <ReactInputMask
+      onChange={(e) => {
+        onChange(e.target.value);
+        handleChange(e.target.value);
+      }}
+      mask={mask}
+      maskChar=" "
+      value={value}
+      placeholder={placeholder}
+      required={required}
+    />
+  );
+};
 
 const HFInputMask = ({
   mask = "",
@@ -25,6 +64,7 @@ const HFInputMask = ({
   control,
   setValue = () => {},
   defaultValue = "",
+  handleChange = () => {},
 }: Props) => {
   const { t } = useTranslation();
 
@@ -46,13 +86,13 @@ const HFInputMask = ({
         }}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <>
-            <ReactInputMask
-              onChange={(e) => onChange(e.target.value)}
+            <InputUI
+              onChange={onChange}
               mask={mask}
-              maskChar=" "
               value={value}
               placeholder={placeholder}
-              required={required}
+              handleChange={handleChange}
+              defaultValue={defaultValue}
             />
             {error?.message && (
               <p className="text-sm text-[var(--error)] absolute -bottom-5">

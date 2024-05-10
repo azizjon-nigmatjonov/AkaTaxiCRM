@@ -15,13 +15,13 @@ export const PopoverDelete = ({
 
         <div className="flex items-center justify-end space-x-2 mt-4">
           <button
-            className="bg-[var(--lightestGray)] px-4 py-2 rounded-[8px]"
+            className="bg-[var(--lightestGray)] common-shadow px-4 py-2 rounded-[8px]"
             onClick={() => closePopover("")}
           >
             Yo'q
           </button>
           <button
-            className="bg-[var(--main)] px-4 py-2 rounded-[8px] text-white"
+            className="bg-[var(--main)] common-shadow px-4 py-2 rounded-[8px] text-white"
             onClick={() => closePopover("delete")}
           >
             Ha

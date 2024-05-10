@@ -22,15 +22,16 @@ input {
     svg {
       display: none;
     }
+
+    @include common-shadow;
+    border: 1px solid var(--gray20);
+
     &.Mui-focused {
-      .MuiOutlinedInput-notchedOutline {
-        border-color: var(--main);
-      }
+      outline: 1.5px solid var(--main);
     }
 
     fieldset {
-      border-color: var(--gray20);
-      @include common-shadow;
+      border: none;
       border-radius: 8px;
     }
 
@@ -57,14 +58,16 @@ input {
 #hfInputMask {
   input {
     background-color: transparent;
-    height: 48px;
+    height: 40px;
     width: 100%;
-    border: 1px solid var(--lineGray);
-    border-radius: 12px;
+    border: 1px solid var(--gray20);
+    border-radius: 8px;
     padding: 0 14px;
+    font-size: 14px;
+    @include common-shadow;
 
     &:focus {
-      border-color: var(--main);
+      outline: 1.5px solid var(--main);
     }
   }
 }
@@ -163,12 +166,13 @@ input {
   color: white;
   text-transform: none;
   border-radius: 10px;
-  border: 1px solid var(--lineGray);
+  border: 1px solid var(--gray20);
   height: 52px;
   padding: 0 18px;
   width: 100%;
   white-space: nowrap;
   font-weight: 500;
+  @include common-shadow;
 }
 
 .success-btn {

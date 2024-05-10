@@ -4,7 +4,6 @@ import CLabel from "../../CElements/CLabel";
 import "../style.scss";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-// import { useTranslation } from "react-i18next";
 
 interface Props {
   control: any;
@@ -39,16 +38,12 @@ const HFTextField = ({
   ...props
 }: Props) => {
   const [password, setPassword] = useState(true);
-
-  
-
-  // const { t } = useTranslation();
   useEffect(() => {
     if (defaultValue) {
       setValue(name, defaultValue);
     }
   }, [defaultValue, name, setValue]);
-
+  
   
   return (
     <div className="HFInput relative">

@@ -2,50 +2,43 @@
   width: 100%;
 
   .MuiFormControl-root {
-    &.error {
-      .MuiOutlinedInput-notchedOutline {
-        border-color: red !important;
-      }
-    }
-
     position: relative;
     width: 100%;
-
     .MuiInputBase-root {
       border-radius: 8px;
       height: 40px;
       border-radius: 8px;
-      border: 1px solid var(--gray30);
+      border: 1px solid var(--gray20);
       box-shadow: 0px 1px 3px 0px rgba(16, 24, 40, 0.1),
         0px 1px 2px 0px rgba(16, 24, 40, 0.06);
-  
+
+      fieldset {
+        border: none;
+      }
+
       &.Mui-focused {
         .MuiOutlinedInput-notchedOutline {
           border: none;
+          outline: none;
         }
-      }
-
-      .MuiInputBase-input {
-        min-height: 30px;
-        overflow: hidden;
-        border-radius: 10px;
+        outline: 1.5px solid var(--main);
       }
 
       .Mui-disabled {
         background-color: var(--gray);
       }
-
-      // .MuiOutlinedInput-notchedOutline {
-       
-      // }
     }
 
     .MuiFormHelperText-root {
       color: var(--error);
-      // font-size: 12px !important;
       position: absolute;
       bottom: -18px;
       left: -10px;
+    }
+    &.error {
+      .MuiOutlinedInput-notchedOutline {
+        border-color: red !important;
+      }
     }
   }
 

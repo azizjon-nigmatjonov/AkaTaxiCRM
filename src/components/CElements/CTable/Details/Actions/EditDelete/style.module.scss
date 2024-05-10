@@ -8,6 +8,7 @@
     width: 30px;
     height: 30px;
     @include center-center;
+    @include common-shadow;
     border: 1px solid var(--gray30);
     border-radius: 4px;
     cursor: pointer;

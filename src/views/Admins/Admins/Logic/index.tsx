@@ -80,7 +80,7 @@ export const TableData = () => {
       {
         title: "",
         id: "actions",
-        permission: ["edit", "delete", "freez"],
+        permission: ["edit", "delete"],
       },
     ];
   }, []);
