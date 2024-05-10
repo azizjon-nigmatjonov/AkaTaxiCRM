@@ -2,6 +2,7 @@ import ImageFrame from "../../../../components/UI/ImageFrame";
 import { useMemo } from "react";
 import { FormatTime } from "../../../../utils/formatTime";
 import Places from "../../../../components/UI/Places";
+import DriversAvater from "../../../../views/Passengers/Active/DriversAvatar";
 
 export const ActiveDriversTable = ({
   setPassenger = () => {},
@@ -65,7 +66,15 @@ export const ActiveDriversTable = ({
       },
       {
         title: "Takliflar",
-        id: "as",
+        id: "bids",
+        render: (arr: any, item: any) => {
+          console.log(arr);
+          return (
+            <div className="py-4">
+              <DriversAvater data={arr} item={item} />
+            </div>
+          );
+        },
       },
       {
         id: "places",

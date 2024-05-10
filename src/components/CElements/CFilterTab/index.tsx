@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import CTab from "./Details";
+import CTab from "./Detail";
 import cls from "./style.module.scss";
 import {
   createSearchParams,
@@ -19,7 +19,7 @@ interface Props {
   slug?: string
 }
 
-export default function CFilterTab({
+export default function CFilterTabs({
   passRouter = true,
   currentTab = {},
   setCurrentTab = () => { },
@@ -27,7 +27,7 @@ export default function CFilterTab({
   handleTabClick = () => { },
   extra,
   customStyles,
-  slug = "tab"
+  slug = "filter_tab"
 }: Props) {
   const location = useLocation();
   const pathname = location.pathname;

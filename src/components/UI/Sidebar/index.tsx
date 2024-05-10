@@ -14,7 +14,7 @@ export const Sidebar = () => {
           <SidebarSection />
         </div>
       </div>
-      <div className="absolute bottom-0 px-16px w-full">
+      <div className="absolute bottom-0 px-16px w-full z-[2]">
         <UserInfo />
       </div>
 

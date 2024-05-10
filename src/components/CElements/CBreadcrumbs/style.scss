@@ -10,10 +10,10 @@
       cursor: pointer;
       transition: 0.3s;
       &:hover {
-        color: $main;
+        color: var(--main);
 
         .breadcrumb-label {
-          color: $main;
+          color: var(--main);
           opacity: 0.5;
         }
       }
@@ -22,13 +22,13 @@
     &.last {
       cursor: auto;
       .breadcrumb-label {
-        color: $gray;
+        color: var(--gray);
       }
       &:hover {
-        color: $main;
+        color: var(--main);
 
         .breadcrumb-label {
-          color: $gray;
+          color: var(--gray);
         }
       }
     }
@@ -36,7 +36,7 @@
 
   .breadcrumb-label {
     font-size: 14px;
-    color: $main;
+    color: var(--main);
     font-weight: 600;
     white-space: pre-wrap;
   }

@@ -67,7 +67,7 @@ const ActiveDrivers = () => {
     const list: any = drivers?.data;
 
     return {
-      list: list.map((item: any) => {
+      list: list?.map((item: any) => {
         return {
           ...item,
           from: item.from_region_name + " - " + item.from_district_name,

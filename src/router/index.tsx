@@ -7,10 +7,10 @@ import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../views/Auth/Login";
 import Registration from "../views/Auth/Registration";
-import CallCenter from "../views/CallCenter";
+
 import { routeList } from "./List";
-import Partners from "../views/Partners";
-import Partner from "../views/Partners/Partner";
+
+
 
 interface Path {
   parent: string;
@@ -94,8 +94,7 @@ const Router = () => {
     <Suspense fallback={"Loading..."}>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Navigate to="/passengers/passenger-list" />} />
-
+          <Route index element={<Navigate to="/dashboard/dashboard" />} />
           {routeList?.map((route) => (
             <Route
               path={getPath({
@@ -108,40 +107,7 @@ const Router = () => {
               element={route.element}
             />
           ))}
-
-          <Route
-            path={getPath({
-              parent: "partners",
-              link: "list",
-              sidebar: true,
-              title: "partners",
-              icon: "partners",
-            })}
-            element={<Partners />}
-          />
-          <Route
-            path={getPath({
-              parent: "partners",
-              link: "partner",
-              sidebar: false,
-              title: "",
-              icon: "",
-            })}
-            element={<Partner />}
-          />
-
-          <Route
-            path={getPath({
-              title: "Call markazi",
-              parent: "call_center",
-              link: "call_center",
-              sidebar: true,
-              icon: "headPhones",
-            })}
-            element={<CallCenter />}
-          />
         </Route>
-
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Suspense>

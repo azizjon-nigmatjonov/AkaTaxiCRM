@@ -3,6 +3,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import "./style.scss";
 import { ColorConstants } from "../../../constants/website";
 import { useTranslation } from "react-i18next";
 
@@ -74,11 +75,11 @@ export default function CTab({
     },
     "& .Mui-selected": {
       transition: "0.7s",
-      color: "#fff !important",
+      color: "black !important",
     },
     "& .MuiTabs-indicator": {
       borderRadius: "10px",
-      backgroundColor: ColorConstants.main,
+      backgroundColor: ColorConstants.lineGray,
       height: "100%",
     },
     ...customStyles

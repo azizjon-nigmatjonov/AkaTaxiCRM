@@ -7,7 +7,7 @@ export const PostBallance = () => {
 
     const BalanceFeatures: Function = () => {
         return <div className="flex items-center gap-4 ">
-            <DropDown name="Vaqt" placeholder="Tanlang" defaultValue={'01.01-.01.01'} position="240"/>
+            <DropDown name="Vaqt" placeholder="Tanlang"  defaultValue={'01.01-.01.01'} position="240"/>
             <AddButton id="successBtn" text="Balansni to’ldirish" onClick={() => navigateQuery({ amount: true })} />
         </div>
 

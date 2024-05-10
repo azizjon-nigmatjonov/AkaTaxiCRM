@@ -28,8 +28,6 @@ const ActivePassengers = () => {
   const { navigateQuery, navigateTo, getQueries } = usePageRouter();
   const query = getQueries();
   const [driverLists, setDriverLists] = useState();
-  // const setSearchParams = useSearchParams()[1]
-  // const { t } = useTranslation()
 
   const { data: passengers, isLoading } = useQuery(
     ["GET_ACTIVE_PASSENGERS", q, currentPage, region_id, status],
@@ -202,7 +200,7 @@ const ActivePassengers = () => {
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrubmsItems} type="link" progmatic={true} />
       </Header>
-      <div className="px-6">
+      <div className="container">
         <SectionHeader
           extra={<FilterButton text="filter" />}
           handleSearch={handleSearch}
@@ -217,7 +215,7 @@ const ActivePassengers = () => {
         </SectionHeader>
 
         <Filters filter={!!query?.filter}>
-          <div className="w-[500px] flex gap-2">
+          <div className="flex space-x-5">
             <CSelect label="Sabablar" options={Reasons} />
             <CSelect
               handlerValue={handlerStatus}
