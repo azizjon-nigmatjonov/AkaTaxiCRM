@@ -4,8 +4,9 @@ import { DateRangeCalendar } from "@mui/x-date-pickers-pro/DateRangeCalendar";
 import "../style.scss";
 import { FormatCalendar } from "../../../../utils/formatTime";
 import usePageRouter from "../../../../hooks/useObjectRouter";
+import { PeriodDateMenu } from "./Menu";
 // import AddButton from '../Buttons/AddButton';
-import { Closer } from "../../../../components/UI/Closer";
+// import { Closer } from "../../../../components/UI/Closer";
 
 interface Props {
   open: boolean;
@@ -16,7 +17,7 @@ interface Props {
 export const PeriodDateDropDown = ({
   open = false,
   handlerValue = () => {},
-  handleDropdown,
+//   handleDropdown,
 }: Props) => {
   if (!open) return <></>;
   const { navigateQuery } = usePageRouter();
@@ -29,6 +30,7 @@ export const PeriodDateDropDown = ({
 
   return (
     <div className="periodPicker">
+        <PeriodDateMenu />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateRangeCalendar
           onChange={(e: any) => clickhandler(e)}
@@ -36,7 +38,7 @@ export const PeriodDateDropDown = ({
         />
       </LocalizationProvider>
 
-      <Closer handleClose={() => handleDropdown()} />
+      {/* <Closer handleClose={() => handleDropdown()} /> */}
     </div>
   );
 };
