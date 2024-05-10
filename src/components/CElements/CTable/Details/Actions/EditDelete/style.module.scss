@@ -1,20 +1,20 @@
 .tableDelete {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    .edit, .delete {
-        width: 30px;
-        height: 30px;
-        @include center-center;
-        // border: 1px solid var(--lineGray);
-        border-radius: 4px;
-        cursor: pointer;
-        position: relative;
-        &:hover {
-            svg {
-                transition: 0.3s;
-                transform: scale(1.2);
-            }
-        }
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  .edit,
+  .delete,
+  .view {
+    width: 30px;
+    height: 30px;
+    @include center-center;
+    border: 1px solid var(--gray30);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    &:hover {
+      transition: 0.3s;
+      transform: scale(1.2);
     }
+  }
 }

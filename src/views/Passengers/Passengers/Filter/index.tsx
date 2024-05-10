@@ -20,7 +20,7 @@ export const FilterPassenger = () => {
   return (
     <Filters filter={!!filter}>
       <div className="grid grid-cols-5 gap-x-4 w-full">
-        {/* <CPeriodPicker label="Vaqt" /> */}
+        {/* <CPeriodPicker label="Vaqt" placeholder="Vaqtni tanlang" /> */}
         <DropDown
           label="Vaqt"
           name="Vaqt"

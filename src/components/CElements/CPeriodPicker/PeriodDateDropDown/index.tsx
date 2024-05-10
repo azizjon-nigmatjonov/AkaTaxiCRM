@@ -4,8 +4,11 @@ import { DateRangeCalendar } from "@mui/x-date-pickers-pro/DateRangeCalendar";
 import "../style.scss";
 import { FormatCalendar } from "../../../../utils/formatTime";
 import usePageRouter from "../../../../hooks/useObjectRouter";
+import { PeriodDateMenu } from "./Menu";
+// import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+// import dayjs from "dayjs";
 // import AddButton from '../Buttons/AddButton';
-import { Closer } from "../../../../components/UI/Closer";
+// import { Closer } from "../../../../components/UI/Closer";
 
 interface Props {
   open: boolean;
@@ -16,8 +19,8 @@ interface Props {
 export const PeriodDateDropDown = ({
   open = false,
   handlerValue = () => {},
-  handleDropdown,
-}: Props) => {
+}: //   handleDropdown,
+Props) => {
   if (!open) return <></>;
   const { navigateQuery } = usePageRouter();
 
@@ -27,16 +30,22 @@ export const PeriodDateDropDown = ({
     handlerValue(e);
   };
 
+//   const today = dayjs();
+// const yesterday = dayjs().subtract(1, 'day');
+
   return (
-    <div className="periodPicker">
+    <div className="periodPicker flex">
+      <PeriodDateMenu />
+      
       <LocalizationProvider dateAdapter={AdapterDayjs}>
+      {/* <DateRangePicker defaultValue={[yesterday, today]} maxDate={yesterday} /> */}
         <DateRangeCalendar
           onChange={(e: any) => clickhandler(e)}
           calendars={2}
         />
       </LocalizationProvider>
 
-      <Closer handleClose={() => handleDropdown()} />
+      {/* <Closer handleClose={() => handleDropdown()} /> */}
     </div>
   );
 };

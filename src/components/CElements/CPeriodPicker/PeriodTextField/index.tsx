@@ -3,19 +3,18 @@ import { TextField } from "@mui/material";
 import "../style.scss";
 import { IoMdArrowDropdown } from "react-icons/io";
 import usePageRouter from "../../../../hooks/useObjectRouter";
+import { ArrowDownOutline } from "../../../../components/UI/IconGenerator/Svg";
 
 interface Props {
-  label?: string;
-  control?: any;
+  open: boolean;
   name: string;
   placeholder?: string;
   defaultValue?: any;
-  position?: string;
   handleDropdown: () => void;
 }
 
 export const PeriodTextField = memo(
-  ({ name, placeholder, defaultValue, handleDropdown }: Props) => {
+  ({ name, placeholder, defaultValue, handleDropdown, open = false }: Props) => {
     const { getQueries } = usePageRouter();
     const query = getQueries();
 
@@ -26,8 +25,8 @@ export const PeriodTextField = memo(
     }, [query.start, query.end]);
 
     return (
-      <div className="HFInput z-20 relative">
-        <div className="relative ">
+      <div className="PeriodTextField z-20 relative">
+        <div className="relative">
           <TextField
             size="small"
             name={name}
@@ -39,8 +38,11 @@ export const PeriodTextField = memo(
               endAdornment: <IoMdArrowDropdown size={18} />,
             }}
             onClick={() => handleDropdown()}
-            style={{ background: "white" }}
+            style={{ background: "white", border: open ? '2px solid var(--main)' : '' }}
           />
+          <div className={`absolute right-12px top-1/2 -translate-y-1/2 ${open ? 'rotate-[180deg]' : ''}`}>
+          <ArrowDownOutline />
+          </div>
         </div>
       </div>
     );

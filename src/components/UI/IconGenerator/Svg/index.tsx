@@ -864,6 +864,25 @@ export const ArrowUp = ({ fill }: { fill?: any }) => (
   </svg>
 );
 
+export const ArrowDownOutline = () => (
+  <svg
+    width="19"
+    height="18"
+    viewBox="0 0 19 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M15.1403 6.71289L10.2503 11.6029C9.67275 12.1804 8.72775 12.1804 8.15025 11.6029L3.26025 6.71289"
+      stroke="#667085"
+      stroke-width="1.5"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
 export const ArrowDown = ({ fill }: { fill?: any }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

@@ -1,6 +1,8 @@
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CLabel from "../CLabel";
+import { ArrowDownOutline } from "../../../components/UI/IconGenerator/Svg";
+import { useState } from "react";
 
 interface Props {
   id?: string;
@@ -14,7 +16,6 @@ interface Props {
 }
 
 const CSelect = ({
-  id = "cselect",
   value,
   options = [],
   label = "",
@@ -22,6 +23,7 @@ const CSelect = ({
   disabled,
   classes = "bg-white",
 }: Props) => {
+  const [open, setOpen] = useState(false);
   const handleChange = (event: SelectChangeEvent) => {
     handlerValue!(event.target?.value);
   };
@@ -29,11 +31,9 @@ const CSelect = ({
   return (
     <div className="flex flex-col w-full">
       {label && <CLabel title={label} />}
-      <div
-        id={`cselect-${id}`}
-        className={`${classes} rounded-[8px] overflow-hidden common-shadow`}
-      >
+      <div id="cselect" className={`${classes} relative`}>
         <Select
+          open={open}
           value={value}
           disabled={disabled}
           defaultValue={options?.[0]?.value}
@@ -41,14 +41,22 @@ const CSelect = ({
             "aria-label": "Without label",
           }}
           onChange={handleChange}
+          onClick={() => setOpen((prev) => !prev)}
         >
           {options.map(({ value, label }: { value: any; label: string }) => (
             <MenuItem key={value} value={value}>
-              {" "}
               {label}
             </MenuItem>
           ))}
         </Select>
+
+        <div
+          className={`absolute right-12px top-1/2 -translate-y-1/2 ${
+            open ? "rotate-[180deg]" : ""
+          }`}
+        >
+          <ArrowDownOutline />
+        </div>
       </div>
     </div>
   );

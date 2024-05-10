@@ -9,6 +9,8 @@ import {
 import cls from "./style.module.scss";
 import Element from "./Element";
 import { ColorConstants } from "../../../../../constants/website";
+import { useState } from "react";
+import { PopoverDelete } from "./EditDelete/PopOver";
 
 interface Props {
   element: any;
@@ -27,10 +29,16 @@ const TabbleActions = ({
   currentIndex,
   setCurrentIndex = () => {},
 }: Props) => {
+  const [deletePopover, setDeletePopover]: any = useState(null);
   const handleClick = (element: any, status?: string, active?: boolean) => {
-    if (active) {
-      handleActions(element, status);
+    if (status === "delete") {
+      setDeletePopover(rowIndex);
       setCurrentIndex(null);
+    } else {
+      if (active) {
+        handleActions(element, status);
+        setCurrentIndex(null);
+      }
     }
   };
 
@@ -101,6 +109,15 @@ const TabbleActions = ({
         ></div>
       ) : (
         ""
+      )}
+
+      {deletePopover === rowIndex && (
+        <PopoverDelete
+          closePopover={() => {
+            setDeletePopover(null);
+            handleActions(element, "delete");
+          }}
+        />
       )}
     </div>
   );

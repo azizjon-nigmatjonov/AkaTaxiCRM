@@ -24,7 +24,7 @@ interface Path {
 
 const Router = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state: any) => state.auth.isAuth);
+  const token = useSelector((state: any) => state.auth.token);
   const [list, setList] = useState<string[]>([]);
 
   const [routes, setRoutes] = useState({
@@ -74,7 +74,7 @@ const Router = () => {
     dispatch(websiteActions.setRoutes({ ...routes }));
   }, []);
 
-  if (!isAuth) {
+  if (!token) {
     return (
       <Suspense fallback={"Loading..."}>
         <Routes>

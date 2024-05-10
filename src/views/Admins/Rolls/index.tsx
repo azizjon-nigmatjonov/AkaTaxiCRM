@@ -5,40 +5,15 @@ import SectionHeader from "../../../components/UI/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
-import { RolesList } from "./Logic";
+import { RolesList, TableData, breadCrumbs } from "./Logic";
 
 const Rolls = () => {
   const { navigateTo } = usePageRouter();
-  const roles = RolesList();
-
+  const { roles, isLoading } = RolesList();
+  const { headColumns } = TableData();
   const bodyColumns = useMemo(() => {
     return roles?.data ?? [];
   }, [roles]);
-
-  const breadCrumbs = useMemo(() => {
-    return [{ label: "Admin", link: "/admins/admin" }, { label: "Rollar" }];
-  }, []);
-
-  const headColumns = [
-    {
-      title: "Rol nomi",
-      id: "name",
-    },
-    {
-      title: "Funksiyalar soni",
-      id: "functions",
-    },
-    {
-      title: "Aktiv adminlar",
-      id: "active_admins",
-    },
-    {
-      title: "",
-      id: "actions",
-      width: 90,
-      permission: ["edit", "delete"],
-    },
-  ];
 
   return (
     <>
@@ -59,6 +34,7 @@ const Rolls = () => {
             headColumns={headColumns}
             bodyColumns={bodyColumns}
             isResizeble={true}
+            isLoading={isLoading}
           />
         </div>
       </div>
