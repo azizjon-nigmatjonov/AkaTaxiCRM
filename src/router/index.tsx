@@ -94,7 +94,7 @@ const Router = () => {
     <Suspense fallback={"Loading..."}>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Navigate to="/passengers/passenger-list" />} />
+          <Route index element={<Navigate to="/dashboard/dashboard" />} />
           {routeList?.map((route) => (
             <Route
               path={getPath({
