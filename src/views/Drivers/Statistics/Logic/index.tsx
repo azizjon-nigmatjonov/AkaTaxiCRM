@@ -1,8 +1,9 @@
-<<<<<<< HEAD
+
 import { useGetQueries } from "../../../../hooks/useGetQueries";
 import { useQuery } from "react-query";
 import driverService from "../../../../services/drivers";
 import { useMemo } from "react";
+
 
 export const FetchFunction = () => {
     const { year, month, week, start, end } = useGetQueries()
@@ -43,8 +44,5 @@ export const FetchFunction = () => {
 export  const breadCrumbs = [
     { label: "Haydovchilar", link: '/drivers/main' },
     { label: 'Statistika', }
-  ]
-=======
+]
 
-const 
->>>>>>> 37966d5 (test)
