@@ -15,10 +15,10 @@ export const CPeriodPicker = ({ label = "" }: Props) => {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col relative">
       {label && <CLabel title={label} />}
       <PeriodTextField name="time" handleDropdown={handleDropdown} />
       <PeriodDateDropDown open={open} handleDropdown={handleDropdown} />
-    </>
+    </div>
   );
 };

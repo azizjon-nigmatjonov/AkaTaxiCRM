@@ -19,7 +19,6 @@ export const PeriodDateDropDown = ({
   handleDropdown,
 }: Props) => {
   if (!open) return <></>;
-
   const { navigateQuery } = usePageRouter();
 
   const clickhandler = (e?: any) => {
@@ -29,14 +28,13 @@ export const PeriodDateDropDown = ({
   };
 
   return (
-    <div className="rangeDate">
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateRangeCalendar
-            onChange={(e: any) => clickhandler(e)}
-            calendars={2}
-          />
-        </LocalizationProvider>
-        
+    <div className="periodPicker">
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DateRangeCalendar
+          onChange={(e: any) => clickhandler(e)}
+          calendars={2}
+        />
+      </LocalizationProvider>
 
       <Closer handleClose={() => handleDropdown()} />
     </div>
