@@ -13,7 +13,9 @@ export const FilterPassenger = () => {
   const { regionList } = GetRegion();
 
   const handlerRegion = (evt: any) => navigateQuery({ region_id: evt });
-  const handlerDiviceModel = (evt: any) => navigateQuery({ device_type: evt });
+  const handlerDiviceModel = (evt: any) => {
+    navigateQuery({ device_type: evt })
+  }
   const handlerVersion = (evt: any) => navigateQuery({ version: evt });
   const handlerGender = (evt: any) => navigateQuery({ gender: evt });
 
