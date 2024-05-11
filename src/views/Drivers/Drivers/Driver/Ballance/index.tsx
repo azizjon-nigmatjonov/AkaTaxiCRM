@@ -14,14 +14,16 @@ import AddButton from "../../../../../components/UI/Buttons/AddButton"
 import CancelButton from "../../../../../components/UI/Buttons/Cancel"
 import { useDispatch } from "react-redux"
 import { websiteActions } from "../../../../../store/website"
+import { useParams } from "react-router-dom"
 
 
 
 const DriverBallance = () => {
-    const { id, currentPage } = useGetQueries()
+    const { currentPage } = useGetQueries()
     const { getQueries, navigateQuery } = usePageRouter()
     const query = getQueries()
     const dispatch = useDispatch()
+    const { id } = useParams()
 
     const { data, isLoading, refetch } = useQuery(['GET_DRIVERS_BALLANCE', id, currentPage], () => {
         return driverService.getDriverBallance({ id, page: currentPage })
@@ -99,6 +101,9 @@ const DriverBallance = () => {
             }
         ]
     }, [])
+
+    console.log(data);
+
 
 
     const bodyColumns = useMemo(() => {

@@ -19,12 +19,14 @@ input {
     outline: none;
     width: 100%;
     border-radius: 8px;
+  
     svg {
       display: none;
     }
     &.Mui-focused {
       .MuiOutlinedInput-notchedOutline {
         border-color: var(--main);
+       
       }
     }
 

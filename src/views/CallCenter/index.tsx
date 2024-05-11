@@ -6,6 +6,7 @@ import { OperatorTable } from "./OperatorTable";
 import { CallCenterStatistics } from "./Statistics";
 
 const CallCenter = () => {
+
   return (
     <>
       <Header>
