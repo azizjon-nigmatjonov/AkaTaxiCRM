@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import roleService from "../../../services/rolls";
+import roleService from "../../../../services/rolls";
 
 export const breadCrumbs = [
   { label: "Admin", link: "/admins/admin" },

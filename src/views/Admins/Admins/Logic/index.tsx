@@ -8,15 +8,9 @@ export const FetchFunction = () => {
     data: admins,
     isLoading,
     refetch,
-  } = useQuery(
-    ["GET_ADMINS"],
-    () => {
-      return adminService.getList();
-    },
-    {
-      enabled: true,
-    }
-  );
+  } = useQuery(["GET_ADMINS"], () => {
+    return adminService.getList();
+  });
 
   const bodyColumns: any = useMemo(() => {
     const list = admins?.data ?? [];

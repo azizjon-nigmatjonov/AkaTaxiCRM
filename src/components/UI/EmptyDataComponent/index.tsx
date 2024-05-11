@@ -1,5 +1,5 @@
 import "./style.scss";
-import companyLogo from "/images/website/no-data.png";
+import emptyImage from "/images/website/no-data.png";
 
 const EmptyDataComponent = ({ title = "Ma'lumot mavjud emas", isVisible }: { title?: string; isVisible?: boolean }) => {
   if (!isVisible) return null;
@@ -8,7 +8,7 @@ const EmptyDataComponent = ({ title = "Ma'lumot mavjud emas", isVisible }: { tit
     <div className="EmptyDataComponent">
       <div className="block">
         <div className="icon">
-          <img src={companyLogo} alt="img" />
+          <img src={emptyImage} alt="emptyImage" />
         </div>
         <p className="text text-[var(--black)]">{title}</p>
       </div>

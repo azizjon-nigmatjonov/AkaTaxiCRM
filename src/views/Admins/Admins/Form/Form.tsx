@@ -115,12 +115,12 @@ export const AdminFormWrapper = ({
       </div>
       <div className="mt-5">
         {isLoading ? (
-          <div className="custom-btn disabled">
+          <div className="custom-btn disabled form">
             <CircularProgress size={30} />
-            Tasdiqlash
+            Jo'natilmoqda
           </div>
         ) : (
-          <button type="submit" className="custom-btn">
+          <button type="submit" className="custom-btn form">
             Tasdiqlash
           </button>
         )}

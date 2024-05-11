@@ -34,7 +34,7 @@ const Admins = () => {
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} />
       </Header>
-      <div className="px-5">
+      <div className="container">
         <SectionHeader handleSearch={handleSearch}>
           <div className="flex items-center gap-3">
             <AddButton

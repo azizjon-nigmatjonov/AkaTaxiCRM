@@ -167,7 +167,7 @@ input {
   text-transform: none;
   border-radius: 10px;
   border: 1px solid var(--gray20);
-  height: 52px;
+  height: 40px;
   padding: 0 18px;
   width: 100%;
   white-space: nowrap;
@@ -177,7 +177,11 @@ input {
   @include common-shadow;
   position: relative;
 
-  .MuiCircularProgress-root  {
+  &.form {
+    height: 52px;
+  }
+
+  .MuiCircularProgress-root {
     margin-right: 16px;
     svg {
       color: white;
