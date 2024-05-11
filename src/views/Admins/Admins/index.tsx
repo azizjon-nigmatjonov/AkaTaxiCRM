@@ -19,8 +19,6 @@ const Admins = () => {
   const handleSearch = () => {};
 
   const handleActions = useCallback((element: any, status: string) => {
-    console.log(status, element);
-
     if (status === "view") navigateQuery({ id: element.id });
 
     if (status === "edit") navigateQuery({ id: element.id });

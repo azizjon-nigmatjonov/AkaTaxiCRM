@@ -1,37 +1,40 @@
 import HFInputMask from "../../../../components/FormElements/HFInputMask";
-import HFSelect from "../../../../components/FormElements/HFSelect";
 import HFTextField from "../../../../components/FormElements/HFTextField";
 import { useForm } from "react-hook-form";
 import { UpdateValidation, Validation } from "./validate";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitFunction } from "./Logic";
+import { HFMultipleSelect } from "../../../../components/FormElements/HFMultipleSelect";
+import { CircularProgress } from "@mui/material";
 
 export const AdminFormWrapper = ({
   refetch,
   id,
-  adminData = {},
+  defaultValues = {},
   rolls,
 }: {
   refetch: () => void;
   id: string;
-  adminData: any;
+  defaultValues: any;
   rolls: any;
 }) => {
-  const schema = id ? UpdateValidation() : Validation();
+  const schema = id === "create" ? Validation() : UpdateValidation();
 
   const { control, setValue, handleSubmit, reset } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
-    defaultValues: adminData,
   });
 
-  const { submitForm, updateForm } = SubmitFunction({ reset, refetch });
+  const { submitForm, updateForm, isLoading } = SubmitFunction({
+    reset,
+    refetch,
+  });
 
   const onSubmit = (data: any) => {
-    if (id) {
-      updateForm(data, id);
-    } else {
+    if (id === "create") {
       submitForm(data);
+    } else {
+      updateForm(data, id);
     }
   };
 
@@ -45,7 +48,7 @@ export const AdminFormWrapper = ({
           label="Ism familya"
           setValue={setValue}
           required={true}
-          defaultValue={adminData?.name}
+          defaultValue={defaultValues?.name}
         />
         <HFInputMask
           name="phone"
@@ -54,7 +57,7 @@ export const AdminFormWrapper = ({
           placeholder={`Telefon raqam`}
           mask={"+\\9\\9\\8 99 999 99 99"}
           required={true}
-          defaultValue={adminData?.phone}
+          defaultValue={defaultValues?.phone}
         />
         <HFTextField
           name="email"
@@ -64,19 +67,18 @@ export const AdminFormWrapper = ({
           setValue={setValue}
           type="email"
           required={true}
-          defaultValue={adminData?.email}
+          defaultValue={defaultValues?.email}
         />
-        <HFSelect
+        <HFMultipleSelect
           name="roles"
           control={control}
           options={rolls}
           label="Rolni tanlang"
           placeholder="Rolni tanlang"
           required={true}
-          setValue={setValue}
-          defaultValue={adminData?.roles}
+          defaultValue={defaultValues?.roles}
         />
-        {id && (
+        {id !== "create" && (
           <HFTextField
             name="old_password"
             control={control}
@@ -87,7 +89,7 @@ export const AdminFormWrapper = ({
             activatePassword={true}
           />
         )}
-        {id && (
+        {id !== "create" && (
           <HFTextField
             name="new_password"
             control={control}
@@ -98,7 +100,7 @@ export const AdminFormWrapper = ({
             activatePassword={true}
           />
         )}
-        {!id && (
+        {id === "create" && (
           <HFTextField
             name="password"
             control={control}
@@ -112,9 +114,16 @@ export const AdminFormWrapper = ({
         )}
       </div>
       <div className="mt-5">
-        <button type="submit" className="custom-btn">
-          Tasdiqlash
-        </button>
+        {isLoading ? (
+          <div className="custom-btn disabled">
+            <CircularProgress size={30} />
+            Tasdiqlash
+          </div>
+        ) : (
+          <button type="submit" className="custom-btn">
+            Tasdiqlash
+          </button>
+        )}
       </div>
     </form>
   );

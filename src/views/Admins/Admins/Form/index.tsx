@@ -6,7 +6,7 @@ import { AdminFormWrapper } from "./Form";
 const Form = ({ refetch, id }: { refetch: () => void; id: string }) => {
   const { navigateQuery } = usePageRouter();
 
-  const { rolls, adminData } = FetchFunction({
+  const { rolls, defaultValues } = FetchFunction({
     adminId: id,
   });
 
@@ -19,7 +19,7 @@ const Form = ({ refetch, id }: { refetch: () => void; id: string }) => {
     >
       <AdminFormWrapper
         rolls={rolls}
-        adminData={adminData}
+        defaultValues={defaultValues}
         refetch={refetch}
         id={id}
       />

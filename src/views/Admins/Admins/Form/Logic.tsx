@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import adminService from "../../../../services/admins";
 import roleService from "../../../../services/rolls";
 import { useMemo } from "react";
@@ -33,7 +33,13 @@ export const FetchFunction = ({ adminId }: { adminId: string }) => {
     });
   }, [rolls]);
 
-  return { rolls: SelectOptions, adminData: adminData?.data };
+  const defaultValues: any = useMemo(() => {
+    const obj: any = adminData?.data;
+    if (obj?.id) obj.roles = obj.roles?.map((item: any) => item.id);
+    return obj;
+  }, [adminData]);
+
+  return { rolls: SelectOptions, defaultValues };
 };
 
 export const SubmitFunction = ({
@@ -55,26 +61,39 @@ export const SubmitFunction = ({
     );
 
     navigateQuery({ id: "" });
+    refetch();
     reset();
   };
+
+  const { mutate: adminCreate, isLoading: updateCreating } = useMutation({
+    mutationFn: (data: any) => {
+      return adminService.createAdmin(data).then(() => {
+        HandleSuccess("Admin yaratildi!");
+      });
+    },
+  });
+
+  const { mutate: adminUpdate, isLoading: updateLoading } = useMutation({
+    mutationFn: (data: any) => {
+      return adminService.updateAdmin(data, data.id).then(() => {
+        HandleSuccess("Ma'lumot yangilandi!");
+      });
+    },
+  });
 
   const submitForm = (data: any) => {
     data.phone = data.phone.substring(1).replace(/\s+/g, "");
     const params = data;
-    adminService.createAdmin(params).then(() => {
-      HandleSuccess("Admin yaratildi!");
-      refetch();
-    });
+
+    adminCreate(params)
   };
 
   const updateForm = (data: any, id: string) => {
     data.phone = data.phone.substring(1).replace(/\s+/g, "");
     const params = data;
-    params.roles = [params.roles]
-    adminService.updateAdmin(params, id).then(() => {
-      HandleSuccess("Ma'lumot yangilandi!");
-      refetch();
-    });
+    params.id = id;
+
+    adminUpdate(params);
   };
-  return { submitForm, updateForm };
+  return { submitForm, updateForm, isLoading: updateLoading || updateCreating };
 };

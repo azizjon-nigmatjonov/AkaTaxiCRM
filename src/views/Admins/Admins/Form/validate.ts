@@ -2,8 +2,12 @@ import * as yup from "yup";
 export const Validation = () => {
   return yup.object().shape({
     name: yup.string().required("Majbiriy maydon"),
-    email: yup.string().required("enter_email").email("enter_valid_email"),
-    roles: yup.string().required("Majbiriy maydon"),
+    email: yup.string().required("Majburiy maydon").email("enter_valid_email"),
+    roles: yup
+    .array()
+    .of(yup.string())
+    .required("Majbiriy maydon")
+    .test('is-roles-empty', 'Majburiy maydon', value => value && value.length > 0),
     phone: yup
       .string()
       .matches(
@@ -19,8 +23,12 @@ export const Validation = () => {
 export const UpdateValidation = () => {
   return yup.object().shape({
     name: yup.string().required("Majbiriy maydon"),
-    email: yup.string().required("enter_email").email("enter_valid_email"),
+    email: yup.string().required("Majburiy maydon").email("Tog'ri email kiriting!"),
     phone: yup.string().required("enter_phone_number"),
-    roles: yup.string().required("Majbiriy maydon"),
+    roles: yup
+    .array()
+    .of(yup.string())
+    .required("Majbiriy maydon")
+    .test('is-roles-empty', 'Majburiy maydon', value => value && value.length > 0),
   });
 };

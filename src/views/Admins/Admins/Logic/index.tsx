@@ -51,7 +51,19 @@ export const TableData = () => {
       },
       {
         title: "Rol",
-        id: "rol",
+        id: "roles",
+        render: (roles: any) => {
+          return (
+            <div>
+              {roles?.map((item: any, index: number, row: any) => (
+                <p key={index}>
+                  {item.name}
+                  {index > 0 && row.length - 1 !== index ? "," : ""}
+                </p>
+              ))}
+            </div>
+          );
+        },
       },
       {
         title: "Yaratilgan sana",
