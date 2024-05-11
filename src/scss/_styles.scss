@@ -28,7 +28,10 @@ input {
     border: 1px solid var(--gray20);
 
     &.Mui-focused {
-      outline: 1.5px solid var(--main);
+      .MuiOutlinedInput-notchedOutline {
+        border-color: var(--main);
+       
+      }
     }
 
     fieldset {
