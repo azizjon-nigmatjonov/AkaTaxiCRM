@@ -2,9 +2,10 @@ import AddButton from "../../../components/UI/Buttons/AddButton";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { Header } from "../../../components/UI/Header";
 import { RouteList } from "./List";
-import { useState } from "react";
 import { RouteCreate } from "./List/RouteCreate";
 import { FetchFunction } from "./List/Logic";
+import usePageRouter from "../../../hooks/useObjectRouter";
+import { useGetQueries } from "../../../hooks/useGetQueries";
 
 export const breadCrumbs = [
   { label: "Routes", link: "/admins/routes" },
@@ -12,13 +13,14 @@ export const breadCrumbs = [
 ];
 
 export const RoutePage = () => {
-  const [open, setOpen] = useState(false);
+  const { navigateQuery } = usePageRouter()
+  const { modal } = useGetQueries()
   const { newRouteList, refetch, isLoading } = FetchFunction();
 
   const handleClose = () => {
-    setOpen(false)
-    refetch()
-  }
+    navigateQuery({ modal: "", active: "" })
+    refetch();
+  };
 
   return (
     <>
@@ -37,15 +39,25 @@ export const RoutePage = () => {
               sahifasi
             </p>
           </div>
-          <div className="fixed top-[90px] right-20px">
-            <AddButton onClick={() => setOpen(true)} iconLeft={true} text="Route yaratish" />
+          <div>
+            <AddButton
+              onClick={() => navigateQuery({ modal: 'open' })}
+              iconLeft={true}
+              text="Route qo'shish"
+            />
           </div>
         </div>
 
-        <RouteList isLoading={isLoading} handleClose={handleClose} newRouteList={newRouteList} />
+        <RouteList
+          isLoading={isLoading}
+          handleClose={handleClose}
+          newRouteList={newRouteList}
+        />
       </div>
 
-      {open && <RouteCreate handleClose={handleClose} newRouteList={newRouteList} />}
+      {modal && (
+        <RouteCreate handleClose={handleClose} newRouteList={newRouteList} />
+      )}
     </>
   );
 };

@@ -25,7 +25,7 @@ export const settingList = [
         parent: 'settings',
         link: 'sms/create/:type',
         sidebar: false,
-        title: '',
+        title: "SMS qo'shish",
         icon: '',
         element: <SmsCreateForm />
     },

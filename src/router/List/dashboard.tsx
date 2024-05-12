@@ -5,7 +5,7 @@ export const dashboardList = [
     parent: "dashboard",
     link: "dashboard",
     sidebar: true,
-    title: "Dashboard",
+    title: "Boshqaruv paneli",
     icon: "Dashboard",
     element: <Dashboard />,
   },

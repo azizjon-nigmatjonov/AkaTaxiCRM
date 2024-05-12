@@ -16,13 +16,12 @@ export const RouteCreate = ({
   newRouteList = [],
 }: Props) => {
   const { options } = GetOptions({ newRouteList });
-  const { createRoute, isLoading } = CreateFunction({ handleClose });
   const schema = Validation();
-
-  const { control, handleSubmit, setValue } = useForm({
+  const { control, handleSubmit, setValue, reset } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
+  const { createRoute, isLoading } = CreateFunction({ handleClose, reset });
 
   const onSubmit = (data: any) => createRoute(data);
 
@@ -38,7 +37,7 @@ export const RouteCreate = ({
           name="name"
           options={options}
           control={control}
-          handleClick={(val) => setValue("title", val.label)}
+          handleClick={(val) => setValue("title", val.title)}
           placeholder="Permission nomi"
         />
 

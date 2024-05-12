@@ -15,7 +15,7 @@ export const partnersList = [
         parent: 'partners',
         link: 'partner',
         sidebar: false,
-        title: '',
+        title: "Sherik sahifasi",
         icon: '',
         element: <Partner />
     }

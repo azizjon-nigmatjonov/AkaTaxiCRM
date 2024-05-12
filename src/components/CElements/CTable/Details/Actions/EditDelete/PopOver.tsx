@@ -2,15 +2,27 @@ import { Closer } from "../../../../../UI/Closer";
 import { WarningIcon } from "../../../../../UI/IconGenerator/Svg";
 
 export const PopoverDelete = ({
+  title = "Ma'lumotni aniq o'chirib tashlamoqchimisiz?",
+  text = "",
+  classes = "",
   closePopover = () => {},
 }: {
+  title?: string;
+  text?: string;
+  classes?: string;
   closePopover: (val: string) => void;
 }) => {
   return (
     <>
-      <div className="absolute left-[-400px] top-[-40px] bg-white p-16px border border-[var(--gray20)] z-[91] rounded-[8px] common-shadow">
-        <p className="whitespace-nowrap flex space-x-2">
-          <WarningIcon /> <span className="font-[600] text-lg">Ma'lumotni aniq o'chirib tashlamoqchimisiz?</span>
+      <div
+        className={`absolute left-[-400px] top-[-40px] bg-white p-16px border border-[var(--gray20)] z-[91] rounded-[8px] common-shadow ${classes}`}
+      >
+        <p className="whitespace-nowrap flex items-start space-x-5">
+          <WarningIcon />{" "}
+          <div>
+            <p className="font-[600] text-lg">{title}</p>
+            <p>{text}</p>
+          </div>
         </p>
 
         <div className="flex items-center justify-end space-x-2 mt-4">

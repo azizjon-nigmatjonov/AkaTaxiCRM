@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "../../components/UI/Sidebar";
-// import { Header } from "../../components/Header";
 import cls from "./style.module.scss";
 import { useEffect } from "react";
 import { ColorConstants } from "../../constants/website";
@@ -8,12 +7,13 @@ import regionService from "../../services/regions";
 import { regionActions } from "../../store/regions/index";
 import { useDispatch, useSelector } from "react-redux";
 import CAlert from "../../components/CElements/CAlert";
+import { BackButtonRoute } from "./Logic";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
   const regions = useSelector((state: any) => state.regions.regions);
   const alertData = useSelector((state: any) => state.website.alert);
-  
+
   const GetVillage = (val: any) => {
     if (!val) return [];
     const arr = val;
@@ -87,6 +87,7 @@ const MainLayout = () => {
         <Outlet />
       </div>
 
+      <BackButtonRoute />
       {alertData?.title && <CAlert data={alertData} />}
     </div>
   );

@@ -43,8 +43,7 @@ const HFTextField = ({
       setValue(name, defaultValue);
     }
   }, [defaultValue, name, setValue]);
-  
-  
+
   return (
     <div className="HFInput relative">
       {label && <CLabel title={label} required={required} />}
@@ -87,11 +86,11 @@ const HFTextField = ({
               </span>
             )}
 
-            {/* {errors[name]?.message && (
-              <p className="text-sm text-[var(--error)] absolute -bottom-5">
-                {t(errors[name].message || "")}
+            {errors[name]?.message && (
+              <p className="text-sm text-[var(--error)] absolute left-1 -bottom-5 whitespace-nowrap">
+                {errors[name].message}
               </p>
-            )} */}
+            )}
           </>
         )}
       ></Controller>
