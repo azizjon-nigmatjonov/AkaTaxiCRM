@@ -82,7 +82,7 @@ export const FetchFunction = ({ id }: { id: any | undefined }) => {
   };
 };
 
-export const CreateFunction = ({ reset }: { reset?: any }) => {
+export const CreateFunction = ({ reset = () => {} }: { reset?: any }) => {
   const { navigateTo } = usePageRouter();
 
   const { mutate: rollCreate, isLoading: rollLoading } = useMutation({

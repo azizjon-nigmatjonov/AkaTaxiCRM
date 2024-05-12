@@ -1,15 +1,14 @@
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs";
 import { Header } from "../../../../components/UI/Header";
 import Rolls from "./Rolls";
-import HFTextField from "../../../../components/FormElements/HFTextField";
 import { useForm } from "react-hook-form";
 import { CreateFunction, FetchFunction, breadCrumbs } from "./Logic";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Validation } from "./validate";
-import { CircularProgress } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { RollCreateHeder } from "./Header";
 import { RollList } from "./List";
+import { RollForm } from "./Form";
 
 const NewRolls = () => {
   const schema = Validation();
@@ -22,14 +21,13 @@ const NewRolls = () => {
   const {
     control,
     handleSubmit,
-    reset,
     setValue,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
-  const { createRoll, updateRoll, isLoading } = CreateFunction({ reset });
+  const { createRoll, updateRoll, isLoading } = CreateFunction({});
   const { breadCrumbsItems } = breadCrumbs({ id });
 
   const onSubmit = (data: any) => {
@@ -39,6 +37,7 @@ const NewRolls = () => {
       createRoll(data);
     }
   };
+  console.log("rollData", rollData);
 
   return (
     <>
@@ -56,25 +55,15 @@ const NewRolls = () => {
 
       <div className="container divide-y-[1px] divide-[var(--gray20)] w-[80%] my-5">
         <Rolls text="Yangi rol nomi">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <HFTextField
-              name="name"
-              control={control}
-              placeholder="e.g.Admin 1"
-              defaultValue={rollData.name}
-            />
-            <div className="fixed top-[90px] right-20px">
-              {isLoading ? (
-                <div className="custom-btn">
-                  <CircularProgress size={24} />
-                </div>
-              ) : (
-                <button type="submit" className="custom-btn">
-                  {id ? "Tahrirlash" : "Rol qo'shish"}
-                </button>
-              )}
-            </div>
-          </form>
+          <RollForm
+            id={id}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            control={control}
+            setValue={setValue}
+            rollData={rollData}
+            isLoading={isLoading}
+          />
         </Rolls>
 
         <RollList

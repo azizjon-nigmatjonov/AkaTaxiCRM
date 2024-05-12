@@ -7,12 +7,12 @@ import { websiteActions } from "../../../../store/website";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 
 export const FetchFunction = ({ adminId }: { adminId: string }) => {
-  const { data: rolls } = useQuery(["GET_ROLLS"], () => {
+  const { data: rolls } = useQuery(["GET_ROLLS_LIST"], () => {
     return roleService.getList();
   });
 
   const { data: adminData } = useQuery(
-    ["GET_ROLLS", adminId],
+    ["GET_ROLL_DATA", adminId],
     () => {
       return adminService.getAdmin(adminId);
     },
