@@ -31,13 +31,17 @@ const NewRolls = () => {
   const { breadCrumbsItems } = breadCrumbs({ id });
 
   const onSubmit = (data: any) => {
+
+    const permissions = data.permissions.map((element: any) =>
+      parseInt(element.trim(), 10)
+    );
+    data.permissions = permissions
     if (id) {
       updateRoll(data, id);
     } else {
       createRoll(data);
     }
   };
-  console.log("rollData", rollData);
 
   return (
     <>

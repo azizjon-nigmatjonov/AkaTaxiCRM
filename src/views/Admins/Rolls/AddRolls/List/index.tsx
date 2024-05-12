@@ -29,11 +29,13 @@ export const RollList = ({
   const [permissions, setPermissions]: any = useState([]);
 
   const handleCheck = (permission: any) => {
+    const value = permission.value
+    
     let data = permissions;
-    if (permissions.find((item: string) => item === permission.value)) {
-      data = permissions.filter((item: string) => item !== permission.value);
+    if (permissions.find((item: string) => item === value)) {
+      data = permissions.filter((item: string) => item !== value);
     } else {
-      data = [...permissions, permission.value];
+      data = [...permissions, value];
     }
 
     setValue("permissions", data);
