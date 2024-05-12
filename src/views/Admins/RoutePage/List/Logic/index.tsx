@@ -132,7 +132,7 @@ export const GetOptions = ({ newRouteList }: { newRouteList: any }) => {
       const found = newRouteList.find(
         (item: any) => item.path === element.path
       );
-      
+
       if (!found) {
         const obj = {
           title: `${t(element.parent)} > ` + element.title || element.path,
@@ -175,14 +175,25 @@ export const FetchFunction = () => {
     data: routes,
     isLoading,
     refetch,
-  } = useQuery(["GET_ADMINS"], () => {
+  } = useQuery(["GET_ROUTE_LIST"], () => {
     return routeService.getList();
   });
 
   const newRouteList: any = useMemo(() => {
-    const list = routes?.data ?? [];
+    const list = routes?.data?.map((route: any) => {
+      return {
+        ...route,
+        permissions: route.permissions?.map((permission: any) => {
+          return {
+            ...permission,
+            label: permission.name.substring(permission.name.indexOf("_") + 1),
+            value: permission.id,
+          };
+        }),
+      };
+    });
 
-    return list;
+    return list ?? [];
   }, [routes]);
 
   return { isLoading, refetch, newRouteList };

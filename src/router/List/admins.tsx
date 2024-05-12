@@ -1,4 +1,3 @@
-import { RollForm } from "../../views/Admins/Rolls/Form";
 import Admins from "../../views/Admins/Admins";
 import Rolls from "../../views/Admins/Rolls";
 import NewRolls from "../../views/Admins/Rolls/AddRolls";
@@ -37,14 +36,13 @@ export const adminList = [
     icon: "",
     element: <NewRolls />,
   },
-
   {
     parent: "admins",
     link: "rolls/:id",
     sidebar: false,
-    title: "Rol tahrirlash",
+    title: "Rol yaratish",
     icon: "",
-    element: <RollForm />,
+    element: <NewRolls />,
   },
   {
     parent: "admins",

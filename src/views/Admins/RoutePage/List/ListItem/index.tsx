@@ -58,8 +58,8 @@ export const ListIem = ({
       <div className="w-full ml-5">
         <div className="flex gap-5 flex-wrap">
           {route.permissions?.map((permission: any) => (
-            <div className="border border-[var(--gray20)] h-[40px] pl-16px pr-8px rounded-[8px] common-shadow min-w-[120px] flex items-center justify-between space-x-5">
-              {permission.name.substring(permission.name.indexOf('_') + 1)}
+            <div className="border border-[var(--gray20)] h-[40px] px-16px whitespace-nopwrap rounded-[8px] common-shadow min-w-[120px] flex items-center justify-between space-x-5">
+              <span>{permission.label}</span>
 
               <button
                 onClick={() => deletePermission(permission.id)}
