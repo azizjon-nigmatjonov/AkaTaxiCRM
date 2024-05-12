@@ -9,10 +9,12 @@ import { useState } from "react";
 
 export const PermissionCreate = ({
   id,
+  path = '',
   list = [],
   handleClose,
 }: {
   id: number;
+  path: string;
   list: any;
   handleClose: () => void;
 }) => {
@@ -39,7 +41,7 @@ export const PermissionCreate = ({
   }
 
   const onSubmit = (data: any) => {
-    const responsee = createPermission(data, id, list);
+    const responsee = createPermission(data, id, path, list);
     if (responsee) setErrors({ name: { message: responsee } });
   };
 

@@ -51,9 +51,9 @@ export const CreateFunction = ({
     return res;
   };
 
-  const createPermission = (data: any, id: number, list: any) => {
+  const createPermission = (data: any, id: number, path: string, list: any) => {
     const params: any = {};
-    params.name = data.name;
+    params.name = path + "_" + data.name;
     params.permission_route_id = id;
 
     const isEqual = checkEquality(list, data);
@@ -132,7 +132,7 @@ export const GetOptions = ({ newRouteList }: { newRouteList: any }) => {
       const found = newRouteList.find(
         (item: any) => item.path === element.path
       );
-
+      
       if (!found) {
         const obj = {
           title: `${t(element.parent)} > ` + element.title || element.path,
