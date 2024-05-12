@@ -37,7 +37,17 @@ export const breadCrumbs = ({ id }: { id: any }) => {
   return { breadCrumbsItems };
 };
 
-export const FetchFunction = () => {
+export const FetchFunction = ({ id }: { id: any | undefined }) => {
+  const { data: rollData, isLoading: rollLoading } = useQuery(
+    ["GET_ROLL_FOR_UPDATE", id],
+    () => {
+      return roleService.getElement(id);
+    },
+    {
+      enabled: !!id,
+    }
+  );
+
   const {
     data: routes,
     isLoading,
@@ -63,7 +73,13 @@ export const FetchFunction = () => {
     return list ?? [];
   }, [routes]);
 
-  return { isLoading, refetch, newRouteList };
+  return {
+    isLoading,
+    refetch,
+    newRouteList,
+    rollData: rollData?.data || {},
+    rollLoading,
+  };
 };
 
 export const CreateFunction = ({ reset }: { reset?: any }) => {
@@ -78,9 +94,27 @@ export const CreateFunction = ({ reset }: { reset?: any }) => {
     },
   });
 
+  const { mutate: rollUpdate, isLoading: updateRollLoading } = useMutation({
+    mutationFn: (data: any) => {
+      return roleService.updateElement(data, data.id).then(() => {
+        reset();
+        navigateTo("/admins/rolls");
+      });
+    },
+  });
+
   const createRoll = (data: any) => {
     rollCreate(data);
   };
 
-  return { createRoll, isLoading: rollLoading };
+  const updateRoll = (data: any, id: string) => {
+    data.id = id
+    rollUpdate(data);
+  };
+
+  return {
+    createRoll,
+    updateRoll,
+    isLoading: rollLoading || updateRollLoading,
+  };
 };

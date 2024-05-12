@@ -1,15 +1,21 @@
 import Rolls from "../Rolls";
 import { ListSkeleton } from "../../../../../components/CElements/CSkeleton/ListSkeleton";
 import CCheckbox from "../../../../../components/CElements/CCheckbox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   isLoading: boolean;
   newRouteList: any;
-  setValue: any
+  setValue: any;
+  rollData: any;
 }
 
-export const RollList = ({ isLoading, newRouteList, setValue }: Props) => {
+export const RollList = ({
+  isLoading,
+  newRouteList,
+  setValue,
+  rollData,
+}: Props) => {
   if (isLoading) {
     return (
       <div>
@@ -44,9 +50,16 @@ export const RollList = ({ isLoading, newRouteList, setValue }: Props) => {
     );
   }
 
+  useEffect(() => {
+    if (rollData?.permissions?.length) {
+      setPermissions(rollData.permissions);
+      setValue("permissions", rollData.permissions);
+    }
+  }, [rollData]);
+
   return (
     <>
-      {newRouteList.map((route: any, index: number) => (
+      {newRouteList.map((route: any) => (
         <Rolls key={route.path} text={route.name}>
           <div className="grid grid-cols-3 gap-5">
             {route.permissions.map((permission: any) => (
@@ -59,7 +72,7 @@ export const RollList = ({ isLoading, newRouteList, setValue }: Props) => {
                     value: permission.id,
                   }}
                 />
-                {!permissions?.length && index === 0 ? (
+                {!permissions?.length ? (
                   <p className="text-[var(--error)] text-sm absolute bottom-[-18px] left-2">
                     Permission tanlang
                   </p>

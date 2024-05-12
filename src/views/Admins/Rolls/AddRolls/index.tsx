@@ -14,15 +14,25 @@ import { RollList } from "./List";
 const NewRolls = () => {
   const schema = Validation();
   const { id } = useParams();
-  const { newRouteList, isLoading: listLoading } = FetchFunction();
+  const {
+    newRouteList,
+    isLoading: listLoading,
+    rollData,
+  } = FetchFunction({ id });
   const { control, handleSubmit, reset, setValue } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
-  const { createRoll, isLoading } = CreateFunction({ reset });
+  const { createRoll, updateRoll, isLoading } = CreateFunction({ reset });
   const { breadCrumbsItems } = breadCrumbs({ id });
 
-  const onSubmit = (data: any) => createRoll(data);
+  const onSubmit = (data: any) => {
+    if (id) {
+      updateRoll(data, id);
+    } else {
+      createRoll(data);
+    }
+  };
 
   return (
     <>
@@ -45,6 +55,7 @@ const NewRolls = () => {
               name="name"
               control={control}
               placeholder="e.g.Admin 1"
+              defaultValue={rollData.name}
             />
             <div className="fixed top-[90px] right-20px">
               {isLoading ? (
@@ -53,7 +64,7 @@ const NewRolls = () => {
                 </div>
               ) : (
                 <button type="submit" className="custom-btn">
-                  Rol qo'shish
+                  {id ? "Tahrirlash" : "Rol qo'shish"}
                 </button>
               )}
             </div>
@@ -64,6 +75,7 @@ const NewRolls = () => {
           newRouteList={newRouteList}
           isLoading={listLoading}
           setValue={setValue}
+          rollData={rollData}
         />
       </div>
     </>

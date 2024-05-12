@@ -1,55 +1,52 @@
-import { useMemo } from "react";
 import { BodyCell } from "./Details/BodyCell";
 import { HeadCell } from "./Details/HeadCell";
 import "./style.scss";
 
 export const PriceTable = () => {
-  const headColumns = useMemo(() => {
-    return [
-      {
-        title: "Viloyat",
-        id: "region",
-        type: "cell",
-      },
-      {
-        title: "Tumanlar",
-        id: "discrict",
-        type: "cell",
-      },
-      {
-        title: "Yo'l-yo'lakay",
-        id: "by_way",
-        type: "collapsed",
-        price: 250,
-        edit_km: false,
-        edit_price: false,
-      },
-      {
-        title: "Standart",
-        id: "standard",
-        type: "collapsed",
-        price: 300,
-        edit_km: false,
-        edit_price: false,
-      },
-      {
-        title: "Komfort",
-        id: "comfort",
-        type: "collapsed",
-        price: 350,
-        edit_km: false,
-        edit_price: false,
-      },
-      {
-        title: "Biznes",
-        id: "business",
-        type: "collapsed",
-        price: 500,
-        edit_km: false,
-        edit_price: false,
-      },
-    ];
-  }, []);
+  const headColumns = [
+    {
+      title: "Viloyat",
+      id: "region",
+      type: "cell",
+    },
+    {
+      title: "Tumanlar",
+      id: "discrict",
+      type: "cell",
+    },
+    {
+      title: "Yo'l-yo'lakay",
+      id: "by_way",
+      type: "collapsed",
+      price: 250,
+      edit_km: false,
+      edit_price: false,
+    },
+    {
+      title: "Standart",
+      id: "standard",
+      type: "collapsed",
+      price: 300,
+      edit_km: false,
+      edit_price: false,
+    },
+    {
+      title: "Komfort",
+      id: "comfort",
+      type: "collapsed",
+      price: 350,
+      edit_km: false,
+      edit_price: false,
+    },
+    {
+      title: "Biznes",
+      id: "business",
+      type: "collapsed",
+      price: 500,
+      edit_km: false,
+      edit_price: false,
+    },
+  ];
 
   const handleCheckKm = (id: string) => {
     console.log(id);
