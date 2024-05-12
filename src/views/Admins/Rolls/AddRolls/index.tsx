@@ -19,7 +19,13 @@ const NewRolls = () => {
     isLoading: listLoading,
     rollData,
   } = FetchFunction({ id });
-  const { control, handleSubmit, reset, setValue } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
@@ -76,6 +82,7 @@ const NewRolls = () => {
           isLoading={listLoading}
           setValue={setValue}
           rollData={rollData}
+          errors={errors}
         />
       </div>
     </>

@@ -8,6 +8,7 @@ interface Props {
   newRouteList: any;
   setValue: any;
   rollData: any;
+  errors: any;
 }
 
 export const RollList = ({
@@ -15,6 +16,7 @@ export const RollList = ({
   newRouteList,
   setValue,
   rollData,
+  errors = {},
 }: Props) => {
   if (isLoading) {
     return (
@@ -72,9 +74,9 @@ export const RollList = ({
                     value: permission.id,
                   }}
                 />
-                {!permissions?.length ? (
+                {errors?.permissions?.message && !permissions?.length ? (
                   <p className="text-[var(--error)] text-sm absolute bottom-[-18px] left-2">
-                    Permission tanlang
+                    {errors.permissions.message}
                   </p>
                 ) : (
                   ""

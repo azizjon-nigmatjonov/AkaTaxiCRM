@@ -8,7 +8,7 @@ export const Validation = () => {
       .required("Majbiriy maydon")
       .test(
         "is-roles-empty",
-        "Permission lar kiritilmagan",
+        "Permission kiritilmagan",
         (value) => value && value.length > 0
       ),
   });
