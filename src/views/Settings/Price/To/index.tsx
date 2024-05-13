@@ -32,7 +32,7 @@ export const ToTashkent = () => {
             handleSucces={handleSucces}
             getDistanceValues={getValues}
             handleDistanceSet={setValue}
-            from_tashkent={1}
+            from_tashkent={0}
           />
         ))}
       </div>
