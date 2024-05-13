@@ -87,11 +87,11 @@ export const HeadCell = ({
       </div>
       <div className="cell__wrapper">
         <div
-          className={`flex space-x-1 px-6px py-2px rounded-full ${
+          className={`flex w-[70px] justify-between px-6px py-2px rounded-full ${
             orderNumber === 2 ? "bg-[var(--primary50)]" : ""
           }`}
         >
-          <span
+          <p
             className={
               orderNumber === 2
                 ? "text-[var(--primary)]"
@@ -99,7 +99,7 @@ export const HeadCell = ({
             }
           >
             KM
-          </span>{" "}
+          </p>{" "}
           {orderNumber === 2 && (
             <button onClick={() => handleDistanceAction(!column.edit_km)}>
               {column.edit_km ? (
