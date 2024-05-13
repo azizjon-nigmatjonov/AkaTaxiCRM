@@ -14,11 +14,13 @@ import AddButton from "../../../../../components/UI/Buttons/AddButton"
 import CancelButton from "../../../../../components/UI/Buttons/Cancel"
 import { useDispatch } from "react-redux"
 import { websiteActions } from "../../../../../store/website"
+import { useParams } from "react-router-dom"
 
 
 
 const DriverBallance = () => {
-    const { id, currentPage } = useGetQueries()
+    const { currentPage } = useGetQueries()
+    const { id } = useParams()
     const { getQueries, navigateQuery } = usePageRouter()
     const query = getQueries()
     const dispatch = useDispatch()

@@ -16,13 +16,13 @@
         border: none;
         align-items: flex-start;
         border-right: 1px solid var(--gray20);
-        border-bottom: 1px solid var(--gray20);
+        // border-bottom: 1px solid var(--gray20);
         padding: 0;
         .cell__wrapper {
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 16px 24px;
+            padding: 16px 16px 16px 24px;
             border-bottom: 1px solid var(--gray20);
         }
       }
@@ -63,6 +63,16 @@
           border-right: 1px solid var(--gray20);
           border-bottom: 1px solid var(--gray20);
           padding: 16px 24px;
+
+          input {
+            background-color: transparent;
+            border: 1px solid var(--gray20);
+            border-radius: 8px;
+            height: 40px;
+            @include common-shadow;
+            padding: 0 16px;
+            width: 50%;
+          }
         }
 
         &:last-child {

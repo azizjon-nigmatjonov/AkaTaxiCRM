@@ -2,7 +2,9 @@ import { OneSkeleton } from "../../../../components/CElements/CSkeleton/OneSkele
 import { PriceTable } from "../../../../components/UI/PriceTable";
 import { FetchFunction } from "./Logic";
 export const FromTashkent = () => {
-  const { bodyColumns, isLoading } = FetchFunction();
+  const { bodyColumns, isLoading, refetchPrice, refetchDistance } = FetchFunction({
+    priceParams: { from_tashkent: 1 },
+  });
 
   if (isLoading) {
     return (
@@ -12,9 +14,18 @@ export const FromTashkent = () => {
     );
   }
 
+  const handleSucces = () => {
+    refetchDistance()
+    refetchPrice()
+  }
+
   return (
     <div className="container">
-      <PriceTable bodyColumns={bodyColumns} />
+      <div className="space-y-10">
+        {bodyColumns?.map((item: any) => (
+          <PriceTable key={item.region_id} region={item} handleSucces={handleSucces} />
+        ))}
+      </div>
     </div>
   );
 };
