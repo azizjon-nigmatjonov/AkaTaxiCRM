@@ -1,38 +1,50 @@
 import { HeadCell } from "./Details/HeadCell";
 import "./style.scss";
-import { CreateFunction, TableData } from "./Logic";
-import { BodyCell } from "./Details/BodyCell";
+import { BodyData, CreateFunction, TableData } from "./Logic";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { BodyUI } from "./Details/Body";
 
 interface Props {
   region: any;
+  from_tashkent: number;
   handleSucces: () => void;
+  handleDistanceSet: (val: string, val2: any) => void;
+  getDistanceValues: () => void;
 }
 
-export const PriceTable = ({ region = {}, handleSucces }: Props) => {
-  const { headColumns, handleCheckKm, handlePriceInput, handleKmInput } = TableData({
+export const PriceTable = ({
+  from_tashkent = 0,
+  region = {},
+  handleSucces,
+  handleDistanceSet,
+  getDistanceValues,
+}: Props) => {
+  const { headColumns, handleCheckKm, handlePriceInput } = TableData({
     region,
   });
-  const { submitPrice } = CreateFunction({ handleSucces });
-  const [districtList, setDistrictList] = useState([])
-  const { setValue, getValues } = useForm({
-    mode: "onSubmit",
+  const { submitPrice, submitDistance } = CreateFunction({
+    handleSucces,
+    from_tashkent: from_tashkent,
   });
+  const { districtList, handleKmInput } = BodyData({
+    bodyList: region?.districts,
+    handleDistanceSet,
+  });
+  const { setValue, getValues } = useForm();
 
-  const submitFn = (type: string, region_id: number) => {
+  const submitFn = (type: string, id: number) => {
     if (type === "submit") {
       const params = getValues();
-      submitPrice(params, region_id);
+      submitPrice(params, id);
+    }
+    if (type === "submitDistance") {
+      const params: any = getDistanceValues();
+
+      if (Object.values(params).length) {
+        submitDistance(params);
+      }
     }
   };
-
-  useEffect(() => {
-    if (region?.districts) {
-      setDistrictList(region.districts)
-    }
-  }, [region?.districts])
-  
 
   return (
     <div
@@ -48,7 +60,7 @@ export const PriceTable = ({ region = {}, handleSucces }: Props) => {
               column={item}
               region={region}
               setValue={setValue}
-              submitPrice={submitFn}
+              submitFn={submitFn}
               handlePriceInput={handlePriceInput}
               handleCheckKm={handleCheckKm}
             />
@@ -62,24 +74,11 @@ export const PriceTable = ({ region = {}, handleSucces }: Props) => {
           </div>
         </div>
         <div className="right">
-          <div className="flex flex-col">
-            {districtList?.map((district: any, districtsIndex: number) => (
-              <div key={districtsIndex} className="row">
-                {headColumns
-                  .slice(1, headColumns.length)
-                  .map((col: any, colIndex: number) => (
-                    <BodyCell
-                      key={colIndex}
-                      edit={col?.edit_km}
-                      type={col.type}
-                      district={district}
-                      handleKmInput={handleKmInput}
-                      column={col}
-                    />
-                  ))}
-              </div>
-            ))}
-          </div>
+          <BodyUI
+            headColumns={headColumns}
+            districtList={districtList}
+            handleKmInput={handleKmInput}
+          />
         </div>
       </div>
     </div>

@@ -1,15 +1,12 @@
 import { useQuery } from "react-query";
 import priceService from "../../../../../services/price";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
 export const FetchFunction = ({ priceParams }: { priceParams: any }) => {
   const { data: priceListData, refetch: refetchPrice } = useQuery(
     ["GET_PRICE_LIST"],
     () => {
       return priceService.getList(priceParams);
-    },
-    {
-      enabled: !!priceParams.from_tashkent,
     }
   );
 
@@ -18,28 +15,27 @@ export const FetchFunction = ({ priceParams }: { priceParams: any }) => {
     isLoading: distanceLoading,
     refetch: refetchDistance,
   } = useQuery(["GET_PRICE_DISTANCE_LIST"], () => {
-    return priceService.getDistanceList();
+    return priceService.getDistanceList(priceParams.from_tashkent);
   });
+  const [bodyColumns, setBodyColumns] = useState([]);
 
-  const bodyColumns = useMemo(() => {
+  useEffect(() => {
     let arr = distanceData?.data;
     const price = priceListData?.data;
-    const result: any = []
 
     if (arr?.length) {
       if (price?.length) {
-        arr.forEach((item: any) => {
+        arr = arr.map((item: any) => {
           price.forEach((element: any) => {
             if (item.region_id === element.region_id)
               item.price = element.price;
           });
 
-          result.push(item);
+          return item;
         });
       }
     }
-
-    return result;
+    setBodyColumns(arr);
   }, [distanceData, priceListData]);
 
   return {

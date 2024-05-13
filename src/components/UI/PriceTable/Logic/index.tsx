@@ -48,7 +48,7 @@ const headColumns = [
     edit_price: false,
   },
 ];
-
+``;
 export const TableData = ({ region }: { region: any }) => {
   const [newColumns, setNewColumns]: any = useState([]);
 
@@ -68,17 +68,16 @@ export const TableData = ({ region }: { region: any }) => {
     setNewColumns(arr);
   };
 
-  const handleKmInput = () => {}
-
   useEffect(() => {
     if (region?.price) {
       const arr: any = [];
 
       headColumns.forEach((item: any) => {
         if (item.id in region.price) {
+          item.region_id = region.region_id;
           item.price = region.price[item.id];
         }
-        arr.push({ ...item, region_id: region.region_id })
+        arr.push({ ...item, region_id: region.region_id });
       });
       setNewColumns(arr);
     }
@@ -88,43 +87,96 @@ export const TableData = ({ region }: { region: any }) => {
     headColumns: newColumns,
     handleCheckKm,
     handlePriceInput,
-    handleKmInput
   };
 };
 
-
 export const CreateFunction = ({
-    handleSucces,
-  }: {
-    handleSucces: () => void;
-  }) => {
-    const dispat = useDispatch()
-    const { mutate: updatePrice } = useMutation({
-      mutationFn: (data: any) => {
-        return priceService.updatePrice(data).then(() => {
-          HandleSuccess("Ma'lumot yangilandi!");
-        });
-      },
-    });
-  
-    const submitPrice = (priceList: any, id: number) => {
-      const params = {
-        region_id: id,
-        price: priceList,
-        from_tashkent: 1,
-      };
-      updatePrice(params);
+  handleSucces,
+  from_tashkent,
+}: {
+  handleSucces: () => void;
+  from_tashkent: number
+}) => {
+  const dispat = useDispatch();
+  const { mutate: updatePrice } = useMutation({
+    mutationFn: (data: any) => {
+      return priceService.updatePrice(data).then(() => {
+        HandleSuccess("Narx yangilandi!");
+      });
+    },
+  });
+
+  const { mutate: updateDistance } = useMutation({
+    mutationFn: (data: any) => {
+      return priceService.updateDistance(data).then(() => {
+        HandleSuccess("Masofa yangilandi!");
+      });
+    },
+  });
+
+  const submitPrice = (priceList: any, id: number) => {
+    const params = {
+      region_id: id,
+      price: priceList,
+      from_tashkent,
     };
-  
-    function HandleSuccess(title: string) {
-      dispat(
-        websiteActions.setAlertData({
-          title: title,
-          translation: "common",
-        })
-      );
-      handleSucces();
-    }
-  
-    return { submitPrice };
+    updatePrice(params);
   };
+
+  const submitDistance = (distanceObj: any) => {
+    const prices: any = [];
+    for (let key in distanceObj) {
+      prices.push({ distance: distanceObj[key], district_id: +key });
+    }
+    const params = {
+      prices,
+      from_tashkent
+    };
+    
+    updateDistance(params);
+  };
+
+  function HandleSuccess(title: string) {
+    dispat(
+      websiteActions.setAlertData({
+        title: title,
+        translation: "common",
+      })
+    );
+    handleSucces();
+  }
+
+  return { submitPrice, submitDistance };
+};
+
+export const BodyData = ({
+  bodyList,
+  handleDistanceSet,
+}: {
+  bodyList: any;
+  handleDistanceSet: (val: string, val2: any) => void;
+}) => {
+  const [districtList, setDistrictList] = useState([]);
+
+  const handleKmInput = (val: number, id: number) => {
+    let arr: any = districtList;
+
+    arr = arr.map((item: any) => {
+      if (item.district_id === id) {
+        item.distance = val;
+      }
+      return item;
+    });
+    
+    handleDistanceSet(id + "", val);
+    setDistrictList(arr);
+  };
+
+  useEffect(() => {
+    if (bodyList?.length) {
+      setDistrictList(bodyList);
+    }
+  }, [bodyList]);
+
+  return { districtList, handleKmInput };
+};

@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { UpdateValidation, Validation } from "./validate";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitFunction } from "./Logic";
-import { HFMultipleSelect } from "../../../../components/FormElements/HFMultipleSelect";
 import { CircularProgress } from "@mui/material";
+import HFSelect from "../../../../components/FormElements/HFSelect";
 
 export const AdminFormWrapper = ({
   refetch,
@@ -69,7 +69,7 @@ export const AdminFormWrapper = ({
           required={true}
           defaultValue={defaultValues?.email}
         />
-        <HFMultipleSelect
+        <HFSelect
           name="roles"
           control={control}
           options={rolls}

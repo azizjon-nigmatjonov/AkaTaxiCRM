@@ -22,14 +22,14 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 16px 16px 16px 24px;
+            padding: 10px;
             border-bottom: 1px solid var(--gray20);
         }
       }
 
       .cell {
         color: var(--gray60);
-        padding: 16px 24px;
+        padding: 10px;
         font-weight: 500;
         display: flex;
         align-items: center;
@@ -49,7 +49,7 @@
       align-items: center;
       border-right: 1px solid var(--gray20);
       .cell {
-        padding: 16px 24px;
+        padding: 10px;
       }
     }
     .right {
@@ -62,15 +62,15 @@
         .cell {
           border-right: 1px solid var(--gray20);
           border-bottom: 1px solid var(--gray20);
-          padding: 16px 24px;
+          padding: 10px;
 
           input {
             background-color: transparent;
             border: 1px solid var(--gray20);
             border-radius: 8px;
-            height: 40px;
+            height: 24px;
             @include common-shadow;
-            padding: 0 16px;
+            padding: 0 8px;
             width: 50%;
           }
         }
