@@ -137,6 +137,7 @@ const DImageUpload = ({
               className="hidden"
               ref={inputRef}
               onChange={(e: any) => [inputChangeHandler(e), onChange(e.target?.files[0])]}
+              accept=".png, .jpg, .jpeg"
             />
 
             {isDelete ? (

@@ -19,7 +19,6 @@ const DriverStatistics = () => {
   const { data, barLoading, widgetsLoading, regionLoading } = FetchFunction()
 
 
-
   return (
     <>
       <Header sticky={true}>
@@ -38,7 +37,9 @@ const DriverStatistics = () => {
               {value ? <BiX color="red" /> : <BiCaretDown />}
             </div>
           </div>
-          {value && <RangeDate />}
+          {value && <div className="absolute   right-[40px]">
+            <RangeDate setShow={setValue} />
+          </div>}
         </div>
       </div>
 

@@ -36,8 +36,8 @@ const DropDown = ({
   };
 
   return (
-    <div className="HFInput z-20 relative">
-      <CLabel title={label} />
+    <div className="HFInput z-20 relative w-full">
+      {label && <CLabel title={label} />}
       <div className="relative ">
         <TextField
           size="small"
