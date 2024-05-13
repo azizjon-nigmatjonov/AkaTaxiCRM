@@ -86,8 +86,20 @@ export const HeadCell = ({
         </div>
       </div>
       <div className="cell__wrapper">
-        <div className="flex space-x-1 bg-[var(--primary50)] px-6px py-2px rounded-full">
-          <span className="text-[var(--primary)]">KM</span>{" "}
+        <div
+          className={`flex space-x-1 px-6px py-2px rounded-full ${
+            orderNumber === 2 ? "bg-[var(--primary50)]" : ""
+          }`}
+        >
+          <span
+            className={
+              orderNumber === 2
+                ? "text-[var(--primary)]"
+                : "text-[var(--gray40)]"
+            }
+          >
+            KM
+          </span>{" "}
           {orderNumber === 2 && (
             <button onClick={() => handleDistanceAction(!column.edit_km)}>
               {column.edit_km ? (
