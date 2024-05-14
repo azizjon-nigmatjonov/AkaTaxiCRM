@@ -34,7 +34,7 @@ const Driver = () => {
   const {BalanceFeatures}= PostBallance()
   const query = getQueries()
 
-  const { data: driver } = useQuery(
+  const { data: driver, refetch } = useQuery(
     ["GET_DRIVER", id],
     () => {
       return driverService.getElement(id);
@@ -77,7 +77,7 @@ const Driver = () => {
         </div>
 
 
-        {tab === "ballance" ? (<DriverBallance />) : tab === "trip_hostory" ? (<DriverTrip />) : (<DriverInfo driver={driver?.data} />)}
+        {tab === "ballance" ? (<DriverBallance />) : tab === "trip_hostory" ? (<DriverTrip />) : (<DriverInfo refetch={refetch} driver={driver?.data} />)}
       </div>
     </>
   );

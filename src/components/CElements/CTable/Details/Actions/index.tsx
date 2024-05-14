@@ -25,11 +25,12 @@ const TabbleActions = ({
   element,
   rowIndex,
   permissions = [],
-  handleActions = () => {},
+  handleActions = () => { },
   currentIndex,
-  setCurrentIndex = () => {},
+  setCurrentIndex = () => { },
 }: Props) => {
   const [deletePopover, setDeletePopover]: any = useState(null);
+
   const handleClick = (element: any, status?: string, active?: boolean) => {
     if (status === "delete") {
       setDeletePopover(rowIndex);
@@ -41,6 +42,8 @@ const TabbleActions = ({
       }
     }
   };
+
+  
 
   return (
     <div>

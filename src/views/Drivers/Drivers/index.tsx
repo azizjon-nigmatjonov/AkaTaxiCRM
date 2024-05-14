@@ -6,11 +6,8 @@ import SectionHeader from "../../../components/UI/Sections/Header";
 import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import driverService from "../../../services/drivers";
-import { useQuery } from "react-query";
 import { useGetQueries } from "../../../hooks/useGetQueries";
-import { FormatTime } from "../../../utils/formatTime";
 import { Header } from "../../../components/UI/Header";
-import ImageFrame from "../../../components/UI/ImageFrame";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import Filters from "../../../components/UI/Filter";
 import DropDown from "../../../components/FormElements/DropDown";
@@ -18,98 +15,16 @@ import CSelect from "../../../components/CElements/CSelect";
 import { useSelector } from "react-redux";
 import { VersionsList } from "../../../constants/versions";
 import { DivicesList } from "../../../constants/devices";
+import { headColumns, FilterFunction, breadCrubmsItems, FetchFunctions } from './Logic';
 
 const Drivers = () => {
   const { navigateQuery, navigateTo, getQueries } = usePageRouter();
-  const { currentPage, q, gender, device_type, start, end, version, region } =
-    useGetQueries();
+  const { currentPage } = useGetQueries();
   const query = getQueries();
-  // const { getQueries } = usePageRouter();
-  // const setSearchParams = useSearchParams()[1]
+  const { handlerDiviceModel, handlerGender, handlerRegion, handlerVersion, handleSearch } = FilterFunction()
+  const { drivers, driversLoading, driversRefetch } = FetchFunctions()
+
   const regions = useSelector((state: any) => state.regions.regions);
-
-  // const { t } = useTranslation()
-
-  const { data, isLoading, refetch } = useQuery(
-    [
-      "GER_DRIVERS_LIST",
-      currentPage,
-      q,
-      gender,
-      device_type,
-      start,
-      end,
-      version,
-      region,
-    ],
-    () => {
-      return driverService.getList({
-        page: currentPage,
-        perPage: 10,
-        q,
-        gender,
-        device_type,
-        created_at: start && end && JSON.stringify([start, end]),
-        version,
-        region,
-      });
-    }
-  );
-
-  const headColumns = useMemo(() => {
-    return [
-      {
-        title: "Ism familya",
-        id: "info",
-        render: (val: any) =>
-          val && (
-            <div className="flex items-center space-x-2 py-2">
-              <ImageFrame image={val.image} gender={val.gender} />
-              <span>{val.full_name}</span>
-            </div>
-          ),
-      },
-      {
-        title: "phone_number",
-        id: "phone",
-        render: (val: any) => val && <p>+{val}</p>,
-      },
-      {
-        title: "Tug‘ilgan sana",
-        id: "birthday",
-        render: (val?: any) => {
-          return <>{FormatTime(val)}</>;
-        },
-      },
-      {
-        title: "Mashina / raqam",
-        id: "car_info",
-        render: (val: any) =>
-          val && (
-            <p>
-              {val.car},{" "}
-              <span className="block text-[var(--gray)]">{val.number}</span>
-            </p>
-          ),
-      },
-      {
-        title: "Hisob raqami",
-        id: "balance",
-      },
-      {
-        title: "Viloyat",
-        id: "region_name",
-      },
-      {
-        title: "Hamkor statusi",
-      },
-      {
-        title: "",
-        id: "actions",
-        permission: ["view", "edit", "delete"],
-      },
-    ];
-  }, []);
 
   const handleActions = useCallback((element: any, status: string) => {
     if (status === "view") {
@@ -120,35 +35,30 @@ const Drivers = () => {
 
     if (status === "delete") {
       driverService.deleteElement(element.id).then(() => {
-        refetch();
+        driversRefetch();
       });
     }
   }, []);
 
-  const drivers: any = useMemo(() => {
-    return data ?? {};
-  }, [data]);
 
-  
-
-  const bodyColumns = useMemo(() => {
-    return (
-      drivers?.data?.map((el: any) => {
-        return {
-          ...el,
-          info: {
-            full_name: el.full_name,
-            image: el?.image,
-            gender: el.gender,
-          },
-          car_info: {
-            car: el.car_name,
-            number: el.car_number,
-          },
-        };
-      }) ?? []
-    );
+  const bodyColumns: any = useMemo(() => {
+    let list: any = drivers?.data?.map((el: any) => {
+      return {
+        ...el,
+        info: {
+          full_name: el.full_name,
+          image: el?.image,
+          gender: el.gender,
+        },
+        car_info: {
+          car: el.car_name,
+          number: el.car_number,
+        },
+      };
+    }) ?? []
+    return { list, ...drivers }
   }, [drivers]);
+  
 
   const Regions = useMemo(() => {
     return regions?.map((i: any) => {
@@ -158,34 +68,9 @@ const Drivers = () => {
       };
     });
   }, [regions]);
+  
 
-  const handleSearch = (evt: any) => {
-    navigateQuery({ q: evt });
-  };
 
-  const handlerDiviceModel = (evt: any) => {
-    navigateQuery({ device_type: evt });
-  };
-
-  const handlerVersion = (evt: any) => {
-    navigateQuery({ version: evt });
-  };
-
-  const handlerGender = (evt: any) => {
-    navigateQuery({ gender: evt });
-  };
-
-  const handlerRegion = (evt: any) => {
-    navigateQuery({ region: evt });
-  };
-
-  const breadCrubmsItems = useMemo(() => {
-    return [
-      { label: "Haydovchilar", link: "/drivers/main" },
-      { label: "Ro'yxat" },
-      // { label: }
-    ];
-  }, []);
 
   return (
     <>
@@ -245,15 +130,15 @@ const Drivers = () => {
 
         <CTable
           headColumns={headColumns}
-          bodyColumns={bodyColumns ?? []}
-          count={drivers?.meta?.pageCount}
-          totalCount={drivers?.meta?.totalCount}
+          bodyColumns={bodyColumns.list ?? []}
+          count={bodyColumns?.meta?.pageCount}
+          totalCount={bodyColumns?.meta?.totalCount}
           handleActions={handleActions}
-          isLoading={isLoading}
+          isLoading={driversLoading}
           currentPage={currentPage}
           clickable={true}
         />
-        <Form refetch={refetch} />
+        <Form refetch={driversRefetch} />
       </div>
     </>
   );

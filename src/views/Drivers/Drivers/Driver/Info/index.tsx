@@ -12,15 +12,19 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import driverService from "../../../../../services/drivers";
 import { websiteActions } from '../../../../../store/website';
+import Ignored from "./Modal";
+import { useParams } from "react-router-dom";
+import { useQuery } from "react-query";
 
 
-const DriverInfo = ({ driver = {} }: { driver?: any }) => {
+const DriverInfo = ({ driver = {}, refetch }: { driver?: any, refetch: any }) => {
   const [alert, setAlert] = useState("Ma'lumotlarni o'zgartishish!")
+  const { id } = useParams()
 
-  
   const dispatch = useDispatch()
   const { getQueries, navigateQuery, navigateTo } = usePageRouter();
   const query = getQueries();
+
 
   const { control, setValue, getValues } = useForm({
     mode: "onSubmit",
@@ -36,10 +40,13 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
       navigateQuery({ passenger: 'update' })
   }
 
+  console.log(driver);
+  
+  
 
   const alertMessage = (e: string) => {
     if (e == 'delete') {
-      driverService.deleteElement(query?.id).then(() => {
+      driverService.deleteElement(id).then(() => {
         dispatch(
           websiteActions.setAlertData({
             mainTitle: "Ma'lumotlar o'chirildi!",
@@ -53,9 +60,9 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
       navigateQuery({ passenger: '' })
     }
     else if (e == 'update') {
-      const value = getValues(); 
+      const value = getValues();
       console.log(value);
-          
+
       let obj: any = {};
       Object.entries(driver).map(([keys, _]) => {
         Object.entries(value).map(([newkeys, _]) => {
@@ -95,6 +102,12 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
     }
   }
 
+  const acceptDriverInfo = () => {
+    driverService.updateCarInfo(id, { status: 'active' })
+    refetch()
+    navigateTo('/drivers/main')
+  }
+
   return (
     <>
       <div className="grid gap-5">
@@ -122,18 +135,23 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
             <DriverImages driver={driver} control={control} setValue={setValue} />
           </CCard>
 
-          <div className="flex items-center justify-between mt-6">
+          {driver.status == "active" ? <div className="flex items-center justify-between mt-6">
             <div><AddButton onClick={deleteAccount} iconLeft={false} text="Akkountni o'chirish" /></div>
             <div className="flex items-center gap-2">
               <CancelButton onClick={() => navigateTo('/drivers/main')} text='Bekor qilish' />
               <AddButton onClick={updateInfo} iconLeft={false} text="Saqlash" />
             </div>
-          </div>
+          </div> : <div className="flex justify-end">
+            <div className="flex items-center justify-end gap-4 mt-5">
+              <CancelButton text="Rad etish" onClick={() => navigateQuery({ accept: 'true' })} />
+              <AddButton iconLeft={false} text="Tasdiqlash" onClick={acceptDriverInfo} />
+            </div>
+          </div>}
         </form>
       </div>
 
-      <Modal open={!!query?.passenger}>
-        <div className='grid place-items-center h-full'>
+      <Modal open={!!query?.passenger || !!query.accept}>
+        {!!query.passenger ? <div className='grid place-items-center h-full'>
           <div className='bg-white px-6 py-8  max-w-[400px] mx-auto rounded-[20px]'>
             <div className='flex items-center gap-2'>
               <InfoIcon fill={'#FFC542'} />
@@ -144,7 +162,9 @@ const DriverInfo = ({ driver = {} }: { driver?: any }) => {
               <AddButton text='Ha' iconLeft={false} onClick={() => alertMessage(query?.passenger)} />
             </div>
           </div>
-        </div>
+        </div> : <CCard style={{ minHeight: 0 }} classes='max-w-[400px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]'>
+          <Ignored />
+        </CCard>}
       </Modal>
     </>
   );

@@ -14,6 +14,6 @@ export const {
     },
     deleteAlert(state, {payload}) {
       state.alerts = state.alerts.filter((alert: any) => alert.id !== payload)
-    }
+    },
   }
 })
