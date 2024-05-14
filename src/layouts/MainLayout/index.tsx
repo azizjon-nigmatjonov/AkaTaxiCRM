@@ -7,7 +7,7 @@ import regionService from "../../services/regions";
 import { regionActions } from "../../store/regions/index";
 import { useDispatch, useSelector } from "react-redux";
 import CAlert from "../../components/CElements/CAlert";
-import { BackButtonRoute } from "./Logic";
+import { BackButtonRoute, GetUserInfo } from "./Logic";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
@@ -88,6 +88,7 @@ const MainLayout = () => {
       </div>
 
       <BackButtonRoute />
+      <GetUserInfo />
       {alertData?.title && <CAlert data={alertData} />}
     </div>
   );

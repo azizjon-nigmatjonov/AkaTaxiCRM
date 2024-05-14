@@ -43,11 +43,12 @@ const SelectUI = ({
       onFormChange(defaultValue);
     }
   }, [defaultValue]);
-
+  
   return (
     <Select
       multiple
       value={value}
+      defaultValue={defaultValue}
       size="small"
       labelId="demo-multiple-name-label"
       id="demo-multiple-name"
@@ -91,7 +92,7 @@ export const HFMultipleSelect = ({
     onChange(value);
     setArr(value)
   };
-
+  
   useEffect(() => {
     if (defaultValue?.length) {
       const arr: any = [];
@@ -102,10 +103,16 @@ export const HFMultipleSelect = ({
           arr.push(element);
         }
       });
-
+      
       setValue(name, arr);
     }
   }, [defaultValue, name]);
+
+  useEffect(() => {
+    if (defaultValue?.length) {
+      setArr(defaultValue)
+    }
+  }, [defaultValue])
 
   return (
     <div id="cselect">

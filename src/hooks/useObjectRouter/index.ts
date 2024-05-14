@@ -4,7 +4,6 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { ColorConstants } from "../../constants/website";
 
 export default function usePageRouter() {
   const navigate = useNavigate();
@@ -45,15 +44,6 @@ export default function usePageRouter() {
 
   const progmatic = () => navigate(-1);
 
-  const checkPath = (path: string, status?: string) => {
-    const result = path === location.pathname.substring(1);
 
-    if (status === "icon") {
-      return result ? ColorConstants.main : ColorConstants.gray;
-    }
-
-    return result;
-  };
-
-  return { navigateTo, progmatic, checkPath, navigateQuery, getQueries };
+  return { navigateTo, progmatic, navigateQuery, getQueries };
 }

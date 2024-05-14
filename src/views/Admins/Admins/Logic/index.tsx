@@ -60,7 +60,7 @@ export const TableData = () => {
         },
       },
       {
-        title: "Yaratilgan sana",
+        title: "Qo'shilgan sana",
         id: "created_at",
         render: (val: any) => {
           return <>{FormatTime(val)}</>;

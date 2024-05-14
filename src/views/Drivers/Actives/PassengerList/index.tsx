@@ -27,8 +27,6 @@ const PassengerList = ({ data }: { data: any }) => {
         })
     }, [data]);
 
-    // console.log(pasengerList.length);
-
 
 
     return (

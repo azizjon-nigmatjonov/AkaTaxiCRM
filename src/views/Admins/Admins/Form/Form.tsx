@@ -5,7 +5,7 @@ import { UpdateValidation, Validation } from "./validate";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitFunction } from "./Logic";
 import { CircularProgress } from "@mui/material";
-import HFSelect from "../../../../components/FormElements/HFSelect";
+import { HFMultipleSelect } from "../../../../components/FormElements/HFMultipleSelect";
 
 export const AdminFormWrapper = ({
   refetch,
@@ -69,13 +69,14 @@ export const AdminFormWrapper = ({
           required={true}
           defaultValue={defaultValues?.email}
         />
-        <HFSelect
+        <HFMultipleSelect
           name="roles"
           control={control}
           options={rolls}
           label="Rolni tanlang"
           placeholder="Rolni tanlang"
           required={true}
+          setValue={setValue}
           defaultValue={defaultValues?.roles}
         />
         {id !== "create" && (
