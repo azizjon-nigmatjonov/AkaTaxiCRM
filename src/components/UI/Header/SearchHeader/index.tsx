@@ -3,7 +3,7 @@ import { FC } from "react";
 // import useDebounce from "../../../hooks/useDebounce";
 // import CSearchInput from "../../CElements/CSearchInput";
 import stl from "./style.module.scss";
-import UserInfo from "../UserInfo";
+// import UserInfo from "../UserInfo";
 
 interface Props {
   //   handleSearch?: (val: any) => void;
@@ -29,7 +29,7 @@ const SearchHeader: FC<Props> = ({ extra }) => {
       </div>
 
       {extra && <div>{extra}</div>}
-      <div className={stl.profile}><UserInfo /></div>
+      {/* <div className={stl.profile}><UserInfo userInfo={userInfo} /></div> */}
     </div>
   );
 };
