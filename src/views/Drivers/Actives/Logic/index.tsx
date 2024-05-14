@@ -68,7 +68,6 @@ export const ActiveDriversTable = ({
         title: "Takliflar",
         id: "bids",
         render: (arr: any, item: any) => {
-          console.log(arr);
           return (
             <div className="py-4">
               <DriversAvater data={arr} item={item} />

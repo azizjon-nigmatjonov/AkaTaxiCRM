@@ -63,7 +63,7 @@ export const FetchFunction = ({ id }: { id: any | undefined }) => {
         permissions: route.permissions?.map((permission: any) => {
           return {
             ...permission,
-            label: permission.name.substring(permission.name.indexOf("_") + 1),
+            label: permission.name.substring(permission.name.indexOf("#") + 1),
             value: permission.id,
           };
         }),

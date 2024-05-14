@@ -1,7 +1,7 @@
-import { getWeekDays } from '../../../../../utils/getMonth'
+// import { getWeekDays } from '../../../../../utils/getMonth'
 import usePageRouter from '../../../../../hooks/useObjectRouter'
 import Detail from './Detail'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 
 
 const YEARS = [
@@ -47,11 +47,6 @@ const Form = ({ value }: { value: string }) => {
     const handleWeek = (evt: string) => {
         navigateQuery({ week: evt })
     }
-
-    useEffect(() => {
-        console.log('111', getWeekDays());
-        
-    }, [])
    
 
     return (

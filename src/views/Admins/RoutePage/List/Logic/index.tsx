@@ -53,7 +53,7 @@ export const CreateFunction = ({
 
   const createPermission = (data: any, id: number, path: string, list: any) => {
     const params: any = {};
-    params.name = path + "_" + data.name;
+    params.name = path + "#" + data.name;
     params.permission_route_id = id;
 
     const isEqual = checkEquality(list, data);
@@ -186,7 +186,7 @@ export const FetchFunction = () => {
         permissions: route.permissions?.map((permission: any) => {
           return {
             ...permission,
-            label: permission.name.substring(permission.name.indexOf("_") + 1),
+            label: permission.name.substring(permission.name.indexOf("#") + 1),
             value: permission.id,
           };
         }),

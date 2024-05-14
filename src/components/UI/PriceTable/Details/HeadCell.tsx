@@ -7,7 +7,7 @@ export const HeadCell = ({
   column = {},
   orderNumber,
   setValue,
-  submitPrice = () => {},
+  submitFn = () => {},
   handlePriceInput = () => {},
   handleCheckKm = () => {},
 }: {
@@ -16,12 +16,13 @@ export const HeadCell = ({
   region: any;
   orderNumber: number;
   setValue: (val: string, val2: any) => void;
-  submitPrice: (val: string, val2: number) => void;
+  submitFn: (val: string, val2: number) => void;
   handlePriceInput: (val: string, val2: number) => void;
   handleCheckKm: (val: number, val2: boolean) => void;
 }) => {
   const [editPrice, setEditPrice] = useState(false);
   const inputRef: any = useRef(null);
+  
   useEffect(() => {
     if (editPrice) {
       inputRef?.current.focus();
@@ -38,11 +39,16 @@ export const HeadCell = ({
 
   const handleChange = useDebounce((value: any) => {
     handlePriceInput(value, column.id);
-  }, 1000);
-  
+  }, 100);
+
   const handlePriceAction = (active: boolean) => {
-    submitPrice(active ? "" : "submit", column.region_id);
+    submitFn(active ? "" : "submit", column.region_id);
     setEditPrice(active);
+  };
+
+  const handleDistanceAction = (active: boolean) => {
+    handleCheckKm(orderNumber, active);
+    submitFn(active ? "" : "submitDistance", column.region_id);
   };
 
   useEffect(() => {
@@ -60,14 +66,14 @@ export const HeadCell = ({
         >
           <input
             ref={inputRef}
-            className={`w-[25px] bg-transparent ${
-              editPrice ? "font-[600] text-sm" : ""
+            className={`w-[40px] bg-transparent ${
+              editPrice ? "font-[600]" : ""
             }`}
             onChange={(e) => {
               handleChange(e.target.value);
               setValue(column.id + "", +e.target.value);
             }}
-            style={{ fontSize: editPrice ? "14px" : "" }}
+            type="number"
             defaultValue={column.price}
             disabled={!editPrice}
           />{" "}
@@ -81,15 +87,29 @@ export const HeadCell = ({
         </div>
       </div>
       <div className="cell__wrapper">
-        <div className="flex space-x-1 bg-[var(--primary50)] px-6px py-2px rounded-full">
-          <span className="text-[var(--primary)]">KM</span>{" "}
-          <button onClick={() => handleCheckKm(orderNumber, !column.edit_km)}>
-            {column.edit_km ? (
-              <SaveIcon fill="var(--primary)" width={20} />
-            ) : (
-              <EditIcon fill="var(--gray60)" />
-            )}
-          </button>
+        <div
+          className={`flex w-[70px] justify-between px-6px py-2px rounded-full ${
+            orderNumber === 2 ? "bg-[var(--primary50)]" : ""
+          }`}
+        >
+          <p
+            className={
+              orderNumber === 2
+                ? "text-[var(--primary)]"
+                : "text-[var(--gray40)]"
+            }
+          >
+            KM
+          </p>{" "}
+          {orderNumber === 2 && (
+            <button onClick={() => handleDistanceAction(!column.edit_km)}>
+              {column.edit_km ? (
+                <SaveIcon fill="var(--primary)" width={20} />
+              ) : (
+                <EditIcon fill="var(--gray60)" />
+              )}
+            </button>
+          )}
         </div>
         <p className="text-[var(--gray40)] font-[600]">Summa</p>
       </div>

@@ -5,13 +5,13 @@ export const BodyCell = ({
   type = "",
   district,
   column,
-  handleKmInput
+  handleKmInput,
 }: {
   edit?: boolean;
   type: string;
   district: any;
   column: any;
-  handleKmInput: (val: any) => void
+  handleKmInput: (val: number, val2: number) => void;
 }) => {
   if (type === "cell") {
     return (
@@ -21,18 +21,23 @@ export const BodyCell = ({
     );
   }
 
-  const handleChange = useDebounce((value: any) => {
-    handleKmInput(value);
-  }, 1000);
-  
+  const handleChange = useDebounce((value: any, id: any) => {
+    handleKmInput(value, id);
+  }, 100);
+
   return (
     <div className="cell flex justify-between items-center">
       {edit ? (
-        <input className="font-[600]" onChange={(e) => handleChange(e.target.value)} defaultValue={district.distance} />
+        <input
+          className="font-[600]"
+          onChange={(e) => {
+            handleChange(+e.target.value, district.district_id);
+          }}
+          defaultValue={district.distance}
+          type="number"
+        />
       ) : (
-        <p>
-          {district.distance}
-        </p>
+        <p>{district.distance}</p>
       )}
       <p className="text-[var(--gray60)]">{district.distance * column.price}</p>
     </div>

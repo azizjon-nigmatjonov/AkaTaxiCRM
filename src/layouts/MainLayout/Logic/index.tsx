@@ -1,7 +1,11 @@
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import usePageRouter from "../../../hooks/useObjectRouter";
-
 import { ArrowLeftIcon } from "@mui/x-date-pickers-pro";
+import { useQuery } from "react-query";
+import authService from "../../../services/auth/authService";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { authActions } from "../../../store/auth/auth.slice";
 
 export const BackButtonRoute = () => {
   const { fromRoutes } = useGetQueries();
@@ -20,4 +24,18 @@ export const BackButtonRoute = () => {
       </button>
     </div>
   );
+};
+
+export const GetUserInfo = () => {
+  const dispatch = useDispatch();
+  const { data: userInfo } = useQuery(["GET_USER"], () => {
+    return authService.getUserInfo();
+  });
+
+  useEffect(() => {
+    if (!userInfo?.data) return;
+    dispatch(authActions.setUser(userInfo?.data));
+  }, [userInfo]);
+
+  return ""
 };
