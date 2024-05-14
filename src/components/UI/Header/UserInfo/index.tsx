@@ -7,7 +7,6 @@ interface Props {
 
 const UserInfo = ({ userInfo = [] } : Props) => {
   const { navigateTo } = usePageRouter();
-
   return (
     <div
       className={cls.wrapper}
