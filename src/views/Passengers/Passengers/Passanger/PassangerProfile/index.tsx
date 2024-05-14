@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import { useQuery } from "react-query";
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useGetQueries } from "../../../../../hooks/useGetQueries"
 import passengerService from "../../../../../services/passengers";
 import CCard from "../../../../../components/CElements/CCard";
 import { InfoIcon } from '../../../../../components/UI/IconGenerator/Svg';
@@ -17,6 +16,7 @@ import usePageRouter from '../../../../../hooks/useObjectRouter';
 import { Modal } from '@mui/material'
 import PImageUpdate from './ImageUpdate';
 import { websiteActions } from '../../../../../store/website';
+import { useParams } from 'react-router-dom';
 
 
 const SelectGender = [
@@ -27,16 +27,16 @@ const SelectGender = [
 const PassengerProfile = () => {
   const dispatch = useDispatch()
   const [alert, setAlert] = useState('')
-  const { id, } = useGetQueries();
+  const { id} = useParams();
   const { getQueries } = usePageRouter();
   const query = getQueries();
   const { navigateQuery, navigateTo } = usePageRouter()
 
-  const { data } = useQuery(['GET_PASSANGER', id], () => {
+  const { data , refetch} = useQuery(['GET_PASSANGER', id], () => {
     return passengerService.getElement(id)
   })
-
-  const { data: regions } = useQuery(["GET_REGIONS_LIST"], () => {
+  
+  const { data: regions, } = useQuery(["GET_REGIONS_LIST"], () => {
     return regionService.getList();
   });
 
@@ -71,7 +71,7 @@ const PassengerProfile = () => {
 
   const alertMessage = (e: string) => {
     if (e == 'delete') {
-      passengerService.deleteElement(query.id).then(() => {
+      passengerService.deleteElement(id).then(() => {
         dispatch(
           websiteActions.setAlertData({
             title: "Ma'lumotlar o'chirildi!",
@@ -106,7 +106,7 @@ const PassengerProfile = () => {
       // console.log(passenger);
       // console.log(values);
 
-      passengerService.updateElement(query?.id, values).then(() => {
+      passengerService.updateElement(id, values).then((data) => {
         dispatch(
           websiteActions.setAlertData({
             mainTitle: 'Muvaffaqiyatli yakunlandi',
@@ -114,7 +114,10 @@ const PassengerProfile = () => {
             translation: "common",
           })
         );
-        window.location.reload()
+        console.log(data);
+        
+        refetch()
+        // window.location.reload()
         // navigateTo('/passengers/main')
       })
       navigateQuery({ passenger: '' })
@@ -122,8 +125,6 @@ const PassengerProfile = () => {
       navigateQuery({ passenger: '' })
     }
   }
-
-
 
   return (
     <div>
@@ -135,7 +136,7 @@ const PassengerProfile = () => {
           </div>
 
           <div className='w-full'>
-            <div className='w-full  flex items-center gap-6'>
+            <div className='w-full  grid grid-cols-3  gap-5'>
               <HFTextField control={control} name='full_name' setValue={setValue} required={true} placeholder='Ism familiya' label='Ism familiya' defaultValue={passenger?.full_name} />
 
               <HFDatePicker name="birthday" label="Tug'ilgan sana" control={control} required={true} placeholder="Tug'ilgan sana" defaultValue={passenger.birthday ? new Date(passenger?.birthday) : ''} />
@@ -152,7 +153,7 @@ const PassengerProfile = () => {
               />
             </div>
 
-            <div className='mt-6 flex items-start gap-6'>
+            <div className='mt-6 grid grid-cols-2 gap-5'>
               <HFSelect
                 name="region_id"
                 control={control}

@@ -19,7 +19,7 @@ export const FetchFunction = () => {
     const arr = coinData?.data?.bookings;
     const arr2 = coinData?.data?.invites
     let bookings = [];
-    let invites = []
+    let invites = [];
     if (arr?.length) {
       bookings = arr.map((el: any) => {
         return {
@@ -37,7 +37,7 @@ export const FetchFunction = () => {
             ...el
           };
         });
-      }
+    }
 
     return { bookings, invites };
   }, [coinData]);

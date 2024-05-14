@@ -8,10 +8,15 @@ import {
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { AudioModal } from "../../../components/UI/CallModals/AudioModal";
 import { NoteModal } from "../../../components/UI/CallModals/NoteModal";
+import CSelectColor from "../../../components/CElements/CSelectColor";
 
 export const TableActions = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
-
+  const options = [
+    { value: 'salom', label: 'salom' },
+    { value: 'hayr', label: 'hayr' },
+    { value: 'salom', label: 'salom' },
+  ]
   const headColumns = [
     {
       title: "Vaqti",
@@ -32,6 +37,9 @@ export const TableActions = () => {
     {
       title: "lead - sabablari",
       id: "lead",
+      render: (val: any) => val && (
+        <CSelectColor options={options} />
+      )
     },
     {
       title: "",

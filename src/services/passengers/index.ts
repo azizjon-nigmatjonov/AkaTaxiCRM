@@ -3,11 +3,11 @@ import requestForm from '../../utils/requestFormdata'
 const passengerService = {
   getList: (data: any) =>
     request.get(
-      `/passengers?page=${data.page}&perPage=${data.perPage}${data.q ? `&q=${data.q}` : ""}${data.region_id ? `&region_id=${data.region_id}` : ""}${data.device_type ? `&device_type=${data.device_type}` : ''}${data.version ? `&version=${data.version}` : ''}${data.created_at ? `&created_at=${data.created_at}` : ''}${data.gender? `&gender=${data.gender}`:''}`
+      `/passenges?page=${data.page}&perPage=${data.perPage}${data.q ? `&q=${data.q}` : ""}${data.region_id ? `&region_id=${data.region_id}` : ""}${data.device_type ? `&device_type=${data.device_type}` : ''}${data.version ? `&version=${data.version}` : ''}${data.created_at ? `&created_at=${data.created_at}` : ''}${data.gender? `&gender=${data.gender}`:''}`
     ),
   createElement: (data: any) => request.post("/passengers", { ...data }),
-  deleteElement: (id: string) => requestForm.delete(`passengers/${id}`),
-  updateElement: (id: string, data: any) =>
+  deleteElement: (id: any) => requestForm.delete(`passengers/${id}`),
+  updateElement: (id: any, data: any) =>
     request.put(`passengers/${id}`, { ...data }),
   getElement: (id: any) => request.get(`passengers/${id}`),
   getActivePassengers: (params: any) =>

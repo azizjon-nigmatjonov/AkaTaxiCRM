@@ -5,7 +5,6 @@ import { useGetQueries } from "../../../../../hooks/useGetQueries"
 import CCard from "../../../../../components/CElements/CCard"
 import { BallanceIcon, TaxIcon, SallaryIcon } from "../../../../../components/UI/IconGenerator/Svg"
 import CTable from "../../../../../components/CElements/CTable"
-import { FormatTime } from "../../../../../utils/formatTime"
 import CModal from "../../../../../components/CElements/CModal"
 import usePageRouter from "../../../../../hooks/useObjectRouter"
 import { useForm } from "react-hook-form"
@@ -15,15 +14,15 @@ import CancelButton from "../../../../../components/UI/Buttons/Cancel"
 import { useDispatch } from "react-redux"
 import { websiteActions } from "../../../../../store/website"
 import { useParams } from "react-router-dom"
-
+import {headColums} from './Logic'
 
 
 const DriverBallance = () => {
     const { currentPage } = useGetQueries()
-    const { id } = useParams()
     const { getQueries, navigateQuery } = usePageRouter()
     const query = getQueries()
     const dispatch = useDispatch()
+    const { id } = useParams()
 
     const { data, isLoading, refetch } = useQuery(['GET_DRIVERS_BALLANCE', id, currentPage], () => {
         return driverService.getDriverBallance({ id, page: currentPage })
@@ -76,31 +75,7 @@ const DriverBallance = () => {
         }
     }, [data])
 
-    const headColums = useMemo(() => {
-        return [
-            {
-                title: 'Summa',
-                id: 'amount',
-                render: (val?: any, item?: any) => val && (
-                    <p className={item.type == 'income' ? 'text-[var(--green)]' : 'text-[var(--main)]'}>{item.type == 'income' ? '+' : '-' + val + ' ' + "so'm"}</p>
-                )
-            },
-            {
-                title: 'tranzaksiya turi',
-                id: "type",
-                render: (val?: any) => val && (
-                    <p >{val == 'income' ? 'Hisob to’ldirildi' : 'Komissiya olindi'}</p>
-                )
-            },
-            {
-                title: 'Sana',
-                id: 'created_at',
-                render: (val?: any) => val && (
-                    FormatTime(val)
-                )
-            }
-        ]
-    }, [])
+  
 
 
     const bodyColumns = useMemo(() => {

@@ -23,13 +23,14 @@ const selOptions = [
 
 export const OperatorTable = () => {
   const { headColumns } = TableActions();
+
   return (
     <div className="mt-10">
       <div className="flex items-center justify-between mb-5">
         <div className="w-[270px]">
-          <CSelect value={1} options={selOptions} id="filter"  />
+          <CSelect value={1} options={selOptions} id="filter" />
         </div>
-        <CSearchInput handleChange={() =>{}} />
+        <CSearchInput handleChange={() => { }} />
       </div>
       <CTable
         headColumns={headColumns}

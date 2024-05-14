@@ -36,7 +36,7 @@ const Detail = ({
 
   return (
     <>
-      <div id={`cselect-${id}`}>
+      <div id={`cselect-${id}`} className="">
         {label && <CLabel title={label} />}
         <Select
           disabled={
@@ -46,7 +46,7 @@ const Detail = ({
               ? false
               : disabled == labelHandler(label)
           }
-          // sx={{ m: 1, width: 112, height: 3 }}
+          // sx={{ m: 1, width: '100%', height: 3 }}
           defaultValue={options?.[0]?.value}
           inputProps={{
             "aria-label": "Without label",

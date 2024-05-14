@@ -864,10 +864,10 @@ export const ArrowUp = ({ fill }: { fill?: any }) => (
   </svg>
 );
 
-export const ArrowDownOutline = () => (
+export const ArrowDownOutline = ({width=19, height=18}:{width?:number, height?:number}) => (
   <svg
-    width="19"
-    height="18"
+    width={width}
+    height={height}
     viewBox="0 0 19 18"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

@@ -50,7 +50,7 @@ const Form = ({ value }: { value: string }) => {
    
 
     return (
-        <div className='bg-[var(--softGray)] mt-4 p-4 rounded-lg flex gap-3'>
+        <div className='bg-[var(--softGray)] mt-4 p-4 rounded-lg flex gap-3 w-full'>
             <Detail handlerValue={handlerYear} disabled={value} label='Yil' options={YEARS} />
             <Detail handlerValue={handlerMonth} disabled={value} label='Oy' options={MONTH} />
             <Detail handlerValue={handleWeek} disabled={value} label='Hafta (Du-Ya)' options={WEEK} />

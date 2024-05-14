@@ -2,7 +2,7 @@ import { OneSkeleton } from "./OneSkeleton";
 
 export const ListSkeleton = ({
   rounded = 12,
-  count = 3,
+  count = 4,
   height = 150,
   direction = "col",
 }: {
