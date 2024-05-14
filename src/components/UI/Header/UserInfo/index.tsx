@@ -1,8 +1,11 @@
 import usePageRouter from "../../../../hooks/useObjectRouter";
 import cls from "./style.module.scss";
 import ImageFrame from "../../ImageFrame";
-import { memo } from "react";
-const UserInfo = ({ userInfo }: { userInfo: any }) => {
+interface Props {
+  userInfo: any
+}
+
+const UserInfo = ({ userInfo = [] } : Props) => {
   const { navigateTo } = usePageRouter();
 
   return (
@@ -25,4 +28,4 @@ const UserInfo = ({ userInfo }: { userInfo: any }) => {
   );
 };
 
-export default memo(UserInfo);
+export default UserInfo;
