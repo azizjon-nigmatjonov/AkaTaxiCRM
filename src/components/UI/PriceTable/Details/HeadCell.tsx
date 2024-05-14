@@ -22,6 +22,7 @@ export const HeadCell = ({
 }) => {
   const [editPrice, setEditPrice] = useState(false);
   const inputRef: any = useRef(null);
+  
   useEffect(() => {
     if (editPrice) {
       inputRef?.current.focus();

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export const FetchFunction = ({ priceParams }: { priceParams: any }) => {
   const { data: priceListData, refetch: refetchPrice } = useQuery(
-    ["GET_PRICE_LIST"],
+    ["GET_PRICE_LIST", priceParams?.from_tashkent],
     () => {
       return priceService.getList(priceParams);
     }
@@ -14,7 +14,7 @@ export const FetchFunction = ({ priceParams }: { priceParams: any }) => {
     data: distanceData,
     isLoading: distanceLoading,
     refetch: refetchDistance,
-  } = useQuery(["GET_PRICE_DISTANCE_LIST"], () => {
+  } = useQuery(["GET_PRICE_DISTANCE_LIST", priceParams?.from_tashkent], () => {
     return priceService.getDistanceList(priceParams.from_tashkent);
   });
   const [bodyColumns, setBodyColumns] = useState([]);
