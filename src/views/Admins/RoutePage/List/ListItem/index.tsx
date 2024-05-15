@@ -75,6 +75,7 @@ export const ListIem = ({
             list={route.permissions}
             handleClose={handleClose}
             id={route.id}
+            route={route}
             path={route.path}
           />
         </div>

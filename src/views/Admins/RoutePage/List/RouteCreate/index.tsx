@@ -38,7 +38,7 @@ export const RouteCreate = ({
           options={options}
           control={control}
           handleClick={(val) => setValue("title", val.title)}
-          placeholder="Permission nomi"
+          placeholder="Route nomi"
         />
 
         <div>

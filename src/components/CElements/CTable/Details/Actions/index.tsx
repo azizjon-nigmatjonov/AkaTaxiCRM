@@ -1,9 +1,9 @@
 import propTypes from "prop-types";
 // import CDropdown from "../../../CDropdown";
 import {
-  CarIcon,
   DeleteIcon,
   EditIcon,
+  EyeIcon,
   LockIcon,
 } from "../../../../UI/IconGenerator/Svg";
 import cls from "./style.module.scss";
@@ -16,6 +16,7 @@ interface Props {
   element: any;
   permissions: string[];
   rowIndex: number;
+  routePermissions: any;
   handleActions: (obj?: any, status?: any) => void;
   currentIndex: any;
   setCurrentIndex: (newIndex?: any) => void;
@@ -25,23 +26,26 @@ const TabbleActions = ({
   element,
   rowIndex,
   permissions = [],
-  handleActions = () => {},
   currentIndex,
+  routePermissions = [],
+  handleActions = () => {},
   setCurrentIndex = () => {},
 }: Props) => {
   const [deletePopover, setDeletePopover]: any = useState(null);
   const handleClick = (element: any, status?: string, active?: boolean) => {
-    if (status === "delete") {
-      setDeletePopover(rowIndex);
-      setCurrentIndex(null);
-    } else {
-      if (active) {
-        handleActions(element, status);
+    if (!routePermissions.includes(status)) {
+      if (status === "delete") {
+        setDeletePopover(rowIndex);
         setCurrentIndex(null);
+      } else {
+        if (active) {
+          handleActions(element, status);
+          setCurrentIndex(null);
+        }
       }
     }
   };
-
+  
   return (
     <div>
       {currentIndex === rowIndex ? (
@@ -50,10 +54,10 @@ const TabbleActions = ({
         >
           <Element
             text="view"
-            active={element?.is_view}
+            active={element?.is_view && routePermissions.includes('view')}
             onClick={() => handleClick(element, "view", element?.is_delete)}
             icon={
-              <CarIcon
+              <EyeIcon
                 fill={element?.is_view ? "white" : ColorConstants.gray}
               />
             }
@@ -61,18 +65,18 @@ const TabbleActions = ({
           />
           <Element
             text="freez"
-            active={element?.is_freeze}
-            onClick={() => handleClick(element, "freez", element?.is_freeze)}
+            active={element?.is_freez && routePermissions.includes('freez')}
+            onClick={() => handleClick(element, "freez", element?.is_freez)}
             icon={
               <LockIcon
-                fill={element?.is_freeze ? "white" : ColorConstants.gray}
+                fill={element?.is_freez ? "white" : ColorConstants.gray}
               />
             }
             show={permissions.includes("freez")}
           />
           <Element
             text="edit"
-            active={element?.is_edit}
+            active={element?.is_edit && routePermissions.includes('edit')}
             onClick={() => handleClick(element, "edit", element.is_edit)}
             icon={
               <EditIcon
@@ -83,7 +87,7 @@ const TabbleActions = ({
           />
           <Element
             text="delete"
-            active={element?.is_delete}
+            active={element?.is_delete && routePermissions.includes('delete')}
             onClick={() => handleClick(element, "delete", element.is_delete)}
             icon={
               <DeleteIcon

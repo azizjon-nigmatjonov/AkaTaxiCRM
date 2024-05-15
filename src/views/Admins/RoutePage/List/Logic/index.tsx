@@ -108,6 +108,7 @@ export const GetOptions = ({ newRouteList }: { newRouteList: any }) => {
   const { navigateTo, navigateQuery } = usePageRouter();
   const { active } = useGetQueries();
   const { t } = useTranslation();
+
   const allRoutes = (list: any) => {
     let arr = [];
     for (let key in list) {
@@ -178,6 +179,7 @@ export const FetchFunction = () => {
   } = useQuery(["GET_ROUTE_LIST"], () => {
     return routeService.getList();
   });
+  const oldRoutes = useSelector((state: any) => state.website.routes)
 
   const newRouteList: any = useMemo(() => {
     const list = routes?.data?.map((route: any) => {
@@ -200,12 +202,14 @@ export const FetchFunction = () => {
 };
 
 export const getPermissionList = ({ list }: { list: any }) => {
+ 
   const permissionsList = useMemo(() => {
     const arr: any = [];
-
     StaticPermissions.forEach((element: any) => {
       const found = list.find((item: any) => item.label === element.value);
-      if (!found) arr.push(element);
+      // const condition = sidebar ? true  : element.value !== 'sidebar' ? true : false
+
+      if (!found) arr.push(element)
     });
 
     return arr;

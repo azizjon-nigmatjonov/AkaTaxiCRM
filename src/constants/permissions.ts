@@ -1,7 +1,7 @@
 export const StaticPermissions = [
   {
     label: "Sidebarda ko'rinish",
-    value: "index",
+    value: "sidebar",
   },
   {
     label: "Ko'rish",
@@ -12,8 +12,12 @@ export const StaticPermissions = [
     value: "add",
   },
   {
-    label: "Yangilash",
-    value: "update",
+    label: "Tahrirlash",
+    value: "edit",
+  },
+  {
+    label: "Muzlatish",
+    value: "freez",
   },
   {
     label: "O'chirish",

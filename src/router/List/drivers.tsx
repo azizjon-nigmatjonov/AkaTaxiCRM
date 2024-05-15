@@ -57,7 +57,7 @@ export const driverList = [
     parent: "drivers",
     link: "fotocontroluser/:id",
     sidebar: false,
-    title: "Foto nazorat",
+    title: "Foto ichki sahifa",
     icon: "",
     element: <FotoControlUser />
   },

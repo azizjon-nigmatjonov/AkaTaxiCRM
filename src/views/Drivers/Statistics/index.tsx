@@ -42,10 +42,8 @@ const DriverStatistics = () => {
           </div>}
         </div>
       </div>
-
-      <div className="p-5 space-y-[20px]">
-
-        <StatisticsCard data={data?.widgetsData} loading={widgetsLoading} />
+      <StatisticsCard data={data?.widgetsData} loading={widgetsLoading} />
+      <div className="container grid gap-y-5">
 
         <CCard style={{ minHeight: 0 }}>
           <StatisticsHeader />

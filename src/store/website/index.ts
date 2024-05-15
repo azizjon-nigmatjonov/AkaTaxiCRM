@@ -10,9 +10,8 @@ export const { actions: websiteActions, reducer: websiteReducer } = createSlice(
     name: "website",
     initialState,
     reducers: {
-      setRoutes: (state: any, { payload }) => {                        
+      setRoutes: (state: any, { payload }) => {
         state.routes = payload;
-         
       },
       setAlertData: (state, { payload }) => {
         state.alert = payload;

@@ -9,7 +9,7 @@ export const breadCrumbs = [
 
 export const FetchFunction = () => {
   const { data, isLoading, refetch } = useQuery(
-    ["GET_ADMINS"],
+    ["GET_ROLLS_TABLE_LIST"],
     () => {
       return roleService.getList();
     },

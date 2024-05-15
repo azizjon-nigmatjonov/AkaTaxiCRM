@@ -22,14 +22,6 @@ export const adminList = [
   },
   {
     parent: "admins",
-    link: "rolls/new_rolls",
-    sidebar: false,
-    title: "Yangi rollar",
-    icon: "",
-    element: <NewRolls />,
-  },
-  {
-    parent: "admins",
     link: "rolls/create",
     sidebar: false,
     title: "Rol yaratish",

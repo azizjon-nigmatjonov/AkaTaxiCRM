@@ -8,16 +8,18 @@ import { HFMultipleSelect } from "../../../../../components/FormElements/HFMulti
 
 export const PermissionCreate = ({
   id,
+  route = {},
   path = "",
   list = [],
   handleClose,
 }: {
   id: number;
+  route: any;
   path: string;
   list: any;
   handleClose: () => void;
 }) => {
-  const { permissionOptions } = getPermissionList({ list });
+  const { permissionOptions } = getPermissionList({ list});
 
   const schema = Validation();
   const { control, setValue, handleSubmit, reset } = useForm({

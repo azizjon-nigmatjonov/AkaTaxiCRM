@@ -52,7 +52,7 @@ export const TableData = () => {
               {roles?.map((item: any, index: number, row: any) => (
                 <p key={index}>
                   {item.name}
-                  {index > 0 && row.length - 1 !== index ? "," : ""}
+                  {row.length > 1 && index !== row.length - 1 ? "," : ""}
                 </p>
               ))}
             </div>
@@ -86,7 +86,7 @@ export const TableData = () => {
       {
         title: "",
         id: "actions",
-        permission: ["edit", "delete"],
+        permission: ["edit", "delete", 'view'],
       },
     ];
   }, []);
