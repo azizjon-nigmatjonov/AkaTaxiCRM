@@ -12,14 +12,22 @@ input {
   }
 }
 
-#cselect {
+.MuiList-root {
+  .MuiButtonBase-root {
+    display: flex;
+    justify-content: space-between !important;
+  }
+}
+
+#cselect,
+#HFMultipleSelect {
   width: 100%;
   .MuiInputBase-root {
     height: 40px;
     outline: none;
     width: 100%;
     border-radius: 8px;
-  
+
     svg {
       display: none;
     }
@@ -30,7 +38,6 @@ input {
     &.Mui-focused {
       .MuiOutlinedInput-notchedOutline {
         border-color: var(--main);
-       
       }
     }
 

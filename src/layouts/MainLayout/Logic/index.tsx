@@ -4,7 +4,7 @@ import { ArrowLeftIcon } from "@mui/x-date-pickers-pro";
 import { useQuery } from "react-query";
 import authService from "../../../services/auth/authService";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { authActions } from "../../../store/auth/auth.slice";
 
 export const BackButtonRoute = () => {
@@ -14,7 +14,10 @@ export const BackButtonRoute = () => {
   if (!fromRoutes) return "";
 
   return (
-    <div className="fixed z-[100] left-[250px] top-[340px]" id="breathing-button">
+    <div
+      className="fixed z-[100] left-[250px] top-[340px]"
+      id="breathing-button"
+    >
       <button
         onClick={() => progmatic()}
         className="custom-btn form text-2xl hover:bg-[var(--primary)] duration-200"
@@ -32,10 +35,44 @@ export const GetUserInfo = () => {
     return authService.getUserInfo();
   });
 
-  useEffect(() => {
-    if (!userInfo?.data) return;
-    dispatch(authActions.setUser(userInfo?.data));
+  const permissions = useMemo(() => {
+    const roles = userInfo?.data?.roles;
+    if (!roles?.length) return [];
+    const list: any = [];
+
+    roles.forEach((role: any) => {
+      role.permissions.forEach((permission: any) => {
+        list.push({
+          ...permission,
+          value: permission.name.substring(0, permission.name.indexOf("#")),
+          permission: permission.name.substring(
+            permission.name.indexOf("#") + 1
+          ),
+          permissions: [],
+        });
+      });
+    });
+
+    const combinedObjects: any = {};
+
+    list.forEach((obj: any) => {
+      if (combinedObjects[obj.value]) {
+        combinedObjects[obj.value].permissions.push(obj.permission);
+      } else {
+        combinedObjects[obj.value] = { ...obj, permissions: [obj.permission] };
+        delete combinedObjects[obj.value].permission;
+      }
+    });
+
+    const result = Object.values(combinedObjects);
+
+    return result;
   }, [userInfo]);
 
-  return ""
+  useEffect(() => {
+    if (!userInfo?.data) return;
+    dispatch(authActions.setUser({ ...userInfo?.data, permissions }));
+  }, [userInfo]);
+
+  return "";
 };

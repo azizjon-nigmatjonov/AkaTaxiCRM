@@ -30,10 +30,11 @@ const SidebarSection = ({ list }: Props) => {
             const visibleSidebarItems: any = (value as any).filter(
               (el: any) => el.sidebar
             );
+            if (!visibleSidebarItems?.length) return ""
 
             const isLastItem = index === Object.entries(list).length - 1;
 
-            return visibleSidebarItems.length > 1 ? (
+            return visibleSidebarItems?.length > 1 ? (
               <div>
                 <button
                   className={`accordion ${
@@ -98,10 +99,10 @@ const SidebarSection = ({ list }: Props) => {
             ) : (
               <div className="menus">
                 <NavLink
-                  to={visibleSidebarItems[0].path}
+                  to={visibleSidebarItems?.[0]?.path}
                   className={`menu_link3 w-full h-[40px] flex items-center gap-x-3 pl-3 ml-[-11px] capitalize`}
                 >
-                  <IconGenerator icon={visibleSidebarItems[0].icon} />
+                  <IconGenerator icon={visibleSidebarItems?.[0]?.icon} />
                   {t(key)}
                 </NavLink>
                 <div className="accordion-line"></div>

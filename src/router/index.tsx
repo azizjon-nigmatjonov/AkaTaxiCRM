@@ -10,8 +10,6 @@ import Registration from "../views/Auth/Registration";
 
 import { routeList } from "./List";
 
-
-
 interface Path {
   parent: string;
   link: string;
@@ -24,6 +22,7 @@ interface Path {
 
 const Router = () => {
   const dispatch = useDispatch();
+  const userInfo = useSelector((state: any) => state.auth.user);
   const token = useSelector((state: any) => state.auth.token);
   const [list, setList] = useState<string[]>([]);
 
@@ -59,10 +58,13 @@ const Router = () => {
       card_info,
       permissions: [],
       parent,
-      link
+      link,
     };
 
-    if (!list.includes(obj.id)) {
+    const permissions = userInfo?.permissions;
+    const found = permissions.find((i: any) => i.value === path);
+
+    if (!list.includes(obj.id) && found?.permissions?.includes("index")) {
       setRoutes((prev: any) => ({
         ...prev,
         [parent]: [...prev[parent], obj],
@@ -112,7 +114,7 @@ const Router = () => {
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </Suspense> 
+    </Suspense>
   );
 };
 

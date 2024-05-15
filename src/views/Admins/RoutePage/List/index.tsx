@@ -33,9 +33,9 @@ export const RouteList = ({
 
   return (
     <div className="mt-10">
-      {newRouteList.map((route: any) => (
+      {newRouteList.map((route: any, index: number) => (
         <ListIem
-          key={route.id}
+          key={index}
           handleClose={handleClose}
           deleteRoute={deleteRoute}
           deletePermission={deletePermission}
