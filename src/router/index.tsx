@@ -105,6 +105,8 @@ const Router = () => {
     );
   }
 
+  // if (userInfo?.permissions?.length) return ""
+
   return (
     <Suspense fallback={"Loading..."}>
       <Routes>
@@ -113,7 +115,7 @@ const Router = () => {
             index
             element={<Navigate to={navigator || "/dashboard/dashboard"} />}
           />
-          {routeList?.map((route) => (
+          {userInfo?.permissions?.length && routeList?.map((route) => (
             <Route
               path={getPath({
                 parent: route.parent,

@@ -29,7 +29,7 @@ const Form = ({ refetch }: Props) => {
   });
 
 
-  const { data: regions } = useQuery(["GET_REGIONS_LIST"], () => {
+  const { data: regions } = useQuery(["GET_REGIONS_LIST_"], () => {
     return regionService.getList();
   });
 
