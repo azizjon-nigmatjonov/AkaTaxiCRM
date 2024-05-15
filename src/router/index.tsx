@@ -62,8 +62,8 @@ const Router = () => {
       link,
     };
 
-    const permissions = userInfo?.permissions;
-    const found = permissions.find((i: any) => i.value === path);
+    const permissions = userInfo?.permissions ?? []
+    const found = permissions?.find((i: any) => i.value === path);
 
     if (found?.permissions?.includes("sidebar")) {
       if (!list.includes(obj.id)) {
