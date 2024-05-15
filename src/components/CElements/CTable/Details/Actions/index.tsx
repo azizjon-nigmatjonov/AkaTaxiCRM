@@ -33,7 +33,7 @@ const TabbleActions = ({
 }: Props) => {
   const [deletePopover, setDeletePopover]: any = useState(null);
   const handleClick = (element: any, status?: string, active?: boolean) => {
-    if (!routePermissions.includes(status)) {
+    if (routePermissions.includes(status)) {
       if (status === "delete") {
         setDeletePopover(rowIndex);
         setCurrentIndex(null);
