@@ -8,7 +8,6 @@ import { HFMultipleSelect } from "../../../../../components/FormElements/HFMulti
 
 export const PermissionCreate = ({
   id,
-  route = {},
   path = "",
   list = [],
   handleClose,

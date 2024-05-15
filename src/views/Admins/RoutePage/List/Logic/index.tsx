@@ -179,7 +179,6 @@ export const FetchFunction = () => {
   } = useQuery(["GET_ROUTE_LIST"], () => {
     return routeService.getList();
   });
-  const oldRoutes = useSelector((state: any) => state.website.routes)
 
   const newRouteList: any = useMemo(() => {
     const list = routes?.data?.map((route: any) => {
