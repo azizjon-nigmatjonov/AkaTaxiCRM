@@ -65,7 +65,7 @@ const Router = () => {
     const permissions = userInfo?.permissions ?? [];
     const found = permissions?.find((i: any) => i.value === path);
 
-    if (found?.permissions?.includes("sidebar")) {
+    if (found?.permissions?.includes("index")) {
       if (!list.includes(obj.id)) {
         setRoutes((prev: any) => ({
           ...prev,
@@ -105,14 +105,12 @@ const Router = () => {
     );
   }
 
-  // if (userInfo?.permissions?.length) return ""
-
   return (
     <Suspense fallback={"Loading..."}>
       <Routes>
         <Route path="/" element={<MainLayout />}>
           {userInfo?.permissions?.length &&
-            routeList?.map((route) => (
+            routeList?.map((route, index) => (
               <Route
                 path={getPath({
                   parent: route.parent,
@@ -121,6 +119,7 @@ const Router = () => {
                   title: route.title,
                   icon: route.icon,
                 })}
+                key={index}
                 element={route.element}
               />
             ))}

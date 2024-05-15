@@ -1,7 +1,7 @@
 export const StaticPermissions = [
   {
-    label: "Sidebarda ko'rinish",
-    value: "sidebar",
+    label: "Sahifa ko'rish",
+    value: "index",
   },
   {
     label: "Ko'rish",
