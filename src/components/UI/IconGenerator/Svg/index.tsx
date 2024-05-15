@@ -864,7 +864,7 @@ export const ArrowUp = ({ fill }: { fill?: any }) => (
   </svg>
 );
 
-export const ArrowDownOutline = ({width=19, height=18}:{width?:number, height?:number}) => (
+export const ArrowDownOutline = ({ width = 19, height = 18 }: { width?: number, height?: number }) => (
   <svg
     width={width}
     height={height}
@@ -3849,3 +3849,19 @@ export const ImageFrameIcon = () => (
     />
   </svg>
 );
+
+
+export const ArrowDoubleIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+  <g clip-path="url(#clip0_7732_78011)">
+    <path d="M24 0.5H0V24.5H24V0.5Z" fill="white" fill-opacity="0.01"/>
+    <path d="M6 6.5L12 12.5L6 18.5" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 6.5L18 12.5L12 18.5" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_7732_78011">
+      <rect width="24" height="24" fill="white" transform="translate(0 0.5)"/>
+    </clipPath>
+  </defs>
+</svg>
+)

@@ -21,6 +21,7 @@ import {
   HeadPhones,
   AdminIcon,
   ListSquaredIcon,
+  EarthIcon
 } from "./Svg/Sidebar";
 
 import { PassengerIcon, DriverIcon, PassengerVehicleIcon, DriverVehicleIcon, PartnersIcon } from "./Svg";
@@ -82,6 +83,10 @@ export const iconsList = [
   {
     name: "bookings_count",
     component: DriverVehicleIcon,
+  },
+  {
+    name:'earth',
+    component: EarthIcon
   },
   {
     name: "driver_count",

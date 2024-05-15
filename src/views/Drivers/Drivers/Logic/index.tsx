@@ -42,9 +42,14 @@ export const headColumns = [
       ),
   },
   {
-    title: "Hisob raqami",
+    title: 'Hisob raqami',
+    id: 'id'
+  },
+  {
+    title: "Mablag'i",
     id: "balance",
   },
+
   {
     title: "Viloyat",
     id: "region_name",

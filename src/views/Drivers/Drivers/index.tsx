@@ -70,8 +70,6 @@ const Drivers = () => {
   }, [regions]);
   
 
-
-
   return (
     <>
       <Header>

@@ -1126,3 +1126,16 @@ export const NewsIcon = () => (
     />
   </svg>
 );
+
+
+export const EarthIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
+    <path d="M13.3346 7.00033C13.3346 3.78033 10.7213 1.16699 7.5013 1.16699C4.2813 1.16699 1.66797 3.78033 1.66797 7.00033C1.66797 10.2203 4.2813 12.8337 7.5013 12.8337" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M5.16823 1.75H5.75156C4.61406 5.15667 4.61406 8.84333 5.75156 12.25H5.16823" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9.25 1.75C9.81583 3.45333 10.1017 5.22667 10.1017 7" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M2.25 9.33333V8.75C3.95333 9.31583 5.72667 9.60168 7.5 9.60168" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M2.25 5.25059C5.65667 4.11309 9.34333 4.11309 12.75 5.25059" stroke="#475467" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M11.7077 9.18192L9.64273 11.2469C9.56106 11.3286 9.48522 11.4803 9.46772 11.5911L9.35689 12.3786C9.31606 12.6644 9.5144 12.8628 9.80023 12.8219L10.5877 12.7111C10.6986 12.6936 10.8561 12.6178 10.9319 12.5361L12.9969 10.4711C13.3527 10.1153 13.5219 9.70108 12.9969 9.17608C12.4777 8.65692 12.0636 8.82609 11.7077 9.18192Z" stroke="#475467" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M11.4102 9.47949C11.5852 10.1095 12.0752 10.5995 12.7052 10.7745" stroke="#475467" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+)

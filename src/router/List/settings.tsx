@@ -1,8 +1,9 @@
-import SMS from "../../views/Settings/SMS";
+// import SMS from "../../views/Settings/SMS";
 import Price from "../../views/Settings/Price";
 import { SmsCreateForm } from "../../views/Settings/SMS/Form";
 import AmoCrm from "../../views/Settings/AmoCrm";
 import ProfilePage from "../../views/Settings/Profile";
+import Regions from "../../views/Regions";
 
 export const settingList = [
     {
@@ -13,13 +14,21 @@ export const settingList = [
         icon: 'price_control',
         element: <Price />
     },
+    // {
+    //     parent: 'settings',
+    //     link: 'sms',
+    //     sidebar: true,
+    //     title: 'SMS xabarnoma',
+    //     icon: 'sms',
+    //     element: <SMS />
+    // },
     {
-        parent: 'settings',
-        link: 'sms',
+        parent:'settings',
+        link:'regions',
         sidebar: true,
-        title: 'SMS xabarnoma',
-        icon: 'sms',
-        element: <SMS />
+        title: "Viloyat qo'shish",
+        icon:'earth',
+        element: <Regions/>
     },
     {
         parent: 'settings',
