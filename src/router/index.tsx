@@ -124,10 +124,12 @@ const Router = () => {
                 element={route.element}
               />
             ))}
-          <Route
-            index
-            element={<Navigate to={navigator || "/dashboard/dashboard"} />}
-          />
+          {userInfo?.permissions?.length && (
+            <Route
+              index
+              element={<Navigate to={navigator || "/dashboard/dashboard"} />}
+            />
+          )}
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
