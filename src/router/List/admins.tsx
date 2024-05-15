@@ -22,14 +22,6 @@ export const adminList = [
   },
   {
     parent: "admins",
-    link: "rolls/new_rolls",
-    sidebar: false,
-    title: "",
-    icon: "",
-    element: <NewRolls />,
-  },
-  {
-    parent: "admins",
     link: "rolls/create",
     sidebar: false,
     title: "Rol yaratish",
@@ -40,7 +32,7 @@ export const adminList = [
     parent: "admins",
     link: "rolls/:id",
     sidebar: false,
-    title: "Rol yaratish",
+    title: "Rol tahrirlash",
     icon: "",
     element: <NewRolls />,
   },

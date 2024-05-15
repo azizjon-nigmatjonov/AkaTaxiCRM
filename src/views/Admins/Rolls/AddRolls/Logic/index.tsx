@@ -29,7 +29,7 @@ export const breadCrumbs = ({ id }: { id: any }) => {
         link: "/admins/rolls",
       },
       {
-        label: id ? "Rolni tahrirlash" : "Yangi rol yaratish",
+        label: id !== 'create' ? "Rolni tahrirlash" : "Yangi rol yaratish",
       },
     ];
   }, [id]);
@@ -107,7 +107,7 @@ export const CreateFunction = ({ reset = () => {} }: { reset?: any }) => {
     rollCreate(data);
   };
 
-  const updateRoll = (data: any, id: string) => {
+  const updateRoll = (data: any, id: any) => {
     data.id = id
     rollUpdate(data);
   };

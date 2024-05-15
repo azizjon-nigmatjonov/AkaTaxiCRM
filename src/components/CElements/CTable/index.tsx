@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { tableSizeAction } from "../../../store/tableSize/tableSizeSlice";
 import { TableDelete } from "./Details/Actions/EditDelete";
 import { PopoverDelete } from "./Details/Actions/EditDelete/PopOver";
+import { PermissionsData } from "../../../hooks/usePermissions";
 
 interface Props {
   count?: number;
@@ -50,7 +51,6 @@ const CTable = ({
   disablePagination = false,
   autoHeight = false,
   limitCount = [10, 30, 50],
-  //   actionList = [{ edit: {}, delete: {} }],
   setCurrentPage = () => {},
   handleActions = () => {},
 }: Props) => {
@@ -64,6 +64,7 @@ const CTable = ({
   const [currentIndex, setCurrentIndex] = useState(null);
   const [currDelete, setCurrDelete] = useState<any>({});
   const dispatch = useDispatch();
+  const { routePermissions } = PermissionsData();
 
   const bodySource = useMemo(() => {
     if (!bodyColumns?.length) return [];
@@ -89,7 +90,7 @@ const CTable = ({
     return (
       list.map((item: any, index?: any) => ({
         ...item,
-        is_freeze: checks(item?.freez),
+        is_freez: checks(item?.freez),
         is_delete: checks(item?.delete),
         is_edit: checks(item?.edit),
         is_view: checks(item?.view),
@@ -400,57 +401,52 @@ const CTable = ({
                           </span>
                         )}
 
-                        {
-                          column.id === "actions" && !item.empty && (
-                            <div className="relative">
-                              {column.permission.length <= 2 ? (
-                                <div>
-                                  <TableDelete
-                                    element={item}
-                                    tableActions={tableActions}
-                                    permissions={column.permission}
+                        {column.id === "actions" &&
+                        !item.empty &&
+                        routePermissions?.length ? (
+                          <div className="relative">
+                            {column.permission.length <= 2 ? (
+                              <div>
+                                <TableDelete
+                                  element={item}
+                                  tableActions={tableActions}
+                                  permissions={column.permission}
+                                  routePermissions={routePermissions}
+                                />
+                                {currDelete.index === item.index ? (
+                                  <PopoverDelete
+                                    closePopover={(status) => {
+                                      setCurrDelete({});
+                                      if (status) handleActions(item, status);
+                                    }}
                                   />
-                                  {currDelete.index === item.index ? (
-                                    <PopoverDelete
-                                      closePopover={(status) => {
-                                        setCurrDelete({});
-                                        if (status) handleActions(item, status);
-                                      }}
-                                    />
-                                  ) : (
-                                    ""
-                                  )}
-                                </div>
-                              ) : (
-                                <>
-                                  <button
-                                    className="p-2"
-                                    onClick={() => setCurrentIndex(rowIndex)}
-                                  >
-                                    <DotsIcon />
-                                  </button>
-                                  <TabbleActions
-                                    element={item}
-                                    rowIndex={rowIndex}
-                                    currentIndex={currentIndex}
-                                    setCurrentIndex={setCurrentIndex}
-                                    handleActions={handleActions}
-                                    permissions={column.permission}
-                                  />
-                                </>
-                              )}
-                            </div>
-                          )
-                          // <TabbleActions
-                          //   element={item}
-                          //   rowIndex={rowIndex + 1}
-                          //   col={item[column.id]}
-                          //   handleActions={handleActions}
-                          //   actionList={actionList}
-                          //   anchorEl={anchorEl}
-                          //   setAnchorEl={setAnchorEl}
-                          // />
-                        }
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            ) : (
+                              <>
+                                <button
+                                  className="p-2"
+                                  onClick={() => setCurrentIndex(rowIndex)}
+                                >
+                                  <DotsIcon />
+                                </button>
+                                <TabbleActions
+                                  element={item}
+                                  rowIndex={rowIndex}
+                                  currentIndex={currentIndex}
+                                  setCurrentIndex={setCurrentIndex}
+                                  handleActions={handleActions}
+                                  permissions={column.permission}
+                                  routePermissions={routePermissions}
+                                />
+                              </>
+                            )}
+                          </div>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </CTableCell>
                   ))}

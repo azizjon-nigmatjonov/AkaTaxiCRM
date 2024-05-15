@@ -5,6 +5,7 @@ import { getWebsiteData } from "./Logic";
 
 export const Sidebar = () => {
   const { userInfo, routes } = getWebsiteData();
+  
   return (
     <div className={cls.sidebar}>
       <div className="overflow-y-scroll">

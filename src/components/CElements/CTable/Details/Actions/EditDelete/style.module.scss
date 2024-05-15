@@ -13,9 +13,19 @@
     border-radius: 4px;
     cursor: pointer;
     position: relative;
+
     &:hover {
       transition: 0.3s;
       transform: scale(1.2);
+    }
+    &.inactive {
+      svg {
+        fill: var(--gray30);
+      }
+      &:hover {
+        transform: none;
+        cursor: no-drop;
+      }
     }
   }
 }

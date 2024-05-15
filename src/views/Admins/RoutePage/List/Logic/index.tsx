@@ -7,6 +7,7 @@ import { EyeIcon } from "../../../../../components/UI/IconGenerator/Svg";
 import usePageRouter from "../../../../../hooks/useObjectRouter";
 import { useGetQueries } from "../../../../../hooks/useGetQueries";
 import { useTranslation } from "react-i18next";
+import { StaticPermissions } from "../../../../../constants/permissions";
 
 export const CreateFunction = ({
   handleClose,
@@ -40,26 +41,25 @@ export const CreateFunction = ({
     routeCreate(params);
   };
 
-  const checkEquality = (permissions: any, data: any) => {
-    let res = false;
-    if (permissions?.length) {
-      permissions.forEach((element: any) => {
-        if (element.name.trim() === data.name.trim()) res = true;
-      });
-    }
+  // const checkEquality = (permissions: any, data: any) => {
+  //   let res = false;
+  //   if (permissions?.length) {
+  //     permissions.forEach((element: any) => {
+  //       if (element.name.trim() === data.name.trim()) res = true;
+  //     });
+  //   }
 
-    return res;
-  };
+  //   return res;
+  // };
 
-  const createPermission = (data: any, id: number, path: string, list: any) => {
+  const createPermission = (name: any, id: number, path: string) => {
     const params: any = {};
-    params.name = path + "#" + data.name;
+    params.name = path + "#" + name;
     params.permission_route_id = id;
 
-    const isEqual = checkEquality(list, data);
+    // const isEqual = checkEquality(list, data);
 
-    if (!isEqual) permissionCreate(params);
-    else return "Bu nomdagi permission mavjud!";
+    permissionCreate(params);
   };
 
   return {
@@ -108,6 +108,7 @@ export const GetOptions = ({ newRouteList }: { newRouteList: any }) => {
   const { navigateTo, navigateQuery } = usePageRouter();
   const { active } = useGetQueries();
   const { t } = useTranslation();
+
   const allRoutes = (list: any) => {
     let arr = [];
     for (let key in list) {
@@ -197,4 +198,21 @@ export const FetchFunction = () => {
   }, [routes]);
 
   return { isLoading, refetch, newRouteList };
+};
+
+export const getPermissionList = ({ list }: { list: any }) => {
+ 
+  const permissionsList = useMemo(() => {
+    const arr: any = [];
+    StaticPermissions.forEach((element: any) => {
+      const found = list.find((item: any) => item.label === element.value);
+      // const condition = sidebar ? true  : element.value !== 'sidebar' ? true : false
+
+      if (!found) arr.push(element)
+    });
+
+    return arr;
+  }, [list]);
+
+  return { permissionOptions: permissionsList ?? [] };
 };

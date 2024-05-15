@@ -7,7 +7,7 @@ export const partnersList = [
         parent: 'partners',
         link: 'list',
         sidebar: true,
-        title: 'partners',
+        title: 'Hamkorlar',
         icon: 'partners',
         element: <Partners />
     },
@@ -15,7 +15,7 @@ export const partnersList = [
         parent: 'partners',
         link: 'partner',
         sidebar: false,
-        title: "Sherik sahifasi",
+        title: "Hamkor sahifasi",
         icon: '',
         element: <Partner />
     }

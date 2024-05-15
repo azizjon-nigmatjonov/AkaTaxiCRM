@@ -17,7 +17,7 @@ export const Header = ({
   ...props
 }: Props) => {
   return (
-    <div className="h-[70px] relative mb-5 z-[98] bg-white">
+    <div className="h-[70px] relative mb-5 z-[98] bg-white w-full">
       <div className={cls.header} {...props}>
         {children ? (
           children

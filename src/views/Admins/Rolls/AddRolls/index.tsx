@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { RollCreateHeder } from "./Header";
 import { RollList } from "./List";
 import { RollForm } from "./Form";
+import { useEffect, useState } from "react";
 
 const NewRolls = () => {
   const schema = Validation();
@@ -29,19 +30,56 @@ const NewRolls = () => {
   });
   const { createRoll, updateRoll, isLoading } = CreateFunction({});
   const { breadCrumbsItems } = breadCrumbs({ id });
+  const [permissions, setPermissions]: any = useState([]);
 
   const onSubmit = (data: any) => {
-
     const permissions = data.permissions.map((element: any) =>
       parseInt(element.trim(), 10)
     );
-    data.permissions = permissions
-    if (id) {
+    data.permissions = permissions;
+    if (id !== 'create') {
       updateRoll(data, id);
     } else {
       createRoll(data);
     }
   };
+
+  const handleCheck = (permission: any, type?: string) => {
+    let data = permissions;
+    if (type === "all") {
+      const ids = permission?.map((item: any) => item.id);
+      const found = ids.find((el: any) => {
+        permissions.includes(el);
+      });
+      console.log("111", ids);
+
+      if (found) {
+        data = permissions.filter((item: string) => {
+          if (!ids.includes(item)) return item;
+        });
+      } else {
+        data = [...data, ...ids];
+      }
+    } else {
+      const value = permission.value;
+
+      if (permissions.find((item: string) => item === value)) {
+        data = permissions.filter((item: string) => item !== value);
+      } else {
+        data = [...data, value];
+      }
+    }
+
+    setValue("permissions", data);
+    setPermissions(data);
+  };
+
+  useEffect(() => {
+    if (rollData?.permissions?.length) {
+      setPermissions(rollData.permissions);
+      setValue("permissions", rollData.permissions);
+    }
+  }, [rollData]);
 
   return (
     <>
@@ -49,11 +87,11 @@ const NewRolls = () => {
         <CBreadcrumbs items={breadCrumbsItems} progmatic={true} type="link" />
       </Header>
       <RollCreateHeder
-        title={id ? "Rolni tahrirlash" : "Yangi rol yaratish"}
+        title={id === "create" ? "Yangi rol yaratish" : "Rolni tahrirlash"}
         text={
-          id
-            ? "Admin panel boshqaruvchini tahrirlash"
-            : "Admin panel yangi boshqaruvchi yaratish"
+          id === "create"
+            ? "Admin panel yangi boshqaruvchi yaratish"
+            : "Admin panel boshqaruvchini tahrirlash"
         }
       />
 
@@ -73,8 +111,8 @@ const NewRolls = () => {
         <RollList
           newRouteList={newRouteList}
           isLoading={listLoading}
-          setValue={setValue}
-          rollData={rollData}
+          handleCheck={handleCheck}
+          permissions={permissions}
           errors={errors}
         />
       </div>

@@ -1,25 +1,27 @@
 import { useForm } from "react-hook-form";
-import { CreateFunction } from "../Logic";
+import { CreateFunction, getPermissionList } from "../Logic";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Validation } from "./validate";
 import { PlusIcon } from "../../../../../components/UI/IconGenerator/Svg";
-import HFTextField from "../../../../../components/FormElements/HFTextField";
 import { CircularProgress } from "@mui/material";
-import { useState } from "react";
+import { HFMultipleSelect } from "../../../../../components/FormElements/HFMultipleSelect";
 
 export const PermissionCreate = ({
   id,
-  path = '',
+  path = "",
   list = [],
   handleClose,
 }: {
   id: number;
+  route: any;
   path: string;
   list: any;
   handleClose: () => void;
 }) => {
+  const { permissionOptions } = getPermissionList({ list});
+
   const schema = Validation();
-  const { control, handleSubmit, reset } = useForm({
+  const { control, setValue, handleSubmit, reset } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
@@ -27,7 +29,6 @@ export const PermissionCreate = ({
     handleClose,
     reset,
   });
-  const [errors, setErrors] = useState({});
 
   if (isLoading) {
     return (
@@ -41,19 +42,20 @@ export const PermissionCreate = ({
   }
 
   const onSubmit = (data: any) => {
-    const responsee = createPermission(data, id, path, list);
-    if (responsee) setErrors({ name: { message: responsee } });
+    data.permissions.forEach((el: any) => {
+      createPermission(el, id, path);
+    });
   };
 
-  return (
+  return permissionOptions?.length ? (
     <form onSubmit={handleSubmit(onSubmit)} className="flex space-x-5">
-      <div className="w-[160px]">
-        <HFTextField
-          name="name"
+      <div className="w-[140px]">
+        <HFMultipleSelect
+          name="permissions"
           control={control}
-          errors={errors}
-          placeholder="Permission nomi"
-          required={true}
+          options={permissionOptions}
+          placeholder="Permission ni tanlang"
+          setValue={setValue}
         />
       </div>
 
@@ -63,5 +65,7 @@ export const PermissionCreate = ({
         </button>
       </div>
     </form>
+  ) : (
+    ""
   );
 };

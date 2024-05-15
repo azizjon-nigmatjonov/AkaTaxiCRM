@@ -16,7 +16,7 @@ interface Props {
   onClick?: (val?: any) => void;
 }
 
-const AddButton = ({
+const DeleteButton = ({
   text = "",
   iconLeft = true,
   id,
@@ -28,7 +28,7 @@ const AddButton = ({
   const { t } = useTranslation();
   const { routePermissions } = PermissionsData()
 
-  if (!routePermissions?.includes('add')) return ""
+  if (!routePermissions?.includes('delete')) return ""
  
   return (
     <div id={id ? id : "addBtn"} {...props}>
@@ -44,4 +44,4 @@ const AddButton = ({
   );
 };
 
-export default AddButton;
+export default DeleteButton;

@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { websiteActions } from "../store/website/index";
@@ -9,8 +9,6 @@ import Login from "../views/Auth/Login";
 import Registration from "../views/Auth/Registration";
 
 import { routeList } from "./List";
-
-
 
 interface Path {
   parent: string;
@@ -24,8 +22,10 @@ interface Path {
 
 const Router = () => {
   const dispatch = useDispatch();
+  const userInfo = useSelector((state: any) => state.auth.user);
   const token = useSelector((state: any) => state.auth.token);
   const [list, setList] = useState<string[]>([]);
+  const storedRoutes = useSelector((state: any) => state.website.routes);
 
   const [routes, setRoutes] = useState({
     dashboard: [],
@@ -59,22 +59,35 @@ const Router = () => {
       card_info,
       permissions: [],
       parent,
-      link
+      link,
     };
 
-    if (!list.includes(obj.id)) {
-      setRoutes((prev: any) => ({
-        ...prev,
-        [parent]: [...prev[parent], obj],
-      }));
-      setList((prev) => [...prev, obj.id]);
-    }
-    return path;
-  };
+    const permissions = userInfo?.permissions ?? []
+    const found = permissions?.find((i: any) => i.value === path);
 
+    if (found?.permissions?.includes("sidebar")) {
+      if (!list.includes(obj.id)) {
+        setRoutes((prev: any) => ({
+          ...prev,
+          [parent]: [...prev[parent], obj],
+        }));
+        setList((prev) => [...prev, obj.id]);
+      }
+      return path;
+    }
+
+    return "";
+  };
+  
   useEffect(() => {
     dispatch(websiteActions.setRoutes({ ...routes }));
   }, []);
+
+  const navigator = useMemo(() => {
+    for (let key in storedRoutes) {
+      if (storedRoutes[key]?.length) return storedRoutes[key][0].path;
+    }
+  }, [storedRoutes]);
 
   if (!token) {
     return (
@@ -96,7 +109,10 @@ const Router = () => {
     <Suspense fallback={"Loading..."}>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Navigate to="/dashboard/dashboard" />} />
+          <Route
+            index
+            element={<Navigate to={navigator || "/dashboard/dashboard"} />}
+          />
           {routeList?.map((route) => (
             <Route
               path={getPath({
@@ -112,7 +128,7 @@ const Router = () => {
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </Suspense> 
+    </Suspense>
   );
 };
 

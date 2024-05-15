@@ -50,7 +50,7 @@ export const notificationsList = [
         parent: "notifications",
         link: "new_notification/add_news",
         sidebar: false,
-        title: "Yangiliklar",
+        title: "Yangiliklar ichki sahifasi",
         icon: "news_notification",
         element: <AddNews />
     }

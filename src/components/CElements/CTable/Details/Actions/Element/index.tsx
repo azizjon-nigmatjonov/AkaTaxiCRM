@@ -17,7 +17,7 @@ const Element = ({ active, text = "", icon, border = true, show = false, ...prop
   return (
     <div
       className={`flex items-center space-x-[8px] px-4 ${
-        active ? "cursor-pointer" : ""
+        active ? "cursor-pointer" : "cursor-not-allowed"
       }`}
       {...props}
     >
@@ -26,7 +26,7 @@ const Element = ({ active, text = "", icon, border = true, show = false, ...prop
         className={` ${
           border ? "border-b border-[var(--darkerGray)]" : ""
         } border-grayDark py-3 w-full select-none whitespace-nowrap ${
-          active ? "text-white" : "text-[var(--gray)]"
+          active ? "text-white" : "text-[var(--gray30)]"
         }`}
       >
         {t(text)}
