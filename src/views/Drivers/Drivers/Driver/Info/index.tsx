@@ -14,7 +14,6 @@ import driverService from "../../../../../services/drivers";
 import { websiteActions } from '../../../../../store/website';
 import Ignored from "./Modal";
 import { useParams } from "react-router-dom";
-import { useQuery } from "react-query";
 
 
 const DriverInfo = ({ driver = {}, refetch }: { driver?: any, refetch: any }) => {
