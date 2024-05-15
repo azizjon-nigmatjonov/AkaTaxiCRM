@@ -1,12 +1,13 @@
-import { Details } from "../Details"
+import { Column } from "../Details";
 
 const Region = () => {
-    return (
-        <div>
-            <p className="text-xs text-[var(--gray60)]">Viloyatlar</p>
-            <Details />
-        </div>
-    )
-}
+  return (
+    <div className="rounded-[18px] overflow-hidden">
+      <div className="grid grid-cols-3">
+        <Column />
+      </div>
+    </div>
+  );
+};
 
-export default Region
+export default Region;

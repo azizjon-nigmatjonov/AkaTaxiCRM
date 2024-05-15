@@ -1,29 +1,29 @@
-.parent {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-block: 16px;
-    padding-inline: 24px;
-    position: relative;
+// .parent {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     padding-block: 16px;
+//     padding-inline: 24px;
+//     position: relative;
 
-    .edit {
-        padding: 8px;
-        background-color: var(--border);
-        border-radius: 100%;
-        cursor: pointer;
-        display: none;
-    }
+//     .edit {
+//         padding: 8px;
+//         background-color: var(--border);
+//         border-radius: 100%;
+//         cursor: pointer;
+//         display: none;
+//     }
 
-    .arrow {
-        padding: 12px;
-        border-top-right-radius: 100%;
-        border-bottom-right-radius: 100%;
-        position: absolute;
-        left: 100%;
-        display: none;
-    }
+//     .arrow {
+//         padding: 12px;
+//         border-top-right-radius: 100%;
+//         border-bottom-right-radius: 100%;
+//         position: absolute;
+//         left: 100%;
+//         display: none;
+//     }
 
-    &:hover>.edit,  &:hover>.arrow {
-        display: block;
-    }
-}
+//     &:hover>.edit,  &:hover>.arrow {
+//         display: block;
+//     }
+// }
