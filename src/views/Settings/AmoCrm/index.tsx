@@ -11,11 +11,13 @@ const AmoCrm = () => {
   };
 
   return (
-    <CCard style={{ minHeight: "auto" }}>
-      <div className="w-[300px]">
-        <AddButton iconLeft={""} text="Login" onClick={() => redirect()} />
-      </div>
-    </CCard>
+    <div className="p-5">
+      <CCard style={{ minHeight: "auto" }}>
+        <div className="w-[300px]">
+          <AddButton iconLeft={""} text="Login" onClick={() => redirect()} />
+        </div>
+      </CCard>
+    </div>
   );
 };
 
