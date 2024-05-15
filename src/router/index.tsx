@@ -62,7 +62,7 @@ const Router = () => {
       link,
     };
 
-    const permissions = userInfo?.permissions ?? []
+    const permissions = userInfo?.permissions ?? [];
     const found = permissions?.find((i: any) => i.value === path);
 
     if (found?.permissions?.includes("sidebar")) {
@@ -78,7 +78,7 @@ const Router = () => {
 
     return "";
   };
-  
+
   useEffect(() => {
     dispatch(websiteActions.setRoutes({ ...routes }));
   }, []);
@@ -111,22 +111,23 @@ const Router = () => {
     <Suspense fallback={"Loading..."}>
       <Routes>
         <Route path="/" element={<MainLayout />}>
+          {userInfo?.permissions?.length &&
+            routeList?.map((route) => (
+              <Route
+                path={getPath({
+                  parent: route.parent,
+                  link: route.link,
+                  sidebar: route.sidebar,
+                  title: route.title,
+                  icon: route.icon,
+                })}
+                element={route.element}
+              />
+            ))}
           <Route
             index
             element={<Navigate to={navigator || "/dashboard/dashboard"} />}
           />
-          {userInfo?.permissions?.length && routeList?.map((route) => (
-            <Route
-              path={getPath({
-                parent: route.parent,
-                link: route.link,
-                sidebar: route.sidebar,
-                title: route.title,
-                icon: route.icon,
-              })}
-              element={route.element}
-            />
-          ))}
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

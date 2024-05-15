@@ -158,7 +158,7 @@ const ProfilePage = () => {
 
         <div className="grid gap-2 grid-cols-2 mt-8">
           <CancelButton text="Yo'q" onClick={() => setLogout(false)} />
-          <AddButton iconLeft={false} text="Ha" onClick={() => Logout()} />
+          <button className="custom-btn" onClick={() => Logout()}>Ha</button>
         </div>
       </CModal>
     </form>
