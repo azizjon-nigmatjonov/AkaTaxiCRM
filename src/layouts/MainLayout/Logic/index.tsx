@@ -3,7 +3,7 @@ import usePageRouter from "../../../hooks/useObjectRouter";
 import { ArrowLeftIcon } from "@mui/x-date-pickers-pro";
 import { useQuery } from "react-query";
 import authService from "../../../services/auth/authService";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { memo, useEffect, useMemo } from "react";
 import { authActions } from "../../../store/auth/auth.slice";
 import { ColorConstants } from "../../../constants/website";
@@ -35,7 +35,8 @@ export const GetUserInfo = () => {
   const { data: userInfo } = useQuery(["GET_USER"], () => {
     return authService.getUserInfo();
   });
-
+  const userInfoStored = useSelector((state: any) => state.auth.user);
+  
   const permissions = useMemo(() => {
     const roles = userInfo?.data?.roles;
     if (!roles?.length) return [];
@@ -75,7 +76,7 @@ export const GetUserInfo = () => {
     dispatch(authActions.setUser({ ...userInfo?.data, permissions }));
   }, [userInfo]);
 
-  return { userInfo };
+  return { userInfo: userInfo?.data || userInfoStored };
 };
 
 export const ColorData = memo(() => {

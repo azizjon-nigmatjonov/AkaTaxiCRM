@@ -3,7 +3,7 @@ import requestForm from '../../utils/requestFormdata'
 const passengerService = {
   getList: (data: any) =>
     request.get(
-      `/passenges?page=${data.page}&perPage=${data.perPage}${data.q ? `&q=${data.q}` : ""}${data.region_id ? `&region_id=${data.region_id}` : ""}${data.device_type ? `&device_type=${data.device_type}` : ''}${data.version ? `&version=${data.version}` : ''}${data.created_at ? `&created_at=${data.created_at}` : ''}${data.gender? `&gender=${data.gender}`:''}`
+      `/passengers?page=${data.page}&perPage=${data.perPage}${data.q ? `&q=${data.q}` : ""}${data.region_id ? `&region_id=${data.region_id}` : ""}${data.device_type ? `&device_type=${data.device_type}` : ''}${data.version ? `&version=${data.version}` : ''}${data.created_at ? `&created_at=${data.created_at}` : ''}${data.gender? `&gender=${data.gender}`:''}`
     ),
   createElement: (data: any) => request.post("/passengers", { ...data }),
   deleteElement: (id: any) => requestForm.delete(`passengers/${id}`),
