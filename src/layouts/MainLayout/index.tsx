@@ -8,7 +8,6 @@ import { RegionData } from "./Logic/Regions";
 
 const MainLayout = () => {
   const { userInfo } = GetUserInfo()
-  const regions = useSelector((state: any) => state.regions.regions);
   const alertData = useSelector((state: any) => state.website.alert);
   
   if (!userInfo?.id) return ""
@@ -22,7 +21,7 @@ const MainLayout = () => {
       <BackButtonRoute />
       {alertData?.title && <CAlert data={alertData} />}
 
-      <RegionData regions={regions} />
+      <RegionData  />
       <ColorData />
     </div>
   );

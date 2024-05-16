@@ -1,15 +1,12 @@
 import { memo, useEffect } from "react";
 import regionService from "../../../services/regions";
-// import { regionActions } from "../../../store/regions";
-// import { useDispatch } from "react-redux";
+import { regionActions } from "../../../store/regions";
 
-export const RegionData = memo(({ regions }: { regions: any }) => {
-
-    if (!regions?.length) return ""
-  
-    // const dispatch = useDispatch();
+export const RegionData = memo(() => {
     const GetDisctricts = (array: any) => {
       if (!array) return;
+      
+      regionActions.setRegions(array ?? [])
       // const arr = array;
   
     //   const GetVillage = (val: any) => {
@@ -60,8 +57,8 @@ export const RegionData = memo(({ regions }: { regions: any }) => {
     };
   
     useEffect(() => {
-      if (!regions?.length) GetRegions();
-    }, [regions]);
+      GetRegions();
+    }, []);
   
     return "";
   });
