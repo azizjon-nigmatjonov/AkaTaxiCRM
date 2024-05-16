@@ -4,7 +4,7 @@ import cls from "./style.module.scss";
 import { useSelector } from "react-redux";
 import CAlert from "../../components/CElements/CAlert";
 import { BackButtonRoute, ColorData, GetUserInfo } from "./Logic";
-import { RegionData } from "./Logic/regions";
+import { RegionData } from "./Logic/Regions";
 
 const MainLayout = () => {
   const regions = useSelector((state: any) => state.regions.regions);
