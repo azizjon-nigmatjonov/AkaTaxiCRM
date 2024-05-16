@@ -9,6 +9,7 @@ import {
 import { ColorConstants } from "../../../../constants/website";
 // import Progress from "./Progress";
 import usePageRouter from "../../../../hooks/useObjectRouter";
+import { PermissionsData } from "../../../../hooks/usePermissions";
 // import VehicleModel from "./VehicleModel";
 
 interface Props {
@@ -18,7 +19,7 @@ interface Props {
 
 const Card: FC<Props> = ({ setInputValue, element }) => {
   const { navigateTo, navigateQuery } = usePageRouter();
-
+  const { routePermissions} = PermissionsData()
   // console.log(element.name);
 
   const handleClick = (element: any) => {
@@ -61,7 +62,7 @@ const Card: FC<Props> = ({ setInputValue, element }) => {
         </div>
       </div> */}
 
-      <div className="flex justify-end">
+      {routePermissions?.includes('add') && <div className="flex justify-end">
         <div
           onClick={() => navigateTo(`/drivers/cars/${element.id}`)}
           className="cursor-pointer px-6 border-r border-[var(--lineGray)] h-[50px] flex items-center w-full font-medium"
@@ -71,6 +72,7 @@ const Card: FC<Props> = ({ setInputValue, element }) => {
           </div>
           <p className="text-[13px] whitespace-nowrap">Batafsil</p>
         </div>
+
         <div
           onClick={() => handleClick(element)}
           className="px-6  h-[50px] flex items-center w-full font-medium cursor-pointer"
@@ -80,7 +82,7 @@ const Card: FC<Props> = ({ setInputValue, element }) => {
           </div>
           <p className="text-[13px]">Tahrirlash</p>
         </div>
-      </div>
+      </div>}
     </CCard>
   );
 };

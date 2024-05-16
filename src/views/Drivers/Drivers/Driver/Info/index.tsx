@@ -3,7 +3,6 @@ import CCard from "../../../../../components/CElements/CCard";
 import MainInfo from "./Main";
 import CarInfo from "./CarInfo";
 import DriverImages from "./Images";
-import AddButton from "../../../../../components/UI/Buttons/AddButton";
 import CancelButton from "../../../../../components/UI/Buttons/Cancel";
 import { Modal } from "@mui/material";
 import { InfoIcon } from "../../../../../components/UI/IconGenerator/Svg";
@@ -40,8 +39,8 @@ const DriverInfo = ({ driver = {}, refetch }: { driver?: any, refetch: any }) =>
   }
 
   console.log(driver);
-  
-  
+
+
 
   const alertMessage = (e: string) => {
     if (e == 'delete') {
@@ -135,15 +134,15 @@ const DriverInfo = ({ driver = {}, refetch }: { driver?: any, refetch: any }) =>
           </CCard>
 
           {driver.status == "active" ? <div className="flex items-center justify-between mt-6">
-            <div><AddButton onClick={deleteAccount} iconLeft={false} text="Akkountni o'chirish" /></div>
+            <div><button className="custom-btn" onClick={deleteAccount}>Akkountni o'chirish</button></div>
             <div className="flex items-center gap-2">
               <CancelButton onClick={() => navigateTo('/drivers/main')} text='Bekor qilish' />
-              <AddButton onClick={updateInfo} iconLeft={false} text="Saqlash" />
+              <button onClick={updateInfo} className="custom-btn">Saqlash</button>
             </div>
           </div> : <div className="flex justify-end">
             <div className="flex items-center justify-end gap-4 mt-5">
               <CancelButton text="Rad etish" onClick={() => navigateQuery({ accept: 'true' })} />
-              <AddButton iconLeft={false} text="Tasdiqlash" onClick={acceptDriverInfo} />
+              <button className="custom-btn" onClick={acceptDriverInfo}>Tasdiqlash</button>
             </div>
           </div>}
         </form>
@@ -158,7 +157,7 @@ const DriverInfo = ({ driver = {}, refetch }: { driver?: any, refetch: any }) =>
             </div>
             <div className='flex items-center gap-2 mt-6'>
               <CancelButton text="Yo'q" onClick={() => alertMessage('')} />
-              <AddButton text='Ha' iconLeft={false} onClick={() => alertMessage(query?.passenger)} />
+              <button className="custom-btn" onClick={() => alertMessage(query?.passenger)} >Ha</button>
             </div>
           </div>
         </div> : <CCard style={{ minHeight: 0 }} classes='max-w-[400px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]'>
