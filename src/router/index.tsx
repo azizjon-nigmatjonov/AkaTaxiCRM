@@ -110,6 +110,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           {userInfo?.permissions?.length &&
+
             routeList?.map((route, index) => (
               <Route
                 path={getPath({
@@ -122,7 +123,9 @@ const Router = () => {
                 key={index}
                 element={route.element}
               />
-            ))}
+            ))
+          }
+
           {userInfo?.permissions?.length && (
             <Route
               index
