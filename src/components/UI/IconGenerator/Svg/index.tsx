@@ -295,10 +295,10 @@ export const PlusIcon = ({ fill = "white" }: { fill?: string }) => (
   </svg>
 );
 
-export const EditIcon = ({ fill = "white" }: { fill?: string }) => (
+export const EditIcon = ({ fill = "white", width = 18 }: { fill?: string; width?: number }) => (
   <svg
-    width="18"
-    height="18"
+    width={width}
+    height={width}
     viewBox="0 0 18 18"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
