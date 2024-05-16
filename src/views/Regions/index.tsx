@@ -18,6 +18,7 @@ const Regions = () => {
         <div className="bg-white border border-[var(--gray20)] common-shadow rounded-[18px]">
             {currentPage()}
         </div>
+        
       </div>
     </>
   );

@@ -10,14 +10,15 @@ export const Column = () => {
         <p className="text-12px text-[var(--gray60)]">Viloyatlar</p>
       </div>
       <ul>
-        <li className="h-[50px] flex items-center px-5">
-          <p>Nomi 1 viloyati</p>
+        <li className="h-[50px] flex items-center px-5 border-t border-[var(--gray20)] flex justify-between relative z-[2] bg-white group">
+          <p className="w-full bg-white relative z-[2] h-full flex items-center">Nomi 1 viloyati</p>
 
-          <button>
+          <button className="absolute right-[20px] z-[3] hidden group-hover:block">
             <EditIcon fill="black" />
           </button>
-          <button>
+          <button className="absolute right-[-60px] w-[100px] rounded-full flex justify-end items-center h-[50px] border border-[var(--gray20)] pr-20px z-[1]">
             <ArrowDoubleIcon />
+        
           </button>
         </li>
       </ul>

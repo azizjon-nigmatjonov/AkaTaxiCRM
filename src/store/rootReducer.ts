@@ -16,9 +16,14 @@ const tableSizePersistConfig = {
   storage,
 };
 
+const regionPersistConfig = {
+  key: "regions",
+  storage,
+};
+
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
-  regions: regionReducer,
+  regions: persistReducer(regionPersistConfig, regionReducer),
   tableSize: persistReducer(tableSizePersistConfig, tableSizeReducer),
   website: websiteReducer,
 });
