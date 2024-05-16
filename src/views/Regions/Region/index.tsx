@@ -1,12 +1,13 @@
-import { Details } from "../Details"
+import { ListTable } from "../../../components/UI/ListTable";
 
 const Region = () => {
-    return (
-        <div>
-            <p className="text-xs text-[var(--gray60)]">Viloyatlar</p>
-            <Details />
-        </div>
-    )
-}
+  return (
+    <div className="rounded-[18px] overflow-hidden">
+      <div className="grid grid-cols-3">
+        <ListTable title="Viloyatlar" />
+      </div>
+    </div>
+  );
+};
 
-export default Region
+export default Region;

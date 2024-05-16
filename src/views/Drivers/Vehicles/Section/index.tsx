@@ -64,7 +64,7 @@ const Section = ({
 
   return (
     <>
-      <div className="bg-white p-2 border border-[var(--lightGray)] rounded-xl">
+      <div className="bg-white p-2 border border-[var(--gray20)] rounded-[16px] common-shadow">
         {Object.keys(allData).length ? <Header arr={allData} /> : ""}
         {list?.length && !loading ? (
           <div>

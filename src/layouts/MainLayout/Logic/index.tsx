@@ -4,8 +4,9 @@ import { ArrowLeftIcon } from "@mui/x-date-pickers-pro";
 import { useQuery } from "react-query";
 import authService from "../../../services/auth/authService";
 import { useDispatch } from "react-redux";
-import { useEffect, useMemo } from "react";
+import { memo, useEffect, useMemo } from "react";
 import { authActions } from "../../../store/auth/auth.slice";
+import { ColorConstants } from "../../../constants/website";
 
 export const BackButtonRoute = () => {
   const { fromRoutes } = useGetQueries();
@@ -74,5 +75,20 @@ export const GetUserInfo = () => {
     dispatch(authActions.setUser({ ...userInfo?.data, permissions }));
   }, [userInfo]);
 
-  return "";
+  return { userInfo };
 };
+
+export const ColorData = memo(() => {
+  useEffect(() => {
+    (Object.keys(ColorConstants) as (keyof typeof ColorConstants)[]).forEach(
+      (key) => {
+        document.documentElement.style.setProperty(
+          "--" + key,
+          ColorConstants[key]
+        );
+      }
+    );
+  }, []);
+
+  return "";
+});

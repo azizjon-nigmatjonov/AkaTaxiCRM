@@ -30,7 +30,7 @@ const SidebarSection = ({ list }: Props) => {
             const visibleSidebarItems: any = (value as any).filter(
               (el: any) => el.sidebar
             );
-            if (!visibleSidebarItems?.length) return ""
+            if (!visibleSidebarItems?.length) return "";
 
             const isLastItem = index === Object.entries(list).length - 1;
 

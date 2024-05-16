@@ -60,8 +60,8 @@ export const HeadCell = ({
       <div className="cell__wrapper h-[60px] relative flex items-center">
         <p>{column.title}</p>
         <div
-          className={`flex space-x-1 bg-[var(--gray50)] px-6px py-2px rounded-full group group-hover:text-[var(--gray90)] text-[var(--gray60)] ${
-            editPrice ? "border border-[var(--gray20)]" : ""
+          className={`flex space-x-1 px-6px py-2px rounded-[8px] group group-hover:text-[var(--gray90)] text-[var(--gray60)] ${
+            editPrice ? "border border-[var(--gray20)] common-shadow" : "bg-[var(--gray50)]"
           }`}
         >
           <input

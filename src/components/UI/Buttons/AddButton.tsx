@@ -12,7 +12,7 @@ interface Props {
   children?: any;
   classes?: string;
   type?: any;
-
+  btnType?: string;
   onClick?: (val?: any) => void;
 }
 
@@ -23,16 +23,26 @@ const AddButton = ({
   children,
   classes,
   type = "button",
+  btnType = "",
   ...props
 }: Props) => {
   const { t } = useTranslation();
-  const { routePermissions } = PermissionsData()
+  const { routePermissions } = PermissionsData();
 
-  if (!routePermissions?.includes('add')) return ""
- 
+  if (!routePermissions?.includes("add")) return "";
+
+  if (btnType === "ordinary") {
+    return (
+      <button {...props} className="text-[var(--main)] font-[600] flex items-center">
+        {iconLeft === true ? <PlusIcon fill="var(--main)" /> : iconLeft}
+        {children ? children : <p>{text}</p>}
+      </button>
+    );
+  }
+
   return (
     <div id={id ? id : "addBtn"} {...props}>
-      <Button type={type} className={classes} >
+      <Button type={type} className={classes}>
         {iconLeft === true ? <PlusIcon /> : iconLeft}
         {children ? (
           children
