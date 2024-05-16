@@ -75,7 +75,7 @@ export const GetUserInfo = () => {
     dispatch(authActions.setUser({ ...userInfo?.data, permissions }));
   }, [userInfo]);
 
-  return "";
+  return { userInfo };
 };
 
 export const ColorData = memo(() => {
