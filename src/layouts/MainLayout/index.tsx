@@ -9,8 +9,7 @@ import { RegionData } from "./Logic/Regions";
 const MainLayout = () => {
   const regions = useSelector((state: any) => state.regions.regions);
   const alertData = useSelector((state: any) => state.website.alert);
-
-
+  
   return (
     <div className={cls.layout}>
       <Sidebar />
