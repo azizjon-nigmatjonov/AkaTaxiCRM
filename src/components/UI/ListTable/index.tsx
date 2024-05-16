@@ -1,7 +1,7 @@
 import { ListItem } from "./Item";
-import AddButton from "../../../components/UI/Buttons/AddButton";
+import AddButton from "../Buttons/AddButton";
 
-export const Column = ({ title = "" }: { title: string }) => {
+export const ListTable = ({ title = "" }: { title: string }) => {
 
 
   const addRow = () => {}

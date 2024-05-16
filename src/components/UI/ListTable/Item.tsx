@@ -1,5 +1,5 @@
-import { ArrowDoubleIcon } from "../../../components/UI/IconGenerator/Svg";
-import { EditIcon } from "../../../components/UI/IconGenerator/Svg";
+import { ArrowDoubleIcon } from "../IconGenerator/Svg";
+import { EditIcon } from "../IconGenerator/Svg";
 import { useState } from "react";
 
 export const ListItem = () => {
