@@ -246,7 +246,8 @@ const CTable = ({
     }
   };
 
-  const tableActions = (status: string, el: any) => {
+  const tableActions = (el: any, status: string) => {
+    if (!checkPermission(status)) return;
     if (status === "delete") {
       setCurrDelete(el);
     } else {
@@ -361,7 +362,7 @@ const CTable = ({
                           column?.click !== "custom" &&
                           column?.id !== "actions"
                         )
-                          handleActions(item, "view");
+                        tableActions(item, "view");
                       }}
                       style={{
                         minWidth: "max-content",
@@ -417,7 +418,7 @@ const CTable = ({
                                   <PopoverDelete
                                     closePopover={(status) => {
                                       setCurrDelete({});
-                                      if (status) handleActions(item, status);
+                                      if (status) tableActions(item, status);
                                     }}
                                   />
                                 ) : (
@@ -437,7 +438,7 @@ const CTable = ({
                                   rowIndex={rowIndex}
                                   currentIndex={currentIndex}
                                   setCurrentIndex={setCurrentIndex}
-                                  handleActions={handleActions}
+                                  handleActions={tableActions}
                                   permissions={column.permission}
                                   checkPermission={checkPermission}
                                 />

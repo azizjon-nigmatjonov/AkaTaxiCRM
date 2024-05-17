@@ -22,7 +22,7 @@ export const TableDelete = ({
   
   const handleActions = (status: string, element: any) => {
     if (checkPermission(status)) {
-      tableActions(status, element)
+      tableActions(element, status)
     }
   }
 

@@ -10,7 +10,7 @@ export const usePermissions = () => {
   );
 
   const checkPermission = (permission: string) =>
-    found.permissions.includes(permission);
+    found?.permissions?.includes(permission);
 
   return { routePermissions: found?.permissions ?? [], checkPermission };
 };
