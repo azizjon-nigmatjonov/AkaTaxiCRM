@@ -1,7 +1,7 @@
 import HFSelect from "../../../../../components/FormElements/HFSelect"
 // import CFilterTab from "../../../../../components/CElements/CFilterTab"
 import { useForm } from "react-hook-form"
-import { Months } from "../../../../../mixins/month"
+import { Months } from "../../../../../constants/month"
 import { getWeekDays, getYears, } from "../../../../../utils/getMonth"
 import CFilterTab from "../../../../../components/CElements/CFilterTab"
 import {tabList} from '../Logic'

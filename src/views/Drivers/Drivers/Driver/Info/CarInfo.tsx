@@ -5,7 +5,7 @@ import DImageUpload from "../../../../../components/CElements/CDivider/DImageUpl
 import HFSelect from "../../../../../components/FormElements/HFSelect";
 import { useQuery } from "react-query";
 import carService from "../../../../../services/cars";
-import { useSelector } from "react-redux";
+import { usePlaces } from "../../../../../hooks/usePlaces";
 interface Props {
   control?: any;
   driver?: any;
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const CarInfo = ({ control, setValue, driver = {} }: Props) => {
-  const regions = useSelector((state: any) => state.regions.regions);
+  const { regionList } = usePlaces()
 
 
   const { data } = useQuery(['GET_CARS_LISTS'], () => {
@@ -36,13 +36,13 @@ const CarInfo = ({ control, setValue, driver = {} }: Props) => {
 
 
   const Regions = useMemo(() => {
-    return regions?.map((i: any) => {
+    return regionList?.map((i: any) => {
       return {
         value: i.id,
         label: i.name.uz,
       };
     });
-  }, [regions]);
+  }, [regionList]);
 
 
   return (

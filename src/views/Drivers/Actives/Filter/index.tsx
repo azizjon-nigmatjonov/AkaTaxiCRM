@@ -3,23 +3,23 @@ import Filters from "../../../../components/UI/Filter";
 import CSelect from "../../../../components/CElements/CSelect";
 import { CustomFunctions } from "./Logic";
 import { useEffect, useMemo } from "react";
-import { useSelector } from "react-redux";
 import { useQuery } from "react-query";
 import carService from "../../../../services/cars";
+import { usePlaces } from "../../../../hooks/usePlaces";
 
 export const ActiveDriverFilter = () => {
   const { filter } = useGetQueries();
   const { handleRegion, handleGender, handleCarModel } = CustomFunctions();
-  const regions = useSelector((state: any) => state.regions.regions);
+  const { regionList } = usePlaces()
 
   const Regions = useMemo(() => {
-    return regions?.map((i: any) => {
+    return regionList?.map((i: any) => {
       return {
         value: i.id,
         label: i.name.uz,
       };
     });
-  }, [regions]);
+  }, [regionList]);
 
   const { data: carModals } = useQuery(["GET_CAR_MODELS"], () => {
     return carService.getCarModel();

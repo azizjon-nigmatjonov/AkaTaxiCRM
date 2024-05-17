@@ -4,14 +4,12 @@ import cls from "./style.module.scss";
 import { useSelector } from "react-redux";
 import CAlert from "../../components/CElements/CAlert";
 import { BackButtonRoute, ColorData, GetUserInfo } from "./Logic";
-import { RegionData } from "./Logic/Regions";
 
 const MainLayout = () => {
   const { userInfo } = GetUserInfo()
-  console.log('userInfo', userInfo);
-  const regions = useSelector((state: any) => state.regions.regions);
   const alertData = useSelector((state: any) => state.website.alert);
-  if (!userInfo?.data) return ""
+  
+  if (!userInfo?.id) return ""
   return (
     <div className={cls.layout}>
       <Sidebar />
@@ -21,8 +19,6 @@ const MainLayout = () => {
 
       <BackButtonRoute />
       {alertData?.title && <CAlert data={alertData} />}
-
-      <RegionData regions={regions} />
       <ColorData />
     </div>
   );

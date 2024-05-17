@@ -8,15 +8,15 @@ import { useQuery } from "react-query";
 import partnerService from "../../services/partners";
 import ImageFrame from "../../components/UI/ImageFrame";
 import CSelect from "../../components/CElements/CSelect";
-import { useSelector } from "react-redux";
 import { Header } from "../../components/UI/Header";
 import Form from "./Form";
 import { useGetQueries } from "../../hooks/useGetQueries";
 import CBreadcrumbs from "../../components/CElements/CBreadcrumbs";
+import { usePlaces } from "../../hooks/usePlaces";
 
 const Partners = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
-  const regions = useSelector((state: any) => state.regions.regions);
+  const { regionList } = usePlaces()
   const { currentPage } = useGetQueries()
 
   const {
@@ -101,13 +101,13 @@ const Partners = () => {
   }, []);
 
   const Regions = useMemo(() => {
-    return regions?.map((i: any) => {
+    return regionList?.map((i: any) => {
       return {
         value: i.id,
         label: i.name.uz,
       };
     });
-  }, [regions]);
+  }, [regionList]);
 
 
   const breadCrumbs = useMemo(() => {

@@ -97,7 +97,7 @@ export const CreateFunction = ({
   handleSucces: () => void;
   from_tashkent: number
 }) => {
-  const dispat = useDispatch();
+  const dispatch = useDispatch();
   const { mutate: updatePrice } = useMutation({
     mutationFn: (data: any) => {
       return priceService.updatePrice(data).then(() => {
@@ -137,7 +137,7 @@ export const CreateFunction = ({
   };
 
   function HandleSuccess(title: string) {
-    dispat(
+    dispatch(
       websiteActions.setAlertData({
         title: title,
         translation: "common",

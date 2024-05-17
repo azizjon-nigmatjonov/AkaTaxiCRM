@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ExchangeIcon } from "../../../../components/UI/IconGenerator/Svg";
 import PointSelector from "./Point";
-import { useSelector } from "react-redux";
 import { ColorConstants } from "../../../../constants/website";
 import usePageRouter from "../../../../hooks/useObjectRouter";
+import { usePlaces } from "../../../../hooks/usePlaces";
 
 const Points = ({
   handleChange = () => { },
@@ -11,7 +11,7 @@ const Points = ({
   handleChange: (val?: any) => void;
 }) => {
   const [current, setCurrent] = useState(0);
-  const regions = useSelector((state: any) => state.regions.regions);
+  const { regionList } = usePlaces()
   const [selected, setSelected] = useState<any>([]);
   const { navigateQuery } = usePageRouter();
   // console.log(selected);
@@ -40,7 +40,7 @@ const Points = ({
 
       <PointSelector
         step={0}
-        regions={regions}
+        regions={regionList}
         selected={selected}
         setSelected={setSelected}
         color={current === 0 ? ColorConstants.darkerGreen : ColorConstants.ink}
@@ -61,7 +61,7 @@ const Points = ({
 
       <PointSelector
         step={1}
-        regions={regions}
+        regions={regionList}
         selected={selected}
         setSelected={setSelected}
         color={current === 1 ? ColorConstants.darkerGreen : ColorConstants.ink}

@@ -12,10 +12,10 @@ import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import Filters from "../../../components/UI/Filter";
 import DropDown from "../../../components/FormElements/DropDown";
 import CSelect from "../../../components/CElements/CSelect";
-import { useSelector } from "react-redux";
 import { VersionsList } from "../../../constants/versions";
 import { DivicesList } from "../../../constants/devices";
 import { headColumns, FilterFunction, breadCrubmsItems, FetchFunctions } from './Logic';
+import { usePlaces } from "../../../hooks/usePlaces";
 
 const Drivers = () => {
   const { navigateQuery, navigateTo, getQueries } = usePageRouter();
@@ -24,7 +24,7 @@ const Drivers = () => {
   const { handlerDiviceModel, handlerGender, handlerRegion, handlerVersion, handleSearch } = FilterFunction()
   const { drivers, driversLoading, driversRefetch } = FetchFunctions()
 
-  const regions = useSelector((state: any) => state.regions.regions);
+  const { regionList } = usePlaces()
 
   const handleActions = useCallback((element: any, status: string) => {
     if (status === "view") {
@@ -61,13 +61,13 @@ const Drivers = () => {
   
 
   const Regions = useMemo(() => {
-    return regions?.map((i: any) => {
+    return regionList?.map((i: any) => {
       return {
         value: i.id,
         label: i.name.uz,
       };
     });
-  }, [regions]);
+  }, [regionList]);
   
 
   return (

@@ -44,7 +44,7 @@ const NewsNotification = () => {
 
       </div>
 
-      <div className="px-6 mt-6">
+      <div className="container">
         <CTable headColumns={headColumns} bodyColumns={[]} />
       </div>
     </>

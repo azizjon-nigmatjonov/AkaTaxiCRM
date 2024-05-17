@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import "./style.scss";
 import { PlusIcon } from "../IconGenerator/Svg";
 import { useTranslation } from "react-i18next";
-import { PermissionsData } from "../../../hooks/usePermissions";
+import { usePermissions } from "../../../hooks/usePermissions";
 
 interface Props {
   text?: string;
@@ -26,9 +26,9 @@ const DeleteButton = ({
   ...props
 }: Props) => {
   const { t } = useTranslation();
-  const { routePermissions } = PermissionsData()
+  const { checkPermission } = usePermissions()
 
-  if (!routePermissions?.includes('delete')) return ""
+  if (!checkPermission('delete')) return ""
  
   return (
     <div id={id ? id : "addBtn"} {...props}>

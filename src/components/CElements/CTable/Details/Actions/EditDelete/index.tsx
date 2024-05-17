@@ -8,7 +8,7 @@ import cls from "./style.module.scss";
 interface Props {
   permissions: string[];
   element: any;
-  routePermissions: any;
+  checkPermission: any;
   tableActions: (val: any, val2: any) => void;
 }
 
@@ -16,13 +16,13 @@ export const TableDelete = ({
   element,
   tableActions = () => {},
   permissions = [],
-  routePermissions = [],
+  checkPermission = [],
 }: Props) => {
 
   
   const handleActions = (status: string, element: any) => {
-    if (routePermissions.includes(status)) {
-      tableActions(status, element)
+    if (checkPermission(status)) {
+      tableActions(element, status)
     }
   }
 
@@ -31,7 +31,7 @@ export const TableDelete = ({
       {permissions.includes("delete") ? (
         <div
           className={`${cls.delete} ${
-            routePermissions?.includes("delete") ? "" : cls.inactive
+            checkPermission("delete") ? "" : cls.inactive
           }`}
           onClick={() => handleActions("delete", element)}
         >
@@ -44,7 +44,7 @@ export const TableDelete = ({
       {permissions.includes("edit") ? (
         <div
           className={`${cls.edit} ${
-            routePermissions?.includes("edit") ? "" : cls.inactive
+            checkPermission("edit") ? "" : cls.inactive
           }`}
           onClick={() => handleActions("edit", element)}
         >
@@ -57,7 +57,7 @@ export const TableDelete = ({
       {permissions.includes("view") ? (
         <div
           className={`${cls.view} ${
-            routePermissions?.includes("view") ? "" : cls.inactive
+            checkPermission("view") ? "" : cls.inactive
           }`}
           onClick={() => handleActions("view", element)}
         >

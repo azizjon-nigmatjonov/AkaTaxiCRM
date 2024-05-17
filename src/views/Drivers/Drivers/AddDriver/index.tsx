@@ -3,7 +3,6 @@ import { Header } from '../../../../components/UI/Header'
 import CCard from '../../../../components/CElements/CCard'
 import MainInfo from '../Driver/Info/Main'
 import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
 import HFSelect from '../../../../components/FormElements/HFSelect'
 import { useQuery } from 'react-query'
 import carService from '../../../../services/cars'
@@ -17,20 +16,21 @@ import usePageRouter from '../../../../hooks/useObjectRouter'
 import { useDispatch } from 'react-redux'
 import { websiteActions } from "../../../../store/website";
 import CBreadcrumbs from '../../../../components/CElements/CBreadcrumbs'
+import { usePlaces } from '../../../../hooks/usePlaces'
 
 const AddDriver = () => {
-    const regions = useSelector((state: any) => state.regions.regions);
+    const { regionList } = usePlaces()
     const dispatch = useDispatch();
     const { navigateTo } = usePageRouter();
 
     const Regions: any = useMemo(() => {
-        return regions?.map((val: any) => {
+        return regionList?.map((val: any) => {
             return {
                 value: val.id,
                 label: val.name.uz
             }
         })
-    }, [regions])
+    }, [regionList])
 
     const { data: carModals } = useQuery(['GET_CAR_MODELS'], () => {
         return carService.getCarModel();

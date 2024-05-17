@@ -14,20 +14,20 @@ const Classes = ({
   classes = [],
   setValue = () => {},
 }: Props) => {
-  const [groupA, setGroupA] = useState([]);
-  // const [groupB, setGroupB] = useState([]);
-
+  const [group, setGroup] = useState([]);
+  
   useEffect(() => {
     if (!classes?.length) return;
-    const a = classes?.map((i: any) => {
+    const arr = classes?.map((i: any) => {
       return {
         ...i,
-        checked: false,
+        checked: i?.checked ?? false,
       };
     });
 
-    setGroupA(a);
-    const ids = a
+
+    setGroup(arr)
+    const ids = arr
       .filter((item: any) => item.checked)
       .map((item: any) => item.slug);
 
@@ -35,50 +35,25 @@ const Classes = ({
   }, [classes, clas, setValue]);
 
   const handleCheck = (name: string, check: boolean,) => {
-    const a: any = groupA.map((i: any) => {
+    const a: any = group.map((i: any) => {
       if (i.name === name) i.checked = check;
       return {
         ...i,
       };
     });
 
-    setGroupA(a);
-
-    // if (group === "a") {
-    //   // const b: any = groupB.map((i: any) => {
-    //   //   return {
-    //   //     ...i,
-    //   //     checked: false,
-    //   //   };
-    //   // });
-    //   // setGroupB(b);
-    // } else {
-    //   // const a: any = groupA.map((i: any) => {
-    //   //   return {
-    //   //     ...i,
-    //   //     checked: false,
-    //   //   };
-    //   // });
-    //   // const b: any = groupB.map((i: any) => {
-    //   //   if (i.name === name) i.checked = true;
-    //   //   return {
-    //   //     ...i,
-    //   //   };
-    //   // });
-    //   // setGroupA(a);
-    //   // setGroupB(b);
-    // }
-    const ids = groupA
+    setGroup(a);
+    const ids = group
 
       .filter((item: any) => item.checked)
       .map((item: any) => item.slug);
 
     setValue("ids", ids);
   };
-
+  
   return (
     <>
-      {groupA?.map((item: any) => (
+      {group?.map((item: any) => (
         <SwitchBtn
           text={item.name}
           name={item.name}
@@ -87,19 +62,6 @@ const Classes = ({
           group="a"
         />
       ))}
-      {/* <Divider /> */}
-      {/* {groupB?.map(
-        (item: any) =>
-          item.name !== "standart" && (
-            <SwitchBtn
-              text={item.name}
-              name={item.name}
-              handleCheck={handleCheck}
-              checked={item.checked}
-              group="b"
-            />
-          )
-      )} */}
     </>
   );
 };

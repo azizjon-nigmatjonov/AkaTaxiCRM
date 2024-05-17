@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { tableSizeAction } from "../../../store/tableSize/tableSizeSlice";
 import { TableDelete } from "./Details/Actions/EditDelete";
 import { PopoverDelete } from "./Details/Actions/EditDelete/PopOver";
-import { PermissionsData } from "../../../hooks/usePermissions";
+import { usePermissions } from "../../../hooks/usePermissions";
 
 interface Props {
   count?: number;
@@ -64,7 +64,7 @@ const CTable = ({
   const [currentIndex, setCurrentIndex] = useState(null);
   const [currDelete, setCurrDelete] = useState<any>({});
   const dispatch = useDispatch();
-  const { routePermissions } = PermissionsData();
+  const { routePermissions, checkPermission } = usePermissions();
 
   const bodySource = useMemo(() => {
     if (!bodyColumns?.length) return [];
@@ -246,7 +246,8 @@ const CTable = ({
     }
   };
 
-  const tableActions = (status: string, el: any) => {
+  const tableActions = (el: any, status: string) => {
+    if (!checkPermission(status)) return;
     if (status === "delete") {
       setCurrDelete(el);
     } else {
@@ -361,7 +362,7 @@ const CTable = ({
                           column?.click !== "custom" &&
                           column?.id !== "actions"
                         )
-                          handleActions(item, "view");
+                        tableActions(item, "view");
                       }}
                       style={{
                         minWidth: "max-content",
@@ -411,13 +412,13 @@ const CTable = ({
                                   element={item}
                                   tableActions={tableActions}
                                   permissions={column.permission}
-                                  routePermissions={routePermissions}
+                                  checkPermission={checkPermission}
                                 />
                                 {currDelete.index === item.index ? (
                                   <PopoverDelete
                                     closePopover={(status) => {
                                       setCurrDelete({});
-                                      if (status) handleActions(item, status);
+                                      if (status) tableActions(item, status);
                                     }}
                                   />
                                 ) : (
@@ -437,9 +438,9 @@ const CTable = ({
                                   rowIndex={rowIndex}
                                   currentIndex={currentIndex}
                                   setCurrentIndex={setCurrentIndex}
-                                  handleActions={handleActions}
+                                  handleActions={tableActions}
                                   permissions={column.permission}
-                                  routePermissions={routePermissions}
+                                  checkPermission={checkPermission}
                                 />
                               </>
                             )}

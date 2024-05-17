@@ -203,11 +203,14 @@ input {
   &.disabled {
     background-color: var(--gray20);
     color: var(--black);
-
+    cursor: not-allowed;
     svg {
       color: var(--main);
     }
   }
+}
+.custom-btn.success {
+  background-color: var(--green);
 }
 
 .success-btn {

@@ -1,8 +1,8 @@
 import cls from "./style.module.scss";
 import useDebounce from "../../../../../hooks/useDebounce";
 import { useGetQueries } from "../../../../../hooks/useGetQueries";
-import { useSelector } from "react-redux";
 import { useMemo } from "react";
+import { usePlaces } from "../../../../../hooks/usePlaces";
 const PriceTable = ({
   locations = {},
   edit = false,
@@ -13,7 +13,7 @@ const PriceTable = ({
   updateCell?: (val: string, val2: any, val3: any, val4: any) => void;
 }) => {
   const { start, end } = useGetQueries();
-  const regions = useSelector((state: any) => state.regions.regions);
+  const { regionList: regions } = usePlaces()
 
 
 

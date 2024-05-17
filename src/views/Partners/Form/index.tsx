@@ -7,12 +7,13 @@ import { useMutation, useQuery } from "react-query";
 import { useMemo } from "react";
 import HFSelect from "../../../components/FormElements/HFSelect";
 import HFInputMask from "../../../components/FormElements/HFInputMask";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { websiteActions } from "../../../store/website";
 import partnerService from "../../../services/partners";
 import ImageUploadBtn from "../../../components/UI/Buttons/ImageUpload";
 import CancelButton from "../../../components/UI/Buttons/Cancel";
 import * as yup from "yup";
+import { usePlaces } from "../../../hooks/usePlaces";
 
 interface Props {
   refetch: () => void;
@@ -39,18 +40,18 @@ const Form = ({ refetch }: Props) => {
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
-  const regions = useSelector((state: any) => state.regions.regions);
+  const { regionList } = usePlaces()
 
   const SelecTList = useMemo(() => {
-    if (!regions) return [];
-    return (regions as any).map((item: any) => {
+    if (!regionList) return [];
+    return (regionList as any).map((item: any) => {
       return {
         ...item,
         label: item.name?.uz,
         value: item.id,
       };
     });
-  }, [regions]);
+  }, [regionList]);
 
   const { data: partner } = useQuery(
     ["GET_PARTNER", query.id],
