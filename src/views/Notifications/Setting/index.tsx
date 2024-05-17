@@ -3,9 +3,9 @@ import CRadio from "../../../components/CElements/Radio"
 import CCard from "../../../components/CElements/CCard"
 import DropDown from "../../../components/FormElements/DropDown"
 import HFSelect from "../../../components/FormElements/HFSelect"
-import { useSelector } from "react-redux"
 import CText from "../../../components/CElements/CText"
 import AddButton from "../../../components/UI/Buttons/AddButton"
+import { usePlaces } from "../../../hooks/usePlaces"
 
 interface Props {
     control?: any,
@@ -33,16 +33,16 @@ const Setting = ({ control, submitHandler, }: Props) => {
         submitHandler(e)
     }
 
-    const regions = useSelector((state: any) => state.regions.regions);
+    const { regionList } = usePlaces()
 
     const Regions = useMemo(() => {
-        return regions?.map((i: any) => {
+        return regionList?.map((i: any) => {
             return {
                 value: i.id,
                 label: i.name.uz,
             };
         });
-    }, [regions]);
+    }, [regionList]);
 
 
     return (

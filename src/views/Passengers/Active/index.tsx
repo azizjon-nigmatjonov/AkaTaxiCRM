@@ -5,7 +5,6 @@ import FilterButton from "../../../components/UI/Filters";
 import { useQuery } from "react-query";
 import passengerService from "../../../services/passengers";
 import CSelect from "../../../components/CElements/CSelect";
-import { useSelector } from "react-redux";
 import { useGetQueries } from "../../../hooks/useGetQueries";
 import { FormatTime } from "../../../utils/formatTime";
 import { Header } from "../../../components/UI/Header";
@@ -19,6 +18,7 @@ import AddButton from "../../../components/UI/Buttons/AddButton";
 import cls from "./style.module.scss";
 import Filters from "../../../components/UI/Filter";
 import { Status, breadCrubmsItems } from "./Logic";
+import { usePlaces } from "../../../hooks/usePlaces";
 
 const Reasons = [{ value: 0, label: "Sabablar" }];
 
@@ -42,7 +42,7 @@ const ActivePassengers = () => {
     { refetchInterval: 4 * 60 * 1000 }
   );
 
-  const regions = useSelector((state: any) => state.regions.regions);
+  const { regionList } = usePlaces();
 
   const driversHandle = (e: any) => {
     setDriverLists(e);
@@ -175,13 +175,13 @@ const ActivePassengers = () => {
   }, [passengers]);
 
   const Regions = useMemo(() => {
-    return regions?.map((i: any) => {
+    return regionList?.map((i: any) => {
       return {
         value: i.id,
         label: i.name.uz,
       };
     });
-  }, [regions]);
+  }, [regionList]);
 
   useEffect(() => {
     Regions.unshift({ value: 0, label: "Barchasi" });

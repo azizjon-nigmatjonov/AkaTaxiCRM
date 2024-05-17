@@ -3,6 +3,7 @@ import { useGetQueries } from "../../../../hooks/useGetQueries";
 import Region from "../Region";
 import { useQuery } from "react-query";
 import { useMemo } from "react";
+import { usePlaces } from "../../../../hooks/usePlaces";
 
 export const breadCrumbsItems = [
   {
@@ -51,53 +52,28 @@ export const GetCurrentPage = () => {
 };
 
 export const FetchFunction = () => {
-  const { region, district } = useGetQueries();
   const {
-    data: regions,
-    isLoading: regionLoading,
-    refetch: regionRefetch,
-  } = useQuery(["GER_REGION_LIST"], () => {
-    return regionService.getList();
-  });
-
-  const {
-    data: districts,
-    isLoading: districtLoading,
-    refetch: districtRefetch,
-  } = useQuery(
-    ["GET_DIRSTRICTS_LIST", region],
-    () => {
-      return regionService.getDistrict(region);
-    },
-    {
-      enabled: !!region,
-    }
-  );
-
-  const {
-    data: villages,
-    isLoading: villageLoading,
-    refetch: villageRefetch,
-  } = useQuery(
-    ["GET_DIRSTRICTS_LIST", district],
-    () => {
-      return regionService.getVillage(district);
-    },
-    {
-      enabled: !!district,
-    }
-  );
+    regionList,
+    getRegionsLoading,
+    getRegionsRefetch,
+    districtList,
+    getDistrictsLoading,
+    getDistrictsRefetch,
+    villageList,
+    getVillagesLoading,
+    getVillagesRefetech,
+  } = usePlaces();
 
   return {
-    regionLoading,
-    regionRefetch,
-    districtRefetch,
-    villageRefetch,
-    regions: regions?.data ?? [],
-    districts: districts?.data ?? [],
-    villages: villages?.data ?? [],
-    districtLoading,
-    villageLoading,
+    regions: regionList,
+    regionLoading: getRegionsLoading,
+    regionRefetch: getRegionsRefetch,
+    districts: districtList,
+    districtLoading: getDistrictsLoading,
+    districtRefetch: getDistrictsRefetch,
+    villages: villageList,
+    villageLoading: getVillagesLoading,
+    villageRefetch: getVillagesRefetech,
   };
 };
 

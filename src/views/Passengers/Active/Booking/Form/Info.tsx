@@ -1,16 +1,16 @@
-import { useSelector } from "react-redux";
 import HFSelect from "../../../../../components/FormElements/HFSelect";
 import HFTextField from "../../../../../components/FormElements/HFTextField"
 import cls from '../style.module.scss';
 import { useMemo, useState } from "react";
 import HFInputMask from "../../../../../components/FormElements/HFInputMask";
+import { usePlaces } from "../../../../../hooks/usePlaces";
 interface Props {
     control?: any,
     getHandler?: () => void
 }
 
 const Info = ({ control, }: Props) => {
-    const regions = useSelector((state: any) => state.regions.regions);
+    const { regionList } = usePlaces()
     const [fromDistrics, setFromDistrics] = useState([])
     const [fromVillages, setFromVillages] = useState([])
 
@@ -18,18 +18,18 @@ const Info = ({ control, }: Props) => {
     const [toVillages, setToVillages] = useState([])
 
     const Regions = useMemo(() => {
-        return regions?.map((i: any) => {
+        return regionList?.map((i: any) => {
             return {
                 value: i.id,
                 label: i.name.uz,
             };
         });
-    }, [regions])
+    }, [regionList])
 
     const handlerDistrics = (e: any) => {
-        for (let i = 0; i < regions.length; i++) {
-            if (regions[i].id == e) {
-                setFromDistrics(regions[i].list?.map((i: any) => {
+        for (let i = 0; i < regionList.length; i++) {
+            if (regionList[i].id == e) {
+                setFromDistrics(regionList[i].list?.map((i: any) => {
                     return {
                         value: i.id,
                         label: i.name.uz,
@@ -65,9 +65,9 @@ const Info = ({ control, }: Props) => {
     }
 
     const ToHandlerDistrics = (e: any) => {
-        for (let i = 0; i < regions.length; i++) {
-            if (regions[i].id == e) {
-                setToDistrics(regions[i].list?.map((i: any) => {
+        for (let i = 0; i < regionList.length; i++) {
+            if (regionList[i].id == e) {
+                setToDistrics(regionList[i].list?.map((i: any) => {
                     return {
                         value: i.id,
                         label: i.name.uz,

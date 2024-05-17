@@ -1,8 +1,8 @@
+import { usePlaces } from "../../../../../hooks/usePlaces";
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
 
 export const GetRegion = () => {
-  const regions = useSelector((state: any) => state.regions.regions);
+  const { regionList: regions } = usePlaces()
 
   const regionList = useMemo(() => {
     return regions?.map((i: any) => {

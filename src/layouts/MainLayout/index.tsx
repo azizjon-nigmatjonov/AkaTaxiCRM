@@ -4,7 +4,6 @@ import cls from "./style.module.scss";
 import { useSelector } from "react-redux";
 import CAlert from "../../components/CElements/CAlert";
 import { BackButtonRoute, ColorData, GetUserInfo } from "./Logic";
-import { RegionData } from "./Logic/Regions";
 
 const MainLayout = () => {
   const { userInfo } = GetUserInfo()
@@ -20,8 +19,6 @@ const MainLayout = () => {
 
       <BackButtonRoute />
       {alertData?.title && <CAlert data={alertData} />}
-
-      <RegionData  />
       <ColorData />
     </div>
   );
