@@ -8,8 +8,6 @@ const DriversAvater = ({ data, item, driversHandle = () => {} }: { data?: any, i
         navigateQuery({ id: item.id });
         driversHandle(item)
     }
-
-    console.log(data);
     
 
     
