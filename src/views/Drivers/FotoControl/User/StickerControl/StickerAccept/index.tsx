@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import usePageRouter from '../../../../../../hooks/useObjectRouter'
-import AddButton from '../../../../../../components/UI/Buttons/AddButton';
 import CancelButton from '../../../../../../components/UI/Buttons/Cancel';
 import { RxCross2 } from "react-icons/rx";
 import { CgArrowLongRight } from "react-icons/cg";
@@ -60,7 +59,7 @@ const Accepted = ({ date }: { date?: string }) => {
             </div>
             <div className='flex items-center justify-end gap-3'>
                 <CancelButton text='Orqaga' onClick={() => navigateQuery({ action: '' })} />
-                <AddButton id='saveButton' iconLeft={false} text='Qabul qilsh' onClick={acceptHandler} />
+                <button className='custom-btn' id='saveButton' onClick={acceptHandler}>Qabul qilsh</button>
             </div>
         </>
     )

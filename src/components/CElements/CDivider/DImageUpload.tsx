@@ -166,8 +166,8 @@ const DImageUpload = ({
           }
         </div>
       )}></Controller>
-      {imageTool && <div onClick={() => setImageTool(false)} className="h-full w-full fixed top-0 left-0   bg-transparent" />}
 
+      {imageTool && <div onClick={() => setImageTool(false)} className="h-full w-full fixed top-0 left-0   bg-transparent" />}
     </>
   );
 };
