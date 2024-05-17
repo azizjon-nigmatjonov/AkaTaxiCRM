@@ -1,14 +1,18 @@
 import { Avatar, AvatarGroup } from '@mui/material';
 import usePageRouter from "../../../../hooks/useObjectRouter";
 
-const DriversAvater = ({ data, item, driversHandle }: { data?: any, item?: any, driversHandle?: (val: any) => void }) => {
+const DriversAvater = ({ data, item, driversHandle = () => {} }: { data?: any, item?: any, driversHandle?: (val: any) => void }) => {
     const { navigateQuery } = usePageRouter()
 
     const driverHandle = () => {
-        if (!driversHandle) return
         navigateQuery({ id: item.id });
         driversHandle(item)
     }
+
+    console.log(data);
+    
+
+    
 
     const classes = {
         "& .MuiAvatar-root": {

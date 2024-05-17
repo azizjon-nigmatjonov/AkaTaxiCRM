@@ -14,7 +14,6 @@ import DriversList from "./DriversList";
 import ImageFrame from "../../../components/UI/ImageFrame";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import Statistics from "./Statistics";
-import AddButton from "../../../components/UI/Buttons/AddButton";
 import cls from "./style.module.scss";
 import Filters from "../../../components/UI/Filter";
 import { Status, breadCrubmsItems } from "./Logic";
@@ -207,10 +206,10 @@ const ActivePassengers = () => {
           defaultValue={query?.q}
         >
           <div className="flex items-center gap-[14px]">
-            <AddButton
-              text="Buyurtma berish"
+            <button
+            className="custom-btn"
               onClick={() => navigateTo("/passengers/active-passengers/booking")}
-            />
+            >Buyurtma berish</button>
           </div>
         </SectionHeader>
 

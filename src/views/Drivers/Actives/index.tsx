@@ -10,19 +10,16 @@ import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import PassengerList from "./PassengerList";
 import LTabs from "../../../components/CElements/CTab/LineTab";
-import { ActiveDriversTable } from "./Logic";
+import { ActiveDriversTable, breadCrumbs, tabList } from "./Logic";
 import { ActiveDriverFilter } from "./Filter";
+import DriversList from "../../../views/Passengers/Active/DriversList";
 
-const tabList = [
-  { slug: "", name: "Aktiv" },
-  { slug: "on-way", name: "Yo'lda" },
-  { slug: "canceled", name: "Bekor qilingan" },
-  { slug: "done", name: "Yetib borgan" },
-];
+
 
 const ActiveDrivers = () => {
   const [passenger, setPassenger] = useState([]);
   const { navigateQuery } = usePageRouter();
+  const [connectPassenger, setConnectPassger] = useState()
 
   const {
     currentPage,
@@ -35,7 +32,7 @@ const ActiveDrivers = () => {
     birthday,
   } = useGetQueries();
 
-  const { headColumns } = ActiveDriversTable({ setPassenger });
+  const { headColumns } = ActiveDriversTable({ setPassenger , setConnectPassger});
 
   const { data: drivers, isLoading } = useQuery(
     [
@@ -91,12 +88,6 @@ const ActiveDrivers = () => {
     navigateQuery({ q: evt });
   };
 
-  const breadCrumbs = useMemo(() => {
-    return [
-      { label: "Haydovchilar", link: "/drivers/active" },
-      { label: "Aktiv" },
-    ];
-  }, []);
 
   return (
     <>
@@ -120,7 +111,7 @@ const ActiveDrivers = () => {
           isLoading={isLoading}
           currentPage={currentPage}
         />
-
+        <DriversList data={connectPassenger} />
         <PassengerList data={passenger} />
       </div>
     </>
