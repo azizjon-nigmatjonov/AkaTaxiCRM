@@ -80,7 +80,7 @@ const NewRolls = () => {
       setValue("permissions", rollData.permissions);
     }
   }, [rollData]);
-
+  
   return (
     <>
       <Header sticky={true}>
