@@ -1,13 +1,16 @@
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-export const PermissionsData = () => {
+export const usePermissions = () => {
   const userInfo = useSelector((state: any) => state.auth.user);
-  const permissions = userInfo?.permissions ?? []
+  const permissions = userInfo?.permissions ?? [];
   const location = useLocation();
   const found = permissions?.find(
     (item: any) => item.value === location.pathname.substring(1)
   );
 
-  return { routePermissions: found?.permissions ?? [] };
+  const checkPermission = (permission: string) =>
+    found.permissions.includes(permission);
+
+  return { routePermissions: found?.permissions ?? [], checkPermission };
 };

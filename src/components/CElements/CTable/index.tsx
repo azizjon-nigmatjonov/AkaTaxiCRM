@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { tableSizeAction } from "../../../store/tableSize/tableSizeSlice";
 import { TableDelete } from "./Details/Actions/EditDelete";
 import { PopoverDelete } from "./Details/Actions/EditDelete/PopOver";
-import { PermissionsData } from "../../../hooks/usePermissions";
+import { usePermissions } from "../../../hooks/usePermissions";
 
 interface Props {
   count?: number;
@@ -64,7 +64,7 @@ const CTable = ({
   const [currentIndex, setCurrentIndex] = useState(null);
   const [currDelete, setCurrDelete] = useState<any>({});
   const dispatch = useDispatch();
-  const { routePermissions } = PermissionsData();
+  const { routePermissions, checkPermission } = usePermissions();
 
   const bodySource = useMemo(() => {
     if (!bodyColumns?.length) return [];
@@ -411,7 +411,7 @@ const CTable = ({
                                   element={item}
                                   tableActions={tableActions}
                                   permissions={column.permission}
-                                  routePermissions={routePermissions}
+                                  checkPermission={checkPermission}
                                 />
                                 {currDelete.index === item.index ? (
                                   <PopoverDelete
@@ -439,7 +439,7 @@ const CTable = ({
                                   setCurrentIndex={setCurrentIndex}
                                   handleActions={handleActions}
                                   permissions={column.permission}
-                                  routePermissions={routePermissions}
+                                  checkPermission={checkPermission}
                                 />
                               </>
                             )}

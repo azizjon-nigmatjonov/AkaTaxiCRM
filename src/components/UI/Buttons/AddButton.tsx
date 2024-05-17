@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import "./style.scss";
 import { PlusIcon } from "../IconGenerator/Svg";
 import { useTranslation } from "react-i18next";
-import { PermissionsData } from "../../../hooks/usePermissions";
+import { usePermissions } from "../../../hooks/usePermissions";
 
 interface Props {
   text?: string;
@@ -27,9 +27,9 @@ const AddButton = ({
   ...props
 }: Props) => {
   const { t } = useTranslation();
-  const { routePermissions } = PermissionsData();
+  const { checkPermission } = usePermissions();
 
-  if (!routePermissions?.includes("add")) return "";
+  if (!checkPermission("add")) return "";
 
   if (btnType === "ordinary") {
     return (

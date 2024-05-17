@@ -15,13 +15,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { websiteActions } from "../../../store/website";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Validation } from "./validate";
-
+import { usePermissions } from "../../../hooks/usePermissions";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const schema = Validation();
   const user = useSelector((state: any) => state.auth.user);
   const [logout, setLogout] = useState(false);
+  const { checkPermission } = usePermissions();
 
   const {
     control,
@@ -33,12 +34,9 @@ const ProfilePage = () => {
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
-  
 
   const onSubmit = () => {
     const params: any = getValues();
-
-    
 
     params.phone = params.phone?.substring(1)?.replace(/\s+/g, "");
     authService.updateUserInfo(params).then(() => {
@@ -137,14 +135,16 @@ const ProfilePage = () => {
         </div>
       </CCard>
 
-      <div className="flex justify-end mt-5">
-        <button
-          type="submit"
-          className="px-10 h-[48px] bg-[var(--main)] text-white rounded-[10px]"
-        >
-          Taxrirlash
-        </button>
-      </div>
+      {checkPermission("edit") && (
+        <div className="flex justify-end mt-5">
+          <button
+            type="submit"
+            className="px-10 h-[48px] bg-[var(--main)] text-white rounded-[10px]"
+          >
+            Taxrirlash
+          </button>
+        </div>
+      )}
 
       <CModal
         open={logout}
@@ -157,7 +157,9 @@ const ProfilePage = () => {
 
         <div className="grid gap-2 grid-cols-2 mt-8">
           <CancelButton text="Yo'q" onClick={() => setLogout(false)} />
-          <button className="custom-btn" onClick={() => Logout()}>Ha</button>
+          <button className="custom-btn" onClick={() => Logout()}>
+            Ha
+          </button>
         </div>
       </CModal>
     </form>

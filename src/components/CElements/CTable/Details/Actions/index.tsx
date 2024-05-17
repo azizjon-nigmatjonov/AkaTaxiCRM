@@ -16,7 +16,7 @@ interface Props {
   element: any;
   permissions: string[];
   rowIndex: number;
-  routePermissions: any;
+  checkPermission: any;
   handleActions: (obj?: any, status?: any) => void;
   currentIndex: any;
   setCurrentIndex: (newIndex?: any) => void;
@@ -27,14 +27,14 @@ const TabbleActions = ({
   rowIndex,
   permissions = [],
   currentIndex,
-  routePermissions = [],
+  checkPermission = [],
   handleActions = () => {},
   setCurrentIndex = () => {},
 }: Props) => {
   const [deletePopover, setDeletePopover]: any = useState(null);
 
   const handleClick = (element: any, status?: string, active?: boolean) => {
-    if (routePermissions.includes(status)) {
+    if (checkPermission(status)) {
       if (status === "delete") {
         setDeletePopover(rowIndex);
         setCurrentIndex(null);
@@ -55,7 +55,7 @@ const TabbleActions = ({
         >
           <Element
             text="view"
-            active={element?.is_view && routePermissions.includes('view')}
+            active={element?.is_view && checkPermission('view')}
             onClick={() => handleClick(element, "view", element?.is_delete)}
             icon={
               <EyeIcon
@@ -66,7 +66,7 @@ const TabbleActions = ({
           />
           <Element
             text="freez"
-            active={element?.is_freez && routePermissions.includes('freez')}
+            active={element?.is_freez && checkPermission('freez')}
             onClick={() => handleClick(element, "freez", element?.is_freez)}
             icon={
               <LockIcon
@@ -77,7 +77,7 @@ const TabbleActions = ({
           />
           <Element
             text="edit"
-            active={element?.is_edit && routePermissions.includes('edit')}
+            active={element?.is_edit && checkPermission('edit')}
             onClick={() => handleClick(element, "edit", element.is_edit)}
             icon={
               <EditIcon
@@ -88,7 +88,7 @@ const TabbleActions = ({
           />
           <Element
             text="delete"
-            active={element?.is_delete && routePermissions.includes('delete')}
+            active={element?.is_delete && checkPermission('delete')}
             onClick={() => handleClick(element, "delete", element.is_delete)}
             icon={
               <DeleteIcon
