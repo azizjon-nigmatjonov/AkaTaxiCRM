@@ -38,7 +38,6 @@ const DriverInfo = ({ driver = {}, refetch }: { driver?: any, refetch: any }) =>
       navigateQuery({ passenger: 'update' })
   }
 
-  console.log(driver);
 
 
 
@@ -148,7 +147,7 @@ const DriverInfo = ({ driver = {}, refetch }: { driver?: any, refetch: any }) =>
         </form>
       </div>
 
-      <Modal open={!!query?.passenger || !!query.accept}>
+      <Modal open={!!query?.passenger || !!query?.accept}>
         {!!query.passenger ? <div className='grid place-items-center h-full'>
           <div className='bg-white px-6 py-8  max-w-[400px] mx-auto rounded-[20px]'>
             <div className='flex items-center gap-2'>

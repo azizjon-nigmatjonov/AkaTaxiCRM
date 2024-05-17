@@ -5,6 +5,7 @@ import { VersionsList } from "../../../../constants/versions";
 import { DivicesList } from "../../../../constants/devices";
 import { GetRegion } from "./Logic";
 import { CPeriodPicker } from "../../../../components/CElements/CPeriodPicker";
+import CMultibleSelect from "../../../../components/CElements/CMultibleSelect";
 // import DropDown from "../../../../components/FormElements/DropDown";
 
 export const FilterPassenger = () => {
@@ -50,12 +51,13 @@ export const FilterPassenger = () => {
           label="Jinsi"
           placeholder="Tanlang"
         />
-        <CSelect
+        {/* <CSelect
           handlerValue={handlerRegion}
           options={regionList}
           label="Viloyat"
           placeholder="Tanlang"
-        />
+        /> */}
+        <CMultibleSelect label="Yashash joyi" />
       </div>
     </Filters>
   );

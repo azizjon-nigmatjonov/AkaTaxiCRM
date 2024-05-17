@@ -9,6 +9,7 @@ import Places from "../../../../components/UI/Places";
 const PassengerList = ({ data }: { data: any }) => {
     const { getQueries, navigateQuery } = usePageRouter()
     const query = getQueries()
+    
 
 
     const pasengerList = useMemo(() => {
@@ -30,7 +31,7 @@ const PassengerList = ({ data }: { data: any }) => {
 
 
     return (
-        <CModal title={data.full_name} open={!!query?.id} handleClose={() => navigateQuery({ id: '' })} footerActive={false}>
+        <CModal title={data.full_name} open={!!query?.id && data.length} handleClose={() => navigateQuery({ id: '' })} footerActive={false}>
             <div className="flex items-center justify-between">
                 <p className="text-2xl font-semibold text-[var(--black)]">{data?.from_region_name}</p>
                 <IoIosArrowRoundForward size='20' color="#858592" />

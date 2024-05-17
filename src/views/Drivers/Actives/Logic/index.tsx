@@ -5,9 +5,11 @@ import Places from "../../../../components/UI/Places";
 import DriversAvater from "../../../../views/Passengers/Active/DriversAvatar";
 
 export const ActiveDriversTable = ({
-  setPassenger = () => {},
+  setPassenger = () => { },
+  setConnectPassger=()=>{}
 }: {
   setPassenger: (val: any) => void;
+  setConnectPassger:(val:any) =>void
 }) => {
   const passengerList = (e: any) => {
     setPassenger(e);
@@ -67,13 +69,11 @@ export const ActiveDriversTable = ({
       {
         title: "Takliflar",
         id: "bids",
-        render: (arr: any, item: any) => {
-          return (
-            <div className="py-4">
-              <DriversAvater data={arr} item={item} />
-            </div>
-          );
-        },
+        render: (arr: any, item: any) => (
+         <div className="py-4">
+         <DriversAvater data={arr} item={item} driversHandle={setConnectPassger}/>
+       </div>
+        )
       },
       {
         id: "places",
@@ -85,3 +85,15 @@ export const ActiveDriversTable = ({
 
   return { headColumns };
 };
+
+
+export const breadCrumbs = [
+  { label: "Haydovchilar", link: "/drivers/active" },
+  { label: "Aktiv" },
+];
+export const tabList = [
+  { slug: "", name: "Aktiv" },
+  { slug: "on-way", name: "Yo'lda" },
+  { slug: "canceled", name: "Bekor qilingan" },
+  { slug: "done", name: "Yetib borgan" },
+];

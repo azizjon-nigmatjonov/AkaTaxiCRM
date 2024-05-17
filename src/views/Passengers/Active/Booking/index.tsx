@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs"
 import { Header } from "../../../../components/UI/Header"
-import AddButton from "../../../../components/UI/Buttons/AddButton"
 import CancelButton from "../../../../components/UI/Buttons/Cancel"
 import { useForm } from "react-hook-form"
 import Info from "./Form/Info"
@@ -20,7 +19,7 @@ const Booking = () => {
     const dispatch = useDispatch()
     const { progmatic, navigateTo } = usePageRouter();
 
-    const { control, getValues  } = useForm({
+    const { control, getValues } = useForm({
         mode: 'onSubmit'
     })
 
@@ -80,7 +79,7 @@ const Booking = () => {
                 websiteActions.setAlertData({
                     title: "Qidiruv boshlandi!",
                     translation: "common",
-            }))
+                }))
             progmatic()
         }
         ).catch((err) => {
@@ -125,7 +124,7 @@ const Booking = () => {
                         <p className="text-[varr(--gray)] text-sm font-normal">Yo’lovchiga admin tomondan haydovchi topib berish</p>
                     </div>
                     <div>
-                        <AddButton onClick={formsubmit} iconLeft={false} text="Haydovchi qidirish" />
+                        <button className='custom-btn' onClick={formsubmit}>Haydovchi qidirish</button>
                     </div>
                 </div>
                 <div>
@@ -137,7 +136,7 @@ const Booking = () => {
                         <div className={`flex  justify-end py-4`}>
                             <div className="flex gap-4 ">
                                 <CancelButton text='Bekor qilish' onClick={() => navigateTo('/passengers/active-passengers')} />
-                                <AddButton onClick={formsubmit} iconLeft={false} text='Haydovchi qidirish' />
+                                <button className="custom-btn" onClick={formsubmit}  >Haydovchi qidirish</button>
                             </div>
                         </div>
                     </form>

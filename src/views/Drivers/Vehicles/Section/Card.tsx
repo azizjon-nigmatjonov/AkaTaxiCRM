@@ -19,7 +19,7 @@ interface Props {
 
 const Card: FC<Props> = ({ setInputValue, element }) => {
   const { navigateTo, navigateQuery } = usePageRouter();
-  const { routePermissions} = PermissionsData()
+  const { routePermissions } = PermissionsData()
   // console.log(element.name);
 
   const handleClick = (element: any) => {
@@ -62,27 +62,27 @@ const Card: FC<Props> = ({ setInputValue, element }) => {
         </div>
       </div> */}
 
-      {routePermissions?.includes('add') && <div className="flex justify-end">
+      <div className="flex justify-end">
         <div
-          onClick={() => navigateTo(`/drivers/cars/${element.id}`)}
-          className="cursor-pointer px-6 border-r border-[var(--lineGray)] h-[50px] flex items-center w-full font-medium"
+          onClick={() => { routePermissions?.includes('index') && navigateTo(`/drivers/cars/${element.id}`) }}
+          className={`${routePermissions?.includes('index') ? 'cursor-pointer': 'cursor-not-allowed'} px-6 border-r border-[var(--lineGray)] h-[50px] flex items-center w-full font-medium`}
         >
           <div className="border border-[var(--lineGray)] h-[30px] w-[30px] flex items-center justify-center rounded-full mr-2">
-            <EyeIcon />
+            <EyeIcon fill={routePermissions?.includes('index') ? ColorConstants.gray : ColorConstants.lineGray} />
           </div>
-          <p className="text-[13px] whitespace-nowrap">Batafsil</p>
+          <p className={`text-[13px] ${routePermissions?.includes('index')? 'text-[var(--gray)]': 'text-[var(--lineGray)]'} whitespace-nowrap`}>Batafsil</p>
         </div>
 
         <div
-          onClick={() => handleClick(element)}
-          className="px-6  h-[50px] flex items-center w-full font-medium cursor-pointer"
+          onClick={() => { routePermissions?.includes('edit') && handleClick(element) }}
+          className={`px-6  h-[50px] flex items-center w-full font-medium ${routePermissions?.includes('edit') ? 'cursor-pointer': 'cursor-not-allowed'} `}
         >
-          <div className="border border-[var(--lineGray)] h-[30px] w-[30px] flex items-center justify-center rounded-full mr-2">
-            <EditIcon fill={ColorConstants.gray} />
+          <div className={`border border-[var(--lineGray)] cur  h-[30px] w-[30px] flex items-center justify-center rounded-full mr-2`}>
+            <EditIcon fill={routePermissions?.includes('edit') ? ColorConstants.gray : ColorConstants.lineGray} />
           </div>
-          <p className="text-[13px]">Tahrirlash</p>
+          <p className={`text-[13px] ${routePermissions?.includes('edit') ? 'text-[var(--gray)] ': 'text-[var(--lineGray)]'}`}>Tahrirlash</p>
         </div>
-      </div>}
+      </div>
     </CCard>
   );
 };
