@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 const NewRolls = () => {
   const schema = Validation();
   const { id } = useParams();
+  
   const {
     newRouteList,
     isLoading: listLoading,
@@ -37,7 +38,7 @@ const NewRolls = () => {
       parseInt(element.trim(), 10)
     );
     data.permissions = permissions;
-    if (id !== 'create') {
+    if (id !== ':create') {
       updateRoll(data, id);
     } else {
       createRoll(data);
@@ -87,9 +88,9 @@ const NewRolls = () => {
         <CBreadcrumbs items={breadCrumbsItems} progmatic={true} type="link" />
       </Header>
       <RollCreateHeder
-        title={id === "create" ? "Yangi rol yaratish" : "Rolni tahrirlash"}
+        title={id === ":create" ? "Yangi rol yaratish" : "Rolni tahrirlash"}
         text={
-          id === "create"
+          id === ":create"
             ? "Admin panel yangi boshqaruvchi yaratish"
             : "Admin panel boshqaruvchini tahrirlash"
         }
