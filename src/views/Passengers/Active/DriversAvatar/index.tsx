@@ -12,11 +12,6 @@ const DriversAvater = ({ data, item, driversHandle = () => {} }: { data?: any, i
 
     
 
-    console.log(data);
-    
-
-    
-
     const classes = {
         "& .MuiAvatar-root": {
             'height': '24px',
