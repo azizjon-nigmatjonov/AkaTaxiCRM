@@ -36,6 +36,7 @@ const ProfilePage = () => {
   });
 
   const onSubmit = () => {
+    if (!checkPermission("edit")) return
     const params: any = getValues();
 
     params.phone = params.phone?.substring(1)?.replace(/\s+/g, "");
@@ -135,16 +136,16 @@ const ProfilePage = () => {
         </div>
       </CCard>
 
-      {checkPermission("edit") && (
-        <div className="flex justify-end mt-5">
+      <div className="flex justify-end">
+        <div className="mt-5 inline-block">
           <button
             type="submit"
-            className="px-10 h-[48px] bg-[var(--main)] text-white rounded-[10px]"
+            className={`custom-btn ${!checkPermission("edit") ? "disabled" : ""}`}
           >
             Taxrirlash
           </button>
         </div>
-      )}
+      </div>
 
       <CModal
         open={logout}

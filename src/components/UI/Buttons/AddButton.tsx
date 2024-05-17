@@ -13,6 +13,7 @@ interface Props {
   classes?: string;
   type?: any;
   btnType?: string;
+  permission?: string;
   onClick?: (val?: any) => void;
 }
 
@@ -24,12 +25,13 @@ const AddButton = ({
   classes,
   type = "button",
   btnType = "",
+  permission = "add",
   ...props
 }: Props) => {
   const { t } = useTranslation();
   const { checkPermission } = usePermissions();
 
-  if (!checkPermission("add")) return "";
+  if (!checkPermission(permission)) return "";
 
   if (btnType === "ordinary") {
     return (

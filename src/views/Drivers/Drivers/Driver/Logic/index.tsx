@@ -1,5 +1,5 @@
 import usePageRouter from "../../../../../hooks/useObjectRouter";
-import AddButton from "../../../../../components/UI/Buttons/AddButton";
+// import AddButton from "../../../../../components/UI/Buttons/AddButton";
 import DropDown from "../../../../../components/FormElements/DropDown";
 
 export const PostBallance = () => {
@@ -12,7 +12,9 @@ export const PostBallance = () => {
                 <DropDown name="Vaqt" placeholder="Tanlang" defaultValue={'01.01-.01.01'} position="240" />
             </div>
 
-            <AddButton id="successBtn" text="Balansni to’ldirish" onClick={() => navigateQuery({ amount: true })} />
+            <button className="custom-btn success" onClick={() => navigateQuery({ amount: true })}>
+                Balansni to’ldirish
+            </button>
         </div>
 
     }
