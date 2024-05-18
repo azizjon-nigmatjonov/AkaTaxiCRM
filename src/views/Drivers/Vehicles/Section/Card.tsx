@@ -9,6 +9,7 @@ import {
 import { ColorConstants } from "../../../../constants/website";
 // import Progress from "./Progress";
 import usePageRouter from "../../../../hooks/useObjectRouter";
+import { usePermissions } from "../../../../hooks/usePermissions";
 // import VehicleModel from "./VehicleModel";
 
 interface Props {
@@ -18,13 +19,13 @@ interface Props {
 
 const Card: FC<Props> = ({ setInputValue, element }) => {
   const { navigateTo, navigateQuery } = usePageRouter();
+  const {} = usePermissions()
 
   // console.log(element.name);
 
   const handleClick = (element: any) => {
     navigateQuery({ id: element.id });
     // setInputValue(element2);
-    console.log("tah", element);
     setInputValue(element.name);
   };
   return (

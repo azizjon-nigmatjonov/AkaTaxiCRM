@@ -140,7 +140,7 @@ const ProfilePage = () => {
         <div className="mt-5 inline-block">
           <button
             type="submit"
-            className={`custom-btn ${!checkPermission("edit") ? "disabled" : ""}`}
+            className={`custom-btn ${!checkPermission("edit") ? "unpermit" : ""}`}
           >
             Taxrirlash
           </button>

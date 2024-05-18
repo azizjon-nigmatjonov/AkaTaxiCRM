@@ -199,10 +199,22 @@ input {
     }
   }
 
+  &.unpermit,
   &.disabled {
     background-color: var(--gray30);
     color: var(--black);
+  }
+  &.unpermit {
     cursor: not-allowed;
+    &:hover {
+      &::after {
+        content: "Permission o'rnatilmagan!";
+        position: absolute;
+        left: -70px;
+        top: -24px;
+        color: var(--main);
+      }
+    }
   }
 }
 .custom-btn.success {

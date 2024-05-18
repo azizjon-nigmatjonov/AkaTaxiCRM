@@ -8,11 +8,11 @@ import CTable from "../../../components/CElements/CTable"
 
 const tabList = [
   {
-    slug: '',
+    slug: 'passengers',
     name: 'Yo’lovchi'
   },
   {
-    slug: 'driver',
+    slug: 'drivers',
     name: 'Haydovchi'
   }
 ]
