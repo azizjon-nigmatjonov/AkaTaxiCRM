@@ -25,7 +25,6 @@ const Card: FC<Props> = ({ setInputValue, element }) => {
   const handleClick = (element: any) => {
     navigateQuery({ id: element.id });
     // setInputValue(element2);
-
     setInputValue(element.name);
   };
   return (

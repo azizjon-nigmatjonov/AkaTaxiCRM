@@ -1,51 +1,56 @@
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+import {
+  LocalizationProvider,
+  StaticDateRangePicker,
+} from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { DateRangeCalendar } from "@mui/x-date-pickers-pro/DateRangeCalendar";
 import "../style.scss";
-import { FormatCalendar } from "../../../../utils/formatTime";
-import usePageRouter from "../../../../hooks/useObjectRouter";
-import { PeriodDateMenu } from "./Menu";
-// import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
-// import dayjs from "dayjs";
-// import AddButton from '../Buttons/AddButton';
-// import { Closer } from "../../../../components/UI/Closer";
+
+import { DateData, DateLabel } from "../Logic";
 
 interface Props {
   open: boolean;
   handlerValue?: (e: any) => void;
-  handleDropdown: () => void;
+  handleDropdown: (val?: any) => void;
 }
 
 export const PeriodDateDropDown = ({
   open = false,
-  handlerValue = () => {},
-}: //   handleDropdown,
-Props) => {
+  handleDropdown = () => {},
+}: Props) => {
   if (!open) return <></>;
-  const { navigateQuery } = usePageRouter();
-
-  const clickhandler = (e?: any) => {
-    navigateQuery({ start: FormatCalendar(e[0]?.$d) });
-    navigateQuery({ end: FormatCalendar(e[1]?.$d) });
-    handlerValue(e);
-  };
-
-//   const today = dayjs();
-// const yesterday = dayjs().subtract(1, 'day');
+  const { defaultValue, actionHandler, handleSubmit, getFormatedDate } = DateData({ handleDropdown });
+  const { shortcutsItems } = DateLabel();
 
   return (
     <div className="periodPicker flex">
-      <PeriodDateMenu />
-      
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-      {/* <DateRangePicker defaultValue={[yesterday, today]} maxDate={yesterday} /> */}
-        <DateRangeCalendar
-          onChange={(e: any) => clickhandler(e)}
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="uz">
+        <StaticDateRangePicker
+          onChange={(e: any) => actionHandler(e)}
+          value={defaultValue}
+          slotProps={{
+            shortcuts: {
+              items: shortcutsItems,
+            },
+            actionBar: { actions: [] },
+          }}
           calendars={2}
         />
       </LocalizationProvider>
-
-      {/* <Closer handleClose={() => handleDropdown()} /> */}
+      <div className="periodPickerFooter">
+        <div className="flex items-center">
+          <div className="default-btn">{getFormatedDate[0]}</div>
+          <div className="px-2">-</div>
+          <div className="default-btn">{getFormatedDate[1]}</div>
+        </div>
+        <div className="btns">
+          <button className="cancel-btn" onClick={() => handleDropdown()}>
+            Bekor qilish
+          </button>
+          <button className="custom-btn" onClick={() => handleSubmit()}>
+            Tanlash
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

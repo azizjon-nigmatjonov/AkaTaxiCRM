@@ -31,21 +31,43 @@ const AddButton = ({
   const { t } = useTranslation();
   const { checkPermission } = usePermissions();
 
-  if (!checkPermission(permission)) return "";
+  // if (!checkPermission(permission)) return "";
 
   if (btnType === "ordinary") {
     return (
-      <button {...props} className="text-[var(--main)] font-[600] flex items-center">
-        {iconLeft === true ? <PlusIcon fill="var(--main)" /> : iconLeft}
+      <button
+        {...props}
+        className={`font-[600] flex items-center ${
+          checkPermission(permission)
+            ? "text-[var(--main)]"
+            : "text-[var(--gray30)] cursor-not-allowed"
+        }`}
+      >
+        {iconLeft === true ? (
+          <PlusIcon
+            fill={checkPermission(permission) ? "var(--main)" : "var(--gray30)"}
+          />
+        ) : (
+          iconLeft
+        )}
         {children ? children : <p>{text}</p>}
       </button>
     );
   }
 
   return (
-    <div id={id ? id : "addBtn"} {...props}>
-      <Button type={type} className={classes}>
-        {iconLeft === true ? <PlusIcon /> : iconLeft}
+    <div
+      id={id ? id : "addBtn"}
+      {...props}
+    >
+      <Button type={type} className={`${classes} ${checkPermission(permission) ? '' : 'disabled'}`}>
+        {iconLeft === true ? (
+          <PlusIcon
+            fill={checkPermission(permission) ? "white" : "var(--gray90)"}
+          />
+        ) : (
+          iconLeft
+        )}
         {children ? (
           children
         ) : (

@@ -34,7 +34,7 @@ export const RollForm = ({
           </div>
         ) : (
           <button type="submit" className="custom-btn">
-            {id !== 'create' ? "Tahrirlash" : "Rol qo'shish"}
+            {id !== ':create' ? "Tahrirlash" : "Rol qo'shish"}
           </button>
         )}
       </div>

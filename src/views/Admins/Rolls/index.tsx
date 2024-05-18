@@ -27,7 +27,7 @@ const Rolls = () => {
           <SectionHeader handleSearch={() => {}}>
             <AddButton
               text="Yangi rol qo'shish"
-              onClick={() => navigateTo("/admins/rolls/create")}
+              onClick={() => navigateTo("/admins/rolls/:create")}
             />
           </SectionHeader>
           <CTable
