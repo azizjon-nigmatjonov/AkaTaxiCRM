@@ -201,11 +201,17 @@ input {
   }
 
   &.disabled {
-    background-color: var(--gray30);
+    background-color: var(--gray20);
     color: var(--black);
   }
-  
 }
+
+.Mui-disabled  {
+  background-color: var(--gray20);
+  color: var(--black);
+  cursor: not-allowed !important;
+}
+
 .unpermit {
   cursor: not-allowed;
   position: relative;

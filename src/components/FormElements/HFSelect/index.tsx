@@ -1,7 +1,7 @@
 import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
 import CLabel from "../../CElements/CLabel";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 // import IconGenerator from "../IconPicker/IconGenerator";
 
 interface Props {
@@ -19,8 +19,93 @@ interface Props {
   defaultValue?: any;
   rules?: any;
   id?: string;
+  disabled?: boolean;
   setValue?: (val1?: any, val2?: any) => void;
 }
+
+const SelectUI = ({
+  value,
+  defaultValue,
+  placeholder,
+  disabled,
+  onChange,
+  onFormChange,
+  optionType,
+  options,
+  props,
+  handleClick,
+}: {
+  value: any;
+  defaultValue?: any;
+  placeholder?: string;
+  disabled?: boolean;
+  onChange: (val: any) => void;
+  onFormChange: (val: any) => void;
+  optionType?: string;
+  options: any;
+  props: any;
+  handleClick: (val: any) => void;
+}) => {
+  return (
+    <Select
+      value={value || defaultValue || ""}
+      size="small"
+      // error={error}
+      inputProps={{ placeholder }}
+      fullWidth
+      // just
+      // following
+      // attributes
+      // into
+      // select
+      displayEmpty
+      disabled={disabled}
+      id="1"
+      renderValue={
+        value !== ""
+          ? undefined
+          : () => <span style={{ color: "#909EAB" }}>{placeholder}</span>
+      }
+      onChange={(e) => {
+        onChange(e.target.value);
+        onFormChange(e.target.value);
+      }}
+      {...props}
+    >
+      {optionType === "GROUP"
+        ? options?.map((group?: any) => [
+            <MenuItem style={{ fontWeight: 600, color: "#000", fontSize: 15 }}>
+              {group.label}
+            </MenuItem>,
+            group.options?.map((option?: any) => (
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                style={{ paddingLeft: 30 }}
+              >
+                <div className="flex align-center gap-2">
+                  {/* <IconGenerator
+              icon={option.icon}
+              size={15}
+              style={{ color: "#6E8BB7" }}
+            /> */}
+                  {option.label}
+                </div>
+              </MenuItem>
+            )),
+          ])
+        : options?.map((option?: any) => (
+            <MenuItem
+              key={option.value}
+              onClick={() => handleClick(option)}
+              value={option.value}
+            >
+              {option.label}
+            </MenuItem>
+          ))}
+    </Select>
+  );
+};
 
 const HFSelect = ({
   control,
@@ -38,6 +123,7 @@ const HFSelect = ({
   id = "cselect",
   handleClick = () => {},
   setValue = () => {},
+  disabled = false,
   ...props
 }: Props) => {
   useEffect(() => {
@@ -45,6 +131,10 @@ const HFSelect = ({
       setValue(name, defaultValue);
     }
   }, [defaultValue, name, setValue]);
+
+  const disableSelect = useMemo(() => {
+    return disabled;
+  }, [disabled]);
 
   return (
     <div id="cselect">
@@ -62,70 +152,23 @@ const HFSelect = ({
         }) => (
           <FormControl style={{ width }}>
             {label && <CLabel title={label} required={required} />}
-            <Select
-              value={value || defaultValue || ""}
-              size="small"
-              // error={error}
-              inputProps={{ placeholder }}
-              fullWidth
-              // just
-              // following
-              // attributes
-              // into
-              // select
-              displayEmpty
-              renderValue={
-                value !== ""
-                  ? undefined
-                  : () => (
-                      <span style={{ color: "#909EAB" }}>{placeholder}</span>
-                    )
-              }
-              onChange={(e) => {
-                onChange(e.target.value);
-                onFormChange(e.target.value);
-              }}
-              {...props}
-            >
-              {optionType === "GROUP"
-                ? options?.map((group?: any) => [
-                    <MenuItem
-                      style={{ fontWeight: 600, color: "#000", fontSize: 15 }}
-                    >
-                      {group.label}
-                    </MenuItem>,
-                    group.options?.map((option?: any) => (
-                      <MenuItem
-                        key={option.value}
-                        value={option.value}
-                        style={{ paddingLeft: 30 }}
-                      >
-                        <div className="flex align-center gap-2">
-                          {/* <IconGenerator
-                          icon={option.icon}
-                          size={15}
-                          style={{ color: "#6E8BB7" }}
-                        /> */}
-                          {option.label}
-                        </div>
-                      </MenuItem>
-                    )),
-                  ])
-                : options?.map((option?: any) => (
-                    <MenuItem
-                      key={option.value}
-                      onClick={() => handleClick(option)}
-                      value={option.value}
-                    >
-                      {option.label}
-                    </MenuItem>
-                  ))}
-            </Select>
 
             <FormHelperText
               style={{ color: "var(--error)", margin: "0 5px" }}
               error
             >
+              <SelectUI
+                options={options}
+                optionType={optionType}
+                onChange={onChange}
+                placeholder={placeholder}
+                onFormChange={onFormChange}
+                value={value}
+                handleClick={handleClick}
+                defaultValue={defaultValue}
+                disabled={disableSelect}
+                props={props}
+              />
               {!disabledHelperText && error?.message ? error.message : " "}
             </FormHelperText>
           </FormControl>

@@ -3,7 +3,7 @@ import CCard from "../../../../../components/CElements/CCard";
 import MainInfo from "./Main";
 import CarInfo from "./CarInfo";
 import DriverImages from "./Images";
-import CancelButton from "../../../../../components/UI/Buttons/Cancel";
+import AddButton from "../../../../../components/UI/Buttons/AddButton";
 import { Modal } from "@mui/material";
 import { InfoIcon } from "../../../../../components/UI/IconGenerator/Svg";
 import usePageRouter from "../../../../../hooks/useObjectRouter";
@@ -36,10 +36,10 @@ const DriverInfo = ({ driver = {}, refetch }: { driver?: any, refetch: any }) =>
   const updateInfo = () => {
     setAlert('Haqiqatdan ham ma’lumotlarni yangilashni istaysizmi?'),
       navigateQuery({ passenger: 'update' })
+    navigateTo('/drivers/main')
   }
-
-
-
+  
+  
 
   const alertMessage = (e: string) => {
     if (e == 'delete') {
@@ -102,9 +102,16 @@ const DriverInfo = ({ driver = {}, refetch }: { driver?: any, refetch: any }) =>
   const acceptDriverInfo = () => {
     driverService.updateCarInfo(id, { status: 'active' })
     refetch()
+    dispatch(
+      websiteActions.setAlertData({
+        mainTitle: "Tasdiqlandi",
+        title: "Sizning tasdiqlash so'rovingiz yuborildi!",
+        translation: "common",
+      })
+    );
     navigateTo('/drivers/main')
   }
-
+    
   return (
     <>
       <div className="grid gap-5">
@@ -132,16 +139,17 @@ const DriverInfo = ({ driver = {}, refetch }: { driver?: any, refetch: any }) =>
             <DriverImages driver={driver} control={control} setValue={setValue} />
           </CCard>
 
-          {driver.status == "active" ? <div className="flex items-center justify-between mt-6">
-            <div><button className="custom-btn" onClick={deleteAccount}>Akkountni o'chirish</button></div>
+          {driver.status === "active" ? <div className="flex items-center justify-between mt-6">
+            <div><AddButton onClick={deleteAccount} iconLeft={false} text="Akkountni o'chirish" /></div>
             <div className="flex items-center gap-2">
-              <CancelButton onClick={() => navigateTo('/drivers/main')} text='Bekor qilish' />
-              <button onClick={updateInfo} className="custom-btn">Saqlash</button>
+              <button type="button" className="cancel-btn" onClick={() => navigateTo('/drivers/main')}>Bekor qilish</button>
+              <button type="button" className="custom-btn" onClick={() => updateInfo()}>Saqlash</button>
             </div>
           </div> : <div className="flex justify-end">
             <div className="flex items-center justify-end gap-4 mt-5">
-              <CancelButton text="Rad etish" onClick={() => navigateQuery({ accept: 'true' })} />
-              <button className="custom-btn" onClick={acceptDriverInfo}>Tasdiqlash</button>
+
+              <button type="button" className="cancel-btn" onClick={() => navigateQuery({ accept: "true" })}>Rad etish</button>
+              <button type="button" className="custom-btn" onClick={() => acceptDriverInfo()}>Tasdiqlash</button>
             </div>
           </div>}
         </form>
@@ -155,8 +163,9 @@ const DriverInfo = ({ driver = {}, refetch }: { driver?: any, refetch: any }) =>
               <p className='text-base font-medium text-[var(--black)]'>{alert}</p>
             </div>
             <div className='flex items-center gap-2 mt-6'>
-              <CancelButton text="Yo'q" onClick={() => alertMessage('')} />
-              <button className="custom-btn" onClick={() => alertMessage(query?.passenger)} >Ha</button>
+         
+              <button className="cancel-btn" onClick={() => alertMessage('')}>Yo'q</button>
+              <button className="custom-btn" onClick={() => alertMessage(query?.passenger)}>Ha</button>
             </div>
           </div>
         </div> : <CCard style={{ minHeight: 0 }} classes='max-w-[400px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]'>

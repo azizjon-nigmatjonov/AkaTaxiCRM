@@ -1,7 +1,5 @@
 import usePageRouter from "../../../../../../hooks/useObjectRouter";
 import { RxCross2 } from "react-icons/rx";
-import CancelButton from "../../../../../../components/UI/Buttons/Cancel";
-import AddButton from "../../../../../../components/UI/Buttons/AddButton";
 import HFTextareaAutosize from "../../../../../../components/FormElements/HFTextareaAutosize";
 import { useForm } from "react-hook-form";
 import driverService from "../../../../../../services/drivers";
@@ -10,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const Ignored = () => {
-  const { navigateQuery } = usePageRouter();
+  const { navigateQuery, navigateTo } = usePageRouter();
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -32,6 +30,7 @@ const Ignored = () => {
             translation: "common",
           })
         );
+        navigateTo('/drivers/main')
       });
   };
 
@@ -59,11 +58,10 @@ const Ignored = () => {
         />
       </div>
       <div className="flex items-center justify-end gap-3">
-        <CancelButton
-          text="Orqaga"
-          onClick={() => navigateQuery({ accept: "" })}
-        />
-        <AddButton iconLeft={false} text="Yuborildi" onClick={ignoreHandler} />
+       
+        <button className="cancel-btn" onClick={() => navigateQuery({ accept: "" })}>Bekor qilish</button>
+        <button className="custom-btn" onClick={() => ignoreHandler()}>Yuborish</button>
+      
       </div>
     </>
   );
