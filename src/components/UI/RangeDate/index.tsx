@@ -4,7 +4,6 @@ import { DateRangeCalendar } from '@mui/x-date-pickers-pro/DateRangeCalendar';
 import './style.scss'
 import { FormatCalendar } from '../../../utils/formatTime';
 import usePageRouter from "../../../hooks/useObjectRouter";
-import AddButton from '../Buttons/AddButton';
 import { Closer } from '../Closer';
 
 interface Props {
@@ -31,7 +30,7 @@ const RangeDate = ({ handlerValue = () => { }, setShow, footerActive = false }: 
                 </LocalizationProvider>
                 {!footerActive && <div className='p-5 flex justify-end'>
                     <div>
-                        <AddButton iconLeft={false} text='Tanlang' />
+                        <button className='custom-btn'>Tanlang</button>
                     </div>
                 </div>}
             </div>
