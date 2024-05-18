@@ -1,24 +1,27 @@
-
-
-
 interface Props {
-    label: any,
-    handleChange?: (e: string) => void,
-    value?: any
+  label: any;
+  handleChange?: (e: string) => void;
+  value?: any;
 }
 
-const CRadio = ({ label, value, handleChange = () => { } }: Props) => {
+const CRadio = ({ label, value, handleChange = () => {} }: Props) => {
+  return (
+    <>
+      <div
+        onClick={() => handleChange(label)}
+        className="px-5 h-[40px] rounded-[8px] border border-[var(--gray20)] bg-white w-full flex items-center justify-between cursor-pointer"
+      >
+        <span className="text-black font-normal">{label}</span>
+        <div
+          className={`h-[18px] w-[18px] rounded-full ${
+            value == label
+              ? "border-4 border-[var(--main)]"
+              : "border-2 border-[var(--gray20)]"
+          }`}
+        />
+      </div>
+    </>
+  );
+};
 
-    return (
-        <>
-            <div onClick={() => handleChange(label)} className="px-[18px] py-[14px] rounded-xl border border-[#F1F1F5] bg-white w-full flex items-center justify-between cursor-pointer">
-                <span className="text-black text-sm font-normal">{label}</span>
-                <div className={`h-[18px] w-[18px] rounded-full ${value == label ? 'border-4 border-[#DD431F]' : 'border-2 border-[#F1F1F5]'}`} />
-            </div>
-
-
-        </>
-    )
-}
-
-export default CRadio
+export default CRadio;
