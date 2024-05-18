@@ -26,6 +26,7 @@ const AddButton = ({
   type = "button",
   btnType = "",
   permission = "add",
+  onClick = () => {},
   ...props
 }: Props) => {
   const { t } = useTranslation();
@@ -36,6 +37,10 @@ const AddButton = ({
   if (btnType === "ordinary") {
     return (
       <button
+        onClick={() => {
+          if (!checkPermission(permission)) return;
+          onClick();
+        }}
         {...props}
         className={`font-[600] flex items-center ${
           checkPermission(permission)
@@ -56,11 +61,17 @@ const AddButton = ({
   }
 
   return (
-    <div
-      id={id ? id : "addBtn"}
-      {...props}
-    >
-      <Button type={type} className={`${classes} ${checkPermission(permission) ? '' : 'disabled'}`}>
+    <div id={id ? id : "addBtn"} {...props}>
+      <Button
+        type={type}
+        onClick={() => {
+          if (!checkPermission(permission)) return;
+          onClick();
+        }}
+        className={`${classes} ${
+          checkPermission(permission) ? "" : "disabled"
+        }`}
+      >
         {iconLeft === true ? (
           <PlusIcon
             fill={checkPermission(permission) ? "white" : "var(--gray90)"}

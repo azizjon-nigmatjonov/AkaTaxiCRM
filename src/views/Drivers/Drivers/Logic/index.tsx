@@ -4,7 +4,10 @@ import { FormatTime } from "../../../../utils/formatTime";
 import { useQuery } from "react-query";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
 import driverService from "../../../../services/drivers";
-import { DangerNotification,  EyeIcon} from "../../../../components/UI/IconGenerator/Svg";
+import {
+  DangerNotification,
+  EyeIcon,
+} from "../../../../components/UI/IconGenerator/Svg";
 
 export const headColumns = [
   {
@@ -42,8 +45,8 @@ export const headColumns = [
       ),
   },
   {
-    title: 'Hisob raqami',
-    id: 'id'
+    title: "Hisob raqami",
+    id: "id",
   },
   {
     title: "Mablag'i",
@@ -58,13 +61,11 @@ export const headColumns = [
     title: "Hamkor statusi",
   },
   {
-    title: "",
+    title: "Status",
     id: "status",
-    render: (val: any) => val && (
-      <div>
-        {val != "Aktiv" ?   <DangerNotification /> : <EyeIcon fill="black"/>}
-      </div>
-    )
+    render: (val: boolean) => (
+      <div>{!val ? <DangerNotification /> : <EyeIcon fill="black" />}</div>
+    ),
   },
 ];
 
@@ -74,8 +75,13 @@ export const breadCrubmsItems = [
 ];
 
 export const FetchFunctions = () => {
-  const { currentPage, q, gender, device_type, start, end, version, region } = useGetQueries();
-  const { data: drivers, isLoading: driversLoading, refetch: driversRefetch } = useQuery(
+  const { currentPage, q, gender, device_type, start, end, version, region } =
+    useGetQueries();
+  const {
+    data: drivers,
+    isLoading: driversLoading,
+    refetch: driversRefetch,
+  } = useQuery(
     [
       "GER_DRIVERS_LIST",
       currentPage,
@@ -101,10 +107,8 @@ export const FetchFunctions = () => {
     }
   );
 
-
-  return { drivers, driversLoading, driversRefetch }
-
-}
+  return { drivers, driversLoading, driversRefetch };
+};
 
 export const FilterFunction = () => {
   const { navigateQuery } = usePageRouter();
@@ -125,13 +129,15 @@ export const FilterFunction = () => {
     navigateQuery({ region: evt });
   };
 
-
   const handleSearch = (evt: any) => {
     navigateQuery({ q: evt });
   };
 
-
-  return { handlerDiviceModel, handlerVersion, handlerGender, handlerRegion, handleSearch }
-}
-
-
+  return {
+    handlerDiviceModel,
+    handlerVersion,
+    handlerGender,
+    handlerRegion,
+    handleSearch,
+  };
+};
