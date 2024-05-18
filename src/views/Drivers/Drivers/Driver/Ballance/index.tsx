@@ -99,13 +99,14 @@ const DriverBallance = () => {
         </div>
         <CTable headColumns={headColums} bodyColumns={bodyColumns.operations} isResizeble={true} isLoading={isLoading} currentPage={currentPage} count={bodyColumns?.meta?.totalCount} />
 
-        <CModal footerActive={false} open={!!query.amount} title={'Balansni to’ldirish'} handleClose={() => { navigateQuery({ amount: "" }); }}>
+        <CModal footerActive={false} open={!!query.amount} title={'Balansni to’ldirish'} handleClose={() => navigateQuery({ amount: "" })}>
             <p className="text-sm font-normal text-[#475467]">Admin tomonidan yo’lovchi hisobini to’ldirish</p>
             <div className="mt-5 space-y-8">
                 <HFTextField name="amount" control={control} placeholder="50 000 so'm" />
                 <div className="flex items-center justify-end gap-3">
                     <CancelButton text='Orqaga' onClick={() => navigateQuery({ amount: '' })} />
-                    <AddButton iconLeft={false} text='To’ldirish' onClick={topUpBalance} />
+                   
+                    <button className="custom-btn" onClick={() => topUpBalance()}>To’ldirish</button>
                 </div>
             </div>
         </CModal>
