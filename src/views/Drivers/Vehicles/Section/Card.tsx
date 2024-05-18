@@ -6,7 +6,6 @@ import {
   EyeIcon,
 } from "../../../../components/UI/IconGenerator/Svg";
 // import { RoutingIcon } from "../../../../components/IconGenerator/Svg/Sidebar";
-import { ColorConstants } from "../../../../constants/website";
 // import Progress from "./Progress";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 import { usePermissions } from "../../../../hooks/usePermissions";
