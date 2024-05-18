@@ -5,10 +5,76 @@
   border-radius: 8px;
   z-index: 91;
   top: 67px;
+  display: flex;
+  flex-direction: column;
 
   .MuiDateRangeCalendar-root {
     & > div:first-child {
       display: none !important;
+    }
+  }
+
+  .periodPickerFooter {
+    width: calc(100% - 199px);
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid var(--gray20);
+    border-left: 1px solid var(--gray20);
+    margin-top: -38px;
+    .btns {
+      display: flex;
+      column-gap: 16px;
+    }
+  }
+
+  .MuiPickersLayout-root {
+    border-radius: 18px !important;
+    display: flex;
+  }
+
+  .MuiPickersToolbar-root {
+    grid-row:unset !important;
+    .MuiTypography-root.MuiTypography-overline {
+      display: none;
+    }
+    display: none;
+  }
+
+  .MuiPickersLayout-contentWrapper {
+    // background-color: red;
+    .MuiPickersDay-root {
+      &.Mui-selected {
+        background-color: var(--main);
+      }
+    }
+  }
+
+  .MuiList-root  {
+    width: 200px;
+    height: 100% !important;
+    max-height: none !important;
+    min-height: auto !important;
+    grid-column: unset !important;
+    grid-row: unset !important; 
+    border-right: 1px solid var(--gray20);
+    .MuiListItem-root {
+      background-color: transparent;
+
+      .MuiButtonBase-root {
+        background-color: transparent;
+        color: var(--gray70);
+        font-weight: 500;
+        font-size: 14px;
+        height: 30px;
+        width: 100%;
+        border-radius: 8px;
+        &:hover {
+          background-color: var(--gray20) !important;
+        }
+      }
     }
   }
 }

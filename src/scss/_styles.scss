@@ -176,10 +176,10 @@ input {
   background-color: var(--main);
   color: white;
   text-transform: none;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid var(--gray20);
   height: 40px;
-  padding: 0 18px;
+  padding: 0 20px;
   width: 100%;
   white-space: nowrap;
   text-align: center;
@@ -200,12 +200,9 @@ input {
   }
 
   &.disabled {
-    background-color: var(--gray20);
+    background-color: var(--gray30);
     color: var(--black);
     cursor: not-allowed;
-    svg {
-      color: var(--main);
-    }
   }
 }
 .custom-btn.success {
@@ -217,9 +214,18 @@ input {
 }
 
 .cancel-btn {
-  background-color: var(--lineGray);
+  background-color: var(--gray20);
   color: var(--black);
   text-transform: none;
+}
+
+.default-btn {
+  height: 40px;
+  padding: 0 20px;
+  border: 1px solid var(--gray20);
+  border-radius: 8px;
+  @include common-shadow;
+  @include center-center;
 }
 
 .accordion {
