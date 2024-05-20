@@ -5,7 +5,7 @@ import HFSelect from "../../../../../components/FormElements/HFSelect";
 import CText from "../../../../../components/CElements/CText";
 import AddButton from "../../../../../components/UI/Buttons/AddButton";
 import { usePlaces } from "../../../../../hooks/usePlaces";
-import { HFDatePicker } from "../../../../../components/FormElements/HFDatePicker";
+import { HFPeriodPicker } from "../../../../../components/FormElements/HFPeriodPicker";
 
 interface Props {
   control?: any;
@@ -61,8 +61,8 @@ const Setting = ({ control, submitHandler }: Props) => {
           />
         </div>
 
-        <div className="grid grid-cols-5 gap-x-5">
-          <HFDatePicker
+        <div className="grid grid-cols-2 gap-x-5">
+          <HFPeriodPicker
             label="Vaqt"
             name="Vaqt"
             control={control}

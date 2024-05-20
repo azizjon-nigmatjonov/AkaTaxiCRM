@@ -24,8 +24,9 @@ const Admins = () => {
     if (status === "edit") navigateQuery({ id: element.id });
 
     if (status === "delete") {
-      adminService.deleteAdmin(element.id);
-      refetch();
+      adminService.deleteAdmin(element.id).then(() => {
+        refetch();
+      });
     }
   }, []);
 
