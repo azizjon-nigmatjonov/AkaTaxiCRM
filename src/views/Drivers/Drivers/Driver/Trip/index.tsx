@@ -15,9 +15,7 @@ const DriverTrip = () => {
     () => {
       return driverService.getDriverTripHistory({ id, page: currentPage });
     },
-    {
-      enabled: !!id,
-    }
+    
 
   );
 
