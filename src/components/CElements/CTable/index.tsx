@@ -247,12 +247,11 @@ const CTable = ({
   };
 
   const tableActions = (el: any, status: string) => {
-    if (!checkPermission(status)) return;
+    if (!checkPermission(status)) return;4
     if (status === "delete") {
       setCurrDelete(el);
-    } else {
-      handleActions(el, status);
-    }
+    } 
+    handleActions(el, status);
   };
 
   return (
