@@ -60,7 +60,7 @@ const Card: FC<Props> = ({ setInputValue, element }) => {
         </div>
       </div> */}
 
-      <div className="flex justify-end">
+      {checkPermission('add') && <div className="flex justify-end">
         <div
           onClick={() => navigateTo(`/drivers/cars/${element.id}`) }
           className={`${checkPermission('index') ? 'cursor-pointer' : 'cursor-not-allowed'} px-6 border-r border-[var(--lineGray)] h-[50px] flex items-center w-full font-medium`}
@@ -80,7 +80,7 @@ const Card: FC<Props> = ({ setInputValue, element }) => {
           </div>
           <p className={`text-[13px] ${checkPermission('edit') ? 'text-[var(--black)] ': 'unpermit text-[var(--gray30)]'}`}>Tahrirlash</p>
         </div>
-      </div>
+      </div>}
     </CCard>
   );
 };
