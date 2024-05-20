@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs"
 import { Header } from "../../../../components/UI/Header"
 import CancelButton from "../../../../components/UI/Buttons/Cancel"
@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux"
 import { websiteActions } from "../../../../store/website"
 import usePageRouter from "../../../../hooks/useObjectRouter"
 import priceService from "../../../../services/price";
+import { breadcrumbs } from "./Logic"
 
 const Booking = () => {
     const [seating, setSeating] = useState({})
@@ -23,39 +24,10 @@ const Booking = () => {
         mode: 'onSubmit'
     })
 
-    const breadcrumbs = useMemo(() => {
-        return [
-            {
-                label: "Yo'lovchi",
-            },
-            {
-                label: "Aktiv",
-                link: '/passengers/active_passengers'
-
-            },
-            {
-                label: 'Buyurtma berish',
-                // link: '/passengers/active_passengers'
-            }
-        ]
-    }, [])
-
+    
 
     const SeatingHandle = (e: any) => {
         setSeating({ place_order: e });
-        // let info: any = {};
-
-        // let value = getValues()
-        // Object.entries(value).map(([key, value]) => {
-        //     if (key == 'start_location_id' || key == 'end_location_id') {
-        //         info[key] = value
-        //     }
-        // })
-
-        // setGetPrice({ ...getPrice, ...info, place_order: e })
-
-        // priceService.getBookingPrice({ ...getPrice, ...info, place_order: e })
-        // console.log(getPrice);
 
     }
 
@@ -95,9 +67,6 @@ const Booking = () => {
         })
     }
 
-    useEffect(() => {
-        GetPrice()
-    }, [seating])
 
     const GetPrice = (e?: any) => {
         let info: any = {};
@@ -111,6 +80,10 @@ const Booking = () => {
         priceService.getBookingPrice({ ...info, ...seating, ...e }).then(data => setGetPrice(data?.data))
 
     }
+
+    useEffect(() => {
+        GetPrice()
+    }, [])
 
     return (
         <>
