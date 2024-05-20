@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs"
 import { Header } from "../../../../components/UI/Header"
-import Setting from "../../Setting";
+import Setting from "../../Notification/AddNotification/Setting";
 import { useForm } from "react-hook-form";
 
 const AddSMS = () => {

@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
-import CRadio from "../../../components/CElements/Radio";
-import CCard from "../../../components/CElements/CCard";
-import HFSelect from "../../../components/FormElements/HFSelect";
-import CText from "../../../components/CElements/CText";
-import AddButton from "../../../components/UI/Buttons/AddButton";
-import { usePlaces } from "../../../hooks/usePlaces";
-import { HFDatePicker } from "../../../components/FormElements/HFDatePicker";
+import CRadio from "../../../../../components/CElements/Radio";
+import CCard from "../../../../../components/CElements/CCard";
+import HFSelect from "../../../../../components/FormElements/HFSelect";
+import CText from "../../../../../components/CElements/CText";
+import AddButton from "../../../../../components/UI/Buttons/AddButton";
+import { usePlaces } from "../../../../../hooks/usePlaces";
+import { HFDatePicker } from "../../../../../components/FormElements/HFDatePicker";
 
 interface Props {
   control?: any;

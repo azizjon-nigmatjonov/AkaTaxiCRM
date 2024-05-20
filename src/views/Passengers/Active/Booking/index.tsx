@@ -82,8 +82,8 @@ const Booking = () => {
     }
 
     useEffect(() => {
-        GetPrice()
-    }, [])
+        if (seating) GetPrice()
+    }, [seating])
 
     return (
         <>

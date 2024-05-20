@@ -5,6 +5,7 @@ import CTabs from "../../../components/CElements/CTab"
 import AddButton from "../../../components/UI/Buttons/AddButton"
 import { useNavigate } from "react-router-dom"
 import CTable from "../../../components/CElements/CTable"
+import { headColumns } from "./Logic"
 
 const tabList = [
   {
@@ -31,18 +32,7 @@ const Notification = () => {
     ]
   }, [])
 
-  const headColumns = useMemo(() => {
-    return [
-      {
-        title: 'xabar',
-        id: 'message'
-      },
-      {
-        title: 'sana',
-        id: 'created_at'
-      }
-    ]
-  }, [])
+
 
   return (
     <>
