@@ -1,22 +1,21 @@
 import { useMemo } from "react"
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs"
 import { Header } from "../../../components/UI/Header"
-import CTabs from "../../../components/CElements/CTab"
 import AddButton from "../../../components/UI/Buttons/AddButton"
 import { useNavigate } from "react-router-dom"
 import CTable from "../../../components/CElements/CTable"
 import { FetchFunction, headColumns } from "./Logic"
 
-const tabList = [
-  {
-    slug: 'passengers',
-    name: 'Yo’lovchi'
-  },
-  {
-    slug: 'drivers',
-    name: 'Haydovchi'
-  }
-]
+// const tabList = [
+//   {
+//     slug: 'passengers',
+//     name: 'Yo’lovchi'
+//   },
+//   {
+//     slug: 'drivers',
+//     name: 'Haydovchi'
+//   }
+// ]
 
 const Notification = () => {
   const navigate = useNavigate()
