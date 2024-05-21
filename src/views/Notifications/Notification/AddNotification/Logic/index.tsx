@@ -41,27 +41,10 @@ export const CreateFunction = () => {
   });
 
   const createNotification = (data: any) => {
+    console.log("daa", data);
     const params = data
-    params.versions = [params.versions]
     notificationCreate(params)
   };
 
   return { isLoading: createLoading, createNotification };
 };
-
-export const FetchFunction = () => {
-  // const { id } = useParams()
-  // const {
-  //   data: notification,
-  //   isLoading: getVillagesLoading,
-  //   refetch: getVillagesRefetech,
-  // } = useQuery(
-  //   ["GET_NOTIFICATION_DEFAULT_DATA", id],
-  //   () => {
-  //     return notificationService.getNotification(id);
-  //   }
-  // );
-
-
-  return {}
-}

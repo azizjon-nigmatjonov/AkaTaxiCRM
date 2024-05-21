@@ -21,7 +21,7 @@ const CText = ({ control }: Props) => {
           control={control}
           name="body"
           placeholder="Yozing..."
-          label="Tavsif"
+          label="Ma'lumot"
           required={true}
         />
       </div>
