@@ -14,6 +14,8 @@ interface Props {
 }
 
 export const HFPeriodPicker = ({ label, required, name, control, placeholder }: Props) => {
+  console.log(name, control, placeholder);
+  
   return (
     <div className="flex flex-col" id="HFDateTimePicker">
       {label && <CLabel title={label} required={required} />}

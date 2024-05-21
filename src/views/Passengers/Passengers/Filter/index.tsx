@@ -3,7 +3,6 @@ import Filters from "../../../../components/UI/Filter";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 import { VersionsList } from "../../../../constants/versions";
 import { DivicesList } from "../../../../constants/devices";
-import { GetRegion } from "./Logic";
 import { CPeriodPicker } from "../../../../components/CElements/CPeriodPicker";
 import CMultibleSelect from "../../../../components/CElements/CMultibleSelect";
 // import DropDown from "../../../../components/FormElements/DropDown";
@@ -11,9 +10,6 @@ import CMultibleSelect from "../../../../components/CElements/CMultibleSelect";
 export const FilterPassenger = () => {
   const { getQueries, navigateQuery } = usePageRouter();
   const { filter } = getQueries();
-  const { regionList } = GetRegion();
-
-  const handlerRegion = (evt: any) => navigateQuery({ region_id: evt });
   const handlerDiviceModel = (evt: any) => {
     navigateQuery({ device_type: evt })
   }
