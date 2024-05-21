@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "react-query";
 import { routeService } from "../../../../../services/route";
 import roleService from "../../../../../services/rolls";
 import usePageRouter from "../../../../../hooks/useObjectRouter";
+import { GetUserInfo } from "../../../../../layouts/MainLayout/Logic";
 
 export const GetRoutes = () => {
   const allRoutes = (routes: any) => {
@@ -84,11 +85,13 @@ export const FetchFunction = ({ id }: { id: any | undefined }) => {
 
 export const CreateFunction = ({ reset = () => {} }: { reset?: any }) => {
   const { navigateTo } = usePageRouter();
+  const { refetchUserInfo } = GetUserInfo()
 
   const { mutate: rollCreate, isLoading: rollLoading } = useMutation({
     mutationFn: (data: any) => {
       return roleService.createElement(data).then(() => {
         reset();
+        refetchUserInfo()
         navigateTo("/admins/rolls");
       });
     },
@@ -98,6 +101,7 @@ export const CreateFunction = ({ reset = () => {} }: { reset?: any }) => {
     mutationFn: (data: any) => {
       return roleService.updateElement(data, data.id).then(() => {
         reset();
+        refetchUserInfo()
         navigateTo("/admins/rolls");
       });
     },

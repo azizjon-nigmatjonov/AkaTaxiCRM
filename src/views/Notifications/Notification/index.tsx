@@ -5,7 +5,7 @@ import CTabs from "../../../components/CElements/CTab"
 import AddButton from "../../../components/UI/Buttons/AddButton"
 import { useNavigate } from "react-router-dom"
 import CTable from "../../../components/CElements/CTable"
-import { headColumns } from "./Logic"
+import { FetchFunction, headColumns } from "./Logic"
 
 const tabList = [
   {
@@ -20,7 +20,7 @@ const tabList = [
 
 const Notification = () => {
   const navigate = useNavigate()
-
+  const { bodyColumns } = FetchFunction()
   const breadCrumbItems = useMemo(() => {
     return [
       {
@@ -40,15 +40,16 @@ const Notification = () => {
         <CBreadcrumbs items={breadCrumbItems} type="link" />
       </Header>
 
-      <section className="px-6 flex justify-between">
-        <CTabs tabList={tabList} />
+      <div className="px-5 flex justify-between mb-5">
+        {/* <CTabs tabList={tabList} /> */}
+        <div></div>
         <div>
           <AddButton text='Yangi bildirishnoma' onClick={() => navigate('/notifications/notification/add_notification')} />
         </div>
-      </section>
+      </div>
 
       <section className="px-6">
-        <CTable headColumns={headColumns} bodyColumns={[]} />
+        <CTable headColumns={headColumns} bodyColumns={bodyColumns} />
       </section>
     </>
   )

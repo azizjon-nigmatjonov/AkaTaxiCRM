@@ -52,6 +52,7 @@ export const TableData = ({ passengerRefetch }: { passengerRefetch: () => void }
     },
     {
       title: "coin",
+      id: "coin_balance"
     },
     {
       title: "",
