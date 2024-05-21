@@ -1,15 +1,61 @@
 #HFDateTimePicker {
-    .MuiFormControl-root {
-        min-width: auto;
+  .MuiStack-root {
+    overflow: auto;
+    padding: 4px;
+    padding-top: 0;
+  }
+  .MuiInputBase-root {
+    height: 40px;
+  }
+  .MuiFormLabel-root {
+    display: none;
+  }
 
-        .MuiInputBase-root {
-            border-radius: 8px;
-            border: 1px solid var(--gray20);
-      
-        }
-        .MuiOutlinedInput-notchedOutline {
-            border: none;
-            @include common-shadow;
+  .MuiFormControl-root {
+    min-width: auto;
+
+    .MuiInputBase-root {
+      border-radius: 8px;
+    }
+    .MuiOutlinedInput-notchedOutline {
+      border-color: var(--gray20);
+      @include common-shadow;
+    }
+  }
+}
+
+.MuiPickersLayout-root {
+  background-color: white;
+  border-radius: 8px;
+
+  .MuiDialogActions-root {
+    border-radius: 8px;
+    .MuiButtonBase-root {
+        background-color: var(--main);
+        color: white;
+        text-transform: none;
+
+        &:first-child {
+            background-color: var(--gray20);
+            color: var(--black);
         }
     }
+  }
+
+  .MuiPickersLayout-contentWrapper {
+    // .MuiMultiSectionDigitalClock-root
+    .MuiButtonBase-root {
+      border-radius: 8px;
+      &.Mui-selected {
+        background-color: var(--main);
+        color: white;
+        &:hover {
+          background-color: var(--main);
+        }
+      }
+      &:hover {
+        background-color: var(--border);
+      }
+    }
+  }
 }

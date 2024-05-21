@@ -1,15 +1,16 @@
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs";
 import { Header } from "../../../../components/UI/Header";
-import { breadCrumbItems } from "./Logic";
+import { CreateFunction, NotificationData, breadCrumbItems } from "./Logic";
 // import CRadio from "../../../../components/CElements/Radio";
 import CCard from "../../../../components/CElements/CCard";
 import HFSelect from "../../../../components/FormElements/HFSelect";
 import CText from "../../../../components/CElements/CText";
-import AddButton from "../../../../components/UI/Buttons/AddButton";
 import { HFPeriodPicker } from "../../../../components/FormElements/HFPeriodPicker";
 import { useForm } from "react-hook-form";
-import { useMemo } from "react";
-import { usePlaces } from "../../../../hooks/usePlaces";
+import { HFMultipleSelect } from "../../../../components/FormElements/HFMultipleSelect";
+import { UserGroup } from "./UserGroup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Validation } from "./Validation";
 const Divice = [
   { value: "ios", label: "IOS" },
   { value: "android", label: "Android" },
@@ -23,24 +24,17 @@ const Version = [
 ];
 
 const AddNotification = () => {
-  const { control, getValues } = useForm();
+  const schema = Validation();
+  const { createNotification } = CreateFunction();
+  const { regionOption } = NotificationData();
+  const { control, handleSubmit, setValue } = useForm({
+    mode: "onSubmit",
+    resolver: yupResolver(schema),
+  });
 
-  const submitHandler = (evt: any) => {
-    const values = getValues();
-    console.log(values);
-    console.log(evt);
+  const onSubmit = (data: any) => {
+    createNotification({ ...data, type: "firebase" });
   };
-
-  const { regionList } = usePlaces();
-
-  const Regions = useMemo(() => {
-    return regionList?.map((i: any) => {
-      return {
-        value: i.id,
-        label: i.name.uz,
-      };
-    });
-  }, [regionList]);
 
   return (
     <>
@@ -49,46 +43,31 @@ const AddNotification = () => {
       </Header>
 
       <div className="px-6">
-        <div className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <CCard style={{ minHeight: 0 }}>
             <span className="text-base font-medium">Kimga yuborish kerak?</span>
-            <div className="grid grid-cols-6 gap-x-5 mb-4 mt-3">
-              {/* <CRadio
-                label={"Hammasi"}
-                value={value}
-                handleChange={handleChange}
-              />
-              <CRadio
-                label={"Haydovchi"}
-                value={value}
-                handleChange={handleChange}
-              />
-              <CRadio
-                label={"Yo'lovchi"}
-                value={value}
-                handleChange={handleChange}
-              /> */}
-            </div>
+            <UserGroup setValue={setValue} />
 
-            <div className="grid grid-cols-5 gap-x-5">
+            <div className="grid grid-cols-5 gap-x-4">
               <HFPeriodPicker
                 label="Vaqt"
-                name="Vaqt"
+                name="send_at"
                 control={control}
                 placeholder="Tanlang"
+                required={true}
                 // defaultValue={"01.01-.01.01"}
               />
-              <HFSelect
+              <HFMultipleSelect
                 control={control}
                 options={Divice}
-                name={"system"}
+                name="device_types"
                 label="Operatsion sistema"
                 placeholder="Tanglang"
               />
               <HFSelect
                 control={control}
                 options={Version}
-                name={"version"}
+                name="versions"
                 label="Versiyalar"
                 placeholder="Tanglang"
               />
@@ -98,14 +77,14 @@ const AddNotification = () => {
                   { label: "Erkak", value: "m" },
                   { label: "Ayol", value: "f" },
                 ]}
-                name={"gender"}
-                label="Jinsi  "
+                name="genders"
+                label="Jinsi"
                 placeholder="Tanglang"
               />
-              <HFSelect
+              <HFMultipleSelect
                 control={control}
-                options={Regions}
-                name={"place"}
+                options={regionOption}
+                name="region_ids"
                 label="Yashash joyi "
                 placeholder="Tanglang"
               />
@@ -116,14 +95,12 @@ const AddNotification = () => {
 
           <div className="flex justify-end">
             <div>
-              <AddButton
-                iconLeft={false}
-                text="Bildirishnomani yuborish"
-                onClick={submitHandler}
-              />
+              <button className="custom-btn" type="submit">
+                Bildirishnomani yuborish
+              </button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );

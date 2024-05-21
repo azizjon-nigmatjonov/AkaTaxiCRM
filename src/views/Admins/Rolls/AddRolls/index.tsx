@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 const NewRolls = () => {
   const schema = Validation();
   const { id } = useParams();
-  
+
   const {
     newRouteList,
     isLoading: listLoading,
@@ -29,6 +29,7 @@ const NewRolls = () => {
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
+
   const { createRoll, updateRoll, isLoading } = CreateFunction({});
   const { breadCrumbsItems } = breadCrumbs({ id });
   const [permissions, setPermissions]: any = useState([]);
@@ -38,7 +39,7 @@ const NewRolls = () => {
       parseInt(element.trim(), 10)
     );
     data.permissions = permissions;
-    if (id !== ':create') {
+    if (id !== ":create") {
       updateRoll(data, id);
     } else {
       createRoll(data);
@@ -81,7 +82,7 @@ const NewRolls = () => {
       setValue("permissions", rollData.permissions);
     }
   }, [rollData]);
-  
+
   return (
     <>
       <Header sticky={true}>

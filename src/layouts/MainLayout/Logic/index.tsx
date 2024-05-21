@@ -32,7 +32,7 @@ export const BackButtonRoute = () => {
 
 export const GetUserInfo = () => {
   const dispatch = useDispatch();
-  const { data: userInfo } = useQuery(["GET_USER"], () => {
+  const { data: userInfo, refetch } = useQuery(["GET_USER"], () => {
     return authService.getUserInfo();
   });
   const userInfoStored = useSelector((state: any) => state.auth.user);
@@ -76,7 +76,7 @@ export const GetUserInfo = () => {
     dispatch(authActions.setUser({ ...userInfo?.data, permissions }));
   }, [userInfo]);
 
-  return { userInfo: userInfo?.data || userInfoStored };
+  return { userInfo: userInfo?.data || userInfoStored, refetchUserInfo: refetch };
 };
 
 export const ColorData = memo(() => {
