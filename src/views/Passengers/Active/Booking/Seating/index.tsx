@@ -71,17 +71,17 @@ const Seating = ({ seatingHandle = () => { }, getHandler = () => { } }: { seatin
     let front = result.slice(0, 1);
     let back = result.slice(1)
 
-    const seatHandle = (e: any) => {
+    // const seatHandle = (e: any) => {
 
-        result?.forEach((val, idx) => {
-            if (val.place_number == seat) {
-                result[idx].gender == 'false' ? result[idx].gender = e : result[idx].gender = 'false'
-                console.log(result[idx].gender);
-            }
-            setSeating(e)
-            setShow(prev => !prev)
-        })
-    }
+    //     result?.forEach((val, idx) => {
+    //         if (val.place_number == seat) {
+    //             result[idx].gender == 'false' ? result[idx].gender = e : result[idx].gender = 'false'
+    //             console.log(result[idx].gender);
+    //         }
+    //         setSeating(e)
+    //         setShow(prev => !prev)
+    //     })
+    // }
 
     // console.log(result);
     

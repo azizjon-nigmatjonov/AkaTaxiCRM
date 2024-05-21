@@ -13,7 +13,7 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
     const [months] = useState(['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']);
     const [monthName, setMonthName] = useState('yanvar')
     const [selectedWeek, setSelectedWeek] = useState('Haftani tanlash')
-    const [showWeek, setShoWeek] = useState(true)
+    // const [showWeek, setShoWeek] = useState(true)
     const [localYear, setLocalYear] = useState(null);
 
 
@@ -119,7 +119,7 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
     const handleWeekChange = (event: any) => {
         const selectedWeekValue = event.target.value;
         setSelectedWeek(selectedWeekValue)
-        setShoWeek(false)
+        // setShoWeek(false)
         const selectedWeekIndex = weeks.findIndex((week: any) => formatWeek(week) === selectedWeekValue);
         const selectedWeekNumber = selectedWeekIndex + 1;
         setCountWeek(selectedWeekNumber);

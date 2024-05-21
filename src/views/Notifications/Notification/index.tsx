@@ -4,7 +4,7 @@ import AddButton from "../../../components/UI/Buttons/AddButton";
 import { useNavigate } from "react-router-dom";
 import CTable from "../../../components/CElements/CTable";
 import { FetchFunction, TableData } from "./Logic";
-import CTabs from "../../../components/CElements/CTab";
+// import CTabs from "../../../components/CElements/CTab";
 
 const breadCrumbItems = [
   {
@@ -16,16 +16,16 @@ const breadCrumbItems = [
   },
 ];
 
-const tabList = [
-  {
-    slug: "passenger",
-    name: "Yo’lovchi",
-  },
-  {
-    slug: "driver",
-    name: "Haydovchi",
-  },
-];
+// const tabList = [
+//   {
+//     slug: "passenger",
+//     name: "Yo’lovchi",
+//   },
+//   {
+//     slug: "driver",
+//     name: "Haydovchi",
+//   },
+// ];
 
 const Notification = () => {
   const navigate = useNavigate();
@@ -38,8 +38,8 @@ const Notification = () => {
         <CBreadcrumbs items={breadCrumbItems} type="link" />
       </Header>
 
-      <div className="px-5 flex justify-between">
-        <CTabs tabList={tabList} />
+      <div className="px-5 flex justify-end mb-5">
+        {/* <CTabs tabList={tabList} /> */}
         <div>
           <AddButton
             text="Yangi bildirishnoma"

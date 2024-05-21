@@ -51,7 +51,7 @@ export const PlaceForm = ({
           name="uz"
           control={control}
           label="O'zbekcha"
-          placeholder="Joy nimi"
+          placeholder="Joy nomi"
           required={true}
           setValue={setValue}
           defaultValue={defaultData?.name?.uz}
@@ -61,7 +61,7 @@ export const PlaceForm = ({
           control={control}
           label="Крилча"
           setValue={setValue}
-          placeholder="Joy nimi"
+          placeholder="Joy nomi"
           required={true}
           defaultValue={defaultData?.name?.oz}
         />
@@ -70,7 +70,7 @@ export const PlaceForm = ({
           control={control}
           label="Русский"
           setValue={setValue}
-          placeholder="Joy nimi"
+          placeholder="Joy nomi"
           required={true}
           defaultValue={defaultData?.name?.ru}
         />
@@ -79,7 +79,7 @@ export const PlaceForm = ({
           control={control}
           label="English"
           setValue={setValue}
-          placeholder="Joy nimi"
+          placeholder="Joy nomi"
           required={true}
           defaultValue={defaultData?.name?.en}
         />

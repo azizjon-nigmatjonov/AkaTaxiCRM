@@ -33,13 +33,10 @@ export const TableData = () => {
 export const FetchFunction = () => {
   const { tab } = useGetQueries();
   const { data: news, isLoading: newsLoading } = useQuery(
-    ["GET_NOTIFICATIONS_TABLE_LIST", tab],
+    [tab === 'driver' ? "GET_NOTIFICATIONS_TABLE_LIST_DRIVER" : "GET_NOTIFICATIONS_TABLE_LIST_PASSENGER", tab],
     () => {
       return notificationService.getList(tab);
     },
-    {
-      enabled: !!tab,
-    }
   );
 
   return { bodyColumns: news?.data ?? [], isLoading: newsLoading };
