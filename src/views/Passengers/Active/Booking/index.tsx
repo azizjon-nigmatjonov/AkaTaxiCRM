@@ -77,7 +77,7 @@ const Booking = () => {
             }
         })
 
-        priceService.getBookingPrice({ ...info, ...seating, ...e }).then(data => setGetPrice(data?.data))
+        !!info?.end_location_id && priceService.getBookingPrice({ ...info, ...seating, ...e }).then(data => setGetPrice(data?.data))
 
     }
 

@@ -1,3 +1,4 @@
+import SMSReports from "../../views/Notifications/SMSReports";
 import NewsNotification from "../../views/Notifications/News";
 import AddNews from "../../views/Notifications/News/Addnew";
 import Notification from "../../views/Notifications/Notification";
@@ -22,6 +23,7 @@ export const notificationsList = [
         icon: '',
         element: <AddNotification />
     },
+
     {
         parent: 'notifications',
         link: 'smsnotification',
@@ -37,6 +39,14 @@ export const notificationsList = [
         title: "SMS qo'shish",
         icon: '',
         element: <AddSMS />
+    },
+    {
+        parent: 'notifications',
+        link: 'sms_reports',
+        sidebar: true,
+        title: "SMS hisobotlar",
+        icon: 'news_notification',
+        element: <SMSReports />
     },
     {
         parent: 'notifications',

@@ -120,7 +120,7 @@ export const FetchFunction = () => {
         gender,
       });
     }
-  );
+  );  
 
   const passengerTableList = useMemo(() => {
     return (

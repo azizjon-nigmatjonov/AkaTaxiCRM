@@ -15,10 +15,7 @@ const tabList = [
     slug: 'sms_message',
     name: 'SMS xabarnoma'
   },
-  {
-    slug: 'sms_accounts',
-    name: 'SMS hisobotlar'
-  }
+ 
 ]
 
 const SMSNotification = () => {
