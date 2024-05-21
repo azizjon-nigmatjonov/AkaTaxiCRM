@@ -247,7 +247,7 @@ const CTable = ({
   };
 
   const tableActions = (el: any, status: string) => {
-    if (!checkPermission(status)) return;4
+    if (!checkPermission(status) || el.empty) return;
     if (status === "delete") {
       setCurrDelete(el);
     } 
@@ -349,7 +349,7 @@ const CTable = ({
                 <TableRow
                   key={rowIndex}
                   ref={(e) => handleBodycolRef(item, e)}
-                  className={clickable ? "clickable" : ""}
+                  className={clickable && !item.empty ? "clickable" : ""}
                 >
                   {headColumns.map((column, colIndex) => (
                     <CTableCell
