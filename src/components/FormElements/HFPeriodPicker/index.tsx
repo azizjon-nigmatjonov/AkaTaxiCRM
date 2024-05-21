@@ -3,6 +3,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import CLabel from "../../../components/CElements/CLabel";
+import './style.scss'
 
 interface Props {
   label?: string
@@ -14,7 +15,7 @@ interface Props {
 
 export const HFPeriodPicker = ({ label, required, name, control, placeholder }: Props) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" id="HFDateTimePicker">
       {label && <CLabel title={label} required={required} />}
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DateTimePicker"]}>

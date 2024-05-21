@@ -5,12 +5,13 @@ import FotoControl from "../../views/Drivers/FotoControl";
 import ActiveDrivers from "../../views/Drivers/Actives";
 import Vehicles from "../../views/Drivers/Vehicles";
 import Map from "../../views/Drivers/Map";
-import RegionRoute from "../../views/Drivers/RegionRoute";
+import { RegionRoute } from "../../views/Drivers/RegionRoute";
 import DriverStatistics from "../../views/Drivers/Statistics";
 const AddDriver = lazy(() => import("../../views/Drivers/Drivers/AddDriver"));
-const FotoControlUser = lazy(() => import("../../views/Drivers/FotoControl/User"));
-const SingleCar = lazy(() => import('../../views/Drivers/Vehicles/Car'))
-
+const FotoControlUser = lazy(
+  () => import("../../views/Drivers/FotoControl/User")
+);
+const SingleCar = lazy(() => import("../../views/Drivers/Vehicles/Car"));
 
 export const driverList = [
   {
@@ -27,7 +28,7 @@ export const driverList = [
     sidebar: false,
     title: "Haydovchi qo'shish",
     icon: "",
-    element: <Driver />
+    element: <Driver />,
   },
   {
     parent: "drivers",
@@ -35,15 +36,15 @@ export const driverList = [
     sidebar: false,
     title: "Haydovchini tahrirlash",
     icon: "",
-    element: <Driver />
+    element: <Driver />,
   },
   {
-    parent: 'drivers',
-    link: 'active',
+    parent: "drivers",
+    link: "active",
     sidebar: true,
-    title: 'Aktiv haydovchilar',
-    icon: 'smart_car',
-    element: <ActiveDrivers />
+    title: "Aktiv haydovchilar",
+    icon: "smart_car",
+    element: <ActiveDrivers />,
   },
   {
     parent: "drivers",
@@ -51,7 +52,7 @@ export const driverList = [
     sidebar: true,
     title: "Foto nazorat",
     icon: "FotoControl",
-    element: <FotoControl />
+    element: <FotoControl />,
   },
   {
     parent: "drivers",
@@ -59,55 +60,54 @@ export const driverList = [
     sidebar: false,
     title: "Foto ichki sahifa",
     icon: "",
-    element: <FotoControlUser />
+    element: <FotoControlUser />,
   },
   {
-    parent: 'drivers',
-    link: 'main/add',
+    parent: "drivers",
+    link: "main/add",
     sidebar: false,
     title: "Haydovchi qo'shish",
-    icon: '',
-    element: <AddDriver />
+    icon: "",
+    element: <AddDriver />,
   },
   {
-    parent: 'drivers',
-    link: 'cars/:id',
+    parent: "drivers",
+    link: "cars/:id",
     sidebar: false,
-    icon: '',
+    icon: "",
     title: "Mashina qo'shish",
-    element: <SingleCar />
+    element: <SingleCar />,
   },
   {
-    parent: 'drivers',
-    link: 'cars',
+    parent: "drivers",
+    link: "cars",
     sidebar: true,
-    icon: 'car',
-    title: 'Mashinalar',
-    element: <Vehicles />
+    icon: "car",
+    title: "Mashinalar",
+    element: <Vehicles />,
   },
   {
-    parent: 'drivers',
-    link: 'maps',
+    parent: "drivers",
+    link: "maps",
     sidebar: true,
-    title: 'Xarita',
-    icon: 'map',
-    element: <Map />
+    title: "Xarita",
+    icon: "map",
+    element: <Map />,
   },
   {
-    parent: 'drivers',
-    link: 'route',
+    parent: "drivers",
+    link: "route",
     sidebar: true,
-    title: 'Viloyat qatnovi',
-    icon: 'routing',
-    element: <RegionRoute />
+    title: "Viloyat qatnovi",
+    icon: "routing",
+    element: <RegionRoute />,
   },
   {
-    parent: 'drivers',
-    link:'statisctics',
+    parent: "drivers",
+    link: "statisctics",
     sidebar: true,
-    title: 'Statistika: haydovchi',
-    icon: 'graph',
-    element: <DriverStatistics/>
+    title: "Statistika: haydovchi",
+    icon: "graph",
+    element: <DriverStatistics />,
   },
- 
 ];

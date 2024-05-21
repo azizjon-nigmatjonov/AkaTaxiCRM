@@ -3,8 +3,8 @@ import CTable from "../../../../components/CElements/CTable";
 import { useQuery } from "react-query";
 import fileService from "../../../../services/fileService";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
-import ImageFrame from "../../../../components/UI/ImageFrame";
 import LTabs from "../../../../components/CElements/CTab/LineTab";
+import { TableData } from "../Logic";
 
 const tabList = [
   { slug: '', name: 'Aktiv' },
@@ -15,7 +15,8 @@ const tabList = [
 
 const Result = () => {
   const { start, end, currentPage, status } = useGetQueries();
-
+  const { headColumns } = TableData()
+  
   const { data, isLoading } = useQuery(['GET_TRIPS', start, end, currentPage, status], () => {
     return fileService.getTrips({
       page: currentPage, perPage: 10,
@@ -25,82 +26,6 @@ const Result = () => {
     })
   })
  
-
-  const headColumns = useMemo(() => {
-    return [
-      {
-        title: "Ism familya",
-        id: "userInfo",
-        render: (val: any) => val && (
-          <>
-            <div className="flex items-center space-x-2 py-2">
-              <ImageFrame image={val.image} gender={val.gender} />
-              <span>{val.full_name}</span>
-            </div>
-          </>
-        )
-      },
-      {
-        title: "Ketish manzil",
-        id: "fromStart",
-        render: (val: any) => val && (
-          <div>
-            <p>{val.city}</p>
-            <span>{val.district}</span>
-          </div>
-        )
-      },
-      {
-        title: "Borish manzil",
-        id: "fromEnd",
-        render: (val: any) => val && (
-          <div>
-            <p>{val.city}</p>
-            <span>{val.district}</span>
-          </div>
-
-        )
-      },
-      {
-        title: "Mashina / raqam",
-        id: "carInfo",
-        render: (val: any) => val && (
-          <>
-            <p>{val?.name}</p>
-            <span className="text-[var(--gray)]">{val?.number}</span>
-          </>
-        )
-      },
-      {
-        title: "Tel.raqam",
-        id: "phone",
-        render: (val: any) => val && (
-          <p>+{val}</p>
-        )
-      },
-
-      {
-        title: "Status",
-        id: "status",
-        render: (val: any) => val && (
-          <div
-            className={
-              val == 'canceled'
-                ? "text-[var(--error)]" :
-                "text-[var(--green)]"
-
-            }
-          >
-            {val == 'canceled' ? "Noaktiv" : "Aktiv"}
-          </div>
-        ),
-      },
-      {
-        title: 'Trip yaratilgan vaqti',
-        id: 'created_at'
-      }
-    ];
-  }, []);
 
 
   const bodyColumns: any = useMemo(() => {
