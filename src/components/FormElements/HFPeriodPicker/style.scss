@@ -1,0 +1,15 @@
+#HFDateTimePicker {
+    .MuiFormControl-root {
+        min-width: auto;
+
+        .MuiInputBase-root {
+            border-radius: 8px;
+            border: 1px solid var(--gray20);
+      
+        }
+        .MuiOutlinedInput-notchedOutline {
+            border: none;
+            @include common-shadow;
+        }
+    }
+}

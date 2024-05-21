@@ -1,7 +1,8 @@
 import "./modal.css";
 import { useMemo, useState } from "react";
 import CSelect from "../../../components/CElements/CSelect";
-import { Regions } from "../../../mixins/regions";
+// import { Regions } from "../../../mixins/regions";
+import { usePlaces } from "../../../hooks/usePlaces";
 
 const optionsStatus = [
   {
@@ -49,12 +50,17 @@ function MapOption({
 }: MapOptionProps) {
   const [regionValue, setRegionValue] = useState(22);
   const [typeCar, setTypeCar] = useState<any>("all");
+  const { regionList } = usePlaces()
 
-  const RegionList = useMemo(() => {
-    return Regions.map((item) => {
-      return { label: item.uz, value: item.id };
+  const Regions = useMemo(() => {
+    return regionList?.map((i: any) => {
+      return {
+        value: i.id,
+        label: i.name.uz,
+      };
     });
-  }, []);
+  }, [regionList]);
+
 
   const handleCarTypeStatus = (value: any) => {
     setTypeCar(value);
@@ -188,7 +194,7 @@ function MapOption({
           label="Viloyat"
           handlerValue={(val: any) => handleSelect(val, "region")}
           value={regionValue}
-          options={RegionList}
+          options={Regions}
           id="filter"
         />
       </div>

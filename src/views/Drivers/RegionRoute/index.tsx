@@ -1,37 +1,30 @@
 import { Header } from "../../../components/UI/Header";
-// import AddButton from "../../../components/Buttons/AddButton";
-// import SectionHeader from "../../../components/Sections/Header";
 import Points from "./Points";
 import Result from "./Result";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
-import { useMemo } from "react";
 
-const RegionRoute = () => {
+const breadCrumbs = [
+  { label: "Haydovchi", link: "/drivers/main" },
+  { label: "Viloyat qatnovi" },
+];
+
+export const RegionRoute = () => {
   const handleChange = (list: any) => {
     console.log(list);
   };
-
-  const breadCrumbs = useMemo(() => {
-    return [
-      { label: 'Haydovchi', link: '/drivers/main' },
-      { label: 'Viloyat qatnovi', }
-    ]
-  }, [])
 
   return (
     <>
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} type="link" />
       </Header>
-      <div className="px-5">
+      <div className="container">
         {/* <SectionHeader handleSearch={() => { }}>
-          <AddButton text="Marshrut tashkil qilish" onClick={() => { }} />
-        </SectionHeader>  */}
+        <AddButton text="Marshrut tashkil qilish" onClick={() => { }} />
+      </SectionHeader>  */}
         <Points handleChange={handleChange} />
         <Result />
       </div>
     </>
   );
 };
-
-export default RegionRoute;

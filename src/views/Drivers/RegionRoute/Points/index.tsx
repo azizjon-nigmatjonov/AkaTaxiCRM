@@ -12,9 +12,9 @@ const Points = ({
 }) => {
   const [current, setCurrent] = useState(0);
   const { regionList } = usePlaces()
-  const [selected, setSelected] = useState<any>([]);
+  const [selected, setSelected] = useState<any>([{list: []}, {list: []}]);
+  const [open, setOpen] = useState(false);
   const { navigateQuery } = usePageRouter();
-  // console.log(selected);
 
 
   const handleExchange = () => {
@@ -25,9 +25,9 @@ const Points = ({
 
 
 
-    navigateQuery({ start: encodeURIComponent(list[0].list.filter((li: any) => li.checked == true).map((li: any) => li.id).join(',')), end: encodeURIComponent(list[1].list.filter((li: any) => li.checked == true).map((li: any) => li.id)) }, true)
+    navigateQuery({ start: encodeURIComponent(list[0].list?.map((li: any) => li.id).join(',')) ?? "", end: encodeURIComponent(list[1].list?.map((li: any) => li.id)) } ?? "", true)
 
-    setSelected([]);
+    setSelected([{}, {}]);
     handleChange(list);
     setTimeout(() => {
       setSelected(list);
@@ -42,6 +42,8 @@ const Points = ({
         step={0}
         regions={regionList}
         selected={selected}
+        open={open}
+        setOpen={setOpen}
         setSelected={setSelected}
         color={current === 0 ? ColorConstants.darkerGreen : ColorConstants.ink}
         selectedHandler={handleExchange}
@@ -63,6 +65,8 @@ const Points = ({
         step={1}
         regions={regionList}
         selected={selected}
+        open={open}
+        setOpen={setOpen}
         setSelected={setSelected}
         color={current === 1 ? ColorConstants.darkerGreen : ColorConstants.ink}
         selectedHandler={handleExchange}
