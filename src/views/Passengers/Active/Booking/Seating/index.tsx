@@ -1,4 +1,4 @@
-import {useState } from 'react';
+import { useState } from 'react';
 import Places from '../../../../../components/UI/Places';
 import cls from '../style.module.scss';
 import { PassangerFemaleIcon, PassengerManIcon } from '../../../../../components/UI/IconGenerator/Svg/index';
@@ -71,6 +71,22 @@ const Seating = ({ seatingHandle = () => { }, getHandler = () => { } }: { seatin
     let front = result.slice(0, 1);
     let back = result.slice(1)
 
+    const seatHandle = (e: any) => {
+
+        result?.forEach((val, idx) => {
+            if (val.place_number == seat) {
+                result[idx].gender == 'false' ? result[idx].gender = e : result[idx].gender = 'false'
+                console.log(result[idx].gender);
+            }
+            setSeating(e)
+            setShow(prev => !prev)
+        })
+    }
+
+    // console.log(result);
+    
+
+
     const clickHandler = (e: string) => {
         result?.forEach((val, idx) => {
             if (val.place_number == seat) {
@@ -81,6 +97,12 @@ const Seating = ({ seatingHandle = () => { }, getHandler = () => { } }: { seatin
         getHandler(result)
         setShow(false)
     }
+
+
+    // console.log(result);
+    // console.log(seat);
+
+
 
 
     return (
@@ -95,7 +117,7 @@ const Seating = ({ seatingHandle = () => { }, getHandler = () => { } }: { seatin
                             {/* SEAT FRONT */}
                             {front.map((val: any) => (
                                 <div className='px-1 border-r-2'>
-                                    <div onClick={() => { setSeating(val.place_number), setShow(true) }} className={`relative ${val.gender != 'false' ? 'bg-[#FF5B01]' : 'bg-[#EAEAEB]'} h-9 w-9 grid place-items-center rounded-lg  ml-auto cursor-pointer`} >
+                                    <div onClick={() => { setSeating(val.place_number), setShow(true)  }} className={`relative ${val.gender != 'false' ? 'bg-[#FF5B01]' : 'bg-[#EAEAEB]'} h-9 w-9 grid place-items-center rounded-lg  ml-auto cursor-pointer`} >
                                         {val.gender == 'false' ? null : val.gender == 'm' ? <PassengerManIcon width={20} height={23} /> : <PassangerFemaleIcon width={20} height={23} />}
                                     </div>
                                     {seat == 0 && show && <SelectedSeating clickHandle={clickHandler} style={'absolute top-[-20px] right-[40px]'} />}

@@ -12,7 +12,7 @@ import { FindoutStatistics } from "./FindoutStatistics";
 // import { useHistory, useLocation } from "react-router-dom";
 
 function Dashboard() {
-  const [year, setYear] = useState<string>("2023");
+  const [year, setYear] = useState<string>("2024");
   const [selectMonth, setSelectMonth] = useState(null);
   const [countWeek, setCountWeek] = useState(null);
 

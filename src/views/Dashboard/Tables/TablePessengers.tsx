@@ -16,7 +16,6 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
     const [showWeek, setShoWeek] = useState(true)
     const [localYear, setLocalYear] = useState(null);
 
-    console.log(showWeek);
 
     const [isOpen, setIsOpen] = useState(true);
     const [driverReason, setDriverReason] = useState(false);
@@ -157,7 +156,6 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
 
                 <div className='flex gap-3'>
                     <Select
-
                         onChange={handleYearChange}
                         disabled={disabledYear}
                         value={year}
@@ -191,8 +189,8 @@ function TablePessengers({ setYear, year, setSelectMonth, dataList, setCountWeek
                                 backgroundColor: 'transparent',
                             },
                         }}>
-                        <MenuItem value={'2023'}>2023</MenuItem>
                         <MenuItem value={'2024'}>2024</MenuItem>
+                        <MenuItem value={'2023'}>2023</MenuItem>
 
                     </Select>
 

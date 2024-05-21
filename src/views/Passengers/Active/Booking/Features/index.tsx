@@ -7,14 +7,14 @@ import { StandarCarImgIcon, ConfortCarImgIcon, BusnissCarImgIcon, CheckLine, ByW
 
 const Features = ({ featureHandle = () => { }, price }: { featureHandle: (val: any) => void, price: any }) => {
     const [features, setFeatures] = useState<any>({
-        air_conditioner: false,
-        additional_trunk: false,
-        chargers: false,
-        heater: false,
+        air_conditioner: true,
+        additional_trunk: true,
+        chargers: true,
+        heater: true,
         petrol: true,
-        gas: false,
+        gas: true,
         electric: true,
-        driver_gender: [],
+        driver_gender: ['m', 'f'],
         can_stop: true,
         car_class_id: null,
     })
@@ -120,7 +120,7 @@ const Features = ({ featureHandle = () => { }, price }: { featureHandle: (val: a
                     <div onClick={() => handleCheck('driver_gender', 'm')} className={`cursor-pointer flex items-center gap-2 pl-[14px] font-medium border border-[var(--lineGray)] rounded-[10px] h-[48px]`}>
                         <div
                             className={`w-[18px] h-[18px] rounded-[4px] border-2 ${features.driver_gender.includes('m')
-                                ? "border-[var(--mainLight)] bg-[var(--mainLight)]"
+                                ? "border-[var(--main500)] bg-[var(--main500)]"
                                 : "border-[var(--lineGray)]"
                                 }`}
                         >
@@ -131,7 +131,7 @@ const Features = ({ featureHandle = () => { }, price }: { featureHandle: (val: a
 
                     <div onClick={() => handleCheck('driver_gender', 'f')} className={`cursor-pointer flex items-center gap-2 pl-[14px] font-medium border border-[var(--lineGray)] rounded-[10px] h-[48px]`}>
                         <div
-                            className={`w-[18px] h-[18px] rounded-[4px] border-2 ${features.driver_gender.includes('f') ? "border-[var(--mainLight)] bg-[var(--mainLight)]"
+                            className={`w-[18px] h-[18px] rounded-[4px] border-2 ${features.driver_gender.includes('f') ? "border-[var(--main500)] bg-[var(--main500)]"
                                 : "border-[var(--lineGray)]"
                                 }`}
                         >
@@ -160,7 +160,7 @@ const Features = ({ featureHandle = () => { }, price }: { featureHandle: (val: a
                 <p className={cls.title}>Klas</p>
                 <div className={cls.parent}>
                     <div className='flex items-center gap-4'>
-                        {CARCLASS.map(({ id, name, price, Images }) => (
+                        {CARCLASS?.map(({ id, name, price, Images }) => (
                             <div onClick={() => handleCheck('car_class_id', id)} className={`p-3 ${features.car_class_id == id ? 'bg-[var(--lineGray)]' : ''} hover:bg-[var(--lineGray)] rounded-xl cursor-pointer`}>
                                 <Images />
                                 <div className='mt-4'>
