@@ -4,7 +4,8 @@ import ImageFrame from "../../../../components/UI/ImageFrame";
 
 export const PointData = () => {
   const { setLocalIds, districtList } = usePlaces();
-
+  console.log('districtList', districtList);
+  
   return { districtList, setLocalIds };
 };
 

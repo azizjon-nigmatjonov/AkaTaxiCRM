@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs"
 import { Header } from "../../../../components/UI/Header"
-import Setting from "../../Notification/AddNotification/Setting";
-import { useForm } from "react-hook-form";
+// import Setting from "../../Notification/AddNotification/Setting";
+// import { useForm } from "react-hook-form";
 
 const AddSMS = () => {
 
-    const { control, getValues } = useForm()
+    // const { control, getValues } = useForm()
 
     const breadCrumbItems = useMemo(() => {
         return [
@@ -23,12 +23,12 @@ const AddSMS = () => {
     }, [])
 
 
-    const submitHandler = (e: any) => {
-        console.log(e);
-        console.log(getValues);
+    // const submitHandler = (e: any) => {
+    //     console.log(e);
+    //     console.log(getValues);
 
 
-    }
+    // }
 
 
 
@@ -39,7 +39,7 @@ const AddSMS = () => {
             </Header>
 
             <div className="px-6">
-                <Setting control={control} submitHandler={submitHandler} />
+                {/* <Setting control={control} submitHandler={submitHandler} /> */}
             </div>
         </>
     )
