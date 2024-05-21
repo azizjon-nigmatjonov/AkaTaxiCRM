@@ -38,7 +38,7 @@ const StickerControl = ({ data }: { data?: any }) => {
                         <div onClick={() => { navigateQuery({ zoom: '' }) }} className="bg-white rounded-lg inline-block p-[10px] absolute top-[18px] right-[18px]">
                             <RxCross2 size={15} />
                         </div>
-                        <img src={data.image} alt="image" className=" w-full h-full" />
+                        <img src={data?.image} alt="image" className=" w-full h-full" />
                     </div>
                 }
                 </div>

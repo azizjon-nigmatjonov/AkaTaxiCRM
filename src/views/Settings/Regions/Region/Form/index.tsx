@@ -50,7 +50,7 @@ export const PlaceForm = ({
         <HFTextField
           name="uz"
           control={control}
-          label="O'bekcha"
+          label="O'zbekcha"
           placeholder="Joy nimi"
           required={true}
           setValue={setValue}

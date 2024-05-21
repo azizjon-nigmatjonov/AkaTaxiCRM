@@ -20,6 +20,7 @@ interface DataListType {
 
 
 function ContentTable({ isLoading, setCountWeekDriversVilage, setSelectMonthDriversVilage, setYearDriversVilage, yearDriversVilage, setCountDrivers, setSelectMonthDrivers, setYearDrivers, yearDrivers, setCountWeekPessengerVilage, setSelectMonthPessengerVilage, setYearPessengerVilage, yearPessengerVilage, setCountWeek, setSelectMonth, year, setYear, driverTripsDataFromVilage, passengersDataVilage, driverTripsDataFromCity, dataList }: { setCountWeekDriversVilage: any, setSelectMonthDriversVilage: any, setYearDriversVilage: any, yearDriversVilage: string, setCountDrivers: any, setSelectMonthDrivers: any, setYearDrivers: any, yearDrivers: any, setCountWeekPessengerVilage: any, setSelectMonthPessengerVilage: any, setYearPessengerVilage: any, yearPessengerVilage: any, setCountWeek: any, setSelectMonth: any, year: any, setYear: any, dataList: DataListType[], driverTripsDataFromCity: any, passengersDataVilage: any, driverTripsDataFromVilage: any; isLoading: boolean }) {
+
     if (isLoading) {
        return <div className='mt-5 mx-5'>
         <h2 className=" text-[30px] my-5 text-[#101828] font-semibold">Yo’lovchilar qatnovi</h2>
