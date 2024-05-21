@@ -39,5 +39,7 @@
   "settings": "Sozlamalar",
   "notifications": "Xabarnomalar",
   "call_center": "Call markazi",
-  "dashboard": "Boshqaruv paneli"
+  "dashboard": "Boshqaruv paneli",
+  "passenger": "Yo'lovchi",
+  "driver": "Haydovchi"
 }
