@@ -6,7 +6,7 @@ import Ignored from "./StickerIgnore"
 import { RxCross2 } from "react-icons/rx"
 
 
-const StickerControl = ({ data }: { data?: any }) => {
+const StickerControl = ({ data, refetch }: { data?: any; refetch: () => void }) => {
     const { navigateQuery, getQueries } = usePageRouter();
     const query = getQueries();
 
@@ -32,7 +32,7 @@ const StickerControl = ({ data }: { data?: any }) => {
             <Modal open={!!query?.action || !!query.zoom}>
                 <div> {!!query?.action ?
                     <CCard style={{ minHeight: 0 }} classes='max-w-[400px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]'>
-                        {query.action == 'ignore' ? <Ignored /> : <Accepted date={data?.created_at} />}
+                        {query.action == 'ignore' ? <Ignored refetch={refetch} /> : <Accepted date={data?.created_at} />}
                     </CCard> :
                     <div className="absolute z-10 bg-red-500 mt-24  mb-24 left-[50%] translate-x-[-50%]  max-w-[600px] w-full h-full max-h-[600px]">
                         <div onClick={() => { navigateQuery({ zoom: '' }) }} className="bg-white rounded-lg inline-block p-[10px] absolute top-[18px] right-[18px]">

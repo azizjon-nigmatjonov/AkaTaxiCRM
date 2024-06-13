@@ -17,6 +17,7 @@ export const FetchFunction = ({ priceParams }: { priceParams: any }) => {
   } = useQuery(["GET_PRICE_DISTANCE_LIST", priceParams?.from_tashkent], () => {
     return priceService.getDistanceList(priceParams.from_tashkent);
   });
+  
   const [bodyColumns, setBodyColumns] = useState([]);
 
   useEffect(() => {

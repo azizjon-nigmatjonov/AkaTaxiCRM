@@ -17,7 +17,7 @@ export const FetchFunction = ({ adminId }: { adminId: string }) => {
       return adminService.getAdmin(adminId);
     },
     {
-      enabled: !!adminId,
+      enabled: !!(adminId && adminId !== "create"),
     }
   );
 
@@ -85,7 +85,7 @@ export const SubmitFunction = ({
     data.phone = data.phone.substring(1).replace(/\s+/g, "");
     const params = data;
 
-    adminCreate(params)
+    adminCreate(params);
   };
 
   const updateForm = (data: any, id: string) => {

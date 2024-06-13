@@ -2,16 +2,18 @@ import { Header } from "../../../components/UI/Header";
 import Points from "./Points";
 import Result from "./Result";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
+import { useState } from "react";
+// import { useGetQueries } from "../../../hooks/useGetQueries";
 
 const breadCrumbs = [
   { label: "Haydovchi", link: "/drivers/main" },
   { label: "Viloyat qatnovi" },
 ];
 
-export const RegionRoute = () => {
-  const handleChange = (list: any) => {
-    console.log(list);
-  };
+const RegionRoute = () => {
+  const [selected, setSelected] = useState<any>([{}, {}]);
+  const [active, setActive] = useState(false)
+  // const { start, end } = useGetQueries()
 
   return (
     <>
@@ -19,12 +21,11 @@ export const RegionRoute = () => {
         <CBreadcrumbs items={breadCrumbs} progmatic={true} type="link" />
       </Header>
       <div className="container">
-        {/* <SectionHeader handleSearch={() => { }}>
-        <AddButton text="Marshrut tashkil qilish" onClick={() => { }} />
-      </SectionHeader>  */}
-        <Points handleChange={handleChange} />
-        <Result />
+        <Points handleChange={() => setActive(!active)} selected={selected} setSelected={setSelected} />
+        <Result selected={selected} />
       </div>
     </>
   );
 };
+
+export default RegionRoute

@@ -4,7 +4,8 @@ import AddButton from "../../../components/UI/Buttons/AddButton";
 import { useNavigate } from "react-router-dom";
 import CTable from "../../../components/CElements/CTable";
 import { FetchFunction, TableData } from "./Logic";
-// import CTabs from "../../../components/CElements/CTab";
+import { useState } from "react";
+import { FilterFunctions } from "../../../components/UI/Filter/Logic";
 
 const breadCrumbItems = [
   {
@@ -16,22 +17,18 @@ const breadCrumbItems = [
   },
 ];
 
-// const tabList = [
-//   {
-//     slug: "passenger",
-//     name: "Yo’lovchi",
-//   },
-//   {
-//     slug: "driver",
-//     name: "Haydovchi",
-//   },
-// ];
-
 const Notification = () => {
   const navigate = useNavigate();
-  const { bodyColumns, isLoading } = FetchFunction();
-  const { headColumns } = TableData();
+  const { tableData, isLoading } = FetchFunction();
+  const { headColumns, handleActions } = TableData();
+  const [filterParams, setFilterParams]: any = useState({});
+  const { storeFilters } = FilterFunctions({ filterParams, setFilterParams });
 
+  const handleFilterParams = (obj: any) => {
+    setFilterParams(obj);
+    storeFilters(obj);
+  };
+  
   return (
     <>
       <Header sticky={true}>
@@ -39,7 +36,6 @@ const Notification = () => {
       </Header>
 
       <div className="px-5 flex justify-end mb-5">
-        {/* <CTabs tabList={tabList} /> */}
         <div>
           <AddButton
             text="Yangi bildirishnoma"
@@ -53,8 +49,14 @@ const Notification = () => {
       <section className="px-6">
         <CTable
           headColumns={headColumns}
-          bodyColumns={bodyColumns}
+          bodyColumns={tableData?.data}
           isLoading={isLoading}
+          handleActions={handleActions}
+          clickable={true}
+          count={tableData?.meta?.pageCount}
+          filterParams={filterParams}
+          handleFilterParams={handleFilterParams}
+          totalCount={tableData?.meta?.totalCount}
         />
       </section>
     </>

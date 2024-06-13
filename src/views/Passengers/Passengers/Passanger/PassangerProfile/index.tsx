@@ -1,42 +1,41 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import passengerService from "../../../../../services/passengers";
 import CCard from "../../../../../components/CElements/CCard";
-import { InfoIcon } from '../../../../../components/UI/IconGenerator/Svg';
-import HFTextField from '../../../../../components/FormElements/HFTextField';
-import { HFDatePicker } from '../../../../../components/FormElements/HFDatePicker';
-import HFSelect from '../../../../../components/FormElements/HFSelect';
-import regionService from '../../../../../services/regions';
-import AddButton from '../../../../../components/UI/Buttons/AddButton';
-import CancelButton from '../../../../../components/UI/Buttons/Cancel';
-import HFInputMask from '../../../../../components/FormElements/HFInputMask';
-import usePageRouter from '../../../../../hooks/useObjectRouter';
-import { Modal } from '@mui/material'
-import PImageUpdate from './ImageUpdate';
-import { websiteActions } from '../../../../../store/website';
-import { useParams } from 'react-router-dom';
-
+import { InfoIcon } from "../../../../../components/UI/IconGenerator/Svg";
+import HFTextField from "../../../../../components/FormElements/HFTextField";
+import { HFDatePicker } from "../../../../../components/FormElements/HFDatePicker";
+import HFSelect from "../../../../../components/FormElements/HFSelect";
+import regionService from "../../../../../services/regions";
+import AddButton from "../../../../../components/UI/Buttons/AddButton";
+import CancelButton from "../../../../../components/UI/Buttons/Cancel";
+import HFInputMask from "../../../../../components/FormElements/HFInputMask";
+import usePageRouter from "../../../../../hooks/useObjectRouter";
+import { Modal } from "@mui/material";
+import PImageUpdate from "./ImageUpdate";
+import { websiteActions } from "../../../../../store/website";
+import { useParams } from "react-router-dom";
 
 const SelectGender = [
-  { id: 1, value: 'm', label: 'Male' },
-  { id: 2, value: 'f', label: 'Female' }
-]
+  { id: 1, value: "m", label: "Male" },
+  { id: 2, value: "f", label: "Female" },
+];
 
 const PassengerProfile = () => {
-  const dispatch = useDispatch()
-  const [alert, setAlert] = useState('')
-  const { id} = useParams();
+  const dispatch = useDispatch();
+  const [alert, setAlert] = useState("");
+  const { id } = useParams();
   const { getQueries } = usePageRouter();
   const query = getQueries();
-  const { navigateQuery, navigateTo } = usePageRouter()
+  const { navigateQuery, navigateTo } = usePageRouter();
 
-  const { data , refetch} = useQuery(['GET_PASSANGER', id], () => {
-    return passengerService.getElement(id)
-  })
-  
-  const { data: regions, } = useQuery(["GET_REGIONS_LIST"], () => {
+  const { data, refetch } = useQuery(["GET_PASSANGER", id], () => {
+    return passengerService.getElement(id);
+  });
+
+  const { data: regions } = useQuery(["GET_REGIONS_LIST"], () => {
     return regionService.getList();
   });
 
@@ -52,94 +51,111 @@ const PassengerProfile = () => {
   }, [regions]);
 
   const { control, setValue, getValues } = useForm({
-    mode: 'onSubmit',
-  })
+    mode: "onSubmit",
+  });
 
   const passenger = useMemo(() => {
-    return data?.data ?? {}
-  }, [data])
+    return data?.data ?? {};
+  }, [data]);
 
   const deleteAccount = () => {
-    navigateQuery({ passenger: 'delete' })
-    setAlert('Haqiqatdan ham o’chirishni istaysizmi?')
-  }
+    navigateQuery({ passenger: "delete" });
+    setAlert("Haqiqatdan ham o’chirishni istaysizmi?");
+  };
 
   const updateProfile = () => {
-    navigateQuery({ passenger: 'update' })
-    setAlert('Haqiqatdan ham ma’lumotlarni yangilashni istaysizmi?')
-  }
+    navigateQuery({ passenger: "update" });
+    setAlert("Haqiqatdan ham ma’lumotlarni yangilashni istaysizmi?");
+  };
 
   const alertMessage = (e: string) => {
-    if (e == 'delete') {
+    if (e == "delete") {
       passengerService.deleteElement(id).then(() => {
         dispatch(
           websiteActions.setAlertData({
             title: "Ma'lumotlar o'chirildi!",
             translation: "common",
-            type: 'error'
+            type: "error",
           })
         );
-        navigateTo('/passengers/main')
-      })
-      navigateQuery({ passenger: '' })
-    } else if (e == 'update') {
-      const data = getValues()
-      console.log(data);
+        navigateTo("/passengers/main");
+      });
+      navigateQuery({ passenger: "" });
+    } else if (e == "update") {
+      const data = getValues();
 
-      let values: any = {}
+      let values: any = {};
 
-      data.phone = data.phone.substring(1).replace(/\s+/g, '')
-      data.image_id = data?.image_id ? String(data?.image_id) : null
+      data.phone = data.phone.substring(1).replace(/\s+/g, "");
+      data.image_id = data?.image_id ? String(data?.image_id) : null;
 
       Object.keys(passenger)?.map((key) => {
         for (let i in data) {
           if (key == i) {
-            if (data[i] != undefined && data[i] != '') {
+            if (data[i] != undefined && data[i] != "") {
               if (passenger[key] != data[i]) {
-                values[i] = data[i]
+                values[i] = data[i];
               }
             }
           }
         }
-      })
+      });
 
-      // console.log(passenger);
-      // console.log(values);
-
-      passengerService.updateElement(id, values).then((data) => {
+      passengerService.updateElement(id, values).then(() => {
         dispatch(
           websiteActions.setAlertData({
-            mainTitle: 'Muvaffaqiyatli yakunlandi',
+            mainTitle: "Muvaffaqiyatli yakunlandi",
             title: "Successfully updated profile!",
             translation: "common",
           })
         );
-        console.log(data);
-        
-        refetch()
+
+        refetch();
         // window.location.reload()
         // navigateTo('/passengers/main')
-      })
-      navigateQuery({ passenger: '' })
+      });
+      navigateQuery({ passenger: "" });
     } else {
-      navigateQuery({ passenger: '' })
+      navigateQuery({ passenger: "" });
     }
-  }
+  };
 
   return (
     <div>
       <CCard style={{ minHeight: 0 }}>
-        <div className='flex items-start gap-4 '>
-
-          <div className='relative'>
-            <PImageUpdate control={control} setValue={setValue} name='image_id' defaultValue={passenger?.image_id} />
+        <div className="flex items-start gap-4 ">
+          <div className="relative">
+            <PImageUpdate
+              control={control}
+              setValue={setValue}
+              name="image_id"
+              view={true}
+              defaultValue={passenger?.image_link}
+            />
           </div>
 
-          <div className='w-full'>
-            <div className='w-full  grid grid-cols-3  gap-5'>
-              <HFTextField control={control} name='full_name' setValue={setValue} required={true} placeholder='Ism familiya' label='Ism familiya' defaultValue={passenger?.full_name} />
+          <div className="w-full">
+            <div className="w-full  grid grid-cols-3  gap-5">
+              <HFTextField
+                control={control}
+                name="full_name"
+                setValue={setValue}
+                required={true}
+                placeholder="Ism familiya"
+                label="Ism familiya"
+                defaultValue={passenger?.full_name}
+              />
 
-              <HFDatePicker name="birthday" label="Tug'ilgan sana" control={control} required={true} placeholder="Tug'ilgan sana" defaultValue={passenger.birthday ? new Date(passenger?.birthday) : ''} />
+              <HFDatePicker
+                name="birthday"
+                label="Tug'ilgan sana"
+                control={control}
+                required={true}
+                placeholder="Tug'ilgan sana"
+                defaultValue={
+                  passenger.birthday ? new Date(passenger?.birthday) : ""
+                }
+              />
 
               <HFSelect
                 name="gender"
@@ -153,7 +169,7 @@ const PassengerProfile = () => {
               />
             </div>
 
-            <div className='mt-6 grid grid-cols-2 gap-5'>
+            <div className="mt-6 grid grid-cols-2 gap-5">
               <HFSelect
                 name="region_id"
                 control={control}
@@ -164,44 +180,60 @@ const PassengerProfile = () => {
                 setValue={setValue}
                 defaultValue={passenger?.region_id}
               />
-              <HFInputMask control={control}
+              <HFInputMask
+                control={control}
                 name="phone"
                 setValue={setValue}
                 mask={"+\\9\\9\\8 99 999 99 99"}
                 label="Tel.raqam"
                 placeholder="Tel.raqam"
                 required={true}
-                defaultValue={passenger?.phone} />
+                defaultValue={passenger?.phone}
+              />
             </div>
           </div>
         </div>
       </CCard>
 
-      <div className='flex items-center justify-between mt-6'>
-        <div ><AddButton onClick={deleteAccount} iconLeft={false} text="Akkauntni o'chirish" /></div>
-        <div className='flex items-centet gap-2'>
-          <CancelButton onClick={() => navigateTo('/passengers/main')} text='Bekor qilish' />
-          <AddButton onClick={updateProfile} iconLeft={false} text="Saqlash" />
+      <div className="flex items-center justify-between mt-6">
+        <div>
+          <AddButton
+            onClick={deleteAccount}
+            iconLeft={false}
+            text="Akkauntni o'chirish"
+            permission="delete"
+          />
+        </div>
+        <div className="flex items-centet gap-2">
+          <button className="cancel-btn" onClick={() => navigateTo("/passengers/main")}>
+            Bekor qilish
+          </button>
+          <AddButton onClick={updateProfile} iconLeft={false} text="Saqlash" permission="edit" />
         </div>
       </div>
 
       <Modal open={!!query?.passenger}>
-        <div className='grid place-items-center h-full'>
-          <div className='bg-white px-6 py-8  max-w-[400px] mx-auto rounded-[20px]'>
-            <div className='flex items-center gap-2'>
-              <InfoIcon fill={'#FFC542'} />
-              <p className='text-base font-medium text-[var(--black)]'>{alert}</p>
+        <div className="grid place-items-center h-full">
+          <div className="bg-white px-6 py-8  max-w-[400px] mx-auto rounded-[20px]">
+            <div className="flex items-center gap-2">
+              <InfoIcon fill={"#FFC542"} />
+              <p className="text-base font-medium text-[var(--black)]">
+                {alert}
+              </p>
             </div>
-            <div className='flex items-center gap-2 mt-6'>
-              <CancelButton text="Yo'q" onClick={() => alertMessage('')} />
-              <AddButton text='Ha' iconLeft={false} onClick={() => alertMessage(query?.passenger)} />
+            <div className="flex items-center gap-2 mt-6">
+              <CancelButton text="Yo'q" onClick={() => alertMessage("")} />
+              <AddButton
+                text="Ha"
+                iconLeft={false}
+                onClick={() => alertMessage(query?.passenger)}
+              />
             </div>
           </div>
         </div>
       </Modal>
-
     </div>
-  )
-}
+  );
+};
 
-export default PassengerProfile
+export default PassengerProfile;

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { CheckLine } from "../../../components/UI/IconGenerator/Svg";
 
 interface Props {
@@ -11,7 +12,7 @@ const CCheckbox = ({
   handleCheck = () => {},
   checked = false,
 }: Props) => {
-  
+  const { t } = useTranslation()
   return (
     <div
       onClick={() => handleCheck(element)}
@@ -28,7 +29,7 @@ const CCheckbox = ({
           {checked ? <CheckLine fill="var(--main)" /> : ""}
         </div>
       </div>
-      <p>{element.label}</p>
+      <p>{t(element.label)}</p>
     </div>
   );
 };

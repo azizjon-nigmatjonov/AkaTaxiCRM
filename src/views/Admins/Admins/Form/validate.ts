@@ -6,7 +6,7 @@ export const Validation = () => {
     roles: yup
     .array()
     .of(yup.string())
-    .required("Majbiriy maydon")
+    .required("Majburiy maydon")
     .test('is-roles-empty', 'Majburiy maydon', value => value && value.length > 0),
     phone: yup
       .string()
@@ -22,13 +22,13 @@ export const Validation = () => {
 
 export const UpdateValidation = () => {
   return yup.object().shape({
-    name: yup.string().required("Majbiriy maydon"),
+    name: yup.string().required("Majburiy maydon"),
     email: yup.string().required("Majburiy maydon").email("Tog'ri email kiriting!"),
     phone: yup.string().required("enter_phone_number"),
     roles: yup
     .array()
     .of(yup.string())
-    .required("Majbiriy maydon")
+    .required("Majburiy maydon")
     .test('is-roles-empty', 'Majburiy maydon', value => value && value.length > 0),
   });
 };

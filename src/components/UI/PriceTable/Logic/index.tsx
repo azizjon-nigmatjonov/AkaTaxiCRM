@@ -150,13 +150,16 @@ export const CreateFunction = ({
 };
 
 export const BodyData = ({
-  bodyList,
   handleDistanceSet,
+  districtList,
+  setDistrictList = () => {}
 }: {
   bodyList: any;
+  districtList: any;
+  setDistrictList: (val: any) => void
   handleDistanceSet: (val: string, val2: any) => void;
 }) => {
-  const [districtList, setDistrictList] = useState([]);
+
 
   const handleKmInput = (val: number, id: number) => {
     let arr: any = districtList;
@@ -172,11 +175,5 @@ export const BodyData = ({
     setDistrictList(arr);
   };
 
-  useEffect(() => {
-    if (bodyList?.length) {
-      setDistrictList(bodyList);
-    }
-  }, [bodyList]);
-
-  return { districtList, handleKmInput };
+  return { handleKmInput };
 };

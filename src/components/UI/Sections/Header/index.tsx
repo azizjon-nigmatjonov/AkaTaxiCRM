@@ -18,7 +18,7 @@ const SectionHeader: FC<Props> = ({
   defaultValue = "",
 }) => {
   return (
-    <div className="pb-5 flex items-center justify-between">
+    <div className="pb-5 flex justify-between">
       {extra && <div className="mr-5">{extra}</div>}
       {handleSearch ? (
         <CSearchInput

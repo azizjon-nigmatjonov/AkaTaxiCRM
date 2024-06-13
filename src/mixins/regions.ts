@@ -70,3 +70,5 @@ export const Regions = [
     uz: "Xorazm viloyati",
   },
 ];
+
+

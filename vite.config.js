@@ -8,6 +8,7 @@ export default defineConfig({
     outDir: "build",
   },
   server: {
+    host: true,
     port: 5555,
   },
   css: {

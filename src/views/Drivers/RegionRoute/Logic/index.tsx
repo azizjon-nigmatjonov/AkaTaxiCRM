@@ -4,9 +4,13 @@ import ImageFrame from "../../../../components/UI/ImageFrame";
 
 export const PointData = () => {
   const { setLocalIds, districtList } = usePlaces();
-  console.log('districtList', districtList);
-  
-  return { districtList, setLocalIds };
+
+  const listDistricts = useMemo(() => {
+    const list = districtList?.filter((i: any) => i.name.en !== "Everything");
+    return list;
+  }, [districtList]);
+
+  return { districtList: listDistricts, setLocalIds };
 };
 
 export const PointCheckData = () => {
@@ -22,17 +26,6 @@ export const PointCheckData = () => {
     }
 
     setCheckedList(list);
-    // const list: any = [];
-
-    // parent.list?.forEach((element: any) => {
-    //   if (element.id === obj.id) {
-    //     element = obj;
-    //   }
-    //   if (element.checked) checked.push(obj);
-    //   list.push(element);
-    // });
-
-    // handleList({ ...parent, list });
   };
 
   return { handleCheck, checkedList };
@@ -112,6 +105,7 @@ export const TableData = () => {
       {
         title: "Trip yaratilgan vaqti",
         id: "created_at",
+        width: 300
       },
     ];
   }, []);

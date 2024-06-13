@@ -1,4 +1,5 @@
-import Dashboard from "../../views/Dashboard";
+import { lazy } from "react";
+const Dashboard = lazy(() => import("../../views/Dashboard"))
 
 export const dashboardList = [
   {
@@ -7,6 +8,6 @@ export const dashboardList = [
     sidebar: true,
     title: "Boshqaruv paneli",
     icon: "Dashboard",
-    element: <Dashboard />,
+    element: <Dashboard />
   },
 ];

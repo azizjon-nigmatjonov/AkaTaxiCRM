@@ -52,7 +52,7 @@ const ChatList = ({
     }
     groupedMessages[date].push(element);
   });
-
+  
 
   return (
     <div className="grid gap-y-2 overflow-y-auto h-[600px]">

@@ -4,6 +4,7 @@ input[type="number"]::-webkit-outer-spin-button {
   appearance: none;
   margin: 0;
 }
+
 input {
   caret-color: var(--main);
 
@@ -12,16 +13,26 @@ input {
   }
 }
 
-.MuiList-root {
-  .MuiButtonBase-root {
-    display: flex;
-    justify-content: space-between !important;
+.hide-scrollbar::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.MuiMenu-paper {
+  ul {
+    @include remove-scroll;
   }
 }
 
 #cselect,
 #HFMultipleSelect {
   width: 100%;
+
   .MuiInputBase-root {
     width: 100%;
     height: 40px;
@@ -45,6 +56,7 @@ input {
     fieldset {
       border: none;
       border-radius: 8px;
+      background-color: transparent;
     }
 
     input {
@@ -56,10 +68,12 @@ input {
 
 .MuiPaper-root {
   border-radius: 12px !important;
+
   ul {
     background-color: white;
     max-height: 300px;
     overflow: scroll;
+
     .Mui-selected {
       color: var(--main);
       font-weight: 500;
@@ -91,6 +105,7 @@ input {
       opacity: 1;
     }
   }
+
   .MuiSwitch-root {
     .MuiSwitch-thumb {
       background-color: white;
@@ -104,52 +119,87 @@ input {
   z-index: 99 !important;
 }
 
-#basicDatePicker,
-#multiDatePicker {
-  width: 100%;
-  .rmdp-container {
-    width: 100%;
-  }
+#basicDatePicker {
   .MuiInputBase-root {
-    height: 48px;
+    background-color: white;
+    border-radius: 8px;
     .MuiOutlinedInput-notchedOutline {
-      border-color: var(--lineGray);
-      border-radius: 12px;
+      border-color: var(--gray20);
+      @include common-shadow;
+      height: 44px;
     }
-  }
-  .MuiFormControl-root {
-    width: 100%;
-  }
-  .MuiTextField-root.error {
-    .MuiInputBase-root {
-      .MuiOutlinedInput-notchedOutline {
-        border-color: var(--error);
+    .MuiInputBase-input {
+      fieldset {
+        border-radius: 8px;
       }
     }
   }
-  .Mui-focused {
-    .MuiOutlinedInput-notchedOutline {
-      border-color: var(--primary);
-      border-width: 1px;
-    }
-  }
-  .MuiInputAdornment-root {
-    z-index: 9;
-    background-color: white;
-    height: 100%;
-    width: 40px;
-    display: flex;
-    justify-content: flex-end;
-  }
-  .sd:hover {
-    background-color: white;
-    color: var(--black) !important;
-  }
 }
 
-.MuiButtonBase-root {
-  &.Mui-checked {
-    color: var(--main) !important;
+#multiDatePicker {
+  width: 100%;
+
+  .rmdp-container {
+    width: 100%;
+  }
+
+  .MuiInputBase-root {
+    .MuiOutlinedInput-notchedOutline,
+    .MuiOutlinedInput-root {
+      border-color: var(--lineGray);
+      border-radius: 8px;
+      height: 40px;
+      @include common-shadow;
+      .MuiOutlinedInput-notchedOutline {
+        // border-color: var(--gray20);
+        border-radius: 8px;
+      }
+    }
+
+    .MuiFormControl-root {
+      width: 100%;
+    }
+
+    .MuiTextField-root.error {
+      .MuiInputBase-root {
+        .MuiOutlinedInput-notchedOutline {
+          border-color: var(--error);
+        }
+      }
+    }
+
+    .Mui-focused {
+      .MuiOutlinedInput-notchedOutline {
+        border-color: var(--primary);
+        border-width: 1px;
+      }
+    }
+
+    .MuiInputAdornment-root {
+      z-index: 9;
+      background-color: white;
+      height: 100%;
+      width: 40px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .sd:hover {
+      background-color: white;
+      color: var(--black) !important;
+    }
+
+    .Mui-focused {
+      .MuiOutlinedInput-notchedOutline {
+        border: 2px solid var(--main) !important;
+      }
+    }
+  }
+
+  .MuiButtonBase-root {
+    &.Mui-checked {
+      color: var(--main) !important;
+    }
   }
 }
 
@@ -159,11 +209,13 @@ input {
       background-color: red !important;
     }
   }
+
   .rmdp-day span {
     &:hover {
       background-color: red;
     }
   }
+
   .rmdp-input {
     background-color: transparent;
     height: 42px;
@@ -173,12 +225,13 @@ input {
 
 .custom-btn,
 .success-btn,
-.cancel-btn {
+.cancel-btn,
+.new-btn {
   background-color: var(--main);
   color: white;
   text-transform: none;
   border-radius: 8px;
-  border: 1px solid var(--gray20);
+  border: 1px solid var(--gray30);
   height: 40px;
   padding: 0 20px;
   width: 100%;
@@ -195,6 +248,7 @@ input {
 
   .MuiCircularProgress-root {
     margin-right: 16px;
+
     svg {
       color: white;
     }
@@ -206,7 +260,7 @@ input {
   }
 }
 
-.Mui-disabled  {
+.Mui-disabled {
   background-color: var(--gray20);
   color: var(--black);
   cursor: not-allowed !important;
@@ -215,6 +269,8 @@ input {
 .unpermit {
   cursor: not-allowed;
   position: relative;
+  background-color: var(--gray20);
+
   &:hover {
     &::after {
       content: "Permission o'rnatilmagan!";
@@ -226,6 +282,7 @@ input {
     }
   }
 }
+
 .custom-btn.success {
   background-color: var(--green);
 }
@@ -238,6 +295,12 @@ input {
   background-color: var(--gray20);
   color: var(--black);
   text-transform: none;
+  height: 39px;
+}
+
+.new-btn {
+  background-color: var(--blue10);
+  color: var(--blue90);
 }
 
 .default-btn {
@@ -287,6 +350,7 @@ input {
 }
 
 .container {
+  max-width: 100vw !important;
   @apply px-5;
 }
 
@@ -344,5 +408,18 @@ input {
     -webkit-transform: scale(0.9);
     -ms-transform: scale(0.9);
     transform: scale(0.9);
+  }
+}
+
+
+#mouse-over-popover-custom {
+  left: 70px;
+  top: -25px;
+  box-shadow: none !important;
+  z-index: 999;
+  .wrapper {
+    background-color: red;
+    box-shadow: none;
+    z-index: 999;
   }
 }

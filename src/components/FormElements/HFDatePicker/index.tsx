@@ -1,14 +1,15 @@
 import { Controller } from "react-hook-form";
-import BasicDatepicker from "../../CElements/CDatePicker/BasicDatepicker";
+// import BasicDatepicker from "../../CElements/CDatePicker/BasicDatepicker";
+import CustomDatepicker from "../../../components/CElements/CDatePicker/CustomDatepicker";
 
 interface Props {
   name: string;
   control: any;
   label?: string | undefined;
-  rules?: any,
-  defaultValue?: any
-  required?: boolean
-  placeholder?: string
+  rules?: any;
+  defaultValue?: any;
+  required?: boolean;
+  placeholder?: string;
 }
 
 export const HFDatePicker = ({
@@ -20,8 +21,6 @@ export const HFDatePicker = ({
   required,
   placeholder,
 }: Props) => {
-  
-  
   return (
     <Controller
       control={control}
@@ -30,13 +29,12 @@ export const HFDatePicker = ({
         required: required ? "required_field" : false,
         ...rules,
       }}
-      render={({ field, fieldState: { error } }) => (
-        <BasicDatepicker
+      render={({ field }) => (
+        <CustomDatepicker
           field={field}
-          error={error}
           label={label}
-          required={required}
           defaultValue={defaultValue}
+          required={required}
           placeholder={placeholder}
         />
       )}

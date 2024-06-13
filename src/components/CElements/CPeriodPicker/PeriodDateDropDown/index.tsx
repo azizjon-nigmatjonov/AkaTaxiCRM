@@ -18,7 +18,7 @@ export const PeriodDateDropDown = ({
   handleDropdown = () => {},
 }: Props) => {
   if (!open) return <></>;
-  const { defaultValue, actionHandler, handleSubmit, getFormatedDate } = DateData({ handleDropdown });
+  const { value, actionHandler, handleSubmit, getFormatedDate } = DateData({ handleDropdown });
   const { shortcutsItems } = DateLabel();
 
   return (
@@ -26,7 +26,7 @@ export const PeriodDateDropDown = ({
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="uz">
         <StaticDateRangePicker
           onChange={(e: any) => actionHandler(e)}
-          value={defaultValue}
+          value={value}
           slotProps={{
             shortcuts: {
               items: shortcutsItems,

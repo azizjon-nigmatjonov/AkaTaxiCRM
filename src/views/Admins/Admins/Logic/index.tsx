@@ -2,14 +2,19 @@ import { useMemo } from "react";
 import { FormatTime } from "../../../../utils/formatTime";
 import { useQuery } from "react-query";
 import adminService from "../../../../services/admins";
+import usePageRouter from "../../../../hooks/useObjectRouter";
+import { getStoredFilters } from "../../../../components/UI/Filter/Logic";
 
 export const FetchFunction = () => {
+  const { filters } = getStoredFilters({});
+  const { q } = filters;
+
   const {
     data: admins,
     isLoading,
     refetch,
-  } = useQuery(["GET_ADMINS"], () => {
-    return adminService.getList();
+  } = useQuery(["GET_ADMINS", q], () => {
+    return adminService.getList({ q: q ?? "" });
   });
 
   const bodyColumns: any = useMemo(() => {
@@ -20,7 +25,7 @@ export const FetchFunction = () => {
     };
   }, [admins]);
 
-  return { isLoading, refetch, bodyColumns };
+  return { isLoading, refetch, bodyColumns, q };
 };
 
 export const breadCrumbs = [
@@ -29,6 +34,11 @@ export const breadCrumbs = [
 ];
 
 export const TableData = () => {
+  const { navigateQuery } = usePageRouter();
+  const handleSearch = (val: string) => {
+    navigateQuery({ q: val });
+  };
+
   const headColumns = useMemo(() => {
     return [
       {
@@ -44,7 +54,7 @@ export const TableData = () => {
         id: "phone",
       },
       {
-        title: "Rol",
+        title: "Rollar",
         id: "roles",
         render: (roles: any) => {
           return (
@@ -86,10 +96,10 @@ export const TableData = () => {
       {
         title: "",
         id: "actions",
-        permission: ["edit", "delete", 'view'],
+        actions: ["edit", "delete", "view"],
       },
     ];
   }, []);
 
-  return { headColumns };
+  return { headColumns, handleSearch };
 };

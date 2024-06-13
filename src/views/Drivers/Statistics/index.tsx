@@ -30,19 +30,21 @@ const DriverStatistics = () => {
         </h1>
         <div className="mr-[15px]">
           <div className="flex items-center gap-2">
-            <p className="border py-1 px-2 rounded-md border-black">{start ? start : 'Start Date'}</p>
+            <p className="border py-1 px-2 rounded-md border-black">{start ? start : 'Boshlanish vaqti'}</p>
             <p>-</p>
-            <p className="border py-1 px-2 rounded-md border-black">{end ? end : 'End Date'}</p>
+            <p className="border py-1 px-2 rounded-md border-black">{end ? end : 'Tugash vaqti'}</p>
             <div onClick={() => setValue(!value)} className={`border py-1 px-2 rounded-md cursor-pointer ${value ? 'bg-red-100 border-red-400' : 'bg-slate-300 border-black'}  `}>
               {value ? <BiX color="red" /> : <BiCaretDown />}
             </div>
           </div>
           {value && <div className="absolute   right-[40px]">
-            <RangeDate setShow={setValue} />
+            <RangeDate footerActive={true} setShow={setValue} />
           </div>}
         </div>
       </div>
+      <div className="px-5">
       <StatisticsCard data={data?.widgetsData} loading={widgetsLoading} />
+      </div>
       <div className="container grid gap-y-5">
 
         <CCard style={{ minHeight: 0 }}>

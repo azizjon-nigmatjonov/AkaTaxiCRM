@@ -1,41 +1,34 @@
-import { useMemo } from "react";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { Header } from "../../../components/UI/Header";
-// import CTabs from "../../../components/CElements/CTab";
 import AddButton from "../../../components/UI/Buttons/AddButton";
 import CTable from "../../../components/CElements/CTable";
 import { useNavigate } from "react-router-dom";
+import { FetchFunction, TableData } from "./Logic";
+import { useState } from "react";
+import { FilterFunctions } from "../../../components/UI/Filter/Logic";
 
-const headColumns = [
+const breadCrumbItems = [
   {
-    title: "Kimga",
+    label: "Xabarnomalar",
+    link: "/notifications/notification",
   },
   {
-    title: "xabar",
-  },
-  {
-    title: "Sana",
-  },
-  {
-    title: "Status",
+    label: "SMS xabarnoma",
   },
 ];
 
 const SMSNotification = () => {
   const navigate = useNavigate();
+  const { tableData, isLoading } = FetchFunction();
+  const { headColumns, handleActions } = TableData();
+  const [filterParams, setFilterParams]: any = useState({});
+  const { storeFilters } = FilterFunctions({filterParams, setFilterParams});
 
-  const breadCrumbItems = useMemo(() => {
-    return [
-      {
-        label: "Xabarnomalar",
-        link: "/notifications/notification",
-      },
-      {
-        label: "SMS xabarnoma",
-      },
-    ];
-  }, []);
-
+  const handleFilterParams = (obj: any) => {
+    setFilterParams(obj);
+    storeFilters(obj);
+  };
+    
   return (
     <>
       <Header sticky={true}>
@@ -50,8 +43,17 @@ const SMSNotification = () => {
         </div>
       </div>
 
-      <div className="px-6">
-        <CTable headColumns={headColumns} bodyColumns={[]} />
+      <div className="container">
+        <CTable
+          headColumns={headColumns}
+          isLoading={isLoading}
+          bodyColumns={tableData?.data}
+          handleActions={handleActions}
+          filterParams={filterParams}
+          handleFilterParams={handleFilterParams}
+          count={tableData?.meta?.pageCount}
+          totalCount={tableData?.meta?.totalCount}
+        />
       </div>
     </>
   );

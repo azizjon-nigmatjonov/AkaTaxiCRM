@@ -56,7 +56,7 @@ export const TableData = ({ deleteRoll }: { deleteRoll: any }) => {
       title: "",
       id: "actions",
       width: 90,
-      permission: ["edit", "delete"],
+      actions: ["edit", "delete"],
     },
   ];
 
@@ -64,7 +64,7 @@ export const TableData = ({ deleteRoll }: { deleteRoll: any }) => {
     if (status === "edit") {
       navigateTo(`/admins/rolls/${el.id}`);
     }
-    if (status === "delete") {
+    if (status === "delete" && el.name !== 'super') {
       deleteRoll(el.id);
     }
   };

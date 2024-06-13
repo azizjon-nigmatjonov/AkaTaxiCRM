@@ -24,12 +24,12 @@ const Statistics = () => {
 
   return (
     <section className="relative">
-     <Header sticky={true}>
-        <CBreadcrumbs items={breadCrubmsItems} progmatic={true} type="link"/>
+      <Header sticky={true}>
+        <CBreadcrumbs items={breadCrubmsItems} progmatic={true} type="link" />
       </Header>
-       <AccountStatistics />
+      <AccountStatistics />
       <Selection />
-       <StatisticsGender />
+      <StatisticsGender />
     </section>
   );
 };

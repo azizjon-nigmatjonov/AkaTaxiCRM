@@ -8,7 +8,7 @@ export const infoLists = [
         sidebar: true,
         title: 'Kalendar',
         icon: 'calendar',
-        element: <Calendar />
+        element: <Calendar />,
     },
     {
         parent: 'infos',

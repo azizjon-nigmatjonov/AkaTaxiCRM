@@ -5,11 +5,9 @@ const DriversAvater = ({ data, item, driversHandle = () => {} }: { data?: any, i
     const { navigateQuery } = usePageRouter()
 
     const driverHandle = () => {
-        navigateQuery({ id: item.id });
+        navigateQuery({ suggestion: item.id });
         driversHandle(item)
     }
-    
-
     
 
     const classes = {

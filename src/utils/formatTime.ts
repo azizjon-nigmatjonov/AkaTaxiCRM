@@ -1,54 +1,29 @@
-import { format } from "date-fns"
+import { format } from "date-fns";
 
-export const FormatTime = (time: string, type?: string) => {
+const convertSeconds = (seconds: number) => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
 
+  if (hours > 0) {
+    return `${hours} soat${hours > 1 ? "s" : ""} ${minutes} minut`;
+  } else {
+    return `${minutes} minut`;
+  }
+};
 
-    // if (!time) return '';
-    // const current = new Date(time);
-
-    // const timeFormat = 'HH:mm '
-    // const dateFormat = 'yyyy-MM-dd'
-
-    //     const formattedDate = new Intl.DateTimeFormat('en-US', {
-    //         hour: '2-digit',
-    //         minute: '2-digit',
-    //         // second: '2-digit',
-    //         day: '2-digit',
-    //         month: '2-digit',
-    //         year: 'numeric',
-    //         timeZone: 'UTC',
-    //         hour12: false
-    //     }).format(new Date(time));
-
-
-    switch (type) {
-        case "time":
-            // return formattedDate
-            return time
-        default:
-            return time
-        // return format(current ,dateFormat)
-    }
-}
-
+export const FormatTime = (time: any, type?: string) => {
+  switch (type) {
+    case "time":
+      return time;
+    case "secunds":
+      return convertSeconds(time);
+    default:
+      return time;
+  }
+};
 
 export const FormatCalendar = (time: any) => {
-    // const timeFormat = 'HH:mm '
-    const dateFormat = 'yyyy-MM-dd'
+  const dateFormat = "yyyy-MM-dd";
 
-    // const formattedDate = new Intl.DateTimeFormat('en-US', {
-    //     hour: '2-digit',
-    //     minute: '2-digit',
-    //     // second: '2-digit',
-    //     day: '2-digit',
-    //     month: '2-digit',
-    //     year: 'numeric',
-    //     timeZone: 'UTC',
-    //     hour12: false
-    // }).format(new Date(time));
-
-    
-
-
-    return format(time, dateFormat)
-} 
+  return format(time, dateFormat);
+};

@@ -1,16 +1,16 @@
 import { lazy } from "react";
-import Driver from "../../views/Drivers/Drivers/Driver";
-import Drivers from "../../views/Drivers/Drivers";
-import FotoControl from "../../views/Drivers/FotoControl";
-import ActiveDrivers from "../../views/Drivers/Actives";
-import Vehicles from "../../views/Drivers/Vehicles";
-import Map from "../../views/Drivers/Map";
-import { RegionRoute } from "../../views/Drivers/RegionRoute";
-import DriverStatistics from "../../views/Drivers/Statistics";
+const Driver = lazy(() => import("../../views/Drivers/Drivers/Driver"));
+const Drivers = lazy(() => import("../../views/Drivers/Drivers"));
+const FotoControl = lazy(() => import("../../views/Drivers/FotoControl"));
+const ActiveDrivers = lazy(() => import("../../views/Drivers/Actives"));
+const Vehicles = lazy(() => import("../../views/Drivers/Vehicles"));
+const Map = lazy(() => import("../../views/Drivers/Map"));
+const RegionRoute = lazy(() => import("../../views/Drivers/RegionRoute"));
+const DriverStatistics = lazy(() => import("../../views/Drivers/Statistics"));
 const AddDriver = lazy(() => import("../../views/Drivers/Drivers/AddDriver"));
 const FotoControlUser = lazy(
   () => import("../../views/Drivers/FotoControl/User")
-);
+)
 const SingleCar = lazy(() => import("../../views/Drivers/Vehicles/Car"));
 
 export const driverList = [
@@ -21,22 +21,25 @@ export const driverList = [
     title: "Ro'yxat",
     icon: "driving",
     element: <Drivers />,
+    permissions: ["name", "phone"]
   },
   {
     parent: "drivers",
     link: "main/create",
     sidebar: false,
-    title: "Haydovchi qo'shish",
+    title: "Haydovchi qo'shish sahifasi",
     icon: "",
     element: <Driver />,
+    single_page: true
   },
   {
     parent: "drivers",
     link: "main/:id",
     sidebar: false,
-    title: "Haydovchini tahrirlash",
+    title: "Haydovchi ichki sahifasi",
     icon: "",
     element: <Driver />,
+    permissions: ["payment"],
   },
   {
     parent: "drivers",
@@ -45,6 +48,7 @@ export const driverList = [
     title: "Aktiv haydovchilar",
     icon: "smart_car",
     element: <ActiveDrivers />,
+    permissions: ["note"]
   },
   {
     parent: "drivers",
@@ -56,11 +60,12 @@ export const driverList = [
   },
   {
     parent: "drivers",
-    link: "fotocontroluser/:id",
+    link: "fotocontrolusers/:id",
     sidebar: false,
-    title: "Foto ichki sahifa",
+    title: "Foto nazorat ichki sahifa",
     icon: "",
     element: <FotoControlUser />,
+    single_page: true
   },
   {
     parent: "drivers",
@@ -69,14 +74,7 @@ export const driverList = [
     title: "Haydovchi qo'shish",
     icon: "",
     element: <AddDriver />,
-  },
-  {
-    parent: "drivers",
-    link: "cars/:id",
-    sidebar: false,
-    icon: "",
-    title: "Mashina qo'shish",
-    element: <SingleCar />,
+    single_page: true
   },
   {
     parent: "drivers",
@@ -85,6 +83,15 @@ export const driverList = [
     icon: "car",
     title: "Mashinalar",
     element: <Vehicles />,
+  },
+  {
+    parent: "drivers",
+    link: "cars/:id",
+    sidebar: false,
+    icon: "",
+    title: "Mashina qo'shish",
+    element: <SingleCar />,
+    single_page: true
   },
   {
     parent: "drivers",

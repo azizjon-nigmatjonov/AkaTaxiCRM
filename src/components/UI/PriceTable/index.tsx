@@ -3,6 +3,7 @@ import "./style.scss";
 import { BodyData, CreateFunction, TableData } from "./Logic";
 import { useForm } from "react-hook-form";
 import { BodyUI } from "./Details/Body";
+import { useEffect, useState } from "react";
 
 interface Props {
   region: any;
@@ -26,9 +27,12 @@ export const PriceTable = ({
     handleSucces,
     from_tashkent: from_tashkent,
   });
-  const { districtList, handleKmInput } = BodyData({
+  const [districtList, setDistrictList] = useState([]);
+  const { handleKmInput } = BodyData({
     bodyList: region?.districts,
     handleDistanceSet,
+    districtList,
+    setDistrictList
   });
   const { setValue, getValues } = useForm();
 
@@ -45,6 +49,13 @@ export const PriceTable = ({
       }
     }
   };
+
+
+  useEffect(() => {
+    if (region?.districts?.length) {
+      setDistrictList(region.districts);
+    }
+  }, [region?.districts]);
 
   return (
     <div

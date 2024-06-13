@@ -1,10 +1,10 @@
 export const StaticPermissions = [
   {
-    label: "Sahifa ko'rish",
+    label: "Sahifani ko'rsatish",
     value: "index",
   },
   {
-    label: "Ko'rish",
+    label: "Ichki sahifani ko'rsatish",
     value: "view",
   },
   {
@@ -15,10 +15,10 @@ export const StaticPermissions = [
     label: "Tahrirlash",
     value: "edit",
   },
-  {
-    label: "Muzlatish",
-    value: "freez",
-  },
+  // {
+  //   label: "Muzlatish",
+  //   value: "freez",
+  // },
   {
     label: "O'chirish",
     value: "delete",

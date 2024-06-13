@@ -60,6 +60,8 @@ export default function LTabs({
         });
     }
 
+    
+
     const value = useMemo(() => {
         if (currentTab?.index) return currentTab.index;
         if (!query?.[slug]) return 0;

@@ -2,6 +2,7 @@ import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
 import CLabel from "../../CElements/CLabel";
 import { useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 // import IconGenerator from "../IconPicker/IconGenerator";
 
 interface Props {
@@ -46,6 +47,7 @@ const SelectUI = ({
   props: any;
   handleClick: (val: any) => void;
 }) => {
+  const { t } = useTranslation();
   return (
     <Select
       value={value || defaultValue || ""}
@@ -89,7 +91,7 @@ const SelectUI = ({
               size={15}
               style={{ color: "#6E8BB7" }}
             /> */}
-                  {option.label}
+                  {typeof option.label === 'string' ? t(option.label) : option.label}
                 </div>
               </MenuItem>
             )),
@@ -100,7 +102,7 @@ const SelectUI = ({
               onClick={() => handleClick(option)}
               value={option.value}
             >
-              {option.label}
+              {typeof option.label === 'string' ? t(option.label) : option.label}
             </MenuItem>
           ))}
     </Select>

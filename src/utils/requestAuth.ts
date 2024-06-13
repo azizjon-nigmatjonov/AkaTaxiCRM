@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 // import { store } from "../store/index";
 // import { showAlert } from "../store/alert/alert.thunk";
 export const baseURL = import.meta.env.VITE_BASE_URL_AUTH;
@@ -12,7 +13,9 @@ const errorHandler = (error: any) => {
   // if (error.response?.data?.data)
   //   store.dispatch(showAlert({ title: error.response.data.data }));
   // else store.dispatch(showAlert({ title: "___ERROR___" }));
-
+  console.log('error,', error);
+  
+  toast.error(error?.message ?? "Error");
   return Promise.reject(error.response);
 };
 
@@ -60,13 +63,13 @@ const errorHandler = (error: any) => {
 
 requestAuth.interceptors.request.use(
   (config: any) => {
-    const token = ""
-    config.headers[`x-device-type`] = 'web'
-    config.headers[`x-app-lang`] = 'uz'
-    config.headers[`x-device-model`] = 'Safari | web'
-    config.headers[`x-app-version`] = '0.0.1'
-    config.headers[`x-app-build`] = 1
-    config.headers[`x-device-uid`] = 123456
+    const token = "";
+    config.headers[`x-device-type`] = "web";
+    config.headers[`x-app-lang`] = "uz";
+    config.headers[`x-device-model`] = "Safari | web";
+    config.headers[`x-app-version`] = "0.0.1";
+    config.headers[`x-app-build`] = 1;
+    config.headers[`x-device-uid`] = 123456;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

@@ -4,8 +4,7 @@ import { Header } from "../../../components/UI/Header";
 import { breadCrumbsItems } from "./Logic";
 import Region from "./Region";
 
-export const Regions = () => {
-
+const Regions = () => {
   return (
     <>
       <Header>
@@ -20,3 +19,4 @@ export const Regions = () => {
   );
 };
 
+export default Regions;

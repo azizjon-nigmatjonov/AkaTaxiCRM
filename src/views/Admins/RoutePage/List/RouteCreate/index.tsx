@@ -16,6 +16,7 @@ export const RouteCreate = ({
   newRouteList = [],
 }: Props) => {
   const { options } = GetOptions({ newRouteList });
+  
   const schema = Validation();
   const { control, handleSubmit, setValue, reset } = useForm({
     mode: "onSubmit",
@@ -27,7 +28,7 @@ export const RouteCreate = ({
 
   return (
     <CModal
-      title={"Yangi route qo'shish"}
+      title="Yangi route qo'shish"
       open={true}
       handleClose={() => handleClose()}
       footerActive={false}
@@ -41,7 +42,7 @@ export const RouteCreate = ({
           placeholder="Route nomi"
         />
 
-        <div>
+        <div className="mt-5">
           {isLoading ? (
             <div className="custom-btn disabled form">
               <CircularProgress size={30} />

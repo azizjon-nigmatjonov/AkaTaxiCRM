@@ -4,9 +4,7 @@ const SMS = ({
 }: {
   element?: any;
   left?: boolean;
-}) => {
-  console.log(element);
-  
+}) => {  
   return (
     <div className={`relative inline-block`}>
       {/* <div className="border border-[var(--lineGray)] w-[30px] h-[30px] rounded-full flex items-center justify-center absolute left-[-15px] top-[8px] bg-white">
@@ -16,7 +14,7 @@ const SMS = ({
           <UserIcon />
         )}
       </div> */}
-      {!left && <span className="mr-3 text-[var(--gray)]">08:00</span>}
+      {!left && <span className="mr-3 text-[var(--gray)]">{element.created_at.substring(element.created_at.indexOf(" "))}</span>}
       <div
         className={`bg-white border border-[var(--lineGray)] rounded-[14px] px-5 py-3 inline-block  ${
           left ? "bg-white" : "bg-[#E2E2EA]"
@@ -24,7 +22,7 @@ const SMS = ({
       >
         {element.text}
       </div>
-      {left && <span className="ml-3 text-[var(--gray)]">08:00</span>}
+      {left && <span className="ml-3 text-[var(--gray)]">{element.created_at.substring(element.created_at.indexOf(" "))}</span>}
     </div>
   );
 };

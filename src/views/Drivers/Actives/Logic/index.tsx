@@ -3,17 +3,22 @@ import { useMemo } from "react";
 import { FormatTime } from "../../../../utils/formatTime";
 import Places from "../../../../components/UI/Places";
 import DriversAvater from "../../../../views/Passengers/Active/DriversAvatar";
+import { useQuery } from "react-query";
+import driverService from "../../../../services/drivers";
+import { ListIcon } from "../../../../components/UI/IconGenerator/Svg";
+import usePageRouter from "../../../../hooks/useObjectRouter";
 
 export const ActiveDriversTable = ({
-  setPassenger = () => { },
-  setConnectPassger=()=>{}
+  setPassenger = () => {},
+  handleOffers = () => {},
 }: {
   setPassenger: (val: any) => void;
-  setConnectPassger:(val:any) =>void
+  handleOffers: (val: any) => void;
 }) => {
-  const passengerList = (e: any) => {
+  const handlePlaces = (e: any) => {
     setPassenger(e);
   };
+  const { navigateQuery } = usePageRouter();
 
   const headColumns = useMemo(() => {
     return [
@@ -45,10 +50,6 @@ export const ActiveDriversTable = ({
         id: "to",
       },
       {
-        title: "Sayohat turi",
-        id: "search_type",
-      },
-      {
         title: "Online vaqti",
         id: "created_at",
         render: (val?: any) => {
@@ -70,15 +71,37 @@ export const ActiveDriversTable = ({
         title: "Takliflar",
         id: "bids",
         render: (arr: any, item: any) => (
-         <div className="py-4">
-         <DriversAvater data={arr} item={item} driversHandle={setConnectPassger}/>
-       </div>
-        )
+          <div className="py-4">
+            <DriversAvater
+              data={arr}
+              item={item}
+              driversHandle={handleOffers}
+            />
+          </div>
+        ),
       },
       {
         id: "places",
-        render: (val: any, items: any) =>
-          val && <Places data={val} item={items} clickHandle={passengerList} />,
+        render: (val: any, element: any) => {
+          return (
+            val && (
+              <Places data={val} element={element} clickHandle={handlePlaces} />
+            )
+          );
+        },
+      },
+      {
+        title: "",
+        id: "notelist",
+        render: (item: any) => {
+          return (
+            <button
+              onClick={() => navigateQuery({ modal: "note", row_id: item.id })}
+            >
+              <ListIcon stroke={item.notelist ? "black" : "#98A2B3"} />
+            </button>
+          );
+        },
       },
     ];
   }, []);
@@ -86,14 +109,27 @@ export const ActiveDriversTable = ({
   return { headColumns };
 };
 
+export const FetchFunction = () => {
+  const { data: activeDriverCount } = useQuery(
+    ["GET_ACTIVE_DRIVERS_COUNT"],
+    () => {
+      return driverService.getActiveDriverCount();
+    }
+  );
+
+  const list = activeDriverCount?.data;
+
+  const tabList = [
+    { slug: "", name: "Aktiv", count: list?.pending },
+    { slug: "on-way", name: "Yo'lda", count: list?.["on-way"] },
+    { slug: "canceled", name: "Bekor qilingan", count: list?.canceled },
+    { slug: "done", name: "Yetib borgan", count: list?.done },
+  ];
+
+  return { activeDriverCount, tabList };
+};
 
 export const breadCrumbs = [
   { label: "Haydovchilar", link: "/drivers/active" },
   { label: "Aktiv" },
-];
-export const tabList = [
-  { slug: "", name: "Aktiv" },
-  { slug: "on-way", name: "Yo'lda" },
-  { slug: "canceled", name: "Bekor qilingan" },
-  { slug: "done", name: "Yetib borgan" },
 ];

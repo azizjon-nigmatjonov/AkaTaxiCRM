@@ -1,18 +1,19 @@
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/UI/Sections/Header";
 import AddButton from "../../../components/UI/Buttons/AddButton";
-import FilterButton from "../../../components/UI/Filters";
 import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
-import { useGetQueries } from "../../../hooks/useGetQueries";
 import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { FetchFunction, TableData, breadCrumbItems } from "./Logic";
 import { FilterPassenger } from "./Filter";
+import { NoteTableButtonActions } from "../../../components/UI/CallModals/NoteModal/Logic";
+import { FilterFunctions } from "../../../components/UI/Filter/Logic";
+import { useState } from "react";
+import { CExcelDownloader } from "../../../components/CElements/CExcelDownloader";
 
 const Passengers = () => {
   const { navigateQuery } = usePageRouter();
-  const { currentPage } = useGetQueries();
   const {
     passengers,
     passengerTableList,
@@ -20,8 +21,21 @@ const Passengers = () => {
     passengerRefetch,
   }: any = FetchFunction();
   const { headColumns, handleActions } = TableData({ passengerRefetch });
+  const [filterParams, setFilterParams]: any = useState({});
+  const { collectFilter, storeFilters } = FilterFunctions({
+    store: true,
+    filterParams,
+    setFilterParams,
+  });
 
-  const handleSearch = (value: any) => navigateQuery({ q: value });
+  const handleSearch = (value: any) => {
+    collectFilter({ type: "q", val: value });
+  };
+
+  const handleFilterParams = (obj: any) => {
+    setFilterParams(obj);
+    storeFilters(obj);
+  };
 
   return (
     <>
@@ -30,10 +44,11 @@ const Passengers = () => {
       </Header>
       <div className="container">
         <SectionHeader
-          extra={<FilterButton text="Filter" />}
           handleSearch={handleSearch}
+          defaultValue={filterParams?.q}
         >
-          <div className="flex items-center gap-3">
+          <div className="flex gap-x-5">
+            <CExcelDownloader />
             <AddButton
               text="new_passenger"
               onClick={() => navigateQuery({ id: "create" })}
@@ -41,7 +56,10 @@ const Passengers = () => {
           </div>
         </SectionHeader>
 
-        <FilterPassenger />
+        <FilterPassenger
+          filterParams={filterParams}
+          setFilterParams={setFilterParams}
+        />
 
         <CTable
           headColumns={headColumns}
@@ -50,11 +68,13 @@ const Passengers = () => {
           count={passengers?.meta?.pageCount ?? 5}
           isLoading={passengerLoading}
           handleActions={handleActions}
-          currentPage={currentPage}
+          filterParams={filterParams}
+          handleFilterParams={handleFilterParams}
           clickable={true}
         />
 
         <Form refetch={passengerRefetch} />
+        <NoteTableButtonActions refetchList={passengerRefetch} />
       </div>
     </>
   );

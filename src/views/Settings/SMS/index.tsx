@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import AddButton from "../../../components/UI/Buttons/AddButton";
 import CTabs from "../../../components/CElements/CTab";
 import usePageRouter from "../../../hooks/useObjectRouter";
@@ -11,6 +11,7 @@ import TypeCard from "./SMSType";
 import SMSMessage from "./Message";
 import { FormatTime } from "../../../utils/formatTime";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
+import { FilterFunctions } from "../../../components/UI/Filter/Logic";
 
 const tabList = [
   {
@@ -36,11 +37,11 @@ const tabList = [
 const SMS = () => {
   const { tab, currentPage } = useGetQueries();
   const { navigateTo, navigateQuery } = usePageRouter();
-
-  // const { data: sms } = useQuery(["GET_SMS_LIST", tab], () => {
-  //   return smsService.getList(tab || "sms");
-  // });
-
+  const [filterParams, setFilterParams]: any = useState({});
+  const { storeFilters } = FilterFunctions({
+    filterParams,
+    setFilterParams,
+  });
 
   const { data: smsReports } = useQuery(['GET_SMS_REPORTS', tab, currentPage], () => {
     return smsService.getReports({ page: currentPage, perPage: 10 });
@@ -101,6 +102,11 @@ const SMS = () => {
     ]
   }, [])
 
+  const handleFilterParams = (obj: any) => {
+    setFilterParams(obj);
+    storeFilters(obj);
+  };
+
   return (
     <>
       <Header sticky={true} >
@@ -126,7 +132,8 @@ const SMS = () => {
           count={bodyColumns?.meta?.totalCount}
           handleActions={handleActions}
           isLoading={false}
-          currentPage={currentPage}
+          filterParams={filterParams}
+          handleFilterParams={handleFilterParams}
         />}
 
       </div>

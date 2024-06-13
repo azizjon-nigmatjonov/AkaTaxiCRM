@@ -52,9 +52,9 @@ const Section = ({
       if (item.slug == 3) {
         item.data = bussniss?.data;
       }
-      if (item.slug == 4) {
-        item.data = econom?.data;
-      }
+      // if (item.slug == 4) {
+      //   item.data = econom?.data;
+      // }
 
       return item;
     });
@@ -68,23 +68,26 @@ const Section = ({
         {Object.keys(allData).length ? <Header arr={allData} /> : ""}
         {list?.length && !loading ? (
           <div>
-            {!isLoading ?
-              <div className="grid grid-cols-4">
-                {Object.values(allData)?.map((item: any, index: number) => (
-                  <ClassWrapper
-                    key={index}
-                    color={`${index % 2 !== 1 ? "bg-white" : "bg-[var(--brown10)]"
-                      }`}
-                    data={item?.data}
-                    setInputValue={setInputValue}
-                  />
-                ))
-                }
-              </div> :
+            {!isLoading ? (
+              <div className="grid grid-cols-3">
+                {Object.values(allData)?.map(
+                  (item: any, index: number) =>
+                    item.data?.length && (
+                      <ClassWrapper
+                        key={index}
+                        color={`${
+                          index % 2 !== 1 ? "bg-white" : "bg-[var(--brown10)]"
+                        }`}
+                        data={item?.data}
+                        setInputValue={setInputValue}
+                      />
+                    )
+                )}
+              </div>
+            ) : (
               <CarSkeleton />
-            }
+            )}
           </div>
-
         ) : loading ? (
           "Yuklanmoqda..."
         ) : (

@@ -30,7 +30,7 @@ export const RouteList = ({
   }
 
   const { deletePermission, deleteRoute } = DeleteFunction({ handleClose });
-
+  
   return (
     <div className="mt-10">
       {newRouteList.map((route: any, index: number) => (

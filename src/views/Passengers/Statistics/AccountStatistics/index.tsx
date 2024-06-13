@@ -25,11 +25,12 @@ const AccountStatistics = () => {
   const staticsWidgets = useMemo(() => {
     if (!data) return [];
     const staticsWidgets = data?.data;
+    
     return staticsWidgets.map(({ name, current_month, last_month }: Props) => ({
       name,
       current_month,
       last_month,
-      percentage: Math.trunc(((current_month - last_month) / last_month) * 100),
+      percentage: last_month ? Math.trunc(((current_month - last_month) / last_month) * 100) : 100,
     }));
   }, [data]);
 

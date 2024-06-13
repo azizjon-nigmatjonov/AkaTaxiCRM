@@ -3,7 +3,7 @@ import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { Header } from "../../../components/UI/Header";
 import CTable from "../../../components/CElements/CTable";
 import { useNavigate } from "react-router-dom";
-import { FetchFunction } from "./Logic";
+import { FetchFunction, TableData } from "./Logic";
 
 const breadCrumbsItems = [
   {
@@ -15,35 +15,34 @@ const breadCrumbsItems = [
   },
 ];
 
-const headColumns = [
-  {
-    title: "xabar",
-  },
-  {
-    title: "sana",
-  },
-];
-
 const NewsNotification = () => {
   const navigate = useNavigate();
-  const { bodyColumns } = FetchFunction()
+  const { tableData, refetch, isLoading } = FetchFunction();
+  const { headColumns, handleActions } = TableData({ refetch });
 
   return (
     <>
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbsItems} progmatic={true} type="link" />
       </Header>
-      <div className="px-6 flex justify-end">
+      <div className="px-6 flex justify-end mb-5">
         <div>
           <AddButton
-            text="Yangi bildirishnoma"
+            text="Yangi xabar"
             onClick={() => navigate("/notifications/new_notification/add_news")}
           />
         </div>
       </div>
 
       <div className="container">
-        <CTable headColumns={headColumns} bodyColumns={bodyColumns} />
+        <CTable
+          headColumns={headColumns}
+          bodyColumns={tableData?.data}
+          handleActions={handleActions}
+          isLoading={isLoading}
+          filterParams={{}}
+          handleFilterParams={() => {}}
+        />
       </div>
     </>
   );

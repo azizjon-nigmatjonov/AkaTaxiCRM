@@ -42,11 +42,11 @@ export const DateData = ({
         end: formatedValue[1] ?? "",
       });
     } else {
-      const arr = value?.map((dateObj: any) => {
-        const dayjsDate = dayjs(dateObj.$d);
-        return dayjsDate.format("YYYY-MM-DD");
-      });
-      navigateQuery({ start: arr[0], end: arr[1] });
+      // const arr = value?.map((dateObj: any) => {
+      //   const dayjsDate = dayjs(dateObj.$d);
+      //   return dayjsDate.format("YYYY-MM-DD");
+      // });
+      // navigateQuery({ start: arr[0], end: arr[1] });
     }
 
     handleDropdown(formatedValue);
@@ -61,7 +61,7 @@ export const DateData = ({
     return arr;
   }, [value]);
 
-  return { defaultValue: value, actionHandler, handleSubmit, getFormatedDate };
+  return { value, actionHandler, handleSubmit, getFormatedDate };
 };
 
 export const DateLabel = () => {

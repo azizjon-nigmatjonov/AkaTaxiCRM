@@ -14,9 +14,9 @@ const ImageFrame = ({
         {image ? (
           <div className="w-[40px] h-[40px]">
             <img
-              className="rounded-full block object-cover w-[40px] h-[40px]"
+              className="rounded-[8px] block object-cover w-[40px] h-[40px]"
               src={image}
-              alt={image || "image"}
+              alt={"image"}
             />
           </div>
         ) : (

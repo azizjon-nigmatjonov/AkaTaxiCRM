@@ -1,61 +1,49 @@
-// import { getWeekDays } from '../../../../../utils/getMonth'
-import usePageRouter from '../../../../../hooks/useObjectRouter'
-import Detail from './Detail'
+import { getYears } from "../../../../../utils/getMonth";
+import usePageRouter from "../../../../../hooks/useObjectRouter";
+import Detail from "./Detail";
+import { useGetQueries } from "../../../../../hooks/useGetQueries";
+import { Months } from "../../../../../constants/month";
+import { getMonthWeeks } from "../../../../../utils/getWeekDays";
 // import { useEffect } from 'react'
 
-
-const YEARS = [
-    { label: '2024', value: '2024' },
-    { label: '2023', value: '2023' },
-]
-
-const MONTH = [
-    { label: 'Yanvar', value: '1' },
-    { label: 'Fevral', value: '2' },
-    { label: 'Mart', value: '3' },
-    { label: 'Aprel', value: '4' },
-    { label: 'May', value: '5' },
-    { label: 'Iyun', value: '6' },
-    { label: 'Iyul', value: '7' },
-    { label: 'Avgust', value: '8' },
-    { label: 'Sentabr', value: '9' },
-    { label: 'Oktabr', value: '10' },
-    { label: 'Noyabr', value: '11' },
-    { label: 'Dekabr', value: '12' },
-]
-
-const WEEK = [
-    { label: '1-7', value: '1' },
-    { label: '8-14', value: '2' },
-    { label: '15-22', value: '5' },
-    { label: '23-30', value: '4' },
-]
-
-
-
 const Form = ({ value }: { value: string }) => {
-    const { navigateQuery } = usePageRouter();
+  const { navigateQuery } = usePageRouter();
+  const { month, year } = useGetQueries();
 
-    const handlerYear = (evt: string) => {
-        navigateQuery({ year: evt })
-    }
+  const handlerYear = (evt: string) => {
+    navigateQuery({ year: evt });
+  };
 
-    const handlerMonth = (evt: string) => {
-        navigateQuery({ month: evt })
-    }
+  const handlerMonth = (evt: string) => {
+    navigateQuery({ month: evt });
+  };
 
-    const handleWeek = (evt: string) => {
-        navigateQuery({ week: evt })
-    }
-   
+  const handleWeek = (evt: string) => {
+    navigateQuery({ week: evt });
+  };
 
-    return (
-        <div className='bg-[var(--softGray)] mt-4 p-4 rounded-lg flex gap-3 w-full'>
-            <Detail handlerValue={handlerYear} disabled={value} label='Yil' options={YEARS} />
-            <Detail handlerValue={handlerMonth} disabled={value} label='Oy' options={MONTH} />
-            <Detail handlerValue={handleWeek} disabled={value} label='Hafta (Du-Ya)' options={WEEK} />
-        </div>
-    )
-}
+  return (
+    <div className="bg-[var(--softGray)] mt-4 p-4 rounded-lg grid grid-cols-3 gap-3 w-full">
+      <Detail
+        handlerValue={handlerYear}
+        disabled={value != "year" ? false : true}
+        label="Yil"
+        options={getYears()}
+      />
+      <Detail
+        handlerValue={handlerMonth}
+        disabled={value == "month" || value == "year" ? true : false}
+        label="Oy"
+        options={Months}
+      />
+      <Detail
+        handlerValue={handleWeek}
+        disabled={value == "week" ? false : true}
+        label="Hafta (Du-Ya)"
+        options={getMonthWeeks(month ?? 1, year ?? new Date().getFullYear())}
+      />
+    </div>
+  );
+};
 
-export default Form
+export default Form;

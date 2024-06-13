@@ -13,28 +13,39 @@ import { useDispatch } from "react-redux";
 import { websiteActions } from "../../../../store/website";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 import Form from "./Form";
-
-
+import { FilterFunctions } from "../../../../components/UI/Filter/Logic";
 
 const tabList = [
-  { slug: 1, name: 'Standart' },
-  { slug: 2, name: 'Komfort' },
-  { slug: 3, name: 'Bisness' }
-]
+  { slug: 1, name: "Standart" },
+  { slug: 2, name: "Komfort" },
+  { slug: 3, name: "Bisness" },
+];
 
 const SingleCar = () => {
-  const { id } = useParams()
-  const dispatch = useDispatch()
-  const { currentPage, page } = useGetQueries();
-  const { navigateQuery, navigateTo } = usePageRouter()
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { navigateQuery, navigateTo } = usePageRouter();
   const { currentTab } = useGetQueries();
   const setCarList = useState([])[1];
   const setLoading = useState(false)[1];
+  const [filterParams, setFilterParams]: any = useState({});
+  const { storeFilters } = FilterFunctions({
+    filterParams,
+    setFilterParams,
+  });
+
+  const handleFilterParams = (obj: any) => {
+    setFilterParams(obj);
+    storeFilters(obj);
+  };
 
   const { data: driversData } = useQuery(
-    ["GET_DRIVERS_BY_CAR", id, page],
+    ["GET_DRIVERS_BY_CAR", id, filterParams?.page],
     () => {
-      return driverService.getList({ page: page ?? 1, car_id: id });
+      return driverService.getList({
+        page: filterParams?.page || 1,
+        car_id: id,
+      });
     },
     {
       enabled: !!id,
@@ -75,12 +86,13 @@ const SingleCar = () => {
       {
         title: "Ism familya",
         id: "info",
-        render: (val: any) => val && (
-          <div className="flex items-center space-x-2 py-2">
-            <ImageFrame image={val.image} gender={val.gender} />
-            <span>{val.name}</span>
-          </div>
-        )
+        render: (val: any) =>
+          val && (
+            <div className="flex items-center space-x-2 py-2">
+              <ImageFrame image={val.image} gender={val.gender} />
+              <span>{val.name}</span>
+            </div>
+          ),
       },
       {
         title: "phone_number",
@@ -103,25 +115,23 @@ const SingleCar = () => {
         render: (val: any) => (
           <div
             className={
-              val != 'Aktiv' ? "text-[var(--error)]" :
-                "text-[var(--green)]"
+              val != "Aktiv" ? "text-[var(--error)]" : "text-[var(--green)]"
             }
           >
             {val}
-          </div >
+          </div>
         ),
       },
       {
         title: "",
         id: "actions",
-        permission: ["edit", "delete", "view", 'd'],
+        actions: ["edit", "delete", "view", "d"],
       },
     ];
   }, []);
 
   const drivers: any = useMemo(() => {
     const lists: any = driversData ?? [];
-
 
     return {
       list: lists.data?.map((val: any) => {
@@ -130,31 +140,29 @@ const SingleCar = () => {
           info: {
             name: val.full_name,
             img: val.image,
-            gender: val.gender
-          }
-        }
-
+            gender: val.gender,
+          },
+        };
       }),
       ...lists,
-    }
+    };
   }, [driversData]);
 
   const handleActions = useCallback((element: any, status: any) => {
     if (element === "edit") {
-      navigateQuery({ id: status.id })
-    } else if (status == 'view') {
-      navigateTo(`/drivers/main/driver?id=${element.id}`)
-    }
-    else {
+      navigateQuery({ id: status.id });
+    } else if (status == "view") {
+      navigateTo(`/drivers/main/driver?id=${element.id}`);
+    } else {
       driverService.deleteElement(status?.id).then(() => {
         dispatch(
           websiteActions.setAlertData({
             title: "Ma'lumotlar o'chirildi!",
             translation: "common",
-            type: 'error'
+            type: "error",
           })
         );
-      })
+      });
     }
   }, []);
 
@@ -165,8 +173,8 @@ const SingleCar = () => {
         link: "/drivers/main",
       },
       {
-        label: 'Mashinalar',
-        link: '/drivers/cars'
+        label: "Mashinalar",
+        link: "/drivers/cars",
       },
       {
         label: drivers?.list?.[0]?.car_name ?? "Mashina",
@@ -174,16 +182,14 @@ const SingleCar = () => {
     ];
   }, [carData, driversData]);
 
-  
   // console.log(drivers);
   // console.log(driversData);
 
-
-
-
   return (
     <>
-      <Header><CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" /></Header>
+      <Header>
+        <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
+      </Header>
       <div className="px-5">
         {/* <SectionHeader>
           <FilterButton text="filter" />
@@ -194,7 +200,8 @@ const SingleCar = () => {
           totalCount={drivers?.meta?.totalCount}
           count={drivers?.meta?.pageCount}
           handleActions={handleActions}
-          currentPage={currentPage}
+          filterParams={filterParams}
+          handleFilterParams={handleFilterParams}
         />
         <Form id={id} classes={tabList} tab={tab} getCarList={getCarList} />
       </div>

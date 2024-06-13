@@ -1,59 +1,87 @@
 import CSelect from "../../../../components/CElements/CSelect";
 import Filters from "../../../../components/UI/Filter";
-import usePageRouter from "../../../../hooks/useObjectRouter";
-import { VersionsList } from "../../../../constants/versions";
 import { DivicesList } from "../../../../constants/devices";
 import { CPeriodPicker } from "../../../../components/CElements/CPeriodPicker";
 import CMultibleSelect from "../../../../components/CElements/CMultibleSelect";
-// import DropDown from "../../../../components/FormElements/DropDown";
+import { usePlaces } from "../../../../hooks/usePlaces";
+import { useMemo, useState } from "react";
+import { useVersions } from "../../../../hooks/useVersions";
+import { FilterFunctions } from "../../../../components/UI/Filter/Logic";
 
-export const FilterPassenger = () => {
-  const { getQueries, navigateQuery } = usePageRouter();
-  const { filter } = getQueries();
-  const handlerDiviceModel = (evt: any) => {
-    navigateQuery({ device_type: evt })
-  }
-  const handlerVersion = (evt: any) => navigateQuery({ version: evt });
-  const handlerGender = (evt: any) => navigateQuery({ gender: evt });
+interface Props {
+  filterParams: any;
+  setFilterParams: (val: any) => void;
+}
 
+export const FilterPassenger = ({
+  filterParams,
+  setFilterParams
+}: Props) => {
+  const { regionList } = usePlaces();
+  const { VersionOptions } = useVersions();
+  const [openFilter, setOpenFilter] = useState(false);
+  const { collectFilter } = FilterFunctions({filterParams, setFilterParams});
+
+  const handleFilter = (type: string, val: any, status?: string) => {
+    collectFilter({ type, val, status });
+  };
+
+  const regionlist = useMemo(() => {
+    return regionList?.map((item: any) => {
+      return {
+        value: item.id,
+        label: item.name.uz,
+      };
+    });
+  }, [regionList]);
+  
   return (
-    <Filters filter={!!filter}>
-      <div className="grid grid-cols-5 gap-x-4 w-full">
-        <CPeriodPicker label="Vaqt" placeholder="Vaqtni tanlang" />
-        {/* <DropDown
+    <Filters
+      filter={openFilter}
+      filterParams={filterParams}
+      setFilterParams={setFilterParams}
+      setOpen={setOpenFilter}
+    >
+      <div className="grid grid-cols-1 gap-y-5 w-full">
+        <CPeriodPicker
           label="Vaqt"
-          name="Vaqt"
-          placeholder="Tanlang"
-          defaultValue={"01.01-.01.01"}
-        /> */}
+          placeholder="Vaqtni tanlang"
+          defaultValue={filterParams?.date}
+          handleValue={(val: any) => handleFilter("date", val)}
+        />
+
         <CSelect
-          handlerValue={handlerDiviceModel}
           options={DivicesList}
           label="Operatsion sistema"
           placeholder="Tanglang"
+          value={filterParams?.device_type?.value}
+          handlerValue={(val: any) => handleFilter("device_type", val)}
         />
         <CSelect
-          handlerValue={handlerVersion}
-          options={VersionsList}
+          options={VersionOptions}
           label="Versiyalar"
           placeholder="Tanglang"
+          value={filterParams?.version?.value}
+          handlerValue={(val: any) => handleFilter("version", val)}
         />
         <CSelect
-          handlerValue={handlerGender}
           options={[
             { value: "m", label: "Erkak" },
             { value: "f", label: "Ayol" },
           ]}
           label="Jinsi"
+          value={filterParams?.gender?.value}
           placeholder="Tanlang"
+          handlerValue={(val: any) => handleFilter("gender", val)}
         />
-        {/* <CSelect
-          handlerValue={handlerRegion}
-          options={regionList}
-          label="Viloyat"
+
+        <CMultibleSelect
+          options={regionlist}
+          label="Yashash joyi"
           placeholder="Tanlang"
-        /> */}
-        <CMultibleSelect label="Yashash joyi" />
+          defaultValue={filterParams?.region_id?.map((item: any) => item.value)}
+          handlerValue={(val: any) => handleFilter("region_id", val, "arr")}
+        />
       </div>
     </Filters>
   );

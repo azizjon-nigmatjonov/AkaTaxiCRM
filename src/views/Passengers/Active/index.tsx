@@ -1,54 +1,73 @@
 import { useEffect, useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/UI/Sections/Header";
-import FilterButton from "../../../components/UI/Filters";
-import { useQuery } from "react-query";
-import passengerService from "../../../services/passengers";
-import CSelect from "../../../components/CElements/CSelect";
-import { useGetQueries } from "../../../hooks/useGetQueries";
-import { FormatTime } from "../../../utils/formatTime";
 import { Header } from "../../../components/UI/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
-import DriversAvater from "./DriversAvatar";
 import DriversList from "./DriversList";
-import ImageFrame from "../../../components/UI/ImageFrame";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import Statistics from "./Statistics";
-import cls from "./style.module.scss";
-import Filters from "../../../components/UI/Filter";
-import { Status, breadCrubmsItems } from "./Logic";
+import { FetchFunction, breadCrubmsItems } from "./Logic";
 import { usePlaces } from "../../../hooks/usePlaces";
-
-const Reasons = [{ value: 0, label: "Sabablar" }];
-
+import BookingDetail from "./BookingDetails";
+import { NoteTableButtonActions } from "../../../components/UI/CallModals/NoteModal/Logic";
+import { Reasons } from "../../../constants/reason";
+import { useDispatch, useSelector } from "react-redux";
+import { mqttActions } from "../../../store/mqtt";
+import { ListIcon } from "../../../components/UI/IconGenerator/Svg";
+import CSelectColor from "../../../components/CElements/CSelectColor";
+import { EyeIcon } from "../../../components/UI/IconGenerator/Svg";
+import ImageFrame from "../../../components/UI/ImageFrame";
+import { FormatTime } from "../../../utils/formatTime";
+import DriversAvater from "./DriversAvatar";
+import cls from "./style.module.scss";
+import { useTranslation } from "react-i18next";
+import { FilterFunctions } from "../../../components/UI/Filter/Logic";
+import { FilterComponent } from "./Filter";
 
 const ActivePassengers = () => {
-  const { currentPage, q, region_id, status } = useGetQueries();
-  const { navigateQuery, navigateTo, getQueries } = usePageRouter();
-  const query = getQueries();
-  const [driverLists, setDriverLists] = useState();
+  const messageName = useSelector((state: any) => state.mqtt.messageName);
+  const { navigateQuery, navigateTo } = usePageRouter();
+  const [headColumns, setHeadcolumns] = useState([]);
+  const { t } = useTranslation();
+  const [filterParams, setFilterParams]: any = useState({});
+  const { collectFilter, storeFilters } = FilterFunctions({
+    store: true,
+    filterParams,
+    setFilterParams,
+  });
 
-  const { data: passengers, isLoading } = useQuery(
-    ["GET_ACTIVE_PASSENGERS", q, currentPage, region_id, status],
-    () => {
-      return passengerService.getActivePassengers({
-        q,
-        page: currentPage,
-        region_id,
-        status,
-      });
-    },
-    { refetchInterval: 4 * 60 * 1000 }
-  );
-
-  const { regionList } = usePlaces();
-
-  const driversHandle = (e: any) => {
-    setDriverLists(e);
+  const handleSearch = (value: any) => {
+    collectFilter({ type: "q", val: value });
   };
 
-  const headColumns = useMemo(() => {
-    return [
+  const {
+    bodyColumns,
+    isLoading,
+    refetch,
+    driverLists,
+    openModal,
+    setOpenModal,
+    postReason,
+    setDriverLists,
+  } = FetchFunction();
+
+  const dispatch = useDispatch();
+  const driversHandle = (e: any) => {
+    setDriverLists(e);
+    setOpenModal(true);
+  };
+
+  const handleReason = (obj: any) => {
+    const params = {
+      reason_id: obj.value,
+      model_id: obj.model_id,
+      model_type: "booking",
+    };
+    postReason(params);
+  };
+
+  useEffect(() => {
+    const arr: any = [
       {
         title: "Ism familya",
         id: "info",
@@ -131,47 +150,92 @@ const ActivePassengers = () => {
           ),
       },
       {
+        title: "sabablar",
+        id: "ids",
+        width: 300,
+        render: (ids: any) => {
+          return (
+            <CSelectColor
+              options={Reasons?.map((i: any) => {
+                return {
+                  ...i,
+                  model_id: ids.id,
+                };
+              })}
+              defaultValue={ids.reason_id}
+              handleClick={handleReason}
+            />
+          );
+        },
+      },
+      {
         title: "Narx",
         id: "price",
+        width: 180,
         render: (val: any) => val && <p>{val} so'm</p>,
       },
       {
+        title: "Klas",
+        id: "class",
+        render: (val: any) => val && <p>{t(val)}</p>,
+      },
+      {
         title: "qidiruv vaqti",
-        id: "search_time",
+        id: "search_time_in_second",
+        width: 180,
         render: (val?: any) => {
-          return FormatTime(val, "time");
+          if (!val) return 0;
+          return <>{FormatTime(val, "secunds")}</>;
         },
       },
-    ];
-  }, []);
-
-  const bodyColumns: any = useMemo(() => {
-    const list = passengers?.data?.map((item: any) => {
-      return {
-        ...item,
-        from: {
-          from_region_name: item?.from_region_name,
-          from_district_name: item?.from_district_name,
-        },
-        to: {
-          to_region_name: item?.to_region_name,
-          to_district_name: item?.to_district_name,
-        },
-        info: {
-          name: item?.full_name,
-          gender: item?.gender,
-          img: item?.image,
-        },
-      };
-    });
-
-    return (
       {
-        list,
-        ...passengers,
-      } ?? []
-    );
-  }, [passengers]);
+        title: "",
+        id: ["notelist", "user_id"],
+        render: (val: any) => {
+          if (!val?.[1]) return "";
+          return (
+            <button
+              onClick={() => navigateQuery({ modal: "note", row_id: val[1] })}
+            >
+              <ListIcon stroke={val[0] ? "black" : "#98A2B3"} />
+            </button>
+          );
+        },
+        click: "custom",
+      },
+      {
+        title: "",
+        id: "id",
+        render: (id: any) =>
+          id && (
+            <div
+              onClick={() => navigateQuery({ booking: id })}
+              className="cursor-pointer"
+            >
+              <EyeIcon fill="var(--gray60)" />
+            </div>
+          ),
+      },
+    ];
+
+    setHeadcolumns([]);
+    if (!isLoading) {
+      setTimeout(() => {
+        setHeadcolumns(arr);
+      }, 100);
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (messageName === "new-booking" || messageName === "reason-update") {
+      refetch();
+      setTimeout(() => {
+        dispatch(mqttActions.setData({}));
+      }, 0);
+    }
+  }, [messageName]);
+
+  const { regionList } = usePlaces();
 
   const Regions = useMemo(() => {
     return regionList?.map((i: any) => {
@@ -186,12 +250,9 @@ const ActivePassengers = () => {
     Regions.unshift({ value: 0, label: "Barchasi" });
   }, [Regions]);
 
-  const handleSearch = (value: any) => {
-    navigateQuery({ q: value });
-  };
-
-  const handlerStatus = (evt: any) => {
-    navigateQuery({ status: evt });
+  const handleFilterParams = (obj: any) => {
+    setFilterParams(obj);
+    storeFilters(obj);
   };
 
   return (
@@ -199,30 +260,28 @@ const ActivePassengers = () => {
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrubmsItems} type="link" progmatic={true} />
       </Header>
+
       <div className="container">
         <SectionHeader
-          extra={<FilterButton text="filter" />}
           handleSearch={handleSearch}
-          defaultValue={query?.q}
+          defaultValue={filterParams?.q}
         >
           <div className="flex items-center gap-[14px]">
             <button
-            className="custom-btn"
-              onClick={() => navigateTo("/passengers/active-passengers/booking")}
-            >Buyurtma berish</button>
+              className="custom-btn"
+              onClick={() =>
+                navigateTo("/passengers/active-passengers/booking")
+              }
+            >
+              Buyurtma berish
+            </button>
           </div>
         </SectionHeader>
 
-        <Filters filter={!!query?.filter}>
-          <div className="flex space-x-5">
-            <CSelect label="Sabablar" options={Reasons} />
-            <CSelect
-              handlerValue={handlerStatus}
-              label="Status"
-              options={Status}
-            />
-          </div>
-        </Filters>
+        <FilterComponent
+          filterParams={filterParams}
+          setFilterParams={setFilterParams}
+        />
 
         <Statistics />
 
@@ -234,12 +293,20 @@ const ActivePassengers = () => {
             totalCount={bodyColumns?.meta?.totalCount}
             isResizeble={true}
             isLoading={isLoading}
-            currentPage={currentPage}
+            filterParams={filterParams}
+            handleFilterParams={handleFilterParams}
           />
         </div>
       </div>
 
-      <DriversList data={driverLists} />
+      <BookingDetail />
+      <DriversList
+        data={driverLists}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      />
+
+      <NoteTableButtonActions refetchList={refetch} />
     </div>
   );
 };

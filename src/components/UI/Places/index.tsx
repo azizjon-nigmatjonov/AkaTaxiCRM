@@ -1,41 +1,71 @@
-import cls from './style.module.scss';
-import { PassengerManIcon, PassangerFemaleIcon } from '../IconGenerator/Svg';
-import usePageRouter from '../../../hooks/useObjectRouter';
+import cls from "./style.module.scss";
+import { PassengerManIcon, PassangerFemaleIcon } from "../IconGenerator/Svg";
+import usePageRouter from "../../../hooks/useObjectRouter";
+import { useMemo } from "react";
 
 interface Props {
-  data: any,
-  item?: any,
-  clickHandle?: (val: any) => void
+  data: any;
+  element?: any;
+  clickHandle?: (val: any) => void;
 }
 
-const Places = ({ data, item, clickHandle = () => { } }: Props) => {
+const Places = ({ data, element, clickHandle = () => {} }: Props) => {
   const { navigateQuery } = usePageRouter();
-  let front = data ? data?.slice(0, 1) : []
-  let back = data ? data?.slice(1, 6) : []
+
+  const places = useMemo(() => {
+    return {
+      front: data ? data?.slice(0, 1) : [],
+      back: data ? data?.slice(1, 6) : [],
+    };
+  }, [data]);
 
   const handleClick = () => {
-    navigateQuery({ id: item.id })
-    clickHandle(item)
-  }
+    navigateQuery({ id: element.id });
+    clickHandle(element);
+  };
 
   return (
-    <div className='max-w-[55px] w-full ' onClick={handleClick}>
-      {front.map((val: any) => (
+    <div className="max-w-[55px] w-full " onClick={handleClick}>
+      {places.front.map((item: any) => (
         <div className={cls.front}>
-          <div className={`${cls.seat} ${val.gender != 'false' ? val.reserved ? cls.driver : cls.user : cls.empty}`}>
-            {val.gender != 'false' ? val.gender == 'm' ? <PassengerManIcon /> : <PassangerFemaleIcon /> : null}
+          <div
+            className={`${cls.seat} ${
+              item.reserved
+                ? cls.driver
+                : item.gender === "m" || item.gender === "f"
+                ? cls.user
+                : cls.empty
+            }`}
+          >
+            {item.gender == "m" ? (
+              <PassengerManIcon />
+            ) : item.gender === "f" ? (
+              <PassangerFemaleIcon />
+            ) : null}
           </div>
         </div>
       ))}
       <div className={cls.back}>
-        {back.map((val: any) => (
-          <div className={`${cls.seat} ${val.gender != 'false' ? val.reserved ? cls.driver : cls.user : cls.empty}`}>
-            {val.gender != 'false' ? val.gender == 'm' ? <PassengerManIcon /> : <PassangerFemaleIcon /> : null}
+        {places.back.map((item: any) => (
+          <div
+            className={`${cls.seat} ${
+              item.reserved
+                ? cls.driver
+                : item.gender === "m" || item.gender === "f"
+                ? cls.user
+                : cls.empty
+            }`}
+          >
+            {item.gender === "m" ? (
+              <PassengerManIcon />
+            ) : item.gender === "f" ? (
+              <PassangerFemaleIcon />
+            ) : null}
           </div>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Places
+export default Places;

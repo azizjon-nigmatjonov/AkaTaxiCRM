@@ -13,11 +13,11 @@ interface Props {
   limit: number;
   limitCount: number[];
   passRouter: boolean;
-  currentPage: number;
+  filterParams: any;
   count: number;
-  totalCount?: number
+  totalCount?: number;
   dataLength: number;
-  setCurrentPage: (newPage: number) => void;
+  handleFilterParams: (newPage: number) => void;
   setCurrentLimit: (newLimit: number) => void;
 }
 
@@ -26,8 +26,8 @@ const CPagination = ({
   limitCount,
   passRouter,
   totalCount,
-  currentPage,
-  setCurrentPage,
+  filterParams,
+  handleFilterParams,
   setCurrentLimit,
   dataLength,
   ...props
@@ -39,18 +39,16 @@ const CPagination = ({
   const count: any = usePaginationCount(props?.count);
   const navigate = useNavigate();
 
-
-
   function handleRouteActions(queryObj: {
     limit?: any;
     page: number;
-    queryLimit?: any;
-    something?: any
+    something?: any;
   }) {
     if (queryObj?.limit) queryObj.limit = parseInt(queryObj.limit, 10);
     if (!passRouter) {
-      if (queryObj?.page) setCurrentPage(queryObj.page);
-      if (queryObj?.limit) setCurrentLimit(queryObj.queryLimit ?? 10);
+      if (queryObj?.page)
+        handleFilterParams({ ...filterParams, page: queryObj.page });
+      if (queryObj?.limit) setCurrentLimit(limit ?? 10);
       return;
     }
 
@@ -68,21 +66,19 @@ const CPagination = ({
   }
 
   return (
-    <div className="table__pagination flex items-center justify-between border-t border-lightGray px-3">
-      {/* <PaginationLimits
-        limit={limit}
-        limitCount={limitCount}
-        handleRouteActions={handleRouteActions}
-      /> */}
-      <p className="text-[var(--gray)]">{totalCount} tadan 1-{dataLength} tasi</p>
+    <div className="table__pagination  flex items-center justify-between border-t border-lightGray px-3">
+      <p className="text-[var(--gray)]">
+        {totalCount} tadan 1-{dataLength} tasi
+      </p>
       <Pagination
-        onChange={(e, val) =>
-          handleRouteActions({ page: val, queryLimit: query?.limit, something: e })
-        }
+        onChange={(e, val) => {
+          console.log("e pagination", e);
+          handleRouteActions({ page: val });
+        }}
         {...props}
         count={count.tableCount}
-        page={currentPage}
-        defaultPage={currentPage}
+        page={filterParams?.page || 1}
+        defaultPage={filterParams?.page || 1}
       />
     </div>
   );

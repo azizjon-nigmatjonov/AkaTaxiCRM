@@ -28,6 +28,8 @@ const Form = ({ refetch }: Props) => {
     resolver: yupResolver(schema),
   });
 
+  console.log(getValues());
+  
 
   const { data: regions } = useQuery(["GET_REGIONS_LIST_"], () => {
     return regionService.getList();

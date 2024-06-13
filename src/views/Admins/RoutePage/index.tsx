@@ -12,7 +12,7 @@ export const breadCrumbs = [
   { label: "Routes sahifasi" },
 ];
 
-export const RoutePage = () => {
+const RoutePage = () => {
   const { navigateQuery } = usePageRouter()
   const { modal } = useGetQueries()
   const { newRouteList, refetch, isLoading } = FetchFunction();
@@ -61,3 +61,6 @@ export const RoutePage = () => {
     </>
   );
 };
+
+
+export default RoutePage

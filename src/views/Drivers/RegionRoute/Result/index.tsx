@@ -1,35 +1,53 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import CTable from "../../../../components/CElements/CTable";
 import { useQuery } from "react-query";
 import fileService from "../../../../services/fileService";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
 import LTabs from "../../../../components/CElements/CTab/LineTab";
 import { TableData } from "../Logic";
+import { FilterFunctions } from "../../../../components/UI/Filter/Logic";
 
 const tabList = [
-  { slug: '', name: 'Aktiv' },
-  { slug: 'on-way', name: "Yo'lda" },
-  { slug: 'canceled', name: 'Bekor qilingan' },
-  { slug: 'done', name: 'Yetib borgan' }
-]
+  { slug: "", name: "Aktiv" },
+  { slug: "on-way", name: "Yo'lda" },
+  { slug: "canceled", name: "Bekor qilingan" },
+  { slug: "done", name: "Yetib borgan" },
+];
 
-const Result = () => {
-  const { start, end, currentPage, status } = useGetQueries();
-  const { headColumns } = TableData()
-  
-  const { data, isLoading } = useQuery(['GET_TRIPS', start, end, currentPage, status], () => {
-    return fileService.getTrips({
-      page: currentPage, perPage: 10,
-      from_location_id:  decodeURIComponent(start).split(',').map(li => parseInt(li)),
-      to_location_id: decodeURIComponent(end).split(',').map(li => parseInt(li)),
-      status
-    })
-  })
- 
+const Result = ({ selected }: { selected?: any }) => {
+  const { currentPage, status } = useGetQueries();
+  const { headColumns } = TableData();
+  const [filterParams, setFilterParams]: any = useState({});
+  const { storeFilters } = FilterFunctions({ filterParams, setFilterParams });
+
+  const locations = useMemo(() => {
+    const arr = selected[0].list?.map((item: any) => item.id) ?? [];
+    const arr2 = selected[1].list?.map((item: any) => item.id) ?? [];
+    
+    return { start: arr.join(","), end: arr2?.join(",") };
+  }, [selected[0]?.list?.length, selected[1]?.list?.length]);
+
+  const { data, isLoading } = useQuery(
+    ["GET_TRIPS", locations.start, locations.end, currentPage, status, selected[0]?.list?.length],
+    () => {
+      return fileService.getTrips({
+        page: currentPage,
+        perPage: 10,
+        from_location_id: locations.start,
+        to_location_id: locations.end,
+        status,
+      });
+    }
+  );
+
+  const handleFilterParams = (obj: any) => {
+    setFilterParams(obj);
+    storeFilters(obj);
+  };
 
 
   const bodyColumns: any = useMemo(() => {
-    const list = data?.data ?? []
+    const list = data?.data ?? [];
 
     const modifiedList = list.map((li: any) => {
       return {
@@ -37,11 +55,11 @@ const Result = () => {
         userInfo: {
           full_name: li.name,
           gender: li.gender,
-          image: li.image
+          image: li.image,
         },
         carInfo: {
           name: li.car,
-          number: li.car_number
+          number: li.car_number,
         },
         fromStart: {
           city: li.from_region_name,
@@ -49,17 +67,16 @@ const Result = () => {
         },
         fromEnd: {
           city: li.to_region_name,
-          district: li.to_district_name
-        }
+          district: li.to_district_name,
+        },
       };
     });
 
     return {
       list: modifiedList,
-      ...data
-    }
-  }, [data])
-
+      ...data,
+    };
+  }, [data]);
 
   return (
     <div className="mt-8">
@@ -75,9 +92,10 @@ const Result = () => {
         bodyColumns={bodyColumns.list}
         count={bodyColumns?.meta?.pageCount}
         disablePagination={false}
-        isResizeble={false}
+        isResizeble={true}
         isLoading={isLoading}
-        currentPage={currentPage}
+        filterParams={filterParams}
+        handleFilterParams={handleFilterParams}
       />
     </div>
   );

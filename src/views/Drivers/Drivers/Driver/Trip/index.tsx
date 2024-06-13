@@ -5,18 +5,18 @@ import CTable from "../../../../../components/CElements/CTable";
 import usePageRouter from "../../../../../hooks/useObjectRouter";
 import { FormatTime } from "../../../../../utils/formatTime";
 import { useGetQueries } from "../../../../../hooks/useGetQueries";
+import { useParams } from "react-router-dom";
 
 const DriverTrip = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
-  const { id, currentPage } = useGetQueries();
+  const { currentPage } = useGetQueries();
+  const { id } = useParams();
 
   const { data: trip, isLoading } = useQuery(
     ["GET_DRIVERS_TRIPS", id, currentPage],
     () => {
       return driverService.getDriverTripHistory({ id, page: currentPage });
-    },
-    
-
+    }
   );
 
   const TripData = useMemo(() => {
@@ -44,46 +44,42 @@ const DriverTrip = () => {
     return [
       {
         title: "marshrut raqami",
-        id: "start_region_name",
+        id: "id",
       },
       {
         title: "Start manzil",
         id: "start",
-        render: (val?: any) => val && (
-          <div>
-            {val?.start_region_name}, {val?.start_district_name}
-          </div>
-        ),
+        render: (val?: any) =>
+          val && (
+            <div>
+              {val?.start_region_name}, {val?.start_district_name}
+            </div>
+          ),
       },
       {
         title: "borar manzil",
         id: "end",
-        render: (val?: any) => val && (
-          <div>
-            {val?.end_region_name}, {val?.end_district_name}
-          </div>
-        )
+        render: (val?: any) =>
+          val && (
+            <div>
+              {val?.end_region_name}, {val?.end_district_name}
+            </div>
+          ),
       },
       {
         title: "sana",
         id: "created_at",
-        render: (val?: any) => val && (
-          <>{FormatTime(val)}</>
-        )
+        render: (val?: any) => val && <>{FormatTime(val)}</>,
       },
       {
         title: "mijozlar",
         id: "passengers_count",
-        render: (val?: any) => val && (
-          <>{val}ta mijoz</>
-        )
+        render: (val?: any) => val && <>{val}ta mijoz</>,
       },
       {
         title: "umumiy summa",
         id: "price_formatted",
-        render: (val?: any) => val && (
-          <p>{val} so'm</p>
-        )
+        render: (val?: any) => val && <p>{val} so'm</p>,
       },
     ];
   }, []);
@@ -103,7 +99,8 @@ const DriverTrip = () => {
         count={TripData?.meta?.pageCount}
         handleActions={handleActions}
         isLoading={isLoading}
-        currentPage={currentPage}
+        filterParams={{}}
+        handleFilterParams={() => {}}
       />
     </>
   );

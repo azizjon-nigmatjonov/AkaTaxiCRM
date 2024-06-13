@@ -1,84 +1,104 @@
-// import MenuItem from "@mui/material/MenuItem";
-// import Select, { SelectChangeEvent } from "@mui/material/Select";
-// import CLabel from "../CLabel";
 import { ArrowDownOutline } from "../../../components/UI/IconGenerator/Svg";
-import { useState } from "react";
-import './style.scss';
+import { useEffect, useState } from "react";
+import "./style.scss";
+import { Closer } from "../../../components/UI/Closer";
 
 interface Props {
-    id?: string;
-    options: any;
-    label?: string;
-    handlerValue?: (val: any) => void;
-    disabled?: boolean;
-    placeholder?: string;
-    value?: any;
-    classes?: string;
+  options: any;
+  defaultValue?: any;
+  handleClick?: (val: any) => void;
 }
 
-const CSelectColor = ({ options }: Props) => {
-    options = [
-        {
-            value: 'drop',
-            label: "Ko'tarmadi",
-        },
-        {
-            value: 'driver_check',
-            label: 'Haydovchi tekshirdi',
-        },
-        {
-            value: 'passenger_check',
-            label: "Yo'lovchi tekshirdi",
-        },
-        {
-            value: 'regions',
-            label: "Tumanlar aro",
-        },
-        {
-            value: 'go',
-            label: "Ketti",
-        },
-        {
-            value: 'not_found',
-            label: "Taksi topilmadi",
-        },
-        {
-            value: 'expensive',
-            label: 'Qimmat',
-        },
-    ]
+const CSelectColor = ({
+  options,
+  defaultValue,
+  handleClick = () => {},
+}: Props) => {
+  const defaultObj = {
+    label: "Bo'sh",
+    value: 0,
+    color: "#475467",
+  };
 
-    const [value, setValue] = useState(options[0].label)
-    const [drop, setDrop] = useState(false)
+  const [current, setCurrent] = useState(defaultObj);
+  const [open, setOpen] = useState(false);
 
+  const handleOptionClick = (item: any) => {
+    setCurrent(item);
+    handleClick(item);
+    setOpen(false);
+  };
 
-    
-    return (
-        <div className="w-full relative h-full  cursor-pointer">
-            <div className="flex items-center gap-2">
-                <div onClick={()=>setDrop(prev => !prev)} className={`${drop && 'rotate-180'}`}>
-                    <ArrowDownOutline height={16} width={16} />
-                </div>
-                <div>
-                    <div onClick={() => setDrop(prev => !prev)} className={`rounded-2xl border-2 border-red-500 px-6px py-2px flex items-center gap-1`}>
-                        <div className={`h-2 w-2 rounded-full bg-red-500`}/>
-                        <p className={ `text-red-500 text-xs  font-medium`}>{value}</p>
-                    </div>
-                    {drop && <div className="menu absolute z-10 top-full left-0 h-[210px] bg-white mt-1 card-shadow border-gray-20 space-y-20px p-6 w-full rounded-lg">
-                        {options.map((item: any) => (
-                            <div className="flex" onClick={() => { setValue(item.label), setDrop(prev => !prev) }}>
-                                <div className={`rounded-2xl border-2  border-[#027A48] px-6px py-2px flex items-center gap-1`}>
-                                    <div className={`bg-[#027A48] h-2 w-2 rounded-full `} />
-                                    <p className={`text-[#027A48] text-xs  font-medium`}>{item.label}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    }
-                </div>
-            </div>
+  useEffect(() => {
+    if (defaultValue) {
+      const found =
+        options?.find((item: any) => item.value === defaultValue) ?? {};
+      if (found) {
+        setCurrent(found);
+      } else {
+        setCurrent(defaultObj);
+      }
+    } else {
+      setCurrent(defaultObj);
+    }
+  }, [defaultValue, options]);
+
+  return (
+    <div className="w-full relative h-full">
+      <div className="flex items-center space-x-2">
+        <div
+          onClick={() => setOpen(!open)}
+          className={`${open && "rotate-180"}`}
+        >
+          <ArrowDownOutline height={16} width={16} />
         </div>
-    )
-}
+        <div>
+          <div
+            onClick={() => setOpen(!open)}
+            className={`rounded-2xl border-2 px-6px py-2px flex items-center gap-1 cursor-pointer`}
+            style={{ borderColor: current?.color }}
+          >
+            <div
+              className="w-2 h-2 rounded-full"
+              style={{ backgroundColor: current?.color }}
+            >
+              <div className={`h-2 w-2 rounded-full`}></div>
+            </div>
+            <p className={`font-medium`} style={{ color: current?.color }}>
+              {current.label}
+            </p>
+          </div>
+          {open && (
+            <div className="absolute p-3 z-[91] top-full mt-2 left-0 max-h-[210px] overflow-y-scroll designed-scroll bg-white card-shadow border border-[var(--gray20)] w-full rounded-[16px] space-y-2">
+              {options.map((item: any, index: number) => (
+                <button
+                  key={index}
+                  className="block w-full"
+                  onClick={() => handleOptionClick(item)}
+                >
+                  <div
+                    className={`rounded-2xl border px-6px py-2px flex items-center space-x-2 w-full`}
+                    style={{ borderColor: item.color }}
+                  >
+                    <div
+                      className="w-2 h-2 rounded-full"
+                      style={{ backgroundColor: current?.color }}
+                    >
+                      <div className={`h-2 w-2 rounded-full`}></div>
+                    </div>
+                    <p className="font-medium" style={{ color: item.color }}>
+                      {item.label}
+                    </p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+      {open && <Closer handleClose={() => setOpen(false)} />}
+    </div>
+  );
+};
 
-export default CSelectColor
+export default CSelectColor;

@@ -19,6 +19,7 @@ interface Props {
   footerActive?: boolean;
   open: boolean;
   classes?: string;
+  titleCenter?: boolean;
   closable?: boolean;
   handleSave?: (val?: any) => void;
   handleClose?: (val?: any) => void;
@@ -38,7 +39,8 @@ const CModal: FC<Props> = ({
   classes = "",
   handleSave = () => { },
   handleClose = () => { },
-  closable = false
+  closable = false,
+  titleCenter = true
 }) => {
 
   return (
@@ -53,7 +55,7 @@ const CModal: FC<Props> = ({
         <Card className={cls.card} style={{ padding }}>
           <div className={classes}>
             <div className={cls.header}>
-              <div></div>
+              {titleCenter ? <div></div> : ""}
               <div className={cls.cardTitle}>{t(title)}</div>
               <div></div>
               <IconButton className={cls.closeButton} onClick={handleClose}>

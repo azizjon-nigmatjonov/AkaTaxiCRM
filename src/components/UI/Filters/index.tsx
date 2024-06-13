@@ -2,44 +2,41 @@ import { Button } from "@mui/material";
 import { LinearSortIcon } from "../IconGenerator/Svg";
 import { BiX } from "react-icons/bi";
 import { t } from "i18next";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import Filters from "./Filter";
-import usePageRouter from "../../../hooks/useObjectRouter";
 import { useSearchParams } from "react-router-dom";
 
 interface Props {
   text?: string;
   left?: ReactNode;
-  open?: boolean;
+  open: boolean;
   onClick?: () => void;
+  setOpen: (val: boolean) => void
   children?: any;
 }
 
-const FilterButton = ({ text = "", left, children, ...props }: Props) => {
-  const { navigateQuery, getQueries } = usePageRouter();
-  const query = getQueries();
+const FilterButton = ({ text = "", open, setOpen, left, children, ...props }: Props) => {
   const setSearchParams = useSearchParams()[1];
-  const [open, setOpen] = useState(false);
-
+  
   const toggle = () => {
-    setOpen((prev) => !prev);
+    setOpen(!open);
+    const defaults: any = {}
 
     if (!open) {
-      navigateQuery({ filter: "filter" });
-    } else setSearchParams({});
+    } else setSearchParams(defaults);
   };
 
   return (
     <div className="relative">
       <div
-        id={open || !!query.filter ? "activeFilterButton" : "filterButton"}
+        id={open ? "activeFilterButton" : "filterButton"}
         {...props}
       >
         <Button onClick={() => toggle()}>
           {left ? left : <span>{t(text)}</span>}
           <div className="icon">
             <div>
-              {open || !!query.filter ? (
+              {open ? (
                 <BiX color="#993701" size={16} />
               ) : (
                 <LinearSortIcon />

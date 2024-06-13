@@ -1,8 +1,6 @@
 import { useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/UI/Sections/Header";
-import FilterButton from "../../../components/UI/Filters";
-import usePageRouter from "../../../hooks/useObjectRouter";
 import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
@@ -10,17 +8,25 @@ import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import PassengerList from "./PassengerList";
 import LTabs from "../../../components/CElements/CTab/LineTab";
-import { ActiveDriversTable, breadCrumbs, tabList } from "./Logic";
+import { ActiveDriversTable, breadCrumbs, FetchFunction } from "./Logic";
 import { ActiveDriverFilter } from "./Filter";
-import DriversList from "../../../views/Passengers/Active/DriversList";
-
-
+// import DriversList from "../../../views/Passengers/Active/DriversList";
+import { NoteTableButtonActions } from "../../../components/UI/CallModals/NoteModal/Logic";
+import { OffersModal } from "./Offers";
+import { FilterFunctions } from "../../../components/UI/Filter/Logic";
 
 const ActiveDrivers = () => {
   const [passenger, setPassenger] = useState([]);
-  const { navigateQuery } = usePageRouter();
-  const [connectPassenger, setConnectPassger] = useState()
+  const { tabList } = FetchFunction();
+  const [open, setOpen] = useState(false);
+  const [filterParams, setFilterParams]: any = useState({});
+  const { collectFilter, storeFilters } = FilterFunctions({ store: true, filterParams, setFilterParams });
 
+  const handleOffers = (val: any) => {
+    setOpen(true);
+    console.log("obj", val);
+  };
+  
   const {
     currentPage,
     q,
@@ -32,9 +38,16 @@ const ActiveDrivers = () => {
     birthday,
   } = useGetQueries();
 
-  const { headColumns } = ActiveDriversTable({ setPassenger , setConnectPassger});
+  const { headColumns } = ActiveDriversTable({
+    setPassenger,
+    handleOffers,
+  });
 
-  const { data: drivers, isLoading } = useQuery(
+  const {
+    data: drivers,
+    isLoading,
+    refetch,
+  } = useQuery(
     [
       "GET_ACTIVE_DRIVERS",
       q,
@@ -59,6 +72,8 @@ const ActiveDrivers = () => {
     }
   );
 
+  // console.log(passenger);
+
   const driversData: any = useMemo(() => {
     if (!drivers) return [];
     const list: any = drivers?.data;
@@ -78,28 +93,37 @@ const ActiveDrivers = () => {
             car_name: item.car_name,
             car_number: item.car_number,
           },
+          notelist: {
+            id: item.id,
+            notelist: item.notes_count,
+          },
         };
       }),
       ...drivers,
     };
   }, [drivers]);
 
-  const handleSearch = (evt: any) => {
-    navigateQuery({ q: evt });
+  const handleSearch = (value: any) => {
+    collectFilter({ type: "q", val: value });
   };
 
-
+  const handleFilterParams = (obj: any) => {
+    setFilterParams(obj);
+    storeFilters(obj);
+  };
   return (
     <>
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} />
       </Header>
-      <div className="px-5">
-        <SectionHeader handleSearch={handleSearch}>
-          <FilterButton text="filter" />
-        </SectionHeader>
 
-        <ActiveDriverFilter />
+      <div className="px-5">
+        <SectionHeader
+          handleSearch={handleSearch}
+          defaultValue={q}
+        ></SectionHeader>
+
+        <ActiveDriverFilter filterParams={filterParams} setFilterParams={setFilterParams} />
 
         <LTabs tabList={tabList} />
 
@@ -109,10 +133,12 @@ const ActiveDrivers = () => {
           count={driversData?.meta?.pageCount}
           totalCount={driversData?.meta?.totalCount}
           isLoading={isLoading}
-          currentPage={currentPage}
+          filterParams={filterParams}
+          handleFilterParams={handleFilterParams}
         />
-        <DriversList data={connectPassenger} />
+        <OffersModal openModal={open} setOpenModal={setOpen} />
         <PassengerList data={passenger} />
+        <NoteTableButtonActions refetchList={refetch} />
       </div>
     </>
   );

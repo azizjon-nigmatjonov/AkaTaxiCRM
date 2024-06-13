@@ -1,7 +1,8 @@
-import Admins from "../../views/Admins/Admins";
-import Rolls from "../../views/Admins/Rolls";
-import NewRolls from "../../views/Admins/Rolls/AddRolls";
-import { RoutePage } from "../../views/Admins/RoutePage";
+import { lazy } from "react";
+const Admins = lazy(() => import("../../views/Admins/Admins"));
+const Rolls = lazy(() => import("../../views/Admins/Rolls"));
+const NewRolls = lazy(() => import("../../views/Admins/Rolls/AddRolls"));
+const RoutePage = lazy(() => import("../../views/Admins/RoutePage"));
 
 export const adminList = [
   {
@@ -10,7 +11,7 @@ export const adminList = [
     sidebar: true,
     title: "Adminlar",
     icon: "admin",
-    element: <Admins />,
+    element: <Admins />
   },
   {
     parent: "admins",
@@ -27,6 +28,7 @@ export const adminList = [
     title: "Rol yaratish",
     icon: "",
     element: <NewRolls />,
+    single_page: true
   },
   {
     parent: "admins",
@@ -35,6 +37,7 @@ export const adminList = [
     title: "Rol tahrirlash",
     icon: "",
     element: <NewRolls />,
+    single_page: true
   },
   {
     parent: "admins",
@@ -43,21 +46,22 @@ export const adminList = [
     title: "Routes",
     icon: "list-squared",
     element: <RoutePage />,
+    permissions: ["add_permission", "delete_permisson"]
   },
-  {
-    parent: "admins",
-    link: "routes/:id",
-    sidebar: false,
-    title: "Route tahrirlash",
-    icon: "",
-    element: <RoutePage />,
-  },
-  {
-    parent: "admins",
-    link: "routes/create",
-    sidebar: false,
-    title: "Route yaratish",
-    icon: "",
-    element: <RoutePage />,
-  },
+  // {
+  //   parent: "admins",
+  //   link: "routes/:id",
+  //   sidebar: false,
+  //   title: "Route tahrirlash",
+  //   icon: "",
+  //   element: <RoutePage />,
+  // },
+  // {
+  //   parent: "admins",
+  //   link: "routes/create",
+  //   sidebar: false,
+  //   title: "Route yaratish",
+  //   icon: "",
+  //   element: <RoutePage />,
+  // },
 ];

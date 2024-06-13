@@ -7,6 +7,7 @@ import {
 } from "../../../../../components/UI/IconGenerator/Svg";
 import { PermissionCreate } from "../PermissionCreate";
 import usePageRouter from "../../../../../hooks/useObjectRouter";
+import { useTranslation } from "react-i18next";
 
 export const ListIem = ({
   route,
@@ -21,6 +22,7 @@ export const ListIem = ({
 }) => {
   const { navigateTo } = usePageRouter();
   const [openPopover, setOpenPopover] = useState(false);
+  const { t } = useTranslation()
 
   const closePopover = (status: string, id: number) => {
     if (status === "delete") {
@@ -60,7 +62,7 @@ export const ListIem = ({
         <div className="flex gap-5 flex-wrap">
           {route.permissions?.map((permission: any) => (
             <div className="border border-[var(--gray20)] h-[40px] px-16px whitespace-nopwrap rounded-[8px] common-shadow min-w-[120px] flex items-center justify-between space-x-5">
-              <span>{permission.label}</span>
+              <span>{t(permission.label)}</span>
 
               <button
                 onClick={() => deletePermission(permission.id)}

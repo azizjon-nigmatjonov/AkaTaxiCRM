@@ -18,7 +18,7 @@ export const PermissionCreate = ({
   list: any;
   handleClose: () => void;
 }) => {
-  const { permissionOptions } = getPermissionList({ list});
+  const { permissionOptions } = getPermissionList({ list, path });
 
   const schema = Validation();
   const { control, setValue, handleSubmit, reset } = useForm({

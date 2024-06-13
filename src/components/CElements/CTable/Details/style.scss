@@ -1,13 +1,49 @@
 #table {
-  @include common-shadow;
-  border-radius: 18px;
+  // @include common-shadow;
+  // border-radius: 18px;
+  // border-top-left-radius: 18px;
+  // border-top-right-radius: 18px;
+
+  .MuiList-root {
+    .MuiButtonBase-root {
+      display: flex;
+      justify-content: space-between !important;
+    }
+  }
+  
+  .MuiPaper-root {
+    &::-webkit-scrollbar {
+      display: block !important;
+    }
+    .MuiList-root {
+      &::-webkit-scrollbar {
+        display: block !important;
+      }
+    }
+  }  
+
+  .MuiPaper-root {
+    // overflow: hidden;
+    // overflow-x: scroll !important;
+
+    // &::-webkit-scrollbar {
+    //   display: block !important;
+    // }
+    // &::-webkit-scrollbar-track {
+    //   border-radius: 12px;
+    //   border: 1px solid var(--gray20);
+    // }
+    // &::-webkit-scrollbar-thumb {
+    //   background: var(--gray30);
+    //   border-radius: 12px;
+    // }
+  }
 }
 .CTableContainer {
   width: 100%;
   .table {
     width: 100%;
-    overflow: auto;
-    border-radius: $lg;
+    // border-radius: $lg;
     position: relative;
     color: var(--black);
     background-color: white;
@@ -17,61 +53,64 @@
       border-collapse: separate;
       border-spacing: 0;
     }
+  }
+}
+.table__pagination {
+  border-bottom-right-radius: $lg;
+  border-bottom-left-radius: $lg;
+  min-height: 50px;
+  @include center;
+  padding: 0 24px;
+  background-color: white;
+  // margin-top: -15px;
 
-    &__pagination {
-      // background-color: red;
-      border-bottom-right-radius: $lg;
-      border-bottom-left-radius: $lg;
-      min-height: 50px;
-      @include center;
-      padding: 0 24px;
+  .MuiPagination-ul {
+    display: flex;
+    gap: 6px;
+    @include remove-scroll;
+    .MuiPaginationItem-page {
+      background-color: transparent;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .MuiButtonBase-root {
+      cursor: pointer;
+      svg {
+        display: none;
+      }
+    }
+    li {
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      @include center-center;
 
-      .MuiPagination-ul {
-        .MuiPaginationItem-page {
-          background-color: transparent;
-          font-size: 14px;
-          font-weight: 500;
-        }
-        .MuiButtonBase-root {
-          cursor: pointer;
-          svg {
-            display: none;
-          }
-        }
-        li {
-          position: relative;
-          z-index: 2;
-          cursor: pointer;
-          border-radius: 8px;
-          width: 32px;
-          height: 32px;
-          @include center-center;
+      button {
+        color: var(--gray);
+      }
 
-          button {
-            color: var(--gray);
-          }
-
-          .Mui-selected {
-            color: var(--main);
-            font-weight: 700;
-          }
-        }
-        li:first-child {
-          border: 1px solid var(--gray20);
-          button {
-            background-image: url("/svg/arrow-left.svg");
-            background-repeat: no-repeat;
-            background-position: center;
-          }
-        }
-        li:last-child {
-          border: 1px solid var(--gray20);
-          button {
-            background-image: url("/svg/arrow-right.svg");
-            background-repeat: no-repeat;
-            background-position: center;
-          }
-        }
+      .Mui-selected {
+        color: var(--main);
+        font-weight: 700;
+      }
+    }
+    li:first-child {
+      border: 1px solid var(--gray20);
+      button {
+        background-image: url("/svg/arrow-left.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+    li:last-child {
+      border: 1px solid var(--gray20);
+      button {
+        background-image: url("/svg/arrow-right.svg");
+        background-repeat: no-repeat;
+        background-position: center;
       }
     }
   }
@@ -102,9 +141,6 @@
 
 .MuiTableRow-root {
   height: 45px !important;
-  // &:nth-child(2n) {
-  //   background-color: var(--softGray);
-  // }
 
   &:last-child {
     .CTableCell {
@@ -126,11 +162,11 @@
 }
 
 #table {
+  overflow-x: scroll;
   .CTableContainer {
     border-radius: 18px !important;
-    border: 1px solid var(--gray20);
     box-shadow: none;
-    overflow: scroll;
+    // overflow: scroll;
   }
 }
 
@@ -139,10 +175,9 @@ thead {
   th {
     position: relative;
     padding: 0 !important;
-    div {
+    .cell {
       height: 40px;
       padding: 24px !important;
-      // background-color: var(--softGray) !important;
       color: var(--black);
       font-weight: 600;
       text-transform: uppercase;
@@ -176,7 +211,6 @@ thead {
 }
 .resizer:hover,
 .resizing {
-  // border-right: 2px solid var(--main);
   background-image: url("/svg/expandSide.svg");
   background-repeat: no-repeat;
 }

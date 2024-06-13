@@ -2,6 +2,7 @@ import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
 import CLabel from "../../CElements/CLabel";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 // import IconGenerator from "../IconPicker/IconGenerator";
 
 interface Props {
@@ -38,6 +39,7 @@ const SelectUI = ({
   handleChange: (val: any) => void;
   onFormChange: (val: any) => void;
 }) => {
+  const { t } = useTranslation()
   useEffect(() => {
     if (defaultValue?.length) {
       onFormChange(defaultValue);
@@ -63,7 +65,7 @@ const SelectUI = ({
     >
       {options?.map((option?: any) => (
         <MenuItem key={option.value} value={option.value}>
-          {option.label}
+          {t(option.label)}
         </MenuItem>
       ))}
     </Select>

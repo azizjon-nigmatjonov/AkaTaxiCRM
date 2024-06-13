@@ -1,9 +1,7 @@
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs";
 import { Header } from "../../../../components/UI/Header";
 import { CreateFunction, NotificationData, breadCrumbItems } from "./Logic";
-// import CRadio from "../../../../components/CElements/Radio";
 import CCard from "../../../../components/CElements/CCard";
-import HFSelect from "../../../../components/FormElements/HFSelect";
 import CText from "../../../../components/CElements/CText";
 import { HFPeriodPicker } from "../../../../components/FormElements/HFPeriodPicker";
 import { useForm } from "react-hook-form";
@@ -11,35 +9,51 @@ import { HFMultipleSelect } from "../../../../components/FormElements/HFMultiple
 import { UserGroup } from "./UserGroup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Validation } from "./Validation";
+import { useVersions } from "../../../../hooks/useVersions";
 const Divice = [
   { value: "ios", label: "IOS" },
   { value: "android", label: "Android" },
 ];
 
-const Version = [
-  { value: "v 1.1.04", label: "v 1.1.04" },
-  { value: "v 1.1.03", label: "v 1.1.03" },
-  { value: "v 1.1.02", label: "v 1.1.02" },
-  { value: "v 1.1.01", label: "v 1.1.01" },
-];
+// const Version = [
+//   { value: "v 1.1.04", label: "v 1.1.04" },
+//   { value: "v 1.1.03", label: "v 1.1.03" },
+//   { value: "v 1.1.02", label: "v 1.1.02" },
+//   { value: "v 1.1.01", label: "v 1.1.01" },
+// ];
 
-const AddNotification = () => {
+const AddNotification = ({
+  breadCrumbs,
+  type = "",
+}: {
+  breadCrumbs?: any;
+  type?: string;
+}) => {
   const schema = Validation();
-  const { createNotification } = CreateFunction();
+  const { VersionOptions } = useVersions()
+  const { createNotification } = CreateFunction({
+    type: type ? type : "firebase",
+  });
   const { regionOption } = NotificationData();
   const { control, handleSubmit, setValue } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
+  
 
   const onSubmit = (data: any) => {
-    createNotification({ ...data, type: "firebase" });
+    createNotification({ ...data });
   };
+
 
   return (
     <>
       <Header sticky={true}>
-        <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
+        <CBreadcrumbs
+          items={breadCrumbs ? breadCrumbs : breadCrumbItems}
+          progmatic={true}
+          type="link"
+        />
       </Header>
 
       <div className="px-6">
@@ -47,7 +61,7 @@ const AddNotification = () => {
           <CCard style={{ minHeight: 0 }}>
             <span className="text-base font-medium">Kimga yuborish kerak?</span>
             <UserGroup setValue={setValue} />
-
+    
             <div className="grid grid-cols-5 gap-x-4">
               <HFPeriodPicker
                 label="Vaqt"
@@ -55,7 +69,7 @@ const AddNotification = () => {
                 control={control}
                 placeholder="Tanlang"
                 required={true}
-                // defaultValue={"01.01-.01.01"}
+                defaultValue={new Date()}
               />
               <HFMultipleSelect
                 control={control}
@@ -64,14 +78,14 @@ const AddNotification = () => {
                 label="Operatsion sistema"
                 placeholder="Tanglang"
               />
-              <HFSelect
+              <HFMultipleSelect
                 control={control}
-                options={Version}
+                options={VersionOptions}
                 name="versions"
                 label="Versiyalar"
                 placeholder="Tanglang"
               />
-              <HFSelect
+              <HFMultipleSelect
                 control={control}
                 options={[
                   { label: "Erkak", value: "m" },

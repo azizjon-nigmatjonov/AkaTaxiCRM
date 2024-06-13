@@ -5,8 +5,9 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import CLabel from "../../../components/CElements/CLabel";
 import "./style.scss";
 import { Controller } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DateData } from "./Logic";
+import dayjs from "dayjs";
 
 interface Props {
   label?: string;
@@ -14,41 +15,55 @@ interface Props {
   required?: boolean;
   control: any;
   placeholder?: string;
+  defaultValue?: any;
 }
 
 const DateUI = ({
   field,
   error,
   placeholder,
+  defaultValue,
 }: {
   field: any;
   error?: any;
+  defaultValue?: any;
   placeholder: string;
 }) => {
   const [open, setOpen] = useState(false);
   const { changeAction, formatedDate } = DateData();
+
   const handleChange = (date: any) => {
     changeAction(date);
   };
 
   useEffect(() => {
     field.onChange(formatedDate);
-  }, [formatedDate])
-  
+  }, [formatedDate]);
+
   const acceptChange = () => {
     console.log("accept");
   };
+
+  const defValue = useMemo(() => {
+    if (defaultValue) {
+      const date = dayjs(defaultValue)
+      changeAction(date)
+      return date
+    };
+  }, [defaultValue]);
 
   return (
     <div className="relative">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DateTimePicker"]}>
           <DateTimePicker
+            disablePast
             open={open}
             onOpen={() => setOpen(true)}
             onClose={() => setOpen(false)}
             onAccept={acceptChange}
             onChange={handleChange}
+            defaultValue={defValue}
             ampm={false}
             format="DD.MM.YYYY HH:mm"
             slotProps={{
@@ -75,6 +90,7 @@ export const HFPeriodPicker = ({
   name,
   control,
   placeholder = "",
+  defaultValue,
 }: Props) => {
   return (
     <div className="flex flex-col relative" id="HFDateTimePicker">
@@ -87,7 +103,12 @@ export const HFPeriodPicker = ({
           required: required ? "required_field" : false,
         }}
         render={({ field, fieldState: { error } }) => (
-          <DateUI field={field} error={error} placeholder={placeholder} />
+          <DateUI
+            field={field}
+            error={error}
+            placeholder={placeholder}
+            defaultValue={defaultValue}
+          />
         )}
       ></Controller>
     </div>

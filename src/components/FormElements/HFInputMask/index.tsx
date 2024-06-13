@@ -47,7 +47,7 @@ const InputUI = ({
         handleChange(e.target.value);
       }}
       mask={mask}
-      maskChar=" "
+      maskChar=""
       value={value}
       placeholder={placeholder}
       required={required}
@@ -95,7 +95,7 @@ const HFInputMask = ({
               defaultValue={defaultValue}
             />
             {error?.message && (
-              <p className="text-sm text-[var(--error)] absolute -bottom-5">
+              <p className="text-sm text-[var(--error)] absolute -bottom-0">
                 {t(error.message || "")}
               </p>
             )}

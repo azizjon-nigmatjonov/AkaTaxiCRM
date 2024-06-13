@@ -9,6 +9,20 @@ import Login from "../views/Auth/Login";
 import Registration from "../views/Auth/Registration";
 
 import { routeList } from "./List";
+import ErrorBoundary from "../utils/ErrorBoundary";
+import { PageFallbackInner } from "../components/UI/PageFallback";
+
+const defaults = {
+  dashboard: [],
+  passengers: [],
+  drivers: [],
+  infos: [],
+  admins: [],
+  notifications: [],
+  partners: [],
+  settings: [],
+  call_center: [],
+};
 
 interface Path {
   parent: string;
@@ -17,7 +31,8 @@ interface Path {
   title: string;
   icon: string;
   sidebar: boolean;
-  card_info?: string;
+  custom_permissions: any;
+  single_page: boolean;
 }
 
 const Router = () => {
@@ -25,19 +40,11 @@ const Router = () => {
   const userInfo = useSelector((state: any) => state.auth.user);
   const token = useSelector((state: any) => state.auth.token);
   const [list, setList] = useState<string[]>([]);
+  const [listNew, setListNew] = useState<string[]>([]);
   const storedRoutes = useSelector((state: any) => state.website.routes);
 
-  const [routes, setRoutes] = useState({
-    dashboard: [],
-    passengers: [],
-    drivers: [],
-    infos: [],
-    admins: [],
-    notifications: [],
-    partners: [],
-    settings: [],
-    call_center: [],
-  });
+  const [routes, setRoutes] = useState({ ...defaults });
+  const [newRoutes, setNewRoutes] = useState({ ...defaults });
 
   const getPath = ({
     parent = "",
@@ -46,7 +53,8 @@ const Router = () => {
     title,
     icon,
     sidebar,
-    card_info,
+    custom_permissions,
+    single_page,
   }: Path) => {
     const path = `${parent}/${link}${childlink ? `/${childlink}` : ""}`;
 
@@ -56,16 +64,24 @@ const Router = () => {
       id: path,
       title,
       icon,
-      card_info,
-      permissions: [],
+      permissions: custom_permissions,
       parent,
       link,
+      single_page,
     };
 
     const permissions = userInfo?.permissions ?? [];
     const found = permissions?.find((i: any) => i.value === path);
 
-    if (found?.permissions?.includes("index")) {
+    if (!listNew.includes(obj.id)) {
+      setNewRoutes((prev: any) => ({
+        ...prev,
+        [parent]: [...prev[parent], obj],
+      }));
+      setListNew((prev) => [...prev, obj.id]);
+    }
+
+    if (found?.permissions?.includes("index") || single_page) {
       if (!list.includes(obj.id)) {
         setRoutes((prev: any) => ({
           ...prev,
@@ -83,9 +99,17 @@ const Router = () => {
     dispatch(websiteActions.setRoutes({ ...routes }));
   }, []);
 
+  useEffect(() => {
+    dispatch(websiteActions.setNewRoutes({ ...newRoutes }));
+  }, []);
+
   const navigator = useMemo(() => {
     for (let key in storedRoutes) {
-      if (storedRoutes[key]?.length) return storedRoutes[key][0].path;
+      if (storedRoutes[key]?.length) {
+        if (storedRoutes[key].find((item: any) => item.sidebar)) {
+          return storedRoutes[key].find((item: any) => item.sidebar)?.path;
+        }
+      }
     }
   }, [storedRoutes]);
 
@@ -106,31 +130,35 @@ const Router = () => {
   }
 
   return (
-    <Suspense fallback={"Loading..."}>
+    <Suspense fallback={<PageFallbackInner />}>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          {userInfo?.permissions?.length &&
-
-            routeList?.map((route, index) => (
-              <Route
-                path={getPath({
-                  parent: route.parent,
-                  link: route.link,
-                  sidebar: route.sidebar,
-                  title: route.title,
-                  icon: route.icon,
-                })}
-                key={index}
-                element={route.element}
-              />
-            ))
-          }
+          {userInfo?.permissions?.length
+            ? routeList?.map((route: any, index) => (
+                <Route
+                  path={getPath({
+                    parent: route.parent,
+                    link: route.link,
+                    sidebar: route.sidebar,
+                    title: route.title,
+                    icon: route.icon,
+                    custom_permissions: route?.permissions ?? [],
+                    single_page: route?.single_page ?? false,
+                  })}
+                  key={index}
+                  element={
+                    <ErrorBoundary>
+                      <Suspense fallback={<PageFallbackInner />}>
+                        {route.element}
+                      </Suspense>
+                    </ErrorBoundary>
+                  }
+                />
+              ))
+            : ""}
 
           {userInfo?.permissions?.length && (
-            <Route
-              index
-              element={<Navigate to={navigator || "/dashboard/dashboard"} />}
-            />
+            <Route index element={<Navigate to={navigator || "/"} />} />
           )}
         </Route>
         <Route path="*" element={<Navigate to="/" />} />

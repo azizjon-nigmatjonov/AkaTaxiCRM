@@ -102,21 +102,25 @@ export const DeleteFunction = ({ handleClose }: { handleClose: any }) => {
   };
 };
 
+const allRoutes = (list: any) => {
+  let arr: any = [];
+  for (let key in list) {
+    list[key].forEach((item: any) => {
+      if (!item.single_page) {
+        arr.push(item);
+      }
+    });
+  }
+
+  return arr;
+};
+
 export const GetOptions = ({ newRouteList }: { newRouteList: any }) => {
-  const routes = useSelector((state: any) => state.website.routes);
+  const newRoutes = useSelector((state: any) => state.website.new_routes);
   const [options, setOptions] = useState([]);
   const { navigateTo, navigateQuery } = usePageRouter();
   const { active } = useGetQueries();
   const { t } = useTranslation();
-
-  const allRoutes = (list: any) => {
-    let arr = [];
-    for (let key in list) {
-      arr.push(...list[key]);
-    }
-
-    return arr;
-  };
 
   const handViewClick = (element: any, index: number) => {
     navigateQuery({ active: index });
@@ -126,10 +130,10 @@ export const GetOptions = ({ newRouteList }: { newRouteList: any }) => {
   };
 
   useEffect(() => {
-    const arr = allRoutes(routes);
+    const arr = allRoutes(newRoutes);
 
     const newArr: any = [];
-    arr.forEach((element, index) => {
+    arr.forEach((element: any, index: number) => {
       const found = newRouteList.find(
         (item: any) => item.path === element.path
       );
@@ -179,18 +183,18 @@ export const FetchFunction = () => {
   } = useQuery(["GET_ROUTE_LIST"], () => {
     return routeService.getList();
   });
-
   const newRouteList: any = useMemo(() => {
     const list = routes?.data?.map((route: any) => {
+      const permissions = route.permissions?.map((permission: any) => {
+        return {
+          ...permission,
+          label: permission.name.substring(permission.name.indexOf("#") + 1),
+          value: permission.id,
+        };
+      });
       return {
         ...route,
-        permissions: route.permissions?.map((permission: any) => {
-          return {
-            ...permission,
-            label: permission.name.substring(permission.name.indexOf("#") + 1),
-            value: permission.id,
-          };
-        }),
+        permissions: permissions ?? [],
       };
     });
 
@@ -200,15 +204,34 @@ export const FetchFunction = () => {
   return { isLoading, refetch, newRouteList };
 };
 
-export const getPermissionList = ({ list }: { list: any }) => {
- 
+export const getPermissionList = ({
+  list,
+  path,
+}: {
+  list: any;
+  path: string;
+}) => {
+  const newRoutes = useSelector((state: any) => state.website.new_routes);
+
   const permissionsList = useMemo(() => {
     const arr: any = [];
-    StaticPermissions.forEach((element: any) => {
-      const found = list.find((item: any) => item.label === element.value);
-      // const condition = sidebar ? true  : element.value !== 'sidebar' ? true : false
+    const oldRoutes = allRoutes(newRoutes);
 
-      if (!found) arr.push(element)
+    const routePermissions =
+      oldRoutes
+        .find((item: any) => item.path === path)
+        ?.permissions?.map((item: any) => {
+          return {
+            label: item,
+            value: item,
+          };
+        }) ?? [];
+
+    const permissions = [...routePermissions, ...StaticPermissions];
+    permissions.forEach((element: any) => {
+      const found = list.find((item: any) => item.label === element.value);
+
+      if (!found) arr.push(element);
     });
 
     return arr;

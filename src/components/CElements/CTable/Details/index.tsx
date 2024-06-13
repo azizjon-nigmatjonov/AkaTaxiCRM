@@ -1,25 +1,21 @@
 import { Paper } from "@mui/material";
-// import { forwardRef } from "react";
-import Pagination from "./Pagination";
 import EmptyDataComponent from "../../../UI/EmptyDataComponent";
-// import TableLoader from "../../../TableLoader/index";
-// import { DeleteRounded, BorderColorRounded } from "@mui/icons-material";
 import "./style.scss";
-import { ReactNode, } from "react";
+import { ReactNode } from "react";
 import TableLoader from "./TableLoader";
 
 interface Props {
   loader: boolean;
   height: any;
   count: number;
-  totalCount?:number;
+  totalCount?: number;
   currentLimit: number;
   passRouter: boolean;
   limitCount: number[];
-  currentPage: number;
+  filterParams: any;
   tableStyle?: object;
   wrapperStyle?: object;
-  setCurrentPage: (newPage: any) => void;
+  handleFilterParams: (newPage: any) => void;
   setCurrentLimit: (newLimit: any) => void;
   children: ReactNode;
   disablePagination?: any;
@@ -29,19 +25,10 @@ interface Props {
 export const CTableWrapper = ({
   loader,
   height,
-  count,
-  totalCount,
-  currentLimit,
-  passRouter,
-  limitCount,
-  currentPage,
   tableStyle = {},
   wrapperStyle = {},
-  setCurrentLimit,
-  setCurrentPage,
-  dataLength,
+
   children,
-  disablePagination,
 }: Props) => {
   return (
     <Paper className="CTableContainer" style={wrapperStyle}>
@@ -54,35 +41,7 @@ export const CTableWrapper = ({
         }}
       >
         <table id="resizeMe">{children}</table>
-
-        {dataLength && !loader && !disablePagination ? (
-          <Pagination
-            currentPage={currentPage}
-            count={count}
-            totalCount={totalCount}
-            limit={currentLimit}
-            limitCount={limitCount}
-            passRouter={passRouter}
-            setCurrentPage={setCurrentPage}
-            setCurrentLimit={setCurrentLimit}
-            dataLength={dataLength}
-          />
-        ) : (
-          ""
-        )}
       </div>
-
-      {/* {!disablePagination && (
-        <CPagination
-          currentPage={currentPage}
-          count={count}
-          limit={currentLimit}
-          limitCount={limitCount}
-          passRouter={passRouter}
-          setCurrentPage={setCurrentPage}
-          setCurrentLimit={setCurrentLimit}
-        />
-      )} */}
     </Paper>
   );
 };
@@ -125,8 +84,6 @@ export const CTableBody = ({
   dataLength: any;
   columnscount?: any;
 }) => {
-
-
   return (
     <>
       <TableLoader isVisible={loader} rowsCount={rowsCount} />

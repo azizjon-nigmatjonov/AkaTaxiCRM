@@ -12,18 +12,19 @@ interface Props {
 const Classes = ({
   clas,
   classes = [],
-  setValue = () => {},
+  setValue = () => { },
 }: Props) => {
   const [group, setGroup] = useState([]);
-  
+
   useEffect(() => {
     if (!classes?.length) return;
     const arr = classes?.map((i: any) => {
-      return {
-        ...i,
-        checked: i?.checked ?? false,
-      };
-    });
+        return {
+          ...i,
+          checked: i?.checked ?? false,
+        };
+      
+    }).filter((e:any)=> e.name != null);
 
 
     setGroup(arr)
@@ -50,7 +51,7 @@ const Classes = ({
 
     setValue("ids", ids);
   };
-  
+
   return (
     <>
       {group?.map((item: any) => (

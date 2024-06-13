@@ -8,7 +8,7 @@ import { useQuery } from "react-query";
 import carService from "../../../services/cars";
 import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
-import SectionHeader from "../../../components/UI/Sections/Header";
+// import SectionHeader from "../../../components/UI/Sections/Header";
 
 const Vehicles = () => {
   const { navigateQuery, getQueries } = usePageRouter();
@@ -39,19 +39,25 @@ const Vehicles = () => {
 
   const tabList = useMemo(() => {
     if (!classes?.data) return [];
-    const list: any = classes.data;
+    const list: any = [];
 
-    return list.map((item: any) => {
-      return {
-        slug: item.id + "",
-        name: item.name,
-      };
+    classes.data?.map((item: any) => {
+      if (item.id !== 4)
+        list.push({
+          slug: item.id + "",
+          name: item.name,
+        });
     });
+    return list;
   }, [classes]);
 
   useEffect(() => {
     if (tab) getCarList(tab);
   }, [tab]);
+
+  const refetch = () => {
+    getCarList(tab);
+  }
 
   const breadCrumbs = useMemo(() => {
     return [
@@ -60,9 +66,9 @@ const Vehicles = () => {
     ];
   }, []);
 
-  const handleSearch = (value: any) => {
-    navigateQuery({ q: value });
-  };
+  // const handleSearch = (value: any) => {
+  //   navigateQuery({ q: value });
+  // };
 
   return (
     <>
@@ -71,8 +77,8 @@ const Vehicles = () => {
       </Header>
 
       <div className="px-5">
-        <div className="flex justify-between">
-          <SectionHeader handleSearch={handleSearch} />
+        <div className="flex justify-end mb-5">
+          {/* <SectionHeader handleSearch={handleSearch} defaultValue={q} /> */}
           <AddButton
             text="new_mark"
             style={{ width: "auto" }}
@@ -91,7 +97,7 @@ const Vehicles = () => {
             loading={loading}
           />
         ) : (
-          ''
+          ""
         )}
 
         {query?.id && (
@@ -100,6 +106,7 @@ const Vehicles = () => {
             id={query.id}
             classes={tabList}
             tab={tab}
+            refetch={refetch}
             getCarList={getCarList}
           />
         )}

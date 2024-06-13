@@ -105,7 +105,7 @@ export default function LTab({
                     maxWidth: "auto",
                   },
                 }}
-                label={<p className="text">{t(tab?.name)}</p>}
+                label={<p className="text">{t(tab?.name)} <span className="text-xs p-2 rounded-full ">{tab?.count}</span> </p>}
                 {...a11yProps(tab.id)}
               />
             ))}

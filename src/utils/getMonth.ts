@@ -38,14 +38,16 @@ export const GetMonth = () => {
   return { firstDay, days, currentMonth };
 };
 
-export const getWeekDays = () => {
-  console.log(firstDayOfWeek);
-  
-  const first = 7 - firstDayOfWeek + 1;
+export const getWeekDays = ({ year = 2024, month = 1 }) => {
+  const currentDate = new Date(year, month);
+  currentDate.setDate(1);
+  const dayOfWeek = currentDate.getDay();
+
+  const first = 7 - dayOfWeek + 1;
   const second = first + 1 + 6;
   const third = second + 1 + 6;
   const fourth = third + 1 + 6;
-  const end = (days - fourth)
+  const end = days - fourth;
   const arr = [
     {
       label: `1 - ${first}`,
@@ -68,22 +70,20 @@ export const getWeekDays = () => {
       value: `5`,
     },
   ];
-  return arr
+  return arr;
 };
 
-
 export const getYears = () => {
+  const years = [{ label: 2023, value: 2023 }];
 
-  const years = [
-    {label: 2023, value: 2023}
-  ];
-
-  const thisYear = new Date().getFullYear() 
+  const thisYear = new Date().getFullYear();
 
   for (let i = 0; thisYear - years[years.length - 1].value; i++) {
-    years.push({label: years[years.length - 1].label + 1, value: years[years.length -1 ].value + 1})
+    years.push({
+      label: years[years.length - 1].label + 1,
+      value: years[years.length - 1].value + 1,
+    });
   }
 
-  return years
-}
-
+  return years;
+};

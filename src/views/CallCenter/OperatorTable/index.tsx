@@ -37,7 +37,8 @@ export const OperatorTable = () => {
         bodyColumns={mockdata}
         count={1}
         isLoading={false}
-        currentPage={1}
+        filterParams={{ page: 1 }}
+        handleFilterParams={() => {}}
       />
 
       <TableButtonActions />

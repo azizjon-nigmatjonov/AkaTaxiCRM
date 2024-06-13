@@ -1,8 +1,7 @@
-import { memo, useMemo } from "react";
+import { memo } from "react";
 import { TextField } from "@mui/material";
 import "../style.scss";
 import { IoMdArrowDropdown } from "react-icons/io";
-import usePageRouter from "../../../../hooks/useObjectRouter";
 import { ArrowDownOutline } from "../../../../components/UI/IconGenerator/Svg";
 
 interface Props {
@@ -10,19 +9,19 @@ interface Props {
   name: string;
   placeholder?: string;
   defaultValue?: any;
+  value: any;
   handleDropdown: () => void;
 }
 
 export const PeriodTextField = memo(
-  ({ name, placeholder, defaultValue, handleDropdown, open = false }: Props) => {
-    const { getQueries } = usePageRouter();
-    const query = getQueries();
-
-    const value = useMemo(() => {
-      query?.start && query?.end
-        ? query?.start.slice(5) + " - " + query.end.slice(5)
-        : "Tanlang";
-    }, [query.start, query.end]);
+  ({
+    name,
+    placeholder,
+    defaultValue,
+    handleDropdown,
+    open = false,
+    value,
+  }: Props) => {
 
     return (
       <div className="PeriodTextField z-20 relative">
@@ -38,10 +37,17 @@ export const PeriodTextField = memo(
               endAdornment: <IoMdArrowDropdown size={18} />,
             }}
             onClick={() => handleDropdown()}
-            style={{ background: "white", border: open ? '2px solid var(--main)' : '' }}
+            style={{
+              background: "white",
+              border: open ? "2px solid var(--main)" : "",
+            }}
           />
-          <div className={`absolute right-12px top-1/2 -translate-y-1/2 ${open ? 'rotate-[180deg]' : ''}`}>
-          <ArrowDownOutline />
+          <div
+            className={`absolute right-12px top-1/2 -translate-y-1/2 ${
+              open ? "rotate-[180deg]" : ""
+            }`}
+          >
+            <ArrowDownOutline />
           </div>
         </div>
       </div>

@@ -61,7 +61,8 @@ const Chats = () => {
       handleFetchNextPage();
     }
   }, [queryData, handleFetchNextPage]);
-
+  console.log('current', current);
+  
   return (
     <>
       <Header sticky={true}>

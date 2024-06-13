@@ -21,11 +21,11 @@ const Passanger = () => {
     return [
       {
         label: "Yo'lovchilar",
-        link: "/passengers/main",
+        link: "/passengers/passenger-list",
       },
       {
         label: "Ro'yxat",
-        link: "/passengers/main",
+        link: "/passengers/passenger-list",
       },
       {
         label: passenger?.data?.full_name || "Yo'lovchi",

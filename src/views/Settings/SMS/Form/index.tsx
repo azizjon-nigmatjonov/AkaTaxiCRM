@@ -26,7 +26,7 @@ const list = [
   },
 ];
 
-export const SmsCreateForm = () => {
+ const SmsCreateForm = () => {
   const { type } = useParams();
   const [active, setActive] = useState("all");
 
@@ -135,3 +135,5 @@ export const SmsCreateForm = () => {
     </>
   );
 };
+
+export default SmsCreateForm

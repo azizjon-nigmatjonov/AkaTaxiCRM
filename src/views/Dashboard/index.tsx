@@ -8,6 +8,7 @@ import { useState } from "react";
 import CBreadcrumbs from "../../components/CElements/CBreadcrumbs";
 import { breadCrumbsItems } from "./Logic";
 import { FindoutStatistics } from "./FindoutStatistics";
+import StatusStatics from "./StatusStatistics";
 
 // import { useHistory, useLocation } from "react-router-dom";
 
@@ -22,8 +23,6 @@ function Dashboard() {
     useState(null);
   const [countWeekPessengerVilage, setCountWeekPessengerVilage] =
     useState(null);
-
-  // navigateQuery({id: '2'})
 
   const [yearDrivers, setYearDrivers] = useState<string>("2023");
   const [selectMonthDrivers, setSelectMonthDrivers] = useState(null);
@@ -41,7 +40,7 @@ function Dashboard() {
     { enabled: !!year || !!selectMonth || !!countWeek, cacheTime: 0 }
   );
 
-  const { data: passengersDataVilage, isLoading: isLoadingTable} = useQuery(
+  const { data: passengersDataVilage, isLoading: isLoadingTable } = useQuery(
     [
       "passengersFromVilage",
       yearPessengerVilage,
@@ -91,15 +90,16 @@ function Dashboard() {
   return (
     <>
       <Header >
-      <CBreadcrumbs items={breadCrumbsItems} />
+        <CBreadcrumbs items={breadCrumbsItems} />
       </Header>
       <div className="flex gap-x-5 px-5">
         <Passenger data={data?.data[1]} isLoading={isLoading} />
         <Drivers data={data?.data[0]} isLoading={isLoading} />
       </div>
 
-      <div className="mt-5">
+      <div className="mt-5 space-y-[20px]">
         <FindoutStatistics />
+        <StatusStatics />
       </div>
 
       <ContentTable

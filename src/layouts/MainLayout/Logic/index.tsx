@@ -4,9 +4,14 @@ import { ArrowLeftIcon } from "@mui/x-date-pickers-pro";
 import { useQuery } from "react-query";
 import authService from "../../../services/auth/authService";
 import { useDispatch, useSelector } from "react-redux";
-import { memo, useEffect, useMemo } from "react";
+import { memo, useEffect, useMemo, useRef } from "react";
 import { authActions } from "../../../store/auth/auth.slice";
 import { ColorConstants } from "../../../constants/website";
+import client from "../../../utils/mqtt";
+import { mqttActions } from "../../../store/mqtt";
+import { notificationActions } from "../../../store/notification";
+import { GetCurrentDate } from "../../../utils/getDate";
+// import { usePermissions } from "../../../hooks/usePermissions";
 
 export const BackButtonRoute = () => {
   const { fromRoutes } = useGetQueries();
@@ -36,7 +41,7 @@ export const GetUserInfo = () => {
     return authService.getUserInfo();
   });
   const userInfoStored = useSelector((state: any) => state.auth.user);
-  
+
   const permissions = useMemo(() => {
     const roles = userInfo?.data?.roles;
     if (!roles?.length) return [];
@@ -76,7 +81,10 @@ export const GetUserInfo = () => {
     dispatch(authActions.setUser({ ...userInfo?.data, permissions }));
   }, [userInfo]);
 
-  return { userInfo: userInfo?.data || userInfoStored, refetchUserInfo: refetch };
+  return {
+    userInfo: userInfo?.data || userInfoStored,
+    refetchUserInfo: refetch,
+  };
 };
 
 export const ColorData = memo(() => {
@@ -93,3 +101,58 @@ export const ColorData = memo(() => {
 
   return "";
 });
+
+export const GlobalMQTT = () => {
+  // const routingKey = import.meta.env.MQTT_TOPIC_NAME || "akataxi/admin"
+  const count = useSelector((state: any) => state.notification.new_count);
+  const sound = useSelector((state: any) => state.notification.sound);
+  // const { checkPermission } = usePermissions();
+  const notificationList = useSelector((state: any) => state.notification.list);
+  const routingKey = "akataxi/admin";
+  const dispatch = useDispatch();
+  const audioRef: any = useRef(null);
+
+  const playAudio = () => {
+    if (!sound) return;
+    // if (checkPermission("show_notification")) {
+      audioRef.current.play();
+    // }
+  };
+
+  useEffect(() => {
+    client.on("connect", function () {
+      console.log("connected to mqtt");
+    });
+
+    client.subscribe(routingKey, function () {
+      console.log("subscribed to mqtt");
+    });
+
+    client.on("message", function (topic: any, message: any) {
+      if (message) {
+        const payload = { topic, message: message.toString() };
+        playAudio();
+
+        const mqttData = JSON.parse(payload.message);
+        if (mqttData.name === "notification") {
+          const Hour = GetCurrentDate({});
+          dispatch(
+            notificationActions.setList([
+              { ...mqttData, time: Hour },
+              ...notificationList,
+            ])
+          );
+          dispatch(notificationActions.setCount(count + 1));
+        }
+        console.log("got mqtt message", mqttData);
+        dispatch(mqttActions.setData({ topic, message: mqttData }));
+      }
+    });
+  }, []);
+
+  return (
+    <>
+      <audio ref={audioRef} src="/notif.wav" />
+    </>
+  );
+};

@@ -19,7 +19,7 @@ const StatisticsLineChart = ({ grapData: data, loading }: { grapData: any, loadi
                     padding: 0.5,
                 }}
                 xAxis={[{ data: data?.label, scaleType: 'band', label: 'Oylar' }]}
-                yAxis={[{ label: 'Yangi foydalanuvhchilar' }]}
+                yAxis={[{ label: 'Yangi foydalanuvchilar' }]}
                 slotProps={{ legend: { hidden: true } }}
                 skipAnimation={false}
             />}

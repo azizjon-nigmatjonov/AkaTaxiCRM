@@ -8,10 +8,11 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authActions } from "../../store/auth/auth.slice";
 import { useDispatch } from "react-redux";
+import { CircularProgress } from "@mui/material";
 
 const Login = () => {
   const [password, setPassword] = useState(true);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -26,8 +27,10 @@ const Login = () => {
   const { login } = useAuth({
     loginProps: {
       onSuccess: (value: any) => {
-        dispatch(authActions.login(value))
-        window.location.reload()
+        if (value) {
+          dispatch(authActions.login(value));
+          window.location.reload();
+        }
       },
     },
   });
@@ -43,7 +46,6 @@ const Login = () => {
 
   const onSubmit = (data: any) => {
     login.mutate(data);
-
   };
 
   return (
@@ -88,9 +90,13 @@ const Login = () => {
 
         <button
           type="submit"
-          className="h-[48px] bg-[var(--main)] w-full mt-6 rounded-[10px] text-white"
+          disabled={login.isLoading}
+          className={`w-full mt-6 text-white flex items-center justify-center custom-btn form ${
+            login.isLoading ? "disabled" : ""
+          }`}
         >
-          Tasdiqlash
+          {login.isLoading && <CircularProgress size={30} />}
+          <span>Tasdiqlash</span>
         </button>
       </form>
     </div>

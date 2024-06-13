@@ -12,7 +12,7 @@ interface Props {
   name: string;
   placeholder?: string;
   defaultValue?: any;
-  position?: string;
+  positionClasses?:string;
 }
 
 const DropDown = ({
@@ -20,7 +20,7 @@ const DropDown = ({
   name,
   placeholder,
   defaultValue,
-  position = "left",
+  positionClasses
 }: Props) => {
   const [show, setShow] = useState(false);
   const { getQueries } = usePageRouter();
@@ -52,11 +52,11 @@ const DropDown = ({
           onClick={() => setShow(true)}
           style={{ background: "white" }}
         />
-        <div className={`absolute ${position}-0`}>
+        <div className={positionClasses}>
           {show && (
             <RangeDate
               setShow={setShow}
-              footerActive={false}
+              footerActive={true}
               handlerValue={clickHandler}
             />
           )}

@@ -19,9 +19,10 @@ interface Props {
   clas?: any;
   id?: any;
   inputValue?: any;
+  refetch: () => void
 }
 
-const Form = ({ inputValue, id, classes = [], getCarList, tab }: Props) => {
+const Form = ({ inputValue, id, classes = [], getCarList, tab, refetch }: Props) => {
   const schema = Validation();
   const dispatch = useDispatch();
   const { navigateQuery, getQueries} = usePageRouter();
@@ -102,7 +103,9 @@ const Form = ({ inputValue, id, classes = [], getCarList, tab }: Props) => {
         if (res?.data) {
           HandleSuccess("Ma'lumot yangilandi!");
         }
-      });
+      }).finally(() => {
+        refetch()
+      })
     }
   };
 

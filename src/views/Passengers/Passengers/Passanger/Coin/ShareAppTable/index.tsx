@@ -21,7 +21,8 @@ export const ShareAppTable = ({
           bodyColumns={list}
           count={123}
           isLoading={isLoading}
-          currentPage={1}
+          filterParams={{}}
+          handleFilterParams={() => {}}
         />
       </div>
     </>

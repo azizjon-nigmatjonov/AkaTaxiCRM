@@ -1,4 +1,5 @@
 import useDebounce from "../../../../hooks/useDebounce";
+import { NumberInput } from "./Input";
 
 export const BodyCell = ({
   edit = false,
@@ -24,18 +25,12 @@ export const BodyCell = ({
   const handleChange = useDebounce((value: any, id: any) => {
     handleKmInput(value, id);
   }, 100);
+  
 
   return (
     <div className="cell flex justify-between items-center">
       {edit ? (
-        <input
-          className="font-[600]"
-          onChange={(e) => {
-            handleChange(+e.target.value, district.district_id);
-          }}
-          defaultValue={district.distance}
-          type="number"
-        />
+        <NumberInput district={district} handleChange={handleChange}  />
       ) : (
         <p>{district.distance}</p>
       )}

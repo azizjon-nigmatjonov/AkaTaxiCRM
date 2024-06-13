@@ -1,41 +1,57 @@
 import usePageRouter from "../../../../../../hooks/useObjectRouter";
 import { RxCross2 } from "react-icons/rx";
-import HFTextareaAutosize from "../../../../../../components/FormElements/HFTextareaAutosize";
 import { useForm } from "react-hook-form";
-import driverService from "../../../../../../services/drivers";
-import { websiteActions } from "../../../../../../store/website";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Validation } from "./validate";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ModalData } from "./Logic";
+import {
+  RejectReasonsOz,
+  RejectReasonsRu,
+  RejectReasonsUz,
+} from "../../../../../../constants/driver";
+import { HFMultipleSelect } from "../../../../../../components/FormElements/HFMultipleSelect";
 
 const Ignored = () => {
-  const { navigateQuery, navigateTo } = usePageRouter();
-  const { id } = useParams();
-  const dispatch = useDispatch();
+  const { navigateQuery } = usePageRouter();
+  const schema = Validation();
+  const { control, handleSubmit } = useForm({
+    mode: "onSubmit",
+    resolver: yupResolver(schema),
+  });
+  const { updateElement } = ModalData();
 
-  const { control, getValues } = useForm();
+  const onSubmit = (data: any) => {
+    const params: any = {
+      en: "",
+      uz: "",
+      ru: "",
+      oz: "",
+    };
+    RejectReasonsUz.forEach((el: any, ind: number) => {
+      console.log(
+        "data.langs.includes(el.value)",
+        data.langs.includes("" + el.value)
+      );
+      if (data.langs.includes("" + el.value)) {
+        params.uz = `${params.uz} ${ind > 0 ? " / " : ""}` + el.label;
+      }
+    });
+    RejectReasonsOz.forEach((el: any, ind: number) => {
+      if (data.langs.includes("" + el.value)) {
+        params.oz = `${params.oz} ${ind > 0 ? " / " : ""}` + el.label;
+      }
+    });
+    RejectReasonsRu.forEach((el: any, ind: number) => {
+      if (data.langs.includes("" + el.value)) {
+        params.ru = `${params.ru} ${ind > 0 ? " / " : ""}` + el.label;
+      }
+    });
 
-  const ignoreHandler = () => {
-    let value = getValues();
-    driverService
-      .updateCarInfo(id, {
-        reason_of_status: value.ignore,
-        status: "banned",
-      })
-      .then(() => {
-        navigateQuery({ accept: "" });
-        dispatch(
-          websiteActions.setAlertData({
-            mainTitle: "Yuborildi!",
-            title: "Sizning rad etish xabaringiz yuborildi!",
-            translation: "common",
-          })
-        );
-        navigateTo('/drivers/main')
-      });
+    updateElement(params);
   };
 
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex items-start justify-between">
         <div>
           <span className="text-lg font-semibold ">Rad qilish</span>
@@ -50,20 +66,60 @@ const Ignored = () => {
           <RxCross2 />
         </div>
       </div>
-      <div className="w-full  my-9">
-        <HFTextareaAutosize
-          name="ignore"
+      <div className="grid grid-cols-1 gap-y-5 mt-5">
+        <HFMultipleSelect
+          placeholder="Sababni tanlang"
+          name="langs"
+          label="Sabab"
+          options={RejectReasonsUz}
           control={control}
-          placeholder="Sababni yozing"
         />
+        {/* <HFTextareaAutosize
+          name="uz"
+          label="O'zbekcha"
+          control={control}
+          required={true}
+          placeholder="Sababni yozing"
+          minRows={1}
+        />
+        <HFTextareaAutosize
+          name="oz"
+          label="Крилча"
+          control={control}
+          required={true}
+          placeholder="Sababni yozing"
+          minRows={1}
+        />
+        <HFTextareaAutosize
+          name="ru"
+          label="Русский"
+          control={control}
+          required={true}
+          placeholder="Sababni yozing"
+          minRows={1}
+        /> */}
+        {/* <HFTextareaAutosize
+          name="en"
+          label="English"
+          control={control}
+          required={true}
+          placeholder="Sababni yozing"
+          minRows={1}
+        /> */}
       </div>
-      <div className="flex items-center justify-end gap-3">
-       
-        <button className="cancel-btn" onClick={() => navigateQuery({ accept: "" })}>Bekor qilish</button>
-        <button className="custom-btn" onClick={() => ignoreHandler()}>Yuborish</button>
-      
+      <div className="flex items-center justify-end gap-x-5 mt-5">
+        <button
+          className="cancel-btn form"
+          type="button"
+          onClick={() => navigateQuery({ accept: "" })}
+        >
+          Bekor qilish
+        </button>
+        <button className="custom-btn form" type="submit">
+          Yuborish
+        </button>
       </div>
-    </>
+    </form>
   );
 };
 

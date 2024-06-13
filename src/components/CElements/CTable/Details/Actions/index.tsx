@@ -14,7 +14,7 @@ import { PopoverDelete } from "./EditDelete/PopOver";
 
 interface Props {
   element: any;
-  permissions: string[];
+  actions: string[];
   rowIndex: number;
   checkPermission: any;
   handleActions: (obj?: any, status?: any) => void;
@@ -25,7 +25,7 @@ interface Props {
 const TabbleActions = ({
   element,
   rowIndex,
-  permissions = [],
+  actions = [],
   currentIndex,
   checkPermission = [],
   handleActions = () => {},
@@ -62,7 +62,7 @@ const TabbleActions = ({
                 fill={element?.is_view ? "white" : ColorConstants.gray}
               />
             }
-            show={permissions.includes("view")}
+            show={actions.includes("view")}
           />
           <Element
             text="freez"
@@ -73,7 +73,7 @@ const TabbleActions = ({
                 fill={element?.is_freez ? "white" : ColorConstants.gray}
               />
             }
-            show={permissions.includes("freez")}
+            show={actions.includes("freez")}
           />
           <Element
             text="edit"
@@ -84,7 +84,7 @@ const TabbleActions = ({
                 fill={element?.is_edit ? "white" : ColorConstants.gray}
               />
             }
-            show={permissions.includes("edit")}
+            show={actions.includes("edit")}
           />
           <Element
             text="delete"
@@ -100,7 +100,7 @@ const TabbleActions = ({
               />
             }
             border={false}
-            show={permissions.includes("delete")}
+            show={actions.includes("delete")}
           />
         </div>
       ) : (

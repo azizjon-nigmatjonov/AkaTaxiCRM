@@ -1,10 +1,13 @@
 import { combineReducers } from "redux";
 import persistReducer from "redux-persist/es/persistReducer";
 import { authReducer } from "./auth/auth.slice";
-import { regionReducer } from "./regions";
 import storage from "redux-persist/lib/storage";
 import { websiteReducer } from "./website";
 import { tableSizeReducer } from "./tableSize/tableSizeSlice";
+import { mqttReducer } from "./mqtt";
+import { notificationReducer } from "./notification";
+import { sidebarReducer } from "./sidebar";
+import { filterReducer } from "./filterParams";
 
 const authPersistConfig = {
   key: "auth",
@@ -16,16 +19,29 @@ const tableSizePersistConfig = {
   storage,
 };
 
-const regionPersistConfig = {
-  key: "regions",
-  storage,
-};
+const notificationPersistConfig = {
+  key: "notificationReducer",
+  storage
+}
+
+const sidebarPersistConfig = {
+  key: "sidebar",
+  storage
+}
+
+const filterPersistConfig = {
+  key: 'filter',
+  storage
+}
 
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
-  regions: persistReducer(regionPersistConfig, regionReducer),
   tableSize: persistReducer(tableSizePersistConfig, tableSizeReducer),
+  notification: persistReducer(notificationPersistConfig, notificationReducer),
+  sidebar: persistReducer(sidebarPersistConfig, sidebarReducer),
+  filter: persistReducer(filterPersistConfig, filterReducer),
   website: websiteReducer,
+  mqtt: mqttReducer
 });
 
 export default rootReducer;

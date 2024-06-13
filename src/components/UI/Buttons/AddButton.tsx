@@ -31,7 +31,7 @@ const AddButton = ({
 }: Props) => {
   const { t } = useTranslation();
   const { checkPermission } = usePermissions();
-
+  
   // if (!checkPermission(permission)) return "";
 
   if (btnType === "ordinary") {

@@ -4,7 +4,7 @@ import cls from "../style.module.scss";
 
 export const ToDistance = ({ control }: { control: any }) => {
     const { regionList, villageList, districtList, setLocalIds } = SelectData();
-    
+        
   return (
     <div className={cls.flex}>
       <p className={cls.title}>Qayerga</p>
@@ -21,7 +21,7 @@ export const ToDistance = ({ control }: { control: any }) => {
           <HFSelect
             name="end_location_id"
             control={control}
-            options={districtList}
+            options={districtList?.slice(1)}
             label="Tuman"
             placeholder="Select"
             disabled={districtList?.length ? false : true}

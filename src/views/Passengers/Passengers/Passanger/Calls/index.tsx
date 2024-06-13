@@ -20,7 +20,8 @@ export const PassengerCalls = () => {
         bodyColumns={mockdata}
         count={1}
         isLoading={false}
-        currentPage={1}
+        filterParams={{}}
+        handleFilterParams={() => {}}
       />
       
       <TableButtonActions />

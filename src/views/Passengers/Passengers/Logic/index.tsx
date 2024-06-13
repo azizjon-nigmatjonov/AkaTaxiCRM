@@ -1,10 +1,11 @@
 import { useQuery } from "react-query";
 import ImageFrame from "../../../../components/UI/ImageFrame";
 import { FormatTime } from "../../../../utils/formatTime";
-import { useGetQueries } from "../../../../hooks/useGetQueries";
 import passengerService from "../../../../services/passengers";
 import { useMemo } from "react";
 import usePageRouter from "../../../../hooks/useObjectRouter";
+import { ListIcon } from "../../../../components/UI/IconGenerator/Svg";
+import { getStoredFilters } from "../../../../components/UI/Filter/Logic";
 
 export const breadCrumbItems = [
   {
@@ -16,7 +17,11 @@ export const breadCrumbItems = [
   },
 ];
 
-export const TableData = ({ passengerRefetch }: { passengerRefetch: () => void }) => {
+export const TableData = ({
+  passengerRefetch,
+}: {
+  passengerRefetch: () => void;
+}) => {
   const { navigateQuery, navigateTo } = usePageRouter();
   const headColumns = [
     {
@@ -38,6 +43,7 @@ export const TableData = ({ passengerRefetch }: { passengerRefetch: () => void }
       title: "Tel.raqam",
       id: "username",
       render: (val: any) => val && <p>+{val}</p>,
+      permission: "phone",
     },
     {
       title: "triplar",
@@ -51,13 +57,35 @@ export const TableData = ({ passengerRefetch }: { passengerRefetch: () => void }
       },
     },
     {
+      title: "Ro'yxatdan o'tgan sana",
+      id: "created_at",
+      width: 270,
+      render: (val?: any) => {
+        return <>{FormatTime(val)}</>;
+      },
+    },
+    {
       title: "coin",
-      id: "coin_balance"
+      id: "coin_balance",
+    },
+    {
+      title: "",
+      id: "notelist",
+      render: (item: any) => {
+        return (
+          <button
+            onClick={() => navigateQuery({ modal: "note", row_id: item.id })}
+          >
+            <ListIcon stroke={item.notelist ? "black" : "#98A2B3"} />
+          </button>
+        );
+      },
+      click: "custom",
     },
     {
       title: "",
       id: "actions",
-      permission: ["view"],
+      actions: ["view"],
     },
   ];
 
@@ -79,17 +107,12 @@ export const TableData = ({ passengerRefetch }: { passengerRefetch: () => void }
 };
 
 export const FetchFunction = () => {
-  const {
-    currentPage,
-    q,
-    region_id,
-    birthday,
-    start,
-    end,
-    device_type,
-    version,
-    gender,
-  } = useGetQueries();
+  const { filters } = getStoredFilters({});
+  const { gender, device_type, region_id, version, date, q, page } = filters;
+
+  const start = date?.[0];
+  const end = date?.[1];
+
   const {
     data: passengers,
     isLoading: passengerLoading,
@@ -97,10 +120,9 @@ export const FetchFunction = () => {
   } = useQuery(
     [
       "GET_PASSENGER_LIST",
-      currentPage,
+      page,
       q,
       region_id,
-      birthday,
       start,
       end,
       device_type,
@@ -109,18 +131,17 @@ export const FetchFunction = () => {
     ],
     () => {
       return passengerService.getList({
-        page: currentPage,
+        page: page || 1,
         perPage: 10,
         q,
-        region_id,
-        birthday,
-        device_type,
-        created_at: start && end && JSON.stringify([start, end]),
-        version,
-        gender,
+        region_id: region_id?.map((item: any) => item.value),
+        device_type: device_type?.value,
+        created_at: start && end && start + "," + end,
+        version: version?.value,
+        gender: gender?.value,
       });
     }
-  );  
+  );
 
   const passengerTableList = useMemo(() => {
     return (
@@ -131,6 +152,10 @@ export const FetchFunction = () => {
             full_name: el.full_name,
             image: el?.image,
             gender: el.gender,
+          },
+          notelist: {
+            id: el.id,
+            notelist: el.notes_count,
           },
         };
       }) ?? []

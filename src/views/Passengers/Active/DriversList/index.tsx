@@ -1,45 +1,88 @@
-import { useGetQueries } from '../../../../hooks/useGetQueries';
-import usePageRouter from '../../../../hooks/useObjectRouter';
-import CModal from '../../../../components/CElements/CModal'
-import Avatar from '@mui/material/Avatar';
+import { useGetQueries } from "../../../../hooks/useGetQueries";
+import CModal from "../../../../components/CElements/CModal";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { PlusIcon } from "../../../../components/UI/IconGenerator/Svg";
+import CTable from "../../../../components/CElements/CTable";
+import { FetchFunction, TableData } from "./Logic";
+import usePageRouter from "../../../../hooks/useObjectRouter";
 
-const DriversList = ({ data }: { data?: any }) => {
-    const query = useGetQueries();
-    const { navigateQuery, } = usePageRouter();
+const DriversList = ({
+  data,
+  openModal,
+  setOpenModal = () => {},
+}: {
+  data?: any;
+  openModal: boolean;
+  setOpenModal: (val: boolean) => void;
+}) => {
+  if (!openModal) return <></>
+  const query = useGetQueries();
+  const { navigateQuery, navigateTo } = usePageRouter();
 
+  const { passengerData, refetch, isLoading } = FetchFunction();
+  const { headColumns, bodyColumns } = TableData(
+    passengerData?.data?.data,
+    refetch
+  );
 
-    return (
-        <div>
-            <CModal title={query.driver_list ? "Aktiv haydovchilar" : "Tahrirlash"}
-                open={!!query.id}
-                handleClose={() => {
-                    navigateQuery({ id: "" });
-                }}
-                footerActive={false}
-            >
-                <div className='flex items-center justify-between'>
-                    <p className='text-[24px] text-[var(--black)] font-semibold'>{data?.from_region_name.split('viloyati')}</p>
-                    <IoIosArrowRoundForward size={24} />
-                    <p className='text-[24px] text-[var(--black)] font-semibold'>{data?.to_region_name.split('viloyati')}</p>
-                </div>
-                <div className='max-h-[450px] overflow-y-scroll'>
-                    {data?.bids?.map((val: any) => (
-                        <div className='flex items-center justify-between'>
-                            <div key={val?.id} className='flex items-center gap-3 p-4 border-b border-[#EAECF0]'>
-                                <Avatar sx={{ width: 24, height: 24 }} alt={val?.full_name} src={val?.image} />
-                                <div>
-                                    <p className='text-sm font-semibold text-[var(--black)]'>{val?.full_name}</p>
-                                    <p className='text-sm font-normal text-[#475467]'>+{val?.phone}</p>
-                                </div>
-                            </div>
-                            <p className={`${val?.status == 'searching_driver' ? 'text-[var(--green)]' : 'text-red-500'}`}>{val?.status == 'searching_driver' ? 'Qabul qilish kutilmoqda' : val?.status == 'driver_accepted' ? 'Qabul qildi' : val?.status == 'driver_canceled' ? 'Haydovchi bekor qildi' : 'Yolovchi bekor qildi'}</p>
-                        </div>
-                    ))}
-                </div>
-            </CModal>
+  return (
+    <div>
+      <CModal
+        title={
+          query.driver_list
+            ? "Aktiv haydovchilar"
+            : "Bildirishnoma borgan haydovchilar"
+        }
+        open={openModal}
+        handleClose={() => {
+          navigateQuery({ suggestion: "" });
+          setOpenModal(false);
+        }}
+        footerActive={false}
+        minWidth={1000}
+        titleCenter={false}
+      >
+        <div className="flex items-center justify-between">
+          <p className="text-[24px] text-[var(--black)] font-semibold">
+            {data?.from_region_name.split("viloyati")}
+          </p>
+          <IoIosArrowRoundForward
+            size={30}
+            style={{ color: "var(--gray40)" }}
+          />
+          <p className="text-[24px] text-[var(--black)] font-semibold">
+            {data?.to_region_name.split("viloyati")}
+          </p>
         </div>
-    )
-}
+        <div className="max-h-[450px] overflow-y-scroll mt-5 remove-scroll">
+          <CTable
+            headColumns={headColumns}
+            bodyColumns={bodyColumns}
+            isLoading={isLoading}
+            filterParams={{}}
+            handleFilterParams={() => {}}
+            disablePagination={true}
+          />
 
-export default DriversList
+        </div>
+        <div className="flex space-x-5 mt-5">
+          <button
+            className="cancel-btn"
+            onClick={() => {
+                navigateQuery({ suggestion: "" }) 
+                setOpenModal(false)
+            }}
+          >
+            Ortga
+          </button>
+          <button onClick={() => navigateTo(`/passengers/active-passengers/attachment/${query.suggestion}`)} className="custom-btn">
+            <PlusIcon />
+            <span className="ml-2">Yangi haydovchi biriktirish</span>
+          </button>
+        </div>
+      </CModal>
+    </div>
+  );
+};
+
+export default DriversList;

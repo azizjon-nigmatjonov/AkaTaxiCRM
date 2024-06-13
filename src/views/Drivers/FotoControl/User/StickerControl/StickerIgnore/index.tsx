@@ -8,7 +8,7 @@ import { websiteActions } from "../../../../../../store/website";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-const Ignored = () => {
+const Ignored = ({ refetch }: { refetch: () => void }) => {
   const { navigateQuery } = usePageRouter();
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ const Ignored = () => {
       })
       .then(() => {
         navigateQuery({ action: "" });
+        refetch()
         dispatch(
           websiteActions.setAlertData({
             mainTitle: "Yuborildi!",

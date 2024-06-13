@@ -15,9 +15,10 @@ export const partnersList = [
         parent: 'partners',
         link: 'partner',
         sidebar: false,
-        title: "Hamkor sahifasi",
+        title: "Hamkor ichki sahifasi",
         icon: '',
-        element: <Partner />
+        element: <Partner />,
+        single_page: true
     }
 ]
 

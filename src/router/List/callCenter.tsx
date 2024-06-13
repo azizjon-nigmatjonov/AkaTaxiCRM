@@ -1,4 +1,5 @@
-import CallCenter from "../../views/CallCenter";
+import { lazy } from "react"
+const CallCenter = lazy(() => import("../../views/CallCenter"))
 
 
 export const callCenterList = [

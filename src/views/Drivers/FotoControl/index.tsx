@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { Header } from "../../../components/UI/Header";
@@ -9,18 +9,29 @@ import ImageFrame from "../../../components/UI/ImageFrame";
 // import Date from "./Date"
 import driverService from "../../../services/drivers";
 import { useGetQueries } from "../../../hooks/useGetQueries";
-import { DangerNotification } from "../../../components/UI/IconGenerator/Svg";
+import { DangerNotification, EyeIcon } from "../../../components/UI/IconGenerator/Svg";
+import CSelect from "../../../components/CElements/CSelect";
+import { FilterFunctions } from "../../../components/UI/Filter/Logic";
 
+const options = [
+  { value: 'new', label: 'Yangilar' },
+  { value: 'middle', label: "O'rtacha" },
+  { value: 'pre_finish', label: "Tugash muddatida" },
+  { value: 'finish', label: "Tugagan" },
+]
 const FotoControl = () => {
-  const { currentPage, page, q, start, end } = useGetQueries();
-  const { navigateQuery, navigateTo } = usePageRouter();
+  const { page, start, end } = useGetQueries();
+  const { navigateTo } = usePageRouter();
+  const [filterParams, setFilterParams]: any = useState({});
+  const { collectFilter, storeFilters } = FilterFunctions({ store: true, filterParams, setFilterParams });
+
 
   const { data: fotoControl, isLoading } = useQuery(
-    ["FOTO_CONTROL", page, q, start, end],
+    ["FOTO_CONTROL", page, filterParams?.q, start, end],
     () => {
       return driverService.getFotoContols({
-        page,
-        q,
+        page: filterParams?.page,
+        q: filterParams?.q,
         perPage: 10,
         create_at: start && end && JSON.stringify([start, end]),
       });
@@ -36,6 +47,11 @@ const FotoControl = () => {
 
   const headColumns = useMemo(() => {
     return [
+      {
+        title: '',
+        id: 'index',
+
+      },
       {
         title: "ism familiya",
         id: "userInfo",
@@ -71,7 +87,7 @@ const FotoControl = () => {
       },
       { title: "muddat", id: "created_at" },
       {
-        title: "Status",
+        title: "",
         id: "status",
         render: (val: any) =>
           val && (
@@ -79,16 +95,10 @@ const FotoControl = () => {
               {val == "created" ? (
                 <DangerNotification />
               ) : (
-                <p className="text-red-500">-</p>
+                <EyeIcon fill="var(--gray)" />
               )}
             </div>
           ),
-      },
-
-      {
-        title: "",
-        id: "actions",
-        permission: ["view"],
       },
     ];
   }, []);
@@ -117,12 +127,17 @@ const FotoControl = () => {
     };
   }, [fotoControl]);
 
-  const handlerActions = useCallback((element: any) => {
-    navigateTo(`/drivers/fotocontroluser/${element.id}`);
+  const handleActions = useCallback((element: any) => {
+    navigateTo(`/drivers/fotocontrolusers/${element.id}`);
   }, []);
 
-  const handleSearch = (evt: string) => {
-    navigateQuery({ q: evt });
+  const handleSearch = (value: any) => {
+    collectFilter({ type: "q", val: value });
+  };
+
+  const handleFilterParams = (obj: any) => {
+    setFilterParams(obj);
+    storeFilters(obj);
   };
 
   return (
@@ -132,8 +147,10 @@ const FotoControl = () => {
       </Header>
 
       <div className="px-6">
-        <SectionHeader handleSearch={handleSearch}>
-          {/* <Date /> */}
+        <SectionHeader handleSearch={handleSearch} defaultValue={filterParams?.q}>
+          <div className="w-[240px] bg-red-500">
+            <CSelect options={options} />
+          </div>
         </SectionHeader>
 
         <CTable
@@ -141,10 +158,11 @@ const FotoControl = () => {
           bodyColumns={bodyColumns?.list}
           count={bodyColumns?.meta?.pageCount}
           totalCount={bodyColumns?.meta?.totalCount}
-          handleActions={handlerActions}
+          handleActions={handleActions}
           clickable={true}
           isLoading={isLoading}
-          currentPage={currentPage}
+          filterParams={filterParams}
+          handleFilterParams={handleFilterParams}
         />
       </div>
     </>

@@ -2,9 +2,12 @@ import { useQuery } from "react-query";
 import { notificationService } from "../../../../services/notification";
 import { useTranslation } from "react-i18next";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
+import usePageRouter from "../../../../hooks/useObjectRouter";
+import { getStoredFilters } from "../../../../components/UI/Filter/Logic";
 
 export const TableData = () => {
   const { t } = useTranslation();
+  const { navigateTo } = usePageRouter()
   const headColumns = [
     {
       title: "kimga",
@@ -27,17 +30,34 @@ export const TableData = () => {
     },
   ];
 
-  return { headColumns };
+  const handleActions = (element: any, type: string) => {
+    if (type === 'edit') {
+      navigateTo(`/notifications/notification/${element.id}`)
+    }
+    if (type === 'delete') {
+
+    }
+  }
+
+  return { headColumns, handleActions };
 };
 
 export const FetchFunction = () => {
   const { tab } = useGetQueries();
+  const { filters } = getStoredFilters({});
+
   const { data: news, isLoading: newsLoading } = useQuery(
-    [tab === 'driver' ? "GET_NOTIFICATIONS_TABLE_LIST_DRIVER" : "GET_NOTIFICATIONS_TABLE_LIST_PASSENGER", tab],
+    [tab === 'driver' ? "GET_NOTIFICATIONS_TABLE_LIST_DRIVER" : "GET_NOTIFICATIONS_TABLE_LIST_PASSENGER", tab, filters?.page],
     () => {
-      return notificationService.getList(tab);
+      const data = {
+        page: filters?.page || 1,
+        tab
+      }
+      return notificationService.getList(data);
     },
   );
 
-  return { bodyColumns: news?.data ?? [], isLoading: newsLoading };
+  const newsData: any = news
+
+  return { tableData: newsData, isLoading: newsLoading };
 };

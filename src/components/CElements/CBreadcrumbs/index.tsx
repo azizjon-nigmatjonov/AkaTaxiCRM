@@ -5,7 +5,7 @@ import FolderIcon from "@mui/icons-material/Folder";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import BackButton from "../../UI/Buttons/BackButton";
-import { NotificationIcon } from "../../UI/IconGenerator/Svg";
+// import { NotificationIcon } from "../../UI/IconGenerator/Svg";
 
 interface Props {
   icon?: any;
@@ -40,7 +40,7 @@ const CBreadcrumbs = ({
   };
 
   return (
-    <div className="flex items-center justify-between w-full z-[99] relative">
+    <div className="flex items-center w-full z-[99] relative">
       <div className="CBreadcrumbs-wrapper">
         {navigateLink && <BackButton link={navigateLink} />}
         <Breadcrumbs
@@ -67,9 +67,6 @@ const CBreadcrumbs = ({
             </div>
           ))}
         </Breadcrumbs>
-      </div>
-      <div className="p-2 cursor-pointer rounded-full shadow-sm">
-        <NotificationIcon />
       </div>
     </div>
   );

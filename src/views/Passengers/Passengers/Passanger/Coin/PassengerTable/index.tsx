@@ -15,9 +15,10 @@ export const PassengerTable = ({ list = [], isLoading = true }: { list: any, isL
         <CTable
           headColumns={headColumns}
           bodyColumns={list}
-          count={123}
+          count={1}
           isLoading={isLoading}
-          currentPage={1}
+          filterParams={{}}
+          handleFilterParams={() => {}}
         />
       </div>
     </>

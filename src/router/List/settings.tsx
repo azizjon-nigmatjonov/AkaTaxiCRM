@@ -1,9 +1,10 @@
-// import SMS from "../../views/Settings/SMS";
-import Price from "../../views/Settings/Price";
-import { SmsCreateForm } from "../../views/Settings/SMS/Form";
-import AmoCrm from "../../views/Settings/AmoCrm";
-import ProfilePage from "../../views/Settings/Profile";
-import { Regions } from "../../views/Settings/Regions";
+import { lazy } from "react";
+const Price = lazy(() => import("../../views/Settings/Price"));
+const Regions = lazy(() => import("../../views/Settings/Regions"));
+const ActionsHistory = lazy(
+  () => import("../../views/Settings/ActionsHistory")
+);
+const ProfilePage = lazy(() => import("../../views/Settings/Profile"))
 
 export const settingList = [
   {
@@ -13,15 +14,8 @@ export const settingList = [
     title: "Narx nazorati",
     icon: "price_control",
     element: <Price />,
+    permissions: ["edit_price", "edit_km"]
   },
-  // {
-  //     parent: 'settings',
-  //     link: 'sms',
-  //     sidebar: true,
-  //     title: 'SMS xabarnoma',
-  //     icon: 'sms',
-  //     element: <SMS />
-  // },
   {
     parent: "settings",
     link: "regions",
@@ -32,26 +26,28 @@ export const settingList = [
   },
   {
     parent: "settings",
-    link: "sms/create/:type",
-    sidebar: false,
-    title: "SMS qo'shish",
-    icon: "",
-    element: <SmsCreateForm />,
-  },
-  {
-    parent: "settings",
-    link: "amocrm",
-    sidebar: true,
-    title: "Amo Crm",
-    icon: "amocrm",
-    element: <AmoCrm />,
-  },
-  {
-    parent: "settings",
     link: "profile",
     sidebar: false,
     title: "Profile",
     icon: "",
     element: <ProfilePage />,
+    permissions: ["logout"]
+  },
+  {
+    parent: "settings",
+    link: "actions",
+    sidebar: true,
+    title: "Amallar tarixi",
+    icon: "layers",
+    element: <ActionsHistory />,
+  },
+  {
+    parent: "settings",
+    link: "additional_functions",
+    sidebar: false,
+    title: "Qo'shimcha funksiyalar",
+    icon: "",
+    element: "",
+    permissions: ["notification_sound", "profile_info", "show_notification"],
   },
 ];

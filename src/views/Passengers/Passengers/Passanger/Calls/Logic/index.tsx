@@ -7,6 +7,7 @@ import {
 import { useGetQueries } from "../../../../../../hooks/useGetQueries";
 import { AudioModal } from "../../../../../../components/UI/CallModals/AudioModal";
 import { NoteModal } from "../../../../../../components/UI/CallModals/NoteModal";
+import { useForm } from "react-hook-form";
 
 export const TableActions = () => {
   const { navigateQuery } = usePageRouter()
@@ -62,11 +63,12 @@ export const TableActions = () => {
 
 export const TableButtonActions = () => {
   const query = useGetQueries();
+  const { control } = useForm()
   switch (query.modal) {
     case "call_audio":
       return <AudioModal />;
     case "note":
-      return <NoteModal />;
+      return <NoteModal control={control} />;
     default:
       return "";
   }

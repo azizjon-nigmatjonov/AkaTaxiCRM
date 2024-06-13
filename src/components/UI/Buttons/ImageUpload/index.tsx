@@ -42,7 +42,7 @@ const ImageUploadBtn = ({
         
         setValue(name, res?.data?.data?.id);
         
-        setImage(res?.data?.data?.id);
+        setImage(res?.data?.data?.original_url);
       })
       .finally(() => {
         setLoading(false);
@@ -81,7 +81,7 @@ const ImageUploadBtn = ({
             className="h-[48px] rounded-[4px]"
             src={
               image
-                ? `https://cdn.akataxi.uz/media/get-image/${image}`
+                ? image
                 : defaultValue
             }
             alt={defaultValue || "image"}

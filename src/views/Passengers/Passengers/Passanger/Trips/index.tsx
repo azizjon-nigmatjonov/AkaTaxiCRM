@@ -60,7 +60,7 @@ const Trips = () => {
 
   return (
     <>
-      <div className='sticky top-[160px] z-10 bg-[var(--softGray)]'> <LTabs tabList={tabList} /></div>
+      <div className='top-[160px] z-10 bg-[var(--softGray)]'> <LTabs tabList={tabList} /></div>
       {
         loading ? Array.from(new Array(2)).map(() => <Skeleton variant="rounded" width={'70%'} height={150} style={{ marginBottom: 20 }} />) : <div>
           <div className='h-[580px] sticky bottom-0  overflow-y-scroll'>

@@ -1,8 +1,10 @@
-import Passanger from "../../views/Passengers/Passengers/Passanger";
-import Passengers from "../../views/Passengers/Passengers";
-import ActivePassengers from "../../views/Passengers/Active";
-import Booking from "../../views/Passengers/Active/Booking";
-import Statistics from "../../views/Passengers/Statistics";
+import { lazy } from "react";
+const Passanger = lazy(() => import("../../views/Passengers/Passengers/Passanger"))
+const Passengers = lazy(() => import("../../views/Passengers/Passengers"))
+const ActivePassengers = lazy(() => import("../../views/Passengers/Active"))
+const Booking = lazy(() => import("../../views/Passengers/Active/Booking"))
+const Statistics = lazy(() => import("../../views/Passengers/Statistics"))
+const DriverAttachment = lazy(() => import("../../views/Passengers/Active/Attachment"))
 
 export const passengerList = [
   {
@@ -12,14 +14,16 @@ export const passengerList = [
     title: "Ro'yxat",
     icon: "list",
     element: <Passengers />,
+    permissions: ["phone"]
   },
   {
     parent: "passengers",
     link: "passenger-list/:id",
     sidebar: false,
-    title: "Yo'lovchini tahrirlash",
+    title: "Yo'lovchi tahrirlash sahifasi",
     icon: "",
-    element: <Passanger />
+    element: <Passanger />,
+    // single_page: true
   },
   {
     parent: "passengers",
@@ -27,7 +31,8 @@ export const passengerList = [
     sidebar: true,
     title: "Aktiv yo‘lovchilar",
     icon: "admin",
-    element: <ActivePassengers />
+    element: <ActivePassengers />,
+    permissions: ["note", "view", "index"]
   },
   {
     parent: "passengers",
@@ -35,7 +40,17 @@ export const passengerList = [
     sidebar: false,
     title: "Haydovchi buyurtma berish",
     icon: "",
-    element: <Booking />
+    element: <Booking />,
+    single_page: true
+  },
+  {
+    parent: "passengers",
+    link: "active-passengers/attachment/:id",
+    sidebar: false,
+    title: "Haydovchi biriktirish",
+    icon: "",
+    element: <DriverAttachment />,
+    single_page: true
   },
   {
     parent: "passengers",

@@ -11,18 +11,31 @@ import request from "../../utils/request";
 
 import axios from "axios";
 import { store } from "../../store/index";
+const uploadUrl = import.meta.env.VITE_IMAGE_UPLOAD_URL;
 
 const token = store.getState().auth.token;
 const fileService = {
   upload: (data: any) =>
-    axios.post("https://cdn.akataxi.uz/api/media/upload", data, {
+    axios.post(uploadUrl, data, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
     }),
-  getImage: (id: number | string) => axios.get(`https://cdn.akataxi.uz/media/get-image/${id}`),
-  getTrips: (data?: any) => request.get(`/trips?${data.page ? `page=${data.page}` : ''}${data.perPage ? `&perPage=${data.perPage}` : ''}${data.from_location_id ? `&from_location_ids=${data.from_location_id}` : ''}${data.to_location_id ? `&to_location_ids=${data.to_location_id}` : ''}${data.status ? `&status=${data.status}` : ''}`)
+  getImage: (id: number | string) =>
+    axios.get(`${uploadUrl}/${id}`),
+  getTrips: (data?: any) =>
+    request.get(
+      `/trips?${data.page ? `page=${data.page}` : ""}${
+        data.perPage ? `&perPage=${data.perPage}` : ""
+      }${
+        data.from_location_id
+          ? `&from_location_ids=${data.from_location_id}`
+          : ""
+      }${data.to_location_id ? `&to_location_ids=${data.to_location_id}` : ""}${
+        data.status ? `&status=${data.status}` : ""
+      }`
+    ),
   // getTrips: (data?: any) => request.get(`/trips?${data.page ? `page=${data.page}` : ''}${data.perPage ? `&perPage=${data.perPage}` : ''}${data.from_location_id? `&from_location_id=${data.from_location_id}`:''}${data.to_location_id ? `&to_location_id=${data.to_location_id}`:''}`)
 };
 

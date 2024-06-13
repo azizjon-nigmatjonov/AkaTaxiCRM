@@ -1,74 +1,65 @@
-import { useCallback, useMemo } from "react";
+import { useMemo, useState } from "react";
 import AddButton from "../../../components/UI/Buttons/AddButton";
-import FilterButton from "../../../components/UI/Filters";
 import CTable from "../../../components/CElements/CTable";
 import SectionHeader from "../../../components/UI/Sections/Header";
 import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
-import driverService from "../../../services/drivers";
-import { useGetQueries } from "../../../hooks/useGetQueries";
 import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
-import Filters from "../../../components/UI/Filter";
-import DropDown from "../../../components/FormElements/DropDown";
-import CSelect from "../../../components/CElements/CSelect";
-import { VersionsList } from "../../../constants/versions";
-import { DivicesList } from "../../../constants/devices";
-import { headColumns, FilterFunction, breadCrubmsItems, FetchFunctions } from './Logic';
-import { usePlaces } from "../../../hooks/usePlaces";
+import { breadCrubmsItems, FetchFunctions, TableData } from "./Logic";
+import { NoteTableButtonActions } from "../../../components/UI/CallModals/NoteModal/Logic";
+import { FilterComponent } from "./Filter";
+import { FilterFunctions } from "../../../components/UI/Filter/Logic";
+import { CExcelDownloader } from "../../../components/CElements/CExcelDownloader";
 
 const Drivers = () => {
-  const { navigateQuery, navigateTo, getQueries } = usePageRouter();
-  const { currentPage } = useGetQueries();
-  const query = getQueries();
-  const { handlerDiviceModel, handlerGender, handlerRegion, handlerVersion, handleSearch } = FilterFunction()
-  const { drivers, driversLoading, driversRefetch } = FetchFunctions()
-
-  const { regionList } = usePlaces()
-
-  const handleActions = useCallback((element: any, status: string) => {
-    if (status === "view") {
-      navigateTo(`/drivers/main/${element.id}`);
-    }
-
-    if (status === "edit") navigateQuery({ id: element.id });
-
-    if (status === "delete") {
-      driverService.deleteElement(element.id).then(() => {
-        driversRefetch();
-      });
-    }
-  }, []);
-
+  const { navigateTo } = usePageRouter();
+  const { drivers, driversLoading, driversRefetch } = FetchFunctions();
+  const [filterParams, setFilterParams]: any = useState({});
+  const { headColumns, handleActions } = TableData({
+    driversRefetch,
+    filterParams,
+    handleFilterParams,
+  });
+  const { collectFilter, storeFilters } = FilterFunctions({
+    store: true,
+    filterParams,
+    setFilterParams,
+  });
 
   const bodyColumns: any = useMemo(() => {
-    let list: any = drivers?.data?.map((el: any) => {
-      return {
-        ...el,
-        info: {
-          full_name: el.full_name,
-          image: el?.image,
-          gender: el.gender,
-        },
-        car_info: {
-          car: el.car_name,
-          number: el.car_number,
-        },
-      };
-    }) ?? []
-    return { list, ...drivers }
+    let list: any =
+      drivers?.data?.map((el: any) => {
+        return {
+          ...el,
+          info: {
+            full_name: el.full_name,
+            image: el?.image,
+            gender: el.gender,
+            id: el.id,
+            status: el.status,
+          },
+          car_info: {
+            car: el.car_name,
+            number: el.car_number,
+          },
+          notelist: {
+            id: el.id,
+            notelist: el.notes_count,
+          },
+        };
+      }) ?? [];
+    return { list, ...drivers };
   }, [drivers]);
-  
 
-  const Regions = useMemo(() => {
-    return regionList?.map((i: any) => {
-      return {
-        value: i.id,
-        label: i.name.uz,
-      };
-    });
-  }, [regionList]);
-  
+  const handleSearch = (value: any) => {
+    collectFilter({ type: "q", val: value });
+  };
+
+  function handleFilterParams(obj: any) {
+    setFilterParams(obj);
+    storeFilters(obj);
+  }
 
   return (
     <>
@@ -77,10 +68,11 @@ const Drivers = () => {
       </Header>
       <div className="px-6">
         <SectionHeader
-          extra={<FilterButton text="filter" />}
-          handleSearch={handleSearch}
+          handleSearch={(val: any) => handleSearch(val)}
+          defaultValue={filterParams?.q}
         >
-          <div className="flex items-center gap-3">
+          <div className="flex gap-x-5">
+            <CExcelDownloader />
             <AddButton
               text="new_driver"
               onClick={() => navigateTo("/drivers/main/add")}
@@ -88,43 +80,10 @@ const Drivers = () => {
           </div>
         </SectionHeader>
 
-        <Filters filter={!!query.filter}>
-          <div className="grid grid-cols-5 gap-x-4">
-            <DropDown
-              label="Vaqt"
-              name="Vaqt"
-              placeholder="Tanlang"
-              defaultValue={"01.01-.01.01"}
-            />
-            <CSelect
-              handlerValue={handlerDiviceModel}
-              options={DivicesList}
-              label="Operatsion sistema"
-              placeholder="Tanglang"
-            />
-            <CSelect
-              handlerValue={handlerVersion}
-              options={VersionsList}
-              label="Versiyalar"
-              placeholder="Tanglang"
-            />
-            <CSelect
-              handlerValue={handlerGender}
-              options={[
-                { value: "m", label: "Erkak" },
-                { value: "f", label: "Ayol" },
-              ]}
-              label="Jinsi"
-              placeholder="Tanlang"
-            />
-            <CSelect
-              handlerValue={handlerRegion}
-              options={Regions}
-              label="Viloyat"
-              placeholder="Tanlang"
-            />
-          </div>
-        </Filters>
+        <FilterComponent
+          filterParams={filterParams}
+          setFilterParams={setFilterParams}
+        />
 
         <CTable
           headColumns={headColumns}
@@ -133,10 +92,12 @@ const Drivers = () => {
           totalCount={bodyColumns?.meta?.totalCount}
           handleActions={handleActions}
           isLoading={driversLoading}
-          currentPage={currentPage}
           clickable={true}
+          filterParams={filterParams}
+          handleFilterParams={(obj: any) => handleFilterParams(obj)}
         />
         <Form refetch={driversRefetch} />
+        <NoteTableButtonActions refetchList={driversRefetch} />
       </div>
     </>
   );

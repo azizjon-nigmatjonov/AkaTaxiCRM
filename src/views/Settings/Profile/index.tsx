@@ -4,7 +4,7 @@ import CImageUpload from "../../../components/CElements/CImageUpload";
 import HFInputMask from "../../../components/FormElements/HFInputMask";
 import HFTextField from "../../../components/FormElements/HFTextField";
 import { useForm } from "react-hook-form";
-import { LogoutIcon } from "../../../components/UI/IconGenerator/Svg";
+import { EditIcon, LogoutIcon } from "../../../components/UI/IconGenerator/Svg";
 import CustomBtn from "../../../components/CElements/CustomBtn";
 import { useState } from "react";
 import CModal from "../../../components/CElements/CModal";
@@ -56,6 +56,7 @@ const ProfilePage = () => {
 
   const Logout = () => {
     dispatch(authActions.logout());
+    sessionStorage.removeItem('has_route')
     window.location.reload();
   };
 
@@ -142,7 +143,8 @@ const ProfilePage = () => {
             type="submit"
             className={`custom-btn ${!checkPermission("edit") ? "unpermit" : ""}`}
           >
-            Taxrirlash
+            <EditIcon />
+            <span className="ml-2">Taxrirlash</span>
           </button>
         </div>
       </div>

@@ -18,13 +18,14 @@ import { tableSizeAction } from "../../../store/tableSize/tableSizeSlice";
 import { TableDelete } from "./Details/Actions/EditDelete";
 import { PopoverDelete } from "./Details/Actions/EditDelete/PopOver";
 import { usePermissions } from "../../../hooks/usePermissions";
+import CPagination from "./Details/Pagination";
+// import CustomScrollbar from "./ScrollComponent";
 
 interface Props {
   count?: number;
   totalCount?: number;
   headColumns: any[];
   bodyColumns?: object[] | any;
-  currentPage?: number;
   clickable?: boolean;
   isLoading?: boolean;
   passRouter?: boolean;
@@ -32,7 +33,8 @@ interface Props {
   disablePagination?: boolean;
   autoHeight?: boolean;
   limitCount?: number[];
-  setCurrentPage?: (val: number) => void;
+  handleFilterParams: (val: number) => void;
+  filterParams: any;
   handleActions?: (val: any, val2?: any) => void;
   idForTable?: string;
 }
@@ -42,16 +44,16 @@ const CTable = ({
   totalCount,
   headColumns = [],
   bodyColumns = [],
-  currentPage = 1,
   clickable = false,
   isLoading = false,
-  passRouter = true,
+  passRouter = false,
   isResizeble = true,
   idForTable,
   disablePagination = false,
   autoHeight = false,
   limitCount = [10, 30, 50],
-  setCurrentPage = () => {},
+  filterParams = { page: 1 },
+  handleFilterParams = () => {},
   handleActions = () => {},
 }: Props) => {
   const tableSize = useSelector((state: any) => state.tableSize.tableSize);
@@ -65,6 +67,14 @@ const CTable = ({
   const [currDelete, setCurrDelete] = useState<any>({});
   const dispatch = useDispatch();
   const { routePermissions, checkPermission } = usePermissions();
+
+  useEffect(() => {
+    const tableEl = document.getElementById("table");
+    const moveXel = tableEl?.querySelector(".wrapper");
+    if (moveXel) {
+      moveXel.scrollTo(1200, 0); // Scrolls to 12000 pixels to the right
+    }
+  }, []);
 
   const bodySource = useMemo(() => {
     if (!bodyColumns?.length) return [];
@@ -95,12 +105,12 @@ const CTable = ({
         is_edit: checks(item?.edit),
         is_view: checks(item?.view),
         index:
-          currentPage > 1
-            ? currentPage * currentLimit - currentLimit + (index + 1)
+          filterParams?.page > 1
+            ? filterParams?.page * currentLimit - currentLimit + (index + 1)
             : index + 1,
       })) ?? []
     );
-  }, [bodyColumns, currentLimit, currentPage, headColumns]);
+  }, [bodyColumns, currentLimit, filterParams?.page, headColumns]);
 
   const pageName: any = useMemo(() => {
     const strLen =
@@ -112,6 +122,8 @@ const CTable = ({
     if (idForTable) result = result + "/" + idForTable;
     return result;
   }, [location, idForTable]);
+
+
 
   useEffect(() => {
     if (!isResizeble) return;
@@ -247,214 +259,270 @@ const CTable = ({
   };
 
   const tableActions = (el: any, status: string) => {
-    if (!checkPermission(status) || el.empty) return;
-    if (status === "delete") {
+    if (status === "delete_by") {
       setCurrDelete(el);
-    } 
+      return;
+    }
+
+    if (!checkPermission(status) || el.empty) return;
+
     handleActions(el, status);
   };
 
   return (
-    <div id="table">
-      <CTableWrapper
-        count={count}
-        totalCount={totalCount}
-        currentLimit={currentLimit}
-        loader={isLoading}
-        height={tableHeight}
-        limitCount={limitCount}
-        passRouter={passRouter}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        setCurrentLimit={setCurrentLimit}
-        disablePagination={disablePagination}
-        dataLength={bodyColumns?.length}
-      >
-        <CTableHead>
-          <CTableRow className="">
-            {headColumns?.map((column, index) => (
-              <CTableHeadCell
-                id={column.id}
-                key={column?.innerId ? column.innerId : column.id || index}
-                style={{
-                  padding: "10px 4px",
-                  minWidth: tableSize?.[pageName]?.[column.id]
-                    ? tableSize?.[pageName]?.[column.id]
-                    : column?.width
-                    ? column.width
-                    : "auto",
-                  width: tableSize?.[pageName]?.[column.id]
-                    ? tableSize?.[pageName]?.[column.id]
-                    : column?.width
-                    ? column.width
-                    : "auto",
-                  position: tableSettings?.[pageName]?.find(
-                    (item: any) => item?.id === column?.id
-                  )?.isStiky
-                    ? "sticky"
-                    : "relative",
-                  left: tableSettings?.[pageName]?.find(
-                    (item: any) => item?.id === column?.id
-                  )?.isStiky
-                    ? calculateWidth(column?.id, index)
-                    : "0",
-                  backgroundColor: "#fff",
-                  zIndex: tableSettings?.[pageName]?.find(
-                    (item: any) => item?.id === column?.id
-                  )?.isStiky
-                    ? "1"
-                    : "",
-                }}
-              >
-                <div style={{ textAlign: column?.textAlign || "left" }}>
-                  {column.renderHead
-                    ? Array.isArray(column.renderHead)
-                      ? column.renderHead(
-                          column.renderHead.map((data: any) => column[data])
-                        )
-                      : column.renderHead()
-                    : column?.id === "index"
-                    ? "№"
-                    : t(column.title)}
-                  {/* {column?.filter && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        right: "10px",
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                      }}
-                    >
-                      <CFilter
-                        currentSort={currentSort}
-                        up={`up_${column.id}`}
-                        down={`down_${column.id}`}
-                      />
+    <div className="border border-[var(--gray20)] common-shadow rounded-[18px] overflow-hidden">
+      <div id="table">
+        <div className="wrapper">
+          <CTableWrapper
+            count={count}
+            totalCount={totalCount}
+            currentLimit={currentLimit}
+            loader={isLoading}
+            height={tableHeight}
+            limitCount={limitCount}
+            passRouter={passRouter}
+            filterParams={filterParams}
+            handleFilterParams={handleFilterParams}
+            setCurrentLimit={setCurrentLimit}
+            disablePagination={disablePagination}
+            dataLength={bodyColumns?.length}
+          >
+            <CTableHead>
+              <CTableRow className="">
+                {headColumns?.map((column, index) => (
+                  <CTableHeadCell
+                    id={column.id}
+                    key={column?.innerId ? column.innerId : index || column.id}
+                    style={{
+                      padding: "10px 4px",
+                      minWidth: tableSize?.[pageName]?.[column.id]
+                        ? tableSize?.[pageName]?.[column.id]
+                        : column?.width
+                        ? column.width
+                        : "auto",
+                      width: tableSize?.[pageName]?.[column.id]
+                        ? tableSize?.[pageName]?.[column.id]
+                        : column?.width
+                        ? column.width
+                        : "auto",
+                      position: tableSettings?.[pageName]?.find(
+                        (item: any) => item?.id === column?.id
+                      )?.isStiky
+                        ? "sticky"
+                        : "relative",
+                      left: tableSettings?.[pageName]?.find(
+                        (item: any) => item?.id === column?.id
+                      )?.isStiky
+                        ? calculateWidth(column?.id, index)
+                        : "0",
+                      backgroundColor: "#fff",
+                      zIndex: tableSettings?.[pageName]?.find(
+                        (item: any) => item?.id === column?.id
+                      )?.isStiky
+                        ? "1"
+                        : "",
+                    }}
+                  >
+                    <div className="cell" style={{ textAlign: column?.textAlign || "left" }}>
+                      {column.renderHead
+                        ? Array.isArray(column.renderHead)
+                          ? column.renderHead(
+                              column.renderHead.map((data: any) => column[data])
+                            )
+                          : column.renderHead()
+                        : column?.id === "index"
+                        ? "№"
+                        : t(column.title)}
+                      {/* {column?.filter && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: "10px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                    }}
+                  >
+                    <CFilter
+                      currentSort={currentSort}
+                      up={`up_${column.id}`}
+                      down={`down_${column.id}`}
+                    />
+                  </div>
+                )} */}
                     </div>
-                  )} */}
-                </div>
-              </CTableHeadCell>
-            ))}
-          </CTableRow>
-        </CTableHead>
+                  </CTableHeadCell>
+                ))}
+              </CTableRow>
+            </CTableHead>
 
-        <CTableBody
-          loader={isLoading}
-          columnscount={headColumns?.length}
-          rowsCount={currentLimit}
-          dataLength={bodySource?.length}
-        >
-          {bodySource?.length
-            ? bodySource?.map((item: any, rowIndex: any) => (
-                <TableRow
-                  key={rowIndex}
-                  ref={(e) => handleBodycolRef(item, e)}
-                  className={clickable && !item.empty ? "clickable" : ""}
-                >
-                  {headColumns.map((column, colIndex) => (
-                    <CTableCell
-                      key={colIndex}
-                      className={`overflow-ellipsis ${tableHeight}`}
-                      onClick={() => {
-                        if (
-                          clickable &&
-                          column?.click !== "custom" &&
-                          column?.id !== "actions"
-                        )
-                        tableActions(item, "view");
-                      }}
-                      style={{
-                        minWidth: "max-content",
-                        padding: "0 4px",
-                        position: tableSettings?.[pageName]?.find(
-                          (item: any) => item?.id === column?.id
-                        )?.isStiky
-                          ? "sticky"
-                          : "relative",
-                        left: tableSettings?.[pageName]?.find(
-                          (item: any) => item?.id === column?.id
-                        )?.isStiky
-                          ? calculateWidth(column?.id, colIndex)
-                          : "0",
-                        backgroundColor: "#fff",
-                        zIndex: tableSettings?.[pageName]?.find(
-                          (item: any) => item?.id === column?.id
-                        )?.isStiky
-                          ? "1"
-                          : "",
-                      }}
+            <CTableBody
+              loader={isLoading}
+              columnscount={headColumns?.length}
+              rowsCount={currentLimit}
+              dataLength={bodySource?.length}
+            >
+              {bodySource?.length
+                ? bodySource?.map((item: any, rowIndex: any) => (
+                    <TableRow
+                      key={rowIndex}
+                      ref={(e) => handleBodycolRef(item, e)}
+                      className={
+                        clickable && !item.empty && checkPermission("view")
+                          ? "clickable"
+                          : ""
+                      }
                     >
-                      <div
-                        style={{
-                          textAlign: column?.textAlign || "left",
-                        }}
-                      >
-                        {column.id !== "actions" && (
-                          <span>
-                            {column.render
-                              ? Array.isArray(column.id)
-                                ? column.render(
-                                    column.id.map((data: any) => item[data])
+                      {headColumns.map((column, colIndex) => (
+                        <CTableCell
+                          key={colIndex}
+                          className={`overflow-ellipsis ${tableHeight}`}
+                          style={{
+                            minWidth: "max-content",
+                            padding: "0 4px",
+                            position: tableSettings?.[pageName]?.find(
+                              (item: any) => item?.id === column?.id
+                            )?.isStiky
+                              ? "sticky"
+                              : "relative",
+                            left: tableSettings?.[pageName]?.find(
+                              (item: any) => item?.id === column?.id
+                            )?.isStiky
+                              ? calculateWidth(column?.id, colIndex)
+                              : "0",
+                            backgroundColor: "#fff",
+                            zIndex: tableSettings?.[pageName]?.find(
+                              (item: any) => item?.id === column?.id
+                            )?.isStiky
+                              ? "1"
+                              : "",
+                          }}
+                        >
+                          <div
+                            style={{
+                              textAlign: column?.textAlign || "left",
+                            }}
+                          >
+                            {column.id !== "actions" && !item.empty ? (
+                              <div
+                                onClick={() => {
+                                  if (
+                                    clickable &&
+                                    column?.click !== "custom" &&
+                                    column?.id !== "actions"
                                   )
-                                : column.render(item[column.id], item)
-                              : item[column.id]}
-                          </span>
-                        )}
-
-                        {column.id === "actions" &&
-                        !item.empty &&
-                        routePermissions?.length ? (
-                          <div className="relative">
-                            {column.permission.length <= 2 ? (
-                              <div>
-                                <TableDelete
-                                  element={item}
-                                  tableActions={tableActions}
-                                  permissions={column.permission}
-                                  checkPermission={checkPermission}
-                                />
-                                {currDelete.index === item.index ? (
-                                  <PopoverDelete
-                                    closePopover={(status) => {
-                                      setCurrDelete({});
-                                      if (status) tableActions(item, status);
-                                    }}
-                                  />
+                                    tableActions(item, "view");
+                                }}
+                              >
+                                {column?.permission ? (
+                                  <>
+                                    {checkPermission(column.permission) && (
+                                      <>
+                                        {column.render
+                                          ? Array.isArray(column.id)
+                                            ? column.render(
+                                                column.id.map(
+                                                  (data: any) => item[data]
+                                                )
+                                              )
+                                            : column.render(
+                                                item[column.id],
+                                                item
+                                              )
+                                          : item[column.id]}
+                                      </>
+                                    )}
+                                  </>
                                 ) : (
-                                  ""
+                                  <>
+                                    {column.render
+                                      ? Array.isArray(column.id)
+                                        ? column.render(
+                                            column.id.map(
+                                              (data: any) => item[data]
+                                            )
+                                          )
+                                        : column.render(item[column.id], item)
+                                      : item[column.id]}
+                                  </>
                                 )}
                               </div>
                             ) : (
-                              <>
-                                <button
-                                  className="p-2"
-                                  onClick={() => setCurrentIndex(rowIndex)}
-                                >
-                                  <DotsIcon />
-                                </button>
-                                <TabbleActions
-                                  element={item}
-                                  rowIndex={rowIndex}
-                                  currentIndex={currentIndex}
-                                  setCurrentIndex={setCurrentIndex}
-                                  handleActions={tableActions}
-                                  permissions={column.permission}
-                                  checkPermission={checkPermission}
-                                />
-                              </>
+                              ""
+                            )}
+
+                            {column.id === "actions" &&
+                            !item.empty &&
+                            routePermissions?.length ? (
+                              <div className="relative">
+                                {column?.actions?.length <= 2 ? (
+                                  <div>
+                                    <TableDelete
+                                      element={item}
+                                      tableActions={tableActions}
+                                      actions={column.actions}
+                                      checkPermission={checkPermission}
+                                    />
+                                    {currDelete.index === item.index ? (
+                                      <PopoverDelete
+                                        closePopover={(status) => {
+                                          setCurrDelete({});
+                                          if (status)
+                                            tableActions(item, status);
+                                        }}
+                                      />
+                                    ) : (
+                                      ""
+                                    )}
+                                  </div>
+                                ) : (
+                                  <>
+                                    <button
+                                      className="p-2"
+                                      onClick={() => setCurrentIndex(rowIndex)}
+                                    >
+                                      <DotsIcon />
+                                    </button>
+                                    <TabbleActions
+                                      element={item}
+                                      rowIndex={rowIndex}
+                                      currentIndex={currentIndex}
+                                      setCurrentIndex={setCurrentIndex}
+                                      handleActions={tableActions}
+                                      actions={column.actions}
+                                      checkPermission={checkPermission}
+                                    />
+                                  </>
+                                )}
+                              </div>
+                            ) : (
+                              ""
                             )}
                           </div>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    </CTableCell>
-                  ))}
-                </TableRow>
-              ))
-            : ""}
-        </CTableBody>
-      </CTableWrapper>
+                        </CTableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                : ""}
+            </CTableBody>
+          </CTableWrapper>
+        </div>
+      </div>
+
+      {bodyColumns?.length && !isLoading && !disablePagination ? (
+        <CPagination
+          filterParams={filterParams}
+          count={count}
+          totalCount={totalCount}
+          limit={currentLimit}
+          limitCount={limitCount}
+          passRouter={passRouter}
+          handleFilterParams={handleFilterParams}
+          setCurrentLimit={setCurrentLimit}
+          dataLength={bodyColumns?.length}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

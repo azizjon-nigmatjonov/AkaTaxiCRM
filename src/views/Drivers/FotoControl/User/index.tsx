@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { useQuery } from "react-query"
 import { Header } from "../../../../components/UI/Header"
 import CBreadcrumbs from "../../../../components/CElements/CBreadcrumbs"
@@ -11,8 +11,9 @@ import { useParams } from "react-router-dom"
 
 const FotoControlUser = () => {
     const { id } = useParams();
+    const [filterParams, setFilterParams]: any = useState({});
 
-    const { data: fotoControl } = useQuery(['GET_FOTOCONTROL_USER', id], () => {
+    const { data: fotoControl, refetch } = useQuery(['GET_FOTOCONTROL_USER', id], () => {
         return driverService.getFotoControlUser(id)
     }, {enabled: !!id })
     
@@ -42,9 +43,9 @@ const FotoControlUser = () => {
       <div className="container space-y-5">
         <DriverInfo data={fotoControl?.data} />
         {fotoControl?.data?.status !== "verified" && fotoControl?.data?.status !== 'canceled' && (
-          <StickerControl data={fotoControl?.data} />
+          <StickerControl data={fotoControl?.data} refetch={refetch} />
         )}
-        <StickerHistory data={fotoControl?.data} />
+        <StickerHistory data={fotoControl?.data} filterParams={filterParams} setFilterParams={setFilterParams} />
       </div>
     </>
   );

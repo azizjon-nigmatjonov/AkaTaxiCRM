@@ -6,7 +6,7 @@ import { useGetQueries } from "../../../../hooks/useGetQueries";
 import DriverBallance from "./Ballance";
 import DriverTrip from "./Trip";
 import DriverInfo from "./Info";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Header } from "../../../../components/UI/Header";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 import { useParams } from "react-router-dom";
@@ -28,11 +28,12 @@ const tabList = [
 ];
 
 const Driver = () => {
-  const { tab} = useGetQueries();
+  const { tab } = useGetQueries();
   const { id } = useParams();
-  const { getQueries } = usePageRouter()
-  const {BalanceFeatures}= PostBallance()
-  const query = getQueries()
+  const { getQueries } = usePageRouter();
+  const [date, setDate] = useState([]);
+  const { BalanceFeatures } = PostBallance({ setDate });
+  const query = getQueries();
 
   const { data: driver, refetch } = useQuery(
     ["GET_DRIVER", id],
@@ -48,7 +49,7 @@ const Driver = () => {
     return [
       {
         label: "Haydovchi",
-        link: '/drivers/main'
+        link: "/drivers/main",
       },
       {
         label: "Ro‘yxat",
@@ -59,25 +60,26 @@ const Driver = () => {
       },
     ];
   }, [driver]);
-
-
-
+  
   return (
     <>
-      <Header >
+      <Header>
         <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
       </Header>
 
       <div className="p-5">
         <div className="flex justify-between">
           <CTabs tabList={tabList} />
-          <div>
-            {query.tab == 'ballance' && BalanceFeatures()}
-          </div>
+          <div>{query.tab == "ballance" && BalanceFeatures()}</div>
         </div>
 
-
-        {tab === "ballance" ? (<DriverBallance />) : tab === "trip_hostory" ? (<DriverTrip />) : (<DriverInfo refetch={refetch} driver={driver?.data} />)}
+        {tab === "ballance" ? (
+          <DriverBallance date={date} />
+        ) : tab === "trip_hostory" ? (
+          <DriverTrip />
+        ) : (
+          <DriverInfo refetch={refetch} driver={driver?.data} />
+        )}
       </div>
     </>
   );

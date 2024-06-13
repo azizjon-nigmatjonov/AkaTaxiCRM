@@ -14,7 +14,7 @@ const Label = ({ label, border, selectHandler = () => { }, value }: Props) => {
             case 'year':
                 return 'Yillik';
             case 'month':
-                return 'Oy';
+                return 'Oylik';
             default:
                 return 'Haftalik'
         }

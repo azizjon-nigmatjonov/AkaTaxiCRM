@@ -1,23 +1,25 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import AddButton from "../../components/UI/Buttons/AddButton";
 import CTable from "../../components/CElements/CTable";
-import FilterButton from "../../components/UI/Filters";
 import SectionHeader from "../../components/UI/Sections/Header";
 import usePageRouter from "../../hooks/useObjectRouter";
 import { useQuery } from "react-query";
 import partnerService from "../../services/partners";
 import ImageFrame from "../../components/UI/ImageFrame";
-import CSelect from "../../components/CElements/CSelect";
 import { Header } from "../../components/UI/Header";
 import Form from "./Form";
-import { useGetQueries } from "../../hooks/useGetQueries";
 import CBreadcrumbs from "../../components/CElements/CBreadcrumbs";
-import { usePlaces } from "../../hooks/usePlaces";
+import { FilterFunctions } from "../../components/UI/Filter/Logic";
+import { FilterComponent } from "./Filter";
 
 const Partners = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
-  const { regionList } = usePlaces()
-  const { currentPage } = useGetQueries()
+  const [filterParams, setFilterParams]: any = useState({});
+  const { collectFilter, storeFilters } = FilterFunctions({
+    store: true,
+    filterParams,
+    setFilterParams,
+  });
 
   const {
     data: partnerData,
@@ -26,6 +28,15 @@ const Partners = () => {
   } = useQuery(["GET_PARTNERS"], () => {
     return partnerService.getList();
   });
+
+  const handleFilterParams = (obj: any) => {
+    setFilterParams(obj);
+    storeFilters(obj);
+  };
+
+  const handleSearch = (value: any) => {
+    collectFilter({ type: "q", val: value });
+  };
 
   const partnersInfo: any = useMemo(() => {
     return (
@@ -43,8 +54,6 @@ const Partners = () => {
       } ?? {}
     );
   }, [partnerData]);
-
-  const handleSearch = () => { };
 
   const headColumns = useMemo(() => {
     return [
@@ -81,13 +90,12 @@ const Partners = () => {
       {
         title: "",
         id: "actions",
-        permission: ["view", "edit", "delete", 'more'],
+        actions: ["view", "edit", "delete", "more"],
       },
     ];
   }, []);
 
   const handleActions = useCallback((element: any, status: string) => {
-    
     if (status === "view") {
       navigateTo(`/partners/partner?id=${element.id}`);
     }
@@ -95,26 +103,14 @@ const Partners = () => {
     if (status === "edit") navigateQuery({ id: element.id });
 
     if (status === "delete") {
-      partnerService.deleteElement(element.id)
-      refetch()
+      partnerService.deleteElement(element.id);
+      refetch();
     }
   }, []);
 
-  const Regions = useMemo(() => {
-    return regionList?.map((i: any) => {
-      return {
-        value: i.id,
-        label: i.name.uz,
-      };
-    });
-  }, [regionList]);
-
-
   const breadCrumbs = useMemo(() => {
-    return [
-      { label: "Hamkorlar", link: "partners/list" },
-    ]
-  }, [])
+    return [{ label: "Hamkorlar", link: "partners/list" }];
+  }, []);
 
   return (
     <>
@@ -122,20 +118,17 @@ const Partners = () => {
         <CBreadcrumbs items={breadCrumbs} progmatic={true} />
       </Header>
       <div className="px-6">
-        <SectionHeader handleSearch={handleSearch}>
-          <div className="flex items-center gap-3">
-            <FilterButton text="filter">
-              <div>
-                <CSelect options={Regions} id="filter" label="Viloyat" />
-              </div>
-            </FilterButton>
-
-            <AddButton
-              text="Yangi hamkor"
-              onClick={() => navigateQuery({ id: "create" })}
-            />
-          </div>
+        <SectionHeader handleSearch={handleSearch} defaultValue={filterParams?.q}>
+          <AddButton
+            text="Yangi hamkor"
+            onClick={() => navigateQuery({ id: "create" })}
+          />
         </SectionHeader>
+
+        <FilterComponent
+          filterParams={filterParams}
+          setFilterParams={setFilterParams}
+        />
 
         <CTable
           headColumns={headColumns}
@@ -144,7 +137,8 @@ const Partners = () => {
           totalCount={partnersInfo?.meta?.totalCount ?? 0}
           handleActions={handleActions}
           isLoading={isLoading}
-          currentPage={currentPage}
+          filterParams={filterParams}
+          handleFilterParams={handleFilterParams}
           clickable={true}
         />
       </div>

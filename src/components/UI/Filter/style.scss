@@ -1,0 +1,10 @@
+.filterDrawer {
+  position: fixed;
+  top: 0;
+  width: auto;
+  height: 100vh;
+  z-index: 99;
+  display: flex;
+  justify-content: flex-start;
+  background-color: white;
+}

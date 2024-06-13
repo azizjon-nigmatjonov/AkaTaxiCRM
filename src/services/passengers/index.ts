@@ -10,10 +10,11 @@ const passengerService = {
   updateElement: (id: any, data: any) =>
     request.put(`passengers/${id}`, { ...data }),
   getElement: (id: any) => request.get(`passengers/${id}`),
+  getActivePassenger: (id: string) => request.get(`/passengers-popular/${id}`),
   getActivePassengers: (params: any) =>
     request.get(
       `/passengers-popular${params.page ? `?page=${params.page || 1}` : ""
-      }${params.q ? `&q=${params.q}` : ""}${params?.status ? `&status=${params.status}` : ''}${params.birthday ? `&birthday=${params.birthday}` : ''}`
+      }${params.q ? `&q=${params.q}` : ""}${params?.status ? `&status=${params.status}` : ''}${params.birthday ? `&birthday=${params.birthday}` : ''}${params.reason ?  `&reason_id=${params.reason}`: ''}`
     ),
   getTicket: (params: any) => request.get(`/passengers-tickets/${params.id}${params.page ? `?page=${params.page}` : '1'}${params.perPage ? `&perPage=${params.perPage}` : ''}${params?.status ? `&status=${params.status}` : ''}`),
   activePassengerWidget: () => request.get('/passenger-statistics/booking-widgets'),

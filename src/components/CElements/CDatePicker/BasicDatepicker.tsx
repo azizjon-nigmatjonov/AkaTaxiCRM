@@ -22,6 +22,7 @@ interface Props {
   label?: string;
   defaultValue?: any;
   required?: boolean;
+  handleClick: (val: any) => void
 }
 
 const BasicDatepicker = ({
@@ -32,14 +33,17 @@ const BasicDatepicker = ({
   label,
   defaultValue,
   required,
+  handleClick = () => {}
 }: Props) => {
   const datePickerRef: any = useRef();
   const [value, setValue] = useState("");
   
   const handleValue = (value: any) => {        
     setValue(value);
+    handleClick(FormatCalendar(value))
     if (field) field.onChange(FormatCalendar(value));
   };
+  
 
   useEffect(() => {
     if (defaultValue) {
@@ -63,6 +67,7 @@ const BasicDatepicker = ({
               datePickerRef.current.closeCalendar();
             }
           });
+
           return (
             <>
               <TextField

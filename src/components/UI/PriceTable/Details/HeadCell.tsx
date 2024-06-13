@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { EditIcon, SaveIcon } from "../../IconGenerator/Svg";
 import useDebounce from "../../../../hooks/useDebounce";
+import { usePermissions } from "../../../../hooks/usePermissions";
 
 export const HeadCell = ({
   type = "cell",
@@ -22,7 +23,8 @@ export const HeadCell = ({
 }) => {
   const [editPrice, setEditPrice] = useState(false);
   const inputRef: any = useRef(null);
-  
+  const { checkPermission } = usePermissions();
+
   useEffect(() => {
     if (editPrice) {
       inputRef?.current.focus();
@@ -36,6 +38,20 @@ export const HeadCell = ({
       </div>
     );
   }
+
+  useEffect(() => {
+    const handleWheel = (event: any) => {
+      if (document.activeElement === inputRef.current) {
+        event.preventDefault();
+      }
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
 
   const handleChange = useDebounce((value: any) => {
     handlePriceInput(value, column.id);
@@ -61,7 +77,9 @@ export const HeadCell = ({
         <p>{column.title}</p>
         <div
           className={`flex space-x-1 px-6px py-2px rounded-[8px] group group-hover:text-[var(--gray90)] text-[var(--gray60)] ${
-            editPrice ? "border border-[var(--gray20)] common-shadow" : "bg-[var(--gray50)]"
+            editPrice
+              ? "border border-[var(--gray20)] common-shadow"
+              : "bg-[var(--gray50)]"
           }`}
         >
           <input
@@ -77,13 +95,17 @@ export const HeadCell = ({
             defaultValue={column.price}
             disabled={!editPrice}
           />{" "}
-          <button onClick={() => handlePriceAction(!editPrice)}>
-            {editPrice ? (
-              <SaveIcon fill="var(--primary)" width={20} />
-            ) : (
-              <EditIcon fill="var(--gray60)" />
-            )}
-          </button>
+          {checkPermission("edit_price") ? (
+            <button onClick={() => handlePriceAction(!editPrice)}>
+              {editPrice ? (
+                <SaveIcon fill="var(--primary)" width={20} />
+              ) : (
+                <EditIcon fill="var(--gray60)" />
+              )}
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div className="cell__wrapper">
@@ -101,7 +123,7 @@ export const HeadCell = ({
           >
             KM
           </p>{" "}
-          {orderNumber === 2 && (
+          {orderNumber === 2 && checkPermission("edit_km") ? (
             <button onClick={() => handleDistanceAction(!column.edit_km)}>
               {column.edit_km ? (
                 <SaveIcon fill="var(--primary)" width={20} />
@@ -109,6 +131,8 @@ export const HeadCell = ({
                 <EditIcon fill="var(--gray60)" />
               )}
             </button>
+          ) : (
+            ""
           )}
         </div>
         <p className="text-[var(--gray40)] font-[600]">Summa</p>

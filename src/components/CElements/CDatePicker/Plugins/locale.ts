@@ -32,3 +32,37 @@ export const locale = {
     ["หลังเที่ยง", "พีเอ็ม"],
   ],
 }
+
+export const localeuz = {
+  months: [
+    ["Yanvar", "Yan"],
+    ["Fevral", "Fev"],
+    ["Mart", "Маrt"],
+    ["Aprel", "Apr"],
+    ["May", "May"],
+    ["Iyun", "Iyun"],
+    ["Iyul", "Iyul"],
+    ["Avgust", "Avg"],
+    ["Sentabr", "Sen"],
+    ["Oktabr", "Okt"],
+    ["Noyabr", "Noy"],
+    ["Dekabr", "Dek"],
+  ],
+  weekDays: [
+    ["Shanba", "Shan"],
+    ["Yakshanba", "Yak"],
+
+    ["Dushanba", "Dush"],
+    ["Seshanba", "Sesh"],
+    ["Chorshanba", "Chor"],
+    ["Payshanba", "Pay"],
+    ["Juma", "Jum"],
+  ],
+  digits: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+  meridiems: [
+    ["ก่อนเที่ยง", "เอเอ็ม"],
+    ["หลังเที่ยง", "พีเอ็ม"],
+  ],
+} as any
+
+

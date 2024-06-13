@@ -10,7 +10,7 @@ const SMSReports = () => {
                 <CBreadcrumbs items={breadcrumbsItems} progmatic={true} type='link' />
             </Header>
             <div className="px-5">
-                <CTable headColumns={headColumns} bodyColumns={[]} />
+                <CTable headColumns={headColumns} bodyColumns={[]} handleFilterParams={() => {}} filterParams={{}} />
             </div>
         </>
     )
