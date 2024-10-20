@@ -33,12 +33,12 @@ export default function RegionStats() {
         return stats?.data ?? [];
     }, [stats]);
 
-    let amount = Object.values(bodyColumns);
-    let amount1 = Object.keys(bodyColumns);
+    const amount = Object.values(bodyColumns);
+    const amount1 = Object.keys(bodyColumns);
 
-    let obj = [];
+    const obj = [];
 
-    let obj1 = { symbol: '', amount: [], color: '' } as {symbol:string, amount: any, color:string};
+    const obj1 = { symbol: '', amount: [], color: '' } as {symbol:string, amount: any, color:string};
     amount1.forEach((item: string, index) => {
         obj1.symbol = item;
         obj1.amount = amount[index];

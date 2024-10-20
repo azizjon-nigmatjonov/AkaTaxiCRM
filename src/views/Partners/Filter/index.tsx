@@ -1,6 +1,6 @@
 import { usePlaces } from "../../../hooks/usePlaces";
 import Filters from "../../../components/UI/Filter";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import CSelect from "../../../components/CElements/CSelect";
 import { FilterFunctions } from "../../../components/UI/Filter/Logic";
 
@@ -10,7 +10,6 @@ interface Props {
 }
 
 export const FilterComponent = ({ filterParams, setFilterParams }: Props) => {
-  const [openFilter, setOpenFilter] = useState(false);
   const { collectFilter } = FilterFunctions({ filterParams, setFilterParams });
   const { regionList } = usePlaces();
   const Regions = useMemo(() => {
@@ -27,12 +26,7 @@ export const FilterComponent = ({ filterParams, setFilterParams }: Props) => {
   };
 
   return (
-    <Filters
-      filter={openFilter}
-      filterParams={filterParams}
-      setFilterParams={setFilterParams}
-      setOpen={setOpenFilter}
-    >
+    <Filters filterParams={filterParams} setFilterParams={setFilterParams}>
       <CSelect
         options={Regions}
         label="Viloyat"

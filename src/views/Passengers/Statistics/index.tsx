@@ -13,7 +13,7 @@ const Statistics = () => {
     return [
       {
         label: "Yo'lovchilar",
-        link: '/passengers/main'
+        link: '/passengers/passenger-list'
       },
       {
         label: 'Statistika',

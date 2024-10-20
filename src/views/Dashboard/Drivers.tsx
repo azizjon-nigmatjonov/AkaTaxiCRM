@@ -4,6 +4,7 @@ import { AndroidIcon } from "../../components/UI/IconGenerator/Svg";
 import { WomenGenderIcon } from "../../components/UI/IconGenerator/Svg";
 import { ManGenderIcon } from "../../components/UI/IconGenerator/Svg";
 import { OneSkeleton } from "../../components/CElements/CSkeleton/OneSkeleton";
+import { formatNumberWithSpaces } from "../../utils/formatMoney";
 
 interface DriversProps {
   data: {
@@ -39,7 +40,7 @@ function Drivers({ data, isLoading }: DriversProps) {
       <div className="flex gap-[49px]">
         <div className="mt-6 relative">
           <p className="text-[#475467] font-medium">Umumiy soni</p>
-          <p className="text-3xl font-semibold mt-2">{totalCount}</p>
+          <p className="text-3xl font-semibold mt-2">{formatNumberWithSpaces(totalCount)}</p>
           <div className="flex gap-6 mt-[25px] before:w-[1px]  before:right-[-24px] before:h-[24px] before:absolute before:bg-[#EAECF0]">
             <div className="flex gap-2 items-center">
               <ManGenderIcon />

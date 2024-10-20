@@ -3,12 +3,12 @@ import { UserIcon } from "../../../../../components/UI/IconGenerator/Svg";
 import { ColorConstants } from "../../../../../constants/website";
 
 
-type CardProps = {
+interface CardProps {
   selectedElement: any;
   element: any;
   handleClick?: (val?: any) => void;
   active: boolean | any;
-};
+}
 
 const Card = ({ selectedElement, element, handleClick = () => { }, active = false }: CardProps) => {
 

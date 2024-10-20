@@ -97,8 +97,8 @@ const Seating = ({
     { place_number: 1, gender: "false" },
   ]);
 
-  let front = result.slice(0, 1);
-  let back = result.slice(1);
+  const front = result.slice(0, 1);
+  const back = result.slice(1);
 
   const handleList = (status: string, number: number) => {
     const newRes = result?.map((item) => {

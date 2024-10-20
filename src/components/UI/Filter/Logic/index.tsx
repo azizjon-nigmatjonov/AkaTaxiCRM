@@ -46,7 +46,7 @@ export const FilterData = ({
   const clearFilter = (key: string, val?: any) => {
     const params: any = key === "all" ? {} : { ...filterParams };
 
-    for (let i in params) {
+    for (const i in params) {
       if (i === key) {
         if (val) {
           params[i] = params[i].filter((item: any) => item.value !== val);
@@ -146,9 +146,21 @@ export const FilterFunctions = ({
     status?: string;
   }) => {
     const obj: any = {};
-    if (status === "arr") {
-      const arr = filterParams[type] ?? [];
-      obj[type] = [...arr, val];
+    if (val) {
+      if (status === "arr") {
+        const arr = filterParams[type] ?? [];
+
+        const found = arr.find(
+          (item: { value: any }) => item.value === val.value
+        );
+        if (found) {
+          obj[type] = arr.filter((item: any) => item.value !== val.value);
+        } else {
+          obj[type] = [...arr, val];
+        }
+      } else {
+        obj[type] = val;
+      }
     } else {
       obj[type] = val;
     }

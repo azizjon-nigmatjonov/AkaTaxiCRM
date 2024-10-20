@@ -2,10 +2,7 @@ import Tabledirvers from "./Tables/Tabledirvers";
 import TableDriversVilage from "./Tables/TableDriversVilage";
 import TablePessengersVilage from "./Tables/TablePessengersVilage";
 import TablePessengers from "./Tables/TablePessengers";
-
-// function createData(name, calories, fat, carbs, protein) {
-//     return { name, calories, fat, carbs, protein };
-// }
+import { CPeriodPicker } from "../../components/CElements/CPeriodPicker";
 
 interface DataListType {
   canceled: number;
@@ -18,44 +15,13 @@ interface DataListType {
 }
 
 function ContentTable({
-//   isLoading,
-  setCountWeekDriversVilage,
-  setSelectMonthDriversVilage,
-  setYearDriversVilage,
-  yearDriversVilage,
-  setCountDrivers,
-  setSelectMonthDrivers,
-  setYearDrivers,
-  yearDrivers,
-  setCountWeekPessengerVilage,
-  setSelectMonthPessengerVilage,
-  setYearPessengerVilage,
-  yearPessengerVilage,
-  setCountWeek,
-  setSelectMonth,
-  year,
-  setYear,
+  handleDate,
   driverTripsDataFromVilage,
   passengersDataVilage,
   driverTripsDataFromCity,
   dataList,
 }: {
-  setCountWeekDriversVilage: any;
-  setSelectMonthDriversVilage: any;
-  setYearDriversVilage: any;
-  yearDriversVilage: string;
-  setCountDrivers: any;
-  setSelectMonthDrivers: any;
-  setYearDrivers: any;
-  yearDrivers: any;
-  setCountWeekPessengerVilage: any;
-  setSelectMonthPessengerVilage: any;
-  setYearPessengerVilage: any;
-  yearPessengerVilage: any;
-  setCountWeek: any;
-  setSelectMonth: any;
-  year: any;
-  setYear: any;
+  handleDate: (val: any, type: string) => void;
   dataList: DataListType[];
   driverTripsDataFromCity: any;
   passengersDataVilage: any;
@@ -65,41 +31,50 @@ function ContentTable({
   return (
     <>
       <div className="px-5 w-full mb-6">
-        <h2 className=" text-[30px] my-5 text-[#101828] font-semibold">
-          Yo’lovchilar qatnovi
-        </h2>
-        <div className="rounded-[10px] shadow-sm  pt-3">
-          <TablePessengers
-            setYear={setYear}
-            year={year}
-            dataList={dataList}
-            setCountWeek={setCountWeek}
-            setSelectMonth={setSelectMonth}
-          />
-          <TablePessengersVilage
-            setCountWeekPessengerVilage={setCountWeekPessengerVilage}
-            setSelectMonthPessengerVilage={setSelectMonthPessengerVilage}
-            setYearPessengerVilage={setYearPessengerVilage}
-            yearPessengerVilage={yearPessengerVilage}
-            passengersDataVilage={passengersDataVilage}
+        <div className="flex items-center justify-between mt-5">
+          <h2 className=" text-[30px] my-5 text-[#101828] font-semibold">
+            Yo’lovchilar qatnovi
+          </h2>
+          <div className="w-[240px]">
+            <CPeriodPicker
+              handleValue={(val: any) => handleDate(val, "passenger")}
+              placeholder="Vaqt tanlang"
+            />
+          </div>
+        </div>
+        <div className="rounded-[10px] shadow-sm">
+          <TablePessengers dataList={dataList} />
+
+          <div className="w-[240px] ml-auto mt-5">
+            <CPeriodPicker
+              placeholder="Vaqtni tanlang"
+              handleValue={(val: any) => handleDate(val, "passenger_to")}
+            />
+          </div>
+          <TablePessengersVilage passengersDataVilage={passengersDataVilage} />
+        </div>
+
+        <div className="flex items-center justify-between">
+          <h2 className=" text-[30px] mt-6 text-[#101828] font-semibold mb-6">
+            Haydovchilar
+          </h2>
+          <div className="w-[240px]">
+            <CPeriodPicker
+              handleValue={(val: any) => handleDate(val, "driver")}
+              placeholder="Vaqt tanlang"
+            />
+          </div>
+        </div>
+        <Tabledirvers driverTripsDataFromCity={driverTripsDataFromCity} />
+
+        <div className="w-[240px] ml-auto mt-5">
+          <CPeriodPicker
+            handleValue={(val: any) => handleDate(val, "driver_to")}
+            placeholder="Vaqt tanlang"
           />
         </div>
-        <h2 className=" text-[30px] mt-6 text-[#101828] font-semibold mb-6">
-          Haydovchilar
-        </h2>
-        <div className="rounded-[10px] shadow-sm  pt-3">
-          <Tabledirvers
-            setCountDrivers={setCountDrivers}
-            setSelectMonthDrivers={setSelectMonthDrivers}
-            setYearDrivers={setYearDrivers}
-            yearDrivers={yearDrivers}
-            driverTripsDataFromCity={driverTripsDataFromCity}
-          />
+        <div className="rounded-[10px] shadow-sm">
           <TableDriversVilage
-            setCountWeekDriversVilage={setCountWeekDriversVilage}
-            setSelectMonthDriversVilage={setSelectMonthDriversVilage}
-            setYearDriversVilage={setYearDriversVilage}
-            yearDriversVilage={yearDriversVilage}
             driverTripsDataFromVilage={driverTripsDataFromVilage}
           />
         </div>

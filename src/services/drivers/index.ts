@@ -2,21 +2,14 @@ import request from "../../utils/request";
 import requestForm from "../../utils/requestFormdata";
 
 const driverService = {
-  getList: (params: any) =>
+  getAllDriver: ({ q, locationIds }: { q: string; locationIds: any }) =>
     request.get(
-      `/drivers?${params.page ? `page=${params.page}` : ""}${
-        params.birthday ? `&birthday=${params.birthday}` : ""
-      }${params.q ? `&q=${params.q}` : ""}${
-        params.perPage ? `&perPage=${params.perPage}` : ""
-      }${params?.version ? `&version=${params.version}` : ""}${
-        params.gender ? `&gender=${params.gender}` : ""
-      }${params.created_at ? `&created_at=${params.created_at}` : ""}${
-        params.region ? `&region_id=${params.region}` : ""
-      }${params.device_type ? `&device_type=${params.device_type}` : ""}${
-        params.car_id ? `&car_id=${params.car_id}` : ""
-      } ${params.status ? `&status=${params.status}` : ""} 
-      ${params.is_paid ? `&is_paid=${params.is_paid}` : ""}`
+      `/drivers-all?q=${q}&start_location_id=${locationIds.start}&end_location_id=${locationIds.end}`
     ),
+  getList: (params: any) =>
+    request.get(`/drivers`, {
+      params,
+    }),
   createElement: (data: any) => requestForm.post("/drivers", data),
   getActives: (params: any) =>
     request.get(
@@ -29,7 +22,11 @@ const driverService = {
       }${params.status ? `&status=${params.status}` : ""}`
     ),
   updateElement: (id: any, data: any) =>
-    requestForm.post(`/drivers/${id}`, data),
+    requestForm.put(`/drivers/${id}`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }),
   updateCarInfo: (id: any, data: any) => request.patch(`/drivers/${id}`, data),
   deleteElement: (id: any) => request.delete(`/drivers/${id}`),
   getElement: (id: string | undefined) => request.get(`/drivers/${id}`),
@@ -37,31 +34,27 @@ const driverService = {
     request.get(
       `drivers/${data.id}/trips?${data.page ? `page=${data.page}` : ""}`
     ),
-  getWidgets: (data: any) =>
-    request.get(
-      `statistics/drivers/widgets${data.start ? `?start=${data.start}` : ""}${
-        data.end ? `&end=${data.end}` : ""
-      }`
-    ),
-  getDriversGraph: (data?: any) =>
-    request.get(
-      `statistics/drivers/graph?${data?.year ? `year=${data.year}` : ""}${
-        data?.month ? `&month=${data?.month}` : ""
-      }${data.week ? `&week=${data.week}` : ""}`
-    ),
+  getWidgets: (params: any) =>
+    request.get(`statistics/drivers/widgets`, { params }),
+  getDriversGraph: (params: any) =>
+    request.get(`statistics/drivers/graph`, { params }),
   getUserRegion: () => request.get("statistics/drivers/users-by-region"),
   getDriverBallance: (data?: any) =>
     request.get(
-      `drivers/${data.id}/transactions?${data.page ? `page=${data.page}` : ""}`
+      `drivers/${data.id}/transactions?${
+        data.page ? `page=${data.page}` : ""
+      } ${data?.created_at ? `&created_at=${data.created_at}` : ""}`
     ),
   getDriverBallanceCard: (data?: any) =>
-    request.get(`drivers/${data.id}/balance?created_at=${data.created_at}`),
-  getFotoContols: (data?: any) =>
     request.get(
-      `stickers?${data.page ? `page=${data.page}` : ""}${
-        data.perPage ? `&perPage=${data.perPage}` : ""
-      }${data.q ? `&q=${data.q}` : ""}`
+      `drivers/${data.id}/balance${
+        data?.created_at ? `?created_at=${data.created_at}` : ""
+      }`
     ),
+  getFotoContols: (data?: any) =>
+    request.get(`stickers`, {
+      params: data,
+    }),
   getFotoControlUser: (id?: string) => request.get(`stickers/${id}`),
   updateFotoControl: (id: any, data: any) =>
     request.put(`stickers/${id}`, data),

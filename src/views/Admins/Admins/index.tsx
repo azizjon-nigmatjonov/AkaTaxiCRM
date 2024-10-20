@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import AddButton from "../../../components/UI/Buttons/AddButton";
-import SectionHeader from "../../../components/UI/Sections/Header";
+// import SectionHeader from "../../../components/UI/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import Form from "./Form";
 import adminService from "../../../services/admins";
@@ -15,17 +15,23 @@ const Admins = () => {
   const { getQueries } = usePageRouter();
   const query = getQueries();
   const { headColumns } = TableData();
-  const { bodyColumns, isLoading, refetch } = FetchFunction();
-  const [filterParams, setFilterParams]: any = useState({});
-  const { collectFilter, storeFilters } = FilterFunctions({ store: true, filterParams, setFilterParams });
 
-  const handleSearch = (value: any) => {
-    collectFilter({ type: "q", val: value });
-  };
+  const [filterParams, setFilterParams]: any = useState({});
+  const { bodyColumns, isLoading, refetch } = FetchFunction();
+  const { collectFilter, storeFilters } = FilterFunctions({
+    store: true,
+    filterParams,
+    setFilterParams,
+  });
 
   const handleFilterParams = (obj: any) => {
     setFilterParams(obj);
     storeFilters(obj);
+  };
+
+  const handleSearch = (value: any) => {
+    collectFilter({ type: "q", val: value });
+    handleFilterParams({ ...filterParams, q: value, page: 1 });
   };
 
   const handleActions = useCallback((element: any, status: string) => {
@@ -34,7 +40,7 @@ const Admins = () => {
     if (status === "edit") navigateQuery({ id: element.id });
 
     if (status === "delete") {
-      if (element.email === 'superrt@akataxi.uz') return
+      if (element.email === "superrt@akataxi.uz") return;
       adminService.deleteAdmin(element.id).then(() => {
         refetch();
       });
@@ -44,22 +50,24 @@ const Admins = () => {
   return (
     <>
       <Header sticky={true}>
-        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+        <CBreadcrumbs
+          items={breadCrumbs}
+          progmatic={true}
+          handleSearch={handleSearch}
+          defaultValue={filterParams?.q}
+        />
+        <div className="ml-5">
+          <AddButton
+            text="new_admin"
+            onClick={() => navigateQuery({ id: "create" })}
+          />
+        </div>
       </Header>
       <div className="container">
-        <SectionHeader handleSearch={handleSearch} defaultValue={filterParams?.q}>
-          <div className="flex items-center gap-3">
-            <AddButton
-              text="new_admin"
-              onClick={() => navigateQuery({ id: "create" })}
-            />
-          </div>
-        </SectionHeader>
-
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns.list}
-          totalCount={bodyColumns?.meta?.totalCount ?? bodyColumns.list.length}
+          meta={bodyColumns?.meta}
           isResizeble={true}
           isLoading={isLoading}
           handleActions={handleActions}

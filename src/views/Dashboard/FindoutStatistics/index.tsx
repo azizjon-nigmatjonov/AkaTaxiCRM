@@ -1,23 +1,16 @@
-import CSelect from "../../../components/CElements/CSelect";
+// import CSelect from "../../../components/CElements/CSelect";
 import CDriver from "../../../components/CElements/CDivider";
 import { WrapperCard } from "../../../components/UI/WrapperCard";
 import { StatisticsList } from "./List";
 import { FetchFunction } from "./Logic";
-import { getYears } from "../../../utils/getMonth";
-import { Months } from "../../../constants/month";
-import { GetMonth } from "../../../utils/getWeekDays";
 import { useState } from "react";
+import { CPeriodPicker } from "../../../components/CElements/CPeriodPicker";
 
 export const FindoutStatistics = () => {
-  const { currentMonth, year } = GetMonth();
-  const [params, setParams]: any = useState({ month: currentMonth, year });
-
-  const { socialData, isLoading } = FetchFunction({ params });
-  const yearsOption = getYears();
-
-  const handleParams = (type: string, val: any) => {
-    setParams({ ...params, [type]: val });
-  };
+  const [filterParams, setFilterParams]: any = useState({});
+  const { socialData, isLoading, defaultData } = FetchFunction({
+    params: filterParams,
+  });
 
   return (
     <WrapperCard classes="p-[0]">
@@ -30,23 +23,22 @@ export const FindoutStatistics = () => {
             Foydalanuvchilarning bizni qayerdan topgani bo’yicha
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-x-5">
-          <CSelect
-            options={Months}
-            value={params.month}
-            handlerValue={(obj: any) => handleParams("month", obj.value)}
-          />
 
-          <CSelect
-            options={yearsOption}
-            value={params.year}
-            handlerValue={(obj: any) => handleParams("year", obj.value)}
+        <div className="w-[235px]">
+          <CPeriodPicker
+            placeholder="Vaqtni tanlang"
+            handleValue={(val: any) => setFilterParams({ date: val })}
+            defaultValue={filterParams?.date}
           />
         </div>
       </div>
       <CDriver classes="mb-24px" />
 
-      <StatisticsList socialData={socialData} isLoading={isLoading} />
+      <StatisticsList
+        socialData={socialData}
+        defaultData={defaultData}
+        isLoading={isLoading}
+      />
     </WrapperCard>
   );
 };

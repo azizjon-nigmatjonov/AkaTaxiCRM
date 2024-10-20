@@ -155,6 +155,7 @@ export const DImageUploadUI = ({
           ) : (
             <ImageFrame />
           )}
+          {defaultValue && loading ? <div className="absolute top-1/2 left-1/2"><CircularProgress style={{ color: "white" }} /></div> : ""}
           <input
             type="file"
             className="hidden"
@@ -184,7 +185,7 @@ export const DImageUploadUI = ({
           </div>
         )}
 
-        {error && error.message && (
+        {error?.message && (
           <p className="text-sm text-[var(--error)] absolute left-1 -bottom-5 whitespace-nowrap">
             {error.message}
           </p>

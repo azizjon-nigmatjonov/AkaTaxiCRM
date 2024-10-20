@@ -15,7 +15,6 @@ const ActionsHistory = () => {
         <CTable
           headColumns={[]}
           bodyColumns={[]}
-          totalCount={1}
           isResizeble={true}
           isLoading={false}
           filterParams={{}}

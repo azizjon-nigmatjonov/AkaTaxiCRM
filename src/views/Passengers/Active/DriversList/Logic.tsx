@@ -33,7 +33,13 @@ export const TableData = (arr: any, refetch: any) => {
       render: (val: any) => {
         return (
           <div className="flex space-x-2">
-            <img src={val?.image} height={50} width={50} alt="image" />
+            <div className="h-[50px] w-[50px] max-h-[50px]">
+              <img
+                src={val?.image}
+                className="w-full h-full object-cover"
+                alt="image"
+              />
+            </div>
             <div>
               <h4>{val?.full_name}</h4>
               <p>{val?.phone}</p>
@@ -98,19 +104,20 @@ export const TableData = (arr: any, refetch: any) => {
 
 export const FetchFunction = () => {
   const { suggestion } = useGetQueries();
+
   const {
-    data: passengerData,
+    data: bidsData,
     refetch,
     isLoading,
   } = useQuery(
-    ["GET_ACTIVE_PASSENGER_DATA_DEFAULT", suggestion],
+    ["GET_BIDS_PASSENGER", suggestion],
     () => {
-      return passengerService.getActivePassenger(suggestion);
+      return passengerService.getBids(suggestion);
     },
     {
       enabled: !!suggestion,
     }
   );
 
-  return { passengerData, refetch, isLoading };
+  return { passengerData: bidsData, refetch, isLoading };
 };

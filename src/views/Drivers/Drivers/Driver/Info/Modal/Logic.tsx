@@ -10,7 +10,8 @@ export const ModalData = () => {
     mutationFn: (data: any) => {
       return driverService
         .updateCarInfo(id, {
-          reason_of_status: data,
+          reason_of_status: data.langs,
+          incorrect_fields: data.incorrect_fields,
           status: "banned",
         })
         .then(() => {

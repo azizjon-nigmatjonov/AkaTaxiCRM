@@ -8,9 +8,11 @@ interface Props {
   label?: string;
   handlerValue?: (val: any) => void;
   disabled?: any;
+  defaultValue?: any
 }
 
 const Detail = ({
+  defaultValue,
   id = "cselect",
   options = [],
   label = "",
@@ -30,7 +32,7 @@ const Detail = ({
         <Select
           disabled={ disabled }
           sx={{ m: 1, width: '100%', }}
-          defaultValue={options?.[0]?.value}
+          defaultValue={defaultValue || options?.[0]?.value}
           inputProps={{
             "aria-label": "Without label",
           }}

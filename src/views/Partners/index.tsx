@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import AddButton from "../../components/UI/Buttons/AddButton";
 import CTable from "../../components/CElements/CTable";
-import SectionHeader from "../../components/UI/Sections/Header";
+// import SectionHeader from "../../components/UI/Sections/Header";
 import usePageRouter from "../../hooks/useObjectRouter";
 import { useQuery } from "react-query";
 import partnerService from "../../services/partners";
@@ -36,6 +36,7 @@ const Partners = () => {
 
   const handleSearch = (value: any) => {
     collectFilter({ type: "q", val: value });
+    handleFilterParams({ ...filterParams, q: value, page: 1 });
   };
 
   const partnersInfo: any = useMemo(() => {
@@ -115,15 +116,26 @@ const Partners = () => {
   return (
     <>
       <Header>
-        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
-      </Header>
-      <div className="px-6">
-        <SectionHeader handleSearch={handleSearch} defaultValue={filterParams?.q}>
+        <CBreadcrumbs
+          items={breadCrumbs}
+          progmatic={true}
+          handleSearch={handleSearch}
+          defaultValue={filterParams?.q}
+        />
+        <div className="ml-5">
           <AddButton
             text="Yangi hamkor"
             onClick={() => navigateQuery({ id: "create" })}
           />
-        </SectionHeader>
+        </div>
+      </Header>
+      <div className="container">
+        {/* <SectionHeader handleSearch={handleSearch} defaultValue={filterParams?.q}>
+          <AddButton
+            text="Yangi hamkor"
+            onClick={() => navigateQuery({ id: "create" })}
+          />
+        </SectionHeader> */}
 
         <FilterComponent
           filterParams={filterParams}
@@ -133,8 +145,7 @@ const Partners = () => {
         <CTable
           headColumns={headColumns}
           bodyColumns={partnersInfo?.list}
-          count={partnersInfo?.meta?.pageCount}
-          totalCount={partnersInfo?.meta?.totalCount ?? 0}
+          meta={partnersInfo?.meta}
           handleActions={handleActions}
           isLoading={isLoading}
           filterParams={filterParams}

@@ -1,7 +1,10 @@
 import MenuItem from "@mui/material/MenuItem";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import CLabel from "../CLabel";
-import { ArrowDownOutline } from "../../../components/UI/IconGenerator/Svg";
+import {
+  ArrowDownOutline,
+  CloseIcon,
+} from "../../../components/UI/IconGenerator/Svg";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -14,22 +17,24 @@ interface Props {
   placeholder?: string;
   value?: any;
   classes?: string;
+  closeIcon?: boolean
 }
 
 const CSelect = ({
+  closeIcon = true,
   placeholder,
   value,
   options = [],
   label = "",
-  handlerValue,
+  handlerValue = () => {},
   disabled,
   classes = "bg-white",
 }: Props) => {
   const [open, setOpen] = useState(false);
   const [currentValue, setCurrentValue]: any = useState(null);
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setCurrentValue(event.target.value);
+  const handleChange = (event: any) => {
+    setCurrentValue(event?.target?.value);
   };
 
   const handleClick = (val: any) => {
@@ -79,8 +84,24 @@ const CSelect = ({
           >
             <ArrowDownOutline />
           </div>
+          {currentValue && closeIcon ? (
+            <button
+              onClick={() => {
+                handleChange(null)
+                handleClick("")
+              }}
+              className={`z-[50] absolute right-[34px] top-1/2 -translate-y-1/2`}
+            >
+              <CloseIcon />
+            </button>
+          ) : (
+            ""
+          )}
         </div>
-        {placeholder && !currentValue ? (
+        {placeholder &&
+        !currentValue &&
+        currentValue !== 0 &&
+        currentValue !== false ? (
           <p className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--gray60)]">
             {placeholder}
           </p>

@@ -6,6 +6,7 @@ import {
   WomenGenderIcon,
 } from "../../components/UI/IconGenerator/Svg";
 import { OneSkeleton } from "../../components/CElements/CSkeleton/OneSkeleton";
+import { formatNumberWithSpaces } from "../../utils/formatMoney";
 
 interface PassengerProps {
   data: {
@@ -16,7 +17,7 @@ interface PassengerProps {
     ios: number;
     android: number;
   };
-  isLoading: boolean
+  isLoading: boolean;
 }
 
 function Passenger({ data, isLoading }: PassengerProps) {
@@ -30,16 +31,20 @@ function Passenger({ data, isLoading }: PassengerProps) {
   }, [data]);
 
   if (isLoading) {
-    return <OneSkeleton height={191.5} />
+    return <OneSkeleton height={191.5} />;
   }
 
   return (
-    <div className={`max-w-[50%] p-6 w-full rounded-[12px] bg-white border border-[var(--gray20)] card-shadow min-g-[191px]`}>
+    <div
+      className={`max-w-[50%] p-6 w-full rounded-[12px] bg-white border border-[var(--gray20)] card-shadow min-g-[191px]`}
+    >
       <h3 className="text-[#101828] font-semibold">{data?.name}</h3>
       <div className="flex gap-[49px]">
         <div className="mt-6 relative">
           <p className="text-[#475467] font-medium">Umumiy soni</p>
-          <p className="text-3xl font-semibold mt-2">{totalCount}</p>
+          <p className="text-3xl font-semibold mt-2">
+            {formatNumberWithSpaces(totalCount)}
+          </p>
           <div className="flex gap-6 mt-[25px] before:w-[1px]  before:right-[-24px] before:h-[24px] before:absolute before:bg-[#EAECF0]">
             <div className="flex gap-2 items-center">
               <ManGenderIcon />

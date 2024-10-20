@@ -11,7 +11,7 @@ const PassengerList = ({ data }: { data: any }) => {
 
   const pasengerList = useMemo(() => {
     if (!data && !data.passengers.length) return [];
-    let passenger = data?.passengers;
+    const passenger = data?.passengers;
     return passenger?.map((val: any) => {
       return {
         ...val,

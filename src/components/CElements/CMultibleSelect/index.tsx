@@ -1,5 +1,5 @@
 import ListItemText from "@mui/material/ListItemText";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import CLabel from "../CLabel";
 import { useEffect, useState } from "react";
@@ -25,18 +25,26 @@ const CMultibleSelect = ({
   const [newOptions, setNewOptions] = useState([]);
 
   useEffect(() => {
-    let newArr: any = [...options];
+    const newArr: any = [...options];
     setNewOptions(newArr);
   }, [options]);
-  
-  const handleChange = (event: SelectChangeEvent<typeof currentValue>) => {
-    const {
-      target: { value },
-    } = event;
 
-    setCurrentValue(value);
+  const handleChange = (obj: any) => {
+    let newVal: any = [...currentValue];
+
+    if (newVal?.find((item: any) => item === obj.value)) {
+      newVal = newVal.filter((el: any) => el !== obj.value);
+    } else {
+      newVal = [...newVal, obj.value];
+    }
+
+    setCurrentValue(newVal);
+    const newOptions = options.filter((item: any) =>
+      newVal.includes(item.value)
+    );
+    handlerValue(newOptions);
   };
-  
+
   const regionHandler = (e: any) => {
     const option: any = [];
     newOptions?.map((items: any) => {
@@ -50,7 +58,7 @@ const CMultibleSelect = ({
   };
 
   useEffect(() => {
-    if (defaultValue?.length) {
+    if (defaultValue?.length && !currentValue?.length) {
       const arr: any = [...currentValue];
       const sum = defaultValue.length
         ? decodeURIComponent(defaultValue).split(",")
@@ -65,8 +73,8 @@ const CMultibleSelect = ({
 
       setCurrentValue(arr);
     }
-  }, [defaultValue]);
-  
+  }, [defaultValue, currentValue]);
+
   return (
     <div id="HFMultipleSelect" className="w-full">
       {label && <CLabel title={label} />}
@@ -77,17 +85,21 @@ const CMultibleSelect = ({
             id="demo-multiple-checkbox"
             multiple
             value={currentValue}
-            onChange={handleChange}
+            // onChange={handleChange}
             placeholder={placeholder}
-            renderValue={(selected) => {
-              if (selected.length === 0) {
+            renderValue={() => {
+              if (currentValue.length === 0) {
                 return <p className="text-red-500">Tanglang</p>;
               }
-              return regionHandler(selected);
+              return regionHandler(currentValue);
             }}
           >
             {newOptions?.map((item: any) => (
-              <MenuItem key={item.value} value={item.value} onClick={() => handlerValue(item)}>
+              <MenuItem
+                key={item.value}
+                value={item.value}
+                onClick={() => handleChange(item)}
+              >
                 <Checkbox checked={currentValue.includes(item.value)} />
 
                 <ListItemText primary={item.label} />

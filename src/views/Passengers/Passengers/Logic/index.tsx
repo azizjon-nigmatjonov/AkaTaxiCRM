@@ -10,7 +10,7 @@ import { getStoredFilters } from "../../../../components/UI/Filter/Logic";
 export const breadCrumbItems = [
   {
     label: "Yo'lovchilar",
-    link: "/passengers/main",
+    link: "/passengers/passenger-list",
   },
   {
     label: "Ro‘yxat",
@@ -69,7 +69,7 @@ export const TableData = ({
       id: "coin_balance",
     },
     {
-      title: "",
+      title: "Eslatma",
       id: "notelist",
       render: (item: any) => {
         return (
@@ -85,7 +85,7 @@ export const TableData = ({
     {
       title: "",
       id: "actions",
-      actions: ["view"],
+      actions: ["view", "multiple"],
     },
   ];
 
@@ -100,6 +100,9 @@ export const TableData = ({
     }
     if (status === "view") {
       navigateTo(`/passengers/passenger-list/${el.id}`);
+    }
+    if (status === 'multiple_delete') {
+      console.log('multiple_delete', status, el);
     }
   };
 

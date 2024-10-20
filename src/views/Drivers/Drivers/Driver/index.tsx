@@ -32,7 +32,8 @@ const Driver = () => {
   const { id } = useParams();
   const { getQueries } = usePageRouter();
   const [date, setDate] = useState([]);
-  const { BalanceFeatures } = PostBallance({ setDate });
+  const [openBalance, setOpenBalance] = useState("")
+  const { BalanceFeatures } = PostBallance({ setDate, setOpenBalance });
   const query = getQueries();
 
   const { data: driver, refetch } = useQuery(
@@ -67,14 +68,14 @@ const Driver = () => {
         <CBreadcrumbs items={breadCrumbItems} progmatic={true} type="link" />
       </Header>
 
-      <div className="p-5">
+      <div className="container">
         <div className="flex justify-between">
           <CTabs tabList={tabList} />
           <div>{query.tab == "ballance" && BalanceFeatures()}</div>
         </div>
 
         {tab === "ballance" ? (
-          <DriverBallance date={date} />
+          <DriverBallance date={date} openBalance={openBalance} setOpenBalance={setOpenBalance} />
         ) : tab === "trip_hostory" ? (
           <DriverTrip />
         ) : (

@@ -9,6 +9,7 @@ import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { usePermissions } from "../../../../hooks/usePermissions";
 import { ListItem } from "./Item";
+import usePageRouter from "../../../../hooks/useObjectRouter";
 
 interface Props {
   setOpen: (val: boolean) => void;
@@ -18,6 +19,7 @@ interface Props {
 export const NitifList = ({ setOpen, list }: Props) => {
   const sound = useSelector((state: any) => state.notification.sound);
   const dispatch = useDispatch();
+  const { navigateTo } = usePageRouter();
   const { checkAdditionals } = usePermissions();
   return (
     <>
@@ -63,7 +65,20 @@ export const NitifList = ({ setOpen, list }: Props) => {
           {list?.length ? (
             <ul className="max-h-[400px] overflow-auto">
               {list.map((item: any, index: number) => (
-                <ListItem key={index} element={item} />
+                <ListItem
+                  key={index}
+                  element={item}
+                  handleClick={(el: { description: any }) => {
+                    console.log(el);
+                    
+                    navigateTo("/passengers/active-passengers");
+                    // if (typeof el.description === "string") {
+                    //   navigateTo("/drivers/active");
+                    // } else {
+                    //   navigateTo("/passengers/active-passengers");
+                    // }
+                  }}
+                />
               ))}
             </ul>
           ) : (

@@ -56,7 +56,7 @@ function ModalMap({ totalDistance, selectedDriverData, modalOpen, setisModal }: 
             return earthRadiusKm * c;
         };
 
-        if (selectedDriverData && selectedDriverData.driver_location && selectedDriverData.end_location_coordinate) {
+        if (selectedDriverData?.driver_location && selectedDriverData.end_location_coordinate) {
             const driverLat = parseFloat(selectedDriverData.driver_location.lat);
             const driverLng = parseFloat(selectedDriverData.driver_location.long);
             const endLat = parseFloat(selectedDriverData.end_location_coordinate[1]);

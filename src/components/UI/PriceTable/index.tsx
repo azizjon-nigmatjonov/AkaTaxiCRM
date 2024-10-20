@@ -1,9 +1,8 @@
-import { HeadCell } from "./Details/HeadCell";
 import "./style.scss";
 import { BodyData, CreateFunction, TableData } from "./Logic";
 import { useForm } from "react-hook-form";
-import { BodyUI } from "./Details/Body";
 import { useEffect, useState } from "react";
+import { PriceTableBody } from "./Body";
 
 interface Props {
   region: any;
@@ -20,9 +19,10 @@ export const PriceTable = ({
   handleDistanceSet,
   getDistanceValues,
 }: Props) => {
-  const { headColumns, handleCheckKm, handlePriceInput } = TableData({
-    region,
-  });
+  const { headColumns, handleCheckKm, handlePriceInput, handleSelectDelivery } =
+    TableData({
+      region,
+    });
   const { submitPrice, submitDistance } = CreateFunction({
     handleSucces,
     from_tashkent: from_tashkent,
@@ -32,7 +32,7 @@ export const PriceTable = ({
     bodyList: region?.districts,
     handleDistanceSet,
     districtList,
-    setDistrictList
+    setDistrictList,
   });
   const { setValue, getValues } = useForm();
 
@@ -48,50 +48,36 @@ export const PriceTable = ({
         submitDistance(params);
       }
     }
-  };
+    if (type === "delivery") {
+      const params: any = getDistanceValues();
 
+      if (Object.values(params).length) {
+        submitDistance(params, type, districtList);
+      }
+    }
+  };
 
   useEffect(() => {
     if (region?.districts?.length) {
-      setDistrictList(region.districts);
+      setTimeout(() => {
+        setDistrictList(region.districts);
+      }, 0);
     }
   }, [region?.districts]);
 
-  return (
-    <div
-      className={`price-table bg-white rounded-[12px] border border-[var(--border)] common-shadow overflow-hidden`}
-    >
-      <div className="header">
-        <div className="row">
-          {headColumns?.map((item: any, index: number) => (
-            <HeadCell
-              key={index}
-              orderNumber={index}
-              type={item.type}
-              column={item}
-              region={region}
-              setValue={setValue}
-              submitFn={submitFn}
-              handlePriceInput={handlePriceInput}
-              handleCheckKm={handleCheckKm}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="body">
-        <div className="left">
-          <div className="cell">
-            <p>{region?.region_name}</p>
-          </div>
-        </div>
-        <div className="right">
-          <BodyUI
-            headColumns={headColumns}
-            districtList={districtList}
-            handleKmInput={handleKmInput}
-          />
-        </div>
-      </div>
-    </div>
-  );
+  if (districtList?.length && headColumns?.length) {
+    return (
+      <PriceTableBody
+        headColumns={headColumns}
+        handleCheckKm={handleCheckKm}
+        handlePriceInput={handlePriceInput}
+        handleKmInput={handleKmInput}
+        setValue={setValue}
+        region={region}
+        submitFn={submitFn}
+        handleSelectDelivery={handleSelectDelivery}
+        districtList={districtList}
+      />
+    );
+  }
 };

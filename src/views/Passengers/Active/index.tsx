@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
-import SectionHeader from "../../../components/UI/Sections/Header";
+// import SectionHeader from "../../../components/UI/Sections/Header";
 import { Header } from "../../../components/UI/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import DriversList from "./DriversList";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import Statistics from "./Statistics";
-import { FetchFunction, breadCrubmsItems } from "./Logic";
+import { ExtraFunctions, FetchFunction, breadCrubmsItems } from "./Logic";
 import { usePlaces } from "../../../hooks/usePlaces";
 import BookingDetail from "./BookingDetails";
 import { NoteTableButtonActions } from "../../../components/UI/CallModals/NoteModal/Logic";
@@ -23,6 +23,11 @@ import cls from "./style.module.scss";
 import { useTranslation } from "react-i18next";
 import { FilterFunctions } from "../../../components/UI/Filter/Logic";
 import { FilterComponent } from "./Filter";
+import { useQuery } from "react-query";
+import passengerService from "../../../services/passengers";
+import { GetCurrentDate } from "../../../utils/getDate";
+import FilterButton from "../../../components/UI/Filters";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 const ActivePassengers = () => {
   const messageName = useSelector((state: any) => state.mqtt.messageName);
@@ -35,11 +40,6 @@ const ActivePassengers = () => {
     filterParams,
     setFilterParams,
   });
-
-  const handleSearch = (value: any) => {
-    collectFilter({ type: "q", val: value });
-  };
-
   const {
     bodyColumns,
     isLoading,
@@ -50,6 +50,53 @@ const ActivePassengers = () => {
     postReason,
     setDriverLists,
   } = FetchFunction();
+  const { cancelBooking } = ExtraFunctions({ refetch });
+
+  const handleFilterParams = (obj: any) => {
+    setFilterParams(obj);
+    storeFilters(obj);
+  };
+
+  const handleSearch = (value: any) => {
+    collectFilter({ type: "q", val: value });
+    handleFilterParams({ ...filterParams, q: value, page: 1 });
+  };
+
+  const handleClick = (obj: { index: number }) => {
+    if (obj.index === 0) {
+      handleFilterParams({ ...filterParams, status: {}, date: [] });
+    } else {
+      let date = [
+        GetCurrentDate({ type: "today" }),
+        GetCurrentDate({ type: "today" }),
+      ];
+      if (obj.index === 2) {
+        date = GetCurrentDate({ type: "week" }).split(",");
+      } else if (obj.index === 3) {
+        date = GetCurrentDate({ type: "month" }).split(",");
+      }
+
+      handleFilterParams({
+        ...filterParams,
+        status: { value: "done", label: "Yetib bordi" },
+        date,
+      });
+    }
+  };
+
+  const {
+    data: cardData,
+    isLoading: laodingCard,
+    refetch: refetchCardData,
+  } = useQuery(
+    ["GET_ACTIVE_PASSANGER_WIDGET"],
+    () => {
+      return passengerService.activePassengerWidget();
+    },
+    {
+      refetchInterval: 4 * 60 * 1000,
+    }
+  );
 
   const dispatch = useDispatch();
   const driversHandle = (e: any) => {
@@ -139,20 +186,38 @@ const ActivePassengers = () => {
       },
       {
         title: "Mavjud taksilar",
-        id: "bids",
-        render: (val?: any, item?: any) =>
-          val && (
-            <DriversAvater
-              data={val}
-              item={item}
-              driversHandle={driversHandle}
-            />
-          ),
+        id: ["bids_count", "id", "to_region_name", "from_region_name"],
+        render: (val: any) => {
+          const arr = val[0]
+            ?.toString()
+            .split("")
+            .map((item: string) => {
+              return {
+                id: item + 1,
+                full_name: item + 1,
+                image: "",
+              };
+            });
+
+          return (
+            val?.[0] > 0 && (
+              <DriversAvater
+                data={arr}
+                item={{
+                  id: val[1],
+                  to_region_name: val[2],
+                  from_region_name: val[3],
+                }}
+                driversHandle={driversHandle}
+              />
+            )
+          );
+        },
       },
       {
         title: "sabablar",
         id: "ids",
-        width: 300,
+        width: 500,
         render: (ids: any) => {
           return (
             <CSelectColor
@@ -175,7 +240,7 @@ const ActivePassengers = () => {
         render: (val: any) => val && <p>{val} so'm</p>,
       },
       {
-        title: "Klas",
+        title: "Klass",
         id: "class",
         render: (val: any) => val && <p>{t(val)}</p>,
       },
@@ -189,7 +254,19 @@ const ActivePassengers = () => {
         },
       },
       {
-        title: "",
+        title: "Sana",
+        id: "created_at",
+        width: 180,
+      },
+      {
+        title: "Qidiruv",
+        id: "type",
+        render: (val: string) => {
+          return <>{t(val)}</>;
+        },
+      },
+      {
+        title: "Eslatma",
         id: ["notelist", "user_id"],
         render: (val: any) => {
           if (!val?.[1]) return "";
@@ -203,8 +280,9 @@ const ActivePassengers = () => {
         },
         click: "custom",
       },
+
       {
-        title: "",
+        title: "Ko'rish",
         id: "id",
         render: (id: any) =>
           id && (
@@ -215,6 +293,21 @@ const ActivePassengers = () => {
               <EyeIcon fill="var(--gray60)" />
             </div>
           ),
+      },
+      {
+        title: "Bekor qilish",
+        id: "id",
+        width: 150,
+        render: (id: number) => {
+          return (
+            <button
+              onClick={() => cancelBooking(id)}
+              className="w-full flex justify-center"
+            >
+              <CancelIcon style={{ color: "var(--error)" }} />
+            </button>
+          );
+        },
       },
     ];
 
@@ -229,6 +322,7 @@ const ActivePassengers = () => {
   useEffect(() => {
     if (messageName === "new-booking" || messageName === "reason-update") {
       refetch();
+      refetchCardData();
       setTimeout(() => {
         dispatch(mqttActions.setData({}));
       }, 0);
@@ -250,23 +344,20 @@ const ActivePassengers = () => {
     Regions.unshift({ value: 0, label: "Barchasi" });
   }, [Regions]);
 
-  const handleFilterParams = (obj: any) => {
-    setFilterParams(obj);
-    storeFilters(obj);
-  };
-
   return (
     <div>
-      <Header sticky={true}>
-        <CBreadcrumbs items={breadCrubmsItems} type="link" progmatic={true} />
-      </Header>
+      <Header>
+        <div className="flex justify-between w-full">
+          <CBreadcrumbs
+            items={breadCrubmsItems}
+            type="link"
+            progmatic={true}
+            handleSearch={handleSearch}
+            defaultValue={filterParams?.q}
+          />
 
-      <div className="container">
-        <SectionHeader
-          handleSearch={handleSearch}
-          defaultValue={filterParams?.q}
-        >
-          <div className="flex items-center gap-[14px]">
+          <div className="ml-5 flex space-x-5">
+            <FilterButton text="filter" />
             <button
               className="custom-btn"
               onClick={() =>
@@ -276,21 +367,26 @@ const ActivePassengers = () => {
               Buyurtma berish
             </button>
           </div>
-        </SectionHeader>
+        </div>
+      </Header>
 
+      <div className="container">
         <FilterComponent
           filterParams={filterParams}
           setFilterParams={setFilterParams}
         />
 
-        <Statistics />
+        <Statistics
+          data={cardData}
+          handleClick={handleClick}
+          isLoading={laodingCard}
+        />
 
         <div className="pb-5">
           <CTable
             headColumns={headColumns}
             bodyColumns={bodyColumns?.list}
-            count={bodyColumns?.meta?.pageCount}
-            totalCount={bodyColumns?.meta?.totalCount}
+            meta={bodyColumns?.meta}
             isResizeble={true}
             isLoading={isLoading}
             filterParams={filterParams}

@@ -43,9 +43,9 @@ const Card: FC<Props> = ({ setInputValue, element }) => {
             </div>
           </div>
         </div>
-        <div className="h-[80px] max-w-[110px]">
+        <div className="max-h-[80px]">
           <img
-            className="w-full h-full object-cover"
+            className="max-w-[110px] object-cover"
             src={element.image}
             alt={element.image || "image"}
           />

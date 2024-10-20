@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import sidebarService from "../../../../services/sidebar";
+import { useQuery } from "react-query";
 
 export const getWebsiteData = () => {
   const userInfo = useSelector((state: any) => state.auth.user);
@@ -20,4 +22,12 @@ export const SectionData = () => {
   };
 
   return { getParentName };
+};
+
+export const FetchFunction = () => {
+  const { data: sibdarData } = useQuery(["GET_SIDEBAR_DATA_"], () => {
+    return sidebarService.getSidebarData();
+  });
+
+  return { sidebarCounts: sibdarData?.data ?? {} };
 };

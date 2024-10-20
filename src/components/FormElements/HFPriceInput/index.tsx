@@ -19,6 +19,7 @@ interface Props {
   activatePassword?: boolean;
   errors?: any;
   readOnly?: boolean;
+  add?: string
 }
 
 export const HFPriceInput = ({
@@ -34,6 +35,7 @@ export const HFPriceInput = ({
   activatePassword = false,
   type = "text",
   errors = {},
+  add = "",
   readOnly = false,
   ...props
 }: Props) => {

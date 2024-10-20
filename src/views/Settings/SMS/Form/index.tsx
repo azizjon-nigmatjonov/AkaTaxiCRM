@@ -107,14 +107,14 @@ const list = [
                 <textarea
                   onChange={(e) => setValue("body", e.target.value)}
                   className={`bg-transparent border border-border rounded-[10px] resize-y w-full p-4 outline-none focus:border-[#DD431F] ${
-                    errors["body"]?.message ? "border-red-500" : ""
+                    errors.body?.message ? "border-red-500" : ""
                   }`}
                   rows={10}
                   placeholder="Matn"
                 />
-                {errors["body"]?.message && (
+                {errors.body?.message && (
                   <p className="text-sm text-[var(--error)] absolute -bottom-5">
-                    {errors["body"].message || ""}
+                    {errors.body.message || ""}
                   </p>
                 )}
               </div>

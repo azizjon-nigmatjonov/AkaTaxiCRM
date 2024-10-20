@@ -15,7 +15,6 @@ export const PassengerTable = ({ list = [], isLoading = true }: { list: any, isL
         <CTable
           headColumns={headColumns}
           bodyColumns={list}
-          count={1}
           isLoading={isLoading}
           filterParams={{}}
           handleFilterParams={() => {}}

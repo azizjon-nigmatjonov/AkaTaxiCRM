@@ -10,8 +10,9 @@ const DriverStatistics = lazy(() => import("../../views/Drivers/Statistics"));
 const AddDriver = lazy(() => import("../../views/Drivers/Drivers/AddDriver"));
 const FotoControlUser = lazy(
   () => import("../../views/Drivers/FotoControl/User")
-)
+);
 const SingleCar = lazy(() => import("../../views/Drivers/Vehicles/Car"));
+const DriverReminder = lazy(() => import("../../views/Drivers/Reminders"));
 
 export const driverList = [
   {
@@ -21,7 +22,7 @@ export const driverList = [
     title: "Ro'yxat",
     icon: "driving",
     element: <Drivers />,
-    permissions: ["name", "phone"]
+    permissions: ["name", "phone"],
   },
   {
     parent: "drivers",
@@ -30,7 +31,7 @@ export const driverList = [
     title: "Haydovchi qo'shish sahifasi",
     icon: "",
     element: <Driver />,
-    single_page: true
+    single_page: true,
   },
   {
     parent: "drivers",
@@ -48,7 +49,7 @@ export const driverList = [
     title: "Aktiv haydovchilar",
     icon: "smart_car",
     element: <ActiveDrivers />,
-    permissions: ["note"]
+    permissions: ["note"],
   },
   {
     parent: "drivers",
@@ -65,7 +66,7 @@ export const driverList = [
     title: "Foto nazorat ichki sahifa",
     icon: "",
     element: <FotoControlUser />,
-    single_page: true
+    single_page: true,
   },
   {
     parent: "drivers",
@@ -74,7 +75,7 @@ export const driverList = [
     title: "Haydovchi qo'shish",
     icon: "",
     element: <AddDriver />,
-    single_page: true
+    single_page: true,
   },
   {
     parent: "drivers",
@@ -89,9 +90,8 @@ export const driverList = [
     link: "cars/:id",
     sidebar: false,
     icon: "",
-    title: "Mashina qo'shish",
+    title: "Mashina ichki sahifasi",
     element: <SingleCar />,
-    single_page: true
   },
   {
     parent: "drivers",
@@ -116,5 +116,21 @@ export const driverList = [
     title: "Statistika: haydovchi",
     icon: "graph",
     element: <DriverStatistics />,
+  },
+  {
+    parent: "drivers",
+    link: "reminder",
+    sidebar: true,
+    title: "Haydovchilar eslatma",
+    icon: "reminder",
+    element: <DriverReminder />,
+  },
+  {
+    parent: "drivers",
+    link: "reminder/:id",
+    sidebar: false,
+    title: "Haydovchilar eslatma",
+    icon: "reminder",
+    element: <DriverReminder />,
   },
 ];

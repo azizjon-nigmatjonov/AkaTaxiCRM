@@ -1,21 +1,34 @@
 import { useQuery } from "react-query";
 import driverService from "../../../../../services/drivers";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import CTable from "../../../../../components/CElements/CTable";
 import usePageRouter from "../../../../../hooks/useObjectRouter";
 import { FormatTime } from "../../../../../utils/formatTime";
-import { useGetQueries } from "../../../../../hooks/useGetQueries";
 import { useParams } from "react-router-dom";
+import { FilterFunctions } from "../../../../../components/UI/Filter/Logic";
 
 const DriverTrip = () => {
   const { navigateQuery, navigateTo } = usePageRouter();
-  const { currentPage } = useGetQueries();
   const { id } = useParams();
+  const [filterParams, setFilterParams]: any = useState({});
+  const { storeFilters } = FilterFunctions({
+    store: true,
+    filterParams,
+    setFilterParams,
+  });
 
+  const handleFilterParams = (obj: any) => {
+    setFilterParams(obj);
+    storeFilters(obj);
+  };
+  
   const { data: trip, isLoading } = useQuery(
-    ["GET_DRIVERS_TRIPS", id, currentPage],
+    ["GET_DRIVERS_TRIPS", id, filterParams],
     () => {
-      return driverService.getDriverTripHistory({ id, page: currentPage });
+      return driverService.getDriverTripHistory({
+        id,
+        page: filterParams?.page || 1,
+      });
     }
   );
 
@@ -42,10 +55,10 @@ const DriverTrip = () => {
 
   const headColumns = useMemo(() => {
     return [
-      {
-        title: "marshrut raqami",
-        id: "id",
-      },
+      // {
+      //   title: "marshrut raqami",
+      //   id: "id",
+      // },
       {
         title: "Start manzil",
         id: "start",
@@ -77,6 +90,10 @@ const DriverTrip = () => {
         render: (val?: any) => val && <>{val}ta mijoz</>,
       },
       {
+        title: "Bekor qilish sababi",
+        id: "",
+      },
+      {
         title: "umumiy summa",
         id: "price_formatted",
         render: (val?: any) => val && <p>{val} so'm</p>,
@@ -96,11 +113,11 @@ const DriverTrip = () => {
       <CTable
         headColumns={headColumns}
         bodyColumns={TripData?.list}
-        count={TripData?.meta?.pageCount}
+        meta={TripData?.meta}
         handleActions={handleActions}
         isLoading={isLoading}
-        filterParams={{}}
-        handleFilterParams={() => {}}
+        filterParams={filterParams}
+        handleFilterParams={handleFilterParams}
       />
     </>
   );

@@ -2,27 +2,16 @@ import { Suspense, useEffect, useMemo, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { websiteActions } from "../store/website/index";
-
 import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../views/Auth/Login";
 import Registration from "../views/Auth/Registration";
-
 import { routeList } from "./List";
 import ErrorBoundary from "../utils/ErrorBoundary";
 import { PageFallbackInner } from "../components/UI/PageFallback";
+import { routeParents } from "../constants/routeParents";
 
-const defaults = {
-  dashboard: [],
-  passengers: [],
-  drivers: [],
-  infos: [],
-  admins: [],
-  notifications: [],
-  partners: [],
-  settings: [],
-  call_center: [],
-};
+const defaults = { ...routeParents };
 
 interface Path {
   parent: string;
@@ -33,6 +22,12 @@ interface Path {
   sidebar: boolean;
   custom_permissions: any;
   single_page: boolean;
+}
+
+interface routeType {
+  sidebar: boolean;
+  value: string; // Assuming value is a string; change as needed
+  // Add other properties if they exist
 }
 
 const Router = () => {
@@ -71,7 +66,7 @@ const Router = () => {
     };
 
     const permissions = userInfo?.permissions ?? [];
-    const found = permissions?.find((i: any) => i.value === path);
+    const found = permissions?.find((i: routeType) => i.value === path);
 
     if (!listNew.includes(obj.id)) {
       setNewRoutes((prev: any) => ({
@@ -95,23 +90,21 @@ const Router = () => {
     return "";
   };
 
-  useEffect(() => {
-    dispatch(websiteActions.setRoutes({ ...routes }));
-  }, []);
-
-  useEffect(() => {
-    dispatch(websiteActions.setNewRoutes({ ...newRoutes }));
-  }, []);
-
   const navigator = useMemo(() => {
-    for (let key in storedRoutes) {
+    for (const key in storedRoutes) {
       if (storedRoutes[key]?.length) {
-        if (storedRoutes[key].find((item: any) => item.sidebar)) {
-          return storedRoutes[key].find((item: any) => item.sidebar)?.path;
+        const obj = storedRoutes[key].find((item: routeType) => item.sidebar);
+        if (obj?.path) {
+          return obj?.path;
         }
       }
     }
   }, [storedRoutes]);
+
+  useEffect(() => {
+    dispatch(websiteActions.setRoutes({ ...routes }));
+    dispatch(websiteActions.setNewRoutes({ ...newRoutes }));
+  }, []);
 
   if (!token) {
     return (

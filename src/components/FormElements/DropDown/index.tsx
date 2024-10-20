@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 import RangeDate from "../../UI/RangeDate";
 import CLabel from "../../CElements/CLabel";
 import "../style.scss";
-import { IoMdArrowDropdown } from "react-icons/io";
+// import { IoMdArrowDropdown } from "react-icons/io";
 import usePageRouter from "../../../hooks/useObjectRouter";
 
 interface Props {
@@ -26,7 +26,7 @@ const DropDown = ({
   const { getQueries } = usePageRouter();
   const query = getQueries();
 
-  let value =
+  const value =
     query?.start && query?.end
       ? query?.start.slice(5) + " - " + query.end.slice(5)
       : "Tanlang";
@@ -47,7 +47,7 @@ const DropDown = ({
           placeholder={placeholder}
           InputProps={{
             readOnly: true,
-            endAdornment: <IoMdArrowDropdown size={18} />,
+            endAdornment: <div></div>
           }}
           onClick={() => setShow(true)}
           style={{ background: "white" }}

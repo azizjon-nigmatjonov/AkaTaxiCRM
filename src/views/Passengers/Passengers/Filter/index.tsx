@@ -4,7 +4,7 @@ import { DivicesList } from "../../../../constants/devices";
 import { CPeriodPicker } from "../../../../components/CElements/CPeriodPicker";
 import CMultibleSelect from "../../../../components/CElements/CMultibleSelect";
 import { usePlaces } from "../../../../hooks/usePlaces";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useVersions } from "../../../../hooks/useVersions";
 import { FilterFunctions } from "../../../../components/UI/Filter/Logic";
 
@@ -13,14 +13,11 @@ interface Props {
   setFilterParams: (val: any) => void;
 }
 
-export const FilterPassenger = ({
-  filterParams,
-  setFilterParams
-}: Props) => {
+export const FilterPassenger = ({ filterParams, setFilterParams }: Props) => {
   const { regionList } = usePlaces();
   const { VersionOptions } = useVersions();
-  const [openFilter, setOpenFilter] = useState(false);
-  const { collectFilter } = FilterFunctions({filterParams, setFilterParams});
+
+  const { collectFilter } = FilterFunctions({ filterParams, setFilterParams });
 
   const handleFilter = (type: string, val: any, status?: string) => {
     collectFilter({ type, val, status });
@@ -34,14 +31,9 @@ export const FilterPassenger = ({
       };
     });
   }, [regionList]);
-  
+
   return (
-    <Filters
-      filter={openFilter}
-      filterParams={filterParams}
-      setFilterParams={setFilterParams}
-      setOpen={setOpenFilter}
-    >
+    <Filters filterParams={filterParams} setFilterParams={setFilterParams}>
       <div className="grid grid-cols-1 gap-y-5 w-full">
         <CPeriodPicker
           label="Vaqt"
@@ -49,7 +41,6 @@ export const FilterPassenger = ({
           defaultValue={filterParams?.date}
           handleValue={(val: any) => handleFilter("date", val)}
         />
-
         <CSelect
           options={DivicesList}
           label="Operatsion sistema"
@@ -80,7 +71,7 @@ export const FilterPassenger = ({
           label="Yashash joyi"
           placeholder="Tanlang"
           defaultValue={filterParams?.region_id?.map((item: any) => item.value)}
-          handlerValue={(val: any) => handleFilter("region_id", val, "arr")}
+          handlerValue={(val: any) => handleFilter("region_id", val)}
         />
       </div>
     </Filters>

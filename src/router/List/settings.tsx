@@ -4,7 +4,8 @@ const Regions = lazy(() => import("../../views/Settings/Regions"));
 const ActionsHistory = lazy(
   () => import("../../views/Settings/ActionsHistory")
 );
-const ProfilePage = lazy(() => import("../../views/Settings/Profile"))
+const ProfilePage = lazy(() => import("../../views/Settings/Profile"));
+const PhoneCode = lazy(() => import("../../views/Settings/PhoneCode"))
 
 export const settingList = [
   {
@@ -14,7 +15,7 @@ export const settingList = [
     title: "Narx nazorati",
     icon: "price_control",
     element: <Price />,
-    permissions: ["edit_price", "edit_km"]
+    permissions: ["edit_price", "edit_km"],
   },
   {
     parent: "settings",
@@ -31,7 +32,7 @@ export const settingList = [
     title: "Profile",
     icon: "",
     element: <ProfilePage />,
-    permissions: ["logout"]
+    permissions: ["logout"],
   },
   {
     parent: "settings",
@@ -40,6 +41,14 @@ export const settingList = [
     title: "Amallar tarixi",
     icon: "layers",
     element: <ActionsHistory />,
+  },
+  {
+    parent: "settings",
+    link: "phone_code",
+    sidebar: true,
+    title: "Telefon kod",
+    icon: "phone",
+    element: <PhoneCode />,
   },
   {
     parent: "settings",

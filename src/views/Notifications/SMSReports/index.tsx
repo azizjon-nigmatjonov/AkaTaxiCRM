@@ -9,7 +9,7 @@ const SMSReports = () => {
             <Header sticky={true}>
                 <CBreadcrumbs items={breadcrumbsItems} progmatic={true} type='link' />
             </Header>
-            <div className="px-5">
+            <div className="container">
                 <CTable headColumns={headColumns} bodyColumns={[]} handleFilterParams={() => {}} filterParams={{}} />
             </div>
         </>

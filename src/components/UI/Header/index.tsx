@@ -2,6 +2,7 @@
 import cls from "./style.module.scss";
 import Notification from "./Notification";
 import { useSelector } from "react-redux";
+import { OrderDriver } from "./OrderDriver";
 
 interface Props {
   title?: string;
@@ -37,8 +38,11 @@ export const Header = ({
             {"/" + titleIn}
           </h3>
         )}
-
-        <Notification />
+        <div className="h-[20px] w-[2px] bg-[var(--gray20)] ml-5"></div>
+        <div className="ml-5 flex items-center space-x-5">
+          <OrderDriver />
+          <Notification />
+        </div>
 
         <img
           className="absolute right-0 top-0 z-[1]"

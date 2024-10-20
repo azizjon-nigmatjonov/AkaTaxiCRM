@@ -11,12 +11,10 @@ interface Props {
   totalCount?: number;
   currentLimit: number;
   passRouter: boolean;
-  limitCount: number[];
   filterParams: any;
   tableStyle?: object;
   wrapperStyle?: object;
   handleFilterParams: (newPage: any) => void;
-  setCurrentLimit: (newLimit: any) => void;
   children: ReactNode;
   disablePagination?: any;
   dataLength: number;
@@ -27,7 +25,6 @@ export const CTableWrapper = ({
   height,
   tableStyle = {},
   wrapperStyle = {},
-
   children,
 }: Props) => {
   return (
@@ -66,7 +63,11 @@ export const CTableHeadCell = ({
   id: any;
   style: any;
 }) => {
-  return <th {...props}>{children}</th>;
+  return (
+    <th {...props} className="sticky">
+      {children}
+    </th>
+  );
 };
 
 export const CTableBody = ({
@@ -131,3 +132,4 @@ export const CTableCell = ({
     </td>
   );
 };
+

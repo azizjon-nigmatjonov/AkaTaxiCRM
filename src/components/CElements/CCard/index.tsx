@@ -8,7 +8,6 @@ interface Props {
 }
 
 const CCard = ({ classes = "", style, children, title = "" }: Props) => {
-  
   return (
     <div>
       {title ? <h2 className="mb-2">{title}</h2> : ""}

@@ -1,8 +1,8 @@
 import { NotificationIcon } from "../../../../components/UI/IconGenerator/Svg";
 
-export const ListItem = ({ element }: { element: any }) => {
+export const ListItem = ({ element, handleClick = () => {} }: { element: any; handleClick: (val: any) => void }) => {
   return (
-    <li className="flex items-center space-x-3 rounded-[12px] p-4 hover:bg-[var(--gray50)] cursor-pointer group relative">
+    <li onClick={() => handleClick(element)} className="flex items-center space-x-3 rounded-[12px] p-4 hover:bg-[var(--gray50)] cursor-pointer group relative">
       <div className="w-[40px]">
         <div className="bg-white group-hover:border border-[var(--gray20)] w-[40px] h-[40px] rounded-[8px] flex items-center justify-center">
           <NotificationIcon />

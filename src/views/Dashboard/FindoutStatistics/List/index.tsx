@@ -11,6 +11,7 @@ import {
   TelegramIcon,
   YoutubeIcon,
 } from "../../../../components/UI/IconGenerator/Svg/Socials";
+import { formatNumberWithSpaces } from "../../../../utils/formatMoney";
 
 const GetIcon = (type: string) => {
   switch (type) {
@@ -64,9 +65,11 @@ const ListItem = ({ classes, element }: { classes?: string; element: any }) => {
 
 export const StatisticsList = ({
   socialData,
+  defaultData = [],
   isLoading = false,
 }: {
   socialData: any;
+  defaultData: any;
   isLoading: boolean;
 }) => {
   if (isLoading) {
@@ -81,35 +84,36 @@ export const StatisticsList = ({
     <div className="grid grid-cols-2">
       <div>
         <h3 className="pl-24px text-[var(--gray90)] text-lg font-[600]">
-          Yo’lovchilar
+          Yo’lovchilar (
+          {formatNumberWithSpaces(socialData?.passenger_count ?? 0)} ta)
+          <span></span>
         </h3>
-        {socialData?.passenger?.length ? (
-          <ul>
-            {socialData.passenger.map((item: any, index: number) => (
-              <ListItem key={index} element={item} classes="pr-24px" />
-            ))}
-          </ul>
-        ) : (
-          <div className="flex justify-center my-5">
-            <img src="/images/no-data.png" width={200} alt="empty" />
-          </div>
-        )}
+
+        <ul>
+          {defaultData.map((item: any, index: number) => (
+            <ListItem
+              key={index}
+              element={socialData?.passenger?.[index] ?? item}
+              classes="pr-24px"
+            />
+          ))}
+        </ul>
       </div>
       <div>
         <h3 className="pl-24px text-[var(--gray90)] text-lg font-[600]">
-          Haydovchilar
+          Haydovchilar ({formatNumberWithSpaces(socialData?.driver_count ?? 0)}{" "}
+          ta)
         </h3>
-        {socialData?.driver?.length ? (
-          <ul>
-            {socialData.driver.map((item: any, index: number) => (
-              <ListItem key={index} element={item} classes="pl-24px" />
-            ))}
-          </ul>
-        ) : (
-          <div className="flex justify-center my-5">
-            <img src="/images/no-data.png" width={200} alt="empty" />
-          </div>
-        )}
+
+        <ul>
+          {defaultData.map((item: any, index: number) => (
+            <ListItem
+              key={index}
+              element={socialData?.driver?.[index] ?? item}
+              classes="pl-24px"
+            />
+          ))}
+        </ul>
       </div>
     </div>
   );

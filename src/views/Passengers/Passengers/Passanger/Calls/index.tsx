@@ -18,7 +18,6 @@ export const PassengerCalls = () => {
       <CTable
         headColumns={headColumns}
         bodyColumns={mockdata}
-        count={1}
         isLoading={false}
         filterParams={{}}
         handleFilterParams={() => {}}

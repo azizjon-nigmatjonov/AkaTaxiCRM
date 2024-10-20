@@ -23,12 +23,19 @@ const Result = ({ selected }: { selected?: any }) => {
   const locations = useMemo(() => {
     const arr = selected[0].list?.map((item: any) => item.id) ?? [];
     const arr2 = selected[1].list?.map((item: any) => item.id) ?? [];
-    
+
     return { start: arr.join(","), end: arr2?.join(",") };
   }, [selected[0]?.list?.length, selected[1]?.list?.length]);
 
   const { data, isLoading } = useQuery(
-    ["GET_TRIPS", locations.start, locations.end, currentPage, status, selected[0]?.list?.length],
+    [
+      "GET_TRIPS",
+      locations.start,
+      locations.end,
+      currentPage,
+      status,
+      selected[0]?.list?.length,
+    ],
     () => {
       return fileService.getTrips({
         page: currentPage,
@@ -44,7 +51,6 @@ const Result = ({ selected }: { selected?: any }) => {
     setFilterParams(obj);
     storeFilters(obj);
   };
-
 
   const bodyColumns: any = useMemo(() => {
     const list = data?.data ?? [];
@@ -90,7 +96,7 @@ const Result = ({ selected }: { selected?: any }) => {
       <CTable
         headColumns={headColumns}
         bodyColumns={bodyColumns.list}
-        count={bodyColumns?.meta?.pageCount}
+        meta={bodyColumns?.meta}
         disablePagination={false}
         isResizeble={true}
         isLoading={isLoading}

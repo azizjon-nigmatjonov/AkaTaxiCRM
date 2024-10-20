@@ -1,15 +1,15 @@
 import { memo } from "react";
 import { TextField } from "@mui/material";
 import "../style.scss";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { ArrowDownOutline } from "../../../../components/UI/IconGenerator/Svg";
+// import { IoMdArrowDropdown } from "react-icons/io";
+import { ArrowDownOutline, CloseIcon } from "../../../UI/IconGenerator/Svg";
 
 interface Props {
   open: boolean;
   name: string;
   placeholder?: string;
-  defaultValue?: any;
   value: any;
+  setOpen: (val: boolean) => void;
   handleDropdown: () => void;
 }
 
@@ -17,31 +17,41 @@ export const PeriodTextField = memo(
   ({
     name,
     placeholder,
-    defaultValue,
     handleDropdown,
     open = false,
     value,
+    setOpen = () => {},
   }: Props) => {
-
     return (
       <div className="PeriodTextField z-20 relative">
         <div className="relative">
           <TextField
             size="small"
             name={name}
-            value={value}
-            defaultValue={defaultValue}
+            value={value || ""}
             placeholder={placeholder}
             InputProps={{
               readOnly: true,
-              endAdornment: <IoMdArrowDropdown size={18} />,
+              endAdornment: <div></div>
             }}
-            onClick={() => handleDropdown()}
+            onClick={() => setOpen(true)}
             style={{
               background: "white",
               border: open ? "2px solid var(--main)" : "",
             }}
           />
+          {value ? (
+            <button
+              onClick={() => handleDropdown()}
+              className={`z-[50] absolute right-[34px] top-1/2 -translate-y-1/2 ${
+                open ? "rotate-[180deg]" : ""
+              }`}
+            >
+              <CloseIcon />
+            </button>
+          ) : (
+            ""
+          )}
           <div
             className={`absolute right-12px top-1/2 -translate-y-1/2 ${
               open ? "rotate-[180deg]" : ""

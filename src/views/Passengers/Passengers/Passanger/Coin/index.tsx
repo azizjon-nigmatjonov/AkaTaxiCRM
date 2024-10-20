@@ -1,5 +1,5 @@
 import { PassengerTable } from "./PassengerTable";
-import { ShareAppTable } from "./ShareAppTable";
+// import { ShareAppTable } from "./ShareAppTable";
 import { FetchFunction } from "./Logic";
 
 export const PassengerCoin = () => {
@@ -12,9 +12,9 @@ export const PassengerCoin = () => {
       </div>
 
       <PassengerTable list={coinData?.bookings} isLoading={isLoading} />
-      <div className="mt-5">
+      {/* <div className="mt-5">
         <ShareAppTable list={coinData?.invites} isLoading={isLoading} />
-      </div>
+      </div> */}
     </>
   );
 };

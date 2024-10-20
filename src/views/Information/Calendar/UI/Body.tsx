@@ -18,8 +18,8 @@ const Body = ({ list = [] }: { list?: any; month?: any }) => {
 
   const emtyCell: any = () => {
     const startWeekDay = list[0].day;
-    let now = new Date(startWeekDay);
-    let day = now.getDay();
+    const now = new Date(startWeekDay);
+    const day = now.getDay();
 
     if (calendarEmptyCell.length < day) {
       for (let i = 1; i < day; i++) {

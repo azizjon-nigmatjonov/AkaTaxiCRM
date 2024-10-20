@@ -14,9 +14,9 @@ const StatisticsLineChart = ({ grapData: data, loading }: { grapData: any, loadi
                 ]}
                 sx={{
                     [`.${axisClasses.left} .${axisClasses.label}`]: {
-                        transform: 'translate(-20px, 0)',
+                        transform: 'translate(-40px, 0)',
                     },
-                    padding: 0.5,
+                    padding: 1.3,
                 }}
                 xAxis={[{ data: data?.label, scaleType: 'band', label: 'Oylar' }]}
                 yAxis={[{ label: 'Yangi foydalanuvchilar' }]}

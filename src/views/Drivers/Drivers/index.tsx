@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import AddButton from "../../../components/UI/Buttons/AddButton";
 import CTable from "../../../components/CElements/CTable";
-import SectionHeader from "../../../components/UI/Sections/Header";
 import Form from "./Form";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import { Header } from "../../../components/UI/Header";
@@ -11,15 +10,25 @@ import { NoteTableButtonActions } from "../../../components/UI/CallModals/NoteMo
 import { FilterComponent } from "./Filter";
 import { FilterFunctions } from "../../../components/UI/Filter/Logic";
 import { CExcelDownloader } from "../../../components/CElements/CExcelDownloader";
+import CModal from "../../../components/CElements/CModal";
+import FilterButton from "../../../components/UI/Filters";
+import { DriverTask } from "./Tasks";
+import { DriverTeg } from "./Tegs";
 
 const Drivers = () => {
   const { navigateTo } = usePageRouter();
   const { drivers, driversLoading, driversRefetch } = FetchFunctions();
   const [filterParams, setFilterParams]: any = useState({});
+  const [mailDriverId, setMailDriverId] = useState<any>(null);
+  const [taskOpen, setTaskOpen]: any = useState(null);
+  const [tegOpen, setTegOpen]: any = useState(null);
   const { headColumns, handleActions } = TableData({
     driversRefetch,
     filterParams,
     handleFilterParams,
+    setMailDriverId,
+    setTaskOpen,
+    setTegOpen,
   });
   const { collectFilter, storeFilters } = FilterFunctions({
     store: true,
@@ -28,7 +37,7 @@ const Drivers = () => {
   });
 
   const bodyColumns: any = useMemo(() => {
-    let list: any =
+    const list: any =
       drivers?.data?.map((el: any) => {
         return {
           ...el,
@@ -54,6 +63,7 @@ const Drivers = () => {
 
   const handleSearch = (value: any) => {
     collectFilter({ type: "q", val: value });
+    handleFilterParams({ ...filterParams, q: value, page: 1 });
   };
 
   function handleFilterParams(obj: any) {
@@ -64,22 +74,27 @@ const Drivers = () => {
   return (
     <>
       <Header>
-        <CBreadcrumbs items={breadCrubmsItems} progmatic={true} />
-      </Header>
-      <div className="px-6">
-        <SectionHeader
-          handleSearch={(val: any) => handleSearch(val)}
-          defaultValue={filterParams?.q}
-        >
-          <div className="flex gap-x-5">
-            <CExcelDownloader />
+        <div className="flex justify-between w-full">
+          <CBreadcrumbs
+            items={breadCrubmsItems}
+            progmatic={true}
+            handleSearch={handleSearch}
+            defaultValue={filterParams?.q}
+          />
+          <div className="flex gap-x-5 ml-5">
+            <CExcelDownloader
+              filterParams={{ ...filterParams, type: "driver" }}
+            />
             <AddButton
               text="new_driver"
               onClick={() => navigateTo("/drivers/main/add")}
             />
-          </div>
-        </SectionHeader>
 
+            <FilterButton text="filter" />
+          </div>
+        </div>
+      </Header>
+      <div className="container">
         <FilterComponent
           filterParams={filterParams}
           setFilterParams={setFilterParams}
@@ -88,8 +103,7 @@ const Drivers = () => {
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns.list ?? []}
-          count={bodyColumns?.meta?.pageCount}
-          totalCount={bodyColumns?.meta?.totalCount}
+          meta={bodyColumns?.meta}
           handleActions={handleActions}
           isLoading={driversLoading}
           clickable={true}
@@ -99,6 +113,40 @@ const Drivers = () => {
         <Form refetch={driversRefetch} />
         <NoteTableButtonActions refetchList={driversRefetch} />
       </div>
+
+      <CModal
+        open={!!mailDriverId}
+        footerActive={false}
+        minWidth={1000}
+        handleClose={() => setMailDriverId(null)}
+      >
+        <div className="flex space-x-2 mb-5">
+          <h3 className="font-[600] text-lg">Javohir Zokirov</h3>
+          <p className="font-[500] text-[var(--gray)] text-lg">(Pochta 8ta)</p>
+        </div>
+        <CTable
+          headColumns={[]}
+          bodyColumns={[]}
+          tableSetting={false}
+          filterParams={filterParams}
+          handleFilterParams={() => {}}
+        />
+      </CModal>
+
+      <CModal
+        open={!!taskOpen || !!tegOpen}
+        footerActive={false}
+        handleClose={() => {
+          setTaskOpen(null);
+          setTegOpen(null);
+        }}
+      >
+        {tegOpen ? (
+          <DriverTeg tegOpen={tegOpen} setTegOpen={setTegOpen} refetch={driversRefetch} />
+        ) : (
+          <DriverTask setTaskOpen={setTaskOpen} taskOpen={taskOpen} refetch={driversRefetch} />
+        )}
+      </CModal>
     </>
   );
 };

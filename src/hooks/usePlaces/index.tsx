@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { useGetQueries } from "../../hooks/useGetQueries";
 import regionService from "../../services/regions";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export const usePlaces = () => {
   const { region, district } = useGetQueries();
@@ -43,6 +43,24 @@ export const usePlaces = () => {
     }
   );
 
+  const RegionOptions = useMemo(() => {
+    return regions?.data?.map((i: any) => {
+      return {
+        value: i.id,
+        label: i.name.uz,
+      };
+    }) ?? []
+  }, [regions?.data]);
+
+  const DistrictOptions = useMemo(() => {
+    return districts?.data?.map((i: any) => {
+      return {
+        value: i.id,
+        label: i.name.uz,
+      };
+    }) ?? []
+  }, [districts?.data]);
+
   const setLocalIds = (type: string, value: any) => {
     if (type === "district") setDistrictId(value);
     if (type === "region") setRegionId(value);
@@ -63,6 +81,8 @@ export const usePlaces = () => {
     villageList: villages?.data ?? [],
     getVillagesLoading,
     getVillagesRefetech,
-    setLocalIds
+    setLocalIds,
+    RegionOptions,
+    DistrictOptions
   };
 };

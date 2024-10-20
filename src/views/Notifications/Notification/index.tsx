@@ -28,14 +28,11 @@ const Notification = () => {
     setFilterParams(obj);
     storeFilters(obj);
   };
-  
+
   return (
     <>
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbItems} type="link" />
-      </Header>
-
-      <div className="px-5 flex justify-end mb-5">
         <div>
           <AddButton
             text="Yangi bildirishnoma"
@@ -44,7 +41,7 @@ const Notification = () => {
             }
           />
         </div>
-      </div>
+      </Header>
 
       <section className="px-6">
         <CTable
@@ -53,10 +50,9 @@ const Notification = () => {
           isLoading={isLoading}
           handleActions={handleActions}
           clickable={true}
-          count={tableData?.meta?.pageCount}
+          meta={tableData?.meta}
           filterParams={filterParams}
           handleFilterParams={handleFilterParams}
-          totalCount={tableData?.meta?.totalCount}
         />
       </section>
     </>

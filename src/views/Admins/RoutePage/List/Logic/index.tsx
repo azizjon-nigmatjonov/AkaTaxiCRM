@@ -103,8 +103,8 @@ export const DeleteFunction = ({ handleClose }: { handleClose: any }) => {
 };
 
 const allRoutes = (list: any) => {
-  let arr: any = [];
-  for (let key in list) {
+  const arr: any = [];
+  for (const key in list) {
     list[key].forEach((item: any) => {
       if (!item.single_page) {
         arr.push(item);

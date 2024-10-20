@@ -13,7 +13,7 @@ const StatisticsGender = () => {
 
     const RegionStatics = useMemo(() => {
         if (!data) return
-        let statics = data?.data;
+        const statics = data?.data;
         return statics.map((val: any) => {
             return {
                 ...val,

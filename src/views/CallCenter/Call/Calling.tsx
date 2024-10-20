@@ -5,7 +5,7 @@ import { PhoneIcon } from "../../../components/UI/IconGenerator/Svg";
 export const Calling = () => {
   const { control } = useForm();
   return (
-    <div className="p-[24px] border border-[var(--gray20)] rounded-[12px] bg-white card-shadow">
+    <div className="p-[16px] border border-[var(--gray20)] rounded-[12px] bg-white card-shadow h-full">
       <h2 className="text-[18px] font-[600]">Qo’ng’iroq qilish</h2>
       <form className="space-y-4 mt-4">
         <HFInputMask

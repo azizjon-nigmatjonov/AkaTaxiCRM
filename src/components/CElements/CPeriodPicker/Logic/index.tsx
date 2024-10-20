@@ -13,8 +13,8 @@ export const DateData = ({
 }) => {
   const { navigateQuery } = usePageRouter();
   const { start, end } = useGetQueries();
-  const today = dayjs();
-  const [value, setValue]: any = useState([today, today]);
+  const today: any = dayjs();
+  const [value, setValue]: any = useState([]);
   const [formatedValue, setFormatedValue] = useState([]);
 
   useEffect(() => {
@@ -53,15 +53,19 @@ export const DateData = ({
   };
 
   const getFormatedDate = useMemo(() => {
+    if (!value?.length) {
+      const dayjsDate = dayjs(today.$d); 
+      return [dayjsDate.format("MMM D, YYYY"), dayjsDate.format("MMM D, YYYY")]
+    }
     const arr = value?.map((dateObj: any) => {
-      const dayjsDate = dayjs(dateObj.$d); // Create a dayjs object from the date
-      return dayjsDate.format("MMM D, YYYY"); // Format the date
+      const dayjsDate = dayjs(dateObj.$d); 
+      return dayjsDate.format("MMM D, YYYY");
     });
 
     return arr;
   }, [value]);
 
-  return { value, actionHandler, handleSubmit, getFormatedDate };
+  return { value, actionHandler, handleSubmit, getFormatedDate, today };
 };
 
 export const DateLabel = () => {

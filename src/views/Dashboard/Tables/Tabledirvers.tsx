@@ -1,10 +1,5 @@
 import {
-  Box,
-  Button,
-  ButtonGroup,
-  MenuItem,
   Paper,
-  Select,
   Table,
   TableBody,
   TableCell,
@@ -13,36 +8,16 @@ import {
   TableRow,
 } from "@mui/material";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { ArrowLeft, ArrowUpward } from "@mui/icons-material";
-import { getYears } from "../../../utils/getMonth";
-import { GetMonth, getMonthWeeks } from "../../../utils/getWeekDays";
-import { Months } from "../../../constants/month";
 
 function Tabledirvers({
-  setCountDrivers,
-  setSelectMonthDrivers,
-  setYearDrivers,
   driverTripsDataFromCity,
 }: {
-  setCountDrivers: any;
-  setSelectMonthDrivers: any;
-  setYearDrivers: any;
-  yearDrivers: any;
   driverTripsDataFromCity: any;
 }) {
-  const [activeButton, setActiveButton] = useState<string>("year");
-  const [disabledYear, setDisabledYear] = useState(false);
-  const [disabledMonth, setDisabledMonth] = useState(true);
-  const [disabledWeek, setDisabledWeek] = useState(true);
-
-  const [selectedWeek, setSelectedWeek] = useState("Haftani tanlash");
-  const { currentMonth: month, year: currentYeear } = GetMonth();
   const [isOpen, setIsOpen] = useState(true);
   const [driverReason, setDriverReason] = useState(false);
-  const [currentYear, setCurrentYear] = useState(currentYeear);
-  const [currentMonth, setCurrentMonth] = useState(month);
-  const [monthWeeks, setMonthWeeks]: any = useState([]);
 
   const handleReason = () => {
     setIsOpen(false);
@@ -57,261 +32,11 @@ function Tabledirvers({
     setDriverReason(true);
   }
 
-  const handleYearButtonClick = () => {
-    setActiveButton("year");
-    setDisabledMonth(true);
-    setDisabledWeek(true);
-    setCountDrivers(null);
-  };
-
-  const handleMonthButtonClick = () => {
-    setActiveButton("month");
-    setDisabledWeek(true);
-    setDisabledYear(false);
-    setDisabledMonth(false);
-
-    setCountDrivers(null);
-  };
-
-  const handleWeekButtonClick = () => {
-    setActiveButton("week");
-    setCountDrivers(2);
-
-    setDisabledWeek(false);
-    setDisabledYear(false);
-    setDisabledMonth(false);
-  };
-
-  const handleYearChange = (event: any) => {
-    setCurrentYear(event.target.value);
-  };
-
-  const handleMonthChange = (event: any) => {
-    setCurrentMonth(event.target.value);
-  };
-
-  const handleWeekChange = (event: any) => {
-    const selectedWeekValue = event.target.value;
-    setSelectedWeek(selectedWeekValue);
-
-    setCountDrivers(selectedWeekValue);
-  };
-
-  const yearsOption = useMemo(() => {
-    return getYears();
-  }, []);
-
-  useEffect(() => {
-    setYearDrivers(currentYear);
-  }, [currentYear]);
-
-  useEffect(() => {
-    setMonthWeeks([]);
-    const list = getMonthWeeks(currentYear, currentMonth);
-
-    setTimeout(() => {
-      setMonthWeeks(list);
-    }, 0);
-  }, [currentYear, currentMonth]);
-
-  useEffect(() => {
-    setSelectMonthDrivers(currentMonth);
-  }, [currentMonth])
-
   return (
     <TableContainer
       component={Paper}
       sx={{ border: "1px solid #e0e0e0", backgroundColor: "#fff !important" }}
     >
-      <div className="pl-[5px] mt-[10px] pr-[16px] flex items-center justify-between">
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "start",
-            margin: 0,
-            "& > *": {
-              m: 1,
-            },
-          }}
-        >
-          <ButtonGroup variant="outlined" aria-label="Basic button group">
-            <Button
-              onClick={handleYearButtonClick}
-              sx={{
-                background: activeButton === "year" ? "#EAECF0" : "",
-                textTransform: "none",
-                "&:hover": { border: "1px solid #D0D5DD" },
-                borderRadius: "8px",
-                border: "1px solid #D0D5DD",
-                color: "#344054",
-                height: "40px",
-                fontSize: "14px",
-                fontWeight: 600,
-              }}
-            >
-              Yillik
-            </Button>
-            <Button
-              onClick={handleMonthButtonClick}
-              sx={{
-                background: activeButton === "month" ? "#EAECF0" : "",
-                textTransform: "none",
-                "&:hover": { border: "1px solid #D0D5DD" },
-                border: "1px solid #D0D5DD",
-                color: "#344054",
-                height: "40px",
-                fontWeight: 600,
-                fontSize: "14px",
-              }}
-            >
-              Oylik
-            </Button>
-            <Button
-              onClick={handleWeekButtonClick}
-              sx={{
-                background: activeButton === "week" ? "#EAECF0" : "",
-                textTransform: "none",
-                "&:hover": { border: "1px solid #D0D5DD" },
-                borderRadius: "8px",
-                border: "1px solid #D0D5DD",
-                color: "#344054",
-                height: "40px",
-                fontSize: "14px",
-                fontWeight: 600,
-              }}
-            >
-              Haftalik
-            </Button>
-          </ButtonGroup>
-        </Box>
-
-        <div className="flex space-x-5">
-          <Select
-            onChange={handleYearChange}
-            disabled={disabledYear}
-            value={currentYear}
-            className="w-[183px] p-0 border"
-            sx={{
-              border: "1px solid #D0D5DD",
-              boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
-              color: "#101828",
-              fontWeight: 500,
-              fontSize: "16px",
-              borderRadius: "8px",
-              padding: "9px 12px",
-              height: "40px",
-              "& .MuiInputBase-input": {
-                padding: 0,
-              },
-              "& .MuiOutlinedInput-root": {
-                padding: 0,
-                "& fieldset": {
-                  borderWidth: "none",
-                },
-              },
-              "&:focus": {
-                borderBottom: "none",
-                boxShadow: "0 12px 14px rgba(0, 0, 0, 0.2)",
-              },
-              "& .MuiOutlinedInput-notchedOutline": {
-                border: "none",
-              },
-              "& .Mui-selected": {
-                backgroundColor: "transparent",
-              },
-            }}
-          >
-            {yearsOption?.map((item: any) => (
-              <MenuItem value={item.value}>{item.label}</MenuItem>
-            ))}
-          </Select>
-          <Select
-            onChange={handleMonthChange}
-            disabled={disabledMonth}
-            value={currentMonth}
-            className="w-[183px] p-0 border"
-            sx={{
-              border: "1px solid #D0D5DD",
-              boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
-              color: "#101828",
-              fontWeight: 500,
-              fontSize: "16px",
-              borderRadius: "8px",
-              padding: "9px 12px",
-              height: "40px",
-              "& .MuiInputBase-input": {
-                padding: 0,
-              },
-              "& .MuiOutlinedInput-root": {
-                padding: 0,
-                "& fieldset": {
-                  borderWidth: "none",
-                },
-              },
-              "&:focus": {
-                borderBottom: "none",
-                boxShadow: "0 12px 14px rgba(0, 0, 0, 0.2)",
-              },
-              "& .MuiOutlinedInput-notchedOutline": {
-                border: "none",
-              },
-              "& .Mui-selected": {
-                backgroundColor: "transparent",
-              },
-            }}
-          >
-            {Months.map((el) => (
-              <MenuItem value={el.value} key={el.value}>
-                {el.label}
-              </MenuItem>
-            ))}
-          </Select>
-          <Select
-            onChange={handleWeekChange}
-            disabled={disabledWeek}
-            value={selectedWeek}
-            className="w-[183px] p-0 border"
-            sx={{
-              border: "1px solid #D0D5DD",
-              boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
-              color: "#101828",
-              fontWeight: 500,
-              fontSize: "16px",
-              borderRadius: "8px",
-              padding: "9px 12px",
-              height: "40px",
-              "& .MuiInputBase-input": {
-                padding: 0,
-              },
-              "& .MuiOutlinedInput-root": {
-                padding: 0,
-                "& fieldset": {
-                  borderWidth: "none",
-                },
-              },
-              "&:focus": {
-                borderBottom: "none",
-                boxShadow: "0 12px 14px rgba(0, 0, 0, 0.2)",
-              },
-              "& .MuiOutlinedInput-notchedOutline": {
-                border: "none",
-              },
-              "& .Mui-selected": {
-                backgroundColor: "transparent",
-              },
-            }}
-          >
-            <MenuItem value={"Haftani tanlash"}>Haftani tanlash</MenuItem>
-
-            {monthWeeks.map((week: any) => (
-              <MenuItem key={week.value} value={week.value}>
-                {week.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </div>
-      </div>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow

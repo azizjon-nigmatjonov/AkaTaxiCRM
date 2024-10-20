@@ -1,11 +1,11 @@
 export const PaymentList = [
   {
     label: "To'lov qilganlar",
-    value: true,
+    value: 1,
   },
   {
     label: "To'lov qilmaganlar",
-    value: false,
+    value: 0,
   },
 ];
 

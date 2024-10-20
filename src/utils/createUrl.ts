@@ -2,12 +2,12 @@ import qs from "query-string";
 import { filterParams } from "./filterParams";
 
 // Define the type for the parameters to ensure proper type checking
-type Params = { [key: string]: any };
+type Params = Record<string, any>;
 
 export const createUrl = (
-  endpoint: string = "",
+  endpoint = "",
   params: Params = {},
-  param: string = ""
+  param = ""
 ): string => {
   const filteredParams = filterParams(params);
   const queryString =

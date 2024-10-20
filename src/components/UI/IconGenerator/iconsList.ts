@@ -23,7 +23,9 @@ import {
   ListSquaredIcon,
   EarthIcon,
 } from "./Svg/Sidebar";
+import PhoneIcon from "@mui/icons-material/Phone";
 import LayersIcon from "@mui/icons-material/Layers";
+import SpatialTrackingIcon from '@mui/icons-material/SpatialTracking';
 import {
   PassengerIcon,
   DriverIcon,
@@ -149,5 +151,13 @@ export const iconsList = [
   {
     name: "layers",
     component: LayersIcon,
+  },
+  {
+    name: "phone",
+    component: PhoneIcon,
+  },
+  {
+    name: "reminder",
+    component: SpatialTrackingIcon,
   },
 ];

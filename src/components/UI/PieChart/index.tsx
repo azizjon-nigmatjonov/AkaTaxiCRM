@@ -12,7 +12,7 @@ interface Coin {
 
 export default function PieChart({ coins }: { coins: Coin[] }) {
   const [active, setActive] = useState<Coin | null>(null);
-  const width: number = 200;
+  const width = 200;
   const half: number = width / 2;
 //  const amount = Object.values(coins);
   return (

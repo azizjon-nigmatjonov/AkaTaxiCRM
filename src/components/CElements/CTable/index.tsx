@@ -8,7 +8,8 @@ import {
   CTableRow,
   CTableBody,
 } from "./Details";
-import { useEffect, useMemo, useState } from "react";
+import { HeaderSettings } from "./Details/TableSettings";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import TabbleActions from "./Details/Actions";
 import { DotsIcon } from "../../UI/IconGenerator/Svg";
@@ -19,29 +20,38 @@ import { TableDelete } from "./Details/Actions/EditDelete";
 import { PopoverDelete } from "./Details/Actions/EditDelete/PopOver";
 import { usePermissions } from "../../../hooks/usePermissions";
 import CPagination from "./Details/Pagination";
+import { TableSettingsData } from "./Logic";
+import usePageRouter from "../../../hooks/useObjectRouter";
+// import { TableData } from "./Logic";
+// import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 // import CustomScrollbar from "./ScrollComponent";
 
 interface Props {
-  count?: number;
-  totalCount?: number;
+  meta?: {
+    totalCount: number;
+    pageCount: number;
+  };
   headColumns: any[];
   bodyColumns?: object[] | any;
   clickable?: boolean;
   isLoading?: boolean;
   passRouter?: boolean;
   isResizeble?: boolean;
+  tableSetting?: boolean;
   disablePagination?: boolean;
   autoHeight?: boolean;
-  limitCount?: number[];
-  handleFilterParams: (val: number) => void;
+  limitList?: number[];
+  handleFilterParams: (val: any) => void;
   filterParams: any;
   handleActions?: (val: any, val2?: any) => void;
   idForTable?: string;
 }
 
 const CTable = ({
-  count = 1,
-  totalCount,
+  meta = {
+    totalCount: 1,
+    pageCount: 1,
+  },
   headColumns = [],
   bodyColumns = [],
   clickable = false,
@@ -51,22 +61,85 @@ const CTable = ({
   idForTable,
   disablePagination = false,
   autoHeight = false,
-  limitCount = [10, 30, 50],
-  filterParams = { page: 1 },
+  limitList = [10, 50, 100, 500, 1000],
+  filterParams = { page: 1, perPage: 10 },
   handleFilterParams = () => {},
   handleActions = () => {},
+  tableSetting = true,
 }: Props) => {
+  const { navigateTo } = usePageRouter();
   const tableSize = useSelector((state: any) => state.tableSize.tableSize);
   const location = useLocation();
   const tableSettings: Record<string, any> = {};
   const [headColHeight, setHeadColHeight] = useState(45);
   const [tableHeight, setTableHeight] = useState(500);
-  const [currentLimit, setCurrentLimit] = useState(10);
   //   const { currentSort } = useGetQueries();
   const [currentIndex, setCurrentIndex] = useState(null);
   const [currDelete, setCurrDelete] = useState<any>({});
   const dispatch = useDispatch();
-  const { routePermissions, checkPermission } = usePermissions();
+  const { checkPermission } = usePermissions();
+  const tableRef: any = useRef(null);
+  const { handleCheckbox } = TableSettingsData({
+    filterParams,
+    handleFilterParams,
+  });
+  const storedColumns = useSelector((state: any) => state.table.columns);
+
+  useEffect(() => {
+    if (!filterParams?.perPage) {
+      handleFilterParams({ perPage: 10 });
+    }
+  }, [filterParams]);
+
+  const pageName: any = useMemo(() => {
+    const strLen =
+      location.pathname.split("/")[2].length +
+      location.pathname.split("/")[1].length;
+
+    let result = location.pathname.substring(0, strLen + 2);
+
+    if (idForTable) result = result + "/" + idForTable;
+    return result;
+  }, [location, idForTable]);
+
+  const pageColumns = storedColumns[pageName] ?? {};
+
+  // const [buttonPosition, setButtonPosition] = useState(10);
+  // const draggingRef = useRef(false);
+  // const [scrollPosition, setScrollPosition] = useState(0);
+  // const collapsed = useSelector((state: any) => state.sidebar.collapsed);
+  // const [showScroll, setShowScroll] = useState(true);
+  // const [tablePosition, setTablePosition] = useState({ top: 140, left: 0 });
+  // const { handleMouseDown } = TableData({
+  //   tableRef,
+  //   collapsed,
+  //   scrollPosition,
+  //   draggingRef,
+  //   setScrollPosition,
+  //   setButtonPosition,
+  //   setShowScroll,
+  // });
+
+  const newHeadColumns: any = useMemo(() => {
+    if (!tableSetting) return headColumns;
+    const data: any = [];
+
+    headColumns?.forEach((el: { id: string }) => {
+      let id: any = el.id;
+      if (id?.[0] && typeof id === "object") {
+        id = id.join("");
+      }
+      if (id in pageColumns && id) {
+        if (pageColumns[id].checked) {
+          data.push(el);
+        }
+      } else {
+        data.push(el);
+      }
+    });
+
+    return data;
+  }, [pageColumns, headColumns, pageName, tableSetting]);
 
   useEffect(() => {
     const tableEl = document.getElementById("table");
@@ -81,8 +154,8 @@ const CTable = ({
 
     let list = [];
 
-    if (bodyColumns.length < currentLimit) {
-      for (let i = 0; i < currentLimit; i++) {
+    if (bodyColumns.length < filterParams.perPage) {
+      for (let i = 0; i < filterParams.perPage; i++) {
         const obj: Record<string, any> = {};
         headColumns.forEach((col) => {
           obj[col.title] = "";
@@ -106,24 +179,13 @@ const CTable = ({
         is_view: checks(item?.view),
         index:
           filterParams?.page > 1
-            ? filterParams?.page * currentLimit - currentLimit + (index + 1)
+            ? filterParams?.page * filterParams.perPage -
+              filterParams.perPage +
+              (index + 1)
             : index + 1,
       })) ?? []
     );
-  }, [bodyColumns, currentLimit, filterParams?.page, headColumns]);
-
-  const pageName: any = useMemo(() => {
-    const strLen =
-      location.pathname.split("/")[2].length +
-      location.pathname.split("/")[1].length;
-
-    let result = location.pathname.substring(0, strLen + 2);
-
-    if (idForTable) result = result + "/" + idForTable;
-    return result;
-  }, [location, idForTable]);
-
-
+  }, [bodyColumns, filterParams.perPage, filterParams.page, headColumns]);
 
   useEffect(() => {
     if (!isResizeble) return;
@@ -264,265 +326,313 @@ const CTable = ({
       return;
     }
 
+    if (status === "multiple") {
+      handleCheckbox(el.id);
+    }
+
     if (!checkPermission(status) || el.empty) return;
+
+    if (status === "edit") {
+      navigateTo(pageName + "/" + el.id);
+    }
 
     handleActions(el, status);
   };
 
-  return (
-    <div className="border border-[var(--gray20)] common-shadow rounded-[18px] overflow-hidden">
-      <div id="table">
-        <div className="wrapper">
-          <CTableWrapper
-            count={count}
-            totalCount={totalCount}
-            currentLimit={currentLimit}
-            loader={isLoading}
-            height={tableHeight}
-            limitCount={limitCount}
-            passRouter={passRouter}
-            filterParams={filterParams}
-            handleFilterParams={handleFilterParams}
-            setCurrentLimit={setCurrentLimit}
-            disablePagination={disablePagination}
-            dataLength={bodyColumns?.length}
-          >
-            <CTableHead>
-              <CTableRow className="">
-                {headColumns?.map((column, index) => (
-                  <CTableHeadCell
-                    id={column.id}
-                    key={column?.innerId ? column.innerId : index || column.id}
-                    style={{
-                      padding: "10px 4px",
-                      minWidth: tableSize?.[pageName]?.[column.id]
-                        ? tableSize?.[pageName]?.[column.id]
-                        : column?.width
-                        ? column.width
-                        : "auto",
-                      width: tableSize?.[pageName]?.[column.id]
-                        ? tableSize?.[pageName]?.[column.id]
-                        : column?.width
-                        ? column.width
-                        : "auto",
-                      position: tableSettings?.[pageName]?.find(
-                        (item: any) => item?.id === column?.id
-                      )?.isStiky
-                        ? "sticky"
-                        : "relative",
-                      left: tableSettings?.[pageName]?.find(
-                        (item: any) => item?.id === column?.id
-                      )?.isStiky
-                        ? calculateWidth(column?.id, index)
-                        : "0",
-                      backgroundColor: "#fff",
-                      zIndex: tableSettings?.[pageName]?.find(
-                        (item: any) => item?.id === column?.id
-                      )?.isStiky
-                        ? "1"
-                        : "",
-                    }}
-                  >
-                    <div className="cell" style={{ textAlign: column?.textAlign || "left" }}>
-                      {column.renderHead
-                        ? Array.isArray(column.renderHead)
-                          ? column.renderHead(
-                              column.renderHead.map((data: any) => column[data])
-                            )
-                          : column.renderHead()
-                        : column?.id === "index"
-                        ? "№"
-                        : t(column.title)}
-                      {/* {column?.filter && (
-                  <div
-                    style={{
-                      position: "absolute",
-                      right: "10px",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                    }}
-                  >
-                    <CFilter
-                      currentSort={currentSort}
-                      up={`up_${column.id}`}
-                      down={`down_${column.id}`}
-                    />
-                  </div>
-                )} */}
-                    </div>
-                  </CTableHeadCell>
-                ))}
-              </CTableRow>
-            </CTableHead>
+  // useEffect(() => {
+  //   if (tableRef.current) {
+  //     const rect = tableRef.current.getBoundingClientRect();
+  //     setTablePosition({
+  //       top: rect.top - 40,
+  //       left: rect.left,
+  //     });
+  //   }
+  // }, [collapsed, tableRef]);
 
-            <CTableBody
+  return (
+    <div className="relative">
+      {/* <div
+        className="sticky z-[90] bg-red-500 left-0"
+        style={{ top: `${tablePosition?.top || 0}px` }}
+      >
+        <div className="relative w-full">
+          {showScroll && (
+            <button
+              onMouseDown={handleMouseDown}
+              style={{
+                position: "absolute",
+                left: buttonPosition,
+                cursor: "pointer",
+                zIndex: "1",
+              }}
+              className={`w-[30%] top-[10px] h-[12px] px-4 bg-[var(--gray30)] rounded-[8px] justify-between flex items-center space-x-1 border border-[var(--gray20)]`}
+            ></button>
+          )}
+        </div>
+      </div> */}
+      <div className="border border-[var(--gray20)] common-shadow rounded-[18px] overflow-hidden bg-white">
+        {tableSetting ? (
+          <HeaderSettings
+            totalCount={meta.totalCount}
+            len={bodyColumns?.length}
+            filterParams={filterParams}
+            tableActions={tableActions}
+            pageName={pageName}
+            headColumns={headColumns}
+            pageColumns={pageColumns}
+          />
+        ) : (
+          ""
+        )}
+        <div
+          id="table"
+          className={`overflow-x-scroll designed-scroll ${
+            tableSetting ? "border-t border-[var(--gray20)]" : ""
+          }`}
+          ref={tableRef}
+        >
+          <div className="wrapper">
+            <CTableWrapper
+              count={meta.pageCount}
+              totalCount={meta.totalCount}
+              currentLimit={filterParams.perPage}
               loader={isLoading}
-              columnscount={headColumns?.length}
-              rowsCount={currentLimit}
-              dataLength={bodySource?.length}
+              height={tableHeight}
+              passRouter={passRouter}
+              filterParams={filterParams}
+              handleFilterParams={handleFilterParams}
+              disablePagination={disablePagination}
+              dataLength={bodyColumns?.length}
             >
-              {bodySource?.length
-                ? bodySource?.map((item: any, rowIndex: any) => (
-                    <TableRow
-                      key={rowIndex}
-                      ref={(e) => handleBodycolRef(item, e)}
-                      className={
-                        clickable && !item.empty && checkPermission("view")
-                          ? "clickable"
-                          : ""
+              <CTableHead>
+                <CTableRow className="">
+                  {newHeadColumns?.map((column: any, index: number) => (
+                    <CTableHeadCell
+                      id={column.id}
+                      key={
+                        column?.innerId ? column.innerId : index || column.id
                       }
+                      style={{
+                        padding: "10px 4px",
+                        minWidth: tableSize?.[pageName]?.[column.id]
+                          ? tableSize?.[pageName]?.[column.id]
+                          : column?.width
+                          ? column.width
+                          : "auto",
+                        width: tableSize?.[pageName]?.[column.id]
+                          ? tableSize?.[pageName]?.[column.id]
+                          : column?.width
+                          ? column.width
+                          : "auto",
+                        position: tableSettings?.[pageName]?.find(
+                          (item: any) => item?.id === column?.id
+                        )?.isStiky
+                          ? "sticky"
+                          : "relative",
+                        left: tableSettings?.[pageName]?.find(
+                          (item: any) => item?.id === column?.id
+                        )?.isStiky
+                          ? calculateWidth(column?.id, index)
+                          : "0",
+                        backgroundColor: "#fff",
+                        zIndex: tableSettings?.[pageName]?.find(
+                          (item: any) => item?.id === column?.id
+                        )?.isStiky
+                          ? "1"
+                          : "",
+                      }}
                     >
-                      {headColumns.map((column, colIndex) => (
-                        <CTableCell
-                          key={colIndex}
-                          className={`overflow-ellipsis ${tableHeight}`}
-                          style={{
-                            minWidth: "max-content",
-                            padding: "0 4px",
-                            position: tableSettings?.[pageName]?.find(
-                              (item: any) => item?.id === column?.id
-                            )?.isStiky
-                              ? "sticky"
-                              : "relative",
-                            left: tableSettings?.[pageName]?.find(
-                              (item: any) => item?.id === column?.id
-                            )?.isStiky
-                              ? calculateWidth(column?.id, colIndex)
-                              : "0",
-                            backgroundColor: "#fff",
-                            zIndex: tableSettings?.[pageName]?.find(
-                              (item: any) => item?.id === column?.id
-                            )?.isStiky
-                              ? "1"
-                              : "",
-                          }}
-                        >
-                          <div
+                      <div
+                        className="cell"
+                        style={{ textAlign: column?.textAlign || "left" }}
+                      >
+                        {column.renderHead
+                          ? Array.isArray(column.renderHead)
+                            ? column.renderHead(
+                                column.renderHead.map(
+                                  (data: any) => column[data]
+                                )
+                              )
+                            : column.renderHead()
+                          : column?.id === "index"
+                          ? "№"
+                          : t(column.title)}
+                      </div>
+                    </CTableHeadCell>
+                  ))}
+                </CTableRow>
+              </CTableHead>
+
+              <CTableBody
+                loader={isLoading}
+                columnscount={newHeadColumns?.length}
+                rowsCount={filterParams.perPage}
+                dataLength={bodySource?.length}
+              >
+                {bodySource?.length
+                  ? bodySource?.map((item: any, rowIndex: any) => (
+                      <TableRow
+                        key={rowIndex}
+                        ref={(e) => handleBodycolRef(item, e)}
+                        className={
+                          clickable && !item.empty && checkPermission("view")
+                            ? "clickable"
+                            : ""
+                        }
+                      >
+                        {newHeadColumns.map((column: any, colIndex: number) => (
+                          <CTableCell
+                            key={colIndex}
+                            className={`overflow-ellipsis ${tableHeight}`}
                             style={{
-                              textAlign: column?.textAlign || "left",
+                              minWidth: "max-content",
+                              padding: "0 4px",
+                              position: tableSettings?.[pageName]?.find(
+                                (item: any) => item?.id === column?.id
+                              )?.isStiky
+                                ? "sticky"
+                                : "relative",
+                              left: tableSettings?.[pageName]?.find(
+                                (item: any) => item?.id === column?.id
+                              )?.isStiky
+                                ? calculateWidth(column?.id, colIndex)
+                                : "0",
+                              backgroundColor: "#fff",
+                              zIndex: tableSettings?.[pageName]?.find(
+                                (item: any) => item?.id === column?.id
+                              )?.isStiky
+                                ? "1"
+                                : "",
                             }}
                           >
-                            {column.id !== "actions" && !item.empty ? (
-                              <div
-                                onClick={() => {
-                                  if (
-                                    clickable &&
-                                    column?.click !== "custom" &&
-                                    column?.id !== "actions"
-                                  )
-                                    tableActions(item, "view");
-                                }}
-                              >
-                                {column?.permission ? (
-                                  <>
-                                    {checkPermission(column.permission) && (
-                                      <>
-                                        {column.render
-                                          ? Array.isArray(column.id)
-                                            ? column.render(
-                                                column.id.map(
-                                                  (data: any) => item[data]
+                            <div
+                              style={{
+                                textAlign: column?.textAlign || "left",
+                              }}
+                            >
+                              {column.id !== "actions" && !item.empty ? (
+                                <div
+                                  onClick={() => {
+                                    if (
+                                      clickable &&
+                                      column?.click !== "custom" &&
+                                      column?.id !== "actions"
+                                    )
+                                      tableActions(item, "view");
+                                  }}
+                                >
+                                  {column?.permission ? (
+                                    <>
+                                      {checkPermission(column.permission) && (
+                                        <>
+                                          {column.render
+                                            ? Array.isArray(column.id)
+                                              ? column.render(
+                                                  column.id.map(
+                                                    (data: any) => item[data]
+                                                  )
                                                 )
+                                              : column.render(
+                                                  item[column.id],
+                                                  item
+                                                )
+                                            : item[column.id]}
+                                        </>
+                                      )}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {column.render
+                                        ? Array.isArray(column.id)
+                                          ? column.render(
+                                              column.id.map(
+                                                (data: any) => item[data]
                                               )
-                                            : column.render(
-                                                item[column.id],
-                                                item
-                                              )
-                                          : item[column.id]}
-                                      </>
-                                    )}
-                                  </>
-                                ) : (
-                                  <>
-                                    {column.render
-                                      ? Array.isArray(column.id)
-                                        ? column.render(
-                                            column.id.map(
-                                              (data: any) => item[data]
                                             )
-                                          )
-                                        : column.render(item[column.id], item)
-                                      : item[column.id]}
-                                  </>
-                                )}
-                              </div>
-                            ) : (
-                              ""
-                            )}
+                                          : column.render(item[column.id], item)
+                                        : item[column.id]}
+                                    </>
+                                  )}
+                                </div>
+                              ) : (
+                                ""
+                              )}
 
-                            {column.id === "actions" &&
-                            !item.empty &&
-                            routePermissions?.length ? (
-                              <div className="relative">
-                                {column?.actions?.length <= 2 ? (
-                                  <div>
-                                    <TableDelete
-                                      element={item}
-                                      tableActions={tableActions}
-                                      actions={column.actions}
-                                      checkPermission={checkPermission}
-                                    />
-                                    {currDelete.index === item.index ? (
-                                      <PopoverDelete
-                                        closePopover={(status) => {
-                                          setCurrDelete({});
-                                          if (status)
-                                            tableActions(item, status);
-                                        }}
+                              {column.id === "actions" && !item.empty ? (
+                                <div className="relative">
+                                  {column?.actions?.length <= 2 ? (
+                                    <div>
+                                      <TableDelete
+                                        element={item}
+                                        tableActions={tableActions}
+                                        actions={column.actions}
+                                        filterParams={filterParams}
+                                        checkPermission={checkPermission}
                                       />
-                                    ) : (
-                                      ""
-                                    )}
-                                  </div>
-                                ) : (
-                                  <>
-                                    <button
-                                      className="p-2"
-                                      onClick={() => setCurrentIndex(rowIndex)}
-                                    >
-                                      <DotsIcon />
-                                    </button>
-                                    <TabbleActions
-                                      element={item}
-                                      rowIndex={rowIndex}
-                                      currentIndex={currentIndex}
-                                      setCurrentIndex={setCurrentIndex}
-                                      handleActions={tableActions}
-                                      actions={column.actions}
-                                      checkPermission={checkPermission}
-                                    />
-                                  </>
-                                )}
-                              </div>
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                        </CTableCell>
-                      ))}
-                    </TableRow>
-                  ))
-                : ""}
-            </CTableBody>
-          </CTableWrapper>
+                                      {currDelete.index === item.index ? (
+                                        <PopoverDelete
+                                          closePopover={(status) => {
+                                            if (status) {
+                                              tableActions(item, status);
+                                            }
+                                            setCurrDelete({});
+                                          }}
+                                        />
+                                      ) : (
+                                        ""
+                                      )}
+                                    </div>
+                                  ) : (
+                                    <>
+                                      <button
+                                        className="p-2"
+                                        onClick={() =>
+                                          setCurrentIndex(rowIndex)
+                                        }
+                                      >
+                                        <DotsIcon />
+                                      </button>
+                                      <TabbleActions
+                                        element={item}
+                                        rowIndex={rowIndex}
+                                        currentIndex={currentIndex}
+                                        setCurrentIndex={setCurrentIndex}
+                                        handleActions={tableActions}
+                                        actions={column.actions}
+                                        checkPermission={checkPermission}
+                                      />
+                                    </>
+                                  )}
+                                </div>
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          </CTableCell>
+                        ))}
+                      </TableRow>
+                    ))
+                  : ""}
+              </CTableBody>
+            </CTableWrapper>
+          </div>
         </div>
-      </div>
 
-      {bodyColumns?.length && !isLoading && !disablePagination ? (
-        <CPagination
-          filterParams={filterParams}
-          count={count}
-          totalCount={totalCount}
-          limit={currentLimit}
-          limitCount={limitCount}
-          passRouter={passRouter}
-          handleFilterParams={handleFilterParams}
-          setCurrentLimit={setCurrentLimit}
-          dataLength={bodyColumns?.length}
-        />
-      ) : (
-        ""
-      )}
+        {bodyColumns?.length && !isLoading && !disablePagination ? (
+          <CPagination
+            filterParams={filterParams}
+            count={meta.pageCount}
+            totalCount={meta.totalCount}
+            limit={filterParams.perPage}
+            limitList={limitList}
+            passRouter={passRouter}
+            handleFilterParams={handleFilterParams}
+            dataLength={bodyColumns?.length}
+          />
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };

@@ -7,24 +7,24 @@ import { FetchFunction, TableData } from "./Logic";
 import usePageRouter from "../../../../hooks/useObjectRouter";
 
 const DriversList = ({
-  data,
   openModal,
   setOpenModal = () => {},
+  data = {},
 }: {
   data?: any;
   openModal: boolean;
   setOpenModal: (val: boolean) => void;
 }) => {
-  if (!openModal) return <></>
+  if (!openModal) return <></>;
   const query = useGetQueries();
   const { navigateQuery, navigateTo } = usePageRouter();
 
   const { passengerData, refetch, isLoading } = FetchFunction();
   const { headColumns, bodyColumns } = TableData(
-    passengerData?.data?.data,
+    passengerData?.data,
     refetch
   );
-
+  
   return (
     <div>
       <CModal
@@ -62,20 +62,27 @@ const DriversList = ({
             filterParams={{}}
             handleFilterParams={() => {}}
             disablePagination={true}
+            tableSetting={false}
           />
-
         </div>
         <div className="flex space-x-5 mt-5">
           <button
             className="cancel-btn"
             onClick={() => {
-                navigateQuery({ suggestion: "" }) 
-                setOpenModal(false)
+              navigateQuery({ suggestion: "" });
+              setOpenModal(false);
             }}
           >
             Ortga
           </button>
-          <button onClick={() => navigateTo(`/passengers/active-passengers/attachment/${query.suggestion}`)} className="custom-btn">
+          <button
+            onClick={() =>
+              navigateTo(
+                `/passengers/active-passengers/attachment/${query.suggestion}`
+              )
+            }
+            className="custom-btn"
+          >
             <PlusIcon />
             <span className="ml-2">Yangi haydovchi biriktirish</span>
           </button>

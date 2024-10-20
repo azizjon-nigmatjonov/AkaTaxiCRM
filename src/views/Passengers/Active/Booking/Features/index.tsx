@@ -9,14 +9,19 @@ import {
   ByWayCarImage,
 } from "../../../../../components/UI/IconGenerator/Svg/index";
 import { CAutocomplete } from "../../../../../components/CElements/CAutocomplete";
+import { FeaturesLogic } from "./Logic";
 
 const Features = ({
+  locationIds,
   featureHandle = () => {},
   price,
 }: {
+  locationIds: { start: number; end: number };
   featureHandle: (val: any) => void;
   price: any;
 }) => {
+  const [search, setSearch] = useState("");
+  const { completeOptions } = FeaturesLogic({ q: search, locationIds });
   const [features, setFeatures] = useState<any>({
     air_conditioner: true,
     additional_trunk: true,
@@ -28,11 +33,12 @@ const Features = ({
     driver_gender: ["m", "f"],
     can_stop: true,
     car_class_id: 1,
+    driver_id: null,
   });
 
   const handleCheck = (name: string, check: any) => {
-    let obj = features;
-    for (let i in features) {
+    const obj = features;
+    for (const i in features) {
       if (i == name) {
         if (Array.isArray(obj[i])) {
           obj[i].length
@@ -232,7 +238,13 @@ const Features = ({
       <div className={cls.flex}>
         <p className={cls.title}>Maxsus haydovchi</p>
         <div className={cls.parent}>
-          <CAutocomplete options={[]} />
+          <CAutocomplete
+            options={completeOptions}
+            handleChange={setSearch}
+            disabled={!(!!locationIds.start && !!locationIds.end)}
+            handleSelect={(val: any) => handleCheck("driver_id", val)}
+            cancel={true}
+          />
         </div>
       </div>
     </>

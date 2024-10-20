@@ -52,7 +52,7 @@ const CSelectColor = ({
         >
           <ArrowDownOutline height={16} width={16} />
         </div>
-        <div>
+        <div className="flex space-x-3 whitespace-nowrap items-center">
           <div
             onClick={() => setOpen(!open)}
             className={`rounded-2xl border-2 px-6px py-2px flex items-center gap-1 cursor-pointer`}
@@ -68,6 +68,7 @@ const CSelectColor = ({
               {current.label}
             </p>
           </div>
+          {/* {current?.value ? <p className="text-[var(--gray60)]">Operator 1</p> : ""} */}
           {open && (
             <div className="absolute p-3 z-[91] top-full mt-2 left-0 max-h-[210px] overflow-y-scroll designed-scroll bg-white card-shadow border border-[var(--gray20)] w-full rounded-[16px] space-y-2">
               {options.map((item: any, index: number) => (

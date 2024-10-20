@@ -8,7 +8,6 @@ import { useQuery } from "react-query";
 import carService from "../../../services/cars";
 import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
-// import SectionHeader from "../../../components/UI/Sections/Header";
 
 const Vehicles = () => {
   const { navigateQuery, getQueries } = usePageRouter();
@@ -57,7 +56,7 @@ const Vehicles = () => {
 
   const refetch = () => {
     getCarList(tab);
-  }
+  };
 
   const breadCrumbs = useMemo(() => {
     return [
@@ -66,29 +65,21 @@ const Vehicles = () => {
     ];
   }, []);
 
-  // const handleSearch = (value: any) => {
-  //   navigateQuery({ q: value });
-  // };
-
   return (
     <>
-      <Header sticky={true}>
+      <Header>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} type="link" />
+        <AddButton
+          text="new_mark"
+          style={{ width: "auto" }}
+          onClick={() => {
+            setInputValue("Marka nomi");
+            navigateQuery({ id: "create" });
+          }}
+        />
       </Header>
 
-      <div className="px-5">
-        <div className="flex justify-end mb-5">
-          {/* <SectionHeader handleSearch={handleSearch} defaultValue={q} /> */}
-          <AddButton
-            text="new_mark"
-            style={{ width: "auto" }}
-            onClick={() => {
-              setInputValue("Marka nomi");
-              navigateQuery({ id: "create" });
-            }}
-          />
-        </div>
-
+      <div className="container">
         {!isLoading ? (
           <Section
             setInputValue={setInputValue}

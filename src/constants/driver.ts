@@ -1,27 +1,33 @@
 export const RejectReasonsUz = [
     {
         label: "Mashina old qismini qayta tushuring",
-        value: 1
+        value: 1,
+        name: "first_image"
     },
     {
         label: "Mashina ichki qismini qayta tushuring",
-        value: 2
+        value: 2,
+        name: "second_image"
     },
     {
         label: "Tex.passport rasmini qayta tushuring",
-        value: 3
+        value: 3,
+        name: "tex_passport"
     },
     {
         label: "Prava rasmini qayta tushuring",
-        value: 4
+        value: 4,
+        name: "driver_license"
     },
     {
         label: "Prava bilan selfini qayta tushing",
-        value: 5
+        value: 5,
+        name: "selfie_driver_license"
     },
     {
         label: "Mashina raqamini qayta kiriting",
-        value: 6
+        value: 6,
+        name: "car_number"   
     }
 ]
 export const RejectReasonsOz = [

@@ -7,14 +7,14 @@ import { getStoredFilters } from "../../../../components/UI/Filter/Logic";
 
 export const FetchFunction = () => {
   const { filters } = getStoredFilters({});
-  const { q } = filters;
+  const { q, page } = filters;
 
   const {
     data: admins,
     isLoading,
     refetch,
-  } = useQuery(["GET_ADMINS", q], () => {
-    return adminService.getList({ q: q ?? "" });
+  } = useQuery(["GET_ADMINS", q, page], () => {
+    return adminService.getList({ q: q ?? "", page: page || 1 });
   });
 
   const bodyColumns: any = useMemo(() => {

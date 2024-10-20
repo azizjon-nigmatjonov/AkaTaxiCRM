@@ -1,19 +1,20 @@
 import { useEffect, useMemo, useState } from "react";
-import usePageRouter from "../../../../hooks/useObjectRouter";
+// import usePageRouter from "../../../../hooks/useObjectRouter";
 import CCard from "../../../../components/CElements/CCard";
 import ChartGraph from "../ChartGraph";
-import Setting from "./Setting";
-import Form from "./Form";
+// import Setting from "./Setting";
+// import Form from "./Form";
 import { LinearProgress, Skeleton } from "@mui/material";
 import { useQuery } from "react-query";
 import statistics from "../../../../services/statistics";
 import { useGetQueries } from "../../../../hooks/useGetQueries";
-import {
-  createSearchParams,
-  useSearchParams,
-  useNavigate,
-} from "react-router-dom";
+// import {
+//   createSearchParams,
+//   useSearchParams,
+//   useNavigate,
+// } from "react-router-dom";
 import CTabs from "../../../../components/CElements/CTab";
+import { CPeriodPicker } from "../../../../components/CElements/CPeriodPicker";
 
 const tabList = [
   {
@@ -31,14 +32,11 @@ const tabList = [
 ];
 
 const Selection = () => {
-  const navigate = useNavigate();
-  const { navigateQuery, getQueries } = usePageRouter();
-  const setSearchParams = useSearchParams()[1];
   const [graph, setGraph] = useState("year");
-  const [count, setCount] = useState("year");
-  const { date, year, month, week, tab } = useGetQueries();
-  const query = getQueries();
-  
+  const { year, month, week, tab } = useGetQueries();
+  const [barChartDate, setBarChartDate] = useState<any>([]);
+  const [countsDate, setCountsDate] = useState<any>([]);
+
   useEffect(() => {
     if (week) {
       setGraph("week");
@@ -52,56 +50,19 @@ const Selection = () => {
     setGraph("year");
   }, [year, month, week]);
 
-  const graphHandler = (e: string) => {
-    setGraph(e);
-    const date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth();
-    switch (e) {
-      case "year":
-        return setSearchParams({});
-      case "month":
-        if (Object.keys(query).length > 2) {
-          Object.entries(query).map(([keys]) => {
-            if (keys != "year") {
-              delete query[keys];
-            }
-          });
-        }
-        navigateQuery({ year: year });
-        break;
-
-      default:
-        let newQuery: any = { year: year, month: month + 1, week: 1 };
-        const queryParams = createSearchParams(newQuery);
-        return navigate({
-          pathname: location.pathname,
-          search: queryParams.toString(),
-        });
-    }
-  };
-
-  const countHandler = (e: string) => {
-    navigateQuery({ date: e });
-    setCount(e);
-  };
-
-  useEffect(() => {
-    if (date) {
-      setCount(date)
-    }
-  }, [date])
-
   const { data: barCart, isLoading } = useQuery(
-    ["GET_GRAPH", year, month, week, tab],
+    ["GET_GRAPH", barChartDate, tab],
     () => {
-      return statistics.getPassangerGraph({ year, month, week, type: tab ? tab : "registered" });
+      return statistics.getPassangerGraph({
+        date: barChartDate?.length ? barChartDate?.join(",") : undefined,
+        type: tab ? tab : "registered",
+      });
     }
   );
 
   const graphData: any = useMemo(() => {
     if (!barCart) return [];
-    let list: any = barCart.data ?? [];
+    const list: any = barCart.data ?? [];
     const data: any = [];
     const label: any = [];
 
@@ -110,15 +71,15 @@ const Selection = () => {
   }, [barCart]);
 
   const { data, isLoading: progressLoading } = useQuery(
-    ["GET_PROGRESS", date],
+    ["GET_PROGRESS", countsDate],
     () => {
-      return statistics.getProgress(date);
+      return statistics.getProgress({ date: countsDate?.join(",") });
     }
   );
 
   const progress = useMemo(() => {
     if (!data?.data) return [];
-    let maxValue = Math.max(...data?.data.map((val: any) => val.users_count));
+    const maxValue = Math.max(...data?.data.map((val: any) => val.users_count));
     return data?.data.map((val: any) => {
       return {
         ...val,
@@ -131,31 +92,40 @@ const Selection = () => {
       };
     });
   }, [data]);
-
+  console.log('progress', progress);
+  
   return (
     <div className="px-6 mb-6 ">
       <div>
         <CTabs tabList={tabList} />
       </div>
-      <div className="flex gap-6 h-full">
+      <div>
         <div className="w-full">
-          <CCard classes="flex flex-col justify-between h-[600px] w-full min-w-[690px]">
-            <div>
-              <div className="flex items-center justify-between">
-                <p className="font-base font-semibold text-[var(--black)]">
-                  Ro’yhatdan o’tganlar
-                </p>
-                <Setting value={graph} chooseChange={graphHandler} />
+          <CCard classes="flex flex-col justify-between w-full min-w-[690px]">
+            <div className="flex items-center justify-between">
+              <p className="font-base font-semibold text-[var(--black)]">
+                Ro’yhatdan o’tganlar
+              </p>
+              <div className="w-[230px]">
+                <CPeriodPicker
+                  handleValue={setBarChartDate}
+                  placeholder="Tanlang"
+                />
               </div>
-              <Form value={graph} />
             </div>
+
             <ChartGraph title={graph} loading={isLoading} data={graphData} />
           </CCard>
         </div>
 
-        <CCard classes="w-[360px] h-full">
+        <CCard classes="w-full h-full mt-5">
           <div>
-            <Setting value={count} chooseChange={countHandler} />
+            <div className="w-[230px] ml-auto mb-5">
+              <CPeriodPicker
+                handleValue={setCountsDate}
+                placeholder="Tanlang"
+              />
+            </div>
             {progressLoading ? (
               <div className="mt-5">
                 {Array.from(new Array(12)).map((_) => (

@@ -1,42 +1,42 @@
 import { useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
-import SectionHeader from "../../../components/UI/Sections/Header";
+// import SectionHeader from "../../../components/UI/Sections/Header";
 import { useQuery } from "react-query";
 import driverService from "../../../services/drivers";
-import { useGetQueries } from "../../../hooks/useGetQueries";
 import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import PassengerList from "./PassengerList";
-import LTabs from "../../../components/CElements/CTab/LineTab";
-import { ActiveDriversTable, breadCrumbs, FetchFunction } from "./Logic";
+// import LTabs from "../../../components/CElements/CTab/LineTab";
+import { ActiveDriversTable, breadCrumbs } from "./Logic";
 import { ActiveDriverFilter } from "./Filter";
 // import DriversList from "../../../views/Passengers/Active/DriversList";
 import { NoteTableButtonActions } from "../../../components/UI/CallModals/NoteModal/Logic";
 import { OffersModal } from "./Offers";
-import { FilterFunctions } from "../../../components/UI/Filter/Logic";
+import {
+  FilterFunctions,
+  getStoredFilters,
+} from "../../../components/UI/Filter/Logic";
+import usePageRouter from "../../../hooks/useObjectRouter";
+import FilterButton from "../../../components/UI/Filters";
 
 const ActiveDrivers = () => {
   const [passenger, setPassenger] = useState([]);
-  const { tabList } = FetchFunction();
+  // const { tabList } = FetchFunction();
   const [open, setOpen] = useState(false);
   const [filterParams, setFilterParams]: any = useState({});
-  const { collectFilter, storeFilters } = FilterFunctions({ store: true, filterParams, setFilterParams });
+  const { navigateTo } = usePageRouter();
+  const { collectFilter, storeFilters } = FilterFunctions({
+    store: true,
+    filterParams,
+    setFilterParams,
+  });
+  const { filters } = getStoredFilters({});
+  const { gender, region_id, q, car_model_id, page } = filters;
 
   const handleOffers = (val: any) => {
     setOpen(true);
     console.log("obj", val);
   };
-  
-  const {
-    currentPage,
-    q,
-    gender,
-    region_id,
-    f,
-    car_model_id,
-    status,
-    birthday,
-  } = useGetQueries();
 
   const { headColumns } = ActiveDriversTable({
     setPassenger,
@@ -48,31 +48,18 @@ const ActiveDrivers = () => {
     isLoading,
     refetch,
   } = useQuery(
-    [
-      "GET_ACTIVE_DRIVERS",
-      q,
-      gender,
-      region_id,
-      f,
-      car_model_id,
-      currentPage,
-      status,
-      birthday,
-    ],
+    ["GET_ACTIVE_DRIVERS", q, gender, region_id, car_model_id, page],
     () => {
       return driverService.getActives({
         q,
-        gender,
-        region_id,
-        f,
-        car_model_id,
-        page: currentPage,
-        status,
+        gender: gender?.value,
+        region_id: region_id?.value,
+        // f: filterParams?.f,
+        car_model_id: car_model_id?.value,
+        page: page || 1,
       });
     }
   );
-
-  // console.log(passenger);
 
   const driversData: any = useMemo(() => {
     if (!drivers) return [];
@@ -103,37 +90,52 @@ const ActiveDrivers = () => {
     };
   }, [drivers]);
 
-  const handleSearch = (value: any) => {
-    collectFilter({ type: "q", val: value });
-  };
-
   const handleFilterParams = (obj: any) => {
     setFilterParams(obj);
     storeFilters(obj);
   };
+
+  const handleSearch = (value: any) => {
+    collectFilter({ type: "q", val: value });
+    handleFilterParams({ ...filterParams, q: value, page: 1 });
+  };
+
+  const handleActions = (el: { id: number }, type: string) => {
+    if (type === "view") {
+      navigateTo(`/drivers/main/${el.id}`);
+    }
+  };
+
+
   return (
     <>
-      <Header sticky={true}>
-        <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+      <Header>
+        <CBreadcrumbs
+          items={breadCrumbs}
+          progmatic={true}
+          handleSearch={handleSearch}
+          defaultValue={filterParams?.q}
+        />
+        <div className="ml-5">
+          <FilterButton text="filter" />
+        </div>
       </Header>
 
-      <div className="px-5">
-        <SectionHeader
-          handleSearch={handleSearch}
-          defaultValue={q}
-        ></SectionHeader>
+      <div className="container">
+        <ActiveDriverFilter
+          filterParams={filterParams}
+          setFilterParams={setFilterParams}
+        />
 
-        <ActiveDriverFilter filterParams={filterParams} setFilterParams={setFilterParams} />
-
-        <LTabs tabList={tabList} />
+        {/* <LTabs tabList={tabList} /> */}
 
         <CTable
           headColumns={headColumns}
           bodyColumns={driversData?.list}
-          count={driversData?.meta?.pageCount}
-          totalCount={driversData?.meta?.totalCount}
+          meta={driversData?.meta}
           isLoading={isLoading}
           filterParams={filterParams}
+          handleActions={handleActions}
           handleFilterParams={handleFilterParams}
         />
         <OffersModal openModal={open} setOpenModal={setOpen} />

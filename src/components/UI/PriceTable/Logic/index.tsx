@@ -4,7 +4,7 @@ import priceService from "../../../../services/price";
 import { websiteActions } from "../../../../store/website";
 import { useDispatch } from "react-redux";
 
-const headColumns = [
+const headColumnList = [
   {
     title: "Viloyat",
     id: "region",
@@ -48,8 +48,71 @@ const headColumns = [
     edit_price: false,
   },
 ];
-``;
+
+const selectData = [
+  {
+    title: "Hujjat yetkazish",
+    id: "document",
+    type: "delivery",
+    price: 1000,
+    edit_km: false,
+    edit_price: false,
+  },
+  {
+    title: "Kichik hajm",
+    id: "small_volume",
+    type: "delivery",
+    price: 1000,
+    edit_km: false,
+    edit_price: false,
+  },
+  {
+    title: "Katta hajm",
+    id: "large_volume",
+    type: "delivery",
+    price: 1000,
+    edit_km: false,
+    edit_price: false,
+  },
+  {
+    title: "Pul 1",
+    id: "money_1",
+    type: "delivery",
+    price: 1000,
+    edit_km: false,
+    edit_price: false,
+  },
+  {
+    title: "Pul 1000",
+    id: "money_1000",
+    type: "delivery",
+    price: 1000,
+    edit_km: false,
+    edit_price: false,
+  },
+  {
+    title: "Pul 5000",
+    id: "money_5000",
+    type: "delivery",
+    price: 1000,
+    edit_km: false,
+    edit_price: false,
+  },
+  {
+    title: "Pul 10000",
+    id: "money_10000",
+    type: "delivery",
+    price: 1000,
+    edit_km: false,
+    edit_price: false,
+  },
+];
+
 export const TableData = ({ region }: { region: any }) => {
+  const [headColumns, setHeadColumns] = useState([
+    ...headColumnList,
+    selectData[0],
+  ]);
   const [newColumns, setNewColumns]: any = useState([]);
 
   const handleCheckKm = (orderNumber: number, type: boolean) => {
@@ -81,12 +144,20 @@ export const TableData = ({ region }: { region: any }) => {
       });
       setNewColumns(arr);
     }
-  }, [region]);
+  }, [region, headColumns]);
+
+  const handleSelectDelivery = (id: string) => {
+    const selected: any =
+      selectData.find((item: { id: string }) => item.id === id) ?? {};
+
+    setHeadColumns([...headColumnList, selected]);
+  };
 
   return {
     headColumns: newColumns,
     handleCheckKm,
     handlePriceInput,
+    handleSelectDelivery,
   };
 };
 
@@ -95,7 +166,7 @@ export const CreateFunction = ({
   from_tashkent,
 }: {
   handleSucces: () => void;
-  from_tashkent: number
+  from_tashkent: number;
 }) => {
   const dispatch = useDispatch();
   const { mutate: updatePrice } = useMutation({
@@ -115,24 +186,50 @@ export const CreateFunction = ({
   });
 
   const submitPrice = (priceList: any, id: number) => {
+    const price: any = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+    };
+
+    for (let key in price) {
+      price[key] = priceList[key];
+    }
+
     const params = {
       region_id: id,
-      price: priceList,
+      price: price,
       from_tashkent,
     };
     updatePrice(params);
   };
 
-  const submitDistance = (distanceObj: any) => {
+  const submitDistance = (distanceObj: any, type?: string, list?: any) => {
     const prices: any = [];
-    for (let key in distanceObj) {
-      prices.push({ distance: distanceObj[key], district_id: +key });
+    const delivery: any = [];
+    if (type === "delivery") {
+      for (const key in distanceObj) {
+        for (let obj of list) {
+          if (key in obj.delivery) {
+            delivery.push({
+              [key]: obj.delivery[key],
+              district_id: obj,
+            });
+          }
+        }
+      }
+    } else {
+      for (const key in distanceObj) {
+        prices.push({ distance: distanceObj[key], district_id: +key });
+      }
     }
     const params = {
       prices,
-      from_tashkent
+      delivery,
+      from_tashkent,
     };
-    
+
     updateDistance(params);
   };
 
@@ -152,26 +249,33 @@ export const CreateFunction = ({
 export const BodyData = ({
   handleDistanceSet,
   districtList,
-  setDistrictList = () => {}
+  setDistrictList = () => {},
 }: {
   bodyList: any;
   districtList: any;
-  setDistrictList: (val: any) => void
+  setDistrictList: (val: any) => void;
   handleDistanceSet: (val: string, val2: any) => void;
 }) => {
-
-
-  const handleKmInput = (val: number, id: number) => {
+  const handleKmInput = (
+    val: number,
+    id: number,
+    type?: string,
+    deliverId?: string
+  ) => {
     let arr: any = districtList;
-
     arr = arr.map((item: any) => {
       if (item.district_id === id) {
-        item.distance = val;
+        if (type === "delivery") {
+          const name: any = deliverId ?? "document";
+          item.delivery[name] = val;
+        } else {
+          item.distance = val;
+        }
       }
       return item;
     });
-    
-    handleDistanceSet(id + "", val);
+
+    handleDistanceSet(deliverId ? deliverId : id + "", val);
     setDistrictList(arr);
   };
 

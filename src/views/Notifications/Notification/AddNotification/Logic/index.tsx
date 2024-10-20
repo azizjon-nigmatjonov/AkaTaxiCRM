@@ -58,7 +58,7 @@ export const CreateFunction = ({ type = "" }: { type: string }) => {
       body: {},
     };
 
-    for (let key in data) {
+    for (const key in data) {
       const asKey = key.substring(0, key.indexOf("_"));
       if (asKey === "title") {
         const name = key.substring(key.indexOf("_") + 1);

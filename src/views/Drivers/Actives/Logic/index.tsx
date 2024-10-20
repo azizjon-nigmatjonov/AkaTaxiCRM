@@ -91,7 +91,7 @@ export const ActiveDriversTable = ({
         },
       },
       {
-        title: "",
+        title: "Eslatma",
         id: "notelist",
         render: (item: any) => {
           return (
@@ -103,6 +103,11 @@ export const ActiveDriversTable = ({
           );
         },
       },
+      {
+        title: "",
+        id: "actions",
+        actions: ["view"]
+      }
     ];
   }, []);
 

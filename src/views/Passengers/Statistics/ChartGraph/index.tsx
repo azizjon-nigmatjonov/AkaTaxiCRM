@@ -41,10 +41,10 @@ const ChartGraph: React.FC<{
           slotProps={{ legend: { hidden: true } }}
           sx={{
             [`.${axisClasses.left} .${axisClasses.label}`]: {
-              transform: "translate(-20px, 0)",
-              fontWeight: 500,
+              transform: "translate(-30px, 0)",
+              fontWeight: 500
             },
-            padding: "5px",
+            padding: 1.5,
           }}
         />
       )}

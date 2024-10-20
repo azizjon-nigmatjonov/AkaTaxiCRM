@@ -1,6 +1,6 @@
 import Filters from "../../../../components/UI/Filter";
 import CSelect from "../../../../components/CElements/CSelect";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useQuery } from "react-query";
 import carService from "../../../../services/cars";
 import { usePlaces } from "../../../../hooks/usePlaces";
@@ -14,8 +14,8 @@ export const ActiveDriverFilter = ({
   setFilterParams: (val: any) => void;
 }) => {
   const { regionList } = usePlaces();
-  const [openFilter, setOpenFilter] = useState(false);
-  const { collectFilter } = FilterFunctions({filterParams, setFilterParams});
+
+  const { collectFilter } = FilterFunctions({ filterParams, setFilterParams });
 
   const Regions = useMemo(() => {
     return regionList?.map((i: any) => {
@@ -48,12 +48,7 @@ export const ActiveDriverFilter = ({
   };
 
   return (
-    <Filters
-      filter={openFilter}
-      filterParams={filterParams}
-      setFilterParams={setFilterParams}
-      setOpen={setOpenFilter}
-    >
+    <Filters filterParams={filterParams} setFilterParams={setFilterParams}>
       <div className="grid grid-cols-1 gap-y-5 w-full">
         <CSelect
           options={Regions}

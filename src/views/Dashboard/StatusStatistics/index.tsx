@@ -1,22 +1,20 @@
-import { Months } from "../../../constants/month";
 import CSelect from "../../../components/CElements/CSelect";
 import { WrapperCard } from "../../../components/UI/WrapperCard";
 import CDriver from "../../../components/CElements/CDivider";
 import CList from "../../../components/CElements/CList";
-import { getYears } from "../../../utils/getMonth";
-import { GetMonth } from "../../../utils/getWeekDays";
 import { useState } from "react";
 import { FetchFunction } from "./Logic";
 import { OneSkeleton } from "../../../components/CElements/CSkeleton/OneSkeleton";
+import { CPeriodPicker } from "../../../components/CElements/CPeriodPicker";
+import { UseOperators } from "../../../hooks/useOperators";
+import { formatNumberWithSpaces } from "../../../utils/formatMoney";
 
 const StatusStatics = () => {
-  const { currentMonth, year } = GetMonth();
-  const [params, setParams] = useState({ month: currentMonth, year });
-  const { statistics, isLoading } = FetchFunction({ params });
-
-  const handleParams = (type: string, val: any) => {
-    setParams({ ...params, [type]: val });
-  };
+  const { operatorOptions } = UseOperators({});
+  const [filterParams, setFilterParams]: any = useState({});
+  const { statistics, isLoading } = FetchFunction({
+    params: { operator_id: operatorOptions?.[0]?.value, ...filterParams },
+  });
 
   return (
     <WrapperCard classes="p-[0]">
@@ -29,17 +27,25 @@ const StatusStatics = () => {
             Foydalanuvchilarning buyurtmalardagi holati
           </p>
         </div>
-        <div className="w-[240px] flex items-center gap-5">
+        <div className="w-[500px] grid grid-cols-2 gap-x-5">
           <CSelect
-            value={params.month}
-            options={Months}
-            handlerValue={(val: any) => handleParams("month", val.value)}
+            placeholder="Operator tanlang"
+            options={operatorOptions}
+            value={operatorOptions?.[0]?.value}
+            handlerValue={(val: any) =>
+              setFilterParams({ ...filterParams, operator_id: val.value })
+            }
           />
-          <CSelect
-            value={params.year}
-            options={getYears()}
-            handlerValue={(val: any) => handleParams("year", val.value)}
-          />
+
+          <div>
+            <CPeriodPicker
+              placeholder="Vaqtni tanlang"
+              handleValue={(val: any) =>
+                setFilterParams({ ...filterParams, date: val })
+              }
+              defaultValue={filterParams?.date}
+            />
+          </div>
         </div>
       </div>
       <CDriver />
@@ -48,8 +54,15 @@ const StatusStatics = () => {
         <OneSkeleton height={240} />
       ) : (
         <div className="flex gap-x-5 p-5">
-          <CList title="Yo'lovchi" list={statistics?.passengers} />
-          <CList title="Haydovchi" list={statistics?.drivers} />
+          <CList
+            title={`Yo'lovchi (${formatNumberWithSpaces(statistics?.passenger_count ?? 0)} ta)`}
+            list={statistics?.passengers}
+          />
+          <CList
+            title={`Haydovchi (${formatNumberWithSpaces(statistics?.driver_count ?? 0)}
+          ta)`}
+            list={statistics?.drivers}
+          />
         </div>
       )}
     </WrapperCard>

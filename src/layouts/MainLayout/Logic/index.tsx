@@ -103,23 +103,20 @@ export const ColorData = memo(() => {
 });
 
 export const GlobalMQTT = () => {
-  // const routingKey = import.meta.env.MQTT_TOPIC_NAME || "akataxi/admin"
   const count = useSelector((state: any) => state.notification.new_count);
   const sound = useSelector((state: any) => state.notification.sound);
-  // const { checkPermission } = usePermissions();
   const notificationList = useSelector((state: any) => state.notification.list);
   const routingKey = "akataxi/admin";
   const dispatch = useDispatch();
   const audioRef: any = useRef(null);
 
   const playAudio = () => {
-    if (!sound) return;
-    // if (checkPermission("show_notification")) {
+    if (sound) {
       audioRef.current.play();
-    // }
+    }
   };
 
-  useEffect(() => {
+  const connectMqtt = () => {
     client.on("connect", function () {
       console.log("connected to mqtt");
     });
@@ -131,10 +128,10 @@ export const GlobalMQTT = () => {
     client.on("message", function (topic: any, message: any) {
       if (message) {
         const payload = { topic, message: message.toString() };
-        playAudio();
 
         const mqttData = JSON.parse(payload.message);
         if (mqttData.name === "notification") {
+          playAudio();
           const Hour = GetCurrentDate({});
           dispatch(
             notificationActions.setList([
@@ -148,7 +145,12 @@ export const GlobalMQTT = () => {
         dispatch(mqttActions.setData({ topic, message: mqttData }));
       }
     });
-  }, []);
+  };
+
+  useEffect(() => {
+    // client.removeAllListeners();
+    connectMqtt();
+  }, [sound]);
 
   return (
     <>

@@ -10,7 +10,7 @@ export const useVersions = () => {
   const VersionOptions = useMemo(() => {
     const arr = [];
     if (version?.data) {
-      for (let key in version.data) {
+      for (const key in version.data) {
         arr.push(key);
       }
     }

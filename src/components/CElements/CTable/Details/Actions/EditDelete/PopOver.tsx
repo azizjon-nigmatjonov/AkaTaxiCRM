@@ -15,7 +15,7 @@ export const PopoverDelete = ({
   return (
     <>
       <div
-        className={`absolute left-[-400px] top-[-40px] bg-white p-16px border border-[var(--gray20)] z-[91] rounded-[8px] common-shadow ${classes}`}
+        className={`absolute left-[-400px] top-[-40px] bg-white p-16px border border-[var(--gray20)] z-[98] rounded-[8px] common-shadow ${classes}`}
       >
         <p className="whitespace-nowrap flex items-start space-x-5">
           <WarningIcon />{" "}
@@ -40,7 +40,7 @@ export const PopoverDelete = ({
           </button>
         </div>
       </div>
-      <Closer handleClose={() => closePopover("")} />
+      <Closer handleClose={() => closePopover("")} classes="z-[97]" />
     </>
   );
 };

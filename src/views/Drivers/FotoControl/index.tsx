@@ -2,38 +2,41 @@ import { useCallback, useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
 import { Header } from "../../../components/UI/Header";
-import SectionHeader from "../../../components/UI/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import CTable from "../../../components/CElements/CTable";
 import ImageFrame from "../../../components/UI/ImageFrame";
-// import Date from "./Date"
 import driverService from "../../../services/drivers";
-import { useGetQueries } from "../../../hooks/useGetQueries";
-import { DangerNotification, EyeIcon } from "../../../components/UI/IconGenerator/Svg";
+import {
+  DangerNotification,
+  EyeIcon,
+} from "../../../components/UI/IconGenerator/Svg";
 import CSelect from "../../../components/CElements/CSelect";
 import { FilterFunctions } from "../../../components/UI/Filter/Logic";
+import NotInterestedIcon from "@mui/icons-material/NotInterested";
+import { GetTimeFutureBack } from "../../../utils/formatTime";
 
 const options = [
-  { value: 'new', label: 'Yangilar' },
-  { value: 'middle', label: "O'rtacha" },
-  { value: 'pre_finish', label: "Tugash muddatida" },
-  { value: 'finish', label: "Tugagan" },
-]
+  { value: "new", label: "Yangilar" },
+  { value: "middle", label: "O'rtacha" },
+  { value: "outdated", label: "Tugagan" },
+];
 const FotoControl = () => {
-  const { page, start, end } = useGetQueries();
   const { navigateTo } = usePageRouter();
   const [filterParams, setFilterParams]: any = useState({});
-  const { collectFilter, storeFilters } = FilterFunctions({ store: true, filterParams, setFilterParams });
-
+  const { collectFilter, storeFilters } = FilterFunctions({
+    store: true,
+    filterParams,
+    setFilterParams,
+  });
 
   const { data: fotoControl, isLoading } = useQuery(
-    ["FOTO_CONTROL", page, filterParams?.q, start, end],
+    ["FOTO_CONTROL", filterParams],
     () => {
       return driverService.getFotoContols({
-        page: filterParams?.page,
+        page: filterParams?.page || 1,
         q: filterParams?.q,
+        status: filterParams?.status?.value,
         perPage: 10,
-        create_at: start && end && JSON.stringify([start, end]),
       });
     }
   );
@@ -48,9 +51,8 @@ const FotoControl = () => {
   const headColumns = useMemo(() => {
     return [
       {
-        title: '',
-        id: 'index',
-
+        title: "",
+        id: "index",
       },
       {
         title: "ism familiya",
@@ -85,20 +87,38 @@ const FotoControl = () => {
         id: "phone",
         render: (val: any) => val && <p>+{val}</p>,
       },
-      { title: "muddat", id: "created_at" },
       {
-        title: "",
+        title: "muddat",
+        id: "created_at",
+      },
+      {
+        title: "tugash muddati",
+        id: "created_at",
+        render: (val: string) => {
+          return <>{GetTimeFutureBack(val ?? 0)} kun qoldi</>;
+        },
+      },
+      {
+        title: "Status",
         id: "status",
-        render: (val: any) =>
-          val && (
-            <div className="flex items-center justify-center">
-              {val == "created" ? (
-                <DangerNotification />
-              ) : (
-                <EyeIcon fill="var(--gray)" />
-              )}
-            </div>
-          ),
+        render: (info: any) => {
+          return (
+            info !== undefined && (
+              <div
+                className="cursor-pointer"
+                onClick={() => handleActions({ id: info.id })}
+              >
+                {info === "verified" ? (
+                  <EyeIcon fill="var(--black)" />
+                ) : info === "created" ? (
+                  <DangerNotification />
+                ) : (
+                  <NotInterestedIcon style={{ color: "var(--error)" }} />
+                )}
+              </div>
+            )
+          );
+        },
       },
     ];
   }, []);
@@ -106,7 +126,7 @@ const FotoControl = () => {
   const bodyColumns: any = useMemo(() => {
     if (!fotoControl?.data) return [];
 
-    let list: any = fotoControl;
+    const list: any = fotoControl;
 
     return {
       list: list.data?.map((val: any) => {
@@ -131,33 +151,45 @@ const FotoControl = () => {
     navigateTo(`/drivers/fotocontrolusers/${element.id}`);
   }, []);
 
-  const handleSearch = (value: any) => {
-    collectFilter({ type: "q", val: value });
-  };
-
   const handleFilterParams = (obj: any) => {
     setFilterParams(obj);
     storeFilters(obj);
   };
 
+  const handleSearch = (value: any) => {
+    collectFilter({ type: "q", val: value });
+    handleFilterParams({ ...filterParams, q: value, page: 1 });
+  };
+
+  const handleFilter = (type: string, val: any, status?: string) => {
+    collectFilter({ type, val, status });
+  };
+
   return (
     <>
       <Header sticky={true}>
-        <CBreadcrumbs items={breadCrumbs} progmatic={true} type="link" />
+        <CBreadcrumbs
+          items={breadCrumbs}
+          progmatic={true}
+          type="link"
+          handleSearch={handleSearch}
+          defaultValue={filterParams?.q}
+        />
+        <div className="w-[200px] ml-5">
+          <CSelect
+            options={options}
+            placeholder="Muddat tanlash"
+            value={filterParams?.status?.value}
+            handlerValue={(val: any) => handleFilter("status", val)}
+          />
+        </div>
       </Header>
 
-      <div className="px-6">
-        <SectionHeader handleSearch={handleSearch} defaultValue={filterParams?.q}>
-          <div className="w-[240px] bg-red-500">
-            <CSelect options={options} />
-          </div>
-        </SectionHeader>
-
+      <div className="container">
         <CTable
           headColumns={headColumns}
           bodyColumns={bodyColumns?.list}
-          count={bodyColumns?.meta?.pageCount}
-          totalCount={bodyColumns?.meta?.totalCount}
+          meta={bodyColumns?.meta}
           handleActions={handleActions}
           clickable={true}
           isLoading={isLoading}

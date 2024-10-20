@@ -1,10 +1,12 @@
 .price-table {
+  overflow-x: scroll;
   .header {
     font-size: 12px;
     background-color: var(--gray25);
     .row {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      // display: flex;
+      grid-template-columns: repeat(7, 1fr);
       .collapsed {
         display: flex;
         flex-direction: column;
@@ -19,11 +21,11 @@
         // border-bottom: 1px solid var(--gray20);
         padding: 0;
         .cell__wrapper {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 5px 10px 10px;
-            border-bottom: 1px solid var(--gray20);
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          padding: 10px 5px 10px 10px;
+          border-bottom: 1px solid var(--gray20);
         }
       }
 
@@ -33,6 +35,7 @@
         font-weight: 500;
         display: flex;
         align-items: center;
+        // width: 200px;
         white-space: nowrap;
         border-right: 1px solid var(--gray20);
         border-bottom: 1px solid var(--gray20);
@@ -48,8 +51,10 @@
       display: flex;
       align-items: center;
       border-right: 1px solid var(--gray20);
+      // max-width: 86%;
       .cell {
         padding: 10px;
+        // width: 200px;
       }
     }
     .right {
@@ -57,12 +62,13 @@
       flex-direction: column;
       .row {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(6, 1fr);
 
         .cell {
           border-right: 1px solid var(--gray20);
           border-bottom: 1px solid var(--gray20);
           padding: 10px;
+          // max-width: 86%;
 
           input {
             background-color: transparent;

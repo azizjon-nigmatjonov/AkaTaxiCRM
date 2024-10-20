@@ -1,1 +1,1 @@
-export const breadCrumbsItems = [{ label: "Boshqaruv paneli", link: "/dashboard/dashboard" }];
+export const breadCrumbsItems = [{ label: "Boshqaruv darchasi", link: "/dashboard/dashboard" }];

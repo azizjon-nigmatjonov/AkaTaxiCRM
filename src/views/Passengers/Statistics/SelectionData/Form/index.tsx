@@ -28,6 +28,7 @@ const Form = ({ value }: { value: string }) => {
         handlerValue={handlerYear}
         disabled={value != "year" ? false : true}
         label="Yil"
+        defaultValue={year || 2024}
         options={getYears()}
       />
       <Detail

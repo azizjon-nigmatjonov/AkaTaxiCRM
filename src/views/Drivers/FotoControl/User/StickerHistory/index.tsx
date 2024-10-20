@@ -90,7 +90,6 @@ const StickerHistory = ({
       <CTable
         headColumns={headColumns}
         bodyColumns={bodyColumns}
-        totalCount={bodyColumns.length}
         filterParams={filterParams}
         handleFilterParams={handleFilterParams}
       />

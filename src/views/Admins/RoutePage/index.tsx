@@ -13,12 +13,12 @@ export const breadCrumbs = [
 ];
 
 const RoutePage = () => {
-  const { navigateQuery } = usePageRouter()
-  const { modal } = useGetQueries()
+  const { navigateQuery } = usePageRouter();
+  const { modal } = useGetQueries();
   const { newRouteList, refetch, isLoading } = FetchFunction();
 
   const handleClose = () => {
-    navigateQuery({ modal: "", active: "" })
+    navigateQuery({ modal: "", active: "" });
     refetch();
   };
 
@@ -26,25 +26,25 @@ const RoutePage = () => {
     <>
       <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} />
+        <div className="ml-5">
+          <AddButton
+            onClick={() => navigateQuery({ modal: "open" })}
+            iconLeft={true}
+            text="Route qo'shish"
+          />
+        </div>
       </Header>
 
       <div className="container">
         <div className="flex items-start justify-between">
           <div>
             <h1 className="text-[#101828] text-lg font-semibold">
-              Yangi route va permission yaratish
+              Yangi sahifa va permission qo'shish
             </h1>
             <p className="text-[#475467] text-sm font-normal">
-              Permission boshqaruvi uchun yangi rol va permission yaratish
-              sahifasi
+              Permission boshqaruvi uchun yangi sahifa va permission qo'shish
+              joyi
             </p>
-          </div>
-          <div>
-            <AddButton
-              onClick={() => navigateQuery({ modal: 'open' })}
-              iconLeft={true}
-              text="Route qo'shish"
-            />
           </div>
         </div>
 
@@ -62,5 +62,4 @@ const RoutePage = () => {
   );
 };
 
-
-export default RoutePage
+export default RoutePage;

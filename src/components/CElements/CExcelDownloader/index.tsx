@@ -1,8 +1,20 @@
 import { ExcelIcon } from "../../../components/UI/IconGenerator/Svg";
+import { FetchFunction } from "./Logic";
 
-export const CExcelDownloader = () => {
+interface Props {
+  filterParams?: any;
+}
+
+export const CExcelDownloader = ({ filterParams = {} }: Props) => {
+  // if (!filterParams) return;
+  
+  const { downloadExcel } = FetchFunction();
+  
   return (
-    <button className="default-btn whitespace-nowrap space-x-3">
+    <button
+      onClick={() => downloadExcel(filterParams)}
+      className="default-btn whitespace-nowrap space-x-3"
+    >
       <ExcelIcon />
       <span>Excel yuklash</span>
     </button>

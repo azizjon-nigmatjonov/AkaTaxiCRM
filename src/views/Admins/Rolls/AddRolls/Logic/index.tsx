@@ -7,8 +7,8 @@ import { GetUserInfo } from "../../../../../layouts/MainLayout/Logic";
 
 export const GetRoutes = () => {
   const allRoutes = (routes: any) => {
-    let arr = [];
-    for (let key in routes) {
+    const arr = [];
+    for (const key in routes) {
       arr.push(...routes[key]);
     }
 

@@ -97,7 +97,7 @@ const AddDriver = () => {
         
         e.phone = e.phone?.substring(1).replace(/\s+/g, '');
         const data = new FormData();
-        for (let i in e) {
+        for (const i in e) {
             data.append(i, e[i])
         }
         
@@ -125,8 +125,8 @@ const AddDriver = () => {
                         <CCard style={{ minHeight: 0 }}>
                             <div className='bg-[var(--softGray)] p-[10px] rounded-lg text-xs font-semibold'>Asosiy ma’lumotlar</div>
                             <div className='grid grid-cols-3  gap-5 mt-4'>
-                                <HFSelect placeholder='Tanlang' name='car_id' label="Mashina ma'lumotlari" options={carModal?.list} control={control} />
-                                <HFTextField name='car_number' label='Mashina raqami' control={control} placeholder='eg: 01 AB 123 C' />
+                                <HFSelect placeholder='Tanlang' name='car_id' required={true} label="Mashina ma'lumotlari" options={carModal?.list} control={control} />
+                                <HFTextField name='car_number' label='Mashina raqami' required={true} control={control} placeholder='eg: 01 AB 123 C' />
                                 <HFSelect placeholder='Tanlang' name='region_id' label="Viloyat" options={Regions} control={control} />
                                 <div>
                                     <div className='flex items-start gap-5'>
@@ -142,7 +142,7 @@ const AddDriver = () => {
                             <div className='bg-[var(--softGray)] p-[10px] rounded-lg text-xs font-semibold'>Haydovchi rasmilari</div>
                             <div className='flex items-start justify-between  gap-5 mt-4'>
                                 <div className='flex flex-wrap items-start gap-5'>
-                                    <CDriverImageUpload control={control} style={{ height: 200 }} name='profile_image' required={true} label='Profil avatar' />
+                                    <CDriverImageUpload control={control} style={{ height: 200 }} name='profile_image' label='Profil avatar' />
                                     <CDriverImageUpload control={control} style={{ height: 200 }} name='tex_passport_id' required={true} label='Tex.pasport' />
                                     <CDriverImageUpload control={control} style={{ height: 200 }} name='driver_license_id' required={true} label='Guvohnoma rasmi' />
                                     <CDriverImageUpload control={control} style={{ height: 200 }} name='selfie_driver_license_id' required={true} label=' Guvohnoma bilan selfi' />

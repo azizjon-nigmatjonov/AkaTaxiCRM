@@ -14,7 +14,7 @@ export const passengerList = [
     title: "Ro'yxat",
     icon: "list",
     element: <Passengers />,
-    permissions: ["phone"]
+    permissions: ["phone", "multiple_delete"]
   },
   {
     parent: "passengers",

@@ -22,26 +22,24 @@ const SMSNotification = () => {
   const { tableData, isLoading } = FetchFunction();
   const { headColumns, handleActions } = TableData();
   const [filterParams, setFilterParams]: any = useState({});
-  const { storeFilters } = FilterFunctions({filterParams, setFilterParams});
+  const { storeFilters } = FilterFunctions({ filterParams, setFilterParams });
 
   const handleFilterParams = (obj: any) => {
     setFilterParams(obj);
     storeFilters(obj);
   };
-    
+
   return (
     <>
-      <Header sticky={true}>
+      <Header>
         <CBreadcrumbs items={breadCrumbItems} type="link" progmatic={true} />
-      </Header>
-      <div className="flex items-center justify-end px-5 pb-5">
         <div>
           <AddButton
             text="Yangi xabar"
             onClick={() => navigate("/notifications/smsnotification/add_sms")}
           />
         </div>
-      </div>
+      </Header>
 
       <div className="container">
         <CTable
@@ -51,8 +49,7 @@ const SMSNotification = () => {
           handleActions={handleActions}
           filterParams={filterParams}
           handleFilterParams={handleFilterParams}
-          count={tableData?.meta?.pageCount}
-          totalCount={tableData?.meta?.totalCount}
+          meta={tableData?.meta}
         />
       </div>
     </>

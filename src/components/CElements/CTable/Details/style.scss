@@ -1,8 +1,5 @@
 #table {
-  // @include common-shadow;
-  // border-radius: 18px;
-  // border-top-left-radius: 18px;
-  // border-top-right-radius: 18px;
+  // max-height: 620px;
 
   .MuiList-root {
     .MuiButtonBase-root {
@@ -10,40 +7,25 @@
       justify-content: space-between !important;
     }
   }
-  
-  .MuiPaper-root {
-    &::-webkit-scrollbar {
-      display: block !important;
-    }
-    .MuiList-root {
-      &::-webkit-scrollbar {
-        display: block !important;
-      }
-    }
-  }  
 
-  .MuiPaper-root {
-    // overflow: hidden;
-    // overflow-x: scroll !important;
-
-    // &::-webkit-scrollbar {
-    //   display: block !important;
-    // }
-    // &::-webkit-scrollbar-track {
-    //   border-radius: 12px;
-    //   border: 1px solid var(--gray20);
-    // }
-    // &::-webkit-scrollbar-thumb {
-    //   background: var(--gray30);
-    //   border-radius: 12px;
-    // }
-  }
+  // .MuiPaper-root {
+  //   overflow: auto;
+  //   &::-webkit-scrollbar {
+  //     display: block !important;
+  //   }
+  //   .MuiList-root {
+  //     &::-webkit-scrollbar {
+  //       display: block !important;
+  //     }
+  //   }
+  // }
 }
+
 .CTableContainer {
   width: 100%;
   .table {
+
     width: 100%;
-    // border-radius: $lg;
     position: relative;
     color: var(--black);
     background-color: white;
@@ -62,7 +44,6 @@
   @include center;
   padding: 0 24px;
   background-color: white;
-  // margin-top: -15px;
 
   .MuiPagination-ul {
     display: flex;
@@ -120,7 +101,6 @@
   position: sticky;
   top: 0;
   z-index: 2;
-  height: auto !important;
 }
 
 .CTableCell {
@@ -162,11 +142,9 @@
 }
 
 #table {
-  overflow-x: scroll;
   .CTableContainer {
     border-radius: 18px !important;
     box-shadow: none;
-    // overflow: scroll;
   }
 }
 

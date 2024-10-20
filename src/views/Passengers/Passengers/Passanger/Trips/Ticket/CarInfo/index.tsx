@@ -10,8 +10,8 @@ interface Props {
 
 const CarInfo = ({ data: { car_class, car_name, driver_name, car_number_region, car_number, place_order, status } }: Props) => {
 
-  let front = place_order ? place_order?.slice(0, 1) : []
-  let back = place_order ? place_order?.slice(1, 6) : []
+  const front = place_order ? place_order?.slice(0, 1) : []
+  const back = place_order ? place_order?.slice(1, 6) : []
 
   return (
     <>

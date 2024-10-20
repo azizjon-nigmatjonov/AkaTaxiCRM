@@ -23,16 +23,14 @@ const tabList = [
     name: "Sms xabarnoma",
   },
   {
-    slug: 'sms_result',
-    name: 'Sms hisobotlar'
-  }
+    slug: "sms_result",
+    name: "Sms hisobotlar",
+  },
   // {
   //   slug: "news",
   //   name: "Yangiliklar",
   // },
 ];
-
-
 
 const SMS = () => {
   const { tab, currentPage } = useGetQueries();
@@ -43,16 +41,17 @@ const SMS = () => {
     setFilterParams,
   });
 
-  const { data: smsReports } = useQuery(['GET_SMS_REPORTS', tab, currentPage], () => {
-    return smsService.getReports({ page: currentPage, perPage: 10 });
-  })
-
+  const { data: smsReports } = useQuery(
+    ["GET_SMS_REPORTS", tab, currentPage],
+    () => {
+      return smsService.getReports({ page: currentPage, perPage: 10 });
+    }
+  );
 
   const bodyColumns: any = useMemo(() => {
-    if (!smsReports?.data) return []
-    return smsReports
+    if (!smsReports?.data) return [];
+    return smsReports;
   }, [smsReports]);
-
 
   const headColumns = useMemo(() => {
     return [
@@ -60,8 +59,8 @@ const SMS = () => {
         title: "Kimga",
         id: "phone",
         render: (val: any) => {
-          return <p>+{val}</p>
-        }
+          return <p>+{val}</p>;
+        },
       },
       {
         title: "Xabar",
@@ -71,14 +70,22 @@ const SMS = () => {
         title: "Status",
         id: "status",
         render: (val?: any) => {
-          return <p className={`${val == 'DELIVERED' ? 'text-green-500' : 'text-red-500'}`}>{val == 'DELIVERED' ? 'Yuborildi' : 'Yuborilmadi'}</p>
-        }
+          return (
+            <p
+              className={`${
+                val == "DELIVERED" ? "text-green-500" : "text-red-500"
+              }`}
+            >
+              {val == "DELIVERED" ? "Yuborildi" : "Yuborilmadi"}
+            </p>
+          );
+        },
       },
       {
         title: "sana",
         id: "date",
         render: (val?: any) => {
-          return <>{FormatTime(val, 'time')}</>;
+          return <>{FormatTime(val, "time")}</>;
         },
       },
     ];
@@ -98,9 +105,9 @@ const SMS = () => {
   const breadCrumbs = useMemo(() => {
     return [
       { label: "Sozlamalar" },
-      { label: "SMS xabarnoma", link: "settings/sms" }
-    ]
-  }, [])
+      { label: "SMS xabarnoma", link: "settings/sms" },
+    ];
+  }, []);
 
   const handleFilterParams = (obj: any) => {
     setFilterParams(obj);
@@ -109,7 +116,7 @@ const SMS = () => {
 
   return (
     <>
-      <Header sticky={true} >
+      <Header sticky={true}>
         <CBreadcrumbs items={breadCrumbs} progmatic={true} />
       </Header>
       <div className="px-6">
@@ -119,23 +126,26 @@ const SMS = () => {
           <div>
             <AddButton
               text="Yangi xabar"
-              onClick={() =>
-                navigateTo(`/settings/sms/create/${tab || "sms"}`)
-              }
+              onClick={() => navigateTo(`/settings/sms/create/${tab || "sms"}`)}
             />
           </div>
         </div>
 
-        {tab == 'firebase' ? <TypeCard title='Firebase' /> : tab == 'sms' ? <SMSMessage title='SMS' /> : <CTable
-          headColumns={headColumns}
-          bodyColumns={bodyColumns?.data}
-          count={bodyColumns?.meta?.totalCount}
-          handleActions={handleActions}
-          isLoading={false}
-          filterParams={filterParams}
-          handleFilterParams={handleFilterParams}
-        />}
-
+        {tab == "firebase" ? (
+          <TypeCard title="Firebase" />
+        ) : tab == "sms" ? (
+          <SMSMessage title="SMS" />
+        ) : (
+          <CTable
+            headColumns={headColumns}
+            bodyColumns={bodyColumns?.data}
+            handleActions={handleActions}
+            meta={bodyColumns?.meta}
+            isLoading={false}
+            filterParams={filterParams}
+            handleFilterParams={handleFilterParams}
+          />
+        )}
       </div>
     </>
   );

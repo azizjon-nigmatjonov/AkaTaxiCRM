@@ -39,7 +39,7 @@ const SingleCar = () => {
     storeFilters(obj);
   };
 
-  const { data: driversData } = useQuery(
+  const { data: driversData, isLoading } = useQuery(
     ["GET_DRIVERS_BY_CAR", id, filterParams?.page],
     () => {
       return driverService.getList({
@@ -125,7 +125,7 @@ const SingleCar = () => {
       {
         title: "",
         id: "actions",
-        actions: ["edit", "delete", "view", "d"],
+        actions: ["view"],
       },
     ];
   }, []);
@@ -152,7 +152,7 @@ const SingleCar = () => {
     if (element === "edit") {
       navigateQuery({ id: status.id });
     } else if (status == "view") {
-      navigateTo(`/drivers/main/driver?id=${element.id}`);
+      navigateTo(`/drivers/main/${element.id}`);
     } else {
       driverService.deleteElement(status?.id).then(() => {
         dispatch(
@@ -197,10 +197,10 @@ const SingleCar = () => {
         <CTable
           headColumns={headColumns}
           bodyColumns={drivers?.list}
-          totalCount={drivers?.meta?.totalCount}
-          count={drivers?.meta?.pageCount}
+          meta={drivers?.meta}
           handleActions={handleActions}
           filterParams={filterParams}
+          isLoading={isLoading}
           handleFilterParams={handleFilterParams}
         />
         <Form id={id} classes={tabList} tab={tab} getCarList={getCarList} />

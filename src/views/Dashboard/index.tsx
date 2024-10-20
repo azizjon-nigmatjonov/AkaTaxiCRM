@@ -10,86 +10,68 @@ import { breadCrumbsItems } from "./Logic";
 import { FindoutStatistics } from "./FindoutStatistics";
 import StatusStatics from "./StatusStatistics";
 
-// import { useHistory, useLocation } from "react-router-dom";
-
 function Dashboard() {
-  const [year, setYear] = useState<string>("2024");
-  const [selectMonth, setSelectMonth] = useState(null);
-  const [countWeek, setCountWeek] = useState(null);
+  const [passengerDate, setPassengerDate] = useState([]);
+  const [passengerToData, setPassengerToData] = useState([]);
+  const [driverFromDate, setDriverFromDate] = useState([]);
+  const [driverToDate, setDriverToDate] = useState([]);
 
-  const [yearPessengerVilage, setYearPessengerVilage] =
-    useState<string>("2024");
-  const [selectMonthPessengerVilage, setSelectMonthPessengerVilage] =
-    useState(null);
-  const [countWeekPessengerVilage, setCountWeekPessengerVilage] =
-    useState(null);
+  const { data, isLoading } = useQuery(
+    "dashboardWidgets",
+    dashboardService.getWidgets
+  );
 
-  const [yearDrivers, setYearDrivers] = useState<string>("2023");
-  const [selectMonthDrivers, setSelectMonthDrivers] = useState(null);
-  const [countWeekDrivers, setCountDrivers] = useState(null);
-
-  const [yearDriversVilage, setYearDriversVilage] = useState<string>("2023");
-  const [selectMonthDriversVilage, setSelectMonthDriversVilage] =
-    useState(null);
-  const [countWeekDriversVilage, setCountWeekDriversVilage] = useState(null);
-
-  const { data, isLoading } = useQuery("dashboardWidgets", dashboardService.getWidgets);
   const { data: passengersData } = useQuery(
-    ["passengersFromTashkent", year, selectMonth, countWeek],
-    () => dashboardService.getPessengersFromCity(year, selectMonth, countWeek),
-    { enabled: !!year || !!selectMonth || !!countWeek, cacheTime: 0 }
+    ["passengersFromTashkent", passengerDate],
+    () =>
+      dashboardService.getPessengersFromCity({
+        date: passengerDate?.length ? passengerDate.join(",") : undefined,
+        from_tashkent: 1,
+      })
   );
 
   const { data: passengersDataVilage, isLoading: isLoadingTable } = useQuery(
-    [
-      "passengersFromVilage",
-      yearPessengerVilage,
-      selectMonthPessengerVilage,
-      countWeekPessengerVilage,
-    ],
+    ["passengersFromVilage"],
     () =>
-      dashboardService.getPessengersFromVilage(
-        yearPessengerVilage,
-        selectMonthPessengerVilage,
-        countWeekPessengerVilage
-      ),
-    {
-      enabled:
-        !!yearPessengerVilage ||
-        !!selectMonthPessengerVilage ||
-        !!countWeekPessengerVilage,
+      dashboardService.getPessengersFromVilage({
+        date: passengerToData?.length ? passengerToData.join(",") : undefined,
+        from_tashkent: 0,
+      })
+  );
+
+  const { data: driverTripsDataFromCity } = useQuery(["driverTrips"], () =>
+    dashboardService.getDriverTripsFromCity({
+      from_tashkent: 1,
+      date: driverFromDate?.length ? driverFromDate.join(",") : undefined,
+    })
+  );
+
+  const { data: driverTripsDataFromVilage } = useQuery(["driverTrips"], () =>
+    dashboardService.getDriverTripsFromVilage({
+      from_tashkent: 0,
+      date: driverToDate?.length ? driverToDate.join(",") : undefined,
+    })
+  );
+
+  const handleDate = (date: any, type: string) => {
+    if (type === "passenger") {
+      setPassengerDate(date);
     }
-  );
+    if (type === "passenger_to") {
+      setPassengerToData(date);
+    }
 
-  const { data: driverTripsDataFromCity } = useQuery(
-    ["driverTrips", yearDrivers, selectMonthDrivers, countWeekDrivers],
-    () =>
-      dashboardService.getDriverTripsFromCity(
-        yearDrivers,
-        selectMonthDrivers,
-        countWeekDrivers
-      ),
-    { enabled: !!yearDrivers || !!selectMonthDrivers || !!countWeekDrivers }
-  );
-
-  const { data: driverTripsDataFromVilage } = useQuery(
-    [
-      "driverTrips",
-      yearDriversVilage,
-      selectMonthDriversVilage,
-      countWeekDriversVilage,
-    ],
-    () =>
-      dashboardService.getDriverTripsFromVilage(
-        yearDriversVilage,
-        selectMonthDriversVilage,
-        countWeekDriversVilage
-      )
-  );
+    if (type === "driver") {
+      setDriverFromDate(date);
+    }
+    if (type === "driver_to") {
+      setDriverToDate(date);
+    }
+  };
 
   return (
     <>
-      <Header >
+      <Header>
         <CBreadcrumbs items={breadCrumbsItems} />
       </Header>
       <div className="flex gap-x-5 px-5">
@@ -103,27 +85,12 @@ function Dashboard() {
       </div>
 
       <ContentTable
-        setCountWeekDriversVilage={setCountWeekDriversVilage}
-        setSelectMonthDriversVilage={setSelectMonthDriversVilage}
-        setYearDriversVilage={setYearDriversVilage}
-        yearDriversVilage={yearDriversVilage}
-        setCountDrivers={setCountDrivers}
-        setSelectMonthDrivers={setSelectMonthDrivers}
-        setYearDrivers={setYearDrivers}
-        yearDrivers={yearDrivers}
-        setCountWeekPessengerVilage={setCountWeekPessengerVilage}
-        setSelectMonthPessengerVilage={setSelectMonthPessengerVilage}
-        setYearPessengerVilage={setYearPessengerVilage}
-        yearPessengerVilage={yearPessengerVilage}
-        setCountWeek={setCountWeek}
-        setSelectMonth={setSelectMonth}
-        year={year}
         isLoading={isLoadingTable}
-        setYear={setYear}
         driverTripsDataFromVilage={driverTripsDataFromVilage}
         passengersDataVilage={passengersDataVilage}
         driverTripsDataFromCity={driverTripsDataFromCity}
         dataList={passengersData?.data}
+        handleDate={handleDate}
       />
     </>
   );

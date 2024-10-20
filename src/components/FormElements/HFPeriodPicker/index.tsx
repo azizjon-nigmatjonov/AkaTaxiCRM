@@ -49,7 +49,7 @@ const DateUI = ({
       const date = dayjs(defaultValue)
       changeAction(date)
       return date
-    };
+    }
   }, [defaultValue]);
 
   return (

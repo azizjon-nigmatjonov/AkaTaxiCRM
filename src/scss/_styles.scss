@@ -242,6 +242,14 @@ input {
   @include common-shadow;
   position: relative;
 
+  &.success {
+    background-color: var(--green);
+  }
+
+  &.error {
+    background-color: var(--error);
+  }
+
   &.form {
     height: 52px;
   }
@@ -283,10 +291,6 @@ input {
   }
 }
 
-.custom-btn.success {
-  background-color: var(--green);
-}
-
 .success-btn {
   background-color: var(--green);
 }
@@ -310,6 +314,7 @@ input {
   border-radius: 8px;
   @include common-shadow;
   @include center-center;
+  // width: 100%;
 }
 
 .accordion {
@@ -410,7 +415,6 @@ input {
     transform: scale(0.9);
   }
 }
-
 
 #mouse-over-popover-custom {
   left: 70px;

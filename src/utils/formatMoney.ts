@@ -5,3 +5,7 @@ export const FormatMoney = (value: any) => {
 export const ReFormatMoney = (value: any) => {
   return value.replace(/[ ,]/g, " ");
 };
+
+export const formatNumberWithSpaces = (number: number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}

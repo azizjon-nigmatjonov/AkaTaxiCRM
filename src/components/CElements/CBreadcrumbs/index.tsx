@@ -5,16 +5,20 @@ import FolderIcon from "@mui/icons-material/Folder";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import BackButton from "../../UI/Buttons/BackButton";
+import CSearchInput from "../CSearchInput";
 // import { NotificationIcon } from "../../UI/IconGenerator/Svg";
 
 interface Props {
   icon?: any;
-  withDefautlIcon?: any
+  withDefautlIcon?: any;
   size?: number;
-  className?: string
-  items?: any
-  type?: string
-  progmatic?: boolean
+  className?: string;
+  items?: any;
+  type?: string;
+  progmatic?: boolean;
+  defaultValue?: any;
+  delay?: number;
+  handleSearch?: (val: any) => void;
 }
 
 const CBreadcrumbs = ({
@@ -24,9 +28,11 @@ const CBreadcrumbs = ({
   className,
   items,
   type = "element",
+  defaultValue,
+  handleSearch,
+  delay = 500,
   progmatic = false,
 }: Props) => {
-
   const navigate = useNavigate();
 
   const navigateLink = useMemo(() => {
@@ -40,8 +46,8 @@ const CBreadcrumbs = ({
   };
 
   return (
-    <div className="flex items-center w-full z-[99] relative">
-      <div className="CBreadcrumbs-wrapper">
+    <div className="flex items-center w-full z-[99] relative justify-between">
+      <div className="CBreadcrumbs-wrapper mr-5">
         {navigateLink && <BackButton link={navigateLink} />}
         <Breadcrumbs
           className={`CBreadcrumbs ${size} ${className}`}
@@ -68,6 +74,14 @@ const CBreadcrumbs = ({
           ))}
         </Breadcrumbs>
       </div>
+      {handleSearch ? (
+        <CSearchInput
+          handleChange={handleSearch}
+          classes="bg-white"
+          delay={delay}
+          defaultValue={defaultValue}
+        />
+      ) : ""}
     </div>
   );
 };

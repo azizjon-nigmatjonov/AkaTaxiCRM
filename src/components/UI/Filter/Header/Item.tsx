@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { CloseIcon } from "../../IconGenerator/Svg";
+import { formatNumberWithSpaces } from "../../../../utils/formatMoney";
 export const Items = ({
   obj,
   title,
@@ -9,16 +10,31 @@ export const Items = ({
   title: string;
   clearFilter: (val: string, val2?: any) => void;
 }) => {
-  if (title === "q") {
+  if (title === "q" || title === 'multiple_ids') {
     return <></>;
   }
-  const { t } = useTranslation()
-  
+  const { t } = useTranslation();
+
+  if (obj?.length === 2 && title === "money") {
+    return (
+      <div
+        className="border whitespace-nowrap border-[var(--gray20)] common-shadow rounded-[8px] bg-white pl-3 pr-2 h-[40px] font-medium flex items-center space-x-3 mr-4 mb-4"
+        title={title}
+      >
+        <span>
+          {formatNumberWithSpaces(obj[0]) + ` so'm`} - {formatNumberWithSpaces(obj[1]) + ` so'm`}
+        </span>
+        <button onClick={() => clearFilter(title)}>
+          <CloseIcon fill="var(--black)" />
+        </button>
+      </div>
+    );
+  }
+
   if (obj?.length > 0 && title !== "date") {
-    if (!obj?.length) return "";
     return obj.map((item: any) => (
       <div
-        className="border whitespace-nowrap border-[var(--gray20)] common-shadow rounded-[8px] bg-white pl-3 pr-2 h-[40px] font-medium flex items-center space-x-3"
+        className="border whitespace-nowrap border-[var(--gray20)] common-shadow rounded-[8px] bg-white pl-3 pr-2 h-[40px] font-medium flex items-center space-x-3  mr-4 mb-4"
         title={item?.value}
       >
         <span>{t(item?.label)}</span>
@@ -32,7 +48,7 @@ export const Items = ({
   if (title === "date" && obj?.length) {
     return (
       <div
-        className="border whitespace-nowrap border-[var(--gray20)] common-shadow rounded-[8px] bg-white pl-3 pr-2 h-[40px] font-medium flex items-center space-x-3"
+        className="border whitespace-nowrap border-[var(--gray20)] common-shadow rounded-[8px] bg-white pl-3 pr-2 h-[40px] font-medium flex items-center space-x-3 mr-4 mb-4"
         title={title}
       >
         <span>
@@ -48,7 +64,7 @@ export const Items = ({
   if (obj?.label) {
     return (
       <div
-        className="border whitespace-nowrap border-[var(--gray20)] common-shadow rounded-[8px] bg-white pl-3 pr-2 h-[40px] font-medium flex items-center space-x-3"
+        className="border whitespace-nowrap border-[var(--gray20)] common-shadow rounded-[8px] bg-white pl-3 pr-2 h-[40px] font-medium flex items-center space-x-3 mr-4 mb-4"
         title={title}
       >
         <span>{t(obj?.label)}</span>

@@ -14,6 +14,7 @@ import { websiteActions } from "../../../../../store/website";
 import Ignored from "./Modal";
 import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
+import { CarClass } from "./CarClass";
 
 const DriverInfo = ({
   driver = {},
@@ -22,12 +23,13 @@ const DriverInfo = ({
   driver?: any;
   refetch: any;
 }) => {
-  const [alert, setAlert] = useState("Ma'lumotlarni o'zgartishish!");
+  const [alert, setAlert] = useState("Ma'lumotlarni o'zgartirish!");
   const { id } = useParams();
 
   const dispatch = useDispatch();
   const { getQueries, navigateQuery, navigateTo } = usePageRouter();
   const query = getQueries();
+  // const [loading, setLoading] = useState(false)
 
   const { control, setValue, getValues } = useForm({
     mode: "onSubmit",
@@ -75,7 +77,7 @@ const DriverInfo = ({
     } else if (e == "update") {
       const value = getValues();
 
-      let obj: any = {};
+      const obj: any = {};
       Object.entries(driver).map(([keys, _]) => {
         Object.entries(value).map(([newkeys, _]) => {
           if (
@@ -96,26 +98,40 @@ const DriverInfo = ({
       obj.phone
         ? (obj.phone = obj?.phone?.substring(1).replace(/\s+/g, ""))
         : null;
-      obj._method = "PUT";
+      // obj._method = "PUT";
       const data = new FormData();
 
-      for (let i in obj) {
+      if (obj.second_image) {
+        obj.car_second_image_id = obj.second_image
+        delete obj.second_image
+      }
+      if (obj.first_image) {
+        obj.car_first_image_id = obj.first_image
+        delete obj.first_image
+      }
+
+      if (obj.profile_image) {
+        obj.profile_image_id = obj.profile_image
+        delete obj.profile_image
+      }
+      if (obj.tex_passport) {
+        obj.tex_passport_id = obj.tex_passport
+        delete obj.tex_passport
+      }
+      if (obj.driver_license) {
+        obj.driver_license_id = obj.driver_license
+        delete obj.driver_license
+      }
+      if (obj.selfie_driver_license) {
+        obj.selfie_driver_license_id = obj.selfie_driver_license
+        delete obj.selfie_driver_license
+      }
+        
+      for (const i in obj) {
         data.append(i, obj[i]);
       }
-      console.log("1111");
-
+      
       updateElement({ id, data });
-      // driverService.updateElement(id, data).then(() => {
-      // dispatch(
-      //   websiteActions.setAlertData({
-      //     mainTitle: 'Muvaffaqiyatli amalga oshirildi',
-      //     title: "Ma'lumotlar yangilandi!",
-      //     translation: "common",
-      //   })
-      // )
-      // navigateTo('/drivers/main')
-      //   console.log('222');
-      // })
     } else {
       navigateQuery({ passenger: "" });
     }
@@ -141,20 +157,27 @@ const DriverInfo = ({
         <form>
           <CCard style={{ minHeight: "auto" }}>
             <p className="bg-[var(--softGray)] p-3 rounded-[10px] font-[600]">
+              Mashina klasi
+            </p>
+
+            <CarClass />
+          </CCard>
+          <CCard style={{ minHeight: "auto" }} classes="mt-5">
+            <p className="bg-[var(--softGray)] p-3 rounded-[10px] font-[600]">
               Asosiy ma’lumotlar
             </p>
 
             <MainInfo driver={driver} control={control} setValue={setValue} />
           </CCard>
 
-          <CCard style={{ minHeight: "auto", marginTop: 18 }}>
+          <CCard style={{ minHeight: "auto" }} classes="mt-5">
             <p className="bg-[var(--softGray)] p-3 rounded-[10px] font-[600]">
               Mashina ma’lumotlari
             </p>
             <CarInfo driver={driver} control={control} setValue={setValue} />
           </CCard>
 
-          <CCard style={{ minHeight: "auto", marginTop: 18 }}>
+          <CCard style={{ minHeight: "auto" }} classes="mt-5">
             <p className="bg-[var(--softGray)] p-3 rounded-[10px] font-[600]">
               Haydovchi rasmlari
             </p>
@@ -217,7 +240,7 @@ const DriverInfo = ({
       </div>
 
       <Modal open={!!query?.passenger || !!query?.accept}>
-        {!!query.passenger ? (
+        {query.passenger ? (
           <div className="grid place-items-center h-full">
             <div className="bg-white px-6 py-8  max-w-[400px] mx-auto rounded-[20px]">
               <div className="flex items-center gap-2">

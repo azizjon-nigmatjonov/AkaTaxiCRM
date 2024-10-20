@@ -15,10 +15,10 @@ const StaticsHeader = memo(({ data, loading }: { data: any, loading: boolean }) 
 
 
     const percentage: any = useMemo(() => {
-        let allUsers = gender.men + gender.female
-        let men = Math.round(gender.men ? (gender.men / allUsers) * 100 : 0)
+        const allUsers = gender.men + gender.female
+        const men = Math.round(gender.men ? (gender.men / allUsers) * 100 : 0)
 
-        let female = Math.round(gender.female ? (gender.female / allUsers) * 100 : 0)
+        const female = Math.round(gender.female ? (gender.female / allUsers) * 100 : 0)
 
         return { allUsers, men, female }
     }, [gender, data])
@@ -37,7 +37,7 @@ const StaticsHeader = memo(({ data, loading }: { data: any, loading: boolean }) 
                 </div>
                 : <div className='flex items-center justify-between border-b pb-6 border-[var(--lineGray)]'>
                     <div>
-                        <p className='text-[var(--darkerGray)] text-3xl font-semibold'>Umumiy {percentage.allUsers} ta</p>
+                        <p className='text-[var(--darkerGray)] text-3xl font-semibold'>Umumiy {31} ta</p>
                         <div className='flex items-center gap-6 mt-1'>
                             <div className='flex items-center gap-2'>
                                 <div className='h-2 w-2 rounded-full bg-[var(--ink)]' />

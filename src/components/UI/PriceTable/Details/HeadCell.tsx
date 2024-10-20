@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { EditIcon, SaveIcon } from "../../IconGenerator/Svg";
 import useDebounce from "../../../../hooks/useDebounce";
 import { usePermissions } from "../../../../hooks/usePermissions";
+import CSelect from "../../../../components/CElements/CSelect";
+import { DeliveryOptions } from "../../../../constants/delivery";
 
 export const HeadCell = ({
   type = "cell",
@@ -11,6 +13,7 @@ export const HeadCell = ({
   submitFn = () => {},
   handlePriceInput = () => {},
   handleCheckKm = () => {},
+  handleSelectDelivery = () => {},
 }: {
   type: string;
   column: any;
@@ -20,6 +23,7 @@ export const HeadCell = ({
   submitFn: (val: string, val2: number) => void;
   handlePriceInput: (val: string, val2: number) => void;
   handleCheckKm: (val: number, val2: boolean) => void;
+  handleSelectDelivery: (val: string) => void;
 }) => {
   const [editPrice, setEditPrice] = useState(false);
   const inputRef: any = useRef(null);
@@ -35,6 +39,20 @@ export const HeadCell = ({
     return (
       <div className="cell">
         <p>{column.title}</p>
+      </div>
+    );
+  }
+
+  if (type === "delivery") {
+    return (
+      <div className="cell flex flex-col space-y-3">
+        <p className="w-full">Pochta</p>
+        <CSelect
+          options={DeliveryOptions}
+          handlerValue={(obj: any) => handleSelectDelivery(obj.value)}
+          placeholder="Dokument"
+          closeIcon={false}
+        />
       </div>
     );
   }

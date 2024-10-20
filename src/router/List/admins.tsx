@@ -43,7 +43,7 @@ export const adminList = [
     parent: "admins",
     link: "routes",
     sidebar: true,
-    title: "Routes",
+    title: "Sahifalar",
     icon: "list-squared",
     element: <RoutePage />,
     permissions: ["add_permission", "delete_permisson"]

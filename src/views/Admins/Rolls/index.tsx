@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import CTable from "../../../components/CElements/CTable";
 import AddButton from "../../../components/UI/Buttons/AddButton";
-import SectionHeader from "../../../components/UI/Sections/Header";
+// import SectionHeader from "../../../components/UI/Sections/Header";
 import usePageRouter from "../../../hooks/useObjectRouter";
 import { Header } from "../../../components/UI/Header";
 import CBreadcrumbs from "../../../components/CElements/CBreadcrumbs";
@@ -16,17 +16,18 @@ const Rolls = () => {
   const [filterParams, setFilterParams]: any = useState({});
   const { collectFilter, storeFilters } = FilterFunctions({
     store: true,
-    filterParams, 
-    setFilterParams
+    filterParams,
+    setFilterParams,
   });
-
-  const handleSearch = (value: any) => {
-    collectFilter({ type: "q", val: value });
-  };
 
   const handleFilterParams = (obj: any) => {
     setFilterParams(obj);
     storeFilters(obj);
+  };
+
+  const handleSearch = (value: any) => {
+    collectFilter({ type: "q", val: value });
+    handleFilterParams({ ...filterParams, q: value, page: 1 });
   };
 
   const bodyColumns = useMemo(() => {
@@ -36,29 +37,30 @@ const Rolls = () => {
   return (
     <>
       <Header sticky={true}>
-        <CBreadcrumbs items={breadCrumbs} progmatic={true} type="link" />
-      </Header>
-      <div className="px-5">
-        <div>
-          <SectionHeader
-            handleSearch={handleSearch}
-            defaultValue={filterParams?.q}
-          >
-            <AddButton
-              text="Yangi rol qo'shish"
-              onClick={() => navigateTo("/admins/rolls/:create")}
-            />
-          </SectionHeader>
-          <CTable
-            headColumns={headColumns}
-            bodyColumns={bodyColumns}
-            isResizeble={true}
-            handleActions={handleActions}
-            isLoading={isLoading}
-            filterParams={filterParams}
-            handleFilterParams={handleFilterParams}
+        <CBreadcrumbs
+          items={breadCrumbs}
+          progmatic={true}
+          type="link"
+          handleSearch={handleSearch}
+          defaultValue={filterParams?.q}
+        />
+        <div className="ml-5">
+          <AddButton
+            text="Yangi rol qo'shish"
+            onClick={() => navigateTo("/admins/rolls/:create")}
           />
         </div>
+      </Header>
+      <div className="px-5">
+        <CTable
+          headColumns={headColumns}
+          bodyColumns={bodyColumns}
+          isResizeble={true}
+          handleActions={handleActions}
+          isLoading={isLoading}
+          filterParams={filterParams}
+          handleFilterParams={handleFilterParams}
+        />
       </div>
     </>
   );

@@ -22,28 +22,28 @@ const Ignored = () => {
 
   const onSubmit = (data: any) => {
     const params: any = {
-      en: "",
-      uz: "",
-      ru: "",
-      oz: "",
+      langs: {
+        en: "",
+        uz: "",
+        ru: "",
+        oz: "",
+      },
+      incorrect_fields: [],
     };
     RejectReasonsUz.forEach((el: any, ind: number) => {
-      console.log(
-        "data.langs.includes(el.value)",
-        data.langs.includes("" + el.value)
-      );
       if (data.langs.includes("" + el.value)) {
-        params.uz = `${params.uz} ${ind > 0 ? " / " : ""}` + el.label;
+        params.langs.uz = `${params.langs.uz} ${ind > 0 ? " / " : ""}` + el.label;
+        params.incorrect_fields.push(el.name);
       }
     });
     RejectReasonsOz.forEach((el: any, ind: number) => {
       if (data.langs.includes("" + el.value)) {
-        params.oz = `${params.oz} ${ind > 0 ? " / " : ""}` + el.label;
+        params.langs.oz = `${params.langs.oz} ${ind > 0 ? " / " : ""}` + el.label;
       }
     });
     RejectReasonsRu.forEach((el: any, ind: number) => {
       if (data.langs.includes("" + el.value)) {
-        params.ru = `${params.ru} ${ind > 0 ? " / " : ""}` + el.label;
+        params.langs.ru = `${params.langs.ru} ${ind > 0 ? " / " : ""}` + el.label;
       }
     });
 
@@ -97,8 +97,8 @@ const Ignored = () => {
           required={true}
           placeholder="Sababni yozing"
           minRows={1}
-        /> */}
-        {/* <HFTextareaAutosize
+        />
+        <HFTextareaAutosize
           name="en"
           label="English"
           control={control}

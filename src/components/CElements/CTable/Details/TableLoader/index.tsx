@@ -22,7 +22,7 @@ const TableLoader = ({
       <div className="wrapper">
         {rows?.map((i, index) => (
           <div key={i + index} className="row">
-            <Skeleton style={{ height: '100%', borderRadius: '10px' }} />
+            <Skeleton style={{ height: '100%', borderRadius: '10px', background: "var(--gray20)" }} />
           </div>
         ))}
       </div>

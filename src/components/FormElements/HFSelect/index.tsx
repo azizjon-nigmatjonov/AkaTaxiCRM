@@ -3,6 +3,7 @@ import { Controller } from "react-hook-form";
 import CLabel from "../../CElements/CLabel";
 import { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { CloseIcon } from "../../UI/IconGenerator/Svg";
 // import IconGenerator from "../IconPicker/IconGenerator";
 
 interface Props {
@@ -21,6 +22,7 @@ interface Props {
   rules?: any;
   id?: string;
   disabled?: boolean;
+  clear?: boolean
   setValue?: (val1?: any, val2?: any) => void;
 }
 
@@ -91,7 +93,9 @@ const SelectUI = ({
               size={15}
               style={{ color: "#6E8BB7" }}
             /> */}
-                  {typeof option.label === 'string' ? t(option.label) : option.label}
+                  {typeof option.label === "string"
+                    ? t(option.label)
+                    : option.label}
                 </div>
               </MenuItem>
             )),
@@ -102,7 +106,9 @@ const SelectUI = ({
               onClick={() => handleClick(option)}
               value={option.value}
             >
-              {typeof option.label === 'string' ? t(option.label) : option.label}
+              {typeof option.label === "string"
+                ? t(option.label)
+                : option.label}
             </MenuItem>
           ))}
     </Select>
@@ -126,6 +132,7 @@ const HFSelect = ({
   handleClick = () => {},
   setValue = () => {},
   disabled = false,
+  clear = false,
   ...props
 }: Props) => {
   useEffect(() => {
@@ -159,18 +166,28 @@ const HFSelect = ({
               style={{ color: "var(--error)", margin: "0 5px" }}
               error
             >
-              <SelectUI
-                options={options}
-                optionType={optionType}
-                onChange={onChange}
-                placeholder={placeholder}
-                onFormChange={onFormChange}
-                value={value}
-                handleClick={handleClick}
-                defaultValue={defaultValue}
-                disabled={disableSelect}
-                props={props}
-              />
+              <div className="relative">
+                <SelectUI
+                  options={options}
+                  optionType={optionType}
+                  onChange={onChange}
+                  placeholder={placeholder}
+                  onFormChange={onFormChange}
+                  value={value}
+                  handleClick={handleClick}
+                  defaultValue={defaultValue}
+                  disabled={disableSelect}
+                  props={props}
+                />
+                {value && clear && (
+                  <button
+                    onClick={() => onFormChange("")}
+                    className="absolute right-4 z-[9] top-1/2 -translate-y-1/2"
+                  >
+                    <CloseIcon />
+                  </button>
+                )}
+              </div>
               {!disabledHelperText && error?.message ? error.message : " "}
             </FormHelperText>
           </FormControl>

@@ -9,13 +9,11 @@ import {
 } from "../../../../../components/UI/IconGenerator/Svg";
 import CTable from "../../../../../components/CElements/CTable";
 import CModal from "../../../../../components/CElements/CModal";
-import usePageRouter from "../../../../../hooks/useObjectRouter";
 import { useForm } from "react-hook-form";
-import CancelButton from "../../../../../components/UI/Buttons/Cancel";
 import { useDispatch } from "react-redux";
 import { websiteActions } from "../../../../../store/website";
 import { useParams } from "react-router-dom";
-import { FetchFunction, headColums } from "./Logic";
+import { FetchFunction, HeaderData } from "./Logic";
 import { ReFormatMoney } from "../../../../../utils/formatMoney";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Validation } from "./Validation";
@@ -29,10 +27,15 @@ import {
   PaymentDueReasonsRu,
 } from "../../../../../constants/payment";
 
-const DriverBallance = ({ date }: { date: any }) => {
+interface Props {
+  date: any;
+  openBalance: string;
+  setOpenBalance: (val: string) => void;
+}
+
+const DriverBallance = ({ date, openBalance, setOpenBalance }: Props) => {
+  const { headColums } = HeaderData();
   const schema = Validation();
-  const { getQueries, navigateQuery } = usePageRouter();
-  const query = getQueries();
   const dispatch = useDispatch();
   const { id } = useParams();
   const { refetch, isLoading, ballanceData, refetchCard } = FetchFunction({
@@ -63,7 +66,7 @@ const DriverBallance = ({ date }: { date: any }) => {
     refetchCard();
     reset();
 
-    navigateQuery({ amount: "" });
+    setOpenBalance("");
   };
 
   const failSubmited = () => {
@@ -74,13 +77,16 @@ const DriverBallance = ({ date }: { date: any }) => {
       type: "error",
     });
 
-    navigateQuery({ amount: "" });
+    setOpenBalance("");
   };
 
   const { mutate: udateBallance, isLoading: isLoadingForm } = useMutation({
     mutationFn: (balance: any) => {
       return driverService.topUpBallance({ id, balance }).then((data: any) => {
         data?.success ? successSubmit() : failSubmited();
+        refetch();
+        refetchCard();
+        reset();
       });
     },
   });
@@ -93,21 +99,28 @@ const DriverBallance = ({ date }: { date: any }) => {
       ru: "",
       oz: "",
     };
-    PaymentDueReasons.forEach((el: any, ind: number) => {
-      if ((data.langs = el.value)) {
-        params.uz = `${params.uz} ${ind > 0 ? " / " : ""}` + el.label;
-      }
-    });
-    PaymentDueReasonsOz.forEach((el: any, ind: number) => {
-      if ((data.langs = el.value)) {
-        params.oz = `${params.oz} ${ind > 0 ? " / " : ""}` + el.label;
-      }
-    });
-    PaymentDueReasonsRu.forEach((el: any, ind: number) => {
-      if ((data.langs = el.value)) {
-        params.ru = `${params.ru} ${ind > 0 ? " / " : ""}` + el.label;
-      }
-    });
+
+    if (openBalance === "minus") {
+      params.amount = "-" + params.amount;
+    }
+
+    if (data?.langs) {
+      PaymentDueReasons.forEach((el: any) => {
+        if ((data.langs = el.value)) {
+          params.uz = el.label;
+        }
+      });
+      PaymentDueReasonsOz.forEach((el: any) => {
+        if ((data.langs = el.value)) {
+          params.oz = el.label;
+        }
+      });
+      PaymentDueReasonsRu.forEach((el: any) => {
+        if ((data.langs = el.value)) {
+          params.ru = el.label;
+        }
+      });
+    }
 
     udateBallance(params);
   };
@@ -152,48 +165,67 @@ const DriverBallance = ({ date }: { date: any }) => {
         bodyColumns={ballanceData?.data}
         isResizeble={true}
         isLoading={isLoading}
-        totalCount={ballanceData.meta?.totalCount ?? 10}
+        meta={ballanceData?.meta}
         filterParams={filterParams}
         handleFilterParams={handleFilterParams}
-        count={ballanceData?.meta?.pageCount}
       />
 
       <CModal
         footerActive={false}
-        open={!!query.amount}
-        title={"Balansni to’ldirish"}
-        handleClose={() => navigateQuery({ amount: "" })}
+        open={!!openBalance}
+        title={
+          openBalance === "minus"
+            ? "Balansni kamaytirish"
+            : "Balansni to’ldirish"
+        }
+        handleClose={() => setOpenBalance("")}
+        minWidth="600px"
       >
         <p className="text-sm font-normal text-[#475467]">
-          Admin tomonidan yo’lovchi hisobini to’ldirish
+          Admin tomonidan yo’lovchi hisobini{" "}
+          {openBalance === "minus" ? "kamaytirish" : "to’ldirish"}
         </p>
         <form onSubmit={handleSubmit(topUpBalance)} className="mt-5 space-y-8">
           <HFPriceInput
+            add={openBalance === "minus" ? "-" : ""}
             name="amount"
             label="Summa"
             control={control}
-            placeholder="50 000 so'm"
+            placeholder={
+              openBalance === "minus" ? "-50 000 so'm" : "50 000 so'm"
+            }
             type="number"
             required={true}
           />
-          <HFSelect
-            placeholder="Tanlang"
-            name="langs"
-            label="Sabab"
-            options={PaymentDueReasons}
-            control={control}
-          />
-          <div className="flex items-center justify-end gap-x-3">
-            <CancelButton
-              text="Orqaga"
-              onClick={() => navigateQuery({ amount: "" })}
+          {openBalance === "minus" ? (
+            <HFSelect
+              placeholder="Tanlang"
+              name="langs"
+              label="Sabab"
+              options={PaymentDueReasons}
+              control={control}
+              clear={true}
             />
+          ) : (
+            ""
+          )}
+          <div className="flex items-center space-x-3">
+            <button
+              type="button"
+              className="cancel-btn"
+              onClick={() => {
+                setOpenBalance("");
+                reset();
+              }}
+            >
+              Bekor qilish
+            </button>
             <button
               className={`custom-btn ${isLoadingForm && "disabled"}`}
               type="submit"
               disabled={isLoadingForm}
             >
-              To’ldirish
+              Tasdiqlash
             </button>
           </div>
         </form>

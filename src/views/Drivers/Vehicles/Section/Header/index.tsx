@@ -13,7 +13,7 @@ const Header = ({ arr = [] }: Props) => {
           item.name && (
             <p
               key={item.slug}
-              className="text-xs font-medium text-[#475467] flex items-center gap-2"
+              className="text-lg font-[600] flex items-center gap-2"
             >
               {item.name}{" "}
               <span className="bg-[var(--lineGray)] h-6 w-6 grid place-items-center items-center rounded-full text-[var(--black)]">

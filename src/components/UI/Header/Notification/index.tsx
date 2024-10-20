@@ -13,6 +13,8 @@ const Notification = () => {
   const { notificationList, clearCount, notifCount } = NotificationData();
   const { checkAdditionals } = usePermissions();
 
+  if (!checkAdditionals("show_notification")) return <></>
+
   return (
     <div className="relative z-[4]">
       <button

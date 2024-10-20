@@ -62,7 +62,7 @@ const TripInfo = ({ gender = "m", bookingData }: Props) => {
         </div>
         <Places
           data={
-            bookingData.driver?.places?.map((item: any) => {
+            bookingData.place_order?.map((item: any) => {
               return { gender: item, reserved: false };
             }) ?? []
           }

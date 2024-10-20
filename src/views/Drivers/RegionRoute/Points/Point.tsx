@@ -34,7 +34,7 @@ const PointSelector = ({
     const newList = selected;
     if (obj === "all") {
       let districtIds = [];
-      let districtNewList = districtList;
+      const districtNewList = districtList;
 
       if (checkedList?.length !== districtList?.length) {
         districtIds = districtList.map((i: any) => i.id);

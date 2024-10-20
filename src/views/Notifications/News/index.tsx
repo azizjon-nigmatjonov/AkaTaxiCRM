@@ -22,17 +22,23 @@ const NewsNotification = () => {
 
   return (
     <>
-      <Header sticky={true}>
+      <Header>
         <CBreadcrumbs items={breadCrumbsItems} progmatic={true} type="link" />
-      </Header>
-      <div className="px-6 flex justify-end mb-5">
         <div>
           <AddButton
             text="Yangi xabar"
             onClick={() => navigate("/notifications/new_notification/add_news")}
           />
         </div>
-      </div>
+      </Header>
+      {/* <div className="px-6 flex justify-end mb-5">
+        <div>
+          <AddButton
+            text="Yangi xabar"
+            onClick={() => navigate("/notifications/new_notification/add_news")}
+          />
+        </div>
+      </div> */}
 
       <div className="container">
         <CTable

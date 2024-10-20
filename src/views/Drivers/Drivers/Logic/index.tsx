@@ -6,6 +6,7 @@ import driverService from "../../../../services/drivers";
 import {
   DangerNotification,
   EyeIcon,
+  PlusIcon,
 } from "../../../../components/UI/IconGenerator/Svg";
 import { ListIcon } from "../../../../components/UI/IconGenerator/Svg";
 import { useCallback, useMemo } from "react";
@@ -13,15 +14,22 @@ import { getStoredFilters } from "../../../../components/UI/Filter/Logic";
 import NotInterestedIcon from "@mui/icons-material/NotInterested";
 import { usePermissions } from "../../../../hooks/usePermissions";
 import { TableSort } from "../../../../components/CElements/CTable/Details/Sort";
+import TaskIcon from "@mui/icons-material/Task";
 
 export const TableData = ({
   driversRefetch,
   filterParams,
   handleFilterParams = () => {},
+  setMailDriverId = () => {},
+  setTaskOpen = () => {},
+  setTegOpen = () => {},
 }: {
   filterParams: any;
   handleFilterParams: (val: any) => void;
   driversRefetch: () => void;
+  setTaskOpen: (val: number) => void;
+  setMailDriverId: (val: number) => void;
+  setTegOpen: (val: number) => void;
 }) => {
   const { navigateQuery, navigateTo } = usePageRouter();
   const { checkPermission } = usePermissions();
@@ -66,6 +74,14 @@ export const TableData = ({
         },
       },
       {
+        title: "Ro'yxatdan o'tgan sana",
+        id: "created_at",
+        width: 300,
+        render: (val?: any) => {
+          return <>{FormatTime(val)}</>;
+        },
+      },
+      {
         title: "Mashina / raqam",
         id: "car_info",
         render: (val: any) =>
@@ -99,6 +115,10 @@ export const TableData = ({
         id: "balance",
       },
       {
+        title: "To'lov vaqti",
+        id: "paid_at",
+      },
+      {
         title: "Viloyat",
         id: "region_name",
       },
@@ -107,8 +127,16 @@ export const TableData = ({
         id: "partner_status",
       },
       {
-        title: "To'lov vaqti",
-        id: "paid_at",
+        title: "Pochta",
+        id: "poch",
+        click: "custom",
+        render: () => {
+          return (
+            <button onClick={() => setMailDriverId(8)} className="w-full">
+              0
+            </button>
+          );
+        },
       },
       {
         title: "Status",
@@ -135,7 +163,38 @@ export const TableData = ({
         },
       },
       {
-        title: "",
+        title: "Vazifa",
+        id: "id",
+        click: "custom",
+        render: (id: number) => {
+          return (
+            <div className="flex space-x-5">
+              <button onClick={() => setTaskOpen(id)}>
+                <PlusIcon fill="black" />
+              </button>
+              <button onClick={() => navigateTo(`/drivers/reminder/${id}/`)}>
+                <TaskIcon fill="var(--primary)" />
+              </button>
+            </div>
+          );
+        },
+      },
+      {
+        title: "Teg",
+        id: "id",
+        click: "custom",
+        render: (id: number) => {
+          return (
+            <div>
+              <button onClick={() => setTegOpen(id)}>
+                <PlusIcon fill="black" />
+              </button>
+            </div>
+          );
+        },
+      },
+      {
+        title: "Eslatma",
         id: "notelist",
         click: "custom",
         render: (item: any) => {
@@ -171,6 +230,7 @@ export const FetchFunctions = () => {
     status,
     page,
     is_paid,
+    money,
   } = filters;
 
   const start = date?.[0];
@@ -193,8 +253,10 @@ export const FetchFunctions = () => {
       region,
       status,
       is_paid,
+      money,
     ],
     () => {
+      const region_ids = region?.map((item: any) => item.value).join(",");
       return driverService.getList({
         page: page || 1,
         perPage: 10,
@@ -203,12 +265,12 @@ export const FetchFunctions = () => {
         device_type: device_type?.value,
         created_at: start && end && start + "," + end,
         version: version?.value,
-        region: region?.map((item: any) => item.value),
+        region_id: region_ids,
         status: status?.value,
         is_paid: is_paid?.value,
+        balance: money?.length > 1 ? `${money[0]},${money[1]}` : undefined,
       });
     }
   );
-
   return { drivers, driversLoading, driversRefetch };
 };

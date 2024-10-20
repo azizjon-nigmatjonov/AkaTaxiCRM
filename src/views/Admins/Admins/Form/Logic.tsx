@@ -24,7 +24,7 @@ export const FetchFunction = ({ adminId }: { adminId: string }) => {
   const SelectOptions = useMemo(() => {
     if (!rolls) return [];
     const arr = rolls?.data ?? [];
-    return (arr as any).map((item: any) => {
+    return (arr ).map((item: any) => {
       return {
         ...item,
         label: item.name,

@@ -19,7 +19,6 @@ export const ShareAppTable = ({
         <CTable
           headColumns={headColumns}
           bodyColumns={list}
-          count={123}
           isLoading={isLoading}
           filterParams={{}}
           handleFilterParams={() => {}}

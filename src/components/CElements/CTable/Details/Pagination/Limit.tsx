@@ -2,15 +2,23 @@ import { useMemo, useState } from "react";
 import { Popover } from "@mui/material";
 // import { KeyboardArrowDownFilled, KeyboardArrowUp } from "@mui/icons-material";
 import cls from "./style.module.scss";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
+interface Props {
+  limit: number;
+  limitList: any;
+  handleRouteActions: (val: any) => void;
+}
 
 export default function PaginationLimits({
-  limit,
-  limitCount,
+  limit = 10,
+  limitList = [],
   handleRouteActions = () => {},
-}) {
+}: Props) {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClickPopup = (event) => {
+  const handleClickPopup = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -18,7 +26,7 @@ export default function PaginationLimits({
     setAnchorEl(null);
   };
 
-  function handleLimitActions(i) {
+  function handleLimitActions(i: any) {
     handleRouteActions({ limit: i });
     setAnchorEl(null);
   }
@@ -31,8 +39,8 @@ export default function PaginationLimits({
   return (
     <>
       <div className={cls.limitBtn} onClick={handleClickPopup}>
-        <span className={cls.text}>Показать от {limit}</span>
-        {open ? "up" : "down"}
+        <span className={cls.text}>{limit} ta dan</span>
+        {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
       </div>
       <Popover
         id={id}
@@ -45,7 +53,7 @@ export default function PaginationLimits({
         }}
       >
         <ul className={cls.limitsList}>
-          {limitCount?.map((i) => (
+          {limitList?.map((i: number) => (
             <li
               key={i}
               onClick={(e) => {
